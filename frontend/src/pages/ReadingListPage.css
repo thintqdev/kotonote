@@ -1,0 +1,529 @@
+/* Đọc hiểu — phiên bản 2: khung vocab-sheet + tab chuẩn + thẻ ngang có ảnh lớn */
+
+.reading-dash .dash-main-inner {
+  max-width: 900px;
+}
+
+.reading-sub-kicker {
+  font-weight: 800;
+  color: var(--vocab-green-deep);
+}
+
+.reading-sub-sep {
+  font-weight: 600;
+  color: var(--vocab-muted);
+}
+
+.reading-goal-box {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  min-width: min(200px, 100%);
+}
+
+.reading-goal-box-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.reading-goal-box .vocab-lesson-goal-label {
+  display: block;
+  width: 100%;
+}
+
+.reading-goal-track {
+  width: 100%;
+  max-width: 200px;
+}
+
+.reading-jlpt-tabs {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.reading-tab-muted {
+  opacity: 0.72;
+}
+
+.reading-tab-muted.vocab-tab--active::after {
+  display: none;
+}
+
+/* Một hàng bài: ảnh + nội dung + chevron */
+.reading-row-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(100px, 160px) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 13px;
+}
+
+.reading-row-link:hover .vocab-lesson-chevron {
+  transform: translateX(2px);
+}
+
+.reading-card-bookmark-wrap {
+  position: absolute;
+  top: 10px;
+  right: 36px;
+  z-index: 1;
+  color: rgba(92, 86, 78, 0.22);
+  pointer-events: none;
+}
+
+.reading-card-bookmark {
+  width: 20px;
+  height: 20px;
+}
+
+.reading-thumb-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(247, 239, 223, 0.75);
+  border: 1px solid var(--vocab-border);
+}
+
+.reading-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  max-height: 120px;
+  object-fit: cover;
+}
+
+.reading-row-main {
+  min-width: 0;
+}
+
+.reading-row-titleline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 10px;
+  margin-bottom: 4px;
+}
+
+.reading-row-title {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.reading-row-snippet {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.reading-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--vocab-muted);
+}
+
+.reading-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reading-ico {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: rgba(92, 122, 82, 0.55);
+}
+
+.reading-ico--star {
+  width: 14px;
+  height: 14px;
+  color: rgba(200, 150, 60, 0.85);
+}
+
+.reading-badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.reading-badge--n5 {
+  background: rgba(200, 220, 240, 0.85);
+  color: #2a4a6a;
+}
+.reading-badge--n4 {
+  background: rgba(255, 220, 185, 0.9);
+  color: #6a4020;
+}
+.reading-badge--n3 {
+  background: rgba(255, 200, 210, 0.88);
+  color: #6a2535;
+}
+.reading-badge--n2 {
+  background: rgba(255, 235, 160, 0.9);
+  color: #5a4810;
+}
+.reading-badge--n1 {
+  background: rgba(230, 210, 245, 0.9);
+  color: #4a3060;
+}
+
+.reading-row-cta {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  pointer-events: none;
+}
+
+.reading-cta--done {
+  opacity: 0.88;
+}
+
+.reading-foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.22);
+}
+
+.reading-foot-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reading-foot-ico {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.reading-foot-badge {
+  margin-left: 4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #c45c5c 0%, #a83838 100%);
+}
+
+@media (max-width: 640px) {
+  .reading-row-link {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .reading-thumb-wrap {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 180px;
+  }
+
+  .reading-row-main {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .reading-card-bookmark-wrap {
+    right: 12px;
+    top: 8px;
+  }
+
+  .reading-row-link .vocab-lesson-chevron {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    padding-top: 4px;
+  }
+}
+
+/* Trang stub bài đọc (ReadingArticlePage) */
+.reading-article-stub {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 28px 22px;
+  text-align: center;
+  border-radius: 16px;
+  border: 1px solid rgba(74, 56, 36, 0.1);
+  background: rgba(255, 252, 248, 0.95);
+}
+
+.reading-article-stub-badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(200, 220, 175, 0.45);
+  color: #3d5c33;
+}
+
+.reading-article-stub-title {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #3a3630;
+}
+
+.reading-article-stub-lead {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(58, 54, 48, 0.7);
+}
+
+.reading-article-stub-back {
+  display: inline-flex;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(
+    165deg,
+    rgba(92, 122, 82, 0.95) 0%,
+    rgba(62, 92, 58, 0.92) 100%
+  );
+  border: 1px solid rgba(45, 62, 40, 0.3);
+}
+
+.reading-article-stub-back:hover {
+  opacity: 0.95;
+}
+
+/* Trang chi tiết đọc — dùng chung khối grammar-detail--journal */
+.reading-detail-cover-block {
+  margin-bottom: 6px;
+}
+
+.reading-detail-cover-wrap {
+  padding: 0;
+  overflow: hidden;
+}
+
+.reading-detail-cover-img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+}
+
+.reading-detail-q-box {
+  margin-bottom: 16px;
+}
+
+.reading-detail-q-box:last-of-type {
+  margin-bottom: 0;
+}
+
+.reading-detail-q-prompt {
+  font-weight: 600;
+}
+
+.reading-q-hint {
+  margin: 0 0 14px;
+  font-size: 0.88rem;
+}
+
+.reading-q-fieldset {
+  margin: 0 0 16px;
+  padding: 16px 14px 14px;
+  border: none;
+  min-width: 0;
+}
+
+.reading-q-fieldset:last-of-type {
+  margin-bottom: 0;
+}
+
+.reading-q-legend {
+  padding: 0;
+  margin: 0 0 12px;
+  max-width: 100%;
+}
+
+.reading-q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reading-q-option {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(51, 51, 51, 0.2);
+  background: rgba(255, 255, 252, 0.88);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  cursor: pointer;
+  color: inherit;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.reading-q-option:hover:not(:disabled) {
+  border-color: rgba(90, 115, 64, 0.55);
+  background: #fff;
+}
+
+.reading-q-option:disabled {
+  cursor: default;
+}
+
+.reading-q-option-letter {
+  flex-shrink: 0;
+  font-weight: 800;
+  min-width: 1.6em;
+}
+
+.reading-q-option-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.reading-q-option--answer {
+  border-color: rgba(79, 125, 89, 0.65);
+  background: rgba(235, 245, 228, 0.55);
+}
+
+.reading-q-option--wrong {
+  border-color: rgba(185, 74, 72, 0.55);
+  background: rgba(255, 235, 235, 0.45);
+}
+
+.reading-q-option--idle {
+  opacity: 0.72;
+}
+
+.reading-q-result {
+  margin: 14px 0 6px;
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
+.reading-q-result--ok {
+  color: #3d6b42;
+}
+
+.reading-q-result--ng {
+  color: #9a3838;
+}
+
+.reading-detail-answer {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.reading-q-explain-block {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(80, 70, 55, 0.28);
+}
+
+.reading-q-explain-title {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #2f3d28;
+  font-family: var(--font-hand);
+}
+
+.reading-q-explain-row {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(80, 70, 55, 0.15);
+  background: rgba(255, 255, 252, 0.55);
+}
+
+.reading-q-explain-row:last-child {
+  margin-bottom: 0;
+}
+
+.reading-q-explain-row--answer {
+  border-color: rgba(79, 125, 89, 0.42);
+  background: rgba(235, 245, 228, 0.35);
+}
+
+.reading-q-explain-row--picked:not(.reading-q-explain-row--answer) {
+  border-color: rgba(185, 74, 72, 0.38);
+}
+
+.reading-q-explain-head {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.reading-q-explain-letter {
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.reading-q-explain-choice {
+  margin: 0;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+}
+
+.reading-q-explain-ja {
+  margin: 0 0 6px;
+}
+
+.reading-q-explain-vi {
+  margin: 0;
+}
+
+.reading-q-retry {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(92, 122, 82, 0.38);
+  background: rgba(255, 252, 248, 0.96);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: #3d5c33;
+  cursor: pointer;
+}
+
+.reading-q-retry:hover {
+  background: rgba(235, 245, 228, 0.85);
+}

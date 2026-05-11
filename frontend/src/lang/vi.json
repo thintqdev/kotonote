@@ -23,7 +23,7 @@
     "kanji": "Kanji",
     "reading": "Đọc hiểu",
     "listening": "Nghe",
-    "practice": "Luyện đề",
+    "practice": "Luyện tập",
     "notebook": "Sổ tay",
     "stats": "Thống kê",
     "settings": "Cài đặt",
@@ -65,7 +65,55 @@
     "vocabulary": "Từ vựng",
     "vocabLessonList": "Danh sách bài học",
     "alphabet": "Bảng chữ cái",
-    "kanji": "Kanji"
+    "kanji": "Kanji",
+    "reading": "Đọc hiểu"
+  },
+  "notFoundPage": {
+    "crumb": "Không tìm thấy trang",
+    "title": "Trang này chưa có hoặc đã đổi địa chỉ",
+    "description": "Kiểm tra lại đường dẫn, hoặc quay về trang chủ để tiếp tục học nhé.",
+    "pathLabel": "Bạn đang mở:",
+    "backHome": "Về trang chủ"
+  },
+  "readingPage": {
+    "kicker": "Dokkai",
+    "kickerJa": "読解",
+    "listTitle": "Danh sách bài đọc",
+    "listSubtitle": "Đọc mỗi ngày một chút, hiểu thêm một chút",
+    "progressLabel": "Tiến độ đọc",
+    "filterAria": "Lọc theo cấp JLPT",
+    "filterAll": "Tất cả",
+    "filterMore": "Bộ lọc",
+    "filterMoreTitle": "Bộ lọc nâng cao (sắp có)",
+    "noResults": "Không có bài đọc phù hợp. Thử chọn cấp khác nhé.",
+    "metaWords": "{{n}} chữ",
+    "metaMinutes": "{{n}} phút",
+    "ctaStart": "Bắt đầu",
+    "ctaContinue": "Đọc tiếp",
+    "footNavAria": "Lối tắt danh sách đọc",
+    "footSuggested": "Gợi ý cho bạn",
+    "footReview": "Ôn lại bài đã đọc"
+  },
+  "readingArticlePage": {
+    "fallbackTitle": "Bài đọc",
+    "comingSoon": "Nội dung bài đọc đang được hoàn thiện — quay lại sau nhé.",
+    "notFound": "Không có bài đọc này.",
+    "backToList": "← Danh sách bài đọc",
+    "metaRibbon": "{{words}} từ · {{minutes}} phút · ★ {{rating}}",
+    "answerLine": "Đáp án: {{key}}",
+    "labels": {
+      "body": "Bài đọc",
+      "vocab": "Từ gợi ý",
+      "comprehension": "Câu hỏi hiểu bài"
+    },
+    "quiz": {
+      "chooseHint": "Nhấn một đáp án (ア・イ・ウ). Sau khi chọn sẽ có giải thích từng lựa chọn.",
+      "explainTitle": "Giải thích từng đáp án",
+      "resultCorrect": "Bạn đã chọn đúng.",
+      "resultWrong": "Chưa trúng đáp án đúng — xem giải thích từng lựa chọn bên dưới.",
+      "retry": "Chọn lại",
+      "optionsAria": "Câu {{n}} — các lựa chọn trắc nghiệm"
+    }
   },
   "alphabetPage": {
     "title": "Alphabet",

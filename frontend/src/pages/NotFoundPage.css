@@ -1,0 +1,103 @@
+.not-found-dash .not-found-sheet {
+  max-width: 520px;
+  margin: 24px auto 48px;
+  padding: clamp(28px, 5vw, 40px) clamp(20px, 4vw, 32px);
+  text-align: center;
+  border-radius: 18px;
+  border: 1px solid rgba(58, 54, 48, 0.12);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 252, 248, 0.98) 0%,
+    rgba(247, 242, 232, 0.92) 100%
+  );
+  box-shadow:
+    0 2px 12px rgba(42, 35, 28, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.not-found-code {
+  margin: 0 0 8px;
+  font-size: clamp(3rem, 10vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(92, 122, 82, 0.45);
+}
+
+.not-found-title {
+  margin: 0 0 12px;
+  font-size: clamp(1.15rem, 3vw, 1.35rem);
+  font-weight: 800;
+  color: #3a3630;
+}
+
+.not-found-desc {
+  margin: 0 0 16px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(58, 54, 48, 0.72);
+}
+
+.not-found-path {
+  margin: 0 0 24px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(58, 54, 48, 0.55);
+  word-break: break-all;
+}
+
+.not-found-path-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.not-found-path-value {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(58, 54, 48, 0.06);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.not-found-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.not-found-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(
+    165deg,
+    rgba(92, 122, 82, 0.98) 0%,
+    rgba(62, 92, 58, 0.95) 100%
+  );
+  border: 1px solid rgba(45, 62, 40, 0.35);
+  box-shadow: 0 2px 8px rgba(42, 55, 35, 0.18);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.not-found-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(42, 55, 35, 0.22);
+}
+
+.not-found-btn:focus-visible {
+  outline: 2px solid rgba(92, 122, 82, 0.65);
+  outline-offset: 3px;
+}

@@ -24,6 +24,9 @@ import VocabularyPage, {
 import AlphabetPage from "./pages/AlphabetPage.jsx";
 import KanjiListPage from "./pages/KanjiListPage.jsx";
 import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
+import ReadingListPage from "./pages/ReadingListPage.jsx";
+import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -55,6 +58,9 @@ function App() {
           <Route path="/kanji/browse" element={<KanjiListPage />} />
           <Route path="/kanji/lesson/:lessonNo" element={<KanjiPage />} />
           <Route path="/kanji" element={<KanjiIndexRedirect />} />
+          <Route path="/reading" element={<ReadingListPage />} />
+          <Route path="/reading/:id" element={<ReadingArticlePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </AuthProvider>

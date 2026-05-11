@@ -65,7 +65,55 @@
     "vocabulary": "語彙",
     "vocabLessonList": "レッスン一覧",
     "alphabet": "アルファベット",
-    "kanji": "漢字"
+    "kanji": "漢字",
+    "reading": "読解"
+  },
+  "notFoundPage": {
+    "crumb": "ページが見つかりません",
+    "title": "このページはまだないか、URLが変わったかもしれません",
+    "description": "アドレスを確認するか、ホームに戻って学習を続けましょう。",
+    "pathLabel": "アクセスしたパス:",
+    "backHome": "ホームへ戻る"
+  },
+  "readingPage": {
+    "kicker": "Dokkai",
+    "kickerJa": "読解",
+    "listTitle": "読解リスト",
+    "listSubtitle": "毎日少しずつ読んで、少しずつ理解を深めよう",
+    "progressLabel": "読解の進み",
+    "filterAria": "JLPT で絞り込み",
+    "filterAll": "すべて",
+    "filterMore": "絞り込み",
+    "filterMoreTitle": "詳しいフィルター（準備中）",
+    "noResults": "該当する読解がありません。レベルを変えてみてください。",
+    "metaWords": "{{n}} 字",
+    "metaMinutes": "{{n}} 分",
+    "ctaStart": "はじめる",
+    "ctaContinue": "続きを読む",
+    "footNavAria": "読解リストのショートカット",
+    "footSuggested": "おすすめ",
+    "footReview": "読んだ記事を復習"
+  },
+  "readingArticlePage": {
+    "fallbackTitle": "読解",
+    "comingSoon": "本文は準備中です。またあとで来てね。",
+    "notFound": "この読解はありません。",
+    "backToList": "← 一覧へ戻る",
+    "metaRibbon": "{{words}}字・{{minutes}}分・★{{rating}}",
+    "answerLine": "正解：{{key}}",
+    "labels": {
+      "body": "本文",
+      "vocab": "語句",
+      "comprehension": "理解チェック"
+    },
+    "quiz": {
+      "chooseHint": "ア・イ・ウのいずれかを選ぶと、各選択肢の解説が表示されます。",
+      "explainTitle": "選択肢ごとの解説",
+      "resultCorrect": "正解です。",
+      "resultWrong": "不正解です。下の解説でそれぞれの理由を確認しましょう。",
+      "retry": "もう一度選ぶ",
+      "optionsAria": "問題{{n}}の選択肢"
+    }
   },
   "alphabetPage": {
     "title": "Alphabet",
