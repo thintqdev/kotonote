@@ -1,5 +1,3 @@
-/* Phiên học từ vựng — cozy notebook · Kotonote */
-
 :root {
   --vs-ink: #3a3630;
   --vs-muted: rgba(58, 54, 48, 0.55);
@@ -32,6 +30,10 @@
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
+}
+
+.vocab-study-breadcrumb-row--solo {
+  justify-content: flex-start;
 }
 
 .vocab-study-breadcrumb-row .dash-breadcrumb {
@@ -157,13 +159,19 @@
   padding: 6px 12px;
   border-radius: 5px;
   transform: rotate(-2.2deg);
-  background: linear-gradient(152deg, rgba(232, 242, 222, 0.98) 0%, rgba(200, 218, 182, 0.55) 100%);
+  background: linear-gradient(
+    152deg,
+    rgba(232, 242, 222, 0.98) 0%,
+    rgba(200, 218, 182, 0.55) 100%
+  );
   border: 1px solid rgba(92, 122, 82, 0.32);
   font-size: 0.71rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   color: var(--vocab-green-deep);
-  box-shadow: 3px 3px 0 rgba(62, 52, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow:
+    3px 3px 0 rgba(62, 52, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .scrap-head-center {
@@ -241,7 +249,11 @@
 .scrap-progress-fill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--vocab-green-line), var(--vocab-green-deep));
+  background: linear-gradient(
+    90deg,
+    var(--vocab-green-line),
+    var(--vocab-green-deep)
+  );
   transition: width 0.38s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
@@ -329,7 +341,9 @@
   border-radius: 18px;
   border: 2px solid rgba(58, 48, 38, 0.1);
   background: linear-gradient(180deg, var(--vs-card) 0%, #faf8f2 100%);
-  box-shadow: 4px 6px 0 rgba(62, 52, 40, 0.05), 0 14px 40px rgba(55, 45, 35, 0.1),
+  box-shadow:
+    4px 6px 0 rgba(62, 52, 40, 0.05),
+    0 14px 40px rgba(55, 45, 35, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 1);
   text-align: center;
   display: flex;
@@ -441,11 +455,7 @@
       rgba(130, 160, 110, 0.32) 8px 12px,
       transparent 12px 16px
     ),
-    linear-gradient(
-      90deg,
-      rgba(235, 240, 220, 0.55),
-      rgba(195, 215, 170, 0.45)
-    );
+    linear-gradient(90deg, rgba(235, 240, 220, 0.55), rgba(195, 215, 170, 0.45));
   box-shadow: 0 1px 4px rgba(45, 35, 28, 0.1);
 }
 
@@ -456,7 +466,9 @@
   opacity: 0.55;
 }
 
-.vocab-study-card--front .vocab-study-card-tap-zone .vocab-study-card-word--kanji-only {
+.vocab-study-card--front
+  .vocab-study-card-tap-zone
+  .vocab-study-card-word--kanji-only {
   margin-block: auto;
 }
 
@@ -567,7 +579,11 @@ button.vocab-cta-reset {
 }
 
 .vocab-study-rate-tile--mint {
-  background: linear-gradient(170deg, rgba(216, 234, 204, 0.45) 0%, rgba(255, 253, 248, 0.98) 100%);
+  background: linear-gradient(
+    170deg,
+    rgba(216, 234, 204, 0.45) 0%,
+    rgba(255, 253, 248, 0.98) 100%
+  );
   border: 1px solid rgba(92, 122, 82, 0.42);
 }
 
@@ -688,7 +704,9 @@ button.vocab-cta-reset {
     rgba(255, 253, 248, 0.99) 0%,
     rgba(247, 242, 230, 0.88) 100%
   );
-  box-shadow: 0 2px 10px rgba(42, 35, 28, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 2px 10px rgba(42, 35, 28, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 
 .vocab-study-example-sheet {
@@ -804,4 +822,545 @@ button.vocab-cta-reset {
 .vocab-study-scope .vocab-empty {
   max-width: var(--vs-column-max);
   margin-inline: auto;
+}
+
+/* Chế độ ôn theo bài (query lesson + jlpt) */
+.vocab-study-lesson-ribbon {
+  max-width: calc(var(--vs-column-max) + 48px);
+  margin: -4px auto 16px;
+  padding: 12px 16px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(92, 122, 82, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(235, 245, 228, 0.55) 0%,
+    rgba(255, 252, 248, 0.98) 55%
+  );
+  box-shadow: 0 2px 10px rgba(42, 35, 28, 0.06);
+}
+
+.vocab-study-lesson-ribbon-main {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--vs-ink);
+}
+
+.vocab-study-lesson-ribbon-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--vs-muted);
+}
+
+.vocab-study-rate-strip--lesson .vocab-study-rate-tile-sub {
+  font-size: 0.72rem;
+}
+
+.vocab-study-growth-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.28);
+}
+
+.vocab-study-growth-ico {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  opacity: 0.32;
+  filter: grayscale(0.35);
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+
+.vocab-study-growth-ico.is-lit {
+  opacity: 1;
+  filter: none;
+}
+
+.vocab-study-growth-caption {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--vs-ink);
+}
+
+.vocab-study-lesson-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto 16px;
+  max-width: calc(var(--vs-column-max) + 48px);
+}
+
+.vocab-study-tab {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 122, 82, 0.35);
+  background: rgba(255, 252, 248, 0.92);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--vs-muted);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.vocab-study-tab:hover {
+  border-color: rgba(92, 122, 82, 0.55);
+  color: var(--vs-ink);
+}
+
+.vocab-study-tab.is-active {
+  background: rgba(235, 245, 228, 0.75);
+  border-color: rgba(92, 122, 82, 0.5);
+  color: var(--vocab-green-deep, #3d5c33);
+}
+
+.vocab-lesson-panel-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.vocab-lesson-detail-board {
+  max-width: var(--vs-column-max);
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.vocab-lesson-detail-lead {
+  margin: 0 0 18px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--vs-muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+.vocab-lesson-detail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vocab-lesson-detail-card {
+  border-radius: 14px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  background: rgba(255, 252, 248, 0.96);
+  padding: 14px 16px 16px;
+  box-shadow: 0 2px 8px rgba(42, 35, 28, 0.05);
+}
+
+.vocab-lesson-detail-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  margin-bottom: 8px;
+}
+
+.vocab-lesson-detail-word {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.vocab-lesson-detail-read {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--vs-muted);
+}
+
+.vocab-lesson-detail-mean {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.vocab-lesson-detail-ex {
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.vocab-lesson-detail-exvi {
+  margin: 8px 0 0;
+  font-size: 0.86rem;
+  color: var(--vs-muted);
+  line-height: 1.5;
+}
+
+.vocab-lesson-quiz-board {
+  max-width: var(--vs-column-max);
+  margin: 0 auto;
+  padding-bottom: 28px;
+}
+
+.vocab-lesson-quiz-intro {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--vs-muted);
+  font-weight: 600;
+}
+
+.vocab-lesson-quiz {
+  margin-top: 8px;
+}
+
+.vocab-lesson-quiz-meta {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--vs-muted);
+  letter-spacing: 0.04em;
+}
+
+.vocab-lesson-quiz-mode {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--vs-muted);
+}
+
+.vocab-lesson-quiz-prompt {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.vocab-lesson-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vocab-lesson-quiz-opt {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(58, 54, 48, 0.14);
+  background: rgba(255, 252, 248, 0.98);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--vs-ink);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.vocab-lesson-quiz-opt:hover:not(:disabled) {
+  border-color: rgba(92, 122, 82, 0.45);
+  background: rgba(235, 245, 228, 0.35);
+}
+
+.vocab-lesson-quiz-opt:disabled {
+  cursor: default;
+}
+
+.vocab-lesson-quiz-opt.is-correct {
+  border-color: rgba(72, 140, 90, 0.65);
+  background: rgba(220, 245, 228, 0.65);
+}
+
+.vocab-lesson-quiz-opt.is-wrong {
+  border-color: rgba(188, 120, 128, 0.55);
+  background: rgba(248, 220, 224, 0.35);
+}
+
+.vocab-lesson-quiz-next {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.vocab-lesson-quiz--result {
+  text-align: center;
+  padding: 12px 8px 8px;
+}
+
+.vocab-lesson-quiz-result-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.vocab-lesson-quiz-score {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.vocab-lesson-quiz-hint {
+  margin: 0 0 16px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--vs-muted);
+}
+
+.vocab-lesson-quiz-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.vocab-lesson-quiz--done-pack {
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.vocab-lesson-quiz-lead {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--vs-ink);
+}
+
+.vocab-study-reading-line {
+  margin: 0;
+  font-size: clamp(1rem, 2.6vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Kanji — chi tiết bài: cùng nhịp với flash (音 | 訓), thẻ gọn */
+.kanji-detail-board {
+  padding-inline: clamp(4px, 2vw, 8px);
+}
+
+.kanji-detail-list {
+  gap: 20px;
+}
+
+.kanji-detail-item {
+  border-radius: 16px;
+  border: 1px solid rgba(58, 54, 48, 0.1);
+  background: rgba(255, 252, 248, 0.9);
+  padding: 18px 16px 20px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+}
+
+.kanji-detail-char-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.kanji-detail-char {
+  display: inline-block;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2.35rem, 6.5vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0.06em;
+  color: var(--vs-ink);
+}
+
+/* Hán Việt sát dưới chữ Kanji */
+.kanji-underglyph-hv {
+  margin: 6px 0 0;
+  font-size: clamp(0.98rem, 2.6vw, 1.14rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(88, 62, 44, 0.94);
+}
+
+.kanji-detail-item .kanji-flash-onkun {
+  margin-top: 4px;
+}
+
+.kanji-flash-headglyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.kanji-flash-headglyph-char {
+  display: block;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2rem, 5.5vw, 2.55rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  color: var(--vs-ink);
+}
+
+.kanji-detail-item .kanji-detail-mean {
+  margin-top: 12px;
+}
+
+.kanji-detail-item .kanji-detail-vocab {
+  margin-top: 10px;
+}
+
+.kanji-detail-item .kanji-detail-examples {
+  margin-top: 12px;
+  padding-top: 14px;
+}
+
+.kanji-detail-item .kanji-detail-examples p {
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+/* Kanji flash: bố cục gọn — 音 | 訓 */
+.vocab-study-scrap-board--kanji .vocab-scrap-hole-rail,
+.vocab-study-scrap-board--kanji .vocab-study-stack-paper {
+  display: none;
+}
+
+.vocab-study-card--kanji-flash.vocab-study-card--front {
+  padding-top: 22px;
+}
+
+.vocab-study-card--kanji-flash.vocab-study-card--back {
+  padding: 18px 16px 16px;
+  min-height: clamp(220px, 36vh, 300px);
+}
+
+.vocab-study-card--kanji-flash .vocab-study-card-tap-zone--back {
+  min-height: clamp(140px, 26vh, 220px);
+  align-items: center;
+}
+
+.vocab-study-card--kanji-flash .vocab-study-reveal-zone--back.kanji-flash-back {
+  gap: 0;
+  align-items: stretch;
+  text-align: center;
+}
+
+.kanji-flash-back {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.kanji-flash-onkun {
+  display: flex;
+  align-items: stretch;
+  border-radius: 14px;
+  border: 1px solid rgba(58, 54, 48, 0.1);
+  background: rgba(255, 252, 248, 0.72);
+  overflow: hidden;
+}
+
+.kanji-flash-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 14px 10px 16px;
+}
+
+.kanji-flash-cell-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--vs-muted);
+}
+
+.kanji-flash-cell-value {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(0.92rem, 2.8vw, 1.12rem);
+  font-weight: 700;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.kanji-flash-onkun-rule {
+  flex: 0 0 1px;
+  width: 1px;
+  background: rgba(58, 54, 48, 0.12);
+  align-self: stretch;
+}
+
+.kanji-flash-mean {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--vs-ink);
+}
+
+.kanji-flash-mean-dot {
+  opacity: 0.45;
+  font-weight: 500;
+}
+
+.kanji-flash-vocab {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--vs-muted);
+}
+
+.kanji-flash-examples {
+  margin-top: 2px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(58, 54, 48, 0.14);
+  text-align: left;
+}
+
+.kanji-flash-examples p {
+  margin: 0 0 8px;
+  font-size: 0.86rem;
+  line-height: 1.52;
+  font-weight: 500;
+}
+
+.kanji-flash-examples p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 380px) {
+  .kanji-flash-onkun {
+    flex-direction: column;
+  }
+
+  .kanji-flash-onkun-rule {
+    display: none;
+  }
+
+  .kanji-flash-cell--on {
+    border-bottom: 1px solid rgba(58, 54, 48, 0.1);
+  }
+}
+
+.kanji-lesson-quiz-board .vocab-lesson-quiz-opt {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  white-space: normal;
 }

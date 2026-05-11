@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Sidebar, Header, Footer, Breadcrumb } from "../components/common";
+import { Breadcrumb } from "../components/common";
 import {
   mockStreak,
   mockNotifications,
@@ -75,16 +75,14 @@ const ChangePasswordPage = () => {
   };
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header
-            userName={headerName}
-            notificationCount={mockNotifications}
-          />
-          <div className="dash-main-inner profile-main change-password-page">
-            <Breadcrumb
+    <Layout
+      userName={headerName}
+      notificationCount={mockNotifications}
+      footerQuote={t("dashboard.quotes.footer")}
+      streakDays={mockStreak.days}
+      mainInnerClassName="profile-main change-password-page"
+    >
+      <Breadcrumb
               items={[
                 { label: t("breadcrumb.home"), to: "/", end: true },
                 { label: t("breadcrumb.changePassword") },
@@ -273,11 +271,6 @@ const ChangePasswordPage = () => {
                 </Link>
               ) : null}
             </section>
-
-            <Footer quote={t("dashboard.quotes.footer")} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

@@ -1,5 +1,3 @@
-/* Trang từ vựng — “sổ spiral” kem, washi, thẻ giấy như mock */
-
 :root {
   --vocab-paper: #f5f1e8;
   --vocab-paper-2: #ebe4d6;
@@ -73,17 +71,6 @@
   z-index: 1;
 }
 
-/* Băng dính washi trang trí */
-.vocab-sheet::before,
-.vocab-sheet::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  border-radius: 2px;
-  z-index: 0;
-  opacity: 0.85;
-}
-
 .vocab-sheet::before {
   top: 18px;
   right: 6%;
@@ -115,7 +102,6 @@
 .vocab-sheet {
   position: relative;
   margin: 0;
-  padding: 12px 8px 32px;
   border: none;
   background: transparent;
 }
@@ -800,4 +786,253 @@
   flex-shrink: 0;
   width: 15px;
   height: 15px;
+}
+
+.vocab-lesson-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.vocab-lesson-head-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vocab-lesson-head-deco {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.vocab-lesson-title {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.vocab-lesson-sub {
+  margin: 2px 0 0;
+  color: var(--vocab-ink-soft);
+  font-size: 0.93rem;
+}
+
+.vocab-lesson-pack-pct {
+  display: inline-block;
+  margin-left: 4px;
+  font-weight: 800;
+  color: var(--vocab-green-deep);
+}
+
+.vocab-lesson-goal-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--vocab-border);
+  background: rgba(255, 252, 246, 0.92);
+}
+
+.vocab-lesson-goal-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.vocab-lesson-goal-box label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--vocab-ink-soft);
+}
+
+.vocab-lesson-goal-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--vocab-ink-soft);
+}
+
+.vocab-lesson-goal-value {
+  font-size: 1.06rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--vocab-green-deep);
+}
+
+.vocab-lesson-goal-box .vocab-jlpt-select {
+  min-width: 84px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.vocab-lesson-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vocab-lesson-card {
+  border-radius: 14px;
+  border: 1px solid var(--vocab-border);
+  background: rgba(255, 253, 249, 0.95);
+  box-shadow: 0 2px 8px var(--vocab-shadow);
+}
+
+.vocab-lesson-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.vocab-lesson-link:hover .vocab-lesson-chevron {
+  transform: translateX(2px);
+}
+
+.vocab-lesson-book-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background: rgba(247, 239, 223, 0.7);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.vocab-lesson-book-icon {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.vocab-lesson-main {
+  min-width: 0;
+}
+
+.vocab-lesson-card-title {
+  margin: 0 0 2px;
+  font-size: 1.25rem;
+  font-family: var(--font-hand);
+  font-weight: 700;
+}
+
+.vocab-lesson-card-sub {
+  margin: 0 0 5px;
+  color: var(--vocab-ink-soft);
+  font-size: 0.88rem;
+}
+
+.vocab-lesson-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vocab-lesson-progress-text {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.vocab-lesson-progress-track {
+  width: 128px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(205, 194, 176, 0.4);
+  overflow: hidden;
+}
+
+.vocab-lesson-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--vocab-green-line), #90b087);
+}
+
+.vocab-lesson-milestones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vocab-lesson-milestones img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.vocab-lesson-milestone {
+  transition:
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.vocab-lesson-milestone.is-inactive {
+  filter: grayscale(1) saturate(0.1);
+  opacity: 0.38;
+}
+
+.vocab-lesson-milestone.is-active {
+  filter: none;
+  opacity: 1;
+}
+
+.vocab-lesson-chevron {
+  font-size: 2rem;
+  line-height: 1;
+  color: rgba(74, 56, 36, 0.6);
+  transition: transform 0.12s ease;
+}
+
+@media (max-width: 900px) {
+  .vocab-lesson-link {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .vocab-lesson-milestones {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .vocab-lesson-link {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .vocab-lesson-chevron {
+    display: none;
+  }
+  .vocab-lesson-progress-track {
+    width: 96px;
+  }
+}
+
+/* Kanji: bài khóa khi chưa thuộc hết bài trước */
+.vocab-lesson-link--locked {
+  cursor: not-allowed;
+  opacity: 0.82;
+}
+
+.vocab-lesson-lock-badge {
+  font-size: 0.85em;
+  margin-inline-start: 0.25em;
+  vertical-align: middle;
+}
+
+.vocab-lesson-chevron--muted {
+  color: rgba(74, 56, 36, 0.28);
+}
+
+.vocab-lesson-card-meta {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(74, 56, 36, 0.72);
 }

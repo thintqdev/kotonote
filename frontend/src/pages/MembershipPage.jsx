@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Sidebar, Header, Footer, Breadcrumb } from "../components/common";
+import { Breadcrumb } from "../components/common";
 import {
   mockStreak,
   mockNotifications,
@@ -24,16 +24,14 @@ const MembershipPage = () => {
     t("demoProfile.firstName");
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header
-            userName={headerName}
-            notificationCount={mockNotifications}
-          />
-          <div className="dash-main-inner profile-main membership-page">
-            <Breadcrumb
+    <Layout
+      userName={headerName}
+      notificationCount={mockNotifications}
+      footerQuote={t("dashboard.quotes.footer")}
+      streakDays={mockStreak.days}
+      mainInnerClassName="profile-main membership-page"
+    >
+      <Breadcrumb
               items={[
                 { label: t("breadcrumb.home"), to: "/", end: true },
                 { label: t("breadcrumb.membership") },
@@ -97,11 +95,6 @@ const MembershipPage = () => {
                 </button>
               </article>
             </div>
-
-            <Footer quote={t("dashboard.quotes.footer")} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

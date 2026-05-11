@@ -1,20 +1,30 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './hooks/useAuth.jsx';
-import LoginPage from './pages/LoginPage.jsx';
-import RegisterPage from './pages/RegisterPage.jsx';
-import SurveyPage from './pages/SurveyPage.jsx';
-import DashboardHome from './pages/DashboardHome.jsx';
-import Profile from './pages/Profile.jsx';
-import ChangePasswordPage from './pages/ChangePasswordPage.jsx';
-import SettingsPage from './pages/SettingsPage.jsx';
-import MembershipPage from './pages/MembershipPage.jsx';
-import NotificationsPage from './pages/NotificationsPage.jsx';
-import GrammarListPage from './pages/GrammarListPage.jsx';
-import GrammarDetailPage from './pages/GrammarDetailPage.jsx';
-import VocabularyListPage from './pages/VocabularyListPage.jsx';
-import VocabularyDetailPage from './pages/VocabularyDetailPage.jsx';
-import VocabularyStudyPage from './pages/VocabularyStudyPage.jsx';
-import './styles/App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
+import SurveyPage from "./pages/SurveyPage.jsx";
+import DashboardHome from "./pages/DashboardHome.jsx";
+import Profile from "./pages/Profile.jsx";
+import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
+import MembershipPage from "./pages/MembershipPage.jsx";
+import NotificationsPage from "./pages/NotificationsPage.jsx";
+import GrammarListPage from "./pages/GrammarListPage.jsx";
+import GrammarDetailPage from "./pages/GrammarDetailPage.jsx";
+import VocabularyListPage from "./pages/VocabularyListPage.jsx";
+import VocabularyDetailPage from "./pages/VocabularyDetailPage.jsx";
+import VocabularyPage, {
+  VocabularyIndexRedirect,
+} from "./pages/VocabularyPage.jsx";
+import AlphabetPage from "./pages/AlphabetPage.jsx";
+import KanjiListPage from "./pages/KanjiListPage.jsx";
+import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
+import "./styles/App.css";
 
 function App() {
   return (
@@ -34,9 +44,17 @@ function App() {
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/grammar" element={<GrammarListPage />} />
           <Route path="/grammar/:slug" element={<GrammarDetailPage />} />
+          <Route path="/alphabet" element={<AlphabetPage />} />
           <Route path="/vocabulary/browse" element={<VocabularyListPage />} />
+          <Route
+            path="/vocabulary/lesson/:lessonNo"
+            element={<VocabularyPage />}
+          />
           <Route path="/vocabulary/:id" element={<VocabularyDetailPage />} />
-          <Route path="/vocabulary" element={<VocabularyStudyPage />} />
+          <Route path="/vocabulary" element={<VocabularyIndexRedirect />} />
+          <Route path="/kanji/browse" element={<KanjiListPage />} />
+          <Route path="/kanji/lesson/:lessonNo" element={<KanjiPage />} />
+          <Route path="/kanji" element={<KanjiIndexRedirect />} />
         </Routes>
       </Router>
     </AuthProvider>
