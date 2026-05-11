@@ -1,0 +1,247 @@
+.settings-page {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.settings-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.settings-saved-banner {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(168, 181, 138, 0.22);
+  border: 1.5px dashed #a8b58a;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a4828;
+  line-height: 1.45;
+}
+
+.settings-card {
+  width: 100%;
+  max-width: none;
+  padding-top: 18px;
+}
+
+.settings-card--pinned,
+.settings-card--taped {
+  padding-top: 22px;
+}
+
+.settings-page-title {
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+.settings-section-title {
+  margin-bottom: 14px;
+}
+
+.settings-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.settings-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: var(--profile-content-rule, 1px dashed rgba(200, 175, 145, 0.35));
+}
+
+.settings-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.settings-row--last {
+  padding-bottom: 0;
+}
+
+.settings-row--stack {
+  padding: 0;
+  border: none;
+  flex-wrap: wrap;
+}
+
+.settings-row-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settings-row-label {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: #3a3028;
+}
+
+.settings-row-desc {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #8a7868;
+}
+
+/* Toggle */
+.settings-toggle {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.settings-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings-toggle-track {
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 26px;
+  border-radius: 14px;
+  background: rgba(180, 168, 148, 0.45);
+  border: 1.5px solid #c4b89a;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.settings-toggle-thumb {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fffef8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transform: translate(0, -50%);
+  transition: transform 0.2s ease;
+}
+
+.settings-toggle-input:checked + .settings-toggle-track {
+  background: rgba(168, 181, 138, 0.75);
+  border-color: #a8b58a;
+}
+
+.settings-toggle-input:checked + .settings-toggle-track .settings-toggle-thumb {
+  transform: translate(20px, -50%);
+}
+
+.settings-toggle-input:focus-visible + .settings-toggle-track {
+  outline: 2px solid rgba(168, 181, 138, 0.9);
+  outline-offset: 2px;
+}
+
+.settings-toggle-input:disabled + .settings-toggle-track {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.settings-field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.settings-select-label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a3028;
+}
+
+.settings-select {
+  width: 100%;
+  max-width: min(100%, 400px);
+  padding: 10px 12px;
+  font-size: 13px;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #8a7868 50%),
+    linear-gradient(135deg, #8a7868 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(50% - 3px),
+    calc(100% - 11px) calc(50% - 3px);
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.settings-quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: #5a6b48;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.settings-quick-link:hover {
+  color: #3a4828;
+}
+
+.settings-save-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 4px;
+}
+
+.settings-save-btn {
+  max-width: min(100%, 360px);
+}
+
+@media (min-width: 900px) {
+  .settings-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 20px;
+    align-items: start;
+  }
+
+  .settings-card--pinned,
+  .settings-card--account,
+  .settings-save-form {
+    grid-column: 1 / -1;
+  }
+
+  .settings-quick-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}

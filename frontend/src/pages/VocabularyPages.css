@@ -1,0 +1,803 @@
+/* Trang từ vựng — “sổ spiral” kem, washi, thẻ giấy như mock */
+
+:root {
+  --vocab-paper: #f5f1e8;
+  --vocab-paper-2: #ebe4d6;
+  --vocab-ink: #3a3530;
+  --vocab-ink-soft: #5c564e;
+  --vocab-muted: rgba(58, 53, 48, 0.58);
+  --vocab-green: #5c7a52;
+  --vocab-green-deep: #4a6b42;
+  --vocab-green-soft: rgba(92, 122, 82, 0.18);
+  --vocab-green-line: #6d8c62;
+  --vocab-border: rgba(58, 48, 38, 0.11);
+  --vocab-shadow: rgba(42, 35, 28, 0.09);
+  --vocab-shadow-lift: rgba(42, 35, 28, 0.14);
+  --vocab-card-bg: #fffdf8;
+}
+
+.vocab-scope {
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--font-ui);
+  color: var(--vocab-ink);
+}
+
+/* Vùng chính: giấy kem + lưới ô rất nhạt + lề “đục lỗ” */
+.vocab-dash .dash-main-inner {
+  position: relative;
+  z-index: 0;
+  background-size:
+    24px 24px,
+    24px 24px,
+    100% 100%,
+    100% 100%;
+  min-height: calc(100vh - 56px);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+}
+
+.vocab-dash .dash-main-inner::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(180, 170, 155, 0.45) 0 5px,
+    transparent 5px 10px
+  );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+@media (max-width: 768px) {
+  .vocab-dash .dash-main-inner {
+    border-radius: 0;
+    min-height: auto;
+  }
+
+  .vocab-dash .dash-main-inner::before {
+    left: 6px;
+  }
+}
+
+.vocab-notebook {
+  position: relative;
+  z-index: 1;
+}
+
+/* Băng dính washi trang trí */
+.vocab-sheet::before,
+.vocab-sheet::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 2px;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.vocab-sheet::before {
+  top: 18px;
+  right: 6%;
+  width: min(104px, 20vw);
+  height: 16px;
+  background: linear-gradient(
+    105deg,
+    rgba(165, 195, 150, 0.45) 0%,
+    rgba(210, 195, 170, 0.5) 50%,
+    rgba(185, 200, 175, 0.42) 100%
+  );
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.vocab-sheet::after {
+  bottom: 120px;
+  left: 4%;
+  width: 72px;
+  height: 12px;
+  background: linear-gradient(
+    90deg,
+    rgba(230, 200, 185, 0.5),
+    rgba(200, 215, 195, 0.4)
+  );
+  transform: rotate(4deg);
+}
+
+.vocab-sheet {
+  position: relative;
+  margin: 0;
+  padding: 12px 8px 32px;
+  border: none;
+  background: transparent;
+}
+
+.vocab-list-head {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.22);
+}
+
+.vocab-list-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.vocab-jlpt-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.vocab-list-kicker {
+  margin: 0 0 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vocab-muted);
+}
+
+.vocab-list-title {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(1.55rem, 2.8vw, 2rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: 0.04em;
+  color: var(--vocab-ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.vocab-list-sub {
+  margin: 12px 0 0;
+  max-width: 34rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: var(--vocab-ink-soft);
+}
+
+/* Thanh lọc — “tờ giấy” nổi nhẹ */
+.vocab-toolbar-panel {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  padding: 14px 16px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--vocab-border);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 248, 0.97) 0%,
+    rgba(252, 248, 240, 0.94) 100%
+  );
+  box-shadow:
+    0 2px 12px var(--vocab-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.85) inset;
+}
+
+.vocab-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px 22px;
+}
+
+.vocab-toolbar-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--vocab-muted);
+}
+
+.vocab-search-row {
+  position: relative;
+  flex: 1 1 240px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.vocab-search-icon {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(92, 122, 82, 0.75);
+  pointer-events: none;
+}
+
+.vocab-search-input {
+  width: 100%;
+  padding: 12px 14px 12px 2.75rem;
+  border: 1px solid rgba(92, 122, 82, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
+  color: var(--vocab-ink);
+  box-shadow: 0 1px 3px var(--vocab-shadow) inset;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.vocab-search-input::placeholder {
+  color: rgba(58, 53, 48, 0.35);
+}
+
+.vocab-search-input:focus {
+  outline: none;
+  border-color: rgba(92, 122, 82, 0.45);
+  box-shadow:
+    0 0 0 3px var(--vocab-green-soft),
+    0 1px 3px var(--vocab-shadow) inset;
+}
+
+.vocab-sort-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 11.5rem;
+}
+
+.vocab-toolbar-select,
+.vocab-jlpt-select {
+  padding: 10px 36px 10px 14px;
+  border: 1px solid rgba(92, 122, 82, 0.2);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.92);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c7a52' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--vocab-ink-soft);
+  box-shadow: 0 1px 3px var(--vocab-shadow);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.vocab-jlpt-select {
+  border-radius: 999px;
+  min-width: 7.5rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--vocab-green-deep);
+  background-color: rgba(255, 252, 246, 0.95);
+}
+
+/* Tab — bo tròn, nền pastel, active = gạch xanh */
+.vocab-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.vocab-tab {
+  position: relative;
+  padding: 10px 20px 12px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 252, 246, 0.88);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--vocab-ink-soft);
+  cursor: pointer;
+  box-shadow: 0 1px 3px var(--vocab-shadow);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.vocab-tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px var(--vocab-shadow-lift);
+}
+
+.vocab-tab--learned {
+  background: rgba(245, 215, 175, 0.5);
+}
+
+.vocab-tab--unlearned {
+  background: rgba(220, 200, 175, 0.48);
+}
+
+.vocab-tab--fav {
+  background: rgba(240, 200, 210, 0.48);
+}
+
+.vocab-tab--active {
+  color: var(--vocab-green-deep);
+  background: rgba(255, 252, 246, 0.98);
+  box-shadow: 0 2px 8px var(--vocab-shadow-lift);
+}
+
+.vocab-tab--active::after {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--vocab-green-line), #8fb088);
+}
+
+.vocab-tab--active.vocab-tab--learned,
+.vocab-tab--active.vocab-tab--unlearned,
+.vocab-tab--active.vocab-tab--fav {
+  /* giữ màu pastel nhưng vẫn có gạch xanh */
+  color: var(--vocab-green-deep);
+}
+
+.vocab-filter-reset {
+  margin-top: 14px;
+  padding: 6px 4px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9a6b5a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* Lưới thẻ: 3 cột (desktop), gọn cho ~24 từ / trang */
+.vocab-card-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1100px) {
+  .vocab-card-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .vocab-card-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vocab-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 11px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--vocab-border);
+  background: var(--vocab-card-bg);
+  box-shadow:
+    0 1px 5px var(--vocab-shadow),
+    0 3px 12px -4px rgba(55, 45, 35, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  min-width: 0;
+}
+
+/* Hàng 1: loại từ (pill) + từ gốc | nút */
+.vocab-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px 8px;
+  margin-bottom: 5px;
+}
+
+.vocab-card-tap-head,
+.vocab-card-tap-body {
+  text-decoration: none;
+  color: inherit;
+}
+
+.vocab-card-tap-head {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.vocab-card-tap-head:hover .vocab-surface {
+  color: var(--vocab-green-deep, #4a6b42);
+}
+
+.vocab-card-tap-body {
+  display: block;
+}
+
+.vocab-card-tap-body:hover .vocab-meaning {
+  color: var(--vocab-ink-soft);
+}
+
+.vocab-head-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 140px;
+}
+
+.vocab-pos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.vocab-pos--noun {
+  background: rgba(165, 190, 215, 0.55);
+  color: #2a3d4f;
+}
+
+.vocab-pos--verb {
+  background: rgba(235, 195, 145, 0.65);
+  color: #4a3010;
+}
+
+.vocab-pos--shape {
+  background: rgba(205, 188, 165, 0.6);
+  color: #3d2f22;
+}
+
+.vocab-pos--adv {
+  background: rgba(225, 190, 205, 0.55);
+  color: #4a2530;
+}
+
+.vocab-word-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.vocab-surface {
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--vocab-ink);
+}
+
+.vocab-reading {
+  font-family: var(--font-serif-jp, serif);
+  font-size: 0.78rem;
+  color: var(--vocab-muted);
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+}
+
+.vocab-meaning {
+  margin: 0 0 5px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-style: normal;
+  color: var(--vocab-ink-soft);
+}
+
+.vocab-inline-label {
+  display: inline;
+  margin-right: 0.3rem;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: var(--vocab-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Ví dụ: cùng dòng; trong ô nhỏ font co lại */
+.vocab-example-line {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--vocab-ink-soft);
+}
+
+.vocab-example-line .vocab-inline-label {
+  margin-right: 0.28rem;
+}
+
+.vocab-example-ja {
+  display: inline;
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: 0.82rem;
+  line-height: inherit;
+  color: var(--vocab-ink);
+  vertical-align: baseline;
+}
+
+.vocab-example-ja ruby {
+  ruby-align: center;
+}
+
+.vocab-example-ja rt {
+  font-size: 0.55em;
+  color: var(--vocab-muted);
+}
+
+.vocab-example-vi-inline {
+  color: var(--vocab-muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.vocab-card-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 420px) {
+  .vocab-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 4px;
+  }
+}
+
+.vocab-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1.5px solid rgba(92, 122, 82, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--vocab-green);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.12s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.vocab-icon-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(92, 122, 82, 0.45);
+  transform: translateY(-1px);
+}
+
+.vocab-icon-btn .vocab-svg-icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.vocab-fav-btn {
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--vocab-muted);
+}
+
+.vocab-fav-btn--on {
+  border-color: rgba(200, 160, 70, 0.55);
+  background: linear-gradient(180deg, #fff9e8 0%, #fff4dc 100%);
+  color: #c9a227;
+}
+
+.vocab-learn-btn {
+  color: rgba(92, 122, 82, 0.65);
+}
+
+.vocab-learn-btn--on {
+  color: #4f7d59;
+  border-color: rgba(79, 125, 89, 0.45);
+  background: rgba(235, 245, 232, 0.95);
+}
+
+.vocab-learn-btn .vocab-learn-svg {
+  display: block;
+}
+
+.vocab-footer-actions {
+  position: relative;
+  z-index: 1;
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.vocab-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border: 2px dashed rgba(92, 122, 82, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 252, 248, 0.95);
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: var(--vocab-green-deep);
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--vocab-shadow);
+  transition:
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.vocab-add-btn:hover {
+  background: rgba(235, 245, 228, 0.95);
+  transform: translateY(-2px);
+}
+
+.vocab-empty {
+  margin: 28px 0;
+  padding: 24px;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px dashed rgba(92, 122, 82, 0.25);
+  background: rgba(255, 252, 246, 0.6);
+  color: var(--vocab-muted);
+  font-size: 0.95rem;
+}
+
+.vocab-pagination {
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.vocab-pagination-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--vocab-muted);
+}
+
+.vocab-pagination-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.vocab-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.35rem;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--vocab-border);
+  background: rgba(255, 252, 248, 0.96);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--vocab-ink-soft);
+  text-decoration: none;
+  box-shadow: 0 1px 3px var(--vocab-shadow);
+  transition:
+    background 0.12s ease,
+    color 0.12s ease;
+}
+
+.vocab-page-btn:hover {
+  background: #fff;
+  color: var(--vocab-green-deep);
+}
+
+.vocab-page-btn--active {
+  border-color: rgba(92, 122, 82, 0.4);
+  background: linear-gradient(
+    180deg,
+    rgba(220, 235, 210, 0.75) 0%,
+    rgba(200, 220, 190, 0.55) 100%
+  );
+  color: var(--vocab-green-deep);
+}
+
+/* Nút nhấn CTA / phụ — dùng thống nhất các màn từ vựng */
+.vocab-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 2.625rem;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(92, 122, 82, 0.42);
+  background: rgba(92, 122, 82, 0.12);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--vocab-green-deep);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.1s ease;
+}
+
+.vocab-cta-btn:hover:not(:disabled) {
+  background: rgba(92, 122, 82, 0.2);
+  border-color: rgba(92, 122, 82, 0.52);
+}
+
+.vocab-cta-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.vocab-cta-btn:focus-visible {
+  outline: 2px solid var(--vocab-green-soft);
+  outline-offset: 2px;
+}
+
+.vocab-cta-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.vocab-cta-btn--muted {
+  border: 1px solid var(--vocab-border);
+  background: rgba(255, 252, 248, 0.96);
+  color: var(--vocab-ink-soft);
+  box-shadow: 0 1px 3px var(--vocab-shadow);
+}
+
+.vocab-cta-btn--muted:hover:not(:disabled) {
+  background: #fff;
+  color: var(--vocab-green-deep);
+}
+
+.vocab-icon-btn > svg {
+  display: block;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}

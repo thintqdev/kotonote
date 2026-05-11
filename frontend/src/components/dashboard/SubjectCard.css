@@ -1,0 +1,198 @@
+/* Giấy ô li kẻ ngang — mọi thẻ cùng pattern; tint chỉ đổi tông kem nhạt */
+
+.subject-card {
+  --paper-tint-a: #faf8f4;
+  --paper-tint-b: #f0ebe3;
+  --ruled-line: rgba(155, 145, 130, 0.32);
+  --ruled-step: 26px;
+  --margin-line: rgba(200, 120, 110, 0.42);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 22px 14px 16px;
+  border: 1.5px dashed rgba(190, 175, 155, 0.85);
+  border-radius: 8px;
+  min-height: 228px;
+  background-color: var(--paper-tint-a);
+  background-image:
+    /* Kẻ ngang */
+    repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent calc(var(--ruled-step) - 1px),
+      var(--ruled-line) calc(var(--ruled-step) - 1px),
+      var(--ruled-line) var(--ruled-step)
+    ),
+    /* Lề đỏ nhạt (vở ô li) */
+    linear-gradient(
+        90deg,
+        var(--margin-line) 0,
+        var(--margin-line) 2px,
+        transparent 2px
+      ),
+    /* Tông giấy */
+    linear-gradient(165deg, var(--paper-tint-a) 0%, var(--paper-tint-b) 100%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  box-shadow:
+    0 1px 0 rgba(255, 253, 249, 0.95) inset,
+    2px 3px 10px rgba(60, 45, 30, 0.06);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  overflow: visible;
+}
+
+.subject-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255, 253, 249, 0.95) inset,
+    2px 6px 14px rgba(60, 45, 30, 0.09);
+}
+
+.subject-card-pin {
+  position: absolute;
+  z-index: 2;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(1px 2px 4px rgba(40, 30, 22, 0.2));
+}
+
+.subject-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 0;
+}
+
+.subject-card-icon-img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.subject-card-name {
+  margin: 0 0 6px;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 700;
+  color: #2b2218;
+  line-height: 1.25;
+}
+
+.subject-card-count {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: #5a4a3a;
+  width: 100%;
+}
+
+.subject-card-bar-wrap {
+  width: 100%;
+  max-width: 200px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.subject-card-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #a8b58a, #8a9870);
+  transition: width 0.3s ease;
+}
+
+.subject-card-pct {
+  margin: 0 0 auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: #5a6a4a;
+}
+
+.subject-card-cta {
+  margin-top: 12px;
+  align-self: center;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: #6a8a5a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(106, 138, 90, 0.35);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.subject-card-cta:hover {
+  color: #4a7038;
+}
+
+/* Chỉ đổi biến tông giấy — cùng kẻ ô li */
+.subject-card--cream {
+  --paper-tint-a: #faf8f4;
+  --paper-tint-b: #f1ebe2;
+}
+
+.subject-card--yellow {
+  --paper-tint-a: #fcf9f2;
+  --paper-tint-b: #f3ecde;
+}
+
+.subject-card--pink {
+  --paper-tint-a: #faf7f7;
+  --paper-tint-b: #f1eaea;
+}
+
+.subject-card--blue {
+  --paper-tint-a: #f7f8fb;
+  --paper-tint-b: #eaeef4;
+}
+
+.subject-card--green {
+  --paper-tint-a: #f6faf4;
+  --paper-tint-b: #e9efe6;
+}
+
+@media (max-width: 720px) {
+  .subject-card {
+    min-height: 0;
+    padding: 20px 12px 14px;
+    --ruled-step: 24px;
+  }
+
+  .subject-card-pin {
+    width: 44px;
+    height: 44px;
+    top: -12px;
+  }
+
+  .subject-card-icon-img {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 420px) {
+  .subject-card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,639 @@
+/* Trang chi tiết từ — scrapbook / sổ tay */
+
+.vocab-detail-scope {
+  --vd-ink: #3a3530;
+  --vd-muted: rgba(58, 53, 48, 0.58);
+  --vd-green: #5c7a52;
+  --vd-pink: rgba(235, 195, 210, 0.55);
+  --vd-yellow: rgba(248, 230, 165, 0.75);
+  --vd-green-tape: rgba(195, 220, 185, 0.65);
+  --vd-card: rgba(255, 253, 248, 0.98);
+  --vd-border: rgba(58, 48, 38, 0.12);
+  --vd-shadow: rgba(42, 35, 28, 0.08);
+  font-family: var(--font-ui);
+  color: var(--vd-ink);
+}
+
+.vocab-detail-wobbly-border {
+  border: 2px solid var(--vd-border);
+  border-radius: 14px;
+  box-shadow: 2px 3px 0 rgba(62, 52, 40, 0.06), 0 4px 18px var(--vd-shadow);
+  background: var(--vd-card);
+}
+
+/* Tag JLPT + 単語 */
+.vocab-detail-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.vocab-detail-jlpt-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: rgba(235, 245, 228, 0.95);
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  color: var(--vd-green);
+}
+
+/* Thẻ tiến độ hôm nay */
+.vocab-detail-today-card {
+  position: relative;
+  max-width: 220px;
+  padding: 10px 12px 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #fffdf8, #faf6ec);
+  border: 1px dashed rgba(92, 122, 82, 0.25);
+  box-shadow: 0 2px 8px var(--vd-shadow);
+}
+
+.vocab-detail-today-card::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 12px;
+  width: 48px;
+  height: 14px;
+  background: var(--vd-green-tape);
+  opacity: 0.85;
+  transform: rotate(-2deg);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.vocab-detail-today-label {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--vd-muted);
+  letter-spacing: 0.06em;
+}
+
+.vocab-detail-today-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(58, 48, 38, 0.08);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.vocab-detail-today-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7aab6e, #5c8f52);
+  transition: width 0.25s ease;
+}
+
+.vocab-detail-today-count {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--vd-ink);
+}
+
+/* Tiêu đề + quay lại */
+.vocab-detail-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.vocab-detail-page-title {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 600;
+}
+
+.vocab-detail-back {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--vd-green);
+  border: 1px solid rgba(92, 122, 82, 0.28);
+  background: rgba(255, 252, 248, 0.95);
+}
+
+.vocab-detail-back:hover {
+  background: rgba(235, 245, 228, 0.6);
+}
+
+/* Hero — từ chính */
+.vocab-detail-hero {
+  position: relative;
+  padding: 18px 18px 16px;
+  margin-bottom: 16px;
+}
+
+.vocab-detail-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.vocab-detail-word-ruby {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+.vocab-detail-word-ruby rt {
+  font-size: 0.42em;
+  color: var(--vd-muted);
+}
+
+.vocab-detail-katakana {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  color: var(--vd-muted);
+  font-family: var(--font-ui);
+}
+
+.vocab-detail-hero-audio {
+  width: 42px;
+  height: 42px;
+}
+
+.vocab-detail-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.vocab-detail-pos-pill {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(235, 245, 228, 0.9);
+  border: 1px solid rgba(92, 122, 82, 0.2);
+  color: var(--vd-green);
+}
+
+.vocab-detail-meaning-big {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.vocab-detail-hero-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.vocab-detail-fav-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--vd-border);
+  font-size: 0.82rem;
+  font-weight: 800;
+  background: rgba(255, 252, 248, 0.95);
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+
+.vocab-detail-fav-big--on {
+  border-color: rgba(200, 160, 70, 0.45);
+  background: linear-gradient(180deg, #fff9e8, #fff4dc);
+  color: #a67c00;
+}
+
+.vocab-detail-learned-box {
+  text-align: right;
+}
+
+.vocab-detail-learned-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  border: 1px solid rgba(79, 125, 89, 0.35);
+  background: rgba(235, 245, 232, 0.95);
+  color: #2d5230;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+
+.vocab-detail-learned-pill:not(.vocab-detail-learned-pill--on) {
+  background: rgba(255, 252, 248, 0.95);
+  border-color: var(--vd-border);
+  color: var(--vd-muted);
+}
+
+.vocab-detail-learned-date {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  color: var(--vd-muted);
+}
+
+/* Washi nhãn */
+.vocab-detail-washi {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 5px 14px 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  transform: rotate(-0.5deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.vocab-detail-washi--pink {
+  background: var(--vd-pink);
+  color: #4a3038;
+}
+
+.vocab-detail-washi--green {
+  background: var(--vd-green-tape);
+  color: #2d4028;
+}
+
+.vocab-detail-washi--yellow {
+  background: var(--vd-yellow);
+  color: #4a4010;
+}
+
+/* Thẻ 例文 */
+.vocab-detail-example-card {
+  position: relative;
+  padding: 14px 16px 14px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.vocab-detail-example-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vocab-detail-example-ja {
+  margin: 0;
+  flex: 1 1 220px;
+  min-width: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.vocab-detail-example-ja ruby {
+  ruby-align: center;
+}
+
+.vocab-detail-example-ja rt {
+  font-size: 0.55em;
+  color: var(--vd-muted);
+}
+
+.vocab-detail-highlight,
+.vocab-detail-example-ja .vocab-detail-highlight {
+  text-decoration: underline;
+  text-decoration-color: #c44;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.vocab-detail-example-vi {
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--vd-muted);
+}
+
+.vocab-detail-example-audio {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+}
+
+/* Lưới 2x2 */
+.vocab-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 720px) {
+  .vocab-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vocab-detail-panel {
+  padding: 12px 14px 14px;
+  min-height: 120px;
+}
+
+.vocab-detail-panel--kanji {
+  background: linear-gradient(165deg, rgba(252, 250, 244, 0.98) 0%, rgba(248, 252, 246, 0.92) 100%);
+  border-color: rgba(92, 122, 82, 0.16);
+}
+
+.vocab-detail-panel-title {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--vd-muted);
+  letter-spacing: 0.04em;
+}
+
+.vocab-detail-panel-title--kanji {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.22);
+}
+
+/* Dải công thức: 情 ＋ 報 */
+.vocab-detail-kanji-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(58, 48, 38, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.vocab-detail-kanji-strip-char {
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2rem, 4.5vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--vd-ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.vocab-detail-kanji-strip-op {
+  font-family: var(--font-ui);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: rgba(92, 122, 82, 0.55);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Thẻ từng chữ */
+.vocab-detail-kanji-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 10px;
+}
+
+.vocab-detail-kanji-card {
+  margin: 0;
+}
+
+.vocab-detail-kanji-card-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(58, 48, 38, 0.1);
+  background: linear-gradient(180deg, #fffefb 0%, #faf8f2 100%);
+  box-shadow: 0 2px 8px var(--vd-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+
+.vocab-detail-kanji-card-glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.75rem;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2.1rem, 4vw, 2.45rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--vd-ink);
+  background: linear-gradient(180deg, rgba(240, 246, 236, 0.55) 0%, rgba(255, 253, 248, 0.4) 100%);
+  border-bottom: 1px solid rgba(58, 48, 38, 0.08);
+}
+
+.vocab-detail-kanji-card-meta {
+  padding: 8px 10px 11px;
+  flex: 1;
+}
+
+.vocab-detail-kanji-card-label {
+  margin: 0 0 2px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(92, 122, 82, 0.75);
+}
+
+.vocab-detail-kanji-card-label--meaning {
+  margin-top: 8px;
+  color: rgba(58, 53, 48, 0.45);
+}
+
+.vocab-detail-kanji-card-yomi {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--vd-ink);
+  word-break: break-word;
+}
+
+.vocab-detail-kanji-reading-parts {
+  display: inline;
+}
+
+.vocab-detail-kanji-reading-dot {
+  display: inline-block;
+  margin: 0 5px;
+  font-weight: 400;
+  color: rgba(92, 122, 82, 0.45);
+}
+
+.vocab-detail-kanji-card-mean {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.48;
+  color: var(--vd-muted);
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .vocab-detail-kanji-cards {
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  }
+}
+
+.vocab-detail-list-plain {
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.vocab-detail-memo-note {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-family: "Patrick Hand", var(--font-ui), cursive;
+  color: var(--vd-ink);
+}
+
+.vocab-detail-memo-note--sub {
+  margin-top: 6px;
+  font-size: 0.88rem;
+  color: var(--vd-muted);
+  font-family: var(--font-ui);
+}
+
+.vocab-detail-empty-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--vd-muted);
+  font-style: normal;
+}
+
+/* 4 nút bar */
+.vocab-detail-action-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 640px) {
+  .vocab-detail-action-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.vocab-detail-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--vd-border);
+  background: linear-gradient(180deg, #fffdf9, #faf6ee);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--vd-ink);
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+
+.vocab-detail-action-btn:hover {
+  border-color: rgba(92, 122, 82, 0.35);
+  background: rgba(255, 252, 248, 1);
+}
+
+.vocab-detail-action-ico {
+  font-size: 1.25rem;
+  opacity: 0.85;
+}
+
+/* Footer prev/next */
+.vocab-detail-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px;
+  margin-top: 8px;
+}
+
+.vocab-detail-nav-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--vd-green);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+}
+
+.vocab-detail-nav-muted {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--vd-muted);
+  opacity: 0.4;
+  user-select: none;
+}
+
+.vocab-detail-nav-pos {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--vd-muted);
+}
+
+.vocab-detail-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(92, 122, 82, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--vd-green);
+  cursor: pointer;
+}
+
+.vocab-detail-icon-circle:hover {
+  border-color: rgba(92, 122, 82, 0.45);
+}
+
+.vocab-detail-icon-circle .vocab-svg-icon {
+  width: 17px;
+  height: 17px;
+  display: block;
+}

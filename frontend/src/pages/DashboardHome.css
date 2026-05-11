@@ -1,0 +1,246 @@
+/* Layout trang dashboard — tách khỏi component con */
+
+.dash-page {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+/* Không đặt max-width ở đây — flex column phải ăn hết phần còn lại sau sidebar,
+   kẻo khi sidebar thu nhỏ vùng phải vẫn bị “co” theo (bug flex + max-width trên cùng flex item). */
+.dash-main {
+  flex: 1 1 0%;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-main-inner {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px;
+}
+
+/* “Bảng ghim giấy”: nền nhẹ + thẻ gắn ghim */
+.dash-pin-board {
+  background-image: radial-gradient(
+    ellipse 130% 70% at 50% -10%,
+    rgba(255, 252, 242, 0.95),
+    transparent 58%
+  );
+}
+
+/* Bóng nhẹ + nghiêng (không dùng ảnh pin — pin chỉ trên thẻ 学習科目) */
+.dash-float {
+  position: relative;
+  z-index: 0;
+  padding-top: 6px;
+  margin-top: 2px;
+  border-radius: 8px;
+  filter: drop-shadow(2px 5px 12px rgba(45, 35, 25, 0.08));
+}
+
+.dash-float--tilt-a {
+  transform: rotate(-0.5deg);
+}
+
+.dash-float--tilt-b {
+  transform: rotate(0.55deg);
+}
+
+.dash-float--section {
+  transform: rotate(-0.22deg);
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.dash-float--tilt-c {
+  transform: rotate(0.38deg);
+}
+
+.dash-float--tilt-d {
+  transform: rotate(-0.42deg);
+}
+
+.dash-row-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.dash-row-top .dash-float {
+  overflow: visible;
+}
+
+.dash-float--tilt-b {
+  position: absolute;
+  right: 20px;
+  top: -40px;
+}
+
+.dash-row-top .welcome-banner {
+  flex: 1;
+  min-width: min(100%, 320px);
+}
+
+/* 今日の進捗 + 今日のメモ — một hàng tiêu đề, một hàng nội dung, cao đồng nhất */
+.dash-daily {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.dash-daily-title-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.dash-daily-section-title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b2b2b;
+  line-height: 1.25;
+}
+
+/* Note title + portal mount for DailyNoteCard toolbar */
+.dash-daily-note-title-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.dash-daily-note-title-cell .dash-daily-section-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dash-daily-note-toolbar-mount {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dash-daily-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.dash-daily-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dash-daily-col > .daily-progress,
+.dash-daily-col > .daily-note {
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .dash-main-inner {
+    max-width: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .dash-page {
+    flex-direction: column;
+  }
+
+  .dash-main {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  .dash-row-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .dash-row-top .welcome-banner {
+    min-width: 0;
+  }
+
+  .dash-float--tilt-a,
+  .dash-float--tilt-b,
+  .dash-float--section,
+  .dash-float--tilt-c,
+  .dash-float--tilt-d {
+    transform: none;
+  }
+
+  .dash-daily-title-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .dash-daily-card-row {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-main {
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  .dash-main-inner {
+    padding-top: 12px;
+  }
+
+  .dash-row-top {
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+
+  .dash-daily-card-row {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-main {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+
+  .dash-main-inner {
+    padding-top: 10px;
+  }
+
+  .dash-daily-card-row {
+    gap: 12px;
+  }
+
+  .dash-daily {
+    margin-top: 6px;
+  }
+}

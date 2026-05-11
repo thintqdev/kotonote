@@ -1,0 +1,143 @@
+.membership-page {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.membership-intro {
+  width: 100%;
+}
+
+.membership-title {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.membership-subtitle {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #6a5a4a;
+}
+
+.membership-tiers {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 860px) {
+  .membership-tiers {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}
+
+.membership-tier {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 18px 16px 16px;
+}
+
+.membership-tier--current {
+  position: relative;
+}
+
+.membership-tier--pro {
+  border-color: #9aab7a;
+  box-shadow:
+    0 2px 14px rgba(90, 110, 72, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  background: linear-gradient(168deg, #fafcf6 0%, #eef3e4 100%);
+}
+
+.membership-tier-head {
+  margin-bottom: 14px;
+}
+
+.membership-tier-badge {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4a5c38;
+  background: rgba(168, 181, 138, 0.35);
+  border: 1px dashed #a8b58a;
+}
+
+.membership-tier-name {
+  margin: 0 0 4px;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  color: #3a3028;
+  letter-spacing: 0.02em;
+}
+
+.membership-tier-name--pro {
+  color: #2d3d22;
+}
+
+.membership-tier-price {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: #7a6a58;
+}
+
+.membership-tier-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.membership-tier-item {
+  position: relative;
+  padding: 10px 0 10px 22px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4a4036;
+  border-top: var(
+    --profile-content-rule,
+    1px dashed rgba(200, 175, 145, 0.35)
+  );
+}
+
+.membership-tier-item:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.membership-tier-item::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6a8550;
+}
+
+.membership-tier-item:first-of-type::before {
+  top: 0;
+}
+
+.membership-tier-cta {
+  margin-top: 16px;
+  width: 100%;
+  max-width: none;
+  align-self: stretch;
+}

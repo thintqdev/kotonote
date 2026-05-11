@@ -1,0 +1,622 @@
+{
+  "dateField": {
+    "placeholder": "Chọn ngày",
+    "clear": "Xóa ngày",
+    "prevMonth": "Tháng trước",
+    "nextMonth": "Tháng sau",
+    "chooseMonth": "Chọn tháng",
+    "chooseYear": "Chọn năm",
+    "dialogLabel": "Chọn ngày trong lịch"
+  },
+  "common": {
+    "language": "Ngôn ngữ"
+  },
+  "lang": {
+    "vi": "Tiếng Việt",
+    "ja": "日本語"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "alphabet": "Bảng chữ cái",
+    "grammar": "Ngữ pháp",
+    "vocab": "Từ vựng",
+    "kanji": "Kanji",
+    "reading": "Đọc hiểu",
+    "listening": "Nghe",
+    "practice": "Luyện đề",
+    "notebook": "Sổ tay",
+    "stats": "Thống kê",
+    "settings": "Cài đặt",
+    "soon": "{{label}} (sắp có)"
+  },
+  "header": {
+    "today": "Hôm nay",
+    "notifications": "Thông báo",
+    "notificationsTitle": "Thông báo",
+    "noNotifications": "Không có thông báo",
+    "viewAllNotifications": "Xem tất cả",
+    "account": "Tài khoản",
+    "profile": "Trang cá nhân",
+    "changePassword": "Đổi mật khẩu",
+    "settingsMenu": "Cài đặt",
+    "membershipMenu": "Gói thành viên",
+    "logout": "Đăng xuất"
+  },
+  "time": {
+    "justNow": "Vừa xong",
+    "minutesAgo": "{{count}} phút trước",
+    "hoursAgo": "{{count}} giờ trước",
+    "daysAgo": "{{count}} ngày trước"
+  },
+  "sidebar": {
+    "ariaNav": "Điều hướng chính",
+    "ariaMenu": "Menu",
+    "expandSidebar": "Mở rộng sidebar",
+    "collapseSidebar": "Thu gọn sidebar"
+  },
+  "breadcrumb": {
+    "home": "Trang chủ",
+    "profile": "Trang cá nhân",
+    "changePassword": "Đổi mật khẩu",
+    "settings": "Cài đặt",
+    "membership": "Gói thành viên",
+    "notifications": "Thông báo",
+    "grammar": "Ngữ pháp",
+    "vocabulary": "Từ vựng"
+  },
+  "grammarPage": {
+    "listTitle": "Ngữ pháp",
+    "listSubtitle": "Lọc theo cấp JLPT, chủ đề tag hoặc từ khóa (mẫu câu / phần mô tả).",
+    "filterAria": "Bộ lọc danh sách ngữ pháp",
+    "jlptFilter": "Cấp JLPT",
+    "jlptAll": "Tất cả cấp",
+    "tagFilter": "Chủ đề",
+    "tagAll": "Tất cả",
+    "searchLabel": "Tìm kiếm",
+    "searchPlaceholder": "Ví dụ: ため、伝聞、わけ…",
+    "searchApply": "Tìm",
+    "clearFilters": "Xóa bộ lọc",
+    "noResults": "Không có mục nào khớp. Thử bỏ bớt bộ lọc hoặc từ khóa khác.",
+    "cardCta": "Xem chi tiết",
+    "backToList": "← Danh sách",
+    "notFound": "Không có bài này. Quay về danh sách nhé.",
+    "jlptBadge": "{{level}}",
+    "paginationLabel": "Phân trang danh sách ngữ pháp",
+    "pageSummary": "Đang hiển thị mục {{from}}–{{to}} trong tổng {{total}}.",
+    "pagePosition": "Trang {{current}} / {{totalPages}}",
+    "firstPage": "Đầu",
+    "prevPage": "Trước",
+    "nextPage": "Sau",
+    "lastPage": "Cuối",
+    "goToPage": "Trang {{n}}"
+  },
+  "vocabPage": {
+    "kicker": "JLPT · 語彙",
+    "listTitle": "今日の単語",
+    "listSubtitle": "Mỗi ngày 10 từ mới, tiến bộ từng chút một!",
+    "browseTitle": "Tra cứu từ vựng",
+    "browseSubtitle": "Lọc, tìm và mở chi tiết từ — phần học flashcard nằm ở mục Từ vựng trong menu.",
+    "browseCrumb": "Danh sách",
+    "jlptShort": "JLPT",
+    "jlptAll": "Tất cả cấp",
+    "filterAria": "Bộ lọc danh sách từ vựng",
+    "searchLabel": "Tìm từ vựng",
+    "searchPlaceholder": "Tìm từ vựng…",
+    "sortLabel": "Sắp xếp",
+    "sortNewest": "Mới nhất",
+    "sortOldest": "Cũ nhất",
+    "sortReading": "Đọc (あいうえお)",
+    "tabListAria": "Lọc theo trạng thái",
+    "tabAll": "Tất cả",
+    "tabLearned": "Đã học",
+    "tabUnlearned": "Chưa học",
+    "tabFavorites": "Yêu thích ♡",
+    "clearFilters": "Xóa bộ lọc",
+    "noResults": "Không có từ nào khớp. Thử đổi cấp JLPT, tab hoặc từ khóa khác.",
+    "meaningLabel": "Nghĩa:",
+    "exampleLabel": "Ví dụ:",
+    "statusLearned": "Đã học",
+    "statusUnlearned": "Chưa học",
+    "addVocab": "Thêm từ vựng mới",
+    "playAudioAria": "Phát âm thanh",
+    "favoriteAria": "Đánh dấu yêu thích",
+    "paginationLabel": "Phân trang danh sách từ vựng",
+    "pageSummary": "Đang hiển thị mục {{from}}–{{to}} trong tổng {{total}}.",
+    "pagePosition": "Trang {{current}} / {{totalPages}}",
+    "firstPage": "Đầu",
+    "prevPage": "Trước",
+    "nextPage": "Sau",
+    "lastPage": "Cuối",
+    "goToPage": "Trang {{n}}",
+    "pos": {
+      "noun": "名",
+      "verb": "動",
+      "shape": "形",
+      "adv": "副"
+    },
+    "posLong": {
+      "noun": "Danh từ",
+      "verb": "Động từ",
+      "shape": "Tính từ",
+      "adv": "Trạng từ"
+    }
+  },
+  "vocabStudyPage": {
+    "linkBrowse": "Tra cứu và danh sách",
+    "deckLabel": "Bộ thẻ",
+    "deckMixed": "Mọi cấp",
+    "title": "Ôn từ trong phiên",
+    "scrapTitle": "Flashcard ôn tập",
+    "reviewBadge": "Ôn lại",
+    "tapPromptLine1": "Nghĩa là gì nhỉ?",
+    "tapPromptLine2": "Nhấn để xem nghĩa",
+    "progressLabel": "Tiến độ",
+    "progressNums": "{{current}} / {{total}}",
+    "revealLabel": "Xem nghĩa & ví dụ",
+    "flipBackAria": "Lật về chỉ chữ Kanji",
+    "rateHint": "Chọn mức độ bạn nhớ từ này nhé!",
+    "rateForgotTitle": "Quên rồi",
+    "rateForgotSub": "Gặp lại sau",
+    "rateSoonTitle": "Hơi nhớ",
+    "rateSoonSub": "Ôn lại sớm",
+    "rateKnowTitle": "Nhớ rồi",
+    "rateKnowSub": "Rất tự tin!",
+    "navPrev": "Từ trước",
+    "navNext": "Từ tiếp theo",
+    "btnKnow": "Đã nhớ · tiếp",
+    "btnAgain": "Ôn lại",
+    "doneTitle": "Đã ôn xong phiên!",
+    "btnAgainSession": "Phiên mới",
+    "btnToBrowse": "Tới tra cứu",
+    "emptyDeck": "Không có từ. Đổi bộ JLPT thử nhé.",
+    "motivateFooter": "Cố lên nhé! Mỗi ngày tiến bộ một chút thôi ✨"
+  },
+  "vocabDetailPage": {
+    "jlptWordTag": "{{level}} · 単語",
+    "todayStudy": "Học hôm nay",
+    "todayProgress": "{{done}} / {{goal}} từ",
+    "pageTitle": "Chi tiết từ",
+    "back": "← Danh sách",
+    "backToStudy": "← Về phiên ôn từ",
+    "meaningLead": "Nghĩa:",
+    "favoriteBtn": "Yêu thích",
+    "learnedBtn": "Đã học",
+    "learnedDate": "{{date}}",
+    "learnedNoDate": "—",
+    "sectionExample": "例文 · Câu ví dụ",
+    "sectionKanji": "漢字の構成",
+    "kanjiReadingLabel": "読み",
+    "kanjiMeanLabel": "Nghĩa gốc",
+    "sectionSynonyms": "類義語 · Đồng nghĩa",
+    "sectionPhrases": "よく使う表現",
+    "sectionMemo": "メモ · Ghi chú",
+    "actionListen": "Nghe phát âm",
+    "actionWrite": "Luyện viết",
+    "actionNotebook": "Thêm vào sổ tay",
+    "actionQuiz": "Quiz ngay",
+    "navPrev": "Trước",
+    "navNext": "Tiếp",
+    "navPosition": "{{current}} / {{total}}",
+    "notFound": "Không có từ này.",
+    "emptySection": "Chưa có nội dung.",
+    "posGrammarJa": {
+      "noun": "名詞",
+      "verb": "動詞",
+      "shape": "形容詞",
+      "adv": "副詞"
+    }
+  },
+  "grammar": {
+    "labels": {
+      "connection": "Cách nối câu",
+      "meaning": "Nghĩa",
+      "usage": "Cách dùng",
+      "examples": "Ví dụ",
+      "point": "Point",
+      "ng": "Không đúng",
+      "compare": "So sánh",
+      "memo": "Ghi chú",
+      "practice": "Luyện tập"
+    },
+    "tags": {
+      "hearsay": "Nghe kể",
+      "formal": "Trang trọng / văn viết",
+      "conjecture": "Suy đoán",
+      "purpose": "Mục đích / lý do",
+      "goal": "Mục tiêu / cách làm",
+      "change": "Thay đổi / quy định"
+    }
+  },
+  "notif": {
+    "n1": {
+      "title": "JLPT · N3",
+      "message": "Hạn đăng ký kỳ tháng 7 đang đến gần — kiểm tra lại thông tin nhé."
+    },
+    "n2": {
+      "title": "Tiến độ tuần này",
+      "message": "Bạn đã ôn thêm 3 bài ngữ pháp. Tiếp tục!"
+    },
+    "n3": {
+      "title": "Chuỗi ngày mới",
+      "message": "Bạn đã học liên tục 12 ngày. Tuyệt vời!"
+    }
+  },
+  "welcome": {
+    "title": "Chào mừng trở lại, {{name}}!",
+    "subtitle": "Từng bước nhỏ hôm nay — thành tiến bộ mai sau."
+  },
+  "goal": {
+    "title": "Mục tiêu {{exam}}",
+    "examDate": "Ngày thi:",
+    "daysLeft": "Còn lại {{count}} ngày!",
+    "daysAgo": "Đã qua {{count}} ngày từ ngày dự kiến",
+    "noExamDateLine": "Chưa đặt",
+    "countdownHint": "Đặt ngày dự kiến ở Hồ sơ để xem đếm ngược.",
+    "examToday": "Hôm nay là ngày thi — cố lên!",
+    "artDaysRemaining": "Còn {{count}} ngày nữa",
+    "artExamToday": "Hôm nay là ngày thi",
+    "artDaysPast": "Đã qua {{count}} ngày từ ngày dự kiến"
+  },
+  "subjectsSection": {
+    "heading": "Môn học"
+  },
+  "subjects": {
+    "grammar": {
+      "label": "Ngữ pháp",
+      "count": "145 bài học"
+    },
+    "vocab": {
+      "label": "Từ vựng",
+      "count": "213 từ"
+    },
+    "kanji": {
+      "label": "Kanji",
+      "count": "213 kanji"
+    },
+    "reading": {
+      "label": "Đọc hiểu",
+      "count": "48 bài"
+    },
+    "listening": {
+      "label": "Nghe",
+      "count": "32 bài"
+    }
+  },
+  "subjectCard": {
+    "progress": "Đã học {{pct}}%",
+    "cta": "Tiếp tục học"
+  },
+  "today": {
+    "title": "Tiến độ hôm nay",
+    "donutAria": "{{pct}}% hoàn thành mục tiêu hôm nay",
+    "donutLabel": "Hoàn thành mục tiêu",
+    "foot": "Cố gắng lên! Bạn đang làm rất tốt!",
+    "tasks": {
+      "g": "2 bài",
+      "v": "15 từ",
+      "k": "8 chữ"
+    }
+  },
+  "dailyNote": {
+    "title": "Ghi chú hôm nay",
+    "edit": "Sửa",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "editAria": "Nội dung ghi chú"
+  },
+  "dashboard": {
+    "quotes": {
+      "note": "Học tập là món quà dành cho chính bạn trong tương lai.",
+      "footer": "Mỗi ngày là cơ hội vượt qua chính mình hôm qua một chút."
+    }
+  },
+  "streak": {
+    "headline": "Chuỗi học",
+    "subline": "ngày liên tiếp!",
+    "weekAria": "Lịch tuần · ngày đã check-in có lửa · chỉ chạm được vào ô hôm nay",
+    "checkedToday": "Đã check-in hôm nay",
+    "tapToCheck": "Chạm để check-in",
+    "weekDays": [
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "CN"
+    ]
+  },
+  "footer": {
+    "dashQuote": "© 2026 Kotonote. All rights reserved. ♥ Developer by ThinTQ."
+  },
+  "authLayout": {
+    "sticky1": "Hôm nay",
+    "sticky2": "cũng là ngày tốt!",
+    "banner": "Cùng nhau cố gắng nhé!",
+    "deco1": "Mỗi ngày một chút,",
+    "deco2": "tiến bộ từng bước nhỏ!",
+    "footerQuote": "Việc học hôm nay là món quà cho tương lai của chính mình.",
+    "copyright": "© 2026 {{app}}. All rights reserved. ♥"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu",
+    "showPassword": "Ẩn hoặc hiện mật khẩu",
+    "remember": "Ghi nhớ đăng nhập",
+    "forgot": "Quên mật khẩu?",
+    "submit": "Đăng nhập",
+    "divider": "―――― hoặc ――――",
+    "google": "Đăng nhập với Google",
+    "noAccount": "Chưa có tài khoản?",
+    "register": "Đăng ký",
+    "errors": {
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Email không hợp lệ",
+      "passwordRequired": "Vui lòng nhập mật khẩu"
+    }
+  },
+  "register": {
+    "title": "Đăng ký",
+    "username": "Tên người dùng",
+    "usernamePh": "Nhập tên hiển thị",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "passwordPh": "Tối thiểu 6 ký tự",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "confirmPh": "Nhập lại mật khẩu",
+    "showPassword": "Ẩn hoặc hiện mật khẩu",
+    "submit": "Đăng ký",
+    "termsPrefix": "Tôi đồng ý với",
+    "terms": "Điều khoản",
+    "termsAnd": "và",
+    "privacy": "Chính sách bảo mật",
+    "hasAccount": "Đã có tài khoản?",
+    "login": "Đăng nhập",
+    "errors": {
+      "username": "Vui lòng nhập tên người dùng",
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Email không hợp lệ",
+      "passwordRequired": "Vui lòng nhập mật khẩu",
+      "passwordShort": "Mật khẩu tối thiểu 6 ký tự",
+      "confirmRequired": "Vui lòng xác nhận mật khẩu",
+      "confirmMismatch": "Mật khẩu không khớp",
+      "terms": "Bạn cần đồng ý điều khoản"
+    }
+  },
+  "survey": {
+    "title": "Khảo sát lần đầu",
+    "lead": "Chỉ mất khoảng 2 phút.",
+    "doneHeading": "Cảm ơn bạn đã hoàn thành khảo sát.",
+    "doneNote": "Thông tin sẽ giúp chúng mình làm nội dung tốt hơn.",
+    "doneNext": "Dựa trên khảo sát, ứng dụng sẽ gợi ý lộ trình phù hợp với bạn.",
+    "homeCta": "Về trang chủ",
+    "legendLevel": "Trình độ hiện tại",
+    "legendGoal": "Mục tiêu học",
+    "legendDaily": "Thời gian học mỗi ngày (ước lượng)",
+    "legendWeak": "Phần còn yếu (chọn nhiều)",
+    "legendDiscovery": "Bạn biết đến app từ đâu?",
+    "discoveryNote": "Chi tiết (tuỳ chọn)",
+    "discoveryNotePh": "Ghi thêm nếu muốn",
+    "freeNote": "Lời nhắn (tuỳ chọn)",
+    "freeNotePh": "Điều bạn muốn chia sẻ về việc học…",
+    "submit": "Gửi khảo sát",
+    "privacy": "Không cần thông tin định danh cá nhân.",
+    "levels": {
+      "begin": "Mới bắt đầu",
+      "n5": "Tương đương N5",
+      "n4": "Tương đương N4",
+      "n3": "Tương đương N3",
+      "n2up": "N2 trở lên"
+    },
+    "goals": {
+      "jlpt": "Đỗ JLPT",
+      "travel": "Du lịch · hội thoại",
+      "work": "Công việc",
+      "school": "Du học",
+      "hobby": "Sở thích"
+    },
+    "daily": {
+      "lt15": "Đến 15 phút",
+      "m1530": "15–30 phút",
+      "m3060": "30–60 phút",
+      "gt60": "Từ 1 giờ trở lên"
+    },
+    "weak": {
+      "grammar": "Ngữ pháp",
+      "vocab": "Từ vựng",
+      "kanji": "Hán tự",
+      "listen": "Nghe",
+      "read": "Đọc"
+    },
+    "discovery": {
+      "friend": "Bạn bè giới thiệu",
+      "sns": "Mạng xã hội",
+      "search": "Tìm kiếm",
+      "other": "Khác"
+    }
+  },
+  "changePasswordPage": {
+    "title": "Đổi mật khẩu",
+    "currentPassword": "Mật khẩu hiện tại",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu mới",
+    "placeholders": {
+      "current": "Nhập mật khẩu bạn đang dùng để đăng nhập",
+      "new": "Mật khẩu mới — tối thiểu 6 ký tự (nên kết hợp chữ, số)",
+      "confirm": "Nhập lại y hệt mật khẩu mới để xác nhận"
+    },
+    "submit": "Cập nhật mật khẩu",
+    "successShort": "Đã cập nhật mật khẩu.",
+    "again": "Nhập lại",
+    "backToProfile": "← Về trang cá nhân",
+    "errors": {
+      "currentRequired": "Vui lòng nhập mật khẩu hiện tại",
+      "newRequired": "Vui lòng nhập mật khẩu mới",
+      "newShort": "Mật khẩu mới tối thiểu 6 ký tự",
+      "confirmRequired": "Vui lòng xác nhận mật khẩu mới",
+      "confirmMismatch": "Mật khẩu xác nhận không khớp",
+      "sameAsCurrent": "Mật khẩu mới phải khác mật khẩu hiện tại"
+    }
+  },
+  "settingsPage": {
+    "title": "Cài đặt",
+    "sectionNotif": "Thông báo",
+    "notifEmail": "Email tóm tắt",
+    "notifEmailDesc": "Tóm tắt tiến độ và nhắc hạn qua email",
+    "notifStudy": "Nhắc học hằng ngày",
+    "notifStudyDesc": "Gợi nhớ ôn bài trong ngày",
+    "notifWeekly": "Báo cáo tuần",
+    "notifWeeklyDesc": "Tổng hợp streak và thời gian học",
+    "sectionStudy": "Mục tiêu học",
+    "dailyGoal": "Thời gian học mỗi ngày (mục tiêu)",
+    "dailyOptions": {
+      "15": "15 phút",
+      "30": "30 phút",
+      "45": "45 phút",
+      "60": "60 phút"
+    },
+    "sectionPrivacy": "Quyền riêng tư",
+    "privacyAnalytics": "Góp phần cải thiện app (phân tích ẩn danh)",
+    "privacyDesc": "Giúp đội phát triển hiểu cách dùng tính năng — có thể tắt.",
+    "sectionAccount": "Tài khoản nhanh",
+    "linkProfile": "Trang cá nhân",
+    "linkPassword": "Đổi mật khẩu",
+    "save": "Lưu cài đặt",
+    "savedShort": "Đã lưu."
+  },
+  "membershipPage": {
+    "title": "Gói thành viên",
+    "subtitle": "So sánh Free và Pro — chọn gói phù hợp với lộ trình ôn JLPT của bạn.",
+    "planFree": "Free",
+    "planPro": "Pro",
+    "priceFree": "Miễn phí",
+    "pricePro": "390.000đ / tháng",
+    "badgeCurrent": "Đang dùng",
+    "ctaPro": "Nâng cấp Pro",
+    "freeB1": "Lộ trình học theo ngày",
+    "freeB2": "Theo dõi streak và tiến độ cơ bản",
+    "freeB3": "Thông báo nhắc học",
+    "proB1": "Tất cả tính năng Free",
+    "proB2": "Không giới hạn bài học và ôn tập",
+    "proB3": "Báo cáo tiến độ chi tiết",
+    "proB4": "Ưu tiên nội dung và mẹo thi mới"
+  },
+  "notificationsPage": {
+    "title": "Thông báo",
+    "subtitle": "Toàn bộ cập nhật và nhắc nhở — bấm một dòng chưa đọc để đánh dấu đã xem.",
+    "filterAria": "Lọc danh sách thông báo",
+    "filterAll": "Tất cả",
+    "filterUnread": "Chưa đọc",
+    "unreadLabel": "Chưa đọc",
+    "emptyUnread": "Không còn thông báo chưa đọc."
+  },
+  "accountStub": {
+    "hint": "Nội dung sẽ được bổ sung sau.",
+    "back": "← Về trang chủ",
+    "changePassword": "Đổi mật khẩu",
+    "settings": "Cài đặt"
+  },
+  "profile": {
+    "edit": "Chỉnh sửa",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "changePhoto": "Đổi ảnh",
+    "removePhoto": "Xóa ảnh",
+    "fullName": "Họ và tên",
+    "readingName": "Tên đọc (katakana / romaji)",
+    "titleLine": "Giới thiệu một dòng",
+    "email": "Email",
+    "emailHint": "Email từ tài khoản — không đổi tại đây.",
+    "region": "Khu vực",
+    "joined": "Tham gia",
+    "timezone": "Múi giờ",
+    "aboutTitle": "Giới thiệu",
+    "aboutField": "Về bản thân",
+    "statsTitle": "Tóm tắt học tập",
+    "statsAria": "Thống kê học tập",
+    "streak": "Chuỗi ngày",
+    "xp": "Điểm XP",
+    "weeklyMin": "Phút / tuần",
+    "level": "Cấp độ",
+    "goalTitle": "Mục tiêu",
+    "goalExam": "Kỳ thi / mục tiêu",
+    "goalWhen": "Thời gian dự kiến",
+    "goalExamType": "Kỳ thi",
+    "goalExamLevel": "Cấp độ / bậc",
+    "goalExamDate": "Ngày dự kiến thi",
+    "goalOtherDetail": "Mô tả mục tiêu",
+    "goalOtherPlaceholder": "Ví dụ: chứng chỉ nội bộ, khóa cụ thể…",
+    "examTypes": {
+      "jlpt": "JLPT",
+      "nat": "NAT-TEST",
+      "jtest": "J-TEST Practical Japanese",
+      "topj": "TOP-J",
+      "eju": "EJU",
+      "other": "Khác"
+    },
+    "examLevels": {
+      "jlpt": {
+        "n5": "N5",
+        "n4": "N4",
+        "n3": "N3",
+        "n2": "N2",
+        "n1": "N1"
+      },
+      "nat": {
+        "q5": "5Q",
+        "q4": "4Q",
+        "q3": "3Q",
+        "q2": "2Q",
+        "q1": "1Q"
+      },
+      "jtest": {
+        "a": "Cấp A",
+        "b": "Cấp B",
+        "c": "Cấp C",
+        "d": "Cấp D"
+      },
+      "topj": {
+        "shokyu": "Sơ cấp",
+        "chukyu": "Trung cấp",
+        "junkyu": "Tấn cấp",
+        "jokyu": "Thượng cấp"
+      },
+      "eju": {
+        "nihongo": "Tiếng Nhật",
+        "full": "Bài thi chính (theo đợt)"
+      }
+    },
+    "focusTitle": "Trọng tâm ôn",
+    "badgesTitle": "Huy hiệu",
+    "badgesAria": "Huy hiệu"
+  },
+  "demoProfile": {
+    "firstName": "Thìn",
+    "fullName": "Nguyễn Minh Thìn",
+    "displayName": "Nguyễn Minh Thìn",
+    "readingName": "グエン・ミン・ティン",
+    "title": "Người học JLPT · thích ghi chú tay",
+    "email": "thinq.kotonote@example.com",
+    "joinedLabel": "15 / 03 / 2024",
+    "location": "TP. Hồ Chí Minh, Việt Nam",
+    "timeZoneLabel": "GMT+7",
+    "bio": "Mình đang ôn N3 với Kotonote, thích học sáng sớm và tối muộn. Mục tiêu là đọc được manga không cần dịch quá nhiều.",
+    "examTarget": "JLPT N3",
+    "examDateLabel": "Tháng 7 / 2026 (dự kiến)",
+    "levelLabel": "Cấp 7 · Sổ tay",
+    "badges": {
+      "b1": "Streak 7 ngày",
+      "b2": "100 bài đã học",
+      "b3": "Tuần xuất sắc",
+      "b4": "Nghe 20h+"
+    },
+    "focus": {
+      "grammar": "Ngữ pháp",
+      "vocab": "Từ vựng",
+      "kanji": "Kanji N3"
+    }
+  },
+  "profileQuote": "Theo nhịp của bạn, từng bước tiến lên."
+}

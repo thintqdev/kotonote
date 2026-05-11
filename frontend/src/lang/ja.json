@@ -1,0 +1,622 @@
+{
+  "dateField": {
+    "placeholder": "日付を選択",
+    "clear": "日付をクリア",
+    "prevMonth": "前の月",
+    "nextMonth": "次の月",
+    "chooseMonth": "月を選択",
+    "chooseYear": "年を選択",
+    "dialogLabel": "日付を選ぶ"
+  },
+  "common": {
+    "language": "言語"
+  },
+  "lang": {
+    "vi": "Tiếng Việt",
+    "ja": "日本語"
+  },
+  "nav": {
+    "home": "ホーム",
+    "alphabet": "アルファベット",
+    "grammar": "文法",
+    "vocab": "語彙",
+    "kanji": "漢字",
+    "reading": "読解",
+    "listening": "聴解",
+    "practice": "模試",
+    "notebook": "ノート",
+    "stats": "統計",
+    "settings": "設定",
+    "soon": "{{label}}（準備中）"
+  },
+  "header": {
+    "today": "今日",
+    "notifications": "通知",
+    "notificationsTitle": "通知",
+    "noNotifications": "通知はありません",
+    "viewAllNotifications": "すべて見る",
+    "account": "アカウント",
+    "profile": "プロフィール",
+    "changePassword": "パスワード変更",
+    "settingsMenu": "設定",
+    "membershipMenu": "メンバーシップ",
+    "logout": "ログアウト"
+  },
+  "time": {
+    "justNow": "たった今",
+    "minutesAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "daysAgo": "{{count}}日前"
+  },
+  "sidebar": {
+    "ariaNav": "メインナビゲーション",
+    "ariaMenu": "メニュー",
+    "expandSidebar": "サイドバーを広げる",
+    "collapseSidebar": "サイドバーを閉じる"
+  },
+  "breadcrumb": {
+    "home": "ホーム",
+    "profile": "プロフィール",
+    "changePassword": "パスワード変更",
+    "settings": "設定",
+    "membership": "メンバーシップ",
+    "notifications": "通知",
+    "grammar": "文法",
+    "vocabulary": "語彙"
+  },
+  "grammarPage": {
+    "listTitle": "文法リスト",
+    "listSubtitle": "JLPTレベル・タグ・キーワード（文型や説明文）で絞り込みできます。",
+    "filterAria": "文法一覧のフィルター",
+    "jlptFilter": "JLPT",
+    "jlptAll": "すべてのレベル",
+    "tagFilter": "タグ",
+    "tagAll": "すべて",
+    "searchLabel": "検索",
+    "searchPlaceholder": "例：ため、伝聞、わけ…",
+    "searchApply": "検索",
+    "clearFilters": "フィルターをクリア",
+    "noResults": "該当する項目がありません。条件を減らすかキーワードを変えてみてください。",
+    "cardCta": "詳細へ",
+    "backToList": "← 一覧へ",
+    "notFound": "この項目はまだありません。一覧に戻りましょう。",
+    "jlptBadge": "{{level}}",
+    "paginationLabel": "文法一覧のページ切り替え",
+    "pageSummary": "{{from}}–{{to}} 件を表示（全 {{total}} 件）",
+    "pagePosition": "{{current}} / {{totalPages}} ページ",
+    "firstPage": "先頭",
+    "prevPage": "前へ",
+    "nextPage": "次へ",
+    "lastPage": "末尾",
+    "goToPage": "{{n}} ページへ"
+  },
+  "vocabPage": {
+    "kicker": "JLPT · 語彙",
+    "listTitle": "今日の単語",
+    "listSubtitle": "毎日10語、少しずつ前へ。",
+    "browseTitle": "単語リスト",
+    "browseSubtitle": "検索して詳細ページへ — フラッシュで学ぶは「語彙」メインへ。",
+    "browseCrumb": "リスト",
+    "jlptShort": "JLPT",
+    "jlptAll": "すべてのレベル",
+    "filterAria": "単語一覧のフィルター",
+    "searchLabel": "検索",
+    "searchPlaceholder": "単語を検索…",
+    "sortLabel": "並び替え",
+    "sortNewest": "新しい順",
+    "sortOldest": "古い順",
+    "sortReading": "読み（あいうえお）",
+    "tabListAria": "状態で絞り込み",
+    "tabAll": "すべて",
+    "tabLearned": "学習済み",
+    "tabUnlearned": "未学習",
+    "tabFavorites": "お気に入り ♡",
+    "clearFilters": "フィルターをクリア",
+    "noResults": "該当する単語がありません。レベル・タブ・キーワードを変えてみてください。",
+    "meaningLabel": "意味：",
+    "exampleLabel": "例：",
+    "statusLearned": "学習済み",
+    "statusUnlearned": "未学習",
+    "addVocab": "単語を追加",
+    "playAudioAria": "音声を再生",
+    "favoriteAria": "お気に入り",
+    "paginationLabel": "単語一覧のページ切り替え",
+    "pageSummary": "{{from}}–{{to}} 件を表示（全 {{total}} 件）",
+    "pagePosition": "{{current}} / {{totalPages}} ページ",
+    "firstPage": "先頭",
+    "prevPage": "前へ",
+    "nextPage": "次へ",
+    "lastPage": "末尾",
+    "goToPage": "{{n}} ページへ",
+    "pos": {
+      "noun": "名",
+      "verb": "動",
+      "shape": "形",
+      "adv": "副"
+    },
+    "posLong": {
+      "noun": "名詞",
+      "verb": "動詞",
+      "shape": "形容詞",
+      "adv": "副詞"
+    }
+  },
+  "vocabStudyPage": {
+    "linkBrowse": "検索・リスト",
+    "deckLabel": "デッキ",
+    "deckMixed": "すべて",
+    "title": "セッションで覚える",
+    "scrapTitle": "フラッシュで復習",
+    "reviewBadge": "復習中",
+    "tapPromptLine1": "意味、わかる？",
+    "tapPromptLine2": "タップして意味・例を見る",
+    "progressLabel": "進捗",
+    "progressNums": "{{current}} / {{total}}",
+    "revealLabel": "意味・例を表示",
+    "flipBackAria": "表に戻す（Kanji のみ）",
+    "rateHint": "覚え度を選んでね！",
+    "rateForgotTitle": "忘れた",
+    "rateForgotSub": "またあとで",
+    "rateSoonTitle": "あいまい",
+    "rateSoonSub": "すぐ復習",
+    "rateKnowTitle": "覚えた",
+    "rateKnowSub": "自信あり！",
+    "navPrev": "前の語",
+    "navNext": "次の語",
+    "btnKnow": "覚えた · 次",
+    "btnAgain": "もう一回",
+    "doneTitle": "セッション完了",
+    "btnAgainSession": "もう一度",
+    "btnToBrowse": "リストへ",
+    "emptyDeck": "単語がありません。JLPT を変えてみて。",
+    "motivateFooter": "今日もすこしだけ、前へ。"
+  },
+  "vocabDetailPage": {
+    "jlptWordTag": "{{level}} 単語",
+    "todayStudy": "今日の学習",
+    "todayProgress": "{{done}} / {{goal}} 単語",
+    "pageTitle": "単語の詳細",
+    "back": "← 戻る",
+    "backToStudy": "← 学習に戻る",
+    "meaningLead": "意味：",
+    "favoriteBtn": "お気に入り",
+    "learnedBtn": "学習済み",
+    "learnedDate": "{{date}}",
+    "learnedNoDate": "—",
+    "sectionExample": "例文",
+    "sectionKanji": "漢字の構成",
+    "kanjiReadingLabel": "読み",
+    "kanjiMeanLabel": "意味（素）",
+    "sectionSynonyms": "類義語",
+    "sectionPhrases": "よく使う表現",
+    "sectionMemo": "メモ",
+    "actionListen": "音声を聞く",
+    "actionWrite": "書き取り",
+    "actionNotebook": "ノートに追加",
+    "actionQuiz": "クイズ",
+    "navPrev": "前へ",
+    "navNext": "次へ",
+    "navPosition": "{{current}} / {{total}}",
+    "notFound": "その単語はありません。",
+    "emptySection": "（なし）",
+    "posGrammarJa": {
+      "noun": "名詞",
+      "verb": "動詞",
+      "shape": "形容詞",
+      "adv": "副詞"
+    }
+  },
+  "grammar": {
+    "labels": {
+      "connection": "接続",
+      "meaning": "意味",
+      "usage": "用法",
+      "examples": "例文",
+      "point": "POINT",
+      "ng": "NG",
+      "compare": "比較",
+      "memo": "メモ",
+      "practice": "練習"
+    },
+    "tags": {
+      "hearsay": "伝聞",
+      "formal": "フォーマル",
+      "conjecture": "推測",
+      "purpose": "目的・理由",
+      "goal": "目標・様子",
+      "change": "変化・規則"
+    }
+  },
+  "notif": {
+    "n1": {
+      "title": "JLPT · N3",
+      "message": "7月試験の募集締切が近づいています。情報を確認しましょう。"
+    },
+    "n2": {
+      "title": "今週の進捗",
+      "message": "文法を3レッスン追加で復習しました。その調子！"
+    },
+    "n3": {
+      "title": "連続学習",
+      "message": "12日連続で学習中です。すごい！"
+    }
+  },
+  "welcome": {
+    "title": "おかえりなさい、{{name}}さん！",
+    "subtitle": "今日の小さな一歩が、明日の成長につながります。"
+  },
+  "goal": {
+    "title": "{{exam}}の目標",
+    "examDate": "試験日：",
+    "daysLeft": "あと{{count}}日！",
+    "daysAgo": "予定日から{{count}}日前",
+    "noExamDateLine": "未設定",
+    "countdownHint": "プロフィールで受験予定日を設定するとカウントダウンが表示されます。",
+    "examToday": "今日が受験日 — がんばって！",
+    "artDaysRemaining": "あと{{count}}日",
+    "artExamToday": "今日が試験日",
+    "artDaysPast": "予定日から{{count}}日経過"
+  },
+  "subjectsSection": {
+    "heading": "学習科目"
+  },
+  "subjects": {
+    "grammar": {
+      "label": "文法",
+      "count": "145レッスン"
+    },
+    "vocab": {
+      "label": "語彙",
+      "count": "213語"
+    },
+    "kanji": {
+      "label": "漢字",
+      "count": "213字"
+    },
+    "reading": {
+      "label": "読解",
+      "count": "48本"
+    },
+    "listening": {
+      "label": "聴解",
+      "count": "32本"
+    }
+  },
+  "subjectCard": {
+    "progress": "{{pct}}% 学習済み",
+    "cta": "続ける"
+  },
+  "today": {
+    "title": "今日の進捗",
+    "donutAria": "今日の目標の{{pct}}%達成",
+    "donutLabel": "目標達成",
+    "foot": "がんばって！とてもいいペースです。",
+    "tasks": {
+      "g": "2回",
+      "v": "15語",
+      "k": "8字"
+    }
+  },
+  "dailyNote": {
+    "title": "今日のメモ",
+    "edit": "編集",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "editAria": "メモの内容"
+  },
+  "dashboard": {
+    "quotes": {
+      "note": "学びは未来の自分への贈り物。",
+      "footer": "毎日が、昨日の自分を少し超えるチャンス。"
+    }
+  },
+  "streak": {
+    "headline": "連続学習",
+    "subline": "日連続！",
+    "weekAria": "週カレンダー · チェックした日は炎 · 今日のマスだけタップ可能",
+    "checkedToday": "今日チェック済み",
+    "tapToCheck": "タップしてチェックイン",
+    "weekDays": [
+      "月",
+      "火",
+      "水",
+      "木",
+      "金",
+      "土",
+      "日"
+    ]
+  },
+  "footer": {
+    "dashQuote": "© 2026 Kotonote. All rights reserved. ♥ Developer by ThinTQ."
+  },
+  "authLayout": {
+    "sticky1": "今日も",
+    "sticky2": "いい日になりますように！",
+    "banner": "一緒にがんばろう！",
+    "deco1": "毎日ちょっとずつ、",
+    "deco2": "少しずつ前へ。",
+    "footerQuote": "今日の学びは、未来の自分へのプレゼント。",
+    "copyright": "© 2026 {{app}}. All rights reserved. ♥"
+  },
+  "login": {
+    "title": "ログイン",
+    "email": "メール",
+    "password": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "showPassword": "パスワードの表示／非表示",
+    "remember": "ログイン状態を保持",
+    "forgot": "パスワードをお忘れですか？",
+    "submit": "ログイン",
+    "divider": "―――― または ――――",
+    "google": "Googleでログイン",
+    "noAccount": "アカウントをお持ちではありませんか？",
+    "register": "新規登録",
+    "errors": {
+      "emailRequired": "メールを入力してください",
+      "emailInvalid": "メールの形式が正しくありません",
+      "passwordRequired": "パスワードを入力してください"
+    }
+  },
+  "register": {
+    "title": "新規登録",
+    "username": "ユーザー名",
+    "usernamePh": "表示名を入力",
+    "email": "メール",
+    "password": "パスワード",
+    "passwordPh": "6文字以上",
+    "confirmPassword": "パスワード確認",
+    "confirmPh": "もう一度入力",
+    "showPassword": "パスワードの表示／非表示",
+    "submit": "登録する",
+    "termsPrefix": "同意します：",
+    "terms": "利用規約",
+    "termsAnd": "および",
+    "privacy": "プライバシーポリシー",
+    "hasAccount": "すでにアカウントをお持ちですか？",
+    "login": "ログイン",
+    "errors": {
+      "username": "ユーザー名を入力してください",
+      "emailRequired": "メールを入力してください",
+      "emailInvalid": "メールの形式が正しくありません",
+      "passwordRequired": "パスワードを入力してください",
+      "passwordShort": "パスワードは6文字以上にしてください",
+      "confirmRequired": "確認用パスワードを入力してください",
+      "confirmMismatch": "パスワードが一致しません",
+      "terms": "利用規約に同意してください"
+    }
+  },
+  "survey": {
+    "title": "初回アンケート",
+    "lead": "所要時間：約2分です。",
+    "doneHeading": "アンケートへのご協力ありがとうございます。",
+    "doneNote": "内容を参考に、より良いサービスを目指します。",
+    "doneNext": "回答に基づき、あなたに合った学習プランを提案します。",
+    "homeCta": "ホームへ",
+    "legendLevel": "現在のレベル",
+    "legendGoal": "学習の目標",
+    "legendDaily": "1日の学習時間（目安）",
+    "legendWeak": "苦手分野（複数選択）",
+    "legendDiscovery": "アプリをどこで知りましたか？",
+    "discoveryNote": "詳細（任意）",
+    "discoveryNotePh": "あればご記入ください",
+    "freeNote": "コメント（任意）",
+    "freeNotePh": "学習について伝えたいこと…",
+    "submit": "送信する",
+    "privacy": "個人を特定する情報は不要です。",
+    "levels": {
+      "begin": "これから始める",
+      "n5": "N5相当",
+      "n4": "N4相当",
+      "n3": "N3相当",
+      "n2up": "N2以上"
+    },
+    "goals": {
+      "jlpt": "JLPT合格",
+      "travel": "旅行・会話",
+      "work": "仕事",
+      "school": "留学",
+      "hobby": "趣味"
+    },
+    "daily": {
+      "lt15": "15分まで",
+      "m1530": "15〜30分",
+      "m3060": "30〜60分",
+      "gt60": "1時間以上"
+    },
+    "weak": {
+      "grammar": "文法",
+      "vocab": "語彙",
+      "kanji": "漢字",
+      "listen": "聴解",
+      "read": "読解"
+    },
+    "discovery": {
+      "friend": "友人の紹介",
+      "sns": "SNS",
+      "search": "検索",
+      "other": "その他"
+    }
+  },
+  "changePasswordPage": {
+    "title": "パスワード変更",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワード（確認）",
+    "placeholders": {
+      "current": "ログイン時に使っている現在のパスワードを入力",
+      "new": "新パスワード（6文字以上・英字と数字の混在を推奨）",
+      "confirm": "確認のため、新パスワードをもう一度同じように入力"
+    },
+    "submit": "更新する",
+    "successShort": "パスワードを更新しました。",
+    "again": "やり直す",
+    "backToProfile": "← プロフィールへ",
+    "errors": {
+      "currentRequired": "現在のパスワードを入力してください",
+      "newRequired": "新しいパスワードを入力してください",
+      "newShort": "新しいパスワードは6文字以上にしてください",
+      "confirmRequired": "確認用パスワードを入力してください",
+      "confirmMismatch": "パスワードが一致しません",
+      "sameAsCurrent": "新しいパスワードは現在のパスワードと別にしてください"
+    }
+  },
+  "settingsPage": {
+    "title": "設定",
+    "sectionNotif": "通知",
+    "notifEmail": "メールサマリー",
+    "notifEmailDesc": "進捗と締切のお知らせ",
+    "notifStudy": "毎日の学習リマインダー",
+    "notifStudyDesc": "その日の復習を促す通知",
+    "notifWeekly": "週次レポート",
+    "notifWeeklyDesc": "ストリークと学習時間のまとめ",
+    "sectionStudy": "学習目標",
+    "dailyGoal": "1日の学習時間（目標）",
+    "dailyOptions": {
+      "15": "15分",
+      "30": "30分",
+      "45": "45分",
+      "60": "60分"
+    },
+    "sectionPrivacy": "プライバシー",
+    "privacyAnalytics": "匿名の利用統計に協力する",
+    "privacyDesc": "機能改善に役立ちます。いつでもオフにできます。",
+    "sectionAccount": "アカウント",
+    "linkProfile": "プロフィール",
+    "linkPassword": "パスワード変更",
+    "save": "設定を保存",
+    "savedShort": "保存しました。"
+  },
+  "membershipPage": {
+    "title": "メンバーシップ",
+    "subtitle": "Free と Pro を比べて、自分の JLPT 学習に合うプランを選びましょう。",
+    "planFree": "Free",
+    "planPro": "Pro",
+    "priceFree": "無料",
+    "pricePro": "¥1,480 / 月",
+    "badgeCurrent": "利用中",
+    "ctaPro": "Pro にアップグレード",
+    "freeB1": "日々の学習プラン",
+    "freeB2": "ストリーク・基本の進捗",
+    "freeB3": "学習リマインド通知",
+    "proB1": "Free のすべての機能",
+    "proB2": "教材・復習を無制限",
+    "proB3": "詳しい進捗レポート",
+    "proB4": "新コンテンツ・試験のコツを優先"
+  },
+  "notificationsPage": {
+    "title": "通知",
+    "subtitle": "すべてのお知らせとリマインダー。未読はタップで既読にします。",
+    "filterAria": "通知の絞り込み",
+    "filterAll": "すべて",
+    "filterUnread": "未読",
+    "unreadLabel": "未読",
+    "emptyUnread": "未読の通知はありません。"
+  },
+  "accountStub": {
+    "hint": "近日公開予定です。",
+    "back": "← ホームへ",
+    "changePassword": "パスワード変更",
+    "settings": "設定"
+  },
+  "profile": {
+    "edit": "編集",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "changePhoto": "写真を変更",
+    "removePhoto": "写真を削除",
+    "fullName": "氏名",
+    "readingName": "読み（カタカナ／ローマ字）",
+    "titleLine": "ひとこと紹介",
+    "email": "メール",
+    "emailHint": "アカウントのメールアドレスです。ここでは変更できません。",
+    "region": "地域",
+    "joined": "参加日",
+    "timezone": "タイムゾーン",
+    "aboutTitle": "自己紹介",
+    "aboutField": "自己紹介",
+    "statsTitle": "学習サマリー",
+    "statsAria": "学習統計",
+    "streak": "連続日数",
+    "xp": "XP",
+    "weeklyMin": "週あたり分",
+    "level": "レベル",
+    "goalTitle": "目標",
+    "goalExam": "試験／目標",
+    "goalWhen": "予定時期",
+    "goalExamType": "試験",
+    "goalExamLevel": "級・レベル",
+    "goalExamDate": "受験予定日",
+    "goalOtherDetail": "内容",
+    "goalOtherPlaceholder": "例：社内検定、講座名など",
+    "examTypes": {
+      "jlpt": "JLPT",
+      "nat": "NAT-TEST",
+      "jtest": "J-TEST",
+      "topj": "TOP-J",
+      "eju": "EJU",
+      "other": "その他"
+    },
+    "examLevels": {
+      "jlpt": {
+        "n5": "N5",
+        "n4": "N4",
+        "n3": "N3",
+        "n2": "N2",
+        "n1": "N1"
+      },
+      "nat": {
+        "q5": "5Q",
+        "q4": "4Q",
+        "q3": "3Q",
+        "q2": "2Q",
+        "q1": "1Q"
+      },
+      "jtest": {
+        "a": "Aレベル",
+        "b": "Bレベル",
+        "c": "Cレベル",
+        "d": "Dレベル"
+      },
+      "topj": {
+        "shokyu": "初級",
+        "chukyu": "中級",
+        "junkyu": "準上級",
+        "jokyu": "上級"
+      },
+      "eju": {
+        "nihongo": "日本語",
+        "full": "本試験（科目セット）"
+      }
+    },
+    "focusTitle": "重点復習",
+    "badgesTitle": "バッジ",
+    "badgesAria": "バッジ"
+  },
+  "demoProfile": {
+    "firstName": "ティン",
+    "fullName": "グエン・ミン・ティン",
+    "displayName": "グエン・ミン・ティン",
+    "readingName": "グエン・ミン・ティン",
+    "title": "JLPT学習中 · 手書きノートが好き",
+    "email": "thinq.kotonote@example.com",
+    "joinedLabel": "2024年3月15日",
+    "location": "ホーチミン市, ベトナム",
+    "timeZoneLabel": "GMT+7",
+    "bio": "KotonoteでN3を勉強中。朝と夜が勉強の時間。目標はマンガをあまり辞書を引かずに読めること。",
+    "examTarget": "JLPT N3",
+    "examDateLabel": "2026年7月（予定）",
+    "levelLabel": "Lv.7 · ノート",
+    "badges": {
+      "b1": "7日連続",
+      "b2": "学習100回",
+      "b3": "今週のスター",
+      "b4": "聴解20時間超"
+    },
+    "focus": {
+      "grammar": "文法",
+      "vocab": "語彙",
+      "kanji": "漢字 N3"
+    }
+  },
+  "profileQuote": "あなたのペースで、一歩ずつ。"
+}

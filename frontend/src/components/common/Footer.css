@@ -1,0 +1,109 @@
+.dash-page-footer {
+  position: relative;
+}
+
+.dash-page-footer-inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 72px;
+  padding: 60px 16px 14px;
+  overflow: visible;
+}
+
+.dash-page-footer-deco {
+  position: absolute;
+  bottom: 8px;
+  z-index: 0;
+  height: auto;
+  max-width: 28vw;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.92;
+  filter: drop-shadow(0 2px 6px rgba(42, 34, 22, 0.08));
+}
+
+.dash-page-footer-deco--book {
+  left: max(4px, env(safe-area-inset-left));
+  width: min(120px, 32vw);
+}
+
+.dash-page-footer-deco--case {
+  right: max(4px, env(safe-area-inset-right));
+  width: min(100px, 28vw);
+}
+
+.dash-page-footer-text-block {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  max-width: min(640px, 100%);
+  text-align: center;
+  padding: 0 min(100px, 12vw);
+}
+
+.dash-page-footer-quote {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 14px;
+  color: #6a5a4a;
+  line-height: 1.65;
+}
+
+.dash-page-footer-copyright {
+  margin: 14px 0 0;
+  font-family: var(--font-hand);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #8a7868;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .dash-page-footer-inner {
+    padding: 16px max(12px, env(safe-area-inset-left)) 12px
+      max(12px, env(safe-area-inset-right));
+    min-height: 64px;
+  }
+
+  .dash-page-footer-text-block {
+    padding: 0 min(72px, 18vw);
+  }
+
+  .dash-page-footer-quote {
+    font-size: 13px;
+  }
+
+  .dash-page-footer-deco--book {
+    width: min(88px, 30vw);
+    bottom: 10px;
+  }
+
+  .dash-page-footer-deco--case {
+    width: min(72px, 26vw);
+    bottom: 10px;
+  }
+
+  .dash-page-footer-copyright {
+    font-size: 11px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dash-page-footer-deco--book {
+    width: 64px;
+    left: 2px;
+  }
+
+  .dash-page-footer-deco--case {
+    width: 56px;
+    right: 2px;
+  }
+
+  .dash-page-footer-text-block {
+    padding: 0 4px;
+  }
+}
