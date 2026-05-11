@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 import vi from "./lang/vi.json";
 import ja from "./lang/ja.json";
 
-export const LANG_STORAGE_KEY = "sketchpad-lang";
+export const LANG_STORAGE_KEY = "kotonote-lang";
 
 function savedLanguage() {
   if (typeof window === "undefined") return "vi";

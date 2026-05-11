@@ -1,11 +1,11 @@
-# Sketchpad Nihongo - MERN Stack Project
+# kotonote Nihongo - MERN Stack Project
 
 A full-stack web application built with **MongoDB**, **Express.js**, **React**, and **Node.js** for learning and managing Japanese vocabulary and kanji.
 
 ## 📋 Project Structure
 
 ```
-sketchpad-nihongo/
+kotonote-nihongo/
 ├── backend/
 │   ├── src/
 │   │   ├── config/           # Database and environment configs
@@ -53,7 +53,7 @@ sketchpad-nihongo/
 1. **Clone the repository**
 
    ```bash
-   cd sketchpad-nihongo
+   cd kotonote-nihongo
    ```
 
 2. **Install dependencies for both frontend and backend**

@@ -1,7 +1,7 @@
 {
-	"name": "sketchpad-nihongo-backend",
+	"name": "kotonote-nihongo-backend",
 	"version": "1.0.0",
-	"description": "Backend for Sketchpad Nihongo MERN application",
+	"description": "Backend for kotonote Nihongo MERN application",
 	"main": "server.js",
 	"type": "module",
 	"scripts": {
