@@ -211,9 +211,9 @@ function GrammarDetailPage() {
               {detail.ng ? (
                 <section className="grammar-block" aria-labelledby="g-ng">
                   <div className="grammar-ng-title" id="g-ng">
-                    {t("grammar.labels.ng")} ✕
+                    {t("grammar.labels.ng")}
                   </div>
-                  <div className="grammar-box">
+                  <div className="grammar-box grammar-box-ng">
                     {ngLinesJa.map((lineJa, idx) => {
                       const viLineRaw = ngLinesVi[idx];
                       const viLine =

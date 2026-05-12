@@ -653,7 +653,7 @@ const Profile = () => {
                 </article>
 
                 <article className="profile-card profile-card--tags">
-                  <span className="profile-card-tape profile-card-tape--right" aria-hidden />
+                  <span className="profile-card-tape profile-card-tape" aria-hidden />
                   <h3 className="profile-section-title">{t('profile.focusTitle')}</h3>
                   <ul className="profile-tag-list">
                     {profile.focusAreas.map((f) => (
@@ -669,7 +669,7 @@ const Profile = () => {
                 className="profile-card profile-card--badges profile-badges-block"
                 aria-label={t('profile.badgesAria')}
               >
-                <span className="profile-card-tape profile-card-tape--right" aria-hidden />
+                <span className="profile-card-tape profile-card-tape" aria-hidden />
                 <h3 className="profile-section-title">{t('profile.badgesTitle')}</h3>
                 <ul className="profile-badge-row">
                   {profile.badges.map((b) => (

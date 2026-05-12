@@ -728,14 +728,13 @@
   display: inline-flex;
   margin: 0 0 12px;
   padding: 6px 18px 7px;
-  border: 2.5px solid #88a070;
+  border: 2px dashed #88a070;
   border-radius: 999px;
   font-family: var(--font-hand);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #2f3d28;
   background: rgba(255, 255, 252, 0.85);
-  border-bottom: 2.5px solid #88a070;
 }
 
 .grammar-detail--journal .grammar-block {
@@ -743,7 +742,7 @@
 }
 
 .grammar-detail--journal .grammar-box {
-  border: 1.5px solid rgba(51, 51, 51, 0.22);
+  border: 2px solid #88a070;
   border-radius: 8px;
   background: rgba(255, 255, 252, 0.65);
   box-shadow: 0 1px 0 rgba(255, 255, 250, 0.9);
@@ -776,14 +775,17 @@
   align-items: center;
   justify-content: center;
   min-width: 3rem;
-  min-height: 3rem;
-  padding: 0 10px;
-  border: 3px solid #c06060;
+  padding: 6px 18px 7px;
+  border: 2px dashed #c06060;
   border-radius: 40px;
   font-family: var(--font-hand);
-  font-size: 1.08rem;
+  font-size: 1rem;
   color: #9a3838;
   margin-bottom: 12px;
+}
+
+.grammar-detail--journal .grammar-box-ng {
+  border: 2px solid #c06060;
 }
 
 .grammar-detail--journal .grammar-ng-line {
@@ -800,13 +802,12 @@
 }
 
 .grammar-detail--journal .grammar-compare {
-  border: 1.5px solid rgba(51, 51, 51, 0.18);
+  border:  1.5px solid rgba(51, 51, 51, 0.18);
   border-radius: 8px;
 }
 
 .grammar-detail--journal .grammar-compare th,
 .grammar-detail--journal .grammar-compare td {
-  border-style: dashed;
   border-color: rgba(80, 70, 55, 0.22);
 }
 
@@ -818,7 +819,7 @@
   position: relative;
   margin-top: 8px;
   padding: 20px 16px 16px;
-  border: 1px dashed rgba(90, 115, 64, 0.28);
+  border: 2px dashed rgba(90, 115, 64, 0.28);
   border-radius: 3px;
   background: linear-gradient(
     180deg,
