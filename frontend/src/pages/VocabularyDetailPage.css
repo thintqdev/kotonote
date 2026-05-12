@@ -520,7 +520,7 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.55;
-  font-family: "Patrick Hand", var(--font-ui), cursive;
+  font-family: var(--font-ui);
   color: var(--vd-ink);
 }
 

@@ -193,10 +193,11 @@ function generatePlaceholderVocabulary({ count, existingItems, templateName, cus
 		vocabulary.push({
 			word,
 			reading: `たんご${attemptCount}`,
-			meaningVi: `Từ vựng ${attemptCount} - Template: ${templateName}${customPrompt ? ` - ${customPrompt}` : ''}`,
+			meaning: `Từ vựng ${attemptCount} - Template: ${templateName}${customPrompt ? ` - ${customPrompt}` : ''}`,
 			meaningJa: `単語${attemptCount}の意味`,
-			exampleSentence: `これは単語${attemptCount}の例文です。`,
+			example: `これは単語${attemptCount}の例文です。`,
 			exampleMeaning: `Đây là câu ví dụ cho từ ${attemptCount}.`,
+			partOfSpeech: 'noun',
 		});
 		
 		existingSet.add(word);

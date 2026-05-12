@@ -23,14 +23,12 @@
   /* Càng nhỏ tỉ lệ (vd. 2.8/1) = khung càng “thấp”, cắt trên/dưới mạnh hơn — thử 2.5–3.5 */
   --logo-crop-aspect: 3.25 / 1;
 
-  /* Tròn, ấm — JP + Latin (tiếng Việt) trong một family */
+  /* Một family web chính (JP + Latin/VN); fallback hệ thống cho macOS/JP */
   --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Noto Sans JP',
     system-ui, sans-serif;
-  /* Viết tay — dấu tiếng Việt ổn định hơn Caveat */
-  --font-hand: 'Patrick Hand', 'Segoe Print', cursive;
-  /* Chữ Nhật nhấn — viết tay (scrapbook); Zen Kurenaido chỉ có Regular (400) */
-  --font-serif-jp: 'Zen Kurenaido', 'Hiragino Maru Gothic ProN', 'Hiragino Sans',
-    sans-serif;
+  /* Giữ token cũ — trùng UI để không nhồi nhiều font trên một trang */
+  --font-hand: var(--font-ui);
+  --font-serif-jp: var(--font-ui);
 }
 
 body {

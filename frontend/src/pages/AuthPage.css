@@ -94,8 +94,9 @@
   border: 1.5px dashed #c4a882;
   padding: 6px 20px;
   border-radius: 3px;
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 13px;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -157,10 +158,9 @@
 }
 
 .auth-title {
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: clamp(52px, 8vw, 80px);
-  /* Patrick Hand chỉ có một độ đậm — tránh faux-bold */
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0.04em;
   color: #2b2b2b;
@@ -396,7 +396,7 @@
 .error-msg {
   font-size: 11px;
   color: #c97a6a;
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   padding-left: 2px;
 }
 
@@ -434,7 +434,7 @@
 }
 
 .auth-caption-sm {
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 11px;
   color: #9a8070;
 }
@@ -574,7 +574,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 12px;
   color: #a89080;
   user-select: none;
@@ -752,14 +752,14 @@
 
 .footer-quote-text {
   margin: 0;
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 13px;
   color: #6a5a48;
   line-height: 1.7;
 }
 
 .footer-copy {
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 13px;
   color: #9a8878;
 }
@@ -839,7 +839,7 @@
   border: 1.5px solid #c4a882;
   border-radius: 2px;
   padding: 8px 14px;
-  font-family: var(--font-hand);
+  font-family: var(--font-ui);
   font-size: 15px;
   font-weight: 600;
   color: #6a5a4a;

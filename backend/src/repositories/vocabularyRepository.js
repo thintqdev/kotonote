@@ -1,9 +1,51 @@
+import mongoose from 'mongoose';
 import VocabularyDeck from '../models/VocabularyDeck.js';
 import Vocabulary from '../models/Vocabulary.js';
 
+const deckSort = { displayOrder: 1, createdAt: -1 };
+
 // Deck Repository
 export const findAllDecks = async (filters = {}) => {
-	return await VocabularyDeck.find(filters).sort({ displayOrder: 1, createdAt: -1 });
+	return await VocabularyDeck.find(filters).sort(deckSort);
+};
+
+export const countDecks = async (filters = {}) => {
+	return await VocabularyDeck.countDocuments(filters);
+};
+
+/**
+ * @param {Record<string, unknown>} filters
+ * @param {{ skip: number, limit: number }} opts
+ */
+export const findDecksPaginated = async (filters = {}, { skip, limit } = {}) => {
+	return await VocabularyDeck.find(filters)
+		.sort(deckSort)
+		.skip(skip)
+		.limit(limit)
+		.lean();
+};
+
+/**
+ * Đếm từ đang active theo từng deck (đồng bộ với findVocabByDeck).
+ * @param {import('mongoose').Types.ObjectId[]} deckIds
+ * @returns {Promise<Map<string, number>>}
+ */
+export const countActiveVocabByDeckIds = async (deckIds) => {
+	const map = new Map();
+	if (!deckIds?.length) {
+		return map;
+	}
+	const ids = deckIds.map((id) =>
+		id instanceof mongoose.Types.ObjectId ? id : new mongoose.Types.ObjectId(String(id)),
+	);
+	const rows = await Vocabulary.aggregate([
+		{ $match: { deckId: { $in: ids }, isActive: true } },
+		{ $group: { _id: '$deckId', wordCount: { $sum: 1 } } },
+	]);
+	for (const r of rows) {
+		map.set(String(r._id), r.wordCount);
+	}
+	return map;
 };
 
 export const findDeckById = async (deckId) => {

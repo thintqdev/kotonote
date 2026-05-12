@@ -1,5 +1,8 @@
+import mongoose from 'mongoose';
 import Kanji from '../models/Kanji.js';
 import KanjiDeck from '../models/KanjiDeck.js';
+
+const kanjiDeckSort = { jlpt: 1, displayOrder: 1, createdAt: -1 };
 
 // ============ DECK OPERATIONS ============
 
@@ -8,16 +11,68 @@ import KanjiDeck from '../models/KanjiDeck.js';
  */
 export const findAllDecks = async (filters = {}) => {
 	const query = {};
-	
+
 	if (filters.jlpt) {
 		query.jlpt = filters.jlpt;
 	}
-	
+
 	if (filters.isActive !== undefined) {
 		query.isActive = filters.isActive;
 	}
-	
+
 	return await KanjiDeck.find(query).sort({ jlpt: 1, displayOrder: 1 });
+};
+
+export const countDecks = async (filters = {}) => {
+	const query = {};
+	if (filters.jlpt) {
+		query.jlpt = filters.jlpt;
+	}
+	if (filters.isActive !== undefined) {
+		query.isActive = filters.isActive;
+	}
+	return await KanjiDeck.countDocuments(query);
+};
+
+/**
+ * @param {Record<string, unknown>} filters
+ * @param {{ skip: number, limit: number }} opts
+ */
+export const findDecksPaginated = async (filters = {}, { skip, limit } = {}) => {
+	const query = {};
+	if (filters.jlpt) {
+		query.jlpt = filters.jlpt;
+	}
+	if (filters.isActive !== undefined) {
+		query.isActive = filters.isActive;
+	}
+	return await KanjiDeck.find(query)
+		.sort(kanjiDeckSort)
+		.skip(skip)
+		.limit(limit)
+		.lean();
+};
+
+/**
+ * @param {import('mongoose').Types.ObjectId[]} deckIds
+ * @returns {Promise<Map<string, number>>}
+ */
+export const countKanjiByDeckIds = async (deckIds) => {
+	const map = new Map();
+	if (!deckIds?.length) {
+		return map;
+	}
+	const ids = deckIds.map((id) =>
+		id instanceof mongoose.Types.ObjectId ? id : new mongoose.Types.ObjectId(String(id)),
+	);
+	const rows = await Kanji.aggregate([
+		{ $match: { deckId: { $in: ids } } },
+		{ $group: { _id: '$deckId', kanjiCount: { $sum: 1 } } },
+	]);
+	for (const r of rows) {
+		map.set(String(r._id), r.kanjiCount);
+	}
+	return map;
 };
 
 /**

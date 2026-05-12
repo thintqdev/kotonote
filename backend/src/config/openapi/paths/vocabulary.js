@@ -4,7 +4,32 @@ export const vocabularyPaths = {
 		get: {
 			tags: ['Vocabulary'],
 			summary: 'Get all vocabulary decks (Public)',
-			description: 'Get all available vocabulary decks',
+			description:
+				'Danh sách deck có phân trang. `pagination.total` là tổng số deck; mỗi phần tử có `wordCount` và `totalWords` khớp số từ active trong deck.',
+			parameters: [
+				{ name: 'level', in: 'query', schema: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'] } },
+				{
+					name: 'category',
+					in: 'query',
+					schema: {
+						type: 'string',
+						enum: ['basic', 'grammar', 'kanji', 'conversation', 'business', 'other'],
+					},
+				},
+				{ name: 'isActive', in: 'query', schema: { type: 'boolean' } },
+				{
+					name: 'page',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1, default: 1 },
+					description: 'Trang (mặc định 1)',
+				},
+				{
+					name: 'limit',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1, maximum: 100, default: 50 },
+					description: 'Số deck mỗi trang (mặc định 50, tối đa 100)',
+				},
+			],
 			responses: {
 				'200': {
 					description: 'Decks retrieved successfully',
@@ -20,9 +45,9 @@ export const vocabularyPaths = {
 										properties: {
 											decks: {
 												type: 'array',
-												items: { $ref: '#/components/schemas/VocabularyDeck' },
+												items: { $ref: '#/components/schemas/VocabularyDeckListItem' },
 											},
-											total: { type: 'number', example: 10 },
+											pagination: { $ref: '#/components/schemas/DeckListPagination' },
 										},
 									},
 								},
@@ -185,13 +210,19 @@ export const vocabularyPaths = {
 					'application/json': {
 						schema: {
 							type: 'object',
-							required: ['titleVi', 'titleJa', 'level'],
+							required: ['title', 'level'],
 							properties: {
-								titleVi: { type: 'string', example: 'Từ vựng cơ bản N5' },
+								title: { type: 'string', example: 'Từ vựng cơ bản N5' },
 								titleJa: { type: 'string', example: 'N5基本語彙' },
-								descriptionVi: { type: 'string', example: 'Từ vựng cơ bản cho người mới bắt đầu' },
+								description: { type: 'string', example: 'Từ vựng cơ bản cho người mới bắt đầu' },
 								descriptionJa: { type: 'string', example: '初心者向けの基本語彙' },
 								level: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'], example: 'n5' },
+								category: {
+									type: 'string',
+									enum: ['basic', 'grammar', 'kanji', 'conversation', 'business', 'other'],
+									example: 'basic',
+								},
+								thumbnail: { type: 'string', example: 'https://example.com/cover.jpg' },
 								displayOrder: { type: 'number', example: 1 },
 								isActive: { type: 'boolean', example: true },
 							},
@@ -247,11 +278,16 @@ export const vocabularyPaths = {
 						schema: {
 							type: 'object',
 							properties: {
-								titleVi: { type: 'string' },
+								title: { type: 'string' },
 								titleJa: { type: 'string' },
-								descriptionVi: { type: 'string' },
+								description: { type: 'string' },
 								descriptionJa: { type: 'string' },
 								level: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'] },
+								category: {
+									type: 'string',
+									enum: ['basic', 'grammar', 'kanji', 'conversation', 'business', 'other'],
+								},
+								thumbnail: { type: 'string' },
 								displayOrder: { type: 'number' },
 								isActive: { type: 'boolean' },
 							},
@@ -328,16 +364,24 @@ export const vocabularyPaths = {
 					'application/json': {
 						schema: {
 							type: 'object',
-							required: ['deckId', 'word', 'reading', 'meaningVi'],
+							required: ['deckId', 'word', 'reading', 'meaning'],
 							properties: {
 								deckId: { type: 'string', example: '507f1f77bcf86cd799439011' },
 								word: { type: 'string', example: '学生' },
 								reading: { type: 'string', example: 'がくせい' },
-								meaningVi: { type: 'string', example: 'học sinh, sinh viên' },
+								meaning: { type: 'string', example: 'học sinh, sinh viên' },
 								meaningJa: { type: 'string', example: '学校で勉強する人' },
-								exampleSentence: { type: 'string', example: '私は学生です。' },
+								partOfSpeech: {
+									type: 'string',
+									enum: ['noun', 'verb', 'adjective', 'adverb', 'particle', 'other'],
+								},
+								example: { type: 'string', example: '私は学生です。' },
+								exampleReading: { type: 'string', example: 'わたしはがくせいです。' },
 								exampleMeaning: { type: 'string', example: 'Tôi là sinh viên.' },
+								audioUrl: { type: 'string' },
+								imageUrl: { type: 'string' },
 								displayOrder: { type: 'number', example: 1 },
+								isActive: { type: 'boolean', example: true },
 							},
 						},
 					},
@@ -352,11 +396,11 @@ export const vocabularyPaths = {
 								type: 'object',
 								properties: {
 									success: { type: 'boolean', example: true },
-									messageCode: { type: 'string', example: 'MSG_701' },
+									messageCode: { type: 'string', example: 'MSG_707' },
 									data: {
 										type: 'object',
 										properties: {
-											vocabulary: { $ref: '#/components/schemas/Vocabulary' },
+											vocab: { $ref: '#/components/schemas/Vocabulary' },
 										},
 									},
 								},
@@ -399,11 +443,19 @@ export const vocabularyPaths = {
 							properties: {
 								word: { type: 'string' },
 								reading: { type: 'string' },
-								meaningVi: { type: 'string' },
+								meaning: { type: 'string' },
 								meaningJa: { type: 'string' },
-								exampleSentence: { type: 'string' },
+								partOfSpeech: {
+									type: 'string',
+									enum: ['noun', 'verb', 'adjective', 'adverb', 'particle', 'other'],
+								},
+								example: { type: 'string' },
+								exampleReading: { type: 'string' },
 								exampleMeaning: { type: 'string' },
+								audioUrl: { type: 'string' },
+								imageUrl: { type: 'string' },
 								displayOrder: { type: 'number' },
+								isActive: { type: 'boolean' },
 							},
 						},
 					},
@@ -418,11 +470,11 @@ export const vocabularyPaths = {
 								type: 'object',
 								properties: {
 									success: { type: 'boolean', example: true },
-									messageCode: { type: 'string', example: 'MSG_702' },
+									messageCode: { type: 'string', example: 'MSG_708' },
 									data: {
 										type: 'object',
 										properties: {
-											vocabulary: { $ref: '#/components/schemas/Vocabulary' },
+											vocab: { $ref: '#/components/schemas/Vocabulary' },
 										},
 									},
 								},
@@ -456,7 +508,7 @@ export const vocabularyPaths = {
 								type: 'object',
 								properties: {
 									success: { type: 'boolean', example: true },
-									messageCode: { type: 'string', example: 'MSG_703' },
+									messageCode: { type: 'string', example: 'MSG_709' },
 								},
 							},
 						},

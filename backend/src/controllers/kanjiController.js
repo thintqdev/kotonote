@@ -11,13 +11,17 @@ import { MESSAGES } from '../constants/messages.js';
  * @access  Public
  */
 export const getAllDecks = asyncHandler(async (req, res) => {
-	const { jlpt, isActive } = req.query;
-	const decks = await kanjiService.getAllDecks({ jlpt, isActive });
-	
-	return apiSuccess(res, {
-		decks,
-		total: decks.length,
-	}, MESSAGES.MSG_906, 200);
+	const { jlpt, isActive, page, limit } = req.query;
+	const filters = {};
+	if (jlpt) filters.jlpt = jlpt;
+	if (isActive !== undefined) filters.isActive = isActive === 'true';
+
+	const { decks, pagination } = await kanjiService.getAllDecks(filters, {
+		page,
+		limit,
+	});
+
+	return apiSuccess(res, { decks, pagination }, MESSAGES.MSG_906, 200);
 });
 
 /**

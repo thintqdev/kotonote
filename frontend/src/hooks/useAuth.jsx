@@ -1,5 +1,10 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import API from '../services/api.js';
+import * as authService from '../services/authService.js';
+import {
+	clearUserToken,
+	getUserToken,
+	setUserToken,
+} from '../services/tokenStorage.js';
 
 const AuthContext = createContext();
 
@@ -11,31 +16,42 @@ export const AuthProvider = ({ children }) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		checkAuth();
+		const ac = new AbortController();
+		(async () => {
+			const token = getUserToken();
+			if (token) {
+				try {
+					const { user: profile } = await authService.fetchCurrentUser({
+						signal: ac.signal,
+					});
+					if (!ac.signal.aborted) {
+						setUser(profile);
+					}
+				} catch {
+					if (!ac.signal.aborted) {
+						clearUserToken();
+					}
+				}
+			}
+			if (!ac.signal.aborted) {
+				setLoading(false);
+			}
+		})();
+		return () => ac.abort();
 	}, []);
 
-	const checkAuth = async () => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			try {
-				const response = await API.get('/auth/me');
-				setUser(response.data);
-			} catch (error) {
-				localStorage.removeItem('token');
-			}
-		}
-		setLoading(false);
-	};
-
 	const login = async (email, password) => {
-		const response = await API.post('/auth/login', { email, password });
-		localStorage.setItem('token', response.data.token);
-		setUser(response.data.user);
-		return response;
+		const { user: nextUser, token } = await authService.login({
+			email,
+			password,
+		});
+		setUserToken(token);
+		setUser(nextUser);
+		return { user: nextUser, token };
 	};
 
 	const logout = () => {
-		localStorage.removeItem('token');
+		clearUserToken();
 		setUser(null);
 	};
 

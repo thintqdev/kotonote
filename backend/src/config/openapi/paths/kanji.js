@@ -9,7 +9,7 @@ export const kanjiPaths = {
 				{
 					name: 'jlpt',
 					in: 'query',
-					schema: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'] },
+					schema: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'] },
 					description: 'Filter by JLPT level',
 				},
 				{
@@ -17,6 +17,18 @@ export const kanjiPaths = {
 					in: 'query',
 					schema: { type: 'boolean' },
 					description: 'Filter by active status',
+				},
+				{
+					name: 'page',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1, default: 1 },
+					description: 'Page number',
+				},
+				{
+					name: 'limit',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1, maximum: 100, default: 50 },
+					description: 'Page size',
 				},
 			],
 			responses: {
@@ -36,7 +48,15 @@ export const kanjiPaths = {
 												type: 'array',
 												items: { $ref: '#/components/schemas/KanjiDeck' },
 											},
-											total: { type: 'number', example: 10 },
+											pagination: {
+												type: 'object',
+												properties: {
+													page: { type: 'integer' },
+													limit: { type: 'integer' },
+													total: { type: 'integer' },
+													pages: { type: 'integer' },
+												},
+											},
 										},
 									},
 								},

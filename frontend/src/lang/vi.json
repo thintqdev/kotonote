@@ -29,6 +29,48 @@
     "settings": "Cài đặt",
     "soon": "{{label}} (sắp có)"
   },
+  "adminLayout": {
+    "brandSubtitle": "Kotonote Studio",
+    "sidebar": {
+      "aria": "Menu điều hướng Studio",
+      "overview": "Tổng quan",
+      "sectionContent": "Nội dung",
+      "alphabet": "Bảng chữ cái",
+      "kanji": "Kanji",
+      "vocabulary": "Từ vựng",
+      "grammar": "Ngữ pháp",
+      "reading": "Đọc hiểu",
+      "listening": "Nghe hiểu",
+      "sectionMedia": "Media",
+      "mediaAudio": "Audio",
+      "mediaImages": "Hình ảnh",
+      "mediaDocs": "Tài liệu",
+      "sectionSystem": "Hệ thống",
+      "users": "Người dùng",
+      "quotes": "Quotes",
+      "analytics": "Thống kê",
+      "studioSettings": "Cài đặt"
+    },
+    "help": {
+      "title": "Bạn cần giúp đỡ?",
+      "link": "Xem hướng dẫn"
+    },
+    "stubHint": "Nội dung trang Studio sẽ được gắn vào đây.",
+    "mainHeader": {
+      "aria": "Đầu trang Studio",
+      "title": "Kotonote Studio",
+      "subtitle": "Bản demo quản trị nội dung",
+      "backToApp": "Về ứng dụng"
+    },
+    "mainFooter": {
+      "aria": "Chân trang Studio",
+      "copy": "© 2026 Kotonote · Studio. Developed by ThinTQ"
+    },
+    "accountMenu": {
+      "aria": "Menu tài khoản quản trị",
+      "roleAdmin": "Quản trị viên"
+    }
+  },
   "header": {
     "today": "Hôm nay",
     "notifications": "Thông báo",

@@ -30,3 +30,21 @@
 .account-stub-page-back:hover {
   text-decoration: underline;
 }
+
+/* Sonner — bo góc & font gần với UI Kotonote */
+.app-toast {
+  font-family: var(--font-ui, system-ui, sans-serif) !important;
+  border-radius: 14px !important;
+  box-shadow:
+    0 4px 12px rgba(61, 47, 36, 0.08),
+    0 16px 40px rgba(61, 47, 36, 0.12) !important;
+}
+
+.app-toast-title {
+  font-weight: 600 !important;
+}
+
+.app-toast-desc {
+  opacity: 0.92;
+  line-height: 1.4;
+}

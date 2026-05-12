@@ -3,13 +3,52 @@ import { KANJI_DECK_MAX_SIZE } from '../constants/kanji.js';
 import AppError from '../utils/AppError.js';
 import { MESSAGES } from '../constants/messages.js';
 
+const DEFAULT_DECK_PAGE = 1;
+const DEFAULT_DECK_PAGE_SIZE = 50;
+const MAX_DECK_PAGE_SIZE = 100;
+
+function normalizeDeckPagination(query = {}) {
+	const page = Math.max(1, Number.parseInt(String(query.page ?? DEFAULT_DECK_PAGE), 10) || DEFAULT_DECK_PAGE);
+	const rawLimit = Number.parseInt(String(query.limit ?? DEFAULT_DECK_PAGE_SIZE), 10) || DEFAULT_DECK_PAGE_SIZE;
+	const limit = Math.min(Math.max(1, rawLimit), MAX_DECK_PAGE_SIZE);
+	return { page, limit, skip: (page - 1) * limit };
+}
+
 // ============ DECK SERVICES ============
 
 /**
- * Get all kanji decks
+ * Danh sách deck có phân trang; mỗi deck có `kanjiCount`.
+ * @param {Record<string, unknown>} filters — jlpt, isActive
+ * @param {{ page?: number, limit?: number }} [pagination]
  */
-export const getAllDecks = async (filters = {}) => {
-	return await kanjiRepository.findAllDecks(filters);
+export const getAllDecks = async (filters = {}, pagination = {}) => {
+	const { page, limit, skip } = normalizeDeckPagination(pagination);
+
+	const [total, decks] = await Promise.all([
+		kanjiRepository.countDecks(filters),
+		kanjiRepository.findDecksPaginated(filters, { skip, limit }),
+	]);
+
+	const ids = decks.map((d) => d._id);
+	const countByDeck = await kanjiRepository.countKanjiByDeckIds(ids);
+
+	const decksOut = decks.map((d) => {
+		const kanjiCount = countByDeck.get(String(d._id)) ?? 0;
+		return {
+			...d,
+			kanjiCount,
+		};
+	});
+
+	return {
+		decks: decksOut,
+		pagination: {
+			page,
+			limit,
+			total,
+			pages: total === 0 ? 0 : Math.ceil(total / limit),
+		},
+	};
 };
 
 /**
@@ -29,7 +68,7 @@ export const getDeckById = async (id) => {
 export const getDeckWithKanji = async (id) => {
 	const deck = await getDeckById(id);
 	const kanji = await kanjiRepository.findKanjiByDeck(id);
-	
+
 	return {
 		deck,
 		kanji,

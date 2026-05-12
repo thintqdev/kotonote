@@ -8,6 +8,7 @@
 		"dev": "nodemon server.js",
 		"start": "node server.js",
 		"seed": "node src/scripts/seed.js",
+		"seed:vocab-demo": "node src/scripts/seedVocabularyDemo.js",
 		"test": "jest --coverage",
 		"lint": "eslint src/**/*.js"
 	},

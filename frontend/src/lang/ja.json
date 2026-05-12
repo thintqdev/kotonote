@@ -29,6 +29,49 @@
     "settings": "設定",
     "soon": "{{label}}（準備中）"
   },
+  "adminLayout": {
+    "brandSubtitle": "Kotonote Studio",
+    "sidebar": {
+      "aria": "スタジオのナビゲーション",
+      "overview": "概要",
+      "sectionContent": "コンテンツ",
+      "alphabet": "アルファベット",
+      "kanji": "漢字",
+      "vocabulary": "語彙",
+      "grammar": "文法",
+      "reading": "読解",
+      "listening": "聴解",
+      "sectionMedia": "メディア",
+      "mediaAudio": "音声",
+      "mediaImages": "画像",
+      "mediaDocs": "資料",
+      "sectionSystem": "システム",
+      "users": "ユーザー",
+      "quotes": "引用",
+      "analytics": "統計",
+      "studioSettings": "設定"
+    },
+    "help": {
+      "title": "ヘルプが必要ですか？",
+      "link": "ガイドを見る"
+    },
+    "stubHint": "スタジオの各ページはここに表示されます（準備中）。",
+    "mainHeader": {
+      "aria": "スタジオのヘッダー",
+      "title": "Kotonote Studio",
+      "subtitle": "コンテンツ管理のデモ",
+      "backToApp": "アプリへ戻る"
+    },
+    "mainFooter": {
+      "aria": "スタジオのフッター",
+      "quote": "各デッキは小さな一章。公開前に内容をよく確認しましょう。",
+      "copy": "© 2026 Kotonote · Studio（デモ）"
+    },
+    "accountMenu": {
+      "aria": "管理者アカウントメニュー",
+      "roleAdmin": "管理者"
+    }
+  },
   "header": {
     "today": "今日",
     "notifications": "通知",
