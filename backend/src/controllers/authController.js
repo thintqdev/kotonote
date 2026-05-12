@@ -42,3 +42,11 @@ export const resendVerificationEmail = asyncHandler(async (req, res) => {
 	
 	return apiSuccess(res, result, AUTH.VERIFICATION_EMAIL_SENT, 200);
 });
+
+export const adminLogin = asyncHandler(async (req, res) => {
+	const { email, password } = req.body;
+	
+	const result = await authService.adminLogin(email, password);
+	
+	return apiSuccess(res, result, AUTH.LOGIN_SUCCESS, 200);
+});

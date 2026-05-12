@@ -69,9 +69,9 @@ export const quotePaths = {
 			},
 		},
 	},
-	'/api/quotes': {
+	'/api/admin/quotes': {
 		get: {
-			tags: ['Quote'],
+			tags: ['Quote - Admin'],
 			summary: 'Get all quotes (Admin only)',
 			description: 'Get all quotes with optional filters',
 			security: [{ bearerAuth: [] }],
@@ -117,26 +117,12 @@ export const quotePaths = {
 						},
 					},
 				},
-				'401': {
-					description: 'Unauthorized',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
-				'403': {
-					description: 'Forbidden - Admin only',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+				'403': { $ref: '#/components/responses/Forbidden' },
 			},
 		},
 		post: {
-			tags: ['Quote'],
+			tags: ['Quote - Admin'],
 			summary: 'Create quote (Admin only)',
 			description: 'Create a new motivational quote',
 			security: [{ bearerAuth: [] }],
@@ -184,28 +170,14 @@ export const quotePaths = {
 						},
 					},
 				},
-				'401': {
-					description: 'Unauthorized',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
-				'403': {
-					description: 'Forbidden - Admin only',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+				'403': { $ref: '#/components/responses/Forbidden' },
 			},
 		},
 	},
-	'/api/quotes/{id}': {
+	'/api/admin/quotes/{id}': {
 		get: {
-			tags: ['Quote'],
+			tags: ['Quote - Admin'],
 			summary: 'Get quote by ID (Admin only)',
 			description: 'Get a specific quote by ID',
 			security: [{ bearerAuth: [] }],
@@ -239,18 +211,11 @@ export const quotePaths = {
 						},
 					},
 				},
-				'404': {
-					description: 'Quote not found',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
+				'404': { $ref: '#/components/responses/NotFound' },
 			},
 		},
 		put: {
-			tags: ['Quote'],
+			tags: ['Quote - Admin'],
 			summary: 'Update quote (Admin only)',
 			description: 'Update an existing quote',
 			security: [{ bearerAuth: [] }],
@@ -305,18 +270,11 @@ export const quotePaths = {
 						},
 					},
 				},
-				'404': {
-					description: 'Quote not found',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
+				'404': { $ref: '#/components/responses/NotFound' },
 			},
 		},
 		delete: {
-			tags: ['Quote'],
+			tags: ['Quote - Admin'],
 			summary: 'Delete quote (Admin only)',
 			description: 'Delete a quote',
 			security: [{ bearerAuth: [] }],
@@ -344,14 +302,7 @@ export const quotePaths = {
 						},
 					},
 				},
-				'404': {
-					description: 'Quote not found',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
+				'404': { $ref: '#/components/responses/NotFound' },
 			},
 		},
 	},

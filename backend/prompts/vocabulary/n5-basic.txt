@@ -1,0 +1,15 @@
+Generate {{count}} Japanese vocabulary words for JLPT N5 level about basic daily life topics.
+
+Requirements:
+- Level: N5 (beginner)
+- Topics: greetings, family, numbers, time, basic verbs, common nouns
+- Each word must include:
+  * word: Japanese word in kanji/hiragana
+  * reading: hiragana reading
+  * meaningVi: Vietnamese meaning
+  * meaningJa: Japanese explanation (simple)
+  * exampleSentence: Example sentence in Japanese
+  * exampleMeaning: Vietnamese translation of example
+
+Format as JSON array. Make words practical and commonly used in daily conversation.
+Avoid duplicates with existing words in the deck.

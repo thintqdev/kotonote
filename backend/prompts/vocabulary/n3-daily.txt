@@ -1,0 +1,16 @@
+Generate {{count}} Japanese vocabulary words for JLPT N3 level about daily life and common situations.
+
+Requirements:
+- Level: N3 (intermediate)
+- Topics: work, school, shopping, transportation, hobbies, health, weather
+- Each word must include:
+  * word: Japanese word in kanji
+  * reading: hiragana/katakana reading
+  * meaningVi: Vietnamese meaning (detailed)
+  * meaningJa: Japanese explanation
+  * exampleSentence: Natural example sentence
+  * exampleMeaning: Vietnamese translation
+
+Format as JSON array. Focus on practical vocabulary used in everyday situations.
+Ensure variety in word types (nouns, verbs, adjectives, adverbs).
+Avoid duplicates with existing words: {{existingWords}}

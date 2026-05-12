@@ -106,6 +106,67 @@ export const authPaths = {
 			},
 		},
 	},
+	'/api/auth/admin/login': {
+		post: {
+			tags: ['Authentication'],
+			summary: 'Admin login',
+			description: 'Authenticate admin user (simplified login without rate limiting)',
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							required: ['email', 'password'],
+							properties: {
+								email: { type: 'string', format: 'email', example: 'admin@kotonote.com' },
+								password: { type: 'string', example: 'Admin@123456' },
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Admin login successful',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_101' },
+									data: {
+										type: 'object',
+										properties: {
+											user: { $ref: '#/components/schemas/User' },
+											token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Invalid credentials',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+				'403': {
+					description: 'Not an admin account',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
 	'/api/auth/google': {
 		post: {
 			tags: ['Authentication'],

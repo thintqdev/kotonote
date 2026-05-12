@@ -1,0 +1,12 @@
+import express from 'express';
+import * as aiController from '../../controllers/aiController.js';
+
+const router = express.Router();
+
+// AI Generation routes
+router.post('/generate/vocabulary', aiController.generateVocabulary);
+router.post('/generate/kanji', aiController.generateKanji);
+router.post('/translate', aiController.translate);
+router.get('/test', aiController.testAIConnection);
+
+export default router;

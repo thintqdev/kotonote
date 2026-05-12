@@ -3,15 +3,19 @@ import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
 import { apiReference } from '@scalar/express-api-reference';
 import connectDB from './src/config/database.js';
 import validateEnv from './src/utils/validateEnv.js';
 import errorHandler from './src/middlewares/errorHandler.js';
 import authRoutes from './src/routes/authRoutes.js';
-import userRoutes from './src/routes/userRoutes.js';
-import surveyRoutes from './src/routes/surveyRoutes.js';
-import quoteRoutes from './src/routes/quoteRoutes.js';
+import publicRoutes from './src/routes/public/index.js';
+import adminRoutes from './src/routes/admin/index.js';
+import notificationRoutes from './src/routes/notificationRoutes.js';
 import { openApiSpec } from './src/config/openapi/index.js';
+import { initializeSocket } from './src/config/socket.js';
+import { notificationQueue } from './src/utils/queue.js';
+import * as notificationService from './src/services/notificationService.js';
 
 // Load environment variables
 dotenv.config();
@@ -23,6 +27,7 @@ validateEnv();
 await connectDB();
 
 const app = express();
+const httpServer = createServer(app);
 
 // Security & Performance Middlewares
 app.use(
@@ -69,9 +74,9 @@ app.use(
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/surveys', surveyRoutes);
-app.use('/api/quotes', quoteRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api', publicRoutes);
 
 // 404 handler
 app.use((req, res) => {
@@ -81,14 +86,37 @@ app.use((req, res) => {
 	});
 });
 
-// Error Handler (Must be last)
 app.use(errorHandler);
 
+// ============ SOCKET.IO INITIALIZATION ============
+
+const io = initializeSocket(httpServer);
+
+// Start notification queue processing
+notificationQueue.startProcessing(async (notification) => {
+	const createdNotification = await notificationService.createNotification(notification);
+	
+	// Send to user via Socket.IO
+	const { sendNotificationToUser } = await import('./src/config/socket.js');
+	sendNotificationToUser(io, notification.userId, createdNotification);
+});
+
+// Cleanup expired notifications every hour
+setInterval(async () => {
+	try {
+		await notificationService.cleanupExpiredNotifications();
+		console.log('[Cleanup] Expired notifications cleaned up');
+	} catch (error) {
+		console.error('[Cleanup] Error cleaning up notifications:', error);
+	}
+}, 60 * 60 * 1000); // 1 hour
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 	console.log(`Environment: ${process.env.NODE_ENV}`);
 	console.log(`API Docs: http://localhost:${PORT}/api/docs`);
+	console.log(`WebSocket: ws://localhost:${PORT}`);
 });
 
 export default app;

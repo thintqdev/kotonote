@@ -1,0 +1,31 @@
+import express from 'express';
+import { authenticate, authorize } from '../../middlewares/auth.js';
+import { USER_ROLE } from '../../constants/userStatus.js';
+import adminVocabularyRoutes from './adminVocabularyRoutes.js';
+import adminQuoteRoutes from './adminQuoteRoutes.js';
+import adminSurveyRoutes from './adminSurveyRoutes.js';
+import adminStreakRoutes from './adminStreakRoutes.js';
+import adminKanaRoutes from './adminKanaRoutes.js';
+import adminKanjiRoutes from './adminKanjiRoutes.js';
+import adminAIRoutes from './adminAIRoutes.js';
+import adminUserRoutes from './adminUserRoutes.js';
+import adminNotificationRoutes from './adminNotificationRoutes.js';
+
+const router = express.Router();
+
+// Apply authentication and admin authorization to all admin routes
+router.use(authenticate);
+router.use(authorize(USER_ROLE.ADMIN));
+
+// Mount admin routes
+router.use('/vocabulary', adminVocabularyRoutes);
+router.use('/quotes', adminQuoteRoutes);
+router.use('/surveys', adminSurveyRoutes);
+router.use('/streaks', adminStreakRoutes);
+router.use('/kana', adminKanaRoutes);
+router.use('/kanji', adminKanjiRoutes);
+router.use('/ai', adminAIRoutes);
+router.use('/users', adminUserRoutes);
+router.use('/notifications', adminNotificationRoutes);
+
+export default router;

@@ -4,7 +4,7 @@ import { AUTH } from '../constants/messages.js';
 import { verifyGoogleToken } from '../utils/googleAuth.js';
 import { generateVerificationToken, hashToken } from '../utils/token.js';
 import { sendVerificationEmail } from './emailService.js';
-import { USER_STATUS, AUTH_PROVIDER, TOKEN_EXPIRY } from '../constants/userStatus.js';
+import { USER_STATUS, AUTH_PROVIDER, TOKEN_EXPIRY, USER_ROLE } from '../constants/userStatus.js';
 
 export const register = async (userData) => {
 	const existingUser = await userRepository.findUserByEmail(userData.email);
@@ -180,5 +180,40 @@ export const resendVerificationEmail = async (email) => {
 	
 	return {
 		messageCode: AUTH.VERIFICATION_EMAIL_SENT,
+	};
+};
+
+export const adminLogin = async (email, password) => {
+	const user = await userRepository.findUserByEmail(email);
+	
+	if (!user) {
+		throw { messageCode: AUTH.EMAIL_NOT_FOUND, statusCode: 401 };
+	}
+	
+	// Check if user is admin
+	if (user.role !== USER_ROLE.ADMIN) {
+		throw { messageCode: AUTH.LOGIN_FAILED, statusCode: 403 };
+	}
+	
+	// Check if account is active
+	if (!user.isActive) {
+		throw { messageCode: AUTH.LOGIN_FAILED, statusCode: 403 };
+	}
+	
+	const isPasswordValid = await user.comparePassword(password);
+	
+	if (!isPasswordValid) {
+		throw { messageCode: AUTH.PASSWORD_INCORRECT, statusCode: 401 };
+	}
+	
+	// Update last login only
+	user.lastLogin = Date.now();
+	await user.save();
+	
+	const token = generateToken(user._id);
+	
+	return {
+		user: user.toJSON(),
+		token,
 	};
 };
