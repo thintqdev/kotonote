@@ -1,69 +1,32 @@
-import userRepository from '../repositories/userRepository.js';
-import AppError from '../utils/AppError.js';
+import * as userRepository from '../repositories/userRepository.js';
+import { USER } from '../constants/messages.js';
 
-class UserService {
-	async getUsers(page = 1, limit = 10, search = '') {
-		const query = search ? { name: { $regex: search, $options: 'i' } } : {};
-		
-		const skip = (page - 1) * limit;
-		const usersPromise = userRepository.findAll(query)
-			.select('-password')
-			.limit(Number(limit))
-			.skip(skip)
-			.sort({ createdAt: -1 })
-			.lean();
-			
-		const countPromise = userRepository.count(query);
-		
-		const [users, count] = await Promise.all([usersPromise, countPromise]);
-		
-		return {
-			users,
-			pagination: {
-				page: Number(page),
-				limit: Number(limit),
-				total: count,
-				pages: Math.ceil(count / limit)
-			}
-		};
+export const getCurrentUser = async (userId) => {
+	const user = await userRepository.findUserById(userId);
+	
+	if (!user) {
+		throw { messageCode: USER.NOT_FOUND, statusCode: 404 };
 	}
+	
+	return user;
+};
 
-	async getUserById(id) {
-		const user = await userRepository.findById(id).select('-password');
-		if (!user) {
-			throw new AppError('User not found', 404);
+export const updateProfile = async (userId, updateData) => {
+	const user = await userRepository.findUserById(userId);
+	
+	if (!user) {
+		throw { messageCode: USER.NOT_FOUND, statusCode: 404 };
+	}
+	
+	// Only allow updating certain fields
+	const allowedFields = ['name', 'avatar'];
+	Object.keys(updateData).forEach((key) => {
+		if (allowedFields.includes(key)) {
+			user[key] = updateData[key];
 		}
-		return user;
-	}
-
-	async createUser(userData) {
-		const { email, name, password } = userData;
-		
-		const existingUser = await userRepository.findByEmail(email);
-		if (existingUser) {
-			throw new AppError('Email already registered', 400);
-		}
-		
-		const user = await userRepository.create({ email, name, password });
-		user.password = undefined; // Remove password from response
-		return user;
-	}
-
-	async updateUser(id, updateData) {
-		const user = await userRepository.update(id, updateData).select('-password');
-		if (!user) {
-			throw new AppError('User not found', 404);
-		}
-		return user;
-	}
-
-	async deleteUser(id) {
-		const user = await userRepository.delete(id);
-		if (!user) {
-			throw new AppError('User not found', 404);
-		}
-		return user;
-	}
-}
-
-export default new UserService();
+	});
+	
+	await user.save();
+	
+	return user;
+};

@@ -1,66 +1,140 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import { USER_STATUS, USER_ROLE, AUTH_PROVIDER, LOGIN_ATTEMPT } from '../constants/userStatus.js';
 
-const userSchema = new mongoose.Schema({
-	email: {
-		type: String,
-		required: [true, 'Email is required'],
-		unique: true,
-		lowercase: true,
-		trim: true,
-		match: [/^\S+@\S+\.\S+$/, 'Please provide valid email']
+const userSchema = new mongoose.Schema(
+	{
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+			lowercase: true,
+			trim: true,
+		},
+		password: {
+			type: String,
+			required: function () {
+				return !this.googleId;
+			},
+			minlength: 6,
+		},
+		name: {
+			type: String,
+			required: true,
+			trim: true,
+		},
+		avatar: {
+			type: String,
+		},
+		googleId: {
+			type: String,
+			unique: true,
+			sparse: true,
+		},
+		authProvider: {
+			type: String,
+			enum: Object.values(AUTH_PROVIDER),
+			default: AUTH_PROVIDER.LOCAL,
+		},
+		role: {
+			type: String,
+			enum: Object.values(USER_ROLE),
+			default: USER_ROLE.USER,
+		},
+		isActive: {
+			type: Boolean,
+			default: true,
+		},
+		status: {
+			type: String,
+			enum: Object.values(USER_STATUS),
+			default: USER_STATUS.ACTIVE,
+		},
+		loginAttempts: {
+			type: Number,
+			default: 0,
+		},
+		lockUntil: {
+			type: Date,
+		},
+		lastLogin: {
+			type: Date,
+		},
+		isEmailVerified: {
+			type: Boolean,
+			default: false,
+		},
+		emailVerificationToken: {
+			type: String,
+		},
+		emailVerificationExpires: {
+			type: Date,
+		},
 	},
-	name: {
-		type: String,
-		required: [true, 'Name is required'],
-		trim: true,
-		minlength: [2, 'Name must be at least 2 characters'],
-		maxlength: [50, 'Name cannot exceed 50 characters']
-	},
-	avatar: {
-		type: String,
-		default: ''
-	},
-	password: {
-		type: String,
-		required: [true, 'Password is required'],
-		minlength: [6, 'Password must be at least 6 characters'],
-		select: false
-	},
-	role: {
-		type: String,
-		enum: ['user', 'admin'],
-		default: 'user'
-	},
-	isActive: {
-		type: Boolean,
-		default: true
+	{
+		timestamps: true,
 	}
-}, {
-	timestamps: true,
-	toJSON: { virtuals: true },
-	toObject: { virtuals: true }
-});
-
-// Create indexes for performance
-userSchema.index({ email: 1 });
-userSchema.index({ createdAt: -1 });
+);
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {
 	if (!this.isModified('password')) return next();
-	this.password = await bcrypt.hash(this.password, 12);
+	this.password = await bcrypt.hash(this.password, 10);
 	next();
 });
 
-// Instance method to compare passwords
+// Compare password method
 userSchema.methods.comparePassword = async function (candidatePassword) {
 	return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Static method to find by email
-userSchema.statics.findByEmail = function (email) {
-	return this.findOne({ email }).select('+password');
+// Check if account is locked
+userSchema.virtual('isLocked').get(function () {
+	return !!(this.lockUntil && this.lockUntil > Date.now());
+});
+
+// Increment login attempts
+userSchema.methods.incLoginAttempts = async function () {
+	if (this.lockUntil && this.lockUntil < Date.now()) {
+		return await this.updateOne({
+			$set: { loginAttempts: 1 },
+			$unset: { lockUntil: 1 },
+		});
+	}
+	
+	const updates = { $inc: { loginAttempts: 1 } };
+	
+	if (this.loginAttempts + 1 >= LOGIN_ATTEMPT.MAX_ATTEMPTS && !this.isLocked) {
+		updates.$set = { 
+			lockUntil: Date.now() + LOGIN_ATTEMPT.LOCK_TIME,
+			status: USER_STATUS.LOCKED
+		};
+	}
+	
+	return await this.updateOne(updates);
+};
+
+// Reset login attempts
+userSchema.methods.resetLoginAttempts = async function () {
+	return await this.updateOne({
+		$set: { 
+			loginAttempts: 0,
+			lastLogin: Date.now(),
+			status: USER_STATUS.ACTIVE
+		},
+		$unset: { lockUntil: 1 },
+	});
+};
+
+// Remove password from JSON response
+userSchema.methods.toJSON = function () {
+	const obj = this.toObject();
+	delete obj.password;
+	delete obj.loginAttempts;
+	delete obj.lockUntil;
+	delete obj.emailVerificationToken;
+	delete obj.emailVerificationExpires;
+	return obj;
 };
 
 export default mongoose.model('User', userSchema);

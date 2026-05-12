@@ -618,5 +618,42 @@
       "kanji": "Kanji N3"
     }
   },
-  "profileQuote": "Theo nhịp của bạn, từng bước tiến lên."
+  "profileQuote": "Theo nhịp của bạn, từng bước tiến lên.",
+  "message": {
+    "MSG_001": "Thành công",
+    "MSG_002": "Lỗi máy chủ",
+    "MSG_003": "Lỗi xác thực dữ liệu",
+    "MSG_004": "Chưa xác thực",
+    "MSG_005": "Không có quyền truy cập",
+    "MSG_006": "Không tìm thấy",
+    "MSG_007": "Yêu cầu không hợp lệ",
+    "MSG_101": "Đăng nhập thành công",
+    "MSG_102": "Đăng nhập thất bại",
+    "MSG_103": "Đăng xuất thành công",
+    "MSG_104": "Đăng ký thành công",
+    "MSG_105": "Đăng ký thất bại",
+    "MSG_106": "Token không hợp lệ",
+    "MSG_107": "Token đã hết hạn",
+    "MSG_108": "Mật khẩu không đúng",
+    "MSG_109": "Email không tồn tại",
+    "MSG_110": "Xác thực Google thất bại",
+    "MSG_111": "Tài khoản đã bị khóa do đăng nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút",
+    "MSG_112": "Tài khoản đã bị tạm ngưng",
+    "MSG_113": "Email chưa được xác thực. Vui lòng kiểm tra email để xác thực tài khoản",
+    "MSG_114": "Email xác thực đã được gửi. Vui lòng kiểm tra hộp thư",
+    "MSG_115": "Xác thực email thành công",
+    "MSG_116": "Link xác thực không hợp lệ hoặc đã hết hạn",
+    "MSG_201": "Tạo người dùng thành công",
+    "MSG_202": "Cập nhật người dùng thành công",
+    "MSG_203": "Xóa người dùng thành công",
+    "MSG_204": "Không tìm thấy người dùng",
+    "MSG_205": "Người dùng đã tồn tại",
+    "MSG_206": "Lấy thông tin người dùng thành công",
+    "MSG_207": "Lấy danh sách người dùng thành công",
+    "MSG_301": "Khảo sát đã được gửi thành công",
+    "MSG_302": "Cập nhật khảo sát thành công",
+    "MSG_303": "Lấy thông tin khảo sát thành công",
+    "MSG_304": "Không tìm thấy khảo sát",
+    "MSG_305": "Bạn đã hoàn thành khảo sát rồi"
+  }
 }

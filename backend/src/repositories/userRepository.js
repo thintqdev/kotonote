@@ -1,33 +1,25 @@
 import User from '../models/User.js';
 
-class UserRepository {
-	findAll(query = {}) {
-		return User.find(query);
-	}
+export const findUserByEmail = async (email) => {
+	return await User.findOne({ email });
+};
 
-	findById(id) {
-		return User.findById(id);
-	}
+export const findUserByGoogleId = async (googleId) => {
+	return await User.findOne({ googleId });
+};
 
-	findByEmail(email) {
-		return User.findByEmail(email);
-	}
+export const createUser = async (userData) => {
+	const user = new User(userData);
+	return await user.save();
+};
 
-	create(userData) {
-		return User.create(userData);
-	}
+export const findUserById = async (userId) => {
+	return await User.findById(userId).select('-password');
+};
 
-	update(id, updateData) {
-		return User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
-	}
-
-	delete(id) {
-		return User.findByIdAndDelete(id);
-	}
-
-	count(query = {}) {
-		return User.countDocuments(query);
-	}
-}
-
-export default new UserRepository();
+export const findUserByVerificationToken = async (token) => {
+	return await User.findOne({
+		emailVerificationToken: token,
+		emailVerificationExpires: { $gt: Date.now() },
+	});
+};

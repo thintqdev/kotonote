@@ -1,44 +1,49 @@
-import jwt from 'jsonwebtoken';
-import asyncHandler from '../utils/asyncHandler.js';
-import User from '../models/User.js';
-import AppError from '../utils/AppError.js';
+import asyncHandler from 'express-async-handler';
+import { verifyToken } from '../utils/jwt.js';
+import { findUserById } from '../repositories/userRepository.js';
+import { apiError } from '../utils/response.js';
+import { AUTH, COMMON } from '../constants/messages.js';
 
-/**
- * Verify JWT token and attach user to request
- */
-export const protect = asyncHandler(async (req, res, next) => {
+export const authenticate = asyncHandler(async (req, res, next) => {
 	let token;
-
-	if (req.headers.authorization?.startsWith('Bearer')) {
+	
+	// Get token from Authorization header
+	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 		token = req.headers.authorization.split(' ')[1];
 	}
-
+	
 	if (!token) {
-		return next(new AppError('Not authorized, please login', 401));
+		return apiError(res, AUTH.TOKEN_INVALID, 401);
 	}
-
-	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-		req.user = await User.findById(decoded.id).select('-password');
-
-		if (!req.user) {
-			return next(new AppError('User not found', 401));
-		}
-
-		next();
-	} catch (error) {
-		return next(new AppError('Invalid token', 401));
+	
+	// Verify token
+	const decoded = verifyToken(token);
+	
+	if (!decoded) {
+		return apiError(res, AUTH.TOKEN_INVALID, 401);
 	}
+	
+	// Get user from token
+	const user = await findUserById(decoded.userId);
+	
+	if (!user) {
+		return apiError(res, COMMON.UNAUTHORIZED, 401);
+	}
+	
+	// Check if user is active
+	if (!user.isActive) {
+		return apiError(res, AUTH.LOGIN_FAILED, 403);
+	}
+	
+	// Attach user to request
+	req.user = user;
+	next();
 });
 
-/**
- * Restrict access to specific roles
- * @param {...string} roles - Allowed roles
- */
-export const restrictTo = (...roles) => {
+export const authorize = (...roles) => {
 	return (req, res, next) => {
 		if (!roles.includes(req.user.role)) {
-			return next(new AppError('You do not have permission', 403));
+			return apiError(res, COMMON.FORBIDDEN, 403);
 		}
 		next();
 	};
