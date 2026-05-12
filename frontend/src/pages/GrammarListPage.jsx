@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Sidebar, Header, Footer, Breadcrumb } from "../components/common";
+import { Breadcrumb } from "../components/common";
 import { mockStreak, mockNotifications } from "../data/dashboardHomeMock.js";
 import {
   GRAMMAR_PAGE_SIZE,
@@ -147,13 +147,13 @@ export default function GrammarListPage() {
   const hasActiveFilter = Boolean(jlpt || tag || qUrl);
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header userName={headerName} notificationCount={mockNotifications} />
-          <div className="dash-main-inner">
-            <Breadcrumb
+    <Layout
+      userName={headerName}
+      notificationCount={mockNotifications}
+      footerQuote={t("dashboard.quotes.footer")}
+      streakDays={mockStreak.days}
+    >
+      <Breadcrumb
               items={[
                 { label: t("breadcrumb.home"), to: "/", end: true },
                 { label: t("breadcrumb.grammar") },
@@ -372,11 +372,6 @@ export default function GrammarListPage() {
               </nav>
               ) : null}
             </article>
-
-            <Footer quote={t("dashboard.quotes.footer")} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 }

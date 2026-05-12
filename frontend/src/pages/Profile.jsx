@@ -8,7 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
-import { Sidebar, Header, Footer, Breadcrumb, DateField } from '../components/common';
+import { Breadcrumb, DateField } from '../components/common';
 import {
   mockStreak,
   mockNotifications,
@@ -296,13 +296,14 @@ const Profile = () => {
   }, []);
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header userName={headerName} notificationCount={mockNotifications} />
-          <div className="dash-main-inner profile-main">
-            <Breadcrumb
+    <Layout
+      userName={headerName}
+      notificationCount={mockNotifications}
+      footerQuote={t('profileQuote')}
+      streakDays={mockStreak.days}
+      mainInnerClassName="profile-main"
+    >
+      <Breadcrumb
               items={[
                 { label: t('breadcrumb.home'), to: '/', end: true },
                 { label: t('breadcrumb.profile') },
@@ -682,11 +683,6 @@ const Profile = () => {
                 </ul>
               </section>
             </div>
-
-            <Footer quote={t('profileQuote')} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

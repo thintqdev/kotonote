@@ -7,6 +7,9 @@ export const VOCAB_PAGE_SIZE = 24;
 /** Số tối đa trong một phiên học flashcard demo */
 export const STUDY_SESSION_SIZE = 10;
 
+/** Số từ trong một “bài” trên danh sách — phải khớp VocabularyListPage */
+export const VOCAB_LESSON_SIZE = 4;
+
 export const VOCAB_TAB_IDS = ['all', 'learned', 'unlearned', 'favorite'];
 
 export const VOCAB_SORT_IDS = ['newest', 'oldest', 'reading'];
@@ -551,12 +554,252 @@ export function buildStudyQueue(mergedItems, { jlpt = '', limit = STUDY_SESSION_
 }
 
 /**
+ * Danh sách từ của một bài (cùng thứ tự lọc như trang list).
+ * @param {ReturnType<typeof mergeVocabMarks>} mergedItems
+ * @param {{ jlpt: string, lessonNo: number }} opts lessonNo bắt đầu từ 1
+ * @returns {ReturnType<typeof mergeVocabMarks>}
+ */
+export function getVocabLessonItems(mergedItems, { jlpt, lessonNo }) {
+  const j = String(jlpt || '').trim();
+  const n = Math.max(1, Math.floor(Number(lessonNo) || 1));
+  const pool = j ? mergedItems.filter((x) => x.jlpt === j) : [...mergedItems];
+  const start = (n - 1) * VOCAB_LESSON_SIZE;
+  return pool.slice(start, start + VOCAB_LESSON_SIZE);
+}
+
+/** Số câu mỗi lần kiểm tra để lên một giai đoạn “cây” (hạt → nở hoa) */
+export const VOCAB_QUIZ_PER_STAGE = 25;
+
+/** Giai đoạn tối đa: 0=hạt, 1=mầm, 2=nụ, 3=hoa (bài hoàn tất) */
+export const VOCAB_LESSON_GROWTH_MAX = 3;
+
+/**
+ * Số icon cây (1…4) được tô màu — mặc định growth 0 → 0 (cả 4 xám).
+ * Mỗi +1 growth bật thêm 1 icon; đạt hoa (growth 3) → cả 4 bật.
+ * @param {number} growthStage
+ */
+export function getLessonMilestoneLitCount(growthStage) {
+  const g = Math.max(
+    0,
+    Math.min(
+      VOCAB_LESSON_GROWTH_MAX,
+      Math.floor(Number(growthStage) || 0),
+    ),
+  );
+  if (g >= VOCAB_LESSON_GROWTH_MAX) return 4;
+  return g;
+}
+
+const VOCAB_GROWTH_LS = 'sketchpad_vocab_lesson_growth';
+
+function vocabGrowthKey(jlpt, lessonNo) {
+  return `${String(jlpt || '').trim()}:${Math.max(1, Math.floor(Number(lessonNo) || 1))}`;
+}
+
+/** @param {ReturnType<typeof mergeVocabMarks>} mergedItems */
+export function findLessonMetaByVocabId(mergedItems, wordId) {
+  const id = String(wordId || '').trim();
+  if (!id || !mergedItems?.length) return null;
+  const item = mergedItems.find((x) => x.id === id);
+  if (!item) return null;
+  const jlpt = item.jlpt;
+  const pool = mergedItems.filter((x) => x.jlpt === jlpt);
+  const idx = pool.findIndex((x) => x.id === id);
+  if (idx === -1) return null;
+  const lessonNo = Math.floor(idx / VOCAB_LESSON_SIZE) + 1;
+  return { jlpt, lessonNo };
+}
+
+export function getLessonGrowthStage(jlpt, lessonNo) {
+  if (typeof window === 'undefined') return 0;
+  try {
+    const raw = window.localStorage.getItem(VOCAB_GROWTH_LS);
+    const o = raw ? JSON.parse(raw) : {};
+    const n = Number(o[vocabGrowthKey(jlpt, lessonNo)]);
+    if (!Number.isFinite(n)) return 0;
+    return Math.max(0, Math.min(VOCAB_LESSON_GROWTH_MAX, Math.floor(n)));
+  } catch {
+    return 0;
+  }
+}
+
+/** Tăng 1 giai đoạn nếu chưa đạt hoa; trả về giai đoạn mới */
+export function advanceLessonGrowthStage(jlpt, lessonNo) {
+  const cur = getLessonGrowthStage(jlpt, lessonNo);
+  if (cur >= VOCAB_LESSON_GROWTH_MAX) return VOCAB_LESSON_GROWTH_MAX;
+  const next = cur + 1;
+  if (typeof window === 'undefined') return next;
+  try {
+    const raw = window.localStorage.getItem(VOCAB_GROWTH_LS);
+    const o = raw ? JSON.parse(raw) : {};
+    o[vocabGrowthKey(jlpt, lessonNo)] = next;
+    window.localStorage.setItem(VOCAB_GROWTH_LS, JSON.stringify(o));
+  } catch {
+    // ignore
+  }
+  return next;
+}
+
+/**
+ * % bài đã “nở hoa” trong gói JLPT (theo số bài trên list).
+ * @param {ReturnType<typeof mergeVocabMarks>} mergedItems
+ */
+export function getPackCompletionPercent(mergedItems, jlpt, lessonCount) {
+  const j = String(jlpt || '').trim();
+  const nLessons = Math.max(0, Math.floor(Number(lessonCount) || 0));
+  if (!j || nLessons <= 0) return 0;
+  let flower = 0;
+  for (let n = 1; n <= nLessons; n++) {
+    if (getLessonGrowthStage(j, n) >= VOCAB_LESSON_GROWTH_MAX) flower += 1;
+  }
+  return Math.round((flower / nLessons) * 100);
+}
+
+/**
  * Hiển thị nghĩa theo ngôn ngữ UI
  * @param {{ meaningVi: string, meaningJa: string }} item
  */
 export function vocabMeaningLine(item, lang) {
   const isVi = String(lang || '').toLowerCase().startsWith('vi');
   return isVi ? item.meaningVi : item.meaningJa;
+}
+
+/**
+ * @typedef {{
+ *   key: string,
+ *   wordId: string,
+ *   mode: 'surface_from_meaning' | 'reading_from_surface' | 'meaning_from_surface',
+ *   prompt: string,
+ *   options: string[],
+ *   answerIndex: number
+ * }} VocabLessonQuizQuestion
+ */
+
+/**
+ * @param {ReturnType<typeof mergeVocabMarks>} mergedItems
+ * @param {ReturnType<typeof getVocabLessonItems>} lessonItems
+ * @param {{ lang?: string, count?: number }} opts
+ * @returns {VocabLessonQuizQuestion[]}
+ */
+export function buildLessonQuizQuestions(
+  mergedItems,
+  lessonItems,
+  { lang, count = VOCAB_QUIZ_PER_STAGE } = {},
+) {
+  const pool = lessonItems.filter(Boolean);
+  if (pool.length === 0) return [];
+
+  const jlpt = String(pool[0].jlpt || '');
+  const distractorBank = mergedItems.filter(
+    (x) => x.jlpt === jlpt && !pool.some((p) => p.id === x.id),
+  );
+
+  const pickUnique = (arr, need, exclude) => {
+    const out = [];
+    const seen = new Set();
+    for (const x of shuffleVocabStudy([...arr])) {
+      if (exclude != null && exclude !== '' && x === exclude) continue;
+      if (seen.has(x)) continue;
+      seen.add(x);
+      out.push(x);
+      if (out.length >= need) break;
+    }
+    return out;
+  };
+
+  const padWrong = (firstWrong, correct, fallbacks) => {
+    const out = [...firstWrong];
+    for (const x of shuffleVocabStudy([...fallbacks])) {
+      if (out.length >= 3) break;
+      if (x === correct) continue;
+      if (out.includes(x)) continue;
+      out.push(x);
+    }
+    return out.slice(0, 3);
+  };
+
+  const questions = [];
+  const modes = ['surface_from_meaning', 'reading_from_surface', 'meaning_from_surface'];
+
+  for (let i = 0; i < count; i++) {
+    const item = pool[Math.floor(Math.random() * pool.length)];
+    const mode = modes[Math.floor(Math.random() * modes.length)];
+
+    if (mode === 'surface_from_meaning') {
+      const meaning = vocabMeaningLine(item, lang);
+      const wrongSurfaces = padWrong(
+        pickUnique(
+          distractorBank.map((x) => x.surface),
+          3,
+          item.surface,
+        ),
+        item.surface,
+        [
+          ...pool.filter((p) => p.id !== item.id).map((p) => p.surface),
+          ...distractorBank.map((x) => x.surface),
+        ],
+      );
+      const options = shuffleVocabStudy([item.surface, ...wrongSurfaces]);
+      const answerIndex = options.indexOf(item.surface);
+      questions.push({
+        key: `${item.id}-sfm-${i}`,
+        wordId: item.id,
+        mode,
+        prompt: meaning,
+        options,
+        answerIndex,
+      });
+    } else if (mode === 'reading_from_surface') {
+      const wrongReadings = padWrong(
+        pickUnique(
+          [...distractorBank.map((x) => x.reading), ...pool.filter((p) => p.id !== item.id).map((p) => p.reading)],
+          3,
+          item.reading,
+        ),
+        item.reading,
+        [...distractorBank.map((x) => x.reading), ...pool.map((p) => p.reading)],
+      );
+      const options = shuffleVocabStudy([item.reading, ...wrongReadings]);
+      const answerIndex = options.indexOf(item.reading);
+      questions.push({
+        key: `${item.id}-rfs-${i}`,
+        wordId: item.id,
+        mode,
+        prompt: item.surface,
+        options,
+        answerIndex,
+      });
+    } else {
+      const meaning = vocabMeaningLine(item, lang);
+      const wrongMeanings = padWrong(
+        pickUnique(
+          [
+            ...distractorBank.map((x) => vocabMeaningLine(x, lang)),
+            ...pool.filter((p) => p.id !== item.id).map((p) => vocabMeaningLine(p, lang)),
+          ],
+          3,
+          meaning,
+        ),
+        meaning,
+        [
+          ...distractorBank.map((x) => vocabMeaningLine(x, lang)),
+          ...pool.filter((p) => p.id !== item.id).map((p) => vocabMeaningLine(p, lang)),
+        ],
+      );
+      const options = shuffleVocabStudy([meaning, ...wrongMeanings]);
+      const answerIndex = options.indexOf(meaning);
+      questions.push({
+        key: `${item.id}-mfs-${i}`,
+        wordId: item.id,
+        mode,
+        prompt: item.surface,
+        options,
+        answerIndex,
+      });
+    }
+  }
+
+  return shuffleVocabStudy(questions);
 }
 
 /** Chi tiết bổ sung theo id (nối vào VOCAB_ITEMS) — mock */

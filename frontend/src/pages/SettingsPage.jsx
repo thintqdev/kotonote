@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Sidebar, Header, Footer, Breadcrumb } from "../components/common";
+import { Breadcrumb } from "../components/common";
 import {
   mockStreak,
   mockNotifications,
@@ -71,16 +71,14 @@ const SettingsPage = () => {
   };
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header
-            userName={headerName}
-            notificationCount={mockNotifications}
-          />
-          <div className="dash-main-inner profile-main settings-page">
-            <Breadcrumb
+    <Layout
+      userName={headerName}
+      notificationCount={mockNotifications}
+      footerQuote={t("dashboard.quotes.footer")}
+      streakDays={mockStreak.days}
+      mainInnerClassName="profile-main settings-page"
+    >
+      <Breadcrumb
               items={[
                 { label: t("breadcrumb.home"), to: "/", end: true },
                 { label: t("breadcrumb.settings") },
@@ -244,11 +242,6 @@ const SettingsPage = () => {
                 </button>
               </form>
             </div>
-
-            <Footer quote={t("dashboard.quotes.footer")} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

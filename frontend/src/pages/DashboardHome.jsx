@@ -3,12 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useMergedProfile } from "../hooks/useMergedProfile.js";
 import Layout from "../layouts/Layout.jsx";
-import {
-  Sidebar,
-  Header,
-  Footer,
-  Breadcrumb,
-} from "../components/common";
+import { Breadcrumb } from "../components/common";
 import WelcomeBanner from "../components/dashboard/WelcomeBanner.jsx";
 import GoalCard from "../components/dashboard/GoalCard.jsx";
 import SubjectGrid from "../components/dashboard/SubjectGrid.jsx";
@@ -122,16 +117,14 @@ const DashboardHome = () => {
   );
 
   return (
-    <Layout>
-      <div className="dash-page">
-        <Sidebar streakDays={mockStreak.days} />
-        <div className="dash-main">
-          <Header
-            userName={displayName}
-            notificationCount={mockNotifications}
-          />
-          <div className="dash-main-inner dash-pin-board">
-            <Breadcrumb
+    <Layout
+      userName={displayName}
+      notificationCount={mockNotifications}
+      footerQuote={t("dashboard.quotes.footer")}
+      streakDays={mockStreak.days}
+      mainInnerClassName="dash-pin-board"
+    >
+      <Breadcrumb
               items={[
                 { label: t("breadcrumb.home"), to: "/", end: true },
               ]}
@@ -192,10 +185,6 @@ const DashboardHome = () => {
                 </div>
               </div>
             </div>
-            <Footer quote={t("dashboard.quotes.footer")} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };
