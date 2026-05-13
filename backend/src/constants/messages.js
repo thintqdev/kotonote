@@ -69,16 +69,6 @@ export const STREAK = {
 	STREAK_BROKEN: 'MSG_506',
 };
 
-// Kana Messages
-export const KANA = {
-	CREATED: 'MSG_601',
-	UPDATED: 'MSG_602',
-	DELETED: 'MSG_603',
-	FETCHED: 'MSG_604',
-	NOT_FOUND: 'MSG_605',
-	LIST_FETCHED: 'MSG_606',
-};
-
 // Vocabulary Messages
 export const VOCABULARY = {
 	DECK_CREATED: 'MSG_701',
@@ -120,7 +110,6 @@ export const MESSAGES = {
 	...SURVEY,
 	...QUOTE,
 	...STREAK,
-	...KANA,
 	...VOCABULARY,
 	...KANJI,
 };

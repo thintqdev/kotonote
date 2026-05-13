@@ -11,7 +11,6 @@ import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb, DateField } from '../components/common';
 import {
   mockStreak,
-  mockNotifications,
   buildDemoProfile,
 } from '../data/dashboardHomeMock.js';
 import i18n from '../i18n.js';
@@ -298,7 +297,6 @@ const Profile = () => {
   return (
     <Layout
       userName={headerName}
-      notificationCount={mockNotifications}
       footerQuote={t('profileQuote')}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main"

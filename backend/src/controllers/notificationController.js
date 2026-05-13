@@ -1,7 +1,10 @@
 import asyncHandler from 'express-async-handler';
 import * as notificationService from '../services/notificationService.js';
-import { apiSuccess } from '../utils/response.js';
-import { MESSAGES } from '../constants/messages.js';
+import * as notificationCampaignService from '../services/notificationCampaignService.js';
+import { getIo } from '../config/ioRegistry.js';
+import { sendNotificationToUser, sendToAdminRoom } from '../config/socket.js';
+import { apiSuccess, apiError } from '../utils/response.js';
+import { MESSAGES, COMMON } from '../constants/messages.js';
 
 /**
  * @desc    Get notifications for current user
@@ -121,12 +124,79 @@ export const getStats = asyncHandler(async (req, res) => {
 // ============ ADMIN ENDPOINTS ============
 
 /**
+ * @desc    Danh sách chiến dịch gửi thông báo (admin)
+ * @route   GET /api/admin/notifications/campaigns
+ * @access  Admin
+ */
+export const listCampaigns = asyncHandler(async (req, res) => {
+	const limit = Math.min(parseInt(req.query.limit, 10) || 30, 100);
+	const skip = Math.max(parseInt(req.query.skip, 10) || 0, 0);
+	const result = await notificationCampaignService.listCampaigns({ limit, skip });
+	return apiSuccess(res, result, MESSAGES.MSG_001, 200);
+});
+
+/**
+ * @desc    Tạo chiến dịch — gửi ngay hoặc lên lịch
+ * @route   POST /api/admin/notifications/campaigns
+ * @access  Admin
+ */
+export const createNotificationCampaign = asyncHandler(async (req, res) => {
+	if (
+		req.body.audience === 'selected' &&
+		(!req.body.userIds || req.body.userIds.length === 0)
+	) {
+		return apiError(res, COMMON.VALIDATION_ERROR, 400, [
+			{ field: 'userIds', message: 'Required when audience is selected' },
+		]);
+	}
+
+	const scheduledAt =
+		req.body.scheduledAt === '' || req.body.scheduledAt == null
+			? null
+			: req.body.scheduledAt;
+
+	const campaign = await notificationCampaignService.createCampaign(
+		{ ...req.body, scheduledAt },
+		req.user._id
+	);
+
+	return apiSuccess(res, { campaign }, MESSAGES.MSG_001, 201);
+});
+
+/**
+ * @desc    Hủy chiến dịch đã lên lịch
+ * @route   PATCH /api/admin/notifications/campaigns/:campaignId/cancel
+ * @access  Admin
+ */
+export const cancelNotificationCampaign = asyncHandler(async (req, res) => {
+	const campaign = await notificationCampaignService.cancelCampaign(
+		req.params.campaignId
+	);
+	const io = getIo();
+	if (io) {
+		sendToAdminRoom(io, {
+			type: 'campaign_cancelled',
+			campaignId: String(req.params.campaignId),
+		});
+	}
+	return apiSuccess(res, { campaign }, MESSAGES.MSG_001, 200);
+});
+
+/**
  * @desc    Send notification to user (Admin)
  * @route   POST /api/admin/notifications/send
  * @access  Admin
  */
 export const sendNotification = asyncHandler(async (req, res) => {
-	const { userId, title, message, type = 'info', category = 'other' } = req.body;
+	const {
+		userId,
+		title,
+		message,
+		type = 'info',
+		category = 'other',
+		actionType = 'none',
+		actionData,
+	} = req.body;
 
 	const notification = await notificationService.createNotification({
 		userId,
@@ -135,7 +205,14 @@ export const sendNotification = asyncHandler(async (req, res) => {
 		type,
 		category,
 		source: 'admin',
+		actionType,
+		actionData: actionData || undefined,
 	});
+
+	const io = getIo();
+	if (io) {
+		sendNotificationToUser(io, notification.userId.toString(), notification);
+	}
 
 	return apiSuccess(res, { notification }, MESSAGES.MSG_001, 201);
 });
@@ -146,45 +223,67 @@ export const sendNotification = asyncHandler(async (req, res) => {
  * @access  Admin
  */
 export const sendBatchNotifications = asyncHandler(async (req, res) => {
-	const { userIds, title, message, type = 'info', category = 'other' } = req.body;
+	const {
+		userIds,
+		title,
+		message,
+		type = 'info',
+		category = 'other',
+		actionType = 'none',
+		actionData,
+	} = req.body;
 
 	const notifications = await notificationService.createBatchNotifications(
-		userIds.map(userId => ({
-			userId,
+		userIds.map((uid) => ({
+			userId: uid,
 			title,
 			message,
 			type,
 			category,
 			source: 'admin',
+			actionType,
+			actionData: actionData || undefined,
 		}))
 	);
+
+	const io = getIo();
+	if (io) {
+		for (const n of notifications) {
+			sendNotificationToUser(io, n.userId.toString(), n);
+		}
+	}
 
 	return apiSuccess(res, { count: notifications.length, notifications }, MESSAGES.MSG_001, 201);
 });
 
 /**
- * @desc    Broadcast notification to all users (Admin)
+ * @desc    Broadcast notification to all or selected users (Admin)
  * @route   POST /api/admin/notifications/broadcast
  * @access  Admin
  */
 export const broadcastNotification = asyncHandler(async (req, res) => {
-	const { title, message, type = 'info', category = 'system' } = req.body;
-	const User = (await import('../models/User.js')).default;
+	const {
+		title,
+		message,
+		type = 'info',
+		category = 'system',
+		userIds,
+		actionType = 'none',
+		actionData,
+	} = req.body;
 
-	const users = await User.find({ isActive: true });
-
-	const notifications = await notificationService.createBatchNotifications(
-		users.map(user => ({
-			userId: user._id,
+	const { recipientCount } =
+		await notificationCampaignService.deliverStandaloneAdminNotifications({
 			title,
 			message,
 			type,
 			category,
-			source: 'admin',
-		}))
-	);
+			userIds: userIds && userIds.length ? userIds : null,
+			actionType,
+			actionData: actionData || undefined,
+		});
 
-	return apiSuccess(res, { count: notifications.length }, MESSAGES.MSG_001, 201);
+	return apiSuccess(res, { count: recipientCount }, MESSAGES.MSG_001, 201);
 });
 
 /**
@@ -279,6 +378,9 @@ export default {
 	deleteNotification,
 	clearOldNotifications,
 	getStats,
+	listCampaigns,
+	createNotificationCampaign,
+	cancelNotificationCampaign,
 	sendNotification,
 	sendBatchNotifications,
 	broadcastNotification,

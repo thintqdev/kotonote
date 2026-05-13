@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import { useAuth } from '../hooks/useAuth.jsx';
+import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
 const RegisterPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { register } = useAuth();
   const [data, setData] = useState({
     username: '',
     email: '',
@@ -14,6 +18,7 @@ const RegisterPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,11 +29,17 @@ const RegisterPage = () => {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    if (errors.general) {
+      setErrors((prev) => ({ ...prev, general: '' }));
+    }
   };
 
   const validate = () => {
     const next = {};
     if (!data.username.trim()) next.username = t('register.errors.username');
+    else if (data.username.trim().length < 2) {
+      next.username = t('register.errors.usernameShort');
+    }
     if (!data.email.trim()) next.email = t('register.errors.emailRequired');
     else if (!/\S+@\S+\.\S+/.test(data.email)) next.email = t('register.errors.emailInvalid');
     if (!data.password) next.password = t('register.errors.passwordRequired');
@@ -44,12 +55,23 @@ const RegisterPage = () => {
     e.preventDefault();
     if (!validate()) return;
     setIsSubmitting(true);
+    setErrors((prev) => ({ ...prev, general: '' }));
     try {
-      await new Promise((r) => setTimeout(r, 800));
+      await register(
+        data.username.trim(),
+        data.email.trim(),
+        data.password,
+        rememberMe,
+      );
+      toast.success(t('register.success'));
+      navigate('/survey', { replace: true });
+    } catch (err) {
+      const msg = getAxiosErrorMessage(err);
+      setErrors((prev) => ({ ...prev, general: msg }));
+      toast.error(t('register.errors.submitFailed'), { description: msg });
     } finally {
       setIsSubmitting(false);
     }
-    navigate('/survey', { replace: true });
   };
 
   return (
@@ -60,6 +82,11 @@ const RegisterPage = () => {
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          {errors.general ? (
+            <div className="field-group" role="alert">
+              <span className="error-msg">{errors.general}</span>
+            </div>
+          ) : null}
           <div className="field-group">
             <label className="field-label" htmlFor="reg-username">
               <span className="auth-label-text">{t('register.username')}</span>
@@ -158,6 +185,17 @@ const RegisterPage = () => {
               </button>
             </div>
             {errors.confirmPassword && <span className="error-msg">{errors.confirmPassword}</span>}
+          </div>
+
+          <div className="form-extras">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <span className="checkbox-text">{t('login.remember')}</span>
+            </label>
           </div>
 
           <button

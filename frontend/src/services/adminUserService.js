@@ -40,6 +40,16 @@ export async function patchAdminUserStatus(id, status) {
 }
 
 /**
+ * Cập nhật trạng thái hàng loạt.
+ * @param {string[]} userIds
+ * @param {'active'|'locked'|'suspended'} status
+ */
+export async function patchBulkAdminUsersStatus(userIds, status) {
+	const body = await adminApi.patch(ADMIN_USERS.bulkStatus, { userIds, status });
+	return getApiData(body);
+}
+
+/**
  * @param {import('axios').AxiosRequestConfig} [axiosConfig]
  */
 export async function getAdminUserStatistics(axiosConfig = {}) {

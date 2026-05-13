@@ -61,27 +61,77 @@ export const schemas = {
 			},
 		},
 	},
-	Survey: {
-		type: 'object',
-		properties: {
-			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
-			userId: { type: 'string', example: '507f1f77bcf86cd799439011' },
-			level: { type: 'string', enum: ['begin', 'n5', 'n4', 'n3', 'n2up'], example: 'n3' },
-			goal: { type: 'string', enum: ['jlpt', 'travel', 'work', 'school', 'hobby'], example: 'jlpt' },
-			dailyTime: { type: 'string', enum: ['lt15', '15-30', '30-60', 'gt60'], example: '30-60' },
-			weakAreas: {
-				type: 'array',
-				items: { type: 'string', enum: ['grammar', 'vocab', 'kanji', 'listen', 'read'] },
-				example: ['grammar', 'kanji'],
+		Survey: {
+			type: 'object',
+			properties: {
+				_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
+				userId: { type: 'string', example: '507f1f77bcf86cd799439011' },
+				level: { type: 'string', enum: ['begin', 'n5', 'n4', 'n3', 'n2up'], example: 'n3' },
+				goal: { type: 'string', enum: ['jlpt', 'travel', 'work', 'school', 'hobby'], example: 'jlpt' },
+				dailyTime: { type: 'string', enum: ['lt15', '15-30', '30-60', 'gt60'], example: '30-60' },
+				weakAreas: {
+					type: 'array',
+					items: { type: 'string', enum: ['grammar', 'vocab', 'kanji', 'listen', 'read'] },
+					example: ['grammar', 'kanji'],
+				},
+				discovery: { type: 'string', enum: ['friend', 'sns', 'search', 'other'], example: 'search' },
+				discoveryNote: { type: 'string', example: 'Found via Google search' },
+				freeNote: { type: 'string', example: 'Looking forward to learning Japanese' },
+				completedAt: { type: 'string', format: 'date-time' },
+				createdAt: { type: 'string', format: 'date-time' },
+				updatedAt: { type: 'string', format: 'date-time' },
 			},
-			discovery: { type: 'string', enum: ['friend', 'sns', 'search', 'other'], example: 'search' },
-			discoveryNote: { type: 'string', example: 'Found via Google search' },
-			freeNote: { type: 'string', example: 'Looking forward to learning Japanese' },
-			completedAt: { type: 'string', format: 'date-time' },
-			createdAt: { type: 'string', format: 'date-time' },
-			updatedAt: { type: 'string', format: 'date-time' },
 		},
-	},
+		SurveyChartBucket: {
+			type: 'object',
+			description: 'Một cột trên biểu đồ (nhãn + số lượng)',
+			properties: {
+				key: {
+					type: 'string',
+					description: 'Mã hạng mục (level, goal, dailyTime, discovery, weakArea)',
+					example: 'n5',
+				},
+				count: { type: 'integer', minimum: 0, example: 24 },
+			},
+			required: ['key', 'count'],
+		},
+		SurveyStatistics: {
+			type: 'object',
+			description: 'Thống kê khảo sát theo từng trục — dùng labels = key, values = count',
+			properties: {
+				totalSurveys: { type: 'integer', minimum: 0, example: 150 },
+				byLevel: {
+					type: 'array',
+					items: { $ref: '#/components/schemas/SurveyChartBucket' },
+				},
+				byGoal: {
+					type: 'array',
+					items: { $ref: '#/components/schemas/SurveyChartBucket' },
+				},
+				byDailyTime: {
+					type: 'array',
+					items: { $ref: '#/components/schemas/SurveyChartBucket' },
+				},
+				byDiscovery: {
+					type: 'array',
+					items: { $ref: '#/components/schemas/SurveyChartBucket' },
+					description: 'Key `unspecified` = khảo sát không có discovery',
+				},
+				byWeakArea: {
+					type: 'array',
+					items: { $ref: '#/components/schemas/SurveyChartBucket' },
+					description: 'Số lần hạng mục được chọn (một user có thể chọn nhiều)',
+				},
+			},
+			required: [
+				'totalSurveys',
+				'byLevel',
+				'byGoal',
+				'byDailyTime',
+				'byDiscovery',
+				'byWeakArea',
+			],
+		},
 	Quote: {
 		type: 'object',
 		properties: {
@@ -186,20 +236,6 @@ export const schemas = {
 			imageUrl: { type: 'string', nullable: true },
 			displayOrder: { type: 'number', example: 1 },
 			isActive: { type: 'boolean', example: true },
-			createdAt: { type: 'string', format: 'date-time' },
-			updatedAt: { type: 'string', format: 'date-time' },
-		},
-	},
-	Kana: {
-		type: 'object',
-		properties: {
-			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
-			character: { type: 'string', example: 'あ' },
-			romaji: { type: 'string', example: 'a' },
-			script: { type: 'string', enum: ['hiragana', 'katakana'], example: 'hiragana' },
-			row: { type: 'string', example: 'a-row' },
-			isDiacritical: { type: 'boolean', example: false },
-			displayOrder: { type: 'number', example: 1 },
 			createdAt: { type: 'string', format: 'date-time' },
 			updatedAt: { type: 'string', format: 'date-time' },
 		},

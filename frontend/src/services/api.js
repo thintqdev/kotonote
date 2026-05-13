@@ -43,7 +43,11 @@ function attachAuthInterceptors(instance, opts) {
 				) {
 					const path = window.location.pathname;
 					if (unauthorizedHref === '/login') {
-						if (!path.startsWith('/admin')) {
+						if (
+							!path.startsWith('/admin') &&
+							path !== '/login' &&
+							path !== '/register'
+						) {
 							window.location.href = unauthorizedHref;
 						}
 					} else if (unauthorizedHref === '/admin/login') {

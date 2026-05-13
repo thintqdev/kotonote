@@ -82,33 +82,3 @@ export const mockTodayProgress = {
 export const mockStreak = {
   days: 12,
 };
-
-/** Số thông báo chưa đọc (khớp mockNotificationList khi chưa tương tác UI). */
-export const mockNotifications = 2;
-
-export const mockNotificationList = [
-  {
-    id: "n1",
-    type: "reminder",
-    titleKey: "notif.n1.title",
-    messageKey: "notif.n1.message",
-    timestamp: new Date(Date.now() - 8 * 60 * 1000),
-    read: false,
-  },
-  {
-    id: "n2",
-    type: "progress",
-    titleKey: "notif.n2.title",
-    messageKey: "notif.n2.message",
-    timestamp: new Date(Date.now() - 14 * 60 * 60 * 1000),
-    read: false,
-  },
-  {
-    id: "n3",
-    type: "achievement",
-    titleKey: "notif.n3.title",
-    messageKey: "notif.n3.message",
-    timestamp: new Date(Date.now() - 28 * 60 * 60 * 1000),
-    read: true,
-  },
-];

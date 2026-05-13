@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import * as userRepository from '../repositories/userRepository.js';
 import { USER } from '../constants/messages.js';
 import { USER_STATUS } from '../constants/userStatus.js';
@@ -71,6 +72,57 @@ export const updateUserStatus = async (userId, status) => {
 	}
 	
 	return user;
+};
+
+/**
+ * Cập nhật trạng thái hàng loạt (admin).
+ * Bỏ qua id không phải ObjectId, id không tồn tại, và **không** áp dụng lên chính admin đang thao tác (`actorUserId`).
+ * @param {string[]} userIds
+ * @param {string} status
+ * @param {string} [actorUserId] — req.user._id dạng string
+ */
+export const bulkUpdateUsersStatus = async (userIds, status, actorUserId) => {
+	const validStatuses = Object.values(USER_STATUS);
+	if (!validStatuses.includes(status)) {
+		throw { messageCode: USER.UPDATED, statusCode: 400 };
+	}
+
+	const unique = [...new Set((userIds || []).map((id) => String(id).trim()).filter(Boolean))];
+
+	const invalidFormatIds = [];
+	const validHexIds = [];
+	for (const id of unique) {
+		if (!mongoose.Types.ObjectId.isValid(id)) {
+			invalidFormatIds.push(id);
+			continue;
+		}
+		if (new mongoose.Types.ObjectId(id).toString() !== id) {
+			invalidFormatIds.push(id);
+			continue;
+		}
+		if (actorUserId && id === String(actorUserId)) {
+			continue;
+		}
+		validHexIds.push(id);
+	}
+
+	const objectIds = validHexIds.map((id) => new mongoose.Types.ObjectId(id));
+	const result = await userRepository.bulkUpdateUsersStatus(objectIds, status);
+
+	const skippedSelfCount = actorUserId
+		? unique.filter((id) => id === String(actorUserId)).length
+		: 0;
+
+	return {
+		status,
+		requested: unique.length,
+		eligibleIdCount: validHexIds.length,
+		matchedCount: result.matchedCount ?? 0,
+		modifiedCount: result.modifiedCount ?? 0,
+		notFoundIdCount: Math.max(0, validHexIds.length - (result.matchedCount ?? 0)),
+		invalidFormatIds,
+		skippedSelfCount,
+	};
 };
 
 /**

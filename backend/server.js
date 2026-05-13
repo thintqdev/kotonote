@@ -14,6 +14,8 @@ import adminRoutes from './src/routes/admin/index.js';
 import notificationRoutes from './src/routes/notificationRoutes.js';
 import { openApiSpec } from './src/config/openapi/index.js';
 import { initializeSocket } from './src/config/socket.js';
+import { setIo } from './src/config/ioRegistry.js';
+import { startNotificationCampaignScheduler } from './src/jobs/notificationCampaignScheduler.js';
 import { notificationQueue } from './src/utils/queue.js';
 import * as notificationService from './src/services/notificationService.js';
 
@@ -45,7 +47,7 @@ app.use(
 app.use(cors({
 	origin: process.env.CLIENT_URL,
 	credentials: true,
-	methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 	allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(compression());
@@ -91,11 +93,13 @@ app.use(errorHandler);
 // ============ SOCKET.IO INITIALIZATION ============
 
 const io = initializeSocket(httpServer);
+setIo(io);
+startNotificationCampaignScheduler();
 
 // Start notification queue processing
 notificationQueue.startProcessing(async (notification) => {
 	const createdNotification = await notificationService.createNotification(notification);
-	
+
 	// Send to user via Socket.IO
 	const { sendNotificationToUser } = await import('./src/config/socket.js');
 	sendNotificationToUser(io, notification.userId, createdNotification);

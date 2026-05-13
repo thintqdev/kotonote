@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import UserDetailModal from "../../components/admin/UserDetailModal.jsx";
 import UserStatusModal from "../../components/admin/UserStatusModal.jsx";
+import BulkUserStatusConfirmModal from "../../components/admin/BulkUserStatusConfirmModal.jsx";
 import {
   AUTH_PROVIDER_OPTIONS,
   USER_ROLE_OPTIONS,
@@ -13,12 +14,14 @@ import {
 import {
   getAdminUserStatistics,
   listAdminUsers,
+  patchBulkAdminUsersStatus,
 } from "../../services/adminUserService.js";
 import { getAdminJwtUserId } from "../../utils/adminJwt.js";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
 import "./AdminUsersPage.css";
 
-const PAGE_SIZE_OPTIONS = [10, 20, 50];
+/** Số bản ghi mỗi trang (cố định, không cấu hình trên UI). */
+const PAGE_LIMIT = 10;
 
 function formatShortDate(v) {
   if (!v) return "—";
@@ -50,7 +53,6 @@ export default function AdminUsersPage() {
   const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
 
   const [users, setUsers] = useState([]);
   const [total, setTotal] = useState(0);
@@ -66,18 +68,101 @@ export default function AdminUsersPage() {
   const [statusOpen, setStatusOpen] = useState(false);
   const [statusUser, setStatusUser] = useState(null);
 
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [bulkTargetStatus, setBulkTargetStatus] = useState("active");
+  const [bulkApplying, setBulkApplying] = useState(false);
+  const headerSelectAllRef = useRef(null);
+
+  const [bulkConfirmOpen, setBulkConfirmOpen] = useState(false);
+
+  const bulkSelectedCount = useMemo(
+    () =>
+      selectedIds.filter(
+        (id) => !currentAdminId || id !== currentAdminId,
+      ).length,
+    [selectedIds, currentAdminId],
+  );
+
   const queryParams = useMemo(() => {
-    const p = { page, limit: pageSize };
+    const p = { page, limit: PAGE_LIMIT };
     if (status) p.status = status;
     if (role) p.role = role;
     if (authProvider) p.authProvider = authProvider;
     if (searchQuery.trim()) p.search = searchQuery.trim();
     return p;
-  }, [page, pageSize, status, role, authProvider, searchQuery]);
+  }, [page, status, role, authProvider, searchQuery]);
 
   useEffect(() => {
     setPage(1);
-  }, [status, role, authProvider, searchQuery, pageSize]);
+  }, [status, role, authProvider, searchQuery]);
+
+  useEffect(() => {
+    setSelectedIds([]);
+  }, [queryParams]);
+
+  useEffect(() => {
+    if (bulkSelectedCount < 1 && bulkConfirmOpen && !bulkApplying) {
+      setBulkConfirmOpen(false);
+    }
+  }, [bulkSelectedCount, bulkConfirmOpen, bulkApplying]);
+
+  const selectableIds = useMemo(
+    () =>
+      users
+        .filter(
+          (u) =>
+            !(currentAdminId && String(u._id) === currentAdminId),
+        )
+        .map((u) => String(u._id)),
+    [users, currentAdminId],
+  );
+
+  const allPageSelected =
+    selectableIds.length > 0 &&
+    selectableIds.every((id) => selectedIds.includes(id));
+  const somePageSelected =
+    selectableIds.length > 0 &&
+    selectableIds.some((id) => selectedIds.includes(id));
+
+  useEffect(() => {
+    const el = headerSelectAllRef.current;
+    if (!el) return;
+    el.indeterminate = somePageSelected && !allPageSelected;
+  }, [somePageSelected, allPageSelected]);
+
+  const toggleSelectAllPage = () => {
+    if (allPageSelected) {
+      setSelectedIds((prev) =>
+        prev.filter((id) => !selectableIds.includes(id)),
+      );
+    } else {
+      setSelectedIds((prev) => [...new Set([...prev, ...selectableIds])]);
+    }
+  };
+
+  const toggleRowSelected = (id) => {
+    const s = String(id);
+    setSelectedIds((prev) =>
+      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s],
+    );
+  };
+
+  const clearSelection = () => setSelectedIds([]);
+
+  const openBulkConfirm = () => {
+    const n = bulkSelectedCount;
+    if (n < 1) {
+      toast.error("Chưa chọn tài khoản", {
+        description: "Chọn ít nhất một user (không tính chính bạn).",
+      });
+      return;
+    }
+    setBulkConfirmOpen(true);
+  };
+
+  const closeBulkConfirm = () => {
+    if (!bulkApplying) setBulkConfirmOpen(false);
+  };
 
   const fetchStats = useCallback(async () => {
     setStatsLoading(true);
@@ -116,6 +201,40 @@ export default function AdminUsersPage() {
       setLoading(false);
     }
   }, [queryParams]);
+
+  const executeBulkUpdate = useCallback(async () => {
+    const ids = selectedIds.filter(
+      (id) => !currentAdminId || id !== currentAdminId,
+    );
+    if (ids.length === 0) {
+      setBulkConfirmOpen(false);
+      return;
+    }
+    setBulkApplying(true);
+    try {
+      const result = await patchBulkAdminUsersStatus(ids, bulkTargetStatus);
+      const mod = result?.modifiedCount ?? 0;
+      toast.success("Đã cập nhật hàng loạt", {
+        description: `Khớp ${result?.matchedCount ?? 0} · Đổi ${mod} bản ghi.`,
+      });
+      setBulkConfirmOpen(false);
+      setSelectedIds([]);
+      await fetchUsers();
+      await fetchStats();
+    } catch (e) {
+      toast.error("Cập nhật hàng loạt thất bại", {
+        description: getAxiosErrorMessage(e),
+      });
+    } finally {
+      setBulkApplying(false);
+    }
+  }, [
+    selectedIds,
+    currentAdminId,
+    bulkTargetStatus,
+    fetchUsers,
+    fetchStats,
+  ]);
 
   useEffect(() => {
     void fetchUsers();
@@ -160,7 +279,9 @@ export default function AdminUsersPage() {
     <div className="admin-stub-main admin-users-page">
       <h1 className="admin-users-title">Quản lý người dùng</h1>
       <p className="admin-users-lead">
-        Lọc danh sách, xem chi tiết và cập nhật trạng thái tài khoản qua API .
+        Lọc danh sách, chọn nhiều user để đổi trạng thái hàng loạt, hoặc sửa
+        từng người — API <code>/api/admin/users</code> và{" "}
+        <code>/api/admin/users/bulk/status</code>.
       </p>
 
       <section className="admin-users-stats" aria-label="Thống kê người dùng">
@@ -284,21 +405,46 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      {!loading && !error && total > 0 ? (
-        <label className="admin-users-page-size">
-          <span>Mỗi trang</span>
-          <select
-            value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
-            aria-label="Số dòng mỗi trang"
-          >
-            {PAGE_SIZE_OPTIONS.map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </label>
+      {!loading && !error && selectedIds.length > 0 ? (
+        <div className="admin-users-bulk-bar">
+          <span className="admin-users-bulk-count">
+            Đã chọn: <strong>{bulkSelectedCount}</strong>
+          </span>
+          <div className="admin-users-bulk-controls">
+            <label className="admin-users-bulk-label" htmlFor="adm-bulk-status">
+              Trạng thái mới
+            </label>
+            <select
+              id="adm-bulk-status"
+              className="admin-users-bulk-select"
+              value={bulkTargetStatus}
+              onChange={(e) => setBulkTargetStatus(e.target.value)}
+              disabled={bulkApplying || bulkConfirmOpen}
+            >
+              {USER_STATUS_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className="admin-users-btn admin-users-btn--primary"
+              onClick={openBulkConfirm}
+              disabled={bulkApplying || bulkConfirmOpen}
+            >
+              Áp dụng cho đã chọn
+            </button>
+            <button
+              type="button"
+              className="admin-users-btn admin-users-btn--muted"
+              onClick={clearSelection}
+              disabled={bulkApplying || bulkConfirmOpen}
+            >
+              Bỏ chọn
+            </button>
+          </div>
+        </div>
       ) : null}
 
       {loading ? (
@@ -317,6 +463,19 @@ export default function AdminUsersPage() {
           <table className="admin-users-table">
             <thead>
               <tr>
+                <th className="admin-users-th-check" scope="col">
+                  <input
+                    ref={headerSelectAllRef}
+                    type="checkbox"
+                    className="admin-users-table-check"
+                    checked={
+                      selectableIds.length > 0 && allPageSelected
+                    }
+                    onChange={toggleSelectAllPage}
+                    disabled={selectableIds.length === 0}
+                    aria-label="Chọn tất cả trên trang này"
+                  />
+                </th>
                 <th>Email</th>
                 <th>Tên</th>
                 <th>Vai trò</th>
@@ -333,6 +492,20 @@ export default function AdminUsersPage() {
                   currentAdminId && String(u._id) === currentAdminId;
                 return (
                   <tr key={u._id}>
+                    <td className="admin-users-cell-check">
+                      <input
+                        type="checkbox"
+                        className="admin-users-table-check"
+                        checked={selectedIds.includes(String(u._id))}
+                        onChange={() => toggleRowSelected(u._id)}
+                        disabled={isSelf}
+                        aria-label={
+                          isSelf
+                            ? "Không thể chọn tài khoản đang đăng nhập"
+                            : `Chọn ${u.email}`
+                        }
+                      />
+                    </td>
                     <td className="admin-users-cell-email">{u.email}</td>
                     <td>{u.name || "—"}</td>
                     <td>
@@ -392,29 +565,33 @@ export default function AdminUsersPage() {
 
       {!loading && !error && total > 0 ? (
         <nav className="admin-users-pagination" aria-label="Phân trang">
-          <button
-            type="button"
-            className="admin-users-btn admin-users-btn--ghost"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-          >
-            Trước
-          </button>
-          <span className="admin-users-pagination-info">
-            Trang {page} / {pagesSafe}
-            <span aria-hidden> · </span>
-            {total} tài khoản
-          </span>
-          <button
-            type="button"
-            className="admin-users-btn admin-users-btn--ghost"
-            disabled={totalPages > 0 ? page >= totalPages : true}
-            onClick={() =>
-              setPage((p) => (totalPages ? Math.min(totalPages, p + 1) : p + 1))
-            }
-          >
-            Sau
-          </button>
+          <div className="admin-users-pagination-inner">
+            <button
+              type="button"
+              className="admin-users-btn admin-users-btn--ghost"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+            >
+              Trước
+            </button>
+            <span className="admin-users-pagination-info">
+              Trang {page} / {pagesSafe}
+              <span aria-hidden> · </span>
+              {total} tài khoản
+            </span>
+            <button
+              type="button"
+              className="admin-users-btn admin-users-btn--ghost"
+              disabled={totalPages > 0 ? page >= totalPages : true}
+              onClick={() =>
+                setPage((p) =>
+                  totalPages ? Math.min(totalPages, p + 1) : p + 1,
+                )
+              }
+            >
+              Sau
+            </button>
+          </div>
         </nav>
       ) : null}
 
@@ -431,6 +608,14 @@ export default function AdminUsersPage() {
           await fetchUsers();
           await fetchStats();
         }}
+      />
+      <BulkUserStatusConfirmModal
+        open={bulkConfirmOpen}
+        count={bulkSelectedCount}
+        statusLabel={userStatusLabel(bulkTargetStatus)}
+        saving={bulkApplying}
+        onClose={closeBulkConfirm}
+        onConfirm={executeBulkUpdate}
       />
     </div>
   );

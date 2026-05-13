@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/useAuth.jsx";
-import { mockNotificationList } from "../../data/dashboardHomeMock.js";
+import { useUserNotifications } from "../../context/UserNotificationContext.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import NotificationDropdown from "./NotificationDropdown.jsx";
 import "./Header.css";
@@ -136,6 +136,7 @@ function DecoFlower(props) {
 const Header = ({ userName, notificationCount }) => {
   const { t, i18n } = useTranslation();
   const { logout } = useAuth();
+  const { recentNotifications, markOneRead } = useUserNotifications();
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -175,11 +176,6 @@ const Header = ({ userName, notificationCount }) => {
     logout();
     navigate("/login");
   };
-
-  const recentNotifications = useMemo(
-    () => mockNotificationList.slice(0, 5),
-    [],
-  );
 
   const dateLine = useMemo(() => {
     const d = new Date();
@@ -251,6 +247,9 @@ const Header = ({ userName, notificationCount }) => {
                 isOpen={isNotificationOpen}
                 notifications={recentNotifications}
                 onClose={() => setIsNotificationOpen(false)}
+                onSelectNotification={(n) => {
+                  if (!n.read) void markOneRead(n.id);
+                }}
               />
             </div>
             <div className="dash-user-wrapper" ref={userBarRef}>

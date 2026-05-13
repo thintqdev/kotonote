@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import QuoteFormModal from "../../components/admin/QuoteFormModal.jsx";
+import QuoteDeleteConfirmModal from "../../components/admin/QuoteDeleteConfirmModal.jsx";
 import {
   QUOTE_CATEGORY_OPTIONS,
   quoteCategoryLabel,
@@ -23,7 +24,7 @@ function sortQuotes(list) {
   });
 }
 
-/** Một trang quản lý quote: lọc, bảng, thêm/sửa qua modal, xóa có xác nhận. */
+/** Một trang quản lý quote: lọc, bảng, thêm/sửa / xóa đều qua modal xác nhận. */
 export default function AdminQuotesPage() {
   const [category, setCategory] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
@@ -34,6 +35,10 @@ export default function AdminQuotesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [formMode, setFormMode] = useState("create");
   const [editingQuote, setEditingQuote] = useState(null);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleteSaving, setDeleteSaving] = useState(false);
 
   const queryParams = useMemo(() => {
     const p = {};
@@ -80,17 +85,33 @@ export default function AdminQuotesPage() {
     setEditingQuote(null);
   };
 
-  const handleDelete = async (q) => {
-    const ok = window.confirm("Xóa quote này? Hành động không thể hoàn tác.");
-    if (!ok) return;
+  const openDeleteConfirm = (q) => {
+    setDeleteTarget(q);
+    setDeleteOpen(true);
+  };
+
+  const closeDeleteConfirm = () => {
+    if (!deleteSaving) {
+      setDeleteOpen(false);
+      setDeleteTarget(null);
+    }
+  };
+
+  const executeDelete = async () => {
+    if (!deleteTarget?._id) return;
+    setDeleteSaving(true);
     try {
-      await deleteAdminQuote(String(q._id));
+      await deleteAdminQuote(String(deleteTarget._id));
       toast.success("Đã xóa quote");
+      setDeleteOpen(false);
+      setDeleteTarget(null);
       await fetchQuotes();
     } catch (e) {
       toast.error("Không xóa được", {
         description: getAxiosErrorMessage(e),
       });
+    } finally {
+      setDeleteSaving(false);
     }
   };
 
@@ -218,7 +239,8 @@ export default function AdminQuotesPage() {
                       <button
                         type="button"
                         className="admin-quotes-btn admin-quotes-btn--danger"
-                        onClick={() => void handleDelete(q)}
+                        disabled={deleteSaving}
+                        onClick={() => openDeleteConfirm(q)}
                       >
                         Xóa
                       </button>
@@ -237,6 +259,14 @@ export default function AdminQuotesPage() {
         quote={editingQuote}
         onClose={closeForm}
         onSaved={fetchQuotes}
+      />
+
+      <QuoteDeleteConfirmModal
+        open={deleteOpen}
+        quote={deleteTarget}
+        deleting={deleteSaving}
+        onClose={closeDeleteConfirm}
+        onConfirm={executeDelete}
       />
     </div>
   );

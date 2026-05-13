@@ -15,7 +15,6 @@ import {
   mockTodayTaskDefs,
   mockTodayProgress,
   mockStreak,
-  mockNotifications,
 } from "../data/dashboardHomeMock.js";
 import {
   formatExamDateLong,
@@ -119,7 +118,6 @@ const DashboardHome = () => {
   return (
     <Layout
       userName={displayName}
-      notificationCount={mockNotifications}
       footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="dash-pin-board"

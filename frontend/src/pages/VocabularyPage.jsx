@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
-import { mockStreak, mockNotifications } from "../data/dashboardHomeMock.js";
+import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   VOCAB_ITEMS,
   buildLessonQuizQuestions,
@@ -216,7 +216,6 @@ export default function VocabularyPage() {
   return (
     <Layout
       userName={headerName}
-      notificationCount={mockNotifications}
       footerQuote={t("vocabStudyPage.motivateFooter")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"

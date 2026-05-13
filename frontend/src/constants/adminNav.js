@@ -25,12 +25,6 @@ export const ADMIN_SIDEBAR_SECTIONS = [
     titleKey: "adminLayout.sidebar.sectionContent",
     items: [
       {
-        id: "alphabet",
-        to: "/admin/alphabet",
-        iconSrc: "/assets/menu-icons/alphabet.png",
-        labelKey: "adminLayout.sidebar.alphabet",
-      },
-      {
         id: "kanji",
         to: "/admin/kanji",
         iconSrc: "/assets/menu-icons/kanji.png",
@@ -99,7 +93,7 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       {
         id: "quotes",
         to: "/admin/quotes",
-        icon: "quote",
+        icon: "user",
         labelKey: "adminLayout.sidebar.quotes",
       },
       {
@@ -107,6 +101,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         to: "/admin/analytics",
         iconSrc: "/assets/menu-icons/statistics.png",
         labelKey: "adminLayout.sidebar.analytics",
+      },
+      {
+        id: "notifications",
+        to: "/admin/notifications",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.notifications",
       },
       {
         id: "settings",

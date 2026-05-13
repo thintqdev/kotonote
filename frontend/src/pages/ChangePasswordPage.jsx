@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
-import {
-  mockStreak,
-  mockNotifications,
-} from "../data/dashboardHomeMock.js";
+import { mockStreak } from "../data/dashboardHomeMock.js";
 import "./AuthPage.css";
 import "./Profile.css";
 import "./DashboardHome.css";
@@ -77,7 +74,6 @@ const ChangePasswordPage = () => {
   return (
     <Layout
       userName={headerName}
-      notificationCount={mockNotifications}
       footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main change-password-page"

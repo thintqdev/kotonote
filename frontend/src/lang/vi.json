@@ -9,7 +9,8 @@
     "dialogLabel": "Chọn ngày trong lịch"
   },
   "common": {
-    "language": "Ngôn ngữ"
+    "language": "Ngôn ngữ",
+    "loading": "Đang tải…"
   },
   "lang": {
     "vi": "Tiếng Việt",
@@ -49,6 +50,7 @@
       "users": "Người dùng",
       "quotes": "Quotes",
       "analytics": "Thống kê",
+      "notifications": "Thông báo",
       "studioSettings": "Cài đặt"
     },
     "help": {
@@ -70,6 +72,125 @@
       "aria": "Menu tài khoản quản trị",
       "roleAdmin": "Quản trị viên"
     }
+  },
+  "adminNotificationsDemo": {
+    "title": "Thông báo & chiến dịch",
+    "lead": "Soạn nội dung broadcast và học tập, xem trước giao diện user.",
+    "leadFull": "Soạn nội dung, chọn gửi toàn bộ user active hoặc danh sách chọn, gửi ngay hoặc lên lịch. Lưu MongoDB + đẩy real-time qua Socket.IO (phòng admin).",
+    "bannerTitle": "Chế độ demo",
+    "bannerBody": "Chưa có API gửi tới người dùng. Trang này chỉ để thử tiêu đề, nội dung và liên kết (CTA) trước khi triển khai backend.",
+    "bannerApiTitle": "API & Socket",
+    "bannerApiBody": "POST /api/admin/notifications/campaigns tạo chiến dịch; gửi ngay hoặc scheduled. Một process Node chạy scheduler 30s — nhiều replica cần Redis/Bull.",
+    "sectionForm": "Soạn & gửi",
+    "sectionPreview": "Xem trước",
+    "sectionRecipients": "Người nhận",
+    "sectionSchedule": "Thời điểm",
+    "sectionCampaigns": "Chiến dịch gần đây",
+    "audienceAll": "Tất cả (active)",
+    "audienceSelected": "Chọn user",
+    "btnChooseRecipients": "Mở danh sách chọn user…",
+    "scheduleImmediate": "Gửi ngay",
+    "scheduleLater": "Lên lịch",
+    "btnReviewSend": "Xem lại & gửi…",
+    "socketConnected": "Socket: đã kết nối",
+    "socketDisconnected": "Socket: chưa kết nối",
+    "modalClose": "Đóng",
+    "modalCancel": "Hủy",
+    "recipientPickerTitle": "Chọn người nhận",
+    "recipientSearch": "Tìm theo tên hoặc email",
+    "recipientLoading": "Đang tải…",
+    "recipientSelectedCount": "Đã chọn: {{count}}",
+    "recipientPager": "Trang {{page}} / {{pages}} · {{total}} người",
+    "recipientPrev": "Trước",
+    "recipientNext": "Sau",
+    "recipientApply": "Áp dụng",
+    "confirmModalTitle": "Xác nhận gửi",
+    "confirmSend": "Xác nhận",
+    "confirmSending": "Đang gửi…",
+    "confirmAudienceAll": "Gửi cho tất cả user đang active.",
+    "confirmAudienceSelected": "Gửi cho {{count}} user đã chọn.",
+    "confirmImmediate": "Gửi ngay sau khi xác nhận.",
+    "confirmScheduledFor": "Lên lịch: {{when}}",
+    "validationRecipients": "Chọn ít nhất một user hoặc chuyển sang «Tất cả».",
+    "validationScheduleDate": "Chọn ngày giờ lên lịch.",
+    "toastCampaignSent": "Đã tạo và gửi chiến dịch.",
+    "toastCampaignScheduled": "Đã lên lịch chiến dịch.",
+    "toastCampaignError": "Không gửi được chiến dịch.",
+    "toastCampaignCancelled": "Đã hủy lịch gửi.",
+    "toastCancelError": "Không hủy được.",
+    "toastSocketCampaignSent": "Chiến dịch đã gửi (socket)",
+    "toastSocketCampaignSentDesc": "{{count}} người nhận — {{title}}",
+    "campaignsRefresh": "Tải lại danh sách",
+    "campaignsLoading": "Đang tải chiến dịch…",
+    "campaignsEmpty": "Chưa có chiến dịch nào.",
+    "campaignsLoadError": "Không tải được danh sách chiến dịch.",
+    "colCreated": "Tạo lúc",
+    "colTitle": "Tiêu đề",
+    "colStatus": "Trạng thái",
+    "colRecipients": "Người nhận",
+    "colScheduled": "Lịch gửi",
+    "cancelCampaign": "Hủy lịch",
+    "campaignStatus": {
+      "scheduled": "Đã lên lịch",
+      "processing": "Đang xử lý",
+      "sent": "Đã gửi",
+      "failed": "Thất bại",
+      "cancelled": "Đã hủy"
+    },
+    "fieldKind": "Loại thông báo",
+    "kind": {
+      "broadcast_maintenance": "Admin — Bảo trì / sự cố",
+      "broadcast_feature": "Admin — Tính năng mới",
+      "learning_streak": "Học tập — Nhắc streak",
+      "learning_new_content": "Học tập — Bài nội dung mới",
+      "learning_review_result": "Học tập — Kết quả ôn tập"
+    },
+    "fieldTitle": "Tiêu đề",
+    "fieldBody": "Nội dung",
+    "fieldLinkUrl": "Liên kết (tùy chọn)",
+    "fieldLinkLabel": "Nhãn nút / CTA (tùy chọn)",
+    "hintLink": "Nếu có URL, preview hiển thị dòng CTA; nhãn để trống thì dùng URL.",
+    "placeholderTitle": "(Chưa có tiêu đề)",
+    "placeholderBody": "(Chưa có nội dung)",
+    "btnFillSample": "Điền mẫu theo loại",
+    "btnReset": "Đặt lại",
+    "previewUnreadToggle": "Xem trước dạng chưa đọc",
+    "previewDropdown": "Khung giống dropdown header",
+    "previewPage": "Danh sách (giống trang thông báo)",
+    "previewNote": "Viền màu theo loại — đồng bộ với component thông báo trên app.",
+    "sampleTitle": {
+      "broadcast_maintenance": "Bảo trì hệ thống",
+      "broadcast_feature": "Có thêm chế độ ôn tập mới",
+      "learning_streak": "Đừng để mất streak hôm nay",
+      "learning_new_content": "Bài Kanji mới: Bài 12",
+      "learning_review_result": "Kết quả ôn tập vừa rồi"
+    },
+    "sampleBody": {
+      "broadcast_maintenance": "Kotonote tạm ngưng từ 02:00–03:00 (UTC+7) để nâng cấp máy chủ. Cảm ơn bạn đã chờ.",
+      "broadcast_feature": "Bạn có thể xem lại câu sai ngay sau mỗi phiên. Mở mục Luyện tập để thử.",
+      "learning_streak": "Bạn đã học 7 ngày liên tiếp. Học thêm 5 phút là giữ được streak.",
+      "learning_new_content": "12 từ mới và 4 cấu trúc đã được thêm vào lộ trình N4.",
+      "learning_review_result": "Đúng 18/20 câu. Khuyến nghị: ôn lại trợ từ は/が trong tuần này."
+    }
+  },
+  "adminSurvey": {
+    "title": "Tổng quan",
+    "total": "Tổng số khảo sát: {{count}}",
+    "kpiLabel": "Khảo sát đã gửi",
+    "loading": "Đang tải thống kê…",
+    "error": "Không tải được thống kê khảo sát.",
+    "retry": "Thử lại",
+    "empty": "Chưa có khảo sát nào trong hệ thống.",
+    "sections": {
+      "level": "Trình độ hiện tại",
+      "goal": "Mục tiêu học",
+      "daily": "Thời gian học mỗi ngày",
+      "discovery": "Biết app từ đâu",
+      "weak": "Phần còn yếu (số lượt chọn)"
+    },
+    "unspecified": "Chưa ghi nhận",
+    "countLabel": "Số lượng",
+    "pieFoot": "Tổng (các lát): {{total}}"
   },
   "header": {
     "today": "Hôm nay",
@@ -599,10 +720,12 @@
     "google": "Đăng nhập với Google",
     "noAccount": "Chưa có tài khoản?",
     "register": "Đăng ký",
+    "success": "Đăng nhập thành công",
     "errors": {
       "emailRequired": "Vui lòng nhập email",
       "emailInvalid": "Email không hợp lệ",
-      "passwordRequired": "Vui lòng nhập mật khẩu"
+      "passwordRequired": "Vui lòng nhập mật khẩu",
+      "submitFailed": "Đăng nhập không thành công"
     }
   },
   "register": {
@@ -622,15 +745,18 @@
     "privacy": "Chính sách bảo mật",
     "hasAccount": "Đã có tài khoản?",
     "login": "Đăng nhập",
+    "success": "Đăng ký thành công",
     "errors": {
       "username": "Vui lòng nhập tên người dùng",
+      "usernameShort": "Tên hiển thị tối thiểu 2 ký tự",
       "emailRequired": "Vui lòng nhập email",
       "emailInvalid": "Email không hợp lệ",
       "passwordRequired": "Vui lòng nhập mật khẩu",
       "passwordShort": "Mật khẩu tối thiểu 6 ký tự",
       "confirmRequired": "Vui lòng xác nhận mật khẩu",
       "confirmMismatch": "Mật khẩu không khớp",
-      "terms": "Bạn cần đồng ý điều khoản"
+      "terms": "Bạn cần đồng ý điều khoản",
+      "submitFailed": "Đăng ký không thành công"
     }
   },
   "survey": {
@@ -650,7 +776,14 @@
     "freeNote": "Lời nhắn (tuỳ chọn)",
     "freeNotePh": "Điều bạn muốn chia sẻ về việc học…",
     "submit": "Gửi khảo sát",
+    "next": "Tiếp theo",
+    "back": "Quay lại",
+    "stepProgress": "Bước {{current}} / {{total}}",
     "privacy": "Không cần thông tin định danh cá nhân.",
+    "successToast": "Đã lưu khảo sát.",
+    "errors": {
+      "submitFailed": "Không gửi được khảo sát"
+    },
     "levels": {
       "begin": "Mới bắt đầu",
       "n5": "Tương đương N5",
@@ -915,12 +1048,6 @@
     "MSG_504": "Sử dụng freeze thành công",
     "MSG_505": "Không còn freeze khả dụng",
     "MSG_506": "Chuỗi streak đã bị gián đoạn",
-    "MSG_601": "Tạo Kana thành công",
-    "MSG_602": "Cập nhật Kana thành công",
-    "MSG_603": "Xóa Kana thành công",
-    "MSG_604": "Lấy thông tin Kana thành công",
-    "MSG_605": "Không tìm thấy Kana",
-    "MSG_606": "Lấy danh sách Kana thành công",
     "MSG_701": "Tạo bộ từ vựng thành công",
     "MSG_702": "Cập nhật bộ từ vựng thành công",
     "MSG_703": "Xóa bộ từ vựng thành công",

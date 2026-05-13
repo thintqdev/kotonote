@@ -11,6 +11,13 @@ export const PROFILE = {
 	ME: '/profile/me',
 };
 
+/** Thông báo người dùng — `/api/notifications` */
+export const NOTIFICATIONS = {
+	LIST: '/notifications',
+	UNREAD_COUNT: '/notifications/unread-count',
+	markRead: (id) => `/notifications/${encodeURIComponent(id)}/read`,
+};
+
 /** Đọc deck/từ (public `/api/vocabulary/*`, cần JWT admin khi gọi qua adminApi) */
 export const VOCABULARY = {
 	DECKS: '/vocabulary/decks',
@@ -56,4 +63,16 @@ export const ADMIN_USERS = {
 	statistics: '/admin/users/statistics',
 	user: (id) => `/admin/users/${id}`,
 	status: (id) => `/admin/users/${id}/status`,
+	bulkStatus: '/admin/users/bulk/status',
+};
+
+/** Khảo sát — `/api/admin/surveys` */
+export const ADMIN_SURVEYS = {
+	stats: '/admin/surveys/stats',
+};
+
+/** Thông báo / chiến dịch — `/api/admin/notifications` */
+export const ADMIN_NOTIFICATIONS = {
+	campaigns: '/admin/notifications/campaigns',
+	campaignCancel: (id) => `/admin/notifications/campaigns/${encodeURIComponent(id)}/cancel`,
 };

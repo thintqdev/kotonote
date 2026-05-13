@@ -12,6 +12,15 @@ export async function login(credentials) {
 }
 
 /**
+ * @param {{ name: string, email: string, password: string }} payload
+ * @returns {Promise<{ user: object, token: string }>}
+ */
+export async function register(payload) {
+	const body = await api.post(AUTH.REGISTER, payload);
+	return getApiData(body);
+}
+
+/**
  * @param {import('axios').AxiosRequestConfig} [axiosConfig]
  * @returns {Promise<{ user: object }>}
  */

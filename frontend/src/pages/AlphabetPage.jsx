@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
-import { mockStreak, mockNotifications } from "../data/dashboardHomeMock.js";
+import { mockStreak } from "../data/dashboardHomeMock.js";
 import KanaStrokeAnimation from "../components/alphabet/KanaStrokeAnimation.jsx";
 import AlphaPracticePad from "../components/alphabet/AlphaPracticePad.jsx";
 import {
@@ -122,7 +122,6 @@ export default function AlphabetPage() {
   return (
     <Layout
       userName={headerName}
-      notificationCount={mockNotifications}
       footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash alpha-dash"

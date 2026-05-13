@@ -7,6 +7,7 @@ import { surveySchema } from '../../validators/surveyValidator.js';
 const router = express.Router();
 
 // User survey routes (require authentication)
+router.get('/me/status', authenticate, surveyController.getMySurveyStatus);
 router.post('/', authenticate, validate(surveySchema), surveyController.submitSurvey);
 router.get('/me', authenticate, surveyController.getMySurvey);
 

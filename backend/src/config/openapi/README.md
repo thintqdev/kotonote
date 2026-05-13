@@ -14,7 +14,6 @@ openapi/
 │   ├── surveys.js       # Survey endpoints
 │   ├── quotes.js        # Quote endpoints
 │   ├── vocabulary.js    # Vocabulary endpoints
-│   ├── kana.js          # Kana endpoints
 │   ├── kanji.js         # Kanji endpoints
 │   ├── ai.js            # AI generation endpoints
 │   ├── streaks.js       # Streak tracking endpoints
@@ -124,7 +123,6 @@ Use these shared schemas:
 - `{ $ref: '#/components/schemas/Quote' }` - Quote object
 - `{ $ref: '#/components/schemas/Survey' }` - Survey object
 - `{ $ref: '#/components/schemas/Streak' }` - Streak object
-- `{ $ref: '#/components/schemas/Kana' }` - Kana object
 
 ## Security
 
@@ -150,7 +148,6 @@ Use consistent tags for grouping:
 - `Survey` - Survey endpoints
 - `Vocabulary` - Public vocabulary endpoints
 - `Kanji` - Public kanji endpoints
-- `Kana` - Public kana endpoints
 - `Quotes` - Public quote endpoints
 - `Streaks` - Streak tracking endpoints
 - `Admin - User Management` - Admin user management

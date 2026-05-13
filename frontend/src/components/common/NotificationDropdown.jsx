@@ -9,6 +9,7 @@ function NotificationDropdown({
   isOpen,
   notifications,
   onClose,
+  onSelectNotification,
   viewAllTo = "/notifications",
 }) {
   const { t } = useTranslation();
@@ -51,7 +52,10 @@ function NotificationDropdown({
                 <NotificationItem
                   notif={notif}
                   unreadLabel={unreadLabel}
-                  onClick={onClose}
+                  onClick={() => {
+                    onSelectNotification?.(notif);
+                    onClose();
+                  }}
                 />
               </li>
             ))}
@@ -77,13 +81,14 @@ NotificationDropdown.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
-      titleKey: PropTypes.string.isRequired,
-      messageKey: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      message: PropTypes.string.isRequired,
       timestamp: PropTypes.instanceOf(Date).isRequired,
       read: PropTypes.bool,
     }),
   ).isRequired,
   onClose: PropTypes.func.isRequired,
+  onSelectNotification: PropTypes.func,
   viewAllTo: PropTypes.string,
 };
 

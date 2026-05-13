@@ -80,8 +80,56 @@ export const surveyPaths = {
 				},
 			},
 		},
+	},
+	'/api/surveys/me': {
 		get: {
 			tags: ['Survey'],
+			summary: 'Get my survey',
+			description: 'Get current user survey',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Survey retrieved successfully',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_303' },
+									data: {
+										type: 'object',
+										properties: {
+											survey: { $ref: '#/components/schemas/Survey' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'404': {
+					description: 'Survey not found',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
+	'/api/admin/surveys': {
+		get: {
+			tags: ['Survey - Admin'],
 			summary: 'Get all surveys (Admin only)',
 			description: 'Get all user surveys with optional filters',
 			security: [{ bearerAuth: [] }],
@@ -143,57 +191,12 @@ export const surveyPaths = {
 			},
 		},
 	},
-	'/api/surveys/me': {
+	'/api/admin/surveys/stats': {
 		get: {
-			tags: ['Survey'],
-			summary: 'Get my survey',
-			description: 'Get current user survey',
-			security: [{ bearerAuth: [] }],
-			responses: {
-				'200': {
-					description: 'Survey retrieved successfully',
-					content: {
-						'application/json': {
-							schema: {
-								type: 'object',
-								properties: {
-									success: { type: 'boolean', example: true },
-									messageCode: { type: 'string', example: 'MSG_303' },
-									data: {
-										type: 'object',
-										properties: {
-											survey: { $ref: '#/components/schemas/Survey' },
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-				'404': {
-					description: 'Survey not found',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
-				'401': {
-					description: 'Unauthorized',
-					content: {
-						'application/json': {
-							schema: { $ref: '#/components/schemas/Error' },
-						},
-					},
-				},
-			},
-		},
-	},
-	'/api/surveys/stats': {
-		get: {
-			tags: ['Survey'],
+			tags: ['Survey - Admin'],
 			summary: 'Get survey statistics (Admin only)',
-			description: 'Get aggregated survey statistics',
+			description:
+				'Aggregated counts per dimension for charts: byLevel, byGoal, byDailyTime, byDiscovery, byWeakArea. Each array is ordered and includes zeros.',
 			security: [{ bearerAuth: [] }],
 			responses: {
 				'200': {
@@ -208,14 +211,7 @@ export const surveyPaths = {
 									data: {
 										type: 'object',
 										properties: {
-											stats: {
-												type: 'object',
-												properties: {
-													totalSurveys: { type: 'number', example: 150 },
-													levelDistribution: { type: 'array', items: { type: 'string' } },
-													goalDistribution: { type: 'array', items: { type: 'string' } },
-												},
-											},
+											stats: { $ref: '#/components/schemas/SurveyStatistics' },
 										},
 									},
 								},

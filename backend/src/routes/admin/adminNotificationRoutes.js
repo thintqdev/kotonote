@@ -1,52 +1,49 @@
 import express from 'express';
 import * as notificationController from '../../controllers/notificationController.js';
 import { validate } from '../../middlewares/validate.js';
-import { sendNotificationSchema, broadcastNotificationSchema } from '../../validators/notificationValidator.js';
+import {
+	sendNotificationSchema,
+	sendBatchNotificationSchema,
+	createCampaignSchema,
+	broadcastNotificationSchema,
+} from '../../validators/notificationValidator.js';
 
 const router = express.Router();
 
-// ============ ADMIN NOTIFICATION ROUTES ============
+router.get(
+	'/campaigns',
+	notificationController.listCampaigns
+);
+router.post(
+	'/campaigns',
+	validate(createCampaignSchema),
+	notificationController.createNotificationCampaign
+);
+router.patch(
+	'/campaigns/:campaignId/cancel',
+	notificationController.cancelNotificationCampaign
+);
 
-/**
- * @route   GET /api/admin/notifications
- * @desc    Get all notifications (Admin)
- * @access  Admin
- */
-router.get('/', notificationController.getAllNotifications);
-
-/**
- * @route   GET /api/admin/notifications/stats
- * @desc    Get notification statistics (Admin)
- * @access  Admin
- */
 router.get('/stats', notificationController.getAdminStats);
 
-/**
- * @route   POST /api/admin/notifications/send
- * @desc    Send notification to specific user (Admin)
- * @access  Admin
- */
-router.post('/send', validate(sendNotificationSchema), notificationController.sendNotification);
+router.get('/', notificationController.getAllNotifications);
 
-/**
- * @route   POST /api/admin/notifications/send-batch
- * @desc    Send notification to multiple users (Admin)
- * @access  Admin
- */
-router.post('/send-batch', validate(sendNotificationSchema), notificationController.sendBatchNotifications);
+router.post(
+	'/send',
+	validate(sendNotificationSchema),
+	notificationController.sendNotification
+);
+router.post(
+	'/send-batch',
+	validate(sendBatchNotificationSchema),
+	notificationController.sendBatchNotifications
+);
+router.post(
+	'/broadcast',
+	validate(broadcastNotificationSchema),
+	notificationController.broadcastNotification
+);
 
-/**
- * @route   POST /api/admin/notifications/broadcast
- * @desc    Broadcast notification to all users (Admin)
- * @access  Admin
- */
-router.post('/broadcast', validate(broadcastNotificationSchema), notificationController.broadcastNotification);
-
-/**
- * @route   DELETE /api/admin/notifications/:id
- * @desc    Delete notification (Admin)
- * @access  Admin
- */
 router.delete('/:id', notificationController.deleteNotificationAdmin);
 
 export default router;

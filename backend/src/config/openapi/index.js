@@ -4,7 +4,6 @@ import { userPaths } from './paths/users.js';
 import { surveyPaths } from './paths/surveys.js';
 import { quotePaths } from './paths/quotes.js';
 import { vocabularyPaths } from './paths/vocabulary.js';
-import { kanaPaths } from './paths/kana.js';
 import { kanjiPaths } from './paths/kanji.js';
 import { aiPaths } from './paths/ai.js';
 import { streakPaths } from './paths/streaks.js';
@@ -65,7 +64,6 @@ export const openApiSpec = {
 		...surveyPaths,
 		...quotePaths,
 		...vocabularyPaths,
-		...kanaPaths,
 		...kanjiPaths,
 		...aiPaths,
 		...streakPaths,

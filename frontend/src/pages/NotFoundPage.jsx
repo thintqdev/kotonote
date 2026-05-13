@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
-import { mockStreak, mockNotifications } from "../data/dashboardHomeMock.js";
+import { mockStreak } from "../data/dashboardHomeMock.js";
 import "./DashboardHome.css";
 import "./NotFoundPage.css";
 
@@ -20,7 +20,6 @@ export default function NotFoundPage() {
   return (
     <Layout
       userName={headerName}
-      notificationCount={mockNotifications}
       footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="not-found-dash"

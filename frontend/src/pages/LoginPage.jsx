@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import { useAuth } from '../hooks/useAuth.jsx';
+import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
 const LoginPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -16,6 +22,9 @@ const LoginPage = () => {
     setLoginData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+    if (errors.general) {
+      setErrors((prev) => ({ ...prev, general: '' }));
     }
   };
 
@@ -32,8 +41,20 @@ const LoginPage = () => {
     e.preventDefault();
     if (!validate()) return;
     setIsSubmitting(true);
+    setErrors((prev) => ({ ...prev, general: '' }));
     try {
-      await new Promise((r) => setTimeout(r, 800));
+      await login(loginData.email.trim(), loginData.password, rememberMe);
+      toast.success(t('login.success'));
+      const from = location.state?.from?.pathname;
+      const safePath =
+        typeof from === 'string' && from.startsWith('/') && !from.startsWith('/login')
+          ? from
+          : '/';
+      navigate(safePath, { replace: true });
+    } catch (err) {
+      const msg = getAxiosErrorMessage(err);
+      setErrors((prev) => ({ ...prev, general: msg }));
+      toast.error(t('login.errors.submitFailed'), { description: msg });
     } finally {
       setIsSubmitting(false);
     }
@@ -52,6 +73,11 @@ const LoginPage = () => {
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          {errors.general ? (
+            <div className="field-group" role="alert">
+              <span className="error-msg">{errors.general}</span>
+            </div>
+          ) : null}
           <div className="field-group">
             <label className="field-label" htmlFor="login-email">
               <span className="auth-label-text">{t('login.email')}</span>

@@ -76,6 +76,20 @@ export const updateUserStatus = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @desc    Cập nhật trạng thái nhiều user (admin)
+ * @route   PATCH /api/admin/users/bulk/status
+ * @access  Admin
+ */
+export const bulkUpdateUsersStatus = asyncHandler(async (req, res) => {
+	const { userIds, status } = req.body;
+	const actorId = req.user?._id != null ? String(req.user._id) : undefined;
+
+	const result = await userService.bulkUpdateUsersStatus(userIds, status, actorId);
+
+	return apiSuccess(res, result, USER.UPDATED, 200);
+});
+
+/**
  * @desc    Get user statistics (admin)
  * @route   GET /api/admin/users/statistics
  * @access  Admin

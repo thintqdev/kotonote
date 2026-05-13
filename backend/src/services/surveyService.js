@@ -36,6 +36,12 @@ export const getUserSurvey = async (userId) => {
 	return survey;
 };
 
+/** Có khảo sát hay chưa — luôn 200 (không ném 404). */
+export const getSurveyCompletionStatus = async (userId) => {
+	const survey = await surveyRepository.findSurveyByUserId(userId);
+	return { completed: Boolean(survey) };
+};
+
 export const getAllSurveys = async (filters) => {
 	return await surveyRepository.getAllSurveys(filters);
 };

@@ -9,7 +9,8 @@
     "dialogLabel": "日付を選ぶ"
   },
   "common": {
-    "language": "言語"
+    "language": "言語",
+    "loading": "読み込み中…"
   },
   "lang": {
     "vi": "Tiếng Việt",
@@ -49,6 +50,7 @@
       "users": "ユーザー",
       "quotes": "引用",
       "analytics": "統計",
+      "notifications": "通知",
       "studioSettings": "設定"
     },
     "help": {
@@ -71,6 +73,126 @@
       "aria": "管理者アカウントメニュー",
       "roleAdmin": "管理者"
     }
+  },
+  "adminNotificationsDemo": {
+    "title": "通知・キャンペーン",
+    "lead": "管理者向けと学習向けの文案を試し、ユーザー画面のプレビューができます。",
+    "leadFull": "内容を作成し、全員（active）か選択ユーザーのみ、即時送信か予約送信を選べます。MongoDB に保存し、Socket.IO でユーザーへリアルタイム配信（管理者ルームにも通知）。",
+    "bannerTitle": "デモ表示",
+    "bannerBody": "送信APIは未実装です。本番前にタイトル・本文・リンク（CTA）の見え方を確認するためのページです。",
+    "bannerApiTitle": "API と Socket",
+    "bannerApiBody": "POST /api/admin/notifications/campaigns でキャンペーン作成。即時または予約。単一 Node で 30 秒スケジューラ — 複数台なら Redis/Bull を検討。",
+    "sectionForm": "作成・送信",
+    "sectionPreview": "プレビュー",
+    "sectionRecipients": "宛先",
+    "sectionSchedule": "送信タイミング",
+    "sectionCampaigns": "最近のキャンペーン",
+    "audienceAll": "全員（active）",
+    "audienceSelected": "ユーザーを選択",
+    "btnChooseRecipients": "ユーザーリストを開く…",
+    "scheduleImmediate": "今すぐ送信",
+    "scheduleLater": "予約",
+    "btnReviewSend": "確認して送信…",
+    "socketConnected": "Socket: 接続済み",
+    "socketDisconnected": "Socket: 未接続",
+    "modalClose": "閉じる",
+    "modalCancel": "キャンセル",
+    "recipientPickerTitle": "宛先ユーザーを選択",
+    "recipientSearch": "名前またはメールで検索",
+    "recipientLoading": "読み込み中…",
+    "recipientSelectedCount": "選択: {{count}} 件",
+    "recipientPager": "{{page}} / {{pages}} ページ · {{total}} 名",
+    "recipientPrev": "前へ",
+    "recipientNext": "次へ",
+    "recipientApply": "適用",
+    "confirmModalTitle": "送信の確認",
+    "confirmSend": "送信する",
+    "confirmSending": "送信中…",
+    "confirmAudienceAll": "アクティブな全ユーザーに送信します。",
+    "confirmAudienceSelected": "選択した {{count}} 名に送信します。",
+    "confirmImmediate": "確認後すぐに送信します。",
+    "confirmScheduledFor": "予約: {{when}}",
+    "validationRecipients": "ユーザーを選ぶか、「全員」に切り替えてください。",
+    "validationScheduleDate": "予約の日時を選んでください。",
+    "toastCampaignSent": "キャンペーンを送信しました。",
+    "toastCampaignScheduled": "キャンペーンを予約しました。",
+    "toastCampaignError": "キャンペーンを送信できませんでした。",
+    "toastCampaignCancelled": "予約を取り消しました。",
+    "toastCancelError": "取り消しに失敗しました。",
+    "toastSocketCampaignSent": "キャンペーン送信（Socket）",
+    "toastSocketCampaignSentDesc": "{{count}} 名 — {{title}}",
+    "campaignsRefresh": "一覧を再読込",
+    "campaignsLoading": "読み込み中…",
+    "campaignsEmpty": "キャンペーンはまだありません。",
+    "campaignsLoadError": "一覧を読み込めませんでした。",
+    "colCreated": "作成日時",
+    "colTitle": "タイトル",
+    "colStatus": "状態",
+    "colRecipients": "宛先数",
+    "colScheduled": "予約日時",
+    "cancelCampaign": "予約取消",
+    "campaignStatus": {
+      "scheduled": "予約済み",
+      "processing": "処理中",
+      "sent": "送信済み",
+      "failed": "失敗",
+      "cancelled": "取消済み"
+    },
+    "fieldKind": "通知の種類",
+    "kind": {
+      "broadcast_maintenance": "管理者 — メンテナンス",
+      "broadcast_feature": "管理者 — 新機能",
+      "learning_streak": "学習 — ストリーク",
+      "learning_new_content": "学習 — 新しい教材",
+      "learning_review_result": "学習 — 復習の結果"
+    },
+    "fieldTitle": "タイトル",
+    "fieldBody": "本文",
+    "fieldLinkUrl": "リンク（任意）",
+    "fieldLinkLabel": "ボタン文言 / CTA（任意）",
+    "hintLink": "URLがあるときプレビューにCTA行を表示。ラベルが空ならURLを表示します。",
+    "placeholderTitle": "（タイトルなし）",
+    "placeholderBody": "（本文なし）",
+    "btnFillSample": "種類に合わせた例文",
+    "btnReset": "リセット",
+    "previewUnreadToggle": "未読として表示",
+    "previewDropdown": "ヘッダー通知ドロップダウン風",
+    "previewPage": "一覧（通知ページ風）",
+    "previewNote": "左の色線は種類ごと — アプリの通知コンポーネントと同じ区分です。",
+    "sampleTitle": {
+      "broadcast_maintenance": "システムメンテナンス",
+      "broadcast_feature": "復習モードを追加しました",
+      "learning_streak": "今日のストリークを守ろう",
+      "learning_new_content": "新しい漢字レッスン：第12課",
+      "learning_review_result": "直近の復習結果"
+    },
+    "sampleBody": {
+      "broadcast_maintenance": "02:00–03:00（UTC+7）にサーバー保守のため一時停止します。ご理解ください。",
+      "broadcast_feature": "各セッション後に誤答だけを振り返れます。練習タブからお試しください。",
+      "learning_streak": "7日連続学習中です。あと5分でストリーク維持。",
+      "learning_new_content": "N4向けに新語12語と文型4つを追加しました。",
+      "learning_review_result": "20問中18問正解。助詞「は／が」の復習をおすすめします。"
+    }
+  },
+  "adminSurvey": {
+    "title": "アンケート概要",
+    "subtitle": "送信済みアンケートの集計（API /api/admin/surveys/stats）。",
+    "total": "回答数: {{count}}",
+    "kpiLabel": "件の回答",
+    "loading": "統計を読み込み中…",
+    "error": "アンケート統計を読み込めませんでした。",
+    "retry": "再試行",
+    "empty": "まだアンケート回答がありません。",
+    "sections": {
+      "level": "現在のレベル",
+      "goal": "学習の目標",
+      "daily": "1日の学習時間",
+      "discovery": "アプリを知ったきっかけ",
+      "weak": "苦手分野（選択回数）"
+    },
+    "unspecified": "未回答",
+    "countLabel": "件数",
+    "pieFoot": "合計（スライス合算）: {{total}}"
   },
   "header": {
     "today": "今日",
@@ -600,10 +722,12 @@
     "google": "Googleでログイン",
     "noAccount": "アカウントをお持ちではありませんか？",
     "register": "新規登録",
+    "success": "ログインしました",
     "errors": {
       "emailRequired": "メールを入力してください",
       "emailInvalid": "メールの形式が正しくありません",
-      "passwordRequired": "パスワードを入力してください"
+      "passwordRequired": "パスワードを入力してください",
+      "submitFailed": "ログインに失敗しました"
     }
   },
   "register": {
@@ -623,15 +747,18 @@
     "privacy": "プライバシーポリシー",
     "hasAccount": "すでにアカウントをお持ちですか？",
     "login": "ログイン",
+    "success": "登録が完了しました",
     "errors": {
       "username": "ユーザー名を入力してください",
+      "usernameShort": "表示名は2文字以上にしてください",
       "emailRequired": "メールを入力してください",
       "emailInvalid": "メールの形式が正しくありません",
       "passwordRequired": "パスワードを入力してください",
       "passwordShort": "パスワードは6文字以上にしてください",
       "confirmRequired": "確認用パスワードを入力してください",
       "confirmMismatch": "パスワードが一致しません",
-      "terms": "利用規約に同意してください"
+      "terms": "利用規約に同意してください",
+      "submitFailed": "登録に失敗しました"
     }
   },
   "survey": {
@@ -651,7 +778,14 @@
     "freeNote": "コメント（任意）",
     "freeNotePh": "学習について伝えたいこと…",
     "submit": "送信する",
+    "next": "次へ",
+    "back": "戻る",
+    "stepProgress": "ステップ {{current}} / {{total}}",
     "privacy": "個人を特定する情報は不要です。",
+    "successToast": "アンケートを保存しました。",
+    "errors": {
+      "submitFailed": "アンケートを送信できませんでした"
+    },
     "levels": {
       "begin": "これから始める",
       "n5": "N5相当",
@@ -916,12 +1050,6 @@
     "MSG_504": "フリーズ使用成功",
     "MSG_505": "利用可能なフリーズがありません",
     "MSG_506": "ストリークが途切れました",
-    "MSG_601": "かな作成成功",
-    "MSG_602": "かな更新成功",
-    "MSG_603": "かな削除成功",
-    "MSG_604": "かな情報取得成功",
-    "MSG_605": "かなが見つかりません",
-    "MSG_606": "かなリスト取得成功",
     "MSG_701": "語彙デッキ作成成功",
     "MSG_702": "語彙デッキ更新成功",
     "MSG_703": "語彙デッキ削除成功",

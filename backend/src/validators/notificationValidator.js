@@ -30,7 +30,7 @@ export const sendNotificationSchema = Joi.object({
 	actionType: Joi.string()
 		.valid('none', 'view_item', 'open_page', 'download', 'confirm', 'dismiss')
 		.default('none'),
-	actionData: Joi.object().messages({
+	actionData: Joi.object().allow(null).messages({
 		'object.base': 'Action data must be an object',
 	}),
 	expiresAt: Joi.date().messages({
@@ -39,6 +39,59 @@ export const sendNotificationSchema = Joi.object({
 	metadata: Joi.object().messages({
 		'object.base': 'Metadata must be an object',
 	}),
+});
+
+/** Gửi cho nhiều user — POST /api/admin/notifications/send-batch */
+export const sendBatchNotificationSchema = Joi.object({
+	userIds: Joi.array().items(Joi.string()).min(1).required().messages({
+		'array.min': 'At least one user ID is required',
+	}),
+	title: Joi.string().required().max(200).messages({
+		'string.empty': 'Title is required',
+		'string.max': 'Title must not exceed 200 characters',
+	}),
+	message: Joi.string().required().max(1000).messages({
+		'string.empty': 'Message is required',
+		'string.max': 'Message must not exceed 1000 characters',
+	}),
+	description: Joi.string().max(2000).messages({
+		'string.max': 'Description must not exceed 2000 characters',
+	}),
+	type: Joi.string()
+		.valid('info', 'success', 'warning', 'error', 'task_update', 'system', 'admin_action')
+		.default('info'),
+	category: Joi.string()
+		.valid('vocabulary', 'kanji', 'quiz', 'streak', 'achievement', 'system', 'admin', 'other')
+		.default('other'),
+	priority: Joi.string()
+		.valid('low', 'normal', 'high', 'urgent')
+		.default('normal'),
+	actionType: Joi.string()
+		.valid('none', 'view_item', 'open_page', 'download', 'confirm', 'dismiss')
+		.default('none'),
+	actionData: Joi.object().allow(null),
+	metadata: Joi.object().messages({
+		'object.base': 'Metadata must be an object',
+	}),
+});
+
+/** Chiến dịch admin (gửi ngay hoặc lên lịch) — POST /api/admin/notifications/campaigns */
+export const createCampaignSchema = Joi.object({
+	title: Joi.string().required().max(200),
+	message: Joi.string().required().max(1000),
+	type: Joi.string()
+		.valid('info', 'success', 'warning', 'error', 'task_update', 'system', 'admin_action')
+		.default('info'),
+	category: Joi.string()
+		.valid('vocabulary', 'kanji', 'quiz', 'streak', 'achievement', 'system', 'admin', 'other')
+		.default('admin'),
+	audience: Joi.string().valid('all', 'selected').required(),
+	userIds: Joi.array().items(Joi.string()).default([]),
+	scheduledAt: Joi.date().allow(null, ''),
+	actionType: Joi.string()
+		.valid('none', 'view_item', 'open_page', 'download', 'confirm', 'dismiss')
+		.default('none'),
+	actionData: Joi.object().allow(null),
 });
 
 export const broadcastNotificationSchema = Joi.object({
@@ -65,6 +118,10 @@ export const broadcastNotificationSchema = Joi.object({
 	userIds: Joi.array().items(Joi.string()).messages({
 		'array.base': 'User IDs must be an array',
 	}),
+	actionType: Joi.string()
+		.valid('none', 'view_item', 'open_page', 'download', 'confirm', 'dismiss')
+		.default('none'),
+	actionData: Joi.object().allow(null),
 	metadata: Joi.object().messages({
 		'object.base': 'Metadata must be an object',
 	}),
@@ -87,6 +144,8 @@ export const getNotificationsSchema = Joi.object({
 
 export default {
 	sendNotificationSchema,
+	sendBatchNotificationSchema,
+	createCampaignSchema,
 	broadcastNotificationSchema,
 	markAsReadSchema,
 	getNotificationsSchema,

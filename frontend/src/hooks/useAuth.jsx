@@ -40,12 +40,23 @@ export const AuthProvider = ({ children }) => {
 		return () => ac.abort();
 	}, []);
 
-	const login = async (email, password) => {
+	const login = async (email, password, remember = true) => {
 		const { user: nextUser, token } = await authService.login({
 			email,
 			password,
 		});
-		setUserToken(token);
+		setUserToken(token, remember);
+		setUser(nextUser);
+		return { user: nextUser, token };
+	};
+
+	const register = async (name, email, password, remember = true) => {
+		const { user: nextUser, token } = await authService.register({
+			name,
+			email,
+			password,
+		});
+		setUserToken(token, remember);
 		setUser(nextUser);
 		return { user: nextUser, token };
 	};
@@ -56,7 +67,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, loading, login, logout }}>
+		<AuthContext.Provider value={{ user, loading, login, register, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -4,16 +4,16 @@ import { formatTimeAgo } from "../../utils/formatTimeAgo.js";
 import "./NotificationItem.css";
 
 /**
- * Một dòng thông báo — dùng chung dropdown header và trang /notifications.
- * @param {{ id: string, type: string, titleKey: string, messageKey: string, timestamp: Date, read?: boolean }} notif
+ * Một dòng thông báo — dropdown header và trang /notifications.
+ * @param {{ id: string, type: string, title: string, message: string, timestamp: Date, read?: boolean }} notif
  */
 function NotificationItem({ notif, unreadLabel, onClick }) {
   const { t } = useTranslation();
   const unread = !notif.read;
 
   const ariaLabel = unread
-    ? `${t(notif.titleKey)} — ${unreadLabel}`
-    : t(notif.titleKey);
+    ? `${notif.title} — ${unreadLabel}`
+    : notif.title;
 
   return (
     <button
@@ -30,8 +30,8 @@ function NotificationItem({ notif, unreadLabel, onClick }) {
             <span className="notif-item__dot" aria-hidden />
           ) : null}
           <span className="notif-item__content">
-            <span className="notif-item__title">{t(notif.titleKey)}</span>
-            <span className="notif-item__message">{t(notif.messageKey)}</span>
+            <span className="notif-item__title">{notif.title}</span>
+            <span className="notif-item__message">{notif.message}</span>
           </span>
         </span>
       </span>
@@ -51,8 +51,8 @@ NotificationItem.propTypes = {
   notif: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    titleKey: PropTypes.string.isRequired,
-    messageKey: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date).isRequired,
     read: PropTypes.bool,
   }).isRequired,

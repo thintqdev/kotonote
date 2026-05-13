@@ -1,6 +1,5 @@
 import express from 'express';
 import quoteRoutes from './quoteRoutes.js';
-import kanaRoutes from './kanaRoutes.js';
 import vocabularyRoutes from './vocabularyRoutes.js';
 import streakRoutes from './streakRoutes.js';
 import surveyRoutes from './surveyRoutes.js';
@@ -11,7 +10,6 @@ const router = express.Router();
 
 // Mount routes (both public and authenticated user routes)
 router.use('/quotes', quoteRoutes);
-router.use('/kana', kanaRoutes);
 router.use('/vocabulary', vocabularyRoutes);
 router.use('/kanji', kanjiRoutes);
 router.use('/streaks', streakRoutes);

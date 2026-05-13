@@ -84,6 +84,32 @@
   border-left: 3px solid #50e3c2;
 }
 
+/* Loại từ API backend (enum type) */
+.notif-item.notif-item--info,
+.notif-item.notif-item--system {
+  border-left: 3px solid #4a90e2;
+}
+
+.notif-item.notif-item--success {
+  border-left: 3px solid #7ed321;
+}
+
+.notif-item.notif-item--warning {
+  border-left: 3px solid #f5a623;
+}
+
+.notif-item.notif-item--error {
+  border-left: 3px solid #d0021b;
+}
+
+.notif-item.notif-item--task_update {
+  border-left: 3px solid #9013fe;
+}
+
+.notif-item.notif-item--admin_action {
+  border-left: 3px solid #bd10e0;
+}
+
 .notif-item__body {
   display: block;
   min-width: 0;

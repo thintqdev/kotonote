@@ -1,0 +1,208 @@
+/* Tổng quan / biểu đồ khảo sát admin (Recharts) */
+
+.admin-overview {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.admin-overview-title {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--admin-ink);
+}
+
+.admin-overview-lead {
+  margin: 0 0 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+  line-height: 1.45;
+}
+
+.admin-overview-status {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+}
+
+.admin-overview-status--error {
+  color: #8a3a32;
+}
+
+.admin-overview-error-detail {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--admin-ink-soft);
+}
+
+.admin-overview-error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.admin-overview-retry {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(90, 107, 56, 0.38);
+  background: rgba(255, 252, 246, 0.95);
+  color: var(--admin-sage-deep);
+}
+
+.admin-overview-retry:hover {
+  background: rgba(107, 126, 95, 0.12);
+}
+
+.admin-overview-kpi {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 22px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 252, 246, 0.98) 0%,
+    rgba(232, 238, 228, 0.45) 100%
+  );
+  box-shadow: 0 6px 22px rgba(42, 38, 32, 0.06);
+}
+
+.admin-overview-kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--admin-sage-deep);
+}
+
+.admin-overview-kpi-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--admin-ink-soft);
+}
+
+.admin-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .admin-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-overview-row-dw {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.admin-overview-row-dw .admin-survey-chart--pie {
+  max-width: none;
+  width: 100%;
+}
+
+.admin-overview-row-dw .admin-survey-chart--split-cell {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .admin-overview-row-dw {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-survey-chart--wide {
+  grid-column: 1 / -1;
+}
+
+.admin-survey-chart--pie .admin-survey-chart-viz--pie {
+  min-height: 280px;
+}
+
+.admin-survey-pie-total {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+}
+
+.admin-survey-chart--radar .admin-survey-chart-viz--radar {
+  min-height: 300px;
+}
+
+.admin-survey-chart--column .admin-survey-chart-viz--column {
+  min-height: 300px;
+}
+
+.admin-survey-chart {
+  padding: 16px 18px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--admin-border);
+  background: rgba(255, 252, 246, 0.92);
+  box-shadow: 0 4px 20px rgba(42, 38, 32, 0.05);
+}
+
+.admin-survey-chart-title {
+  margin: 0 0 4px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--admin-ink);
+}
+
+.admin-survey-chart-viz {
+  width: 100%;
+  min-height: 120px;
+}
+
+.admin-survey-chart-viz .recharts-surface {
+  overflow: visible;
+}
+
+.admin-survey-tooltip {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.22);
+  background: rgba(255, 252, 246, 0.98);
+  box-shadow: 0 8px 24px rgba(42, 38, 32, 0.12);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.admin-survey-tooltip-name {
+  font-weight: 700;
+  color: var(--admin-ink);
+  margin-bottom: 4px;
+}
+
+.admin-survey-tooltip-value {
+  color: var(--admin-ink-soft);
+  font-weight: 600;
+}
+
+.admin-survey-tooltip-value strong {
+  color: var(--admin-sage-deep);
+  font-weight: 800;
+}

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 import { USER_STATUS } from '../constants/userStatus.js';
 
@@ -88,6 +89,25 @@ export const updateUserStatus = async (userId, status) => {
 		updates,
 		{ new: true, runValidators: true }
 	).select('-password');
+};
+
+/**
+ * Cập nhật cùng một `status` cho nhiều user (chỉ các _id hợp lệ trong DB).
+ * @param {import('mongoose').Types.ObjectId[]} objectIds
+ * @param {string} status
+ * @returns {Promise<import('mongoose').mongodb.UpdateResult>}
+ */
+export const bulkUpdateUsersStatus = async (objectIds, status) => {
+	if (!objectIds?.length) {
+		return { matchedCount: 0, modifiedCount: 0 };
+	}
+	const filter = { _id: { $in: objectIds } };
+	const updateDoc =
+		status === USER_STATUS.ACTIVE
+			? { $set: { status, loginAttempts: 0 }, $unset: { lockUntil: 1 } }
+			: { $set: { status } };
+
+	return await User.updateMany(filter, updateDoc, { runValidators: true });
 };
 
 /**

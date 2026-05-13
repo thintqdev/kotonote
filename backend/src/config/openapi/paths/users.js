@@ -223,6 +223,96 @@ export const userPaths = {
 			},
 		},
 	},
+	'/api/admin/users/bulk/status': {
+		patch: {
+			tags: ['Admin - User Management'],
+			summary: 'Bulk update user status (Admin)',
+			description:
+				'Set the same status for many users. Invalid ObjectIds are ignored. The authenticated admin’s own user ID is never updated. Max 100 IDs per request.',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							required: ['userIds', 'status'],
+							properties: {
+								userIds: {
+									type: 'array',
+									items: { type: 'string' },
+									minItems: 1,
+									maxItems: 100,
+									description: 'MongoDB ObjectId strings (duplicates removed)',
+								},
+								status: {
+									type: 'string',
+									enum: ['active', 'locked', 'suspended'],
+									example: 'active',
+								},
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Bulk status update completed (see counts in payload)',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_202' },
+									data: {
+										type: 'object',
+										properties: {
+											status: { type: 'string', example: 'active' },
+											requested: { type: 'number', example: 5 },
+											eligibleIdCount: { type: 'number', example: 4 },
+											matchedCount: { type: 'number', example: 4 },
+											modifiedCount: { type: 'number', example: 4 },
+											notFoundIdCount: { type: 'number', example: 0 },
+											invalidFormatIds: {
+												type: 'array',
+												items: { type: 'string' },
+											},
+											skippedSelfCount: { type: 'number', example: 1 },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'400': {
+					description: 'Validation error',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+				'403': {
+					description: 'Forbidden - Admin only',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
 	'/api/admin/users/{id}': {
 		get: {
 			tags: ['Admin - User Management'],

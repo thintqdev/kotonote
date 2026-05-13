@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { SidebarCollapseProvider } from "../context/SidebarCollapseContext.jsx";
+import { useUserNotifications } from "../context/UserNotificationContext.jsx";
 import { Sidebar, Header, Footer } from "../components/common";
 import "./Layout.css";
 
@@ -10,12 +11,12 @@ import "./Layout.css";
 function Layout({
   children,
   userName,
-  notificationCount,
   footerQuote,
   streakDays,
   pageClassName = "",
   mainInnerClassName = "",
 }) {
+  const { unreadCount } = useUserNotifications();
   const pageClasses = ["dash-page", pageClassName].filter(Boolean).join(" ");
   const innerClasses = ["dash-main-inner", mainInnerClassName]
     .filter(Boolean)
@@ -28,10 +29,7 @@ function Layout({
         <div className={pageClasses}>
           <Sidebar streakDays={streakDays} />
           <div className="dash-main">
-            <Header
-              userName={userName}
-              notificationCount={notificationCount}
-            />
+            <Header userName={userName} notificationCount={unreadCount} />
             <div className={innerClasses}>
               {children}
               <Footer quote={footerQuote} />
@@ -46,7 +44,6 @@ function Layout({
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   userName: PropTypes.string.isRequired,
-  notificationCount: PropTypes.number.isRequired,
   footerQuote: PropTypes.string.isRequired,
   streakDays: PropTypes.number.isRequired,
   pageClassName: PropTypes.string,

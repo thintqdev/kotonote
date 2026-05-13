@@ -37,3 +37,39 @@ export const SURVEY_DISCOVERY = {
 	SEARCH: 'search',
 	OTHER: 'other',
 };
+
+/** Thứ tự cố định cho trục biểu đồ / bảng thống kê */
+export const SURVEY_LEVEL_KEYS = Object.freeze([
+	'begin',
+	'n5',
+	'n4',
+	'n3',
+	'n2up',
+]);
+export const SURVEY_GOAL_KEYS = Object.freeze([
+	'jlpt',
+	'travel',
+	'work',
+	'school',
+	'hobby',
+]);
+export const SURVEY_DAILY_TIME_KEYS = Object.freeze([
+	'lt15',
+	'15-30',
+	'30-60',
+	'gt60',
+]);
+export const SURVEY_WEAK_AREA_KEYS = Object.freeze([
+	'grammar',
+	'vocab',
+	'kanji',
+	'listen',
+	'read',
+]);
+export const SURVEY_DISCOVERY_KEYS = Object.freeze([
+	'friend',
+	'sns',
+	'search',
+	'other',
+	'unspecified',
+]);

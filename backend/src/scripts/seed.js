@@ -3,6 +3,7 @@ import connectDB from '../config/database.js';
 import seedQuotes from '../seeds/quoteSeeder.js';
 import seedAdmin from '../seeds/adminSeeder.js';
 import seedDemoUsers from '../seeds/userDemoSeeder.js';
+import seedSurveyDemo from '../seeds/surveyDemoSeeder.js';
 import seedKanji from '../seeds/kanjiSeeder.js';
 import seedVocabularyDemo from '../seeds/vocabularyDemoSeeder.js';
 
@@ -19,6 +20,7 @@ const runSeeder = async () => {
 		// Run seeders
 		await seedAdmin();
 		await seedDemoUsers();
+		await seedSurveyDemo();
 		await seedQuotes();
 		await seedKanji();
 		await seedVocabularyDemo();

@@ -8,29 +8,28 @@ import { USER_STATUS, AUTH_PROVIDER, TOKEN_EXPIRY, USER_ROLE } from '../constant
 
 export const register = async (userData) => {
 	const existingUser = await userRepository.findUserByEmail(userData.email);
-	
+
 	if (existingUser) {
 		throw { messageCode: AUTH.REGISTER_FAILED, statusCode: 400 };
 	}
-	
-	// Generate verification token
-	const verificationToken = generateVerificationToken();
-	const hashedToken = hashToken(verificationToken);
-	
-	// Create user with verification token
+
+	/** Luồng onboarding: đăng ký → khảo sát → app (không chặn bằng email). */
 	const user = await userRepository.createUser({
-		...userData,
-		emailVerificationToken: hashedToken,
-		emailVerificationExpires: Date.now() + TOKEN_EXPIRY.EMAIL_VERIFICATION,
-		isActive: false, // User inactive until email verified
+		email: userData.email,
+		password: userData.password,
+		name: userData.name,
+		authProvider: userData.authProvider ?? AUTH_PROVIDER.LOCAL,
+		isActive: true,
+		status: USER_STATUS.ACTIVE,
+		isEmailVerified: true,
 	});
-	
-	// Send verification email
-	await sendVerificationEmail(user.email, user.name, verificationToken);
-	
+
+	const token = generateToken(user._id);
+
 	return {
-		user,
-		messageCode: AUTH.VERIFICATION_EMAIL_SENT,
+		user: user.toJSON(),
+		token,
+		messageCode: AUTH.REGISTER_SUCCESS,
 	};
 };
 

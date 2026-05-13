@@ -34,12 +34,20 @@ export const initializeSocket = (httpServer) => {
 				return next(new Error('Authentication error: No token provided'));
 			}
 
-			// Verify JWT token
+			// Verify JWT token (payload giống REST: { userId } — xem utils/jwt.js)
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
-			const user = await User.findById(decoded.id);
+			const userIdFromToken = decoded.userId ?? decoded.id;
+			if (!userIdFromToken) {
+				return next(new Error('Authentication error: Invalid token payload'));
+			}
+			const user = await User.findById(userIdFromToken);
 
 			if (!user) {
 				return next(new Error('Authentication error: User not found'));
+			}
+
+			if (!user.isActive) {
+				return next(new Error('Authentication error: Account inactive'));
 			}
 
 			// Attach user to socket
@@ -192,7 +200,15 @@ export const initializeSocket = (httpServer) => {
 					return callback({ success: false, error: 'Unauthorized' });
 				}
 
-				const { userId, title, message, type = 'info', category = 'other' } = data;
+				const {
+					userId,
+					title,
+					message,
+					type = 'info',
+					category = 'other',
+					actionType = 'none',
+					actionData,
+				} = data;
 
 				const Notification = (await import('../models/Notification.js')).default;
 				const notification = await Notification.create({
@@ -202,18 +218,12 @@ export const initializeSocket = (httpServer) => {
 					type,
 					category,
 					source: 'admin',
+					actionType,
+					actionData: actionData || undefined,
 					deliveredAt: new Date(),
 				});
 
-				// Send to user in real-time
-				io.to(`user:${userId}`).emit('notification:new', {
-					_id: notification._id,
-					title: notification.title,
-					message: notification.message,
-					type: notification.type,
-					category: notification.category,
-					createdAt: notification.createdAt,
-				});
+				sendNotificationToUser(io, String(userId), notification);
 
 				callback({ success: true, notificationId: notification._id });
 			} catch (error) {
@@ -231,47 +241,31 @@ export const initializeSocket = (httpServer) => {
 					return callback({ success: false, error: 'Unauthorized' });
 				}
 
-				const { title, message, type = 'info', category = 'system', userIds = null } = data;
+				const {
+					title,
+					message,
+					type = 'info',
+					category = 'system',
+					userIds = null,
+					actionType = 'none',
+					actionData,
+				} = data;
 
-				const Notification = (await import('../models/Notification.js')).default;
-				const User = (await import('../models/User.js')).default;
-
-				// Get target users
-				let targetUsers;
-				if (userIds && Array.isArray(userIds)) {
-					targetUsers = await User.find({ _id: { $in: userIds } });
-				} else {
-					targetUsers = await User.find({ isActive: true });
-				}
-
-				const batchId = `batch_${Date.now()}`;
-				const notifications = [];
-
-				// Create notifications for all users
-				for (const user of targetUsers) {
-					const notification = await Notification.create({
-						userId: user._id,
+				const { deliverStandaloneAdminNotifications } = await import(
+					'../services/notificationCampaignService.js'
+				);
+				const { recipientCount } =
+					await deliverStandaloneAdminNotifications({
 						title,
 						message,
 						type,
 						category,
-						source: 'admin',
-						batchId,
-						deliveredAt: new Date(),
+						userIds: userIds && Array.isArray(userIds) && userIds.length ? userIds : null,
+						actionType,
+						actionData,
 					});
-					notifications.push(notification);
-				}
 
-				// Broadcast to all connected users
-				io.emit('notification:new', {
-					title,
-					message,
-					type,
-					category,
-					isSystemBroadcast: true,
-				});
-
-				callback({ success: true, sentCount: notifications.length, batchId });
+				callback({ success: true, sentCount: recipientCount });
 			} catch (error) {
 				console.error('[Socket] Error broadcasting notification:', error);
 				callback({ success: false, error: error.message });
