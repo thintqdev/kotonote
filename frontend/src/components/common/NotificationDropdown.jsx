@@ -85,6 +85,8 @@ NotificationDropdown.propTypes = {
       message: PropTypes.string.isRequired,
       timestamp: PropTypes.instanceOf(Date).isRequired,
       read: PropTypes.bool,
+      actionType: PropTypes.string,
+      actionData: PropTypes.object,
     }),
   ).isRequired,
   onClose: PropTypes.func.isRequired,

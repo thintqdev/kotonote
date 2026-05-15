@@ -49,6 +49,7 @@
       "sectionSystem": "システム",
       "users": "ユーザー",
       "quotes": "引用",
+      "badges": "バッジ",
       "analytics": "統計",
       "notifications": "通知",
       "studioSettings": "設定"
@@ -73,6 +74,42 @@
       "aria": "管理者アカウントメニュー",
       "roleAdmin": "管理者"
     }
+  },
+  "adminBadgesPage": {
+    "title": "バッジ（実績報酬）",
+    "lead": "学習者が実績を達成したときに付与するバッジを定義します。「キー」はユーザーへ付与する際のコード用IDです（一意・公開後は変更しない想定）。",
+    "filterCategory": "カテゴリ",
+    "filterStatus": "状態",
+    "filterAll": "すべて",
+    "filterActive": "有効",
+    "filterInactive": "無効",
+    "refresh": "再読み込み",
+    "addBadge": "バッジを追加",
+    "loading": "読み込み中…",
+    "empty": "条件に一致するバッジがありません。",
+    "colOrder": "順序",
+    "colIcon": "アイコン",
+    "colKey": "キー",
+    "colNameVi": "名前（VI）",
+    "colNameJa": "名前（JA）",
+    "colCategory": "カテゴリ",
+    "colRarity": "レア度",
+    "colActive": "表示",
+    "colActions": "操作",
+    "colActionsAria": "操作",
+    "statusOn": "オン",
+    "statusOff": "オフ",
+    "edit": "編集",
+    "delete": "削除",
+    "toastLoadErrorTitle": "バッジ一覧を読み込めませんでした",
+    "toastDeleted": "バッジを削除しました",
+    "toastDeleteFail": "削除できませんでした",
+    "formIconLabel": "アイコン画像",
+    "formIconHint": "正方形・透明背景の PNG / WebP を推奨（例 128×128）。GIF・JPEG可・最大2MB。",
+    "formIconChoose": "画像を選ぶ",
+    "formIconRemove": "アイコンを削除",
+    "formIconWillClear": "保存時にアイコンを削除します。",
+    "formIconPreviewAlt": "バッジアイコンのプレビュー"
   },
   "adminNotificationsDemo": {
     "title": "通知・キャンペーン",
@@ -832,6 +869,7 @@
     },
     "submit": "更新する",
     "successShort": "パスワードを更新しました。",
+    "apiError": "パスワードを変更できませんでした。しばらくしてからもう一度お試しください。",
     "again": "やり直す",
     "backToProfile": "← プロフィールへ",
     "errors": {
@@ -840,7 +878,8 @@
       "newShort": "新しいパスワードは6文字以上にしてください",
       "confirmRequired": "確認用パスワードを入力してください",
       "confirmMismatch": "パスワードが一致しません",
-      "sameAsCurrent": "新しいパスワードは現在のパスワードと別にしてください"
+      "sameAsCurrent": "新しいパスワードは現在のパスワードと別にしてください",
+      "noLocalPassword": "このアカウントにはローカルログインパスワードがありません（Googleログインなど）。ここでは変更できません。"
     }
   },
   "settingsPage": {
@@ -905,6 +944,10 @@
     "edit": "編集",
     "cancel": "キャンセル",
     "save": "保存",
+    "saving": "保存中…",
+    "saveError": "プロフィールを保存できませんでした。しばらくしてからもう一度お試しください。",
+    "nameTooShort": "お名前は2文字以上で入力してください。",
+    "avatarTooLarge": "プロフィール画像は2MBまでです。",
     "changePhoto": "写真を変更",
     "removePhoto": "写真を削除",
     "fullName": "氏名",
@@ -973,7 +1016,9 @@
     },
     "focusTitle": "重点復習",
     "badgesTitle": "バッジ",
-    "badgesAria": "バッジ"
+    "badgesAria": "バッジ",
+    "badgesEmpty": "まだバッジがありません。ストリークや目標達成で解除できます。",
+    "badgesDevTest": "QA: streak_7 を解除"
   },
   "demoProfile": {
     "firstName": "ティン",
@@ -1026,6 +1071,8 @@
     "MSG_114": "確認メールを送信しました。受信トレイをご確認ください",
     "MSG_115": "メール認証成功",
     "MSG_116": "確認リンクが無効または期限切れです",
+    "MSG_117": "パスワードを変更しました",
+    "MSG_118": "このアカウントはローカルパスワードを使っていません（Googleログインなど）。ここではパスワードを変更できません。",
     "MSG_201": "ユーザー作成成功",
     "MSG_202": "ユーザー更新成功",
     "MSG_203": "ユーザー削除成功",

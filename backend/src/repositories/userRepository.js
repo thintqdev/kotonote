@@ -19,6 +19,11 @@ export const findUserById = async (userId) => {
 	return await User.findById(userId).select('-password');
 };
 
+/** Có hash mật khẩu — dùng cho đổi mật khẩu (không dùng `.select('-password')`). */
+export const findUserByIdWithPassword = async (userId) => {
+	return await User.findById(userId);
+};
+
 export const findUserByVerificationToken = async (token) => {
 	return await User.findOne({
 		emailVerificationToken: token,

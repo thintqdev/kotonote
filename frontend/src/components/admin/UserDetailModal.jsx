@@ -7,6 +7,7 @@ import {
   userStatusLabel,
 } from "../../constants/userFieldMeta.js";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
+import { resolveAvatarUrl } from "../../utils/resolveAvatarUrl.js";
 
 function formatDate(v) {
   if (!v) return "—";
@@ -126,7 +127,7 @@ export default function UserDetailModal({ open, userId = null, onClose }) {
                 <InfoRow label="Avatar">
                   <a
                     className="admin-users-link"
-                    href={user.avatar}
+                    href={resolveAvatarUrl(user.avatar) || user.avatar}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

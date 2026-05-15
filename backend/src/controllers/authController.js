@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import * as authService from '../services/authService.js';
-import { apiSuccess, apiError } from '../utils/response.js';
+import { apiSuccess } from '../utils/response.js';
 import { AUTH } from '../constants/messages.js';
 
 export const register = asyncHandler(async (req, res) => {
@@ -49,4 +49,12 @@ export const adminLogin = asyncHandler(async (req, res) => {
 	const result = await authService.adminLogin(email, password);
 	
 	return apiSuccess(res, result, AUTH.LOGIN_SUCCESS, 200);
+});
+
+export const changePassword = asyncHandler(async (req, res) => {
+	const { currentPassword, newPassword } = req.body;
+
+	await authService.changePassword(req.user._id, currentPassword, newPassword);
+
+	return apiSuccess(res, {}, AUTH.PASSWORD_CHANGED, 200);
 });

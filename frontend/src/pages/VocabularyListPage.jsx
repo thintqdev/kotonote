@@ -67,7 +67,6 @@ export default function VocabularyListPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >

@@ -55,6 +55,8 @@ NotificationItem.propTypes = {
     message: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date).isRequired,
     read: PropTypes.bool,
+    actionType: PropTypes.string,
+    actionData: PropTypes.object,
   }).isRequired,
   unreadLabel: PropTypes.string.isRequired,
   onClick: PropTypes.func,

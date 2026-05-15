@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
@@ -18,6 +20,10 @@ import { setIo } from './src/config/ioRegistry.js';
 import { startNotificationCampaignScheduler } from './src/jobs/notificationCampaignScheduler.js';
 import { notificationQueue } from './src/utils/queue.js';
 import * as notificationService from './src/services/notificationService.js';
+import { ensureAvatarsUploadDir } from './src/middlewares/avatarUpload.js';
+import { ensureBadgesUploadDir } from './src/middlewares/badgeUpload.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +40,7 @@ const httpServer = createServer(app);
 // Security & Performance Middlewares
 app.use(
 	helmet({
+		crossOriginResourcePolicy: { policy: 'cross-origin' },
 		contentSecurityPolicy: {
 			directives: {
 				...helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -53,6 +60,10 @@ app.use(cors({
 app.use(compression());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+ensureAvatarsUploadDir();
+ensureBadgesUploadDir();
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health check endpoint
 app.get('/health', (req, res) => {

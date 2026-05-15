@@ -7,12 +7,16 @@ import {
   subscribeProfileOverrides,
   getProfileOverridesSnapshot,
 } from "../utils/profileStorage.js";
+import {
+  buildProfileSliceFromUser,
+  stripServerSyncedProfileOverrides,
+} from "../utils/mapUserProfile.js";
 
 /**
  * Hồ sơ gộp: demo + localStorage override + user đăng nhập (cùng logic Profile).
  */
 export function useMergedProfile() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const version = useSyncExternalStore(
     subscribeProfileOverrides,
@@ -28,11 +32,15 @@ export function useMergedProfile() {
   const demoProfile = useMemo(() => buildDemoProfile(t), [t]);
 
   const profile = useMemo(() => {
-    const merged = { ...demoProfile, ...overrides };
-    if (user?.email?.trim()) merged.email = user.email.trim();
-    if (user?.name?.trim()) merged.displayName = user.name.trim();
-    return merged;
-  }, [demoProfile, overrides, user]);
+    const localOnly = stripServerSyncedProfileOverrides(overrides);
+    const serverSlice = buildProfileSliceFromUser(
+      user,
+      demoProfile,
+      t,
+      i18n.language,
+    );
+    return { ...demoProfile, ...localOnly, ...serverSlice };
+  }, [demoProfile, overrides, user, t, i18n.language]);
 
   return profile;
 }

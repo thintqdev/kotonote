@@ -47,9 +47,11 @@ export const userPaths = {
 					'application/json': {
 						schema: {
 							type: 'object',
+							required: ['name'],
 							properties: {
 								name: { type: 'string', example: 'Nguyen Van B' },
-								avatar: { type: 'string', example: 'https://example.com/avatar.jpg' },
+								avatar: { type: 'string', nullable: true, example: 'https://example.com/avatar.jpg' },
+								profile: { $ref: '#/components/schemas/UserProfile' },
 							},
 						},
 					},

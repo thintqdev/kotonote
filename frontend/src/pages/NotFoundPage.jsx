@@ -20,7 +20,6 @@ export default function NotFoundPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="not-found-dash"
     >

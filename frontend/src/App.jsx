@@ -42,6 +42,7 @@ import AdminKanjiHome from "./pages/admin/AdminKanjiHome.jsx";
 import VocabularyDeckEditorPage from "./pages/admin/VocabularyDeckEditorPage.jsx";
 import KanjiDeckEditorPage from "./pages/admin/KanjiDeckEditorPage.jsx";
 import AdminQuotesPage from "./pages/admin/AdminQuotesPage.jsx";
+import BadgePage from "./pages/admin/BadgePage.jsx";
 import AdminUsersPage from "./pages/admin/AdminUsersPage.jsx";
 import AdminNotificationsDemoPage from "./pages/admin/AdminNotificationsDemoPage.jsx";
 import AdminLoginPage from "./pages/admin/AdminLoginPage.jsx";
@@ -119,6 +120,7 @@ function App() {
               />
               <Route path="kanji" element={<AdminKanjiHome />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
+              <Route path="badges" element={<BadgePage />} />
               <Route path="users" element={<AdminUsersPage />} />
               <Route
                 path="notifications"

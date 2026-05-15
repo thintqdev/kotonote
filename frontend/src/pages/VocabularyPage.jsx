@@ -216,7 +216,6 @@ export default function VocabularyPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("vocabStudyPage.motivateFooter")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >

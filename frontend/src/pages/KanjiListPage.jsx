@@ -70,7 +70,6 @@ export default function KanjiListPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >

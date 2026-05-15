@@ -305,12 +305,13 @@ export default function AdminNotificationsDemoPage() {
       <h1 className="admin-notif-demo__title">
         {t("adminNotificationsDemo.title")}
       </h1>
-      <p className="admin-notif-demo__lead">{t("adminNotificationsDemo.leadFull")}</p>
+      <p className="admin-notif-demo__lead">
+        {t("adminNotificationsDemo.leadFull")}
+      </p>
 
       <div className="admin-notif-demo__banner admin-notif-demo__banner--row">
         <div>
           <strong>{t("adminNotificationsDemo.bannerApiTitle")}</strong>
-          <p>{t("adminNotificationsDemo.bannerApiBody")}</p>
         </div>
         <span
           className={`admin-notif-demo__socket-pill${
@@ -360,7 +361,9 @@ export default function AdminNotificationsDemoPage() {
                 <button
                   type="button"
                   className={`admin-notif-demo__seg-btn${
-                    audience === "all" ? " admin-notif-demo__seg-btn--active" : ""
+                    audience === "all"
+                      ? " admin-notif-demo__seg-btn--active"
+                      : ""
                   }`}
                   onClick={() => setAudience("all")}
                 >
@@ -509,7 +512,10 @@ export default function AdminNotificationsDemoPage() {
             </div>
           </form>
 
-          <h2 className="admin-notif-demo__panel-title" style={{ marginTop: 28 }}>
+          <h2
+            className="admin-notif-demo__panel-title"
+            style={{ marginTop: 28 }}
+          >
             {t("adminNotificationsDemo.sectionCampaigns")}
           </h2>
           <div className="admin-notif-demo__campaign-toolbar">
@@ -549,9 +555,7 @@ export default function AdminNotificationsDemoPage() {
                       <td>{formatLocal(c.createdAt)}</td>
                       <td>{c.title}</td>
                       <td>
-                        {t(
-                          `adminNotificationsDemo.campaignStatus.${c.status}`,
-                        )}
+                        {t(`adminNotificationsDemo.campaignStatus.${c.status}`)}
                       </td>
                       <td>{c.recipientCount ?? "—"}</td>
                       <td>

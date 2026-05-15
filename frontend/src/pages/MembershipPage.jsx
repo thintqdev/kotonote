@@ -23,7 +23,6 @@ const MembershipPage = () => {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main membership-page"
     >

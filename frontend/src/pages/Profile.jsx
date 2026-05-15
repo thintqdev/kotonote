@@ -6,7 +6,13 @@ import {
   useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.jsx';
+import * as authService from '../services/authService.js';
+import {
+  buildProfileSliceFromUser,
+  stripServerSyncedProfileOverrides,
+} from '../utils/mapUserProfile.js';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb, DateField } from '../components/common';
 import {
@@ -23,7 +29,7 @@ import {
 import './Profile.css';
 import { loadOverrides, persistOverrides } from '../utils/profileStorage.js';
 
-const MAX_AVATAR_CHARS = 900_000;
+const MAX_AVATAR_BYTES = 2 * 1024 * 1024;
 
 function IconPencil() {
   return (
@@ -130,39 +136,91 @@ function buildDraftFromProfile(p) {
 
 const Profile = () => {
   const { t, i18n } = useTranslation();
-  const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
+  const { user, setUser, refreshUser } = useAuth();
   const [overrides, setOverrides] = useState(loadOverrides);
+  const [badgeHighlightKey, setBadgeHighlightKey] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+  const [avatarRemoved, setAvatarRemoved] = useState(false);
+  const [hasPendingAvatar, setHasPendingAvatar] = useState(false);
   const [draft, setDraft] = useState(() =>
     buildDraftFromProfile(buildDemoProfile((key) => i18n.t(key))),
   );
   const avatarInputRef = useRef(null);
+  const pendingAvatarFileRef = useRef(null);
+  const pendingBlobUrlRef = useRef(null);
 
   const demoProfile = useMemo(() => buildDemoProfile(t), [t, i18n.language]);
 
-  const baseProfile = useMemo(
-    () => ({
-      ...demoProfile,
-      displayName: user?.name?.trim() || demoProfile.displayName,
-      email: user?.email?.trim() || demoProfile.email,
-    }),
-    [user, demoProfile],
-  );
-
   const profile = useMemo(() => {
-    const merged = { ...baseProfile, ...overrides };
-    if (user?.email?.trim()) merged.email = user.email.trim();
-    if (Object.prototype.hasOwnProperty.call(overrides, 'avatarDataUrl')) {
-      merged.avatarDataUrl = overrides.avatarDataUrl || null;
-    }
-    return merged;
-  }, [baseProfile, overrides, user]);
+    const localOnly = stripServerSyncedProfileOverrides(overrides);
+    const serverSlice = buildProfileSliceFromUser(
+      user,
+      demoProfile,
+      t,
+      i18n.language,
+    );
+    return { ...demoProfile, ...localOnly, ...serverSlice };
+  }, [demoProfile, overrides, user, t, i18n.language]);
 
   useEffect(() => {
     if (!isEditing) {
       setDraft(buildDraftFromProfile(profile));
     }
   }, [isEditing, profile]);
+
+  useEffect(
+    () => () => {
+      if (pendingBlobUrlRef.current) {
+        URL.revokeObjectURL(pendingBlobUrlRef.current);
+        pendingBlobUrlRef.current = null;
+      }
+    },
+    [],
+  );
+
+  const highlightBadgeParam = (
+    searchParams.get('highlightBadge') || ''
+  ).trim().toLowerCase();
+
+  useEffect(() => {
+    if (location.pathname !== '/profile') return undefined;
+    const hash = location.hash.replace(/^#/, '').toLowerCase();
+    const wantsSection = hash === 'badges' || Boolean(highlightBadgeParam);
+    if (!wantsSection) return undefined;
+
+    const raf = requestAnimationFrame(() => {
+      document
+        .getElementById('profile-badges')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    if (highlightBadgeParam) setBadgeHighlightKey(highlightBadgeParam);
+    const tmr = setTimeout(() => setBadgeHighlightKey(''), 4500);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(tmr);
+    };
+  }, [location.pathname, location.hash, highlightBadgeParam]);
+
+  const runTestBadgeUnlock = useCallback(
+    async (badgeKey) => {
+      setSaveError('');
+      try {
+        const data = await authService.testUnlockBadge({ badgeKey });
+        if (data?.user) setUser(data.user);
+        else await refreshUser();
+      } catch (err) {
+        setSaveError(
+          err instanceof Error ? err.message : t('profile.saveError'),
+        );
+      }
+    },
+    [setUser, refreshUser, t],
+  );
 
   const emailLocked = Boolean(user?.email);
 
@@ -176,16 +234,38 @@ const Profile = () => {
     profile.displayName.split(/\s+/)[0] || profile.displayName;
 
   const startEdit = useCallback(() => {
+    setSaveError('');
+    if (pendingBlobUrlRef.current) {
+      URL.revokeObjectURL(pendingBlobUrlRef.current);
+      pendingBlobUrlRef.current = null;
+    }
+    pendingAvatarFileRef.current = null;
+    setHasPendingAvatar(false);
+    setAvatarRemoved(false);
     setDraft(buildDraftFromProfile(profile));
     setIsEditing(true);
   }, [profile]);
 
   const cancelEdit = useCallback(() => {
+    if (pendingBlobUrlRef.current) {
+      URL.revokeObjectURL(pendingBlobUrlRef.current);
+      pendingBlobUrlRef.current = null;
+    }
+    pendingAvatarFileRef.current = null;
+    setHasPendingAvatar(false);
+    setAvatarRemoved(false);
     setIsEditing(false);
+    setSaveError('');
     setDraft(buildDraftFromProfile(profile));
   }, [profile]);
 
-  const saveEdit = useCallback(() => {
+  const saveEdit = useCallback(async () => {
+    const name = draft.displayName.trim();
+    if (name.length < 2) {
+      setSaveError(t('profile.nameTooShort'));
+      return;
+    }
+
     const typeKey = draft.examTypeKey || 'jlpt';
     const levelKeys = EXAM_LEVEL_KEYS_BY_TYPE[typeKey] || [];
     const levelKey =
@@ -198,66 +278,88 @@ const Profile = () => {
       typeKey === 'other' ? draft.examOtherNote.trim() : '';
     const dateIso = draft.examDateIso || '';
 
-    const goalForText = {
-      examTypeKey: typeKey,
-      examLevelKey: levelKey,
-      examOtherNote: otherNote,
-    };
-    const examTargetLine = buildExamTargetDisplay(t, goalForText);
-    const examDateLine = dateIso
-      ? formatExamDateLong(dateIso, i18n.language)
-      : '';
+    setSaveError('');
+    setIsSaving(true);
+    try {
+      if (pendingAvatarFileRef.current) {
+        const { user: afterAvatar } = await authService.uploadMyAvatar(
+          pendingAvatarFileRef.current,
+        );
+        pendingAvatarFileRef.current = null;
+        if (pendingBlobUrlRef.current) {
+          URL.revokeObjectURL(pendingBlobUrlRef.current);
+          pendingBlobUrlRef.current = null;
+        }
+        setHasPendingAvatar(false);
+        setUser(afterAvatar);
+      }
 
-    const next = {
-      ...overrides,
-      displayName: draft.displayName.trim() || baseProfile.displayName,
-      readingName: draft.readingName.trim(),
-      title: draft.title.trim(),
-      location: draft.location.trim(),
-      timeZoneLabel: draft.timeZoneLabel.trim(),
-      bio: draft.bio.trim(),
-      examTypeKey: typeKey,
-      examLevelKey: levelKey,
-      examDateIso: dateIso,
-      examOtherNote: otherNote,
-      examTarget: examTargetLine,
-      examDateLabel: examDateLine,
-      avatarDataUrl: draft.avatarDataUrl,
-    };
-    if (emailLocked) {
-      delete next.email;
-    } else {
-      next.email = draft.email.trim() || baseProfile.email;
+      const putBody = {
+        name,
+        profile: {
+          readingName: draft.readingName.trim(),
+          title: draft.title.trim(),
+          location: draft.location.trim(),
+          timeZoneLabel: draft.timeZoneLabel.trim(),
+          bio: draft.bio.trim(),
+          examTypeKey: typeKey,
+          examLevelKey: levelKey,
+          examDateIso: dateIso,
+          examOtherNote: otherNote,
+        },
+      };
+      if (avatarRemoved) {
+        putBody.avatar = null;
+      }
+
+      const { user: nextUser } = await authService.updateCurrentUser(putBody);
+      setUser(nextUser);
+      const cleaned = stripServerSyncedProfileOverrides(overrides);
+      persistOverrides(cleaned);
+      setOverrides(cleaned);
+      setAvatarRemoved(false);
+      setIsEditing(false);
+    } catch (err) {
+      setSaveError(
+        err instanceof Error ? err.message : t('profile.saveError'),
+      );
+    } finally {
+      setIsSaving(false);
     }
-    setOverrides(next);
-    persistOverrides(next);
-    setIsEditing(false);
-  }, [
-    overrides,
-    draft,
-    baseProfile.displayName,
-    baseProfile.email,
-    emailLocked,
-    t,
-    i18n.language,
-  ]);
+  }, [draft, overrides, setUser, t, avatarRemoved]);
 
-  const onAvatarFile = useCallback((e) => {
-    const file = e.target.files?.[0];
-    if (!file || !file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result;
-      if (typeof dataUrl === 'string' && dataUrl.length > MAX_AVATAR_CHARS) {
+  const onAvatarFile = useCallback(
+    (e) => {
+      const file = e.target.files?.[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      if (file.size > MAX_AVATAR_BYTES) {
+        setSaveError(t('profile.avatarTooLarge'));
         return;
       }
-      setDraft((d) => ({ ...d, avatarDataUrl: dataUrl }));
-    };
-    reader.readAsDataURL(file);
-    e.target.value = '';
-  }, []);
+      setSaveError('');
+      setAvatarRemoved(false);
+      if (pendingBlobUrlRef.current) {
+        URL.revokeObjectURL(pendingBlobUrlRef.current);
+        pendingBlobUrlRef.current = null;
+      }
+      pendingAvatarFileRef.current = file;
+      const url = URL.createObjectURL(file);
+      pendingBlobUrlRef.current = url;
+      setHasPendingAvatar(true);
+      setDraft((d) => ({ ...d, avatarDataUrl: url }));
+      e.target.value = '';
+    },
+    [t],
+  );
 
   const clearAvatar = useCallback(() => {
+    if (pendingBlobUrlRef.current) {
+      URL.revokeObjectURL(pendingBlobUrlRef.current);
+      pendingBlobUrlRef.current = null;
+    }
+    pendingAvatarFileRef.current = null;
+    setHasPendingAvatar(false);
+    setAvatarRemoved(true);
     setDraft((d) => ({ ...d, avatarDataUrl: null }));
   }, []);
 
@@ -297,7 +399,6 @@ const Profile = () => {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t('profileQuote')}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main"
     >
@@ -320,10 +421,16 @@ const Profile = () => {
                 </button>
               ) : (
                 <div className="profile-toolbar-actions">
+                  {saveError ? (
+                    <p className="profile-save-error" role="alert">
+                      {saveError}
+                    </p>
+                  ) : null}
                   <button
                     type="button"
                     className="profile-btn profile-btn--ghost"
                     onClick={cancelEdit}
+                    disabled={isSaving}
                   >
                     {t('profile.cancel')}
                   </button>
@@ -331,8 +438,9 @@ const Profile = () => {
                     type="button"
                     className="profile-btn profile-btn--save"
                     onClick={saveEdit}
+                    disabled={isSaving}
                   >
-                    {t('profile.save')}
+                    {isSaving ? t('profile.saving') : t('profile.save')}
                   </button>
                 </div>
               )}
@@ -380,8 +488,16 @@ const Profile = () => {
                           type="button"
                           className="profile-btn profile-btn--avatar profile-btn--remove"
                           onClick={clearAvatar}
-                          disabled={!draft.avatarDataUrl}
-                          aria-disabled={!draft.avatarDataUrl}
+                          disabled={
+                            !draft.avatarDataUrl &&
+                            !user?.avatar &&
+                            !hasPendingAvatar
+                          }
+                          aria-disabled={
+                            !draft.avatarDataUrl &&
+                            !user?.avatar &&
+                            !hasPendingAvatar
+                          }
                         >
                           <IconImageOff />
                           <span className="profile-btn-label">{t('profile.removePhoto')}</span>
@@ -664,21 +780,62 @@ const Profile = () => {
               </div>
 
               <section
+                id="profile-badges"
                 className="profile-card profile-card--badges profile-badges-block"
                 aria-label={t('profile.badgesAria')}
               >
                 <span className="profile-card-tape profile-card-tape" aria-hidden />
                 <h3 className="profile-section-title">{t('profile.badgesTitle')}</h3>
-                <ul className="profile-badge-row">
-                  {profile.badges.map((b) => (
-                    <li key={b.id} className="profile-badge-pill">
-                      <span className="profile-badge-emoji" aria-hidden>
-                        {b.emoji}
-                      </span>
-                      <span className="profile-badge-text">{b.label}</span>
-                    </li>
-                  ))}
-                </ul>
+                {import.meta.env.DEV ? (
+                  <div className="profile-dev-badge-row">
+                    <button
+                      type="button"
+                      className="profile-dev-badge-btn"
+                      onClick={() => void runTestBadgeUnlock('streak_7')}
+                    >
+                      {t('profile.badgesDevTest')}
+                    </button>
+                  </div>
+                ) : null}
+                {profile.badges.length === 0 ? (
+                  <p className="profile-badges-empty">{t('profile.badgesEmpty')}</p>
+                ) : (
+                  <ul className="profile-badge-row">
+                    {profile.badges.map((b) => {
+                      const keyNorm = String(b.badgeKey || b.id || '')
+                        .trim()
+                        .toLowerCase();
+                      const isHi =
+                        badgeHighlightKey &&
+                        keyNorm &&
+                        keyNorm === badgeHighlightKey;
+                      return (
+                        <li key={b.id}>
+                          <div
+                            className={`profile-badge-pill${
+                              isHi ? ' profile-badge-pill--highlight' : ''
+                            }`}
+                          >
+                            {b.iconUrl ? (
+                              <img
+                                className="profile-badge-icon"
+                                src={b.iconUrl}
+                                alt=""
+                                width={22}
+                                height={22}
+                              />
+                            ) : (
+                              <span className="profile-badge-emoji" aria-hidden>
+                                {b.emoji}
+                              </span>
+                            )}
+                            <span className="profile-badge-text">{b.label}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </section>
             </div>
     </Layout>

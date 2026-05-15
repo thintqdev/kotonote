@@ -15,5 +15,6 @@ router.use('/kanji', kanjiRoutes);
 router.use('/streaks', streakRoutes);
 router.use('/surveys', surveyRoutes);
 router.use('/profile', profileRoutes);
+router.use('/users', profileRoutes);
 
 export default router;

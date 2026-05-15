@@ -5,10 +5,22 @@ export const AUTH = {
 	ADMIN_LOGIN: '/auth/admin/login',
 	REGISTER: '/auth/register',
 	GOOGLE: '/auth/google',
+	CHANGE_PASSWORD: '/auth/change-password',
 };
 
+/** Trích dẫn công khai — `/api/quotes/*` */
+export const QUOTES = {
+	RANDOM: '/quotes/random',
+	ACTIVE: '/quotes/active',
+};
+
+/** GET/PUT hồ sơ người đăng nhập — `/api/users/me` (alias tương thích: `/api/profile/me`) */
 export const PROFILE = {
-	ME: '/profile/me',
+	ME: '/users/me',
+	/** POST multipart field `avatar` — lưu file, trả về `user.avatar` dạng `/uploads/avatars/...` */
+	AVATAR: '/users/me/avatar',
+	/** POST JSON `{ badgeKey }` — chỉ bật khi không phải production */
+	BADGE_TEST_UNLOCK: '/users/me/badges/test-unlock',
 };
 
 /** Thông báo người dùng — `/api/notifications` */
@@ -49,6 +61,13 @@ export const ADMIN_KANJI = {
 	import: (deckId) => `/admin/kanji/decks/${deckId}/import`,
 	KANJI: '/admin/kanji/kanji',
 	kanji: (id) => `/admin/kanji/kanji/${id}`,
+};
+
+/** Huy hiệu / thành tựu — `/api/admin/badges` */
+export const ADMIN_BADGES = {
+	BASE: '/admin/badges',
+	badge: (id) => `/admin/badges/${encodeURIComponent(id)}`,
+	icon: (id) => `/admin/badges/${encodeURIComponent(id)}/icon`,
 };
 
 /** Trích dẫn — `/api/admin/quotes` */

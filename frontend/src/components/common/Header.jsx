@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
+import { getNavigationTargetFromNotification } from "../../utils/notificationNavigation.js";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { useUserNotifications } from "../../context/UserNotificationContext.jsx";
@@ -249,6 +250,8 @@ const Header = ({ userName, notificationCount }) => {
                 onClose={() => setIsNotificationOpen(false)}
                 onSelectNotification={(n) => {
                   if (!n.read) void markOneRead(n.id);
+                  const to = getNavigationTargetFromNotification(n);
+                  if (to) navigate(to);
                 }}
               />
             </div>

@@ -97,6 +97,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.quotes",
       },
       {
+        id: "badges",
+        to: "/admin/badges",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.badges",
+      },
+      {
         id: "analytics",
         to: "/admin/analytics",
         iconSrc: "/assets/menu-icons/statistics.png",

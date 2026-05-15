@@ -6,6 +6,7 @@ import { ADMIN_SIDEBAR_SECTIONS } from "../constants/adminNav.js";
 import { USER_ROLE } from "../constants/userRole.js";
 import { fetchAdminSession } from "../services/adminAuthService.js";
 import { clearAdminToken, getAdminToken } from "../services/tokenStorage.js";
+import { resolveAvatarUrl } from "../utils/resolveAvatarUrl.js";
 import "./AdminLayout.css";
 
 function isCanceledRequest(err) {
@@ -269,7 +270,9 @@ function AdminAccountMenu({ user, verifying, onLogout }) {
   }, [open]);
 
   const avatarUrl =
-    user && isAvatarSrc(user.avatar) && !imgBroken ? user.avatar.trim() : null;
+    user && isAvatarSrc(user.avatar) && !imgBroken
+      ? resolveAvatarUrl(user.avatar)?.trim() || null
+      : null;
   const initials = user ? initialsFromUser(user) : "";
 
   return (

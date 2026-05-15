@@ -70,7 +70,6 @@ const SettingsPage = () => {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main settings-page"
     >

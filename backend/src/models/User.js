@@ -2,6 +2,37 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { USER_STATUS, USER_ROLE, AUTH_PROVIDER, LOGIN_ATTEMPT } from '../constants/userStatus.js';
 
+const userEarnedBadgeSchema = new mongoose.Schema(
+	{
+		badgeKey: {
+			type: String,
+			required: true,
+			trim: true,
+			lowercase: true,
+		},
+		unlockedAt: {
+			type: Date,
+			default: Date.now,
+		},
+	},
+	{ _id: false }
+);
+
+const userProfileSchema = new mongoose.Schema(
+	{
+		readingName: { type: String, default: '', trim: true, maxlength: 80 },
+		title: { type: String, default: '', trim: true, maxlength: 120 },
+		location: { type: String, default: '', trim: true, maxlength: 120 },
+		timeZoneLabel: { type: String, default: '', trim: true, maxlength: 80 },
+		bio: { type: String, default: '', maxlength: 2000 },
+		examTypeKey: { type: String, default: 'jlpt', trim: true, maxlength: 40 },
+		examLevelKey: { type: String, default: '', trim: true, maxlength: 40 },
+		examDateIso: { type: String, default: '', trim: true, maxlength: 32 },
+		examOtherNote: { type: String, default: '', trim: true, maxlength: 500 },
+	},
+	{ _id: false }
+);
+
 const userSchema = new mongoose.Schema(
 	{
 		email: {
@@ -25,6 +56,10 @@ const userSchema = new mongoose.Schema(
 		},
 		avatar: {
 			type: String,
+		},
+		profile: {
+			type: userProfileSchema,
+			default: () => ({}),
 		},
 		googleId: {
 			type: String,
@@ -59,6 +94,11 @@ const userSchema = new mongoose.Schema(
 		},
 		lastLogin: {
 			type: Date,
+		},
+		/** Huy hiệu đã mở khóa — `badgeKey` khớp `Badge.key` */
+		earnedBadges: {
+			type: [userEarnedBadgeSchema],
+			default: [],
 		},
 		isEmailVerified: {
 			type: Boolean,

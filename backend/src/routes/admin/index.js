@@ -3,6 +3,7 @@ import { authenticate, authorize } from '../../middlewares/auth.js';
 import { USER_ROLE } from '../../constants/userStatus.js';
 import adminVocabularyRoutes from './adminVocabularyRoutes.js';
 import adminQuoteRoutes from './adminQuoteRoutes.js';
+import adminBadgeRoutes from './adminBadgeRoutes.js';
 import adminSurveyRoutes from './adminSurveyRoutes.js';
 import adminStreakRoutes from './adminStreakRoutes.js';
 import adminKanjiRoutes from './adminKanjiRoutes.js';
@@ -19,6 +20,7 @@ router.use(authorize(USER_ROLE.ADMIN));
 // Mount admin routes
 router.use('/vocabulary', adminVocabularyRoutes);
 router.use('/quotes', adminQuoteRoutes);
+router.use('/badges', adminBadgeRoutes);
 router.use('/surveys', adminSurveyRoutes);
 router.use('/streaks', adminStreakRoutes);
 router.use('/kanji', adminKanjiRoutes);

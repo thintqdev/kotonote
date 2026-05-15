@@ -141,7 +141,6 @@ export default function ReadingListPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >

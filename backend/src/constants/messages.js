@@ -27,6 +27,8 @@ export const AUTH = {
 	VERIFICATION_EMAIL_SENT: 'MSG_114',
 	EMAIL_VERIFIED_SUCCESS: 'MSG_115',
 	VERIFICATION_TOKEN_INVALID: 'MSG_116',
+	PASSWORD_CHANGED: 'MSG_117',
+	PASSWORD_CHANGE_NOT_ALLOWED: 'MSG_118',
 };
 
 // User Messages
@@ -85,6 +87,17 @@ export const VOCABULARY = {
 	DECK_FULL: 'MSG_712',
 };
 
+// Badge (achievement reward) — admin CRUD
+export const BADGE = {
+	CREATED: 'MSG_801',
+	UPDATED: 'MSG_802',
+	DELETED: 'MSG_803',
+	FETCHED: 'MSG_804',
+	NOT_FOUND: 'MSG_805',
+	LIST_FETCHED: 'MSG_806',
+	DUPLICATE_KEY: 'MSG_807',
+};
+
 // Kanji Messages
 export const KANJI = {
 	CREATED: 'MSG_901',
@@ -109,6 +122,7 @@ export const MESSAGES = {
 	...USER,
 	...SURVEY,
 	...QUOTE,
+	...BADGE,
 	...STREAK,
 	...VOCABULARY,
 	...KANJI,

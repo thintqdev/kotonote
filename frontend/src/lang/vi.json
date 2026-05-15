@@ -49,6 +49,7 @@
       "sectionSystem": "Hệ thống",
       "users": "Người dùng",
       "quotes": "Quotes",
+      "badges": "Huy hiệu",
       "analytics": "Thống kê",
       "notifications": "Thông báo",
       "studioSettings": "Cài đặt"
@@ -73,6 +74,42 @@
       "roleAdmin": "Quản trị viên"
     }
   },
+  "adminBadgesPage": {
+    "title": "Huy hiệu (badge)",
+    "lead": "Định nghĩa huy hiệu thưởng khi người học đạt thành tựu. Trường «Mã (key)» dùng trong code để gán badge cho user (duy nhất, không đổi sau khi phát hành).",
+    "filterCategory": "Danh mục",
+    "filterStatus": "Trạng thái",
+    "filterAll": "Tất cả",
+    "filterActive": "Đang bật",
+    "filterInactive": "Đang tắt",
+    "refresh": "Làm mới",
+    "addBadge": "Thêm huy hiệu",
+    "loading": "Đang tải…",
+    "empty": "Chưa có huy hiệu nào khớp bộ lọc.",
+    "colOrder": "Thứ tự",
+    "colIcon": "Icon",
+    "colKey": "Mã (key)",
+    "colNameVi": "Tên (VI)",
+    "colNameJa": "Tên (JA)",
+    "colCategory": "Danh mục",
+    "colRarity": "Độ hiếm",
+    "colActive": "Hiển thị",
+    "colActions": "Thao tác",
+    "colActionsAria": "Thao tác",
+    "statusOn": "Bật",
+    "statusOff": "Tắt",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "toastLoadErrorTitle": "Không tải được danh sách huy hiệu",
+    "toastDeleted": "Đã xóa huy hiệu",
+    "toastDeleteFail": "Không xóa được",
+    "formIconLabel": "Ảnh icon",
+    "formIconHint": "Ưu tiên ảnh vuông, PNG hoặc WebP nền trong suốt (vd. 128×128). Cho phép GIF, JPEG — tối đa 2MB.",
+    "formIconChoose": "Chọn ảnh",
+    "formIconRemove": "Gỡ icon",
+    "formIconWillClear": "Sẽ gỡ icon sau khi lưu.",
+    "formIconPreviewAlt": "Xem trước icon huy hiệu"
+  },
   "adminNotificationsDemo": {
     "title": "Thông báo & chiến dịch",
     "lead": "Soạn nội dung broadcast và học tập, xem trước giao diện user.",
@@ -80,7 +117,6 @@
     "bannerTitle": "Chế độ demo",
     "bannerBody": "Chưa có API gửi tới người dùng. Trang này chỉ để thử tiêu đề, nội dung và liên kết (CTA) trước khi triển khai backend.",
     "bannerApiTitle": "API & Socket",
-    "bannerApiBody": "POST /api/admin/notifications/campaigns tạo chiến dịch; gửi ngay hoặc scheduled. Một process Node chạy scheduler 30s — nhiều replica cần Redis/Bull.",
     "sectionForm": "Soạn & gửi",
     "sectionPreview": "Xem trước",
     "sectionRecipients": "Người nhận",
@@ -830,6 +866,7 @@
     },
     "submit": "Cập nhật mật khẩu",
     "successShort": "Đã cập nhật mật khẩu.",
+    "apiError": "Không đổi được mật khẩu. Thử lại sau.",
     "again": "Nhập lại",
     "backToProfile": "← Về trang cá nhân",
     "errors": {
@@ -838,7 +875,8 @@
       "newShort": "Mật khẩu mới tối thiểu 6 ký tự",
       "confirmRequired": "Vui lòng xác nhận mật khẩu mới",
       "confirmMismatch": "Mật khẩu xác nhận không khớp",
-      "sameAsCurrent": "Mật khẩu mới phải khác mật khẩu hiện tại"
+      "sameAsCurrent": "Mật khẩu mới phải khác mật khẩu hiện tại",
+      "noLocalPassword": "Tài khoản này không có mật khẩu đăng nhập cục bộ — dùng đăng nhập Google hoặc liên hệ hỗ trợ."
     }
   },
   "settingsPage": {
@@ -903,6 +941,10 @@
     "edit": "Chỉnh sửa",
     "cancel": "Hủy",
     "save": "Lưu",
+    "saving": "Đang lưu…",
+    "saveError": "Không lưu được hồ sơ. Thử lại sau.",
+    "nameTooShort": "Họ và tên cần ít nhất 2 ký tự.",
+    "avatarTooLarge": "Ảnh đại diện tối đa 2MB.",
     "changePhoto": "Đổi ảnh",
     "removePhoto": "Xóa ảnh",
     "fullName": "Họ và tên",
@@ -971,7 +1013,9 @@
     },
     "focusTitle": "Trọng tâm ôn",
     "badgesTitle": "Huy hiệu",
-    "badgesAria": "Huy hiệu"
+    "badgesAria": "Huy hiệu",
+    "badgesEmpty": "Chưa có huy hiệu nào. Check-in streak hoặc hoàn thành mục tiêu để mở khóa thành tựu.",
+    "badgesDevTest": "QA: mở streak_7"
   },
   "demoProfile": {
     "firstName": "Thìn",
@@ -1024,6 +1068,8 @@
     "MSG_114": "Email xác thực đã được gửi. Vui lòng kiểm tra hộp thư",
     "MSG_115": "Xác thực email thành công",
     "MSG_116": "Link xác thực không hợp lệ hoặc đã hết hạn",
+    "MSG_117": "Đã đổi mật khẩu thành công",
+    "MSG_118": "Tài khoản này không dùng mật khẩu cục bộ (ví dụ đăng nhập Google). Không thể đổi mật khẩu tại đây.",
     "MSG_201": "Tạo người dùng thành công",
     "MSG_202": "Cập nhật người dùng thành công",
     "MSG_203": "Xóa người dùng thành công",

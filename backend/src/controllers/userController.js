@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import * as userService from '../services/userService.js';
-import { apiSuccess } from '../utils/response.js';
-import { USER } from '../constants/messages.js';
+import { apiSuccess, apiError } from '../utils/response.js';
+import { USER, COMMON } from '../constants/messages.js';
 
 // ============ USER PROFILE CONTROLLERS ============
 
@@ -22,11 +22,41 @@ export const getMe = asyncHandler(async (req, res) => {
  * @access  Private
  */
 export const updateMe = asyncHandler(async (req, res) => {
-	const { name, avatar } = req.body;
-	
-	const user = await userService.updateProfile(req.user._id, { name, avatar });
+	const user = await userService.updateProfile(req.user._id, req.body);
 	
 	return apiSuccess(res, { user }, USER.UPDATED, 200);
+});
+
+/**
+ * @desc    Upload avatar (multipart) — lưu file, user.avatar = đường dẫn `/uploads/avatars/...`
+ * @route   POST /api/users/me/avatar
+ * @access  Private
+ */
+export const uploadMyAvatar = asyncHandler(async (req, res) => {
+	if (!req.file) {
+		return apiError(res, COMMON.VALIDATION_ERROR, 400, [
+			{ field: 'avatar', message: 'Image file is required' },
+		]);
+	}
+	const publicPath = `/uploads/avatars/${req.file.filename}`;
+	const user = await userService.setAvatarFromUploadedFile(req.user._id, publicPath);
+	return apiSuccess(res, { user }, USER.UPDATED, 200);
+});
+
+/**
+ * @desc    Thử mở khóa badge (chỉ development — để QA luồng notify + profile)
+ * @route   POST /api/users/me/badges/test-unlock
+ * @access  Private
+ */
+export const testUnlockBadge = asyncHandler(async (req, res) => {
+	if (process.env.NODE_ENV === 'production') {
+		return apiError(res, COMMON.FORBIDDEN, 403, [
+			{ field: 'env', message: 'Endpoint disabled in production' },
+		]);
+	}
+	const { badgeKey } = req.body;
+	const result = await userService.testUnlockBadgeForCurrentUser(req.user._id, badgeKey);
+	return apiSuccess(res, result, USER.FETCHED, 200);
 });
 
 // ============ ADMIN USER MANAGEMENT CONTROLLERS ============

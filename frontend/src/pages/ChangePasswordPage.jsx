@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
+import * as authService from "../services/authService.js";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
@@ -20,6 +21,7 @@ const ChangePasswordPage = () => {
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -29,6 +31,7 @@ const ChangePasswordPage = () => {
     t("demoProfile.firstName");
 
   const validate = () => {
+    setFormError("");
     const next = {};
     if (!currentPassword.trim()) {
       next.current = t("changePasswordPage.errors.currentRequired");
@@ -58,14 +61,32 @@ const ChangePasswordPage = () => {
     e.preventDefault();
     if (!validate()) return;
     setSuccess(false);
+    setFormError("");
     setIsSubmitting(true);
     try {
-      await new Promise((r) => setTimeout(r, 700));
+      await authService.changePassword({
+        currentPassword: currentPassword.trim(),
+        newPassword,
+      });
       setSuccess(true);
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
       setErrors({});
+    } catch (err) {
+      const code =
+        err && typeof err === "object" && "messageCode" in err
+          ? /** @type {{ messageCode?: string }} */ (err).messageCode
+          : undefined;
+      if (code === "MSG_108") {
+        setErrors((o) => ({ ...o, current: t("message.MSG_108") }));
+      } else if (code === "MSG_118") {
+        setFormError(t("message.MSG_118"));
+      } else {
+        setFormError(
+          err instanceof Error ? err.message : t("changePasswordPage.apiError"),
+        );
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -74,7 +95,6 @@ const ChangePasswordPage = () => {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main change-password-page"
     >
@@ -118,6 +138,11 @@ const ChangePasswordPage = () => {
                 onSubmit={handleSubmit}
                 noValidate
               >
+                {formError ? (
+                  <p className="change-password-form-error" role="alert">
+                    {formError}
+                  </p>
+                ) : null}
                 <div className="field-group">
                   <label className="field-label" htmlFor="cp-current">
                     <span className="auth-label-text">
@@ -135,6 +160,7 @@ const ChangePasswordPage = () => {
                       value={currentPassword}
                       onChange={(e) => {
                         setCurrentPassword(e.target.value);
+                        setFormError("");
                         if (errors.current) {
                           setErrors((o) => ({ ...o, current: undefined }));
                         }
@@ -176,6 +202,7 @@ const ChangePasswordPage = () => {
                       value={newPassword}
                       onChange={(e) => {
                         setNewPassword(e.target.value);
+                        setFormError("");
                         if (errors.new) {
                           setErrors((o) => ({ ...o, new: undefined }));
                         }
@@ -215,6 +242,7 @@ const ChangePasswordPage = () => {
                       value={confirmPassword}
                       onChange={(e) => {
                         setConfirmPassword(e.target.value);
+                        setFormError("");
                         if (errors.confirm) {
                           setErrors((o) => ({ ...o, confirm: undefined }));
                         }

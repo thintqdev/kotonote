@@ -60,7 +60,14 @@ function attachAuthInterceptors(instance, opts) {
 					}
 				}
 			}
-			return Promise.reject(new Error(getAxiosErrorMessage(error)));
+			const message = getAxiosErrorMessage(error);
+			const err = new Error(message);
+			const code = error.response?.data?.messageCode;
+			if (typeof code === 'string' && code.trim()) {
+				/** @type {Error & { messageCode?: string }} */ (err).messageCode =
+					code.trim();
+			}
+			return Promise.reject(err);
 		}
 	);
 }

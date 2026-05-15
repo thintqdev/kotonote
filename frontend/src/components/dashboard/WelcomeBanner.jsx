@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useRandomQuoteLine } from "../../hooks/useRandomQuoteLine.js";
 import "./WelcomeBanner.css";
 
 const WelcomeBanner = ({ userName }) => {
   const { t } = useTranslation();
+  const subtitleQuote = useRandomQuoteLine({
+    fallbackI18nKey: "welcome.subtitle",
+  });
   return (
     <section className="welcome-banner" aria-labelledby="welcome-heading">
       <div className="welcome-banner-deco" aria-hidden="true">
@@ -20,7 +24,7 @@ const WelcomeBanner = ({ userName }) => {
         <h1 id="welcome-heading" className="welcome-banner-title">
           {t("welcome.title", { name: userName })}
         </h1>
-        <p className="welcome-banner-quote">{t("welcome.subtitle")}</p>
+        <p className="welcome-banner-quote">{subtitleQuote}</p>
       </div>
     </section>
   );

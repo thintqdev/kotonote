@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useMergedProfile } from "../hooks/useMergedProfile.js";
+import { useRandomQuoteLine } from "../hooks/useRandomQuoteLine.js";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import WelcomeBanner from "../components/dashboard/WelcomeBanner.jsx";
@@ -115,10 +116,13 @@ const DashboardHome = () => {
     [t],
   );
 
+  const dailyNoteQuote = useRandomQuoteLine({
+    fallbackI18nKey: "dashboard.quotes.note",
+  });
+
   return (
     <Layout
       userName={displayName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="dash-pin-board"
     >
@@ -178,7 +182,7 @@ const DashboardHome = () => {
                     showTitle={false}
                     titleId="dash-daily-note-title"
                     toolbarMountId="dash-daily-note-toolbar-mount"
-                    quote={t("dashboard.quotes.note")}
+                    quote={dailyNoteQuote}
                   />
                 </div>
               </div>

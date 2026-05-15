@@ -12,3 +12,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 coverage/
+# Avatar files (keep backend/uploads/avatars/.gitkeep)
+backend/uploads/avatars/*
+!backend/uploads/avatars/.gitkeep

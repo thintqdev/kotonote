@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useUserNotifications } from "../context/UserNotificationContext.jsx";
@@ -7,6 +8,7 @@ import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import { fetchNotifications } from "../services/userNotificationService.js";
 import { mapNotificationToUi } from "../utils/mapUserNotification.js";
+import { getNavigationTargetFromNotification } from "../utils/notificationNavigation.js";
 import NotificationItem from "../components/common/NotificationItem.jsx";
 import "./AuthPage.css";
 import "./Profile.css";
@@ -17,6 +19,7 @@ const LIST_LIMIT = 50;
 
 const NotificationsPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { markOneRead, inboxVersion } = useUserNotifications();
   const [items, setItems] = useState([]);
@@ -66,21 +69,24 @@ const NotificationsPage = () => {
   }, [items, filter]);
 
   const handleRowClick = useCallback(
-    async (id, read) => {
-      if (!read) {
-        await markOneRead(id);
+    async (notif) => {
+      if (!notif.read) {
+        await markOneRead(notif.id);
         setItems((prev) =>
-          prev.map((row) => (row.id === id ? { ...row, read: true } : row)),
+          prev.map((row) =>
+            row.id === notif.id ? { ...row, read: true } : row,
+          ),
         );
       }
+      const to = getNavigationTargetFromNotification(notif);
+      if (to) navigate(to);
     },
-    [markOneRead],
+    [markOneRead, navigate],
   );
 
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("dashboard.quotes.footer")}
       streakDays={mockStreak.days}
       mainInnerClassName="profile-main notifications-page"
     >
@@ -172,7 +178,7 @@ const NotificationsPage = () => {
                   <NotificationItem
                     notif={notif}
                     unreadLabel={t("notificationsPage.unreadLabel")}
-                    onClick={() => handleRowClick(notif.id, notif.read)}
+                    onClick={() => handleRowClick(notif)}
                   />
                 </li>
               ))}

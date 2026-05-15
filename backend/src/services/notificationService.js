@@ -233,6 +233,16 @@ export const createFromTemplate = async (userId, templateType, variables = {}) =
 			type: 'success',
 			category: 'achievement',
 			priority: 'high',
+			...(variables.badgeKey
+				? {
+						actionType: 'open_page',
+						actionData: {
+							path: '/profile',
+							hash: 'badges',
+							badgeKey: String(variables.badgeKey).trim().toLowerCase(),
+						},
+					}
+				: {}),
 		},
 		system_maintenance: {
 			title: 'Bảo trì hệ thống',

@@ -237,7 +237,6 @@ export default function KanjiPage() {
   return (
     <Layout
       userName={headerName}
-      footerQuote={t("kanjiStudyPage.motivateFooter")}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >

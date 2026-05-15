@@ -24,3 +24,16 @@ export const loginSchema = Joi.object({
 		'any.required': 'MSG_003',
 	}),
 });
+
+export const changePasswordSchema = Joi.object({
+	currentPassword: Joi.string().min(1).max(200).required().messages({
+		'any.required': 'MSG_003',
+		'string.max': 'MSG_003',
+	}),
+	newPassword: Joi.string().min(6).max(128).required().invalid(Joi.ref('currentPassword')).messages({
+		'any.required': 'MSG_003',
+		'string.min': 'MSG_003',
+		'string.max': 'MSG_003',
+		'any.invalid': 'MSG_003',
+	}),
+}).unknown(false);

@@ -1,0 +1,115 @@
+/* Preview icon huy hiệu — nền caro để thấy trong suốt */
+
+.badge-form-icon-block {
+  margin-bottom: 14px;
+}
+
+.badge-form-icon-preview-wrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  border: 1px solid rgba(90, 107, 56, 0.35);
+  overflow: hidden;
+  margin-bottom: 10px;
+  background-color: #f4f1ea;
+  background-image:
+    linear-gradient(45deg, #d8d4cc 25%, transparent 25%),
+    linear-gradient(-45deg, #d8d4cc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d8d4cc 75%),
+    linear-gradient(-45deg, transparent 75%, #d8d4cc 75%);
+  background-size: 12px 12px;
+  background-position:
+    0 0,
+    0 6px,
+    6px -6px,
+    -6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-form-icon-preview-img {
+  max-width: 88%;
+  max-height: 88%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.badge-form-icon-preview-empty {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #6a6358);
+  text-align: center;
+  padding: 8px;
+  line-height: 1.35;
+}
+
+.badge-form-icon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.badge-form-icon-file {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.badge-form-icon-file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(90, 107, 56, 0.38);
+  background: rgba(255, 252, 246, 0.95);
+  color: var(--admin-sage-deep, #3d4e3a);
+}
+
+.badge-form-icon-file-label:hover {
+  background: rgba(107, 126, 95, 0.12);
+}
+
+.badge-form-icon-btn-clear {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(180, 60, 60, 0.45);
+  background: rgba(255, 245, 245, 0.95);
+  color: #7a1f1f;
+}
+
+.badge-form-icon-btn-clear:hover:not(:disabled) {
+  background: rgba(255, 220, 220, 0.55);
+}
+
+.badge-form-icon-btn-clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.badge-form-icon-hint {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft, #6a6358);
+  line-height: 1.45;
+}
+
+.badge-form-icon-will-clear {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #8a4a1a;
+}

@@ -1,10 +1,11 @@
 import * as userRepository from '../repositories/userRepository.js';
 import { generateToken } from '../utils/jwt.js';
-import { AUTH } from '../constants/messages.js';
+import { AUTH, USER } from '../constants/messages.js';
 import { verifyGoogleToken } from '../utils/googleAuth.js';
 import { generateVerificationToken, hashToken } from '../utils/token.js';
 import { sendVerificationEmail } from './emailService.js';
 import { USER_STATUS, AUTH_PROVIDER, TOKEN_EXPIRY, USER_ROLE } from '../constants/userStatus.js';
+import { enrichUserWithBadges } from './userService.js';
 
 export const register = async (userData) => {
 	const existingUser = await userRepository.findUserByEmail(userData.email);
@@ -27,7 +28,7 @@ export const register = async (userData) => {
 	const token = generateToken(user._id);
 
 	return {
-		user: user.toJSON(),
+		user: await enrichUserWithBadges(user),
 		token,
 		messageCode: AUTH.REGISTER_SUCCESS,
 	};
@@ -73,9 +74,37 @@ export const login = async (email, password) => {
 	const token = generateToken(user._id);
 	
 	return {
-		user: user.toJSON(),
+		user: await enrichUserWithBadges(user),
 		token,
 	};
+};
+
+/**
+ * Đổi mật khẩu (tài khoản có mật khẩu cục bộ). Sai mật khẩu hiện tại → 400 (tránh 401 làm client xóa JWT).
+ * @param {string} userId
+ * @param {string} currentPassword
+ * @param {string} newPassword
+ */
+export const changePassword = async (userId, currentPassword, newPassword) => {
+	const user = await userRepository.findUserByIdWithPassword(userId);
+
+	if (!user) {
+		throw { messageCode: USER.NOT_FOUND, statusCode: 404 };
+	}
+
+	if (!user.password) {
+		throw { messageCode: AUTH.PASSWORD_CHANGE_NOT_ALLOWED, statusCode: 403 };
+	}
+
+	const valid = await user.comparePassword(currentPassword);
+	if (!valid) {
+		throw { messageCode: AUTH.PASSWORD_INCORRECT, statusCode: 400 };
+	}
+
+	user.password = newPassword;
+	await user.save();
+
+	return { messageCode: AUTH.PASSWORD_CHANGED };
 };
 
 export const googleLogin = async (googleToken) => {
@@ -125,7 +154,7 @@ export const googleLogin = async (googleToken) => {
 	const token = generateToken(user._id);
 	
 	return {
-		user: user.toJSON(),
+		user: await enrichUserWithBadges(user),
 		token,
 	};
 };
@@ -152,7 +181,7 @@ export const verifyEmail = async (token) => {
 	const jwtToken = generateToken(user._id);
 	
 	return {
-		user: user.toJSON(),
+		user: await enrichUserWithBadges(user),
 		token: jwtToken,
 	};
 };

@@ -1,12 +1,16 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../common/LanguageSwitcher.jsx";
+import { useRandomQuoteLine } from "../../hooks/useRandomQuoteLine.js";
 import "../../pages/AuthPage.css";
 
 const AuthLayoutBody = ({ children, formLayout = "narrow" }) => {
   const isSurvey = formLayout === "survey";
   const { t } = useTranslation();
   const appName = import.meta.env.VITE_APP_NAME;
+  const authFooterQuote = useRandomQuoteLine({
+    fallbackI18nKey: "authLayout.footerQuote",
+  });
 
   return (
     <div className="auth-page">
@@ -68,7 +72,7 @@ const AuthLayoutBody = ({ children, formLayout = "narrow" }) => {
       <div className="auth-footer">
         <div className="footer-quote">
           <p className="footer-quote-text">
-            {t("authLayout.footerQuote")}
+            {authFooterQuote}
           </p>
         </div>
         <p className="footer-copy">

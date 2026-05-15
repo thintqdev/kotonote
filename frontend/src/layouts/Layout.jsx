@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 import { SidebarCollapseProvider } from "../context/SidebarCollapseContext.jsx";
 import { useUserNotifications } from "../context/UserNotificationContext.jsx";
+import { useRandomQuoteLine } from "../hooks/useRandomQuoteLine.js";
 import { Sidebar, Header, Footer } from "../components/common";
 import "./Layout.css";
 
 /**
  * Vỏ dashboard: Sidebar + Header + vùng nội dung + Footer.
  * Các trang chỉ cần truyền props chung và đặt nội dung (breadcrumb, article…) vào children.
+ *
+ * `footerQuote` (tuỳ chọn): override tĩnh; bỏ qua thì footer gọi `GET /quotes/random`.
  */
 function Layout({
   children,
@@ -17,6 +20,10 @@ function Layout({
   mainInnerClassName = "",
 }) {
   const { unreadCount } = useUserNotifications();
+  const footerDisplay = useRandomQuoteLine({
+    fallbackI18nKey: "dashboard.quotes.footer",
+    staticText: footerQuote,
+  });
   const pageClasses = ["dash-page", pageClassName].filter(Boolean).join(" ");
   const innerClasses = ["dash-main-inner", mainInnerClassName]
     .filter(Boolean)
@@ -32,7 +39,7 @@ function Layout({
             <Header userName={userName} notificationCount={unreadCount} />
             <div className={innerClasses}>
               {children}
-              <Footer quote={footerQuote} />
+              <Footer quote={footerDisplay} />
             </div>
           </div>
         </div>
@@ -44,7 +51,7 @@ function Layout({
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   userName: PropTypes.string.isRequired,
-  footerQuote: PropTypes.string.isRequired,
+  footerQuote: PropTypes.string,
   streakDays: PropTypes.number.isRequired,
   pageClassName: PropTypes.string,
   mainInnerClassName: PropTypes.string,

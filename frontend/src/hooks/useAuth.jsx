@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import * as authService from '../services/authService.js';
 import {
 	clearUserToken,
@@ -66,8 +66,30 @@ export const AuthProvider = ({ children }) => {
 		setUser(null);
 	};
 
+	const refreshUser = useCallback(async (axiosConfig = {}) => {
+		const token = getUserToken();
+		if (!token) return null;
+		try {
+			const { user: next } = await authService.fetchCurrentUser(axiosConfig);
+			setUser(next);
+			return next;
+		} catch {
+			return null;
+		}
+	}, []);
+
 	return (
-		<AuthContext.Provider value={{ user, loading, login, register, logout }}>
+		<AuthContext.Provider
+			value={{
+				user,
+				loading,
+				login,
+				register,
+				logout,
+				setUser,
+				refreshUser,
+			}}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
