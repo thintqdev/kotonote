@@ -12,6 +12,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 coverage/
+
+# Docker named volumes (bind mounts nếu dùng sau)
+.docker-data/
 # Avatar files (keep backend/uploads/avatars/.gitkeep)
 backend/uploads/avatars/*
 !backend/uploads/avatars/.gitkeep

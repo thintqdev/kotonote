@@ -4,8 +4,18 @@ export const AUTH = {
 	LOGIN: '/auth/login',
 	ADMIN_LOGIN: '/auth/admin/login',
 	REGISTER: '/auth/register',
+	VERIFY_EMAIL: '/auth/verify-email',
+	RESEND_VERIFICATION: '/auth/resend-verification',
 	GOOGLE: '/auth/google',
 	CHANGE_PASSWORD: '/auth/change-password',
+	FORGOT_PASSWORD: '/auth/forgot-password',
+	RESET_PASSWORD: '/auth/reset-password',
+};
+
+/** Ngữ pháp (user đã đăng nhập) — `/api/grammar/*`, Bearer JWT */
+export const GRAMMAR = {
+	BASE: '/grammar',
+	bySlug: (slug) => `/grammar/${encodeURIComponent(slug)}`,
 };
 
 /** Trích dẫn công khai — `/api/quotes/*` */
@@ -17,10 +27,28 @@ export const QUOTES = {
 /** GET/PUT hồ sơ người đăng nhập — `/api/users/me` (alias tương thích: `/api/profile/me`) */
 export const PROFILE = {
 	ME: '/users/me',
+	LEARNING_SUMMARY: '/users/me/learning-summary',
+	FOCUS_AREAS: '/users/me/focus-areas',
 	/** POST multipart field `avatar` — lưu file, trả về `user.avatar` dạng `/uploads/avatars/...` */
 	AVATAR: '/users/me/avatar',
 	/** POST JSON `{ badgeKey }` — chỉ bật khi không phải production */
 	BADGE_TEST_UNLOCK: '/users/me/badges/test-unlock',
+};
+
+/** Sổ tay ghi chú — `/api/notebook/*` */
+export const NOTEBOOK = {
+	NOTES: '/notebook/notes',
+	note: (id) => `/notebook/notes/${encodeURIComponent(id)}`,
+	IMAGES: '/notebook/images',
+};
+
+/** Streak — `/api/streaks/*` (user: Bearer JWT) */
+export const STREAK = {
+	ME: '/streaks/me',
+	CHECK_IN: '/streaks/check-in',
+	FREEZE: '/streaks/freeze',
+	WEEKLY: '/streaks/weekly',
+	LEADERBOARD: '/streaks/leaderboard',
 };
 
 /** Thông báo người dùng — `/api/notifications` */
@@ -30,7 +58,7 @@ export const NOTIFICATIONS = {
 	markRead: (id) => `/notifications/${encodeURIComponent(id)}/read`,
 };
 
-/** Đọc deck/từ (public `/api/vocabulary/*`, cần JWT admin khi gọi qua adminApi) */
+/** Đọc deck/từ vựng (user đã đăng nhập) — `/api/vocabulary/*`, Bearer JWT */
 export const VOCABULARY = {
 	DECKS: '/vocabulary/decks',
 	deck: (id) => `/vocabulary/decks/${id}`,
@@ -47,7 +75,7 @@ export const ADMIN_VOCABULARY = {
 	word: (id) => `/admin/vocabulary/words/${id}`,
 };
 
-/** Đọc deck/kanji (public `/api/kanji/*`) */
+/** Đọc deck/kanji (user đã đăng nhập) — `/api/kanji/*`, Bearer JWT */
 export const KANJI = {
 	DECKS: '/kanji/decks',
 	deck: (id) => `/kanji/decks/${id}`,
@@ -68,6 +96,12 @@ export const ADMIN_BADGES = {
 	BASE: '/admin/badges',
 	badge: (id) => `/admin/badges/${encodeURIComponent(id)}`,
 	icon: (id) => `/admin/badges/${encodeURIComponent(id)}/icon`,
+};
+
+/** Ngữ pháp — `/api/admin/grammar` */
+export const ADMIN_GRAMMAR = {
+	BASE: '/admin/grammar',
+	grammar: (id) => `/admin/grammar/${encodeURIComponent(id)}`,
 };
 
 /** Trích dẫn — `/api/admin/quotes` */

@@ -1,0 +1,43 @@
+# Infrastructure dev — không build FE/BE.
+# Chạy: docker compose up -d
+# Dừng:  docker compose down
+#
+# Mailpit (bắt SMTP, xem mail trên web):
+#   SMTP  → localhost:1025
+#   UI    → http://localhost:8025
+#
+# MongoDB:
+#   URI   → mongodb://localhost:27017/kotonote-nihongo
+
+services:
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: kotonote-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_MAX_MESSAGES: "5000"
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+    networks:
+      - kotonote-dev
+
+  mongodb:
+    image: mongo:7
+    container_name: kotonote-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - kotonote-dev
+
+volumes:
+  mongodb_data:
+
+networks:
+  kotonote-dev:
+    driver: bridge

@@ -10,6 +10,7 @@ import adminKanjiRoutes from './adminKanjiRoutes.js';
 import adminAIRoutes from './adminAIRoutes.js';
 import adminUserRoutes from './adminUserRoutes.js';
 import adminNotificationRoutes from './adminNotificationRoutes.js';
+import adminGrammarRoutes from './adminGrammarRoutes.js';
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.use('/kanji', adminKanjiRoutes);
 router.use('/ai', adminAIRoutes);
 router.use('/users', adminUserRoutes);
 router.use('/notifications', adminNotificationRoutes);
+router.use('/grammar', adminGrammarRoutes);
 
 export default router;

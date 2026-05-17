@@ -89,6 +89,139 @@ export const userPaths = {
 			},
 		},
 	},
+	'/api/users/me/focus-areas': {
+		get: {
+			tags: ['User'],
+			summary: 'Get study focus areas',
+			description: 'Selected subject keys and available options for profile focus tags',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Focus areas retrieved',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_209' },
+									data: {
+										type: 'object',
+										properties: {
+											focus: { $ref: '#/components/schemas/ProfileFocusAreas' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+		put: {
+			tags: ['User'],
+			summary: 'Update study focus areas',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							required: ['focusAreaKeys'],
+							properties: {
+								focusAreaKeys: {
+									type: 'array',
+									items: {
+										type: 'string',
+										enum: ['grammar', 'vocab', 'kanji', 'reading', 'listening'],
+									},
+									maxItems: 4,
+								},
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Focus areas updated',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_210' },
+									data: {
+										type: 'object',
+										properties: {
+											focus: { $ref: '#/components/schemas/ProfileFocusAreas' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
+	'/api/users/me/learning-summary': {
+		get: {
+			tags: ['User'],
+			summary: 'Get learning summary for profile',
+			description:
+				'Aggregated study stats: streak, weekly check-ins, exam countdown, badges, active library counts',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Learning summary retrieved successfully',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_208' },
+									data: {
+										type: 'object',
+										properties: {
+											summary: { $ref: '#/components/schemas/LearningSummary' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
 	'/api/admin/users': {
 		get: {
 			tags: ['Admin - User Management'],

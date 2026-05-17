@@ -455,6 +455,37 @@
   color: #5a7a4a;
 }
 
+.auth-forgot-lead {
+  margin: 10px auto 0;
+  max-width: 340px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.55;
+  color: #6b5648;
+  text-align: center;
+}
+
+.auth-forgot-success {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.auth-forgot-success-lead {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4a3a2a;
+  text-align: center;
+}
+
+.auth-forgot-back-btn {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
 /* =========================================
    BUTTONS
    ========================================= */

@@ -6,18 +6,26 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
-  VOCAB_ITEMS,
   buildLessonQuizQuestions,
   advanceLessonGrowthStage,
   getLessonGrowthStage,
   getLessonMilestoneLitCount,
-  getVocabLessonItems,
   mergeVocabMarks,
   shuffleVocabStudy,
   vocabMeaningLine,
   VOCAB_LESSON_GROWTH_MAX,
   VOCAB_QUIZ_PER_STAGE,
 } from "../data/vocabularyMock.js";
+import {
+  getDeckWithVocabulary,
+  loadVocabularyPack,
+} from "../services/vocabularyService.js";
+import {
+  getDeckLessonItems,
+  levelToJlpt,
+  mapVocabRecord,
+} from "../utils/deckStudy.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
@@ -51,7 +59,10 @@ export default function VocabularyPage() {
   const showViGloss = String(lang).toLowerCase().startsWith("vi");
 
   const [marks] = useState(() => ({}));
-  const merged = useMemo(() => mergeVocabMarks(VOCAB_ITEMS, marks), [marks]);
+  const [packItems, setPackItems] = useState([]);
+  const [sortedDecks, setSortedDecks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const params = useParams();
   const [searchParams] = useSearchParams();
@@ -70,17 +81,67 @@ export default function VocabularyPage() {
     () => (searchParams.get("jlpt") || "").trim(),
     [searchParams],
   );
+  const deckId = useMemo(
+    () => (searchParams.get("deckId") || "").trim(),
+    [searchParams],
+  );
   const isLessonMode = Boolean(
     lessonNoFromQuery != null && lessonJlpt.length > 0,
   );
 
+  useEffect(() => {
+    if (!user || !lessonJlpt || !isLessonMode) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        if (deckId) {
+          const { deck, vocabulary } = await getDeckWithVocabulary(deckId);
+          const jlpt = lessonJlpt || levelToJlpt(deck.level);
+          const items = vocabulary.map((v) =>
+            mapVocabRecord(v, jlpt, deckId),
+          );
+          if (!cancelled) {
+            setSortedDecks([deck]);
+            setPackItems(items);
+          }
+        } else {
+          const pack = await loadVocabularyPack(lessonJlpt);
+          if (!cancelled) {
+            setSortedDecks(pack.decks);
+            setPackItems(pack.items);
+          }
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(getApiErrorMessage(err, t));
+          setSortedDecks([]);
+          setPackItems([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, lessonJlpt, deckId, isLessonMode, t]);
+
+  const merged = useMemo(
+    () => mergeVocabMarks(packItems, marks),
+    [packItems, marks],
+  );
+
   const lessonItemsStable = useMemo(() => {
-    if (!isLessonMode || !lessonJlpt || !lessonNoFromQuery) return [];
-    return getVocabLessonItems(merged, {
-      jlpt: lessonJlpt,
-      lessonNo: lessonNoFromQuery,
-    });
-  }, [merged, isLessonMode, lessonJlpt, lessonNoFromQuery]);
+    if (!isLessonMode) return [];
+    if (deckId) return merged;
+    if (!lessonNoFromQuery) return [];
+    return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
+  }, [merged, sortedDecks, deckId, isLessonMode, lessonNoFromQuery]);
 
   const [growthStage, setGrowthStage] = useState(0);
   useEffect(() => {
@@ -210,6 +271,28 @@ export default function VocabularyPage() {
   );
 
   if (!isLessonMode) {
+    return <Navigate to="/vocabulary/browse" replace />;
+  }
+
+  if (loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty grammar-empty--error" role="alert">
+          {error}
+        </p>
+      </Layout>
+    );
+  }
+
+  if (lessonItemsStable.length === 0) {
     return <Navigate to="/vocabulary/browse" replace />;
   }
 

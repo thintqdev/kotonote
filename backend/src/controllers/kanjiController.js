@@ -2,19 +2,21 @@ import asyncHandler from 'express-async-handler';
 import * as kanjiService from '../services/kanjiService.js';
 import { apiSuccess } from '../utils/response.js';
 import { MESSAGES } from '../constants/messages.js';
+import {
+	assertDeckVisibleToUser,
+	buildDeckListFilters,
+} from '../utils/userDeckAccess.js';
 
 // ============ DECK CONTROLLERS ============
 
 /**
  * @desc    Get all kanji decks
  * @route   GET /api/kanji/decks
- * @access  Public
+ * @access  Private (User)
  */
 export const getAllDecks = asyncHandler(async (req, res) => {
 	const { jlpt, isActive, page, limit } = req.query;
-	const filters = {};
-	if (jlpt) filters.jlpt = jlpt;
-	if (isActive !== undefined) filters.isActive = isActive === 'true';
+	const filters = buildDeckListFilters(req, { jlpt, isActive });
 
 	const { decks, pagination } = await kanjiService.getAllDecks(filters, {
 		page,
@@ -27,22 +29,24 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 /**
  * @desc    Get deck by ID
  * @route   GET /api/kanji/decks/:id
- * @access  Public
+ * @access  Private (User)
  */
 export const getDeckById = asyncHandler(async (req, res) => {
 	const deck = await kanjiService.getDeckById(req.params.id);
-	
+	assertDeckVisibleToUser(req, deck);
+
 	return apiSuccess(res, { deck }, MESSAGES.MSG_904, 200);
 });
 
 /**
  * @desc    Get deck with kanji
  * @route   GET /api/kanji/decks/:id/kanji
- * @access  Public
+ * @access  Private (User)
  */
 export const getDeckWithKanji = asyncHandler(async (req, res) => {
 	const result = await kanjiService.getDeckWithKanji(req.params.id);
-	
+	assertDeckVisibleToUser(req, result.deck);
+
 	return apiSuccess(res, result, MESSAGES.MSG_906, 200);
 });
 
@@ -84,11 +88,13 @@ export const deleteDeck = asyncHandler(async (req, res) => {
 /**
  * @desc    Get kanji by deck
  * @route   GET /api/kanji/deck/:deckId/kanji
- * @access  Public
+ * @access  Private (User)
  */
 export const getKanjiByDeck = asyncHandler(async (req, res) => {
+	const deck = await kanjiService.getDeckById(req.params.deckId);
+	assertDeckVisibleToUser(req, deck);
 	const kanji = await kanjiService.getKanjiByDeck(req.params.deckId);
-	
+
 	return apiSuccess(res, {
 		kanji,
 		total: kanji.length,
@@ -98,11 +104,13 @@ export const getKanjiByDeck = asyncHandler(async (req, res) => {
 /**
  * @desc    Get kanji by ID
  * @route   GET /api/kanji/:id
- * @access  Public
+ * @access  Private (User)
  */
 export const getKanjiById = asyncHandler(async (req, res) => {
 	const kanji = await kanjiService.getKanjiById(req.params.id);
-	
+	const deck = await kanjiService.getDeckById(kanji.deckId);
+	assertDeckVisibleToUser(req, deck);
+
 	return apiSuccess(res, { kanji }, MESSAGES.MSG_904, 200);
 });
 

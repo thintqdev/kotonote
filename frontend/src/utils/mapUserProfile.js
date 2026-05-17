@@ -4,6 +4,10 @@ import {
 	resolveGoalExamFields,
 } from './profileExamDisplay.js';
 import { resolveAvatarUrl, resolvePublicMediaUrl } from './resolveAvatarUrl.js';
+import {
+	normalizeProfileRegionKey,
+	normalizeProfileTimeZoneKey,
+} from '../constants/profileLocale.js';
 
 /** Các key đồng bộ từ API — không ghi đè bằng localStorage sau khi đã có user */
 export const SERVER_SYNCED_PROFILE_KEYS = new Set([
@@ -54,8 +58,9 @@ export function buildProfileSliceFromUser(user, demoProfile, t, language) {
 		email: user.email?.trim() || demoProfile.email,
 		readingName: p.readingName ?? '',
 		title: p.title ?? '',
-		location: p.location ?? '',
-		timeZoneLabel: p.timeZoneLabel ?? '',
+		location: normalizeProfileRegionKey(p.location) || '',
+		timeZoneLabel:
+			normalizeProfileTimeZoneKey(p.timeZoneLabel, p.location) || '',
 		bio: p.bio ?? '',
 		examTypeKey: p.examTypeKey || 'jlpt',
 		examLevelKey: p.examLevelKey ?? '',

@@ -1,0 +1,125 @@
+.nb-editor {
+	display: flex;
+	flex-direction: column;
+	min-height: 280px;
+	border-radius: 10px;
+	border: 1px dashed rgba(120, 100, 75, 0.45);
+	background: rgba(255, 252, 246, 0.92);
+	overflow: hidden;
+}
+
+.nb-editor--disabled {
+	opacity: 0.7;
+	pointer-events: none;
+}
+
+.nb-editor-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	padding: 8px;
+	border-bottom: 1px dashed rgba(170, 150, 125, 0.4);
+	background: rgba(247, 241, 232, 0.85);
+}
+
+.nb-editor-tool {
+	min-width: 32px;
+	height: 30px;
+	padding: 0 8px;
+	border: 1px solid rgba(150, 130, 105, 0.35);
+	border-radius: 6px;
+	background: #fffef8;
+	font-size: 0.78rem;
+	font-weight: 800;
+	color: #3d3428;
+	cursor: pointer;
+	transition: background 0.12s ease, transform 0.1s ease;
+}
+
+.nb-editor-tool:hover:not(:disabled) {
+	background: #f0ebe0;
+	transform: translateY(-1px);
+}
+
+.nb-editor-surface {
+	flex: 1;
+	min-height: 240px;
+	padding: 16px 18px 24px;
+	outline: none;
+	font-size: 0.95rem;
+	line-height: 1.65;
+	color: #2b2b2b;
+	overflow-y: auto;
+}
+
+.nb-editor-surface:empty::before {
+	content: attr(data-placeholder);
+	color: rgba(90, 80, 68, 0.45);
+	pointer-events: none;
+}
+
+.nb-editor-surface h2 {
+	margin: 1em 0 0.4em;
+	font-size: 1.25rem;
+	font-weight: 800;
+}
+
+.nb-editor-surface h3 {
+	margin: 0.85em 0 0.35em;
+	font-size: 1.08rem;
+	font-weight: 800;
+}
+
+.nb-editor-surface blockquote {
+	margin: 0.75em 0;
+	padding: 8px 12px;
+	border-left: 3px solid #a8b58a;
+	background: rgba(168, 181, 138, 0.12);
+	font-style: italic;
+}
+
+.nb-editor-surface ul,
+.nb-editor-surface ol {
+	margin: 0.5em 0;
+	padding-left: 1.4em;
+}
+
+.nb-editor-surface .nb-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 12px 0;
+	font-size: 0.88rem;
+}
+
+.nb-editor-surface .nb-table th,
+.nb-editor-surface .nb-table td {
+	border: 1px dashed rgba(130, 110, 85, 0.55);
+	padding: 8px 10px;
+	min-width: 64px;
+}
+
+.nb-editor-surface .nb-table th {
+	background: rgba(216, 195, 165, 0.25);
+	font-weight: 800;
+}
+
+.nb-editor-surface .nb-figure {
+	margin: 12px 0;
+	text-align: center;
+}
+
+.nb-editor-surface .nb-img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	border: 1px solid rgba(150, 130, 100, 0.35);
+	box-shadow: 0 4px 14px rgba(40, 32, 22, 0.08);
+}
+
+.nb-editor-file {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	pointer-events: none;
+}

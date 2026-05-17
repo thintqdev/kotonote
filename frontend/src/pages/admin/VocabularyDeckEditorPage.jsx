@@ -26,6 +26,7 @@ import {
   updateVocab,
   updateVocabularyDeck,
 } from "../../services/adminVocabularyService.js";
+import GrammarLocFields from "../../components/admin/GrammarLocFields.jsx";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
 import "./VocabularyDeckEditorPage.css";
 
@@ -539,7 +540,6 @@ export default function VocabularyDeckEditorPage() {
   };
 
   const titleCount = title.length;
-  const descCount = description.length;
 
   if (!isCreate && loading) {
     return (
@@ -646,32 +646,19 @@ export default function VocabularyDeckEditorPage() {
                       placeholder="日本語タイトル"
                     />
                   </div>
-                  <div className="vdeck-field vdeck-field--full">
-                    <label className="vdeck-label" htmlFor={`${baseId}-desc`}>
-                      Mô tả
-                    </label>
-                    <textarea
-                      id={`${baseId}-desc`}
-                      className="vdeck-textarea"
-                      maxLength={2000}
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Tùy chọn"
+                  <div className="vdeck-field vdeck-field--full vdeck-field--loc">
+                    <GrammarLocFields
+                      label="Mô tả"
+                      rows={3}
+                      value={{ ja: descriptionJa, vi: description }}
+                      onChange={(loc) => {
+                        setDescriptionJa(loc.ja ?? "");
+                        setDescription(loc.vi ?? "");
+                      }}
                     />
-                    <span className="vdeck-counter">{descCount}/2000</span>
-                  </div>
-                  <div className="vdeck-field vdeck-field--full">
-                    <label className="vdeck-label" htmlFor={`${baseId}-descJa`}>
-                      Mô tả (JP)
-                    </label>
-                    <textarea
-                      id={`${baseId}-descJa`}
-                      className="vdeck-textarea"
-                      lang="ja"
-                      maxLength={2000}
-                      value={descriptionJa}
-                      onChange={(e) => setDescriptionJa(e.target.value)}
-                    />
+                    <span className="vdeck-counter vdeck-counter--loc">
+                      VI {description.length}/2000 · JA {descriptionJa.length}/2000
+                    </span>
                   </div>
                   <div className="vdeck-field">
                     <label className="vdeck-label" htmlFor={`${baseId}-level`}>

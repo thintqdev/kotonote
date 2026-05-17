@@ -52,7 +52,19 @@ const LoginPage = () => {
           : '/';
       navigate(safePath, { replace: true });
     } catch (err) {
-      const msg = getAxiosErrorMessage(err);
+      const code =
+        err && typeof err === 'object' && 'messageCode' in err
+          ? /** @type {{ messageCode?: string }} */ (err).messageCode
+          : undefined;
+      if (code === 'MSG_113') {
+        toast.info(t('login.verifyRequired'));
+        navigate('/register/thank-you', {
+          replace: true,
+          state: { email: loginData.email.trim() },
+        });
+        return;
+      }
+      const msg = getAxiosErrorMessage(err, t);
       setErrors((prev) => ({ ...prev, general: msg }));
       toast.error(t('login.errors.submitFailed'), { description: msg });
     } finally {
@@ -137,9 +149,9 @@ const LoginPage = () => {
               />
               <span className="checkbox-text">{t('login.remember')}</span>
             </label>
-            <a href="#" className="forgot-link">
+            <Link to="/forgot-password" className="forgot-link">
               {t('login.forgot')}
-            </a>
+            </Link>
           </div>
 
           <button

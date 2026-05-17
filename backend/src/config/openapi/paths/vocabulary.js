@@ -1,11 +1,16 @@
+const authResponses = {
+	'401': { $ref: '#/components/responses/Unauthorized' },
+	'403': { $ref: '#/components/responses/Forbidden' },
+};
+
 export const vocabularyPaths = {
-	// Public routes
 	'/api/vocabulary/decks': {
 		get: {
-			tags: ['Vocabulary'],
-			summary: 'Get all vocabulary decks (Public)',
+			tags: ['Vocabulary - User'],
+			summary: 'Get all vocabulary decks (User)',
 			description:
-				'Danh sách deck có phân trang. `pagination.total` là tổng số deck; mỗi phần tử có `wordCount` và `totalWords` khớp số từ active trong deck.',
+				'Requires authentication. Danh sách deck có phân trang; mỗi phần tử có `wordCount` và `totalWords`.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{ name: 'level', in: 'query', schema: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'] } },
 				{
@@ -55,14 +60,16 @@ export const vocabularyPaths = {
 						},
 					},
 				},
+				...authResponses,
 			},
 		},
 	},
 	'/api/vocabulary/decks/{id}': {
 		get: {
-			tags: ['Vocabulary'],
-			summary: 'Get deck by ID (Public)',
-			description: 'Get a specific vocabulary deck by ID',
+			tags: ['Vocabulary - User'],
+			summary: 'Get deck by ID (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'id',
@@ -101,14 +108,16 @@ export const vocabularyPaths = {
 						},
 					},
 				},
+				...authResponses,
 			},
 		},
 	},
 	'/api/vocabulary/decks/{id}/vocabulary': {
 		get: {
-			tags: ['Vocabulary'],
-			summary: 'Get deck with vocabulary (Public)',
-			description: 'Get a deck with all its vocabulary words',
+			tags: ['Vocabulary - User'],
+			summary: 'Get deck with vocabulary (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'id',
@@ -151,14 +160,16 @@ export const vocabularyPaths = {
 						},
 					},
 				},
+				...authResponses,
 			},
 		},
 	},
 	'/api/vocabulary/deck/{deckId}/words': {
 		get: {
-			tags: ['Vocabulary'],
-			summary: 'Get vocabulary by deck (Public)',
-			description: 'Get all vocabulary words in a specific deck',
+			tags: ['Vocabulary - User'],
+			summary: 'Get vocabulary by deck (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'deckId',
@@ -193,6 +204,7 @@ export const vocabularyPaths = {
 						},
 					},
 				},
+				...authResponses,
 			},
 		},
 	},

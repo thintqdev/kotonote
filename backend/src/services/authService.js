@@ -1,9 +1,10 @@
+import User from '../models/User.js';
 import * as userRepository from '../repositories/userRepository.js';
 import { generateToken } from '../utils/jwt.js';
-import { AUTH, USER } from '../constants/messages.js';
+import { AUTH, USER, COMMON } from '../constants/messages.js';
 import { verifyGoogleToken } from '../utils/googleAuth.js';
 import { generateVerificationToken, hashToken } from '../utils/token.js';
-import { sendVerificationEmail } from './emailService.js';
+import { sendVerificationEmail, sendPasswordResetEmail } from './emailService.js';
 import { USER_STATUS, AUTH_PROVIDER, TOKEN_EXPIRY, USER_ROLE } from '../constants/userStatus.js';
 import { enrichUserWithBadges } from './userService.js';
 
@@ -11,10 +12,12 @@ export const register = async (userData) => {
 	const existingUser = await userRepository.findUserByEmail(userData.email);
 
 	if (existingUser) {
-		throw { messageCode: AUTH.REGISTER_FAILED, statusCode: 400 };
+		throw { messageCode: AUTH.EMAIL_ALREADY_REGISTERED, statusCode: 409 };
 	}
 
-	/** Luồng onboarding: đăng ký → khảo sát → app (không chặn bằng email). */
+	const verificationToken = generateVerificationToken();
+	const hashedToken = hashToken(verificationToken);
+
 	const user = await userRepository.createUser({
 		email: userData.email,
 		password: userData.password,
@@ -22,15 +25,24 @@ export const register = async (userData) => {
 		authProvider: userData.authProvider ?? AUTH_PROVIDER.LOCAL,
 		isActive: true,
 		status: USER_STATUS.ACTIVE,
-		isEmailVerified: true,
+		isEmailVerified: false,
+		emailVerificationToken: hashedToken,
+		emailVerificationExpires: Date.now() + TOKEN_EXPIRY.EMAIL_VERIFICATION,
 	});
 
-	const token = generateToken(user._id);
+	const emailSent = await sendVerificationEmail(
+		user.email,
+		user.name,
+		verificationToken,
+	);
+
+	if (!emailSent) {
+		throw { messageCode: COMMON.SERVER_ERROR, statusCode: 503 };
+	}
 
 	return {
-		user: await enrichUserWithBadges(user),
-		token,
-		messageCode: AUTH.REGISTER_SUCCESS,
+		email: user.email,
+		messageCode: AUTH.VERIFICATION_EMAIL_SENT,
 	};
 };
 
@@ -160,30 +172,47 @@ export const googleLogin = async (googleToken) => {
 };
 
 export const verifyEmail = async (token) => {
-	const hashedToken = hashToken(token);
-	
-	const user = await userRepository.findUserByVerificationToken(hashedToken);
-	
-	if (!user) {
+	const raw = String(token || '').trim();
+	if (!raw) {
 		throw { messageCode: AUTH.VERIFICATION_TOKEN_INVALID, statusCode: 400 };
 	}
-	
-	if (user.emailVerificationExpires < Date.now()) {
+
+	const hashedToken = hashToken(raw);
+
+	const user = await User.findOneAndUpdate(
+		{
+			emailVerificationToken: hashedToken,
+			emailVerificationExpires: { $gt: new Date() },
+			isEmailVerified: { $ne: true },
+		},
+		{
+			$set: { isEmailVerified: true, isActive: true },
+			$unset: { emailVerificationToken: 1, emailVerificationExpires: 1 },
+		},
+		{ new: true },
+	);
+
+	if (user) {
+		const jwtToken = generateToken(user._id);
+		return {
+			user: await enrichUserWithBadges(user),
+			token: jwtToken,
+		};
+	}
+
+	const stale = await User.findOne({ emailVerificationToken: hashedToken });
+	if (stale?.isEmailVerified) {
+		const jwtToken = generateToken(stale._id);
+		return {
+			user: await enrichUserWithBadges(stale),
+			token: jwtToken,
+		};
+	}
+	if (stale) {
 		throw { messageCode: AUTH.TOKEN_EXPIRED, statusCode: 400 };
 	}
-	
-	user.isEmailVerified = true;
-	user.isActive = true;
-	user.emailVerificationToken = undefined;
-	user.emailVerificationExpires = undefined;
-	await user.save();
-	
-	const jwtToken = generateToken(user._id);
-	
-	return {
-		user: await enrichUserWithBadges(user),
-		token: jwtToken,
-	};
+
+	throw { messageCode: AUTH.VERIFICATION_TOKEN_INVALID, statusCode: 400 };
 };
 
 export const resendVerificationEmail = async (email) => {
@@ -209,6 +238,59 @@ export const resendVerificationEmail = async (email) => {
 	return {
 		messageCode: AUTH.VERIFICATION_EMAIL_SENT,
 	};
+};
+
+/**
+ * Quên mật khẩu — luôn trả thành công (không lộ email có tồn tại).
+ * Chỉ gửi mail nếu user local có mật khẩu.
+ */
+export const requestPasswordReset = async (email) => {
+	const normalized = String(email || '').trim().toLowerCase();
+	const user = await userRepository.findUserByEmail(normalized);
+
+	if (
+		user &&
+		user.password &&
+		user.authProvider === AUTH_PROVIDER.LOCAL &&
+		user.isActive &&
+		user.status !== USER_STATUS.SUSPENDED
+	) {
+		const resetToken = generateVerificationToken();
+		const hashedToken = hashToken(resetToken);
+
+		user.passwordResetToken = hashedToken;
+		user.passwordResetExpires = Date.now() + TOKEN_EXPIRY.PASSWORD_RESET;
+		await user.save();
+
+		await sendPasswordResetEmail(user.email, user.name, resetToken);
+	}
+
+	return { messageCode: AUTH.PASSWORD_RESET_EMAIL_SENT };
+};
+
+export const resetPassword = async (token, newPassword) => {
+	const hashedToken = hashToken(token);
+	const user = await userRepository.findUserByPasswordResetToken(hashedToken);
+
+	if (!user) {
+		throw { messageCode: AUTH.VERIFICATION_TOKEN_INVALID, statusCode: 400 };
+	}
+
+	if (user.passwordResetExpires < Date.now()) {
+		throw { messageCode: AUTH.TOKEN_EXPIRED, statusCode: 400 };
+	}
+
+	user.password = newPassword;
+	user.passwordResetToken = undefined;
+	user.passwordResetExpires = undefined;
+	user.loginAttempts = 0;
+	user.lockUntil = undefined;
+	if (user.status === USER_STATUS.LOCKED) {
+		user.status = USER_STATUS.ACTIVE;
+	}
+	await user.save();
+
+	return { messageCode: AUTH.PASSWORD_RESET_SUCCESS };
 };
 
 export const adminLogin = async (email, password) => {

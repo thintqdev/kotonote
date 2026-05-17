@@ -10,7 +10,8 @@
   },
   "common": {
     "language": "Ngôn ngữ",
-    "loading": "Đang tải…"
+    "loading": "Đang tải…",
+    "apiError": "Đã xảy ra lỗi, vui lòng thử lại."
   },
   "lang": {
     "vi": "Tiếng Việt",
@@ -265,7 +266,53 @@
     "vocabLessonList": "Danh sách bài học",
     "alphabet": "Bảng chữ cái",
     "kanji": "Kanji",
-    "reading": "Đọc hiểu"
+    "reading": "Đọc hiểu",
+    "notebook": "Sổ tay"
+  },
+  "notebook": {
+    "pageTitle": "Sổ tay học tập",
+    "pageSubtitle": "Ghi chú, bảng biểu, hình ảnh — lưu trên tài khoản của bạn.",
+    "newNote": "Trang mới",
+    "search": "Tìm ghi chú",
+    "searchPlaceholder": "Tìm theo tiêu đề hoặc nội dung…",
+    "listEmpty": "Chưa có ghi chú. Tạo trang mới để bắt đầu.",
+    "untitled": "Không tiêu đề",
+    "noExcerpt": "Trang trống — viết gì đó nhé!",
+    "titlePlaceholder": "Tiêu đề trang…",
+    "coverColor": "Màu giấy",
+    "pin": "Ghim",
+    "saveNow": "Lưu ngay",
+    "delete": "Xóa",
+    "deleteConfirm": "Xóa ghi chú này? Không thể hoàn tác.",
+    "deleted": "Đã xóa ghi chú",
+    "saving": "Đang lưu…",
+    "saved": "Đã lưu",
+    "unsaved": "Chưa lưu",
+    "saveError": "Lưu thất bại",
+    "lastEdited": "Sửa lần cuối: {{date}}",
+    "editorToolbar": "Định dạng văn bản",
+    "editorAria": "Nội dung ghi chú",
+    "editorPlaceholder": "Viết ghi chú, dán bảng, chèn ảnh từ thanh công cụ…",
+    "editorLinkPrompt": "Nhập URL (https://…)",
+    "toolBold": "In đậm",
+    "toolItalic": "In nghiêng",
+    "toolUnderline": "Gạch chân",
+    "toolH2": "Tiêu đề lớn",
+    "toolH3": "Tiêu đề nhỏ",
+    "toolList": "Danh sách chấm",
+    "toolOrdered": "Danh sách số",
+    "toolQuote": "Trích dẫn",
+    "toolTable": "Chèn bảng",
+    "toolHr": "Đường kẻ ngang",
+    "toolLink": "Liên kết",
+    "toolImage": "Chèn ảnh",
+    "colors": {
+      "cream": "Giấy kem",
+      "sage": "Xanh lá nhạt",
+      "peach": "Đào",
+      "sky": "Xanh trời",
+      "lavender": "Tím nhạt"
+    }
   },
   "notFoundPage": {
     "crumb": "Không tìm thấy trang",
@@ -428,12 +475,16 @@
       "adv": "Trạng từ"
     },
     "lessonPageTitle": "Từ vựng",
-    "lessonPageSubtitle": "Học {{total}} từ vựng quan trọng trong mỗi chặng",
+    "lessonPageSubtitle": "Gói {{jlpt}}: {{lessonCount}} bài · {{totalWords}} từ vựng",
+    "lessonPageSubtitleEmpty": "Chưa có bài từ vựng trong gói này.",
     "goalLabel": "Mục tiêu:",
+    "jlptFilter": "Cấp JLPT",
+    "jlptAll": "Tất cả cấp",
     "lessonCardTitle": "Từ vựng bài {{n}}",
     "lessonCardSubtitle": "Học các từ vựng quan trọng trong bài này",
+    "lessonCardWordCount": "{{count}} từ trong deck",
     "lessonCardProgress": "{{learned}} / {{total}} từ",
-    "packCompleteLine": "· Gói JLPT: {{pct}}% đã nở hoa",
+    "packCompleteLine": "· {{flowerCount}}/{{lessonCount}} bài đã nở hoa ({{pct}}%)",
     "lessonCardGrowth": "{{stageName}} · {{words}} từ trong bài",
     "growthStageName": {
       "0": "Hạt giống",
@@ -444,8 +495,10 @@
   },
   "kanjiPage": {
     "lessonPageTitle": "Kanji",
-    "lessonPageSubtitle": "Học {{total}} chữ Kanji theo từng bài — thuộc hết chữ trong bài trước thì mới mở bài tiếp theo",
+    "lessonPageSubtitle": "Gói {{jlpt}}: {{lessonCount}} bài · {{totalKanji}} chữ Kanji — thuộc hết bài trước để mở bài tiếp",
+    "lessonPageSubtitleEmpty": "Chưa có bài Kanji trong gói này.",
     "goalLabel": "Mục tiêu:",
+    "jlptFilter": "Cấp JLPT",
     "jlptAll": "Tất cả cấp",
     "noResults": "Chưa có chữ Kanji trong gói này.",
     "lessonCardTitle": "Kanji bài {{n}}",
@@ -453,7 +506,7 @@
     "lessonLockedSubtitle": "Thuộc hết mọi chữ Kanji bài trước để mở khóa bài này",
     "lessonLockedAria": "Bài {{n}} đang khóa — hoàn thành bài trước trước",
     "lessonCardProgress": "Đã thuộc {{learned}} / {{total}} chữ",
-    "packCompleteLine": "· Gói JLPT: {{pct}}% đã nở hoa",
+    "packCompleteLine": "· {{flowerCount}}/{{lessonCount}} bài đã nở hoa ({{pct}}%)",
     "lessonCardGrowth": "{{stageName}} · {{kanji}} chữ trong bài",
     "growthStageName": {
       "0": "Hạt giống",
@@ -734,6 +787,81 @@
   "footer": {
     "dashQuote": "© 2026 Kotonote. All rights reserved. ♥ Developer by ThinTQ."
   },
+  "legal": {
+    "backToRegister": "Quay lại đăng ký",
+    "viewTerms": "Xem Điều khoản sử dụng",
+    "viewPrivacy": "Xem Chính sách bảo mật",
+    "terms": {
+      "title": "Điều khoản sử dụng",
+      "updated": "Có hiệu lực từ: 16/05/2026",
+      "intro": "Điều khoản này điều chỉnh việc bạn sử dụng ứng dụng học tiếng Nhật Kotonote Nihongo. Khi tạo tài khoản, bạn xác nhận đã đọc và đồng ý với các điều khoản dưới đây.",
+      "sections": [
+        {
+          "title": "1. Dịch vụ",
+          "body": "Kotonote Nihongo cung cấp nội dung và công cụ hỗ trợ tự học tiếng Nhật (ngữ pháp, từ vựng, kanji, đọc hiểu, v.v.). Chúng tôi có thể cập nhật, tạm ngưng hoặc ngừng một phần tính năng để bảo trì hoặc cải thiện dịch vụ."
+        },
+        {
+          "title": "2. Tài khoản",
+          "body": "Bạn chịu trách nhiệm bảo mật thông tin đăng nhập và mọi hoạt động trên tài khoản. Thông tin đăng ký phải chính xác; không mạo danh hoặc sử dụng email của người khác mà không được phép."
+        },
+        {
+          "title": "3. Sử dụng chấp nhận được",
+          "body": "Không được: (a) can thiệp hệ thống, spam hoặc tấn công dịch vụ; (b) sao chép, bán lại nội dung có bản quyền trái phép; (c) đăng nội dung vi phạm pháp luật hoặc quyền của bên thứ ba. Vi phạm có thể dẫn đến khóa hoặc xóa tài khoản."
+        },
+        {
+          "title": "4. Nội dung và quyền sở hữu trí tuệ",
+          "body": "Nội dung do Kotonote cung cấp (bài học, giao diện, logo, v.v.) thuộc quyền của chúng tôi hoặc bên cấp phép. Bạn được phép sử dụng cho mục đích học tập cá nhân, phi thương mại, trừ khi có thỏa thuận khác."
+        },
+        {
+          "title": "5. Miễn trừ trách nhiệm",
+          "body": "Ứng dụng hỗ trợ học tập, không thay thế giáo trình chính thức hay kết quả kỳ thi JLPT. Chúng tôi nỗ lực duy trì độ chính xác nhưng không đảm bảo nội dung không có sai sót. Dịch vụ được cung cấp \"nguyên trạng\" trong phạm vi pháp luật cho phép."
+        },
+        {
+          "title": "6. Chấm dứt",
+          "body": "Bạn có thể ngừng sử dụng và yêu cầu xóa tài khoản theo hướng dẫn trong ứng dụng hoặc liên hệ hỗ trợ. Chúng tôi có thể đình chỉ tài khoản nếu vi phạm điều khoản hoặc vì lý do bảo mật."
+        },
+        {
+          "title": "7. Thay đổi điều khoản",
+          "body": "Chúng tôi có thể cập nhật điều khoản; phiên bản mới sẽ được đăng trên trang này kèm ngày hiệu lực. Việc tiếp tục sử dụng sau khi cập nhật được coi là chấp nhận điều khoản mới."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Chính sách bảo mật",
+      "updated": "Có hiệu lực từ: 16/05/2026",
+      "intro": "Chính sách này mô tả cách Kotonote Nihongo thu thập, sử dụng và bảo vệ thông tin khi bạn dùng ứng dụng.",
+      "sections": [
+        {
+          "title": "1. Thông tin chúng tôi thu thập",
+          "body": "Khi đăng ký: email, tên hiển thị, mật khẩu (được mã hóa). Khi sử dụng: tiến độ học, streak, khảo sát mục tiêu, cài đặt hồ sơ, huy hiệu và dữ liệu bạn tự nhập (sổ tay, bộ từ, v.v.). Khi đăng nhập Google: thông tin cơ bản từ tài khoản Google theo phạm vi bạn cho phép."
+        },
+        {
+          "title": "2. Mục đích sử dụng",
+          "body": "Cung cấp và cá nhân hóa trải nghiệm học; xác thực tài khoản; gửi email xác minh hoặc đặt lại mật khẩu; thông báo trong app; cải thiện tính năng và khắc phục sự cố; tuân thủ pháp luật."
+        },
+        {
+          "title": "3. Lưu trữ và bảo mật",
+          "body": "Dữ liệu lưu trên máy chủ bảo mật; truyền qua HTTPS. Mật khẩu được băm, không lưu dạng văn bản thuần. Chúng tôi áp dụng biện pháp kỹ thuật và tổ chức hợp lý nhưng không thể đảm bảo an toàn tuyệt đối trên internet."
+        },
+        {
+          "title": "4. Chia sẻ với bên thứ ba",
+          "body": "Chúng tôi không bán dữ liệu cá nhân. Có thể dùng nhà cung cấp (email, hosting, đăng nhập Google) chỉ để vận hành dịch vụ, theo hợp đồng và chính sách bảo mật của họ. Chia sẻ khi pháp luật yêu cầu."
+        },
+        {
+          "title": "5. Cookie và thiết bị",
+          "body": "Ứng dụng lưu token đăng nhập và tùy chọn ngôn ngữ trên trình duyệt/thiết bị của bạn. Bạn có thể xóa qua cài đặt trình duyệt; điều này có thể yêu cầu đăng nhập lại."
+        },
+        {
+          "title": "6. Quyền của bạn",
+          "body": "Bạn có thể xem và cập nhật hồ sơ trong app; yêu cầu xóa tài khoản hoặc dữ liệu qua liên hệ hỗ trợ. Nếu dùng đăng nhập Google, bạn có thể thu hồi quyền trong cài đặt Google."
+        },
+        {
+          "title": "7. Trẻ em và thay đổi chính sách",
+          "body": "Dịch vụ không hướng tới trẻ em dưới 13 tuổi mà không có sự đồng ý của phụ huynh. Chúng tôi có thể cập nhật chính sách; phiên bản mới sẽ hiển thị trên trang này. Liên hệ: email hỗ trợ ghi trong ứng dụng hoặc trang đăng ký."
+        }
+      ]
+    }
+  },
   "authLayout": {
     "sticky1": "Hôm nay",
     "sticky2": "cũng là ngày tốt!",
@@ -757,11 +885,50 @@
     "noAccount": "Chưa có tài khoản?",
     "register": "Đăng ký",
     "success": "Đăng nhập thành công",
+    "verifyRequired": "Vui lòng xác minh email trước khi đăng nhập",
     "errors": {
       "emailRequired": "Vui lòng nhập email",
       "emailInvalid": "Email không hợp lệ",
       "passwordRequired": "Vui lòng nhập mật khẩu",
       "submitFailed": "Đăng nhập không thành công"
+    }
+  },
+  "forgotPassword": {
+    "title": "Quên mật khẩu",
+    "lead": "Nhập email đã đăng ký. Chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu nếu tài khoản tồn tại.",
+    "email": "Email",
+    "submit": "Gửi liên kết",
+    "successTitle": "Kiểm tra hộp thư",
+    "successLead": "Nếu {{email}} đã đăng ký, bạn sẽ nhận email hướng dẫn trong vài phút. Hãy kiểm tra cả thư mục spam.",
+    "successToast": "Đã gửi yêu cầu — vui lòng kiểm tra email",
+    "rememberPassword": "Nhớ mật khẩu?",
+    "backToLogin": "Quay lại đăng nhập",
+    "errors": {
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Email không hợp lệ",
+      "submitFailed": "Không gửi được yêu cầu"
+    }
+  },
+  "resetPassword": {
+    "title": "Đặt lại mật khẩu",
+    "lead": "Chọn mật khẩu mới cho tài khoản của bạn.",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "passwordPlaceholder": "Tối thiểu 6 ký tự",
+    "confirmPlaceholder": "Nhập lại mật khẩu",
+    "submit": "Lưu mật khẩu",
+    "successTitle": "Đã đổi mật khẩu",
+    "successLead": "Bạn có thể đăng nhập bằng mật khẩu mới.",
+    "successToast": "Đặt lại mật khẩu thành công",
+    "backToLogin": "Đăng nhập",
+    "requestNewLink": "Gửi lại link đặt mật khẩu",
+    "errors": {
+      "tokenMissing": "Link không hợp lệ hoặc thiếu mã. Vui lòng yêu cầu email mới.",
+      "passwordRequired": "Vui lòng nhập mật khẩu",
+      "passwordShort": "Mật khẩu tối thiểu 6 ký tự",
+      "confirmRequired": "Vui lòng xác nhận mật khẩu",
+      "confirmMismatch": "Mật khẩu xác nhận không khớp",
+      "submitFailed": "Không đặt lại được mật khẩu"
     }
   },
   "register": {
@@ -782,6 +949,7 @@
     "hasAccount": "Đã có tài khoản?",
     "login": "Đăng nhập",
     "success": "Đăng ký thành công",
+    "successVerify": "Đăng ký thành công — vui lòng kiểm tra email để xác minh",
     "errors": {
       "username": "Vui lòng nhập tên người dùng",
       "usernameShort": "Tên hiển thị tối thiểu 2 ký tự",
@@ -794,6 +962,27 @@
       "terms": "Bạn cần đồng ý điều khoản",
       "submitFailed": "Đăng ký không thành công"
     }
+  },
+  "registerThankYou": {
+    "title": "Cảm ơn bạn đã đăng ký!",
+    "lead": "Chúng tôi đã gửi email xác minh tới {{email}}. Vui lòng mở hộp thư và bấm link để kích hoạt tài khoản.",
+    "hint": "Sau khi xác minh, bạn sẽ được chuyển tới bước khảo sát ngắn trước khi vào ứng dụng. Kiểm tra cả thư mục spam nếu không thấy mail.",
+    "resend": "Gửi lại email xác minh",
+    "resendSuccess": "Đã gửi lại email xác minh",
+    "resendFailed": "Không gửi được email",
+    "backToLogin": "Quay lại đăng nhập"
+  },
+  "verifyEmail": {
+    "confirmTitle": "Xác minh email",
+    "confirmLead": "Nhấn nút bên dưới để kích hoạt tài khoản. (Tránh mở link tự động làm hỏng mã xác minh.)",
+    "confirmButton": "Xác nhận email của tôi",
+    "verifying": "Đang xác minh email…",
+    "redirecting": "Xác minh thành công — đang chuyển tới khảo sát…",
+    "successToast": "Email đã được xác minh",
+    "missingTitle": "Link không hợp lệ",
+    "missingLead": "Thiếu mã xác minh. Mở link đầy đủ từ email hoặc yêu cầu gửi lại.",
+    "errorTitle": "Không xác minh được",
+    "errorLead": "Link có thể đã hết hạn hoặc đã được dùng."
   },
   "survey": {
     "title": "Khảo sát lần đầu",
@@ -955,11 +1144,33 @@
     "region": "Khu vực",
     "joined": "Tham gia",
     "timezone": "Múi giờ",
+    "regionPlaceholder": "Chọn khu vực",
+    "timezonePlaceholder": "Chọn múi giờ",
+    "regions": {
+      "vn": "Việt Nam",
+      "jp": "Nhật Bản"
+    },
+    "timezones": {
+      "gmt+7": "GMT+7 (Việt Nam, ICT)",
+      "gmt+9": "GMT+9 (Nhật Bản, JST)"
+    },
     "aboutTitle": "Giới thiệu",
     "aboutField": "Về bản thân",
     "statsTitle": "Tóm tắt học tập",
     "statsAria": "Thống kê học tập",
+    "statsLoading": "Đang tải…",
     "streak": "Chuỗi ngày",
+    "streakLongest": "Kỷ lục {{n}}",
+    "weeklyCheckIn": "Check-in tuần",
+    "weeklyCheckInValue": "{{n}}/7",
+    "badgesUnlocked": "Huy hiệu",
+    "badgeLatest": "Mới: {{name}}",
+    "examCountdown": "Đến kỳ thi",
+    "examToday": "Hôm nay",
+    "examDaysLeft": "{{n}} ngày",
+    "examDaysPast": "Qua {{n}} ngày",
+    "libraryTotal": "Nội dung học",
+    "libraryTotalValue": "{{n}} bài",
     "xp": "Điểm XP",
     "weeklyMin": "Phút / tuần",
     "level": "Cấp độ",
@@ -1012,6 +1223,16 @@
       }
     },
     "focusTitle": "Trọng tâm ôn",
+    "focusHint": "Chọn tối đa {{max}} môn bạn muốn ưu tiên (bấm để bật/tắt).",
+    "focusEmpty": "Chưa chọn trọng tâm — bấm Sửa hồ sơ để thêm.",
+    "focusMaxReached": "Đã đủ {{max}} môn — bỏ chọn một môn để thêm môn khác.",
+    "focusOptions": {
+      "grammar": "Ngữ pháp",
+      "vocab": "Từ vựng",
+      "kanji": "Kanji",
+      "reading": "Đọc hiểu",
+      "listening": "Nghe"
+    },
     "badgesTitle": "Huy hiệu",
     "badgesAria": "Huy hiệu",
     "badgesEmpty": "Chưa có huy hiệu nào. Check-in streak hoặc hoàn thành mục tiêu để mở khóa thành tựu.",
@@ -1070,6 +1291,9 @@
     "MSG_116": "Link xác thực không hợp lệ hoặc đã hết hạn",
     "MSG_117": "Đã đổi mật khẩu thành công",
     "MSG_118": "Tài khoản này không dùng mật khẩu cục bộ (ví dụ đăng nhập Google). Không thể đổi mật khẩu tại đây.",
+    "MSG_119": "Nếu email đã đăng ký, bạn sẽ nhận hướng dẫn đặt lại mật khẩu trong vài phút",
+    "MSG_120": "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập với mật khẩu mới",
+    "MSG_121": "Email này đã được đăng ký. Vui lòng đăng nhập hoặc dùng email khác.",
     "MSG_201": "Tạo người dùng thành công",
     "MSG_202": "Cập nhật người dùng thành công",
     "MSG_203": "Xóa người dùng thành công",
@@ -1077,6 +1301,16 @@
     "MSG_205": "Người dùng đã tồn tại",
     "MSG_206": "Lấy thông tin người dùng thành công",
     "MSG_207": "Lấy danh sách người dùng thành công",
+    "MSG_208": "Lấy tóm tắt học tập thành công",
+    "MSG_209": "Lấy trọng tâm ôn thành công",
+    "MSG_210": "Cập nhật trọng tâm ôn thành công",
+    "MSG_950": "Tạo ghi chú thành công",
+    "MSG_951": "Cập nhật ghi chú thành công",
+    "MSG_952": "Xóa ghi chú thành công",
+    "MSG_953": "Lấy ghi chú thành công",
+    "MSG_954": "Lấy danh sách ghi chú thành công",
+    "MSG_955": "Không tìm thấy ghi chú",
+    "MSG_956": "Tải ảnh lên thành công",
     "MSG_301": "Khảo sát đã được gửi thành công",
     "MSG_302": "Cập nhật khảo sát thành công",
     "MSG_303": "Lấy thông tin khảo sát thành công",
@@ -1117,6 +1351,20 @@
     "MSG_909": "Xóa bộ Kanji thành công",
     "MSG_910": "Lấy thông tin bộ Kanji thành công",
     "MSG_911": "Không tìm thấy bộ Kanji",
-    "MSG_912": "Bộ Kanji đã đầy (tối đa 25 chữ)"
+    "MSG_912": "Bộ Kanji đã đầy (tối đa 25 chữ)",
+    "MSG_913": "Tạo bài ngữ pháp thành công",
+    "MSG_914": "Cập nhật bài ngữ pháp thành công",
+    "MSG_915": "Xóa bài ngữ pháp thành công",
+    "MSG_916": "Lấy bài ngữ pháp thành công",
+    "MSG_917": "Không tìm thấy bài ngữ pháp",
+    "MSG_918": "Lấy danh sách ngữ pháp thành công",
+    "MSG_919": "Slug ngữ pháp đã tồn tại",
+    "MSG_801": "Tạo huy hiệu thành công",
+    "MSG_802": "Cập nhật huy hiệu thành công",
+    "MSG_803": "Xóa huy hiệu thành công",
+    "MSG_804": "Lấy thông tin huy hiệu thành công",
+    "MSG_805": "Không tìm thấy huy hiệu",
+    "MSG_806": "Lấy danh sách huy hiệu thành công",
+    "MSG_807": "Mã huy hiệu đã tồn tại"
   }
 }

@@ -1,12 +1,22 @@
 import Joi from 'joi';
+import {
+	PROFILE_REGION_KEYS,
+	PROFILE_TIMEZONE_KEYS,
+} from '../constants/profileLocale.js';
 
 const EXAM_TYPES = ['jlpt', 'nat', 'jtest', 'topj', 'eju', 'other'];
 
 const profileSchema = Joi.object({
 	readingName: Joi.string().allow('', null).trim().max(80),
 	title: Joi.string().allow('', null).trim().max(120),
-	location: Joi.string().allow('', null).trim().max(120),
-	timeZoneLabel: Joi.string().allow('', null).trim().max(80),
+	location: Joi.string()
+		.allow('', null)
+		.valid(...PROFILE_REGION_KEYS, '')
+		.messages({ 'any.only': 'Invalid region' }),
+	timeZoneLabel: Joi.string()
+		.allow('', null)
+		.valid(...PROFILE_TIMEZONE_KEYS, '')
+		.messages({ 'any.only': 'Invalid timezone' }),
 	bio: Joi.string().allow('', null).max(2000),
 	examTypeKey: Joi.string().valid(...EXAM_TYPES),
 	examLevelKey: Joi.string().allow('', null).trim().max(40),

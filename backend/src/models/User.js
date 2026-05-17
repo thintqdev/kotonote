@@ -29,6 +29,11 @@ const userProfileSchema = new mongoose.Schema(
 		examLevelKey: { type: String, default: '', trim: true, maxlength: 40 },
 		examDateIso: { type: String, default: '', trim: true, maxlength: 32 },
 		examOtherNote: { type: String, default: '', trim: true, maxlength: 500 },
+		/** Môn ưu tiên ôn — key trong `focusAreas` constants */
+		focusAreaKeys: {
+			type: [String],
+			default: () => ['grammar', 'vocab', 'kanji'],
+		},
 	},
 	{ _id: false }
 );
@@ -110,6 +115,14 @@ const userSchema = new mongoose.Schema(
 		emailVerificationExpires: {
 			type: Date,
 		},
+		passwordResetToken: {
+			type: String,
+			select: false,
+		},
+		passwordResetExpires: {
+			type: Date,
+			select: false,
+		},
 	},
 	{
 		timestamps: true,
@@ -174,6 +187,8 @@ userSchema.methods.toJSON = function () {
 	delete obj.lockUntil;
 	delete obj.emailVerificationToken;
 	delete obj.emailVerificationExpires;
+	delete obj.passwordResetToken;
+	delete obj.passwordResetExpires;
 	return obj;
 };
 

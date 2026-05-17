@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
@@ -6,66 +6,160 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
-  KANJI_ITEMS,
   mergeKanjiMarks,
-  getDistinctKanjiJlptLevels,
-  KANJI_LESSON_SIZE,
   getKanjiLessonGrowthStage,
-  getKanjiPackCompletionPercent,
   KANJI_LESSON_GROWTH_MAX,
-  isKanjiLessonUnlocked,
 } from "../data/kanjiMock.js";
 import { getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
+import {
+  listKanjiDecks,
+  loadAllKanjiPacks,
+  loadKanjiPack,
+} from "../services/kanjiService.js";
+import {
+  buildDeckLessons,
+  buildLessonNoInJlptMap,
+  filterActiveDecks,
+  jlptLevelsFromDecks,
+  packFlowerProgress,
+  packFlowerProgressForLessons,
+} from "../utils/deckStudy.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
-
-const FIXED_TARGET_JLPT = "N3";
 
 export default function KanjiListPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
 
   const [marks] = useState(() => ({}));
-  const jlptLevels = useMemo(() => getDistinctKanjiJlptLevels(), []);
-  const targetJlpt = useMemo(() => {
-    if (jlptLevels.includes(FIXED_TARGET_JLPT)) return FIXED_TARGET_JLPT;
-    return jlptLevels[0] || "";
-  }, [jlptLevels]);
+  const [jlptLevels, setJlptLevels] = useState([]);
+  const [selectedJlpt, setSelectedJlpt] = useState("");
+  const [packItems, setPackItems] = useState([]);
+  const [sortedDecks, setSortedDecks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const merged = useMemo(() => mergeKanjiMarks(KANJI_ITEMS, marks), [marks]);
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const { decks } = await listKanjiDecks({ isActive: true, limit: 100 });
+        if (!cancelled) {
+          setJlptLevels(jlptLevelsFromDecks(filterActiveDecks(decks)));
+        }
+      } catch {
+        if (!cancelled) setJlptLevels([]);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
-  const lessons = useMemo(() => {
-    const filtered = targetJlpt
-      ? merged.filter((item) => item.jlpt === targetJlpt)
-      : merged;
-    const chunks = [];
-    for (let i = 0; i < filtered.length; i += KANJI_LESSON_SIZE) {
-      const items = filtered.slice(i, i + KANJI_LESSON_SIZE);
-      const learned = items.filter((x) => x.learned).length;
-      const lessonNo = i / KANJI_LESSON_SIZE + 1;
-      chunks.push({
-        id: `kanji-lesson-${lessonNo}`,
-        lessonNo,
-        learned,
-        total: items.length,
-        items,
-        unlocked: isKanjiLessonUnlocked(merged, targetJlpt, lessonNo),
-      });
+  useEffect(() => {
+    if (!user) {
+      setLoading(false);
+      return;
     }
-    return chunks;
-  }, [merged, targetJlpt]);
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const pack = selectedJlpt
+          ? await loadKanjiPack(selectedJlpt)
+          : await loadAllKanjiPacks();
+        if (!cancelled) {
+          setSortedDecks(pack.decks);
+          setPackItems(pack.items);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(getApiErrorMessage(err, t));
+          setSortedDecks([]);
+          setPackItems([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, selectedJlpt, t]);
 
+  const merged = useMemo(
+    () => mergeKanjiMarks(packItems, marks),
+    [packItems, marks],
+  );
+
+  const lessons = useMemo(
+    () => buildDeckLessons(sortedDecks, merged),
+    [sortedDecks, merged],
+  );
+
+  const lessonNoInJlpt = useMemo(
+    () => buildLessonNoInJlptMap(lessons),
+    [lessons],
+  );
+
+  const lessonCount = lessons.length;
   const totalKanji = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
 
-  const packCompletePct = useMemo(
-    () => getKanjiPackCompletionPercent(merged, targetJlpt, lessons.length),
-    [merged, targetJlpt, lessons.length],
-  );
+  const displayJlpt = selectedJlpt || t("kanjiPage.jlptAll");
+
+  const packProgress = useMemo(() => {
+    if (!lessonCount) {
+      return { flowerCount: 0, lessonCount: 0, pct: 0 };
+    }
+    if (selectedJlpt) {
+      return packFlowerProgress(
+        selectedJlpt,
+        lessonCount,
+        getKanjiLessonGrowthStage,
+        KANJI_LESSON_GROWTH_MAX,
+      );
+    }
+    return packFlowerProgressForLessons(
+      lessons,
+      getKanjiLessonGrowthStage,
+      KANJI_LESSON_GROWTH_MAX,
+      lessonNoInJlpt,
+    );
+  }, [selectedJlpt, lessonCount, lessons, lessonNoInJlpt]);
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
+
+  if (loading) {
+    return (
+      <Layout
+        userName={headerName}
+        streakDays={mockStreak.days}
+        pageClassName="vocab-dash"
+      >
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout
+        userName={headerName}
+        streakDays={mockStreak.days}
+        pageClassName="vocab-dash"
+      >
+        <p className="vocab-empty grammar-empty--error" role="alert">
+          {error}
+        </p>
+      </Layout>
+    );
+  }
 
   return (
     <Layout
@@ -98,21 +192,41 @@ export default function KanjiListPage() {
                 {t("kanjiPage.lessonPageTitle")}
               </h1>
               <p className="vocab-lesson-sub">
-                {t("kanjiPage.lessonPageSubtitle", { total: totalKanji })}{" "}
-                <span className="vocab-lesson-pack-pct">
-                  {t("kanjiPage.packCompleteLine", { pct: packCompletePct })}
-                </span>
+                {lessonCount > 0 ? (
+                  <>
+                    {t("kanjiPage.lessonPageSubtitle", {
+                      jlpt: displayJlpt,
+                      lessonCount,
+                      totalKanji,
+                    })}{" "}
+                    <span className="vocab-lesson-pack-pct">
+                      {t("kanjiPage.packCompleteLine", packProgress)}
+                    </span>
+                  </>
+                ) : (
+                  t("kanjiPage.lessonPageSubtitleEmpty")
+                )}
               </p>
             </div>
           </div>
 
           <div className="vocab-lesson-goal-box">
-            <span className="vocab-lesson-goal-label">
-              {t("kanjiPage.goalLabel")}
-            </span>
-            <strong className="vocab-lesson-goal-value">
-              {targetJlpt || t("kanjiPage.jlptAll")}
-            </strong>
+            <label htmlFor="kanji-jlpt-select" className="vocab-lesson-goal-label">
+              {t("kanjiPage.jlptFilter")}
+            </label>
+            <select
+              id="kanji-jlpt-select"
+              className="vocab-jlpt-select"
+              value={selectedJlpt}
+              onChange={(e) => setSelectedJlpt(e.target.value)}
+            >
+              <option value="">{t("kanjiPage.jlptAll")}</option>
+              {jlptLevels.map((lv) => (
+                <option key={lv} value={lv}>
+                  {lv}
+                </option>
+              ))}
+            </select>
           </div>
         </header>
 
@@ -123,18 +237,20 @@ export default function KanjiListPage() {
         ) : (
           <ul className="vocab-lesson-list">
             {lessons.map((lesson) => {
-              const growth = targetJlpt
-                ? getKanjiLessonGrowthStage(targetJlpt, lesson.lessonNo)
-                : 0;
+              const growthLessonNo =
+                lessonNoInJlpt.get(lesson.id) ?? lesson.lessonNo;
+              const growth = getKanjiLessonGrowthStage(
+                lesson.jlpt,
+                growthLessonNo,
+              );
               const progressPct =
                 KANJI_LESSON_GROWTH_MAX > 0
                   ? Math.round((growth / KANJI_LESSON_GROWTH_MAX) * 100)
                   : 0;
               const milestoneLitCount = getLessonMilestoneLitCount(growth);
-              const studyTo =
-                targetJlpt && lesson.lessonNo
-                  ? `/kanji/lesson/${lesson.lessonNo}?jlpt=${encodeURIComponent(targetJlpt)}`
-                  : "/kanji/browse";
+              const studyTo = lesson.lessonNo
+                ? `/kanji/lesson/${growthLessonNo}?jlpt=${encodeURIComponent(lesson.jlpt)}`
+                : "/kanji/browse";
 
               const cardInner = (
                 <>
@@ -150,6 +266,11 @@ export default function KanjiListPage() {
 
                   <div className="vocab-lesson-main">
                     <h2 className="vocab-lesson-card-title">
+                      {!selectedJlpt ? (
+                        <span className="vocab-lesson-jlpt-tag">
+                          {lesson.jlpt}
+                        </span>
+                      ) : null}
                       {t("kanjiPage.lessonCardTitle", { n: lesson.lessonNo })}
                       {!lesson.unlocked ? (
                         <span className="vocab-lesson-lock-badge" aria-hidden>

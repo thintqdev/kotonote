@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
+import {
+	getApiErrorMessage,
+	translateMessageCode,
+} from '../utils/apiErrorMessage.js';
 import {
 	clearAdminToken,
 	clearUserToken,
@@ -60,12 +63,17 @@ function attachAuthInterceptors(instance, opts) {
 					}
 				}
 			}
-			const message = getAxiosErrorMessage(error);
+			const code =
+				typeof error.response?.data?.messageCode === 'string'
+					? error.response.data.messageCode.trim()
+					: '';
+			const message = code
+				? translateMessageCode(code)
+				: getApiErrorMessage(error);
 			const err = new Error(message);
-			const code = error.response?.data?.messageCode;
-			if (typeof code === 'string' && code.trim()) {
+			if (code) {
 				/** @type {Error & { messageCode?: string }} */ (err).messageCode =
-					code.trim();
+					code;
 			}
 			return Promise.reject(err);
 		}

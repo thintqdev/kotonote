@@ -9,7 +9,7 @@ import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 const RegisterPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { signUp } = useAuth();
   const [data, setData] = useState({
     username: '',
     email: '',
@@ -57,18 +57,25 @@ const RegisterPage = () => {
     setIsSubmitting(true);
     setErrors((prev) => ({ ...prev, general: '' }));
     try {
-      await register(
-        data.username.trim(),
-        data.email.trim(),
-        data.password,
-        rememberMe,
-      );
-      toast.success(t('register.success'));
-      navigate('/survey', { replace: true });
+      const email = data.email.trim();
+      await signUp(data.username.trim(), email, data.password);
+      toast.success(t('register.successVerify'));
+      navigate('/register/thank-you', {
+        replace: true,
+        state: { email },
+      });
     } catch (err) {
-      const msg = getAxiosErrorMessage(err);
-      setErrors((prev) => ({ ...prev, general: msg }));
-      toast.error(t('register.errors.submitFailed'), { description: msg });
+      const code =
+        err && typeof err === 'object' && 'messageCode' in err
+          ? /** @type {{ messageCode?: string }} */ (err).messageCode
+          : undefined;
+      const msg = getAxiosErrorMessage(err, t);
+      if (code === 'MSG_121' || code === 'MSG_205') {
+        setErrors((prev) => ({ ...prev, email: msg, general: '' }));
+      } else {
+        setErrors((prev) => ({ ...prev, general: msg }));
+      }
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
@@ -224,9 +231,25 @@ const RegisterPage = () => {
             />
             <span className="checkbox-text">
               {t('register.termsPrefix')}{' '}
-              <a href="#" className="terms-link">{t('register.terms')}</a>
+              <Link
+                to="/terms"
+                className="terms-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t('register.terms')}
+              </Link>
               {' '}{t('register.termsAnd')}{' '}
-              <a href="#" className="terms-link">{t('register.privacy')}</a>
+              <Link
+                to="/privacy"
+                className="terms-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t('register.privacy')}
+              </Link>
             </span>
           </label>
           {errors.terms && <span className="error-msg">{errors.terms}</span>}

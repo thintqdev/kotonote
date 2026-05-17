@@ -52,7 +52,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   userName: PropTypes.string.isRequired,
   footerQuote: PropTypes.string,
-  streakDays: PropTypes.number.isRequired,
+  streakDays: PropTypes.number,
   pageClassName: PropTypes.string,
   mainInnerClassName: PropTypes.string,
 };

@@ -12,11 +12,37 @@ export async function login(credentials) {
 }
 
 /**
+ * Đăng ký — không trả JWT; client chuyển sang trang chờ xác minh email.
  * @param {{ name: string, email: string, password: string }} payload
- * @returns {Promise<{ user: object, token: string }>}
+ * @returns {Promise<{ email: string }>}
  */
 export async function register(payload) {
 	const body = await api.post(AUTH.REGISTER, payload);
+	return getApiData(body);
+}
+
+/**
+ * @param {string} token — token từ link email
+ * @returns {Promise<{ user: object, token: string }>}
+ */
+export async function verifyEmail(token, axiosConfig = {}) {
+	const body = await api.post(
+		AUTH.VERIFY_EMAIL,
+		{ token: String(token || '').trim() },
+		axiosConfig,
+	);
+	return getApiData(body);
+}
+
+/**
+ * @param {string} email
+ */
+export async function resendVerificationEmail(email, axiosConfig = {}) {
+	const body = await api.post(
+		AUTH.RESEND_VERIFICATION,
+		{ email: String(email || '').trim() },
+		axiosConfig,
+	);
 	return getApiData(body);
 }
 
@@ -26,6 +52,27 @@ export async function register(payload) {
  */
 export async function changePassword(payload, axiosConfig = {}) {
 	const body = await api.post(AUTH.CHANGE_PASSWORD, payload, axiosConfig);
+	return getApiData(body);
+}
+
+/**
+ * @param {string} email
+ */
+export async function requestPasswordReset(email, axiosConfig = {}) {
+	const trimmed = String(email || '').trim();
+	const body = await api.post(
+		AUTH.FORGOT_PASSWORD,
+		{ email: trimmed },
+		axiosConfig,
+	);
+	return getApiData(body);
+}
+
+/**
+ * @param {{ token: string, newPassword: string }} payload
+ */
+export async function resetPassword(payload, axiosConfig = {}) {
+	const body = await api.post(AUTH.RESET_PASSWORD, payload, axiosConfig);
 	return getApiData(body);
 }
 

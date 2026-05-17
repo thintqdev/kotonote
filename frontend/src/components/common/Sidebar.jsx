@@ -151,7 +151,7 @@ const Sidebar = ({ streakDays }) => {
 };
 
 Sidebar.propTypes = {
-  streakDays: PropTypes.number.isRequired,
+  streakDays: PropTypes.number,
 };
 
 export default Sidebar;

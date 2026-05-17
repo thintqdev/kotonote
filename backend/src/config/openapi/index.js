@@ -7,6 +7,8 @@ import { vocabularyPaths } from './paths/vocabulary.js';
 import { kanjiPaths } from './paths/kanji.js';
 import { aiPaths } from './paths/ai.js';
 import { streakPaths } from './paths/streaks.js';
+import { grammarPaths } from './paths/grammar.js';
+import { adminGrammarPaths } from './paths/adminGrammar.js';
 import { systemPaths } from './paths/system.js';
 
 export const openApiSpec = {
@@ -67,6 +69,8 @@ export const openApiSpec = {
 		...kanjiPaths,
 		...aiPaths,
 		...streakPaths,
+		...grammarPaths,
+		...adminGrammarPaths,
 		...systemPaths,
 	},
 };

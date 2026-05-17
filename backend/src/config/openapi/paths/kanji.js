@@ -1,10 +1,16 @@
+const authResponses = {
+	'401': { $ref: '#/components/responses/Unauthorized' },
+	'403': { $ref: '#/components/responses/Forbidden' },
+};
+
 export const kanjiPaths = {
-	// ============ PUBLIC KANJI ROUTES ============
+	// ============ USER KANJI ROUTES (Bearer JWT) ============
 	'/api/kanji/decks': {
 		get: {
-			tags: ['Kanji'],
-			summary: 'Get all kanji decks',
-			description: 'Get all kanji decks with optional filters',
+			tags: ['Kanji - User'],
+			summary: 'Get all kanji decks (User)',
+			description: 'Requires authentication. Get all active kanji decks with optional filters.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'jlpt',
@@ -64,14 +70,16 @@ export const kanjiPaths = {
 						},
 					},
 				},
+				...authResponses,
 			},
 		},
 	},
 	'/api/kanji/decks/{id}': {
 		get: {
-			tags: ['Kanji'],
-			summary: 'Get kanji deck by ID',
-			description: 'Get detailed information about a specific kanji deck',
+			tags: ['Kanji - User'],
+			summary: 'Get kanji deck by ID (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'id',
@@ -103,14 +111,16 @@ export const kanjiPaths = {
 					},
 				},
 				'404': { $ref: '#/components/responses/NotFound' },
+				...authResponses,
 			},
 		},
 	},
 	'/api/kanji/decks/{id}/kanji': {
 		get: {
-			tags: ['Kanji'],
-			summary: 'Get deck with all kanji',
-			description: 'Get deck information along with all kanji characters in the deck',
+			tags: ['Kanji - User'],
+			summary: 'Get deck with all kanji (User)',
+			description: 'Requires authentication. Deck with all kanji in the deck.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'id',
@@ -147,14 +157,16 @@ export const kanjiPaths = {
 					},
 				},
 				'404': { $ref: '#/components/responses/NotFound' },
+				...authResponses,
 			},
 		},
 	},
 	'/api/kanji/deck/{deckId}/kanji': {
 		get: {
-			tags: ['Kanji'],
-			summary: 'Get kanji by deck',
-			description: 'Get all kanji characters in a specific deck',
+			tags: ['Kanji - User'],
+			summary: 'Get kanji by deck (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'deckId',
@@ -190,14 +202,16 @@ export const kanjiPaths = {
 					},
 				},
 				'404': { $ref: '#/components/responses/NotFound' },
+				...authResponses,
 			},
 		},
 	},
 	'/api/kanji/{id}': {
 		get: {
-			tags: ['Kanji'],
-			summary: 'Get kanji by ID',
-			description: 'Get detailed information about a specific kanji character',
+			tags: ['Kanji - User'],
+			summary: 'Get kanji by ID (User)',
+			description: 'Requires authentication.',
+			security: [{ bearerAuth: [] }],
 			parameters: [
 				{
 					name: 'id',
@@ -229,6 +243,7 @@ export const kanjiPaths = {
 					},
 				},
 				'404': { $ref: '#/components/responses/NotFound' },
+				...authResponses,
 			},
 		},
 	},

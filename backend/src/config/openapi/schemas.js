@@ -16,6 +16,80 @@ export const schemas = {
 			},
 		},
 	},
+	ProfileFocusAreas: {
+		type: 'object',
+		properties: {
+			selectedKeys: {
+				type: 'array',
+				items: { type: 'string', enum: ['grammar', 'vocab', 'kanji', 'reading', 'listening'] },
+			},
+			maxSelectable: { type: 'integer', example: 4 },
+			options: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						key: { type: 'string' },
+						route: { type: 'string', example: '/grammar' },
+					},
+				},
+			},
+		},
+	},
+	LearningSummary: {
+		type: 'object',
+		properties: {
+			streak: {
+				type: 'object',
+				properties: {
+					current: { type: 'integer', example: 5 },
+					longest: { type: 'integer', example: 12 },
+					checkedThisWeek: { type: 'integer', example: 3 },
+					weekCheckIns: {
+						type: 'array',
+						items: { type: 'boolean' },
+						minItems: 7,
+						maxItems: 7,
+					},
+				},
+			},
+			exam: {
+				type: 'object',
+				properties: {
+					hasGoal: { type: 'boolean', example: true },
+					examTypeKey: { type: 'string', example: 'jlpt' },
+					examLevelKey: { type: 'string', example: 'n3' },
+					examDateIso: { type: 'string', example: '2026-07-05' },
+					daysUntilExam: { type: 'integer', nullable: true, example: 50 },
+				},
+			},
+			badges: {
+				type: 'object',
+				properties: {
+					unlockedCount: { type: 'integer', example: 2 },
+					latest: {
+						type: 'object',
+						nullable: true,
+						properties: {
+							key: { type: 'string', example: 'streak_7' },
+							nameVi: { type: 'string' },
+							nameJa: { type: 'string' },
+							emoji: { type: 'string', example: '🔥' },
+							iconImage: { type: 'string' },
+						},
+					},
+				},
+			},
+			library: {
+				type: 'object',
+				properties: {
+					vocabularyDecksActive: { type: 'integer', example: 27 },
+					kanjiDecksActive: { type: 'integer', example: 15 },
+					grammarLessonsPublished: { type: 'integer', example: 40 },
+				},
+			},
+		},
+	},
 	UserProfile: {
 		type: 'object',
 		properties: {
@@ -287,6 +361,102 @@ export const schemas = {
 			displayOrder: { type: 'number', example: 1 },
 			createdAt: { type: 'string', format: 'date-time' },
 			updatedAt: { type: 'string', format: 'date-time' },
+		},
+	},
+	GrammarLoc: {
+		type: 'object',
+		properties: {
+			ja: { type: 'string', example: '普通形 ＋ によると' },
+			vi: { type: 'string', example: 'Thể thường + によると' },
+		},
+	},
+	GrammarExample: {
+		type: 'object',
+		properties: {
+			ja: { type: 'string', example: '天気予報によると、明日は雪だそうです。' },
+			vi: { type: 'string', example: 'Theo dự báo thời tiết, ngày mai có tuyết.' },
+		},
+	},
+	Grammar: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
+			slug: { type: 'string', example: 'ni-yoru-to' },
+			jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'], example: 'N3' },
+			pattern: { type: 'string', example: '～によると' },
+			tagIds: {
+				type: 'array',
+				items: {
+					type: 'string',
+					enum: ['hearsay', 'formal', 'conjecture', 'purpose', 'goal', 'change'],
+				},
+				example: ['hearsay', 'formal'],
+			},
+			isPublished: { type: 'boolean', example: true },
+			displayOrder: { type: 'number', example: 0 },
+			teaser: { $ref: '#/components/schemas/GrammarLoc' },
+			topicRibbon: { $ref: '#/components/schemas/GrammarLoc' },
+			connection: { $ref: '#/components/schemas/GrammarLoc' },
+			meaning: { $ref: '#/components/schemas/GrammarLoc' },
+			usage: { $ref: '#/components/schemas/GrammarLoc' },
+			usageNote: { $ref: '#/components/schemas/GrammarLoc' },
+			pointBubble: { $ref: '#/components/schemas/GrammarLoc' },
+			examples: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/GrammarExample' },
+			},
+			ng: {
+				type: 'object',
+				properties: {
+					ja: { type: 'array', items: { type: 'string' } },
+					vi: { type: 'array', items: { type: 'string' } },
+				},
+			},
+			ngNote: { $ref: '#/components/schemas/GrammarLoc' },
+			memo: { $ref: '#/components/schemas/GrammarLoc' },
+			createdAt: { type: 'string', format: 'date-time' },
+			updatedAt: { type: 'string', format: 'date-time' },
+		},
+	},
+	GrammarInput: {
+		type: 'object',
+		required: ['slug', 'jlpt', 'pattern'],
+		properties: {
+			slug: { type: 'string', example: 'ni-yoru-to' },
+			jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'] },
+			pattern: { type: 'string', example: '～によると' },
+			tagIds: { type: 'array', items: { type: 'string' } },
+			isPublished: { type: 'boolean' },
+			displayOrder: { type: 'number' },
+			teaser: { $ref: '#/components/schemas/GrammarLoc' },
+			topicRibbon: { $ref: '#/components/schemas/GrammarLoc' },
+			connection: { $ref: '#/components/schemas/GrammarLoc' },
+			meaning: { $ref: '#/components/schemas/GrammarLoc' },
+			usage: { $ref: '#/components/schemas/GrammarLoc' },
+			usageNote: { $ref: '#/components/schemas/GrammarLoc' },
+			pointBubble: { $ref: '#/components/schemas/GrammarLoc' },
+			examples: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/GrammarExample' },
+			},
+			ng: {
+				type: 'object',
+				properties: {
+					ja: { type: 'array', items: { type: 'string' } },
+					vi: { type: 'array', items: { type: 'string' } },
+				},
+			},
+			ngNote: { $ref: '#/components/schemas/GrammarLoc' },
+			memo: { $ref: '#/components/schemas/GrammarLoc' },
+			practice: {
+				type: 'object',
+				properties: {
+					items: {
+						type: 'array',
+						items: { $ref: '#/components/schemas/GrammarLoc' },
+					},
+				},
+			},
 		},
 	},
 };

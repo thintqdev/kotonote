@@ -1,45 +1,77 @@
 import i18n from '../i18n.js';
 
+const MSG_CODE_RE = /^MSG_\d+$/;
+
 /**
- * Quy đổi mã backend (vd. MSG_108) sang chuỗi theo ngôn ngữ hiện tại (vi.json / ja.json → message.*).
  * @param {string} code
+ * @param {(key: string, opts?: object) => string} [tFn]
  * @returns {string}
  */
-export function translateMessageCode(code) {
+export function translateMessageCode(code, tFn) {
 	if (!code || typeof code !== 'string') {
 		return '';
 	}
 	const trimmed = code.trim();
-	if (!trimmed) {
-		return '';
+	if (!MSG_CODE_RE.test(trimmed)) {
+		return trimmed;
 	}
-	return i18n.t(`message.${trimmed}`, { defaultValue: trimmed });
+
+	const key = `message.${trimmed}`;
+	const tr = tFn ?? ((k, opts) => i18n.t(k, opts));
+
+	if (i18n.exists(key)) {
+		return tr(key);
+	}
+
+	const fallbackKey = 'message.MSG_002';
+	return i18n.exists(fallbackKey) ? tr(fallbackKey) : trimmed;
 }
 
 /**
- * Lấy thông báo lỗi hiển thị cho người dùng từ lỗi Axios / backend.
- * Ưu tiên messageCode → bản dịch; sau đó message chữ thường (legacy).
+ * Lấy thông báo lỗi hiển thị từ lỗi Axios, Error đã chuẩn hóa (api.js), hoặc mã MSG_*.
  * @param {unknown} error
+ * @param {(key: string, opts?: object) => string} [tFn] — `t` từ useTranslation (tùy chọn)
  * @returns {string}
  */
-export function getAxiosErrorMessage(error) {
-	const res =
-		error && typeof error === 'object' && 'response' in error
-			? /** @type {{ response?: { data?: Record<string, unknown> } }} */ (error)
-					.response
-			: undefined;
-	const data = res?.data;
-	if (data && typeof data === 'object') {
-		const rawCode = data.messageCode;
+export function getApiErrorMessage(error, tFn) {
+	if (error && typeof error === 'object' && 'response' in error) {
+		const data = /** @type {{ response?: { data?: Record<string, unknown> } }} */ (
+			error
+		).response?.data;
+		if (data && typeof data === 'object') {
+			const rawCode = data.messageCode;
+			if (typeof rawCode === 'string' && rawCode.trim()) {
+				return translateMessageCode(rawCode, tFn);
+			}
+			if (typeof data.message === 'string' && data.message.trim()) {
+				return data.message.trim();
+			}
+		}
+	}
+
+	if (error && typeof error === 'object' && 'messageCode' in error) {
+		const rawCode = /** @type {{ messageCode?: string }} */ (error).messageCode;
 		if (typeof rawCode === 'string' && rawCode.trim()) {
-			return translateMessageCode(rawCode);
-		}
-		if (typeof data.message === 'string' && data.message.trim()) {
-			return data.message;
+			return translateMessageCode(rawCode, tFn);
 		}
 	}
+
 	if (error instanceof Error && error.message) {
-		return translateMessageCode(error.message) || error.message;
+		const msg = error.message.trim();
+		if (MSG_CODE_RE.test(msg)) {
+			return translateMessageCode(msg, tFn);
+		}
+		return msg;
 	}
-	return 'Đã xảy ra lỗi, vui lòng thử lại.';
+
+	const fallbackKey = 'common.apiError';
+	if (tFn) {
+		return tFn(fallbackKey);
+	}
+	return i18n.t(fallbackKey, {
+		defaultValue: 'Đã xảy ra lỗi, vui lòng thử lại.',
+	});
 }
+
+/** @deprecated Dùng getApiErrorMessage */
+export const getAxiosErrorMessage = getApiErrorMessage;

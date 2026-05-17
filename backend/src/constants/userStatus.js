@@ -26,4 +26,5 @@ export const LOGIN_ATTEMPT = {
 // Token Expiry Constants
 export const TOKEN_EXPIRY = {
 	EMAIL_VERIFICATION: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+	PASSWORD_RESET: 60 * 60 * 1000, // 1 hour
 };

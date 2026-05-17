@@ -2,15 +2,15 @@ import asyncHandler from 'express-async-handler';
 import * as vocabularyService from '../services/vocabularyService.js';
 import { apiSuccess } from '../utils/response.js';
 import { VOCABULARY } from '../constants/messages.js';
+import {
+	assertDeckVisibleToUser,
+	buildDeckListFilters,
+} from '../utils/userDeckAccess.js';
 
 // Deck Controllers
 export const getAllDecks = asyncHandler(async (req, res) => {
 	const { level, category, isActive, page, limit } = req.query;
-
-	const filters = {};
-	if (level) filters.level = level;
-	if (category) filters.category = category;
-	if (isActive !== undefined) filters.isActive = isActive === 'true';
+	const filters = buildDeckListFilters(req, { level, category, isActive });
 
 	const { decks, pagination } = await vocabularyService.getAllDecks(filters, {
 		page,
@@ -24,6 +24,7 @@ export const getDeckById = asyncHandler(async (req, res) => {
 	const { id } = req.params;
 
 	const deck = await vocabularyService.getDeckById(id);
+	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 
 	return apiSuccess(res, { deck }, VOCABULARY.DECK_FETCHED, 200);
 });
@@ -32,6 +33,7 @@ export const getDeckWithVocabulary = asyncHandler(async (req, res) => {
 	const { id } = req.params;
 
 	const result = await vocabularyService.getDeckWithVocabulary(id);
+	assertDeckVisibleToUser(req, result.deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 
 	return apiSuccess(res, result, VOCABULARY.DECK_FETCHED, 200);
 });
@@ -65,6 +67,8 @@ export const deleteDeck = asyncHandler(async (req, res) => {
 export const getVocabularyByDeck = asyncHandler(async (req, res) => {
 	const { deckId } = req.params;
 
+	const deck = await vocabularyService.getDeckById(deckId);
+	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 	const vocabulary = await vocabularyService.getVocabularyByDeck(deckId);
 
 	return apiSuccess(res, { vocabulary, total: vocabulary.length }, VOCABULARY.WORD_FETCHED, 200);

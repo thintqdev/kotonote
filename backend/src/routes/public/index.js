@@ -5,6 +5,8 @@ import streakRoutes from './streakRoutes.js';
 import surveyRoutes from './surveyRoutes.js';
 import profileRoutes from './profileRoutes.js';
 import kanjiRoutes from './kanjiRoutes.js';
+import grammarRoutes from './grammarRoutes.js';
+import notebookRoutes from './notebookRoutes.js';
 
 const router = express.Router();
 
@@ -12,9 +14,11 @@ const router = express.Router();
 router.use('/quotes', quoteRoutes);
 router.use('/vocabulary', vocabularyRoutes);
 router.use('/kanji', kanjiRoutes);
+router.use('/grammar', grammarRoutes);
 router.use('/streaks', streakRoutes);
 router.use('/surveys', surveyRoutes);
 router.use('/profile', profileRoutes);
 router.use('/users', profileRoutes);
+router.use('/notebook', notebookRoutes);
 
 export default router;

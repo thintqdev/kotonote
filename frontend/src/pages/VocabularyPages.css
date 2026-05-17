@@ -870,6 +870,19 @@
   padding-bottom: 7px;
 }
 
+.vocab-lesson-jlpt-tag {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--vocab-green-deep);
+  background: rgba(72, 120, 88, 0.12);
+  vertical-align: middle;
+}
+
 .vocab-lesson-list {
   list-style: none;
   margin: 0;

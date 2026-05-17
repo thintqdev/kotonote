@@ -3,6 +3,10 @@ import path from 'path';
 import mongoose from 'mongoose';
 import * as userRepository from '../repositories/userRepository.js';
 import { buildBadgesDisplayForUser, unlockBadgeForUser } from './badgeUnlockService.js';
+import {
+	normalizeProfileRegionKey,
+	normalizeProfileTimeZoneKey,
+} from '../constants/profileLocale.js';
 import { USER } from '../constants/messages.js';
 import { USER_STATUS } from '../constants/userStatus.js';
 
@@ -121,6 +125,13 @@ export const updateProfile = async (userId, updateData) => {
 				user.profile[key] = s;
 			}
 		}
+		const region = normalizeProfileRegionKey(user.profile.location);
+		if (region) user.profile.location = region;
+		const tz = normalizeProfileTimeZoneKey(
+			user.profile.timeZoneLabel,
+			user.profile.location,
+		);
+		if (tz) user.profile.timeZoneLabel = tz;
 	}
 	
 	await user.save();

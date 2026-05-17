@@ -6,17 +6,20 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
-  KANJI_ITEMS,
   buildKanjiLessonQuizQuestions,
   advanceKanjiLessonGrowthStage,
   getKanjiLessonGrowthStage,
-  getKanjiLessonItems,
   mergeKanjiMarks,
   kanjiMeaningLine,
   KANJI_LESSON_GROWTH_MAX,
   KANJI_QUIZ_PER_STAGE,
-  isKanjiLessonUnlocked,
 } from "../data/kanjiMock.js";
+import { loadKanjiPack } from "../services/kanjiService.js";
+import {
+  getDeckLessonItems,
+  isDeckLessonUnlocked,
+} from "../utils/deckStudy.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { shuffleVocabStudy, getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
 import "./DashboardHome.css";
@@ -49,7 +52,10 @@ export default function KanjiPage() {
   const { user } = useAuth();
   const lang = i18n.language || "ja";
   const [marks] = useState(() => ({}));
-  const merged = useMemo(() => mergeKanjiMarks(KANJI_ITEMS, marks), [marks]);
+  const [packItems, setPackItems] = useState([]);
+  const [sortedDecks, setSortedDecks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const params = useParams();
   const [searchParams] = useSearchParams();
@@ -72,21 +78,53 @@ export default function KanjiPage() {
     lessonNoFromQuery != null && lessonJlpt.length > 0,
   );
 
+  useEffect(() => {
+    if (!user || !lessonJlpt) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const pack = await loadKanjiPack(lessonJlpt);
+        if (!cancelled) {
+          setSortedDecks(pack.decks);
+          setPackItems(pack.items);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(getApiErrorMessage(err, t));
+          setSortedDecks([]);
+          setPackItems([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, lessonJlpt, t]);
+
+  const merged = useMemo(
+    () => mergeKanjiMarks(packItems, marks),
+    [packItems, marks],
+  );
+
   const lessonUnlocked = useMemo(
     () =>
-      isLessonMode && lessonJlpt && lessonNoFromQuery
-        ? isKanjiLessonUnlocked(merged, lessonJlpt, lessonNoFromQuery)
+      isLessonMode && lessonNoFromQuery
+        ? isDeckLessonUnlocked(sortedDecks, merged, lessonNoFromQuery)
         : false,
-    [merged, isLessonMode, lessonJlpt, lessonNoFromQuery],
+    [merged, sortedDecks, isLessonMode, lessonNoFromQuery],
   );
 
   const lessonItemsStable = useMemo(() => {
-    if (!isLessonMode || !lessonJlpt || !lessonNoFromQuery) return [];
-    return getKanjiLessonItems(merged, {
-      jlpt: lessonJlpt,
-      lessonNo: lessonNoFromQuery,
-    });
-  }, [merged, isLessonMode, lessonJlpt, lessonNoFromQuery]);
+    if (!isLessonMode || !lessonNoFromQuery) return [];
+    return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
+  }, [merged, sortedDecks, isLessonMode, lessonNoFromQuery]);
 
   const [growthStage, setGrowthStage] = useState(0);
   useEffect(() => {
@@ -230,7 +268,29 @@ export default function KanjiPage() {
     return <Navigate to="/kanji/browse" replace />;
   }
 
+  if (loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty grammar-empty--error" role="alert">
+          {error}
+        </p>
+      </Layout>
+    );
+  }
+
   if (!lessonUnlocked) {
+    return <Navigate to="/kanji/browse" replace />;
+  }
+
+  if (lessonItemsStable.length === 0) {
     return <Navigate to="/kanji/browse" replace />;
   }
 

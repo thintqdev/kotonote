@@ -37,3 +37,36 @@ export const changePasswordSchema = Joi.object({
 		'any.invalid': 'MSG_003',
 	}),
 }).unknown(false);
+
+export const verifyEmailSchema = Joi.object({
+	token: Joi.string().min(32).max(256).required().messages({
+		'any.required': 'MSG_003',
+		'string.min': 'MSG_003',
+	}),
+});
+
+export const resendVerificationSchema = Joi.object({
+	email: Joi.string().email().required().messages({
+		'string.email': 'MSG_003',
+		'any.required': 'MSG_003',
+	}),
+});
+
+export const forgotPasswordSchema = Joi.object({
+	email: Joi.string().email().required().messages({
+		'string.email': 'MSG_003',
+		'any.required': 'MSG_003',
+	}),
+});
+
+export const resetPasswordSchema = Joi.object({
+	token: Joi.string().min(32).max(128).required().messages({
+		'any.required': 'MSG_003',
+		'string.min': 'MSG_003',
+	}),
+	newPassword: Joi.string().min(6).max(128).required().messages({
+		'any.required': 'MSG_003',
+		'string.min': 'MSG_003',
+		'string.max': 'MSG_003',
+	}),
+}).unknown(false);

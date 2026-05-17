@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,10 +7,11 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
-  getGrammarDetail,
   grammarLine,
   grammarIsViUI,
 } from "../data/grammarMock.js";
+import { getGrammarBySlug } from "../services/grammarService.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 
@@ -81,23 +83,79 @@ function GrammarDetailPage() {
   const { user } = useAuth();
   const lang = i18n.language || "ja";
 
-  const detail = slug ? getGrammarDetail(slug) : null;
+  const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!slug || !user) return;
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setNotFound(false);
+      setError("");
+      try {
+        const g = await getGrammarBySlug(slug);
+        if (!cancelled) {
+          if (!g) setNotFound(true);
+          else setDetail(g);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const code =
+            err && typeof err === "object" && "messageCode" in err
+              ? /** @type {{ messageCode?: string }} */ (err).messageCode
+              : undefined;
+          if (code === "MSG_917" || code === "MSG_006") {
+            setNotFound(true);
+          } else {
+            setError(getApiErrorMessage(err, t));
+          }
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, user, t]);
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
 
-  if (!detail) {
+  if (loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="grammar-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="grammar-empty grammar-empty--error" role="alert">
+          {error}
+        </p>
+        <Link className="grammar-back" to="/grammar">
+          {t("grammarPage.backToList")}
+        </Link>
+      </Layout>
+    );
+  }
+
+  if (notFound || !detail) {
     return <Navigate to="/grammar" replace />;
   }
 
-  const meta = detail.meta || {};
   const ngLinesJa = detail.ng?.ja ?? [];
   const ngLinesVi = detail.ng?.vi ?? [];
 
   const showNgViAssist = grammarIsViUI(lang);
-  const capLine = grammarLine(detail.compare?.caption, lang);
 
   return (
     <Layout
@@ -131,9 +189,9 @@ function GrammarDetailPage() {
                 >
                   {detail.pattern}
                 </h1>
-                {meta.topicRibbon ? (
+                {detail.topicRibbon ? (
                   <p className="grammar-detail-ribbon">
-                    {grammarLine(meta.topicRibbon, lang).primary}
+                    {grammarLine(detail.topicRibbon, lang).primary}
                   </p>
                 ) : null}
               </header>

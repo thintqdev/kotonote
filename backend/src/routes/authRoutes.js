@@ -6,6 +6,10 @@ import {
 	registerSchema,
 	loginSchema,
 	changePasswordSchema,
+	forgotPasswordSchema,
+	resetPasswordSchema,
+	resendVerificationSchema,
+	verifyEmailSchema,
 } from '../validators/authValidator.js';
 import { googleLoginSchema } from '../validators/googleAuthValidator.js';
 
@@ -21,7 +25,26 @@ router.post(
 	validate(changePasswordSchema),
 	authController.changePassword,
 );
+router.post(
+	'/forgot-password',
+	validate(forgotPasswordSchema),
+	authController.forgotPassword,
+);
+router.post(
+	'/reset-password',
+	validate(resetPasswordSchema),
+	authController.resetPassword,
+);
 router.get('/verify-email', authController.verifyEmail);
-router.post('/resend-verification', authController.resendVerificationEmail);
+router.post(
+	'/verify-email',
+	validate(verifyEmailSchema),
+	authController.verifyEmailPost,
+);
+router.post(
+	'/resend-verification',
+	validate(resendVerificationSchema),
+	authController.resendVerificationEmail,
+);
 
 export default router;

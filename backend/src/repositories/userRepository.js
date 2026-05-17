@@ -31,6 +31,13 @@ export const findUserByVerificationToken = async (token) => {
 	});
 };
 
+export const findUserByPasswordResetToken = async (hashedToken) => {
+	return await User.findOne({
+		passwordResetToken: hashedToken,
+		passwordResetExpires: { $gt: Date.now() },
+	}).select('+passwordResetToken +passwordResetExpires +password');
+};
+
 // ============ ADMIN USER MANAGEMENT ============
 
 /**

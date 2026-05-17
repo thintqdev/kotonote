@@ -7,6 +7,10 @@
   transform: rotate(-0.6deg);
 }
 
+.streak-card--loading .streak-card-num {
+  opacity: 0.55;
+}
+
 .streak-card-pin {
   position: absolute;
   top: -35px;

@@ -3,6 +3,7 @@ import { verifyToken } from '../utils/jwt.js';
 import { findUserById } from '../repositories/userRepository.js';
 import { apiError } from '../utils/response.js';
 import { AUTH, COMMON } from '../constants/messages.js';
+import { AUTH_PROVIDER } from '../constants/userStatus.js';
 
 export const authenticate = asyncHandler(async (req, res, next) => {
 	let token;
@@ -33,6 +34,11 @@ export const authenticate = asyncHandler(async (req, res, next) => {
 	// Check if user is active
 	if (!user.isActive) {
 		return apiError(res, AUTH.LOGIN_FAILED, 403);
+	}
+
+	const provider = user.authProvider || AUTH_PROVIDER.LOCAL;
+	if (provider === AUTH_PROVIDER.LOCAL && !user.isEmailVerified) {
+		return apiError(res, AUTH.EMAIL_NOT_VERIFIED, 403);
 	}
 	
 	// Attach user to request

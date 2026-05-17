@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import * as authService from "../services/authService.js";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
@@ -83,9 +84,7 @@ const ChangePasswordPage = () => {
       } else if (code === "MSG_118") {
         setFormError(t("message.MSG_118"));
       } else {
-        setFormError(
-          err instanceof Error ? err.message : t("changePasswordPage.apiError"),
-        );
+        setFormError(getApiErrorMessage(err, t));
       }
     } finally {
       setIsSubmitting(false);

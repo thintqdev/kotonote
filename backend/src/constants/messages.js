@@ -16,6 +16,7 @@ export const AUTH = {
 	LOGOUT_SUCCESS: 'MSG_103',
 	REGISTER_SUCCESS: 'MSG_104',
 	REGISTER_FAILED: 'MSG_105',
+	EMAIL_ALREADY_REGISTERED: 'MSG_121',
 	TOKEN_INVALID: 'MSG_106',
 	TOKEN_EXPIRED: 'MSG_107',
 	PASSWORD_INCORRECT: 'MSG_108',
@@ -29,6 +30,8 @@ export const AUTH = {
 	VERIFICATION_TOKEN_INVALID: 'MSG_116',
 	PASSWORD_CHANGED: 'MSG_117',
 	PASSWORD_CHANGE_NOT_ALLOWED: 'MSG_118',
+	PASSWORD_RESET_EMAIL_SENT: 'MSG_119',
+	PASSWORD_RESET_SUCCESS: 'MSG_120',
 };
 
 // User Messages
@@ -40,6 +43,9 @@ export const USER = {
 	ALREADY_EXISTS: 'MSG_205',
 	FETCHED: 'MSG_206',
 	LIST_FETCHED: 'MSG_207',
+	LEARNING_SUMMARY_FETCHED: 'MSG_208',
+	FOCUS_AREAS_FETCHED: 'MSG_209',
+	FOCUS_AREAS_UPDATED: 'MSG_210',
 };
 
 // Survey Messages
@@ -98,6 +104,17 @@ export const BADGE = {
 	DUPLICATE_KEY: 'MSG_807',
 };
 
+// Grammar Messages
+export const GRAMMAR = {
+	CREATED: 'MSG_913',
+	UPDATED: 'MSG_914',
+	DELETED: 'MSG_915',
+	FETCHED: 'MSG_916',
+	NOT_FOUND: 'MSG_917',
+	LIST_FETCHED: 'MSG_918',
+	SLUG_EXISTS: 'MSG_919',
+};
+
 // Kanji Messages
 export const KANJI = {
 	CREATED: 'MSG_901',
@@ -115,6 +132,17 @@ export const KANJI = {
 	DECK_FULL: 'MSG_912',
 };
 
+// Notebook Messages
+export const NOTEBOOK = {
+	CREATED: 'MSG_950',
+	UPDATED: 'MSG_951',
+	DELETED: 'MSG_952',
+	FETCHED: 'MSG_953',
+	LIST_FETCHED: 'MSG_954',
+	NOT_FOUND: 'MSG_955',
+	IMAGE_UPLOADED: 'MSG_956',
+};
+
 // Export all messages as MESSAGES object
 export const MESSAGES = {
 	...COMMON,
@@ -125,5 +153,7 @@ export const MESSAGES = {
 	...BADGE,
 	...STREAK,
 	...VOCABULARY,
+	...GRAMMAR,
 	...KANJI,
+	...NOTEBOOK,
 };

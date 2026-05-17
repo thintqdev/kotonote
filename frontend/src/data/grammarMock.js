@@ -5,10 +5,10 @@
  * @typedef {{ ja: string, vi?: string }} GrammarLoc
  */
 
-export const GRAMMAR_TAG_IDS = ['hearsay', 'formal', 'conjecture', 'purpose', 'goal', 'change'];
-
-/** Số mục mỗi trang (danh sách) */
-export const GRAMMAR_PAGE_SIZE = 4;
+export {
+	GRAMMAR_TAG_IDS,
+	GRAMMAR_PAGE_SIZE,
+} from '../constants/grammarFieldMeta.js';
 
 const isViUILang = (lang) => String(lang || '').toLowerCase().startsWith('vi');
 

@@ -1,5 +1,8 @@
 import express from 'express';
 import * as userController from '../../controllers/userController.js';
+import * as learningSummaryController from '../../controllers/learningSummaryController.js';
+import * as focusAreaController from '../../controllers/focusAreaController.js';
+import { updateFocusAreasSchema } from '../../validators/focusAreaValidator.js';
 import { authenticate } from '../../middlewares/auth.js';
 import { validate } from '../../middlewares/validate.js';
 import { updateMeSchema } from '../../validators/updateMeValidator.js';
@@ -10,6 +13,18 @@ const router = express.Router();
 
 // User profile routes (require authentication)
 router.get('/me', authenticate, userController.getMe);
+router.get(
+	'/me/learning-summary',
+	authenticate,
+	learningSummaryController.getMyLearningSummary,
+);
+router.get('/me/focus-areas', authenticate, focusAreaController.getMyFocusAreas);
+router.put(
+	'/me/focus-areas',
+	authenticate,
+	validate(updateFocusAreasSchema),
+	focusAreaController.updateMyFocusAreas,
+);
 router.post(
 	'/me/avatar',
 	authenticate,

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
 
 /**
  * Custom hook for fetching data
@@ -25,7 +26,7 @@ const useFetch = (url, options = {}) => {
 				setData(result);
 				setError(null);
 			} catch (err) {
-				setError(err.message);
+				setError(getApiErrorMessage(err));
 				setData(null);
 			} finally {
 				setLoading(false);

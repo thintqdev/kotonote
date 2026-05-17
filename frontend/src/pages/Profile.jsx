@@ -6,7 +6,7 @@ import {
   useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.jsx';
 import * as authService from '../services/authService.js';
 import {
@@ -20,6 +20,7 @@ import {
   buildDemoProfile,
 } from '../data/dashboardHomeMock.js';
 import i18n from '../i18n.js';
+import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
 import { EXAM_TYPE_ORDER, EXAM_LEVEL_KEYS_BY_TYPE, defaultLevelForType } from '../constants/profileExamGoals.js';
 import {
   buildExamTargetDisplay,
@@ -28,6 +29,25 @@ import {
 } from '../utils/profileExamDisplay.js';
 import './Profile.css';
 import { loadOverrides, persistOverrides } from '../utils/profileStorage.js';
+import { getMyLearningSummary } from '../services/learningSummaryService.js';
+import {
+  getMyFocusAreas,
+  updateMyFocusAreas,
+} from '../services/focusAreaService.js';
+import {
+  FOCUS_AREA_KEYS,
+  FOCUS_AREA_MAX,
+  FOCUS_AREA_ROUTES,
+} from '../constants/profileFocusAreas.js';
+import {
+  PROFILE_REGION_KEYS,
+  PROFILE_TIMEZONES,
+  DEFAULT_TIMEZONE_BY_REGION,
+  normalizeProfileRegionKey,
+  normalizeProfileTimeZoneKey,
+  profileRegionLabel,
+  profileTimeZoneLabel,
+} from '../constants/profileLocale.js';
 
 const MAX_AVATAR_BYTES = 2 * 1024 * 1024;
 
@@ -114,6 +134,23 @@ function IconImageOff() {
   );
 }
 
+function formatExamStatValue(exam, t) {
+  if (!exam?.hasGoal || exam.daysUntilExam == null) return null;
+  const d = exam.daysUntilExam;
+  if (d === 0) return t('profile.examToday');
+  if (d > 0) return t('profile.examDaysLeft', { n: d });
+  return t('profile.examDaysPast', { n: Math.abs(d) });
+}
+
+function libraryContentTotal(library) {
+  if (!library) return 0;
+  return (
+    (library.vocabularyDecksActive ?? 0) +
+    (library.kanjiDecksActive ?? 0) +
+    (library.grammarLessonsPublished ?? 0)
+  );
+}
+
 function buildDraftFromProfile(p) {
   const g = resolveGoalExamFields(p);
   return {
@@ -121,8 +158,9 @@ function buildDraftFromProfile(p) {
     readingName: p.readingName ?? '',
     title: p.title ?? '',
     email: p.email,
-    location: p.location ?? '',
-    timeZoneLabel: p.timeZoneLabel ?? '',
+    location: normalizeProfileRegionKey(p.location) || 'vn',
+    timeZoneLabel:
+      normalizeProfileTimeZoneKey(p.timeZoneLabel, p.location) || 'gmt+7',
     bio: p.bio ?? '',
     examTypeKey: g.examTypeKey,
     examLevelKey: g.examLevelKey,
@@ -131,6 +169,7 @@ function buildDraftFromProfile(p) {
     examTarget: p.examTarget ?? '',
     examDateLabel: p.examDateLabel ?? '',
     avatarDataUrl: p.avatarDataUrl || null,
+    focusAreaKeys: Array.isArray(p.focusAreaKeys) ? [...p.focusAreaKeys] : [],
   };
 }
 
@@ -141,6 +180,10 @@ const Profile = () => {
   const { user, setUser, refreshUser } = useAuth();
   const [overrides, setOverrides] = useState(loadOverrides);
   const [badgeHighlightKey, setBadgeHighlightKey] = useState('');
+  const [learningSummary, setLearningSummary] = useState(null);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [focusData, setFocusData] = useState(null);
+  const [focusLoading, setFocusLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
@@ -166,11 +209,37 @@ const Profile = () => {
     return { ...demoProfile, ...localOnly, ...serverSlice };
   }, [demoProfile, overrides, user, t, i18n.language]);
 
+  const focusAreas = useMemo(() => {
+    if (user && focusData?.selectedKeys) {
+      return focusData.selectedKeys.map((key) => ({
+        key,
+        label: t(`profile.focusOptions.${key}`),
+        route:
+          focusData.options?.find((o) => o.key === key)?.route ||
+          FOCUS_AREA_ROUTES[key] ||
+          '/',
+      }));
+    }
+    if (!user) {
+      return (demoProfile.focusAreas ?? []).map((f, i) => ({
+        key: FOCUS_AREA_KEYS[i] || `demo-${i}`,
+        label: f.label,
+        route: FOCUS_AREA_ROUTES[FOCUS_AREA_KEYS[i]] || '/',
+      }));
+    }
+    return [];
+  }, [user, focusData, demoProfile.focusAreas, t]);
+
   useEffect(() => {
     if (!isEditing) {
-      setDraft(buildDraftFromProfile(profile));
+      setDraft(
+        buildDraftFromProfile({
+          ...profile,
+          focusAreaKeys: focusData?.selectedKeys ?? [],
+        }),
+      );
     }
-  }, [isEditing, profile]);
+  }, [isEditing, profile, focusData]);
 
   useEffect(
     () => () => {
@@ -185,6 +254,118 @@ const Profile = () => {
   const highlightBadgeParam = (
     searchParams.get('highlightBadge') || ''
   ).trim().toLowerCase();
+
+  const refreshLearningSummary = useCallback(async () => {
+    if (!user) return;
+    setSummaryLoading(true);
+    try {
+      const summary = await getMyLearningSummary();
+      setLearningSummary(summary);
+    } catch {
+      setLearningSummary(null);
+    } finally {
+      setSummaryLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) {
+      setLearningSummary(null);
+      setSummaryLoading(false);
+      return;
+    }
+    void refreshLearningSummary();
+  }, [user, refreshLearningSummary]);
+
+  const refreshFocusAreas = useCallback(async () => {
+    if (!user) return;
+    setFocusLoading(true);
+    try {
+      const focus = await getMyFocusAreas();
+      setFocusData(focus);
+    } catch {
+      setFocusData(null);
+    } finally {
+      setFocusLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) {
+      setFocusData(null);
+      setFocusLoading(false);
+      return;
+    }
+    void refreshFocusAreas();
+  }, [user, refreshFocusAreas]);
+
+  const toggleFocusAreaKey = useCallback((key) => {
+    setDraft((prev) => {
+      const set = new Set(prev.focusAreaKeys);
+      if (set.has(key)) {
+        set.delete(key);
+      } else if (set.size >= FOCUS_AREA_MAX) {
+        return prev;
+      } else {
+        set.add(key);
+      }
+      return { ...prev, focusAreaKeys: [...set] };
+    });
+  }, []);
+
+  const statsDisplay = useMemo(() => {
+    const isJa = i18n.language === 'ja';
+    const dash = summaryLoading ? '…' : '—';
+    if (!learningSummary && !summaryLoading) {
+      return {
+        streak: dash,
+        streakHint: '',
+        weekly: dash,
+        badges: dash,
+        badgeHint: '',
+        fourthValue: dash,
+        fourthLabel: t('profile.examCountdown'),
+        fourthHint: '',
+      };
+    }
+    const s = learningSummary;
+    const streakCurrent = s?.streak?.current ?? 0;
+    const streakLongest = s?.streak?.longest ?? 0;
+    const weeklyN = s?.streak?.checkedThisWeek ?? 0;
+    const badgeCount = s?.badges?.unlockedCount ?? 0;
+    const latest = s?.badges?.latest;
+    const latestName = latest
+      ? (isJa ? latest.nameJa : latest.nameVi) || latest.key
+      : '';
+    const examVal = formatExamStatValue(s?.exam, t);
+    const hasExamGoal = Boolean(s?.exam?.hasGoal && examVal != null);
+    const libTotal = libraryContentTotal(s?.library);
+
+    return {
+      streak: summaryLoading ? '…' : String(streakCurrent),
+      streakHint:
+        !summaryLoading && streakLongest > 0
+          ? t('profile.streakLongest', { n: streakLongest })
+          : '',
+      weekly: summaryLoading
+        ? '…'
+        : t('profile.weeklyCheckInValue', { n: weeklyN }),
+      badges: summaryLoading ? '…' : String(badgeCount),
+      badgeHint:
+        !summaryLoading && latestName
+          ? t('profile.badgeLatest', { name: latestName })
+          : '',
+      fourthValue: summaryLoading
+        ? '…'
+        : hasExamGoal
+          ? examVal
+          : t('profile.libraryTotalValue', { n: libTotal }),
+      fourthLabel: hasExamGoal
+        ? t('profile.examCountdown')
+        : t('profile.libraryTotal'),
+      fourthHint: '',
+    };
+  }, [learningSummary, summaryLoading, t, i18n.language]);
 
   useEffect(() => {
     if (location.pathname !== '/profile') return undefined;
@@ -213,13 +394,12 @@ const Profile = () => {
         const data = await authService.testUnlockBadge({ badgeKey });
         if (data?.user) setUser(data.user);
         else await refreshUser();
+        void refreshLearningSummary();
       } catch (err) {
-        setSaveError(
-          err instanceof Error ? err.message : t('profile.saveError'),
-        );
+        setSaveError(getApiErrorMessage(err, t));
       }
     },
-    [setUser, refreshUser, t],
+    [setUser, refreshUser, refreshLearningSummary, t],
   );
 
   const emailLocked = Boolean(user?.email);
@@ -233,6 +413,33 @@ const Profile = () => {
   const headerName =
     profile.displayName.split(/\s+/)[0] || profile.displayName;
 
+  const localeDisplay = useMemo(
+    () => ({
+      region: profileRegionLabel(t, profile.location),
+      timeZone: profileTimeZoneLabel(t, profile.timeZoneLabel),
+    }),
+    [profile.location, profile.timeZoneLabel, t],
+  );
+
+  const draftRegionKey = normalizeProfileRegionKey(draft.location);
+  const draftTimeZoneOptions = useMemo(
+    () =>
+      PROFILE_TIMEZONES.filter(
+        (tz) => !draftRegionKey || tz.region === draftRegionKey,
+      ),
+    [draftRegionKey],
+  );
+
+  const handleRegionChange = useCallback((e) => {
+    const region = e.target.value;
+    setDraft((prev) => ({
+      ...prev,
+      location: region,
+      timeZoneLabel:
+        DEFAULT_TIMEZONE_BY_REGION[region] || prev.timeZoneLabel,
+    }));
+  }, []);
+
   const startEdit = useCallback(() => {
     setSaveError('');
     if (pendingBlobUrlRef.current) {
@@ -242,9 +449,14 @@ const Profile = () => {
     pendingAvatarFileRef.current = null;
     setHasPendingAvatar(false);
     setAvatarRemoved(false);
-    setDraft(buildDraftFromProfile(profile));
+    setDraft(
+      buildDraftFromProfile({
+        ...profile,
+        focusAreaKeys: focusData?.selectedKeys ?? [],
+      }),
+    );
     setIsEditing(true);
-  }, [profile]);
+  }, [profile, focusData]);
 
   const cancelEdit = useCallback(() => {
     if (pendingBlobUrlRef.current) {
@@ -299,8 +511,13 @@ const Profile = () => {
         profile: {
           readingName: draft.readingName.trim(),
           title: draft.title.trim(),
-          location: draft.location.trim(),
-          timeZoneLabel: draft.timeZoneLabel.trim(),
+          location:
+            normalizeProfileRegionKey(draft.location) || 'vn',
+          timeZoneLabel:
+            normalizeProfileTimeZoneKey(
+              draft.timeZoneLabel,
+              draft.location,
+            ) || DEFAULT_TIMEZONE_BY_REGION.vn,
           bio: draft.bio.trim(),
           examTypeKey: typeKey,
           examLevelKey: levelKey,
@@ -314,19 +531,28 @@ const Profile = () => {
 
       const { user: nextUser } = await authService.updateCurrentUser(putBody);
       setUser(nextUser);
+      await updateMyFocusAreas(draft.focusAreaKeys);
+      void refreshFocusAreas();
       const cleaned = stripServerSyncedProfileOverrides(overrides);
       persistOverrides(cleaned);
       setOverrides(cleaned);
       setAvatarRemoved(false);
       setIsEditing(false);
+      void refreshLearningSummary();
     } catch (err) {
-      setSaveError(
-        err instanceof Error ? err.message : t('profile.saveError'),
-      );
+      setSaveError(getApiErrorMessage(err, t));
     } finally {
       setIsSaving(false);
     }
-  }, [draft, overrides, setUser, t, avatarRemoved]);
+  }, [
+    draft,
+    overrides,
+    setUser,
+    t,
+    avatarRemoved,
+    refreshLearningSummary,
+    refreshFocusAreas,
+  ]);
 
   const onAvatarFile = useCallback(
     (e) => {
@@ -583,7 +809,7 @@ const Profile = () => {
                   <dl className="profile-meta-row">
                     <div className="profile-meta-pair">
                       <dt>{t('profile.region')}</dt>
-                      <dd>{profile.location}</dd>
+                      <dd>{localeDisplay.region}</dd>
                     </div>
                     <div className="profile-meta-pair">
                       <dt>{t('profile.joined')}</dt>
@@ -591,30 +817,46 @@ const Profile = () => {
                     </div>
                     <div className="profile-meta-pair profile-meta-pair--short">
                       <dt>{t('profile.timezone')}</dt>
-                      <dd>{profile.timeZoneLabel}</dd>
+                      <dd>{localeDisplay.timeZone}</dd>
                     </div>
                   </dl>
                 ) : (
                   <div className="profile-form-row profile-meta-edit">
                     <label className="profile-field">
                       <span className="profile-field-label">{t('profile.region')}</span>
-                      <input
-                        type="text"
-                        className="profile-input"
-                        value={draft.location}
-                        onChange={(e) => setField('location', e.target.value)}
-                      />
+                      <select
+                        className="profile-input profile-select"
+                        value={draftRegionKey}
+                        onChange={handleRegionChange}
+                      >
+                        <option value="">{t('profile.regionPlaceholder')}</option>
+                        {PROFILE_REGION_KEYS.map((key) => (
+                          <option key={key} value={key}>
+                            {t(`profile.regions.${key}`)}
+                          </option>
+                        ))}
+                      </select>
                     </label>
                     <label className="profile-field">
                       <span className="profile-field-label">{t('profile.timezone')}</span>
-                      <input
-                        type="text"
-                        className="profile-input"
-                        value={draft.timeZoneLabel}
+                      <select
+                        className="profile-input profile-select"
+                        value={normalizeProfileTimeZoneKey(
+                          draft.timeZoneLabel,
+                          draft.location,
+                        )}
                         onChange={(e) =>
                           setField('timeZoneLabel', e.target.value)
                         }
-                      />
+                        disabled={!draftRegionKey}
+                      >
+                        <option value="">{t('profile.timezonePlaceholder')}</option>
+                        {draftTimeZoneOptions.map((tz) => (
+                          <option key={tz.key} value={tz.key}>
+                            {t(`profile.timezones.${tz.key}`)}
+                          </option>
+                        ))}
+                      </select>
                     </label>
                   </div>
                 )}
@@ -648,32 +890,51 @@ const Profile = () => {
                 <h3 className="profile-section-title profile-section-title--flush">
                   {t('profile.statsTitle')}
                 </h3>
-                <ul className="profile-stat-grid">
+                <ul
+                  className={`profile-stat-grid${summaryLoading ? ' profile-stat-grid--loading' : ''}`}
+                  aria-busy={summaryLoading}
+                >
                   <li className="profile-stat-chip">
                     <span className="profile-stat-value">
-                      {profile.streakDays}
+                      {statsDisplay.streak}
                     </span>
                     <span className="profile-stat-label">{t('profile.streak')}</span>
+                    {statsDisplay.streakHint ? (
+                      <span className="profile-stat-hint">
+                        {statsDisplay.streakHint}
+                      </span>
+                    ) : null}
                   </li>
                   <li className="profile-stat-chip">
                     <span className="profile-stat-value">
-                      {profile.totalXp.toLocaleString(
-                        i18n.language === 'ja' ? 'ja-JP' : 'vi-VN',
-                      )}
+                      {statsDisplay.weekly}
                     </span>
-                    <span className="profile-stat-label">{t('profile.xp')}</span>
+                    <span className="profile-stat-label">
+                      {t('profile.weeklyCheckIn')}
+                    </span>
                   </li>
                   <li className="profile-stat-chip">
                     <span className="profile-stat-value">
-                      {profile.weeklyStudyMin}
+                      {statsDisplay.badges}
                     </span>
-                    <span className="profile-stat-label">{t('profile.weeklyMin')}</span>
+                    <span className="profile-stat-label">
+                      {t('profile.badgesUnlocked')}
+                    </span>
+                    {statsDisplay.badgeHint ? (
+                      <span className="profile-stat-hint profile-stat-hint--truncate">
+                        {statsDisplay.badgeHint}
+                      </span>
+                    ) : null}
                   </li>
                   <li className="profile-stat-chip">
-                    <span className="profile-stat-value profile-stat-value--sm">
-                      {profile.levelLabel}
+                    <span
+                      className={`profile-stat-value${statsDisplay.fourthValue.length > 6 ? ' profile-stat-value--sm' : ''}`}
+                    >
+                      {statsDisplay.fourthValue}
                     </span>
-                    <span className="profile-stat-label">{t('profile.level')}</span>
+                    <span className="profile-stat-label">
+                      {statsDisplay.fourthLabel}
+                    </span>
                   </li>
                 </ul>
               </section>
@@ -766,16 +1027,75 @@ const Profile = () => {
                   )}
                 </article>
 
-                <article className="profile-card profile-card--tags">
+                <article
+                  className="profile-card profile-card--tags"
+                  aria-labelledby="profile-focus-title"
+                >
                   <span className="profile-card-tape profile-card-tape" aria-hidden />
-                  <h3 className="profile-section-title">{t('profile.focusTitle')}</h3>
-                  <ul className="profile-tag-list">
-                    {profile.focusAreas.map((f) => (
-                      <li key={f.label} className="profile-tag">
-                        <span className="profile-tag-text">{f.label}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <h3
+                    id="profile-focus-title"
+                    className="profile-section-title"
+                  >
+                    {t('profile.focusTitle')}
+                  </h3>
+                  {isEditing ? (
+                    <>
+                      <p className="profile-focus-hint">
+                        {t('profile.focusHint', { max: FOCUS_AREA_MAX })}
+                      </p>
+                      <ul
+                        className="profile-focus-picker"
+                        role="group"
+                        aria-label={t('profile.focusTitle')}
+                      >
+                        {FOCUS_AREA_KEYS.map((key) => {
+                          const selected = draft.focusAreaKeys.includes(key);
+                          const atMax =
+                            draft.focusAreaKeys.length >= FOCUS_AREA_MAX &&
+                            !selected;
+                          return (
+                            <li key={key}>
+                              <button
+                                type="button"
+                                className={`profile-focus-chip${selected ? ' is-selected' : ''}`}
+                                aria-pressed={selected}
+                                disabled={atMax}
+                                title={
+                                  atMax
+                                    ? t('profile.focusMaxReached', {
+                                        max: FOCUS_AREA_MAX,
+                                      })
+                                    : undefined
+                                }
+                                onClick={() => toggleFocusAreaKey(key)}
+                              >
+                                {t(`profile.focusOptions.${key}`)}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  ) : focusLoading && user ? (
+                    <p className="profile-focus-empty" aria-busy="true">
+                      {t('profile.statsLoading')}
+                    </p>
+                  ) : focusAreas.length === 0 ? (
+                    <p className="profile-focus-empty">{t('profile.focusEmpty')}</p>
+                  ) : (
+                    <ul className="profile-tag-list">
+                      {focusAreas.map((f) => (
+                        <li key={f.key}>
+                          <Link
+                            to={f.route}
+                            className="profile-tag profile-tag--link"
+                          >
+                            <span className="profile-tag-text">{f.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </article>
               </div>
 

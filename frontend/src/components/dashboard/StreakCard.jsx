@@ -1,6 +1,12 @@
-import { useState, useCallback, useMemo, useId } from "react";
+import { useState, useCallback, useMemo, useId, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../hooks/useAuth.jsx";
+import {
+  checkInStreak,
+  getMyStreak,
+  mapStreakToCardState,
+} from "../../services/streakService.js";
 import "./StreakCard.css";
 
 const WEEK_FALLBACK = ["?", "?", "?", "?", "?", "?", "?"];
@@ -75,8 +81,6 @@ StreakFlameIcon.propTypes = {
   className: PropTypes.string,
 };
 
-const STORAGE_KEY = "kotonote-streak-card";
-
 /** Ngày local YYYY-MM-DD (tránh lệch UTC) */
 function isoDateLocal(d) {
   const y = d.getFullYear();
@@ -104,39 +108,10 @@ function weekIsoDatesLocal(base = new Date()) {
   return dates;
 }
 
-function readStored(initialDays) {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { count: initialDays, checkIns: [] };
-    const p = JSON.parse(raw);
-    const count =
-      typeof p.count === "number" && p.count >= 0 ? p.count : initialDays;
-    let checkIns = [];
-    if (Array.isArray(p.checkIns)) {
-      checkIns = [...new Set(p.checkIns.filter(Boolean))];
-    }
-    if (checkIns.length === 0 && p.lastCheck) {
-      checkIns = [p.lastCheck];
-    }
-    return { count, checkIns };
-  } catch {
-    return { count: initialDays, checkIns: [] };
-  }
-}
-
-function writeStored(data) {
-  try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ count: data.count, checkIns: data.checkIns }),
-    );
-  } catch {
-    /* ignore quota */
-  }
-}
-
-const StreakCard = ({ days }) => {
+const StreakCard = ({ days = 0 }) => {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
+
   const weekShort = useMemo(() => {
     const arr = t("streak.weekDays", { returnObjects: true });
     return Array.isArray(arr) ? arr : WEEK_FALLBACK;
@@ -145,26 +120,88 @@ const StreakCard = ({ days }) => {
   const todayStr = isoDateLocal(new Date());
   const weekDates = weekIsoDatesLocal(new Date());
 
-  const [streak, setStreak] = useState(() => readStored(days));
+  const [streak, setStreak] = useState(() => ({
+    count: days,
+    checkIns: [],
+  }));
+  const [loading, setLoading] = useState(Boolean(user));
+  const [checkingIn, setCheckingIn] = useState(false);
+
+  const refreshStreak = useCallback(async () => {
+    const data = await getMyStreak();
+    setStreak(mapStreakToCardState(data, days));
+  }, [days]);
+
+  useEffect(() => {
+    if (!user) {
+      setStreak({ count: days, checkIns: [] });
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const data = await getMyStreak();
+        if (!cancelled) {
+          setStreak(mapStreakToCardState(data, days));
+        }
+      } catch {
+        if (!cancelled) {
+          setStreak({ count: days, checkIns: [] });
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, days]);
 
   const checkInSet = useMemo(() => new Set(streak.checkIns), [streak.checkIns]);
 
   const checkedToday = checkInSet.has(todayStr);
 
-  const onTodayCheckIn = useCallback(() => {
-    setStreak((prev) => {
-      if (prev.checkIns.includes(todayStr)) return prev;
-      const next = {
-        count: prev.count + 1,
-        checkIns: [...prev.checkIns, todayStr].sort(),
-      };
-      writeStored(next);
-      return next;
-    });
-  }, [todayStr]);
+  const onTodayCheckIn = useCallback(async () => {
+    if (!user || checkedToday || checkingIn) return;
+
+    setCheckingIn(true);
+    try {
+      const result = await checkInStreak();
+      if (typeof result.currentStreak === "number") {
+        setStreak((prev) => ({
+          count: result.currentStreak,
+          checkIns: prev.checkIns.includes(todayStr)
+            ? prev.checkIns
+            : [...prev.checkIns, todayStr].sort(),
+        }));
+      }
+      await refreshStreak();
+    } catch (err) {
+      if (/** @type {{ messageCode?: string }} */ (err).messageCode === "MSG_502") {
+        await refreshStreak();
+        return;
+      }
+      try {
+        await refreshStreak();
+      } catch {
+        /* giữ state hiện tại */
+      }
+    } finally {
+      setCheckingIn(false);
+    }
+  }, [user, checkedToday, checkingIn, todayStr, refreshStreak]);
+
+  const displayCount = loading ? days : streak.count;
 
   return (
-    <div className="streak-card">
+    <div
+      className={`streak-card${loading ? " streak-card--loading" : ""}`}
+      aria-busy={loading || checkingIn}
+    >
       <img
         className="streak-card-pin"
         src="/assets/decorates/pin2.png"
@@ -178,7 +215,7 @@ const StreakCard = ({ days }) => {
 
         <div className="streak-card-num-wrap">
           <span className="streak-card-num" aria-live="polite">
-            {streak.count}
+            {displayCount}
           </span>
         </div>
 
@@ -218,8 +255,10 @@ const StreakCard = ({ days }) => {
                   key={`${label}-${dateStr}`}
                   type="button"
                   className={cellClass}
-                  onClick={onTodayCheckIn}
+                  onClick={() => void onTodayCheckIn()}
+                  disabled={!user || checkingIn}
                   aria-pressed={didCheck}
+                  aria-busy={checkingIn}
                   title={
                     didCheck ? t("streak.checkedToday") : t("streak.tapToCheck")
                   }
@@ -254,7 +293,7 @@ const StreakCard = ({ days }) => {
 };
 
 StreakCard.propTypes = {
-  days: PropTypes.number.isRequired,
+  days: PropTypes.number,
 };
 
 export default StreakCard;

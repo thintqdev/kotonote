@@ -523,6 +523,26 @@
   color: #5a4838;
 }
 
+.profile-stat-hint {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--profile-ink-muted, #7a6f5f);
+}
+
+.profile-stat-hint--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.profile-stat-grid--loading .profile-stat-value {
+  opacity: 0.55;
+}
+
 .profile-stat-label {
   font-size: 0.72rem;
   font-weight: 600;
@@ -609,6 +629,77 @@
   font-family: var(--font-ui);
   font-weight: 600;
   color: #3d3428;
+}
+
+.profile-tag--link {
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
+}
+
+.profile-tag--link:hover {
+  background: rgba(255, 252, 246, 1);
+  border-color: rgba(130, 110, 85, 0.65);
+  transform: translateY(-1px);
+}
+
+.profile-focus-hint {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--profile-ink-muted, #7a6f5f);
+}
+
+.profile-focus-empty {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--profile-ink-muted, #7a6f5f);
+}
+
+.profile-focus-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-focus-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px dashed rgba(170, 150, 125, 0.55);
+  background: rgba(255, 252, 246, 0.85);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3d3428;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.profile-focus-chip:hover:not(:disabled) {
+  border-color: rgba(100, 140, 110, 0.65);
+  background: rgba(240, 248, 242, 0.95);
+}
+
+.profile-focus-chip.is-selected {
+  border-style: solid;
+  border-color: rgba(72, 120, 88, 0.75);
+  background: rgba(220, 238, 226, 0.95);
+  color: #2d4a38;
+}
+
+.profile-focus-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* ---------- Badges ---------- */
