@@ -7,6 +7,7 @@ import {
 	mockStreak,
 } from '../data/dashboardHomeMock.js';
 import { SUBJECT_ROUTE_BY_ID } from '../constants/dashboardNav.js';
+import { DEFAULT_DAILY_SUBJECT_GOALS } from '../constants/dailySubjectGoals.js';
 
 /**
  * @param {boolean} enabled — gọi API khi user đã đăng nhập
@@ -65,7 +66,11 @@ export function buildMockDashboardHomePayload() {
 		today: {
 			percent: mockTodayProgress.percent,
 			tasks: mockTodayTaskDefs.map((row) => {
-				const targets = { g: 2, v: 15, k: 8 };
+				const targets = {
+					g: DEFAULT_DAILY_SUBJECT_GOALS.grammar,
+					v: DEFAULT_DAILY_SUBJECT_GOALS.vocab,
+					k: DEFAULT_DAILY_SUBJECT_GOALS.kanji,
+				};
 				const key = row.detailKey;
 				const target = targets[key] ?? 1;
 				const completed =

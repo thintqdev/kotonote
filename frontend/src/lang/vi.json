@@ -776,6 +776,7 @@
   },
   "dashboard": {
     "streakDays": "{{count}} ngày liên tiếp",
+    "editDailyGoals": "Chỉnh mục tiêu",
     "quotes": {
       "note": "Học tập là món quà dành cho chính bạn trong tương lai.",
       "footer": "Mỗi ngày là cơ hội vượt qua chính mình hôm qua một chút."
@@ -1092,6 +1093,13 @@
     "notifWeeklyDesc": "Email thứ Hai 8:00: tổng hợp tuần (streak, check-in)",
     "sectionStudy": "Mục tiêu học",
     "dailyGoal": "Thời gian học mỗi ngày (mục tiêu)",
+    "sectionDailyProgress": "Mục tiêu tiến độ hôm nay",
+    "dailyProgressDesc": "Số lượng từng môn hiển thị trên trang chủ (ô Tiến độ hôm nay). Lưu cài đặt để áp dụng.",
+    "dailyGoalUnits": {
+      "grammar": "bài / ngày",
+      "vocab": "từ / ngày",
+      "kanji": "chữ / ngày"
+    },
     "dailyOptions": {
       "15": "15 phút",
       "30": "30 phút",

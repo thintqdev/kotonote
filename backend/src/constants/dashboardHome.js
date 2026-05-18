@@ -23,11 +23,11 @@ export const DASHBOARD_SUBJECT_STYLE = {
 	listening: { tint: 'green', variant: 'default' },
 };
 
-/** Mục tiêu gợi ý trong khối “Hôm nay” */
-export const DASHBOARD_TODAY_TARGETS = {
-	grammar: { detailKey: 'g', target: 2 },
-	vocab: { detailKey: 'v', target: 15 },
-	kanji: { detailKey: 'k', target: 8 },
+/** Khóa i18n chi tiết task “Hôm nay” theo môn */
+export const DASHBOARD_TODAY_DETAIL_KEYS = {
+	grammar: 'g',
+	vocab: 'v',
+	kanji: 'k',
 };
 
 export const DASHBOARD_TODAY_SUBJECT_IDS = ['grammar', 'vocab', 'kanji'];

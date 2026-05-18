@@ -3,6 +3,22 @@ import {
 	DAILY_GOAL_MINUTES_OPTIONS,
 	REMINDER_TIME_PATTERN,
 } from '../constants/userSettings.js';
+import { DAILY_SUBJECT_GOAL_LIMITS } from '../constants/dailySubjectGoals.js';
+
+const dailySubjectGoalsSchema = Joi.object({
+	grammar: Joi.number()
+		.integer()
+		.min(DAILY_SUBJECT_GOAL_LIMITS.grammar.min)
+		.max(DAILY_SUBJECT_GOAL_LIMITS.grammar.max),
+	vocab: Joi.number()
+		.integer()
+		.min(DAILY_SUBJECT_GOAL_LIMITS.vocab.min)
+		.max(DAILY_SUBJECT_GOAL_LIMITS.vocab.max),
+	kanji: Joi.number()
+		.integer()
+		.min(DAILY_SUBJECT_GOAL_LIMITS.kanji.min)
+		.max(DAILY_SUBJECT_GOAL_LIMITS.kanji.max),
+});
 
 const notificationsSchema = Joi.object({
 	emailDigest: Joi.boolean(),
@@ -12,6 +28,7 @@ const notificationsSchema = Joi.object({
 
 const studySchema = Joi.object({
 	dailyGoalMinutes: Joi.number().valid(...DAILY_GOAL_MINUTES_OPTIONS),
+	dailySubjectGoals: dailySubjectGoalsSchema,
 	reminderEnabled: Joi.boolean(),
 	reminderTime: Joi.string().pattern(REMINDER_TIME_PATTERN).messages({
 		'string.pattern.base': 'MSG_003',

@@ -51,6 +51,53 @@
   color: #3a4828;
 }
 
+.settings-daily-progress-desc {
+  margin: 0 0 12px;
+  max-width: 36rem;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #8a7868;
+}
+
+.settings-daily-goals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 14px;
+  margin-bottom: 4px;
+}
+
+.settings-daily-goals-grid .settings-field-block {
+  margin: 0;
+}
+
+.settings-number-input {
+  width: 100%;
+  max-width: 6.5rem;
+  padding: 10px 12px;
+  border-radius: 3px;
+  border: 1.5px solid #c4a882;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: #2b2b2b;
+  background: rgba(255, 253, 248, 0.95);
+  box-sizing: border-box;
+}
+
+.settings-daily-goal-unit {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #8a7868;
+}
+
+@media (max-width: 640px) {
+  .settings-daily-goals-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .settings-reminder-time {
   display: flex;
   flex-direction: column;

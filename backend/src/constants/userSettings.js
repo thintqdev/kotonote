@@ -1,3 +1,5 @@
+import { normalizeDailySubjectGoals } from './dailySubjectGoals.js';
+
 export const DAILY_GOAL_MINUTES_OPTIONS = [15, 30, 45, 60];
 
 export const DEFAULT_REMINDER_TIME = '20:00';
@@ -35,6 +37,7 @@ export const DEFAULT_USER_SETTINGS = {
 	},
 	study: {
 		dailyGoalMinutes: 30,
+		dailySubjectGoals: normalizeDailySubjectGoals(),
 		reminderEnabled: true,
 		reminderTime: DEFAULT_REMINDER_TIME,
 		reminderWeekends: true,
@@ -75,6 +78,7 @@ export function normalizeUserSettings(raw) {
 			dailyGoalMinutes: DAILY_GOAL_MINUTES_OPTIONS.includes(dailyGoalMinutes)
 				? dailyGoalMinutes
 				: DEFAULT_USER_SETTINGS.study.dailyGoalMinutes,
+			dailySubjectGoals: normalizeDailySubjectGoals(st.dailySubjectGoals),
 			reminderEnabled:
 				typeof st.reminderEnabled === 'boolean'
 					? st.reminderEnabled

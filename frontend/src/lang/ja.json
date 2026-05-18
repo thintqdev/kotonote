@@ -779,6 +779,7 @@
   },
   "dashboard": {
     "streakDays": "{{count}}日連続",
+    "editDailyGoals": "目標を編集",
     "quotes": {
       "note": "学びは未来の自分への贈り物。",
       "footer": "毎日が、昨日の自分を少し超えるチャンス。"
@@ -1095,6 +1096,13 @@
     "notifWeeklyDesc": "月曜8時に週間メール（ストリーク・チェックイン）",
     "sectionStudy": "学習目標",
     "dailyGoal": "1日の学習時間（目標）",
+    "sectionDailyProgress": "今日の進捗目標",
+    "dailyProgressDesc": "ホームの「今日の進捗」に表示する各科目の目標数です。保存後に反映されます。",
+    "dailyGoalUnits": {
+      "grammar": "回 / 日",
+      "vocab": "語 / 日",
+      "kanji": "字 / 日"
+    },
     "dailyOptions": {
       "15": "15分",
       "30": "30分",

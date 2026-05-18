@@ -51,6 +51,11 @@ const userSettingsSchema = new mongoose.Schema(
 				enum: [15, 30, 45, 60],
 				default: 30,
 			},
+			dailySubjectGoals: {
+				grammar: { type: Number, default: 2, min: 1, max: 10 },
+				vocab: { type: Number, default: 15, min: 5, max: 50 },
+				kanji: { type: Number, default: 8, min: 1, max: 20 },
+			},
 			reminderEnabled: { type: Boolean, default: true },
 			reminderTime: {
 				type: String,

@@ -10,11 +10,14 @@ import * as streakRepository from '../repositories/streakRepository.js';
 import * as readingProgressRepository from '../repositories/readingProgressRepository.js';
 import { VOCAB_GROWTH_STAGE_MAX } from '../constants/vocabGrowth.js';
 import { KANJI_LESSON_GROWTH_MAX } from '../constants/kanji.js';
+import User from '../models/User.js';
+import { normalizeUserSettings } from '../constants/userSettings.js';
+import { normalizeDailySubjectGoals } from '../constants/dailySubjectGoals.js';
 import {
 	DASHBOARD_SUBJECT_ORDER,
 	DASHBOARD_SUBJECT_ROUTES,
 	DASHBOARD_SUBJECT_STYLE,
-	DASHBOARD_TODAY_TARGETS,
+	DASHBOARD_TODAY_DETAIL_KEYS,
 	DASHBOARD_TODAY_SUBJECT_IDS,
 } from '../constants/dashboardHome.js';
 
@@ -52,6 +55,7 @@ export async function getDashboardHome(userId) {
 	const todayStart = startOfToday();
 
 	const [
+		userDoc,
 		streak,
 		grammarTotal,
 		vocabDecksActive,
@@ -65,6 +69,7 @@ export async function getDashboardHome(userId) {
 		vocabActivityToday,
 		kanjiActivityToday,
 	] = await Promise.all([
+		User.findById(userId).select('settings').lean(),
 		streakRepository.getOrCreateStreak(userId),
 		Grammar.countDocuments({ isPublished: true }),
 		VocabularyDeck.countDocuments({ isActive: true }),
@@ -126,18 +131,23 @@ export async function getDashboardHome(userId) {
 		};
 	});
 
+	const settings = normalizeUserSettings(userDoc?.settings);
+	const dailyGoals = normalizeDailySubjectGoals(
+		settings.study?.dailySubjectGoals,
+	);
+
 	const todayTasks = DASHBOARD_TODAY_SUBJECT_IDS.map((subjectId) => {
-		const meta = DASHBOARD_TODAY_TARGETS[subjectId];
+		const target = dailyGoals[subjectId] ?? 1;
 		let completed = 0;
 		if (subjectId === 'vocab') {
-			completed = Math.min(meta.target, vocabActivityToday * 5);
+			completed = Math.min(target, vocabActivityToday * 5);
 		} else if (subjectId === 'kanji') {
-			completed = Math.min(meta.target, kanjiActivityToday * 4);
+			completed = Math.min(target, kanjiActivityToday * 4);
 		}
 		return {
 			subjectId,
-			detailKey: meta.detailKey,
-			target: meta.target,
+			detailKey: DASHBOARD_TODAY_DETAIL_KEYS[subjectId],
+			target,
 			completed,
 		};
 	});
@@ -159,6 +169,7 @@ export async function getDashboardHome(userId) {
 		today: {
 			percent: todayPercent,
 			tasks: todayTasks,
+			goals: dailyGoals,
 		},
 	};
 }

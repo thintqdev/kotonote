@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useMergedProfile } from "../hooks/useMergedProfile.js";
@@ -173,12 +174,17 @@ const DashboardHome = () => {
 
         <div className="dash-daily">
           <div className="dash-daily-title-row">
-            <h2
-              id="dash-daily-progress-title"
-              className="dash-daily-section-title"
-            >
-              {t("today.title")}
-            </h2>
+            <div className="dash-daily-progress-title-wrap">
+              <h2
+                id="dash-daily-progress-title"
+                className="dash-daily-section-title"
+              >
+                {t("today.title")}
+              </h2>
+              <Link className="dash-daily-goals-link" to="/settings">
+                {t("dashboard.editDailyGoals")}
+              </Link>
+            </div>
             <div className="dash-daily-note-title-cell">
               <h2
                 id="dash-daily-note-title"

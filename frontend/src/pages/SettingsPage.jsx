@@ -15,6 +15,11 @@ import {
   REMINDER_TIME_OPTIONS,
   snapReminderTimeToSlot,
 } from "../constants/reminderTime.js";
+import {
+  DAILY_SUBJECT_GOAL_IDS,
+  DAILY_SUBJECT_GOAL_LIMITS,
+  normalizeDailySubjectGoals,
+} from "../constants/dailySubjectGoals.js";
 import "./AuthPage.css";
 import "./Profile.css";
 import "./DashboardHome.css";
@@ -56,6 +61,7 @@ function buildSettingsPayload(state) {
     },
     study: {
       dailyGoalMinutes: Number(state.dailyGoal),
+      dailySubjectGoals: state.dailySubjectGoals,
       reminderEnabled: state.reminderEnabled,
       reminderTime: state.reminderTime,
       reminderWeekends: state.reminderWeekends,
@@ -74,6 +80,9 @@ const SettingsPage = () => {
   const [notifStudy, setNotifStudy] = useState(true);
   const [notifWeekly, setNotifWeekly] = useState(false);
   const [dailyGoal, setDailyGoal] = useState("30");
+  const [dailySubjectGoals, setDailySubjectGoals] = useState(() =>
+    normalizeDailySubjectGoals(),
+  );
   const [reminderEnabled, setReminderEnabled] = useState(true);
   const [reminderTime, setReminderTime] = useState("20:00");
   const [reminderWeekends, setReminderWeekends] = useState(true);
@@ -90,6 +99,9 @@ const SettingsPage = () => {
     setNotifStudy(settings.notifications?.dailyStudyReminder ?? true);
     setNotifWeekly(settings.notifications?.weeklyReport ?? false);
     setDailyGoal(String(settings.study?.dailyGoalMinutes ?? 30));
+    setDailySubjectGoals(
+      normalizeDailySubjectGoals(settings.study?.dailySubjectGoals),
+    );
     setReminderEnabled(settings.study?.reminderEnabled ?? true);
     setReminderTime(
       snapReminderTimeToSlot(settings.study?.reminderTime ?? "20:00"),
@@ -135,6 +147,7 @@ const SettingsPage = () => {
         notifStudy,
         notifWeekly,
         dailyGoal,
+        dailySubjectGoals,
         reminderEnabled,
         reminderTime,
         reminderWeekends,
@@ -266,6 +279,52 @@ const SettingsPage = () => {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <h3 className="settings-subsection-title">
+              {t("settingsPage.sectionDailyProgress")}
+            </h3>
+            <p className="settings-daily-progress-desc">
+              {t("settingsPage.dailyProgressDesc")}
+            </p>
+            <div className="settings-daily-goals-grid">
+              {DAILY_SUBJECT_GOAL_IDS.map((subjectId) => {
+                const { min, max } = DAILY_SUBJECT_GOAL_LIMITS[subjectId];
+                return (
+                  <div key={subjectId} className="settings-field-block">
+                    <label
+                      className="settings-select-label"
+                      htmlFor={`settings-daily-goal-${subjectId}`}
+                    >
+                      {t(`subjects.${subjectId}.label`)}
+                    </label>
+                    <input
+                      id={`settings-daily-goal-${subjectId}`}
+                      type="number"
+                      className="settings-number-input sketch-input"
+                      min={min}
+                      max={max}
+                      step={1}
+                      value={dailySubjectGoals[subjectId]}
+                      onChange={(e) => {
+                        const next = Number(e.target.value);
+                        setDailySubjectGoals((prev) =>
+                          normalizeDailySubjectGoals({
+                            ...prev,
+                            [subjectId]: Number.isFinite(next)
+                              ? next
+                              : prev[subjectId],
+                          }),
+                        );
+                      }}
+                      disabled={formDisabled}
+                    />
+                    <span className="settings-daily-goal-unit">
+                      {t(`settingsPage.dailyGoalUnits.${subjectId}`)}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
             <h3 className="settings-subsection-title">
