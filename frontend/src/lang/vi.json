@@ -267,7 +267,19 @@
     "alphabet": "Bảng chữ cái",
     "kanji": "Kanji",
     "reading": "Đọc hiểu",
-    "notebook": "Sổ tay"
+    "notebook": "Sổ tay",
+    "listening": "Nghe hiểu",
+    "practice": "Luyện tập"
+  },
+  "listeningPage": {
+    "title": "Nghe hiểu",
+    "subtitle": "Luyện nghe theo chủ đề và trình độ JLPT.",
+    "comingSoon": "Nội dung đang được bổ sung — quay lại sau nhé."
+  },
+  "practicePage": {
+    "title": "Luyện tập",
+    "subtitle": "Ôn tập tổng hợp từ vựng, kanji và ngữ pháp.",
+    "comingSoon": "Chế độ luyện tập sẽ sớm có mặt."
   },
   "notebook": {
     "pageTitle": "Sổ tay học tập",
@@ -721,23 +733,23 @@
   "subjects": {
     "grammar": {
       "label": "Ngữ pháp",
-      "count": "145 bài học"
+      "count": "{{count}} bài học"
     },
     "vocab": {
       "label": "Từ vựng",
-      "count": "213 từ"
+      "count": "{{count}} từ"
     },
     "kanji": {
       "label": "Kanji",
-      "count": "213 kanji"
+      "count": "{{count}} kanji"
     },
     "reading": {
       "label": "Đọc hiểu",
-      "count": "48 bài"
+      "count": "{{count}} bài"
     },
     "listening": {
       "label": "Nghe",
-      "count": "32 bài"
+      "count": "{{count}} bài"
     }
   },
   "subjectCard": {
@@ -750,9 +762,9 @@
     "donutLabel": "Hoàn thành mục tiêu",
     "foot": "Cố gắng lên! Bạn đang làm rất tốt!",
     "tasks": {
-      "g": "2 bài",
-      "v": "15 từ",
-      "k": "8 chữ"
+      "g": "{{current}} / {{target}} bài",
+      "v": "{{current}} / {{target}} từ",
+      "k": "{{current}} / {{target}} chữ"
     }
   },
   "dailyNote": {
@@ -763,6 +775,7 @@
     "editAria": "Nội dung ghi chú"
   },
   "dashboard": {
+    "streakDays": "{{count}} ngày liên tiếp",
     "quotes": {
       "note": "Học tập là món quà dành cho chính bạn trong tương lai.",
       "footer": "Mỗi ngày là cơ hội vượt qua chính mình hôm qua một chút."
@@ -1072,11 +1085,11 @@
     "title": "Cài đặt",
     "sectionNotif": "Thông báo",
     "notifEmail": "Email tóm tắt",
-    "notifEmailDesc": "Tóm tắt tiến độ và nhắc hạn qua email",
+    "notifEmailDesc": "Email mỗi sáng 8:00 (múi giờ hồ sơ): streak, mục tiêu, ngày thi",
     "notifStudy": "Nhắc học hằng ngày",
-    "notifStudyDesc": "Gợi nhớ ôn bài trong ngày",
+    "notifStudyDesc": "Cho phép gửi nhắc học hằng ngày trong app",
     "notifWeekly": "Báo cáo tuần",
-    "notifWeeklyDesc": "Tổng hợp streak và thời gian học",
+    "notifWeeklyDesc": "Email thứ Hai 8:00: tổng hợp tuần (streak, check-in)",
     "sectionStudy": "Mục tiêu học",
     "dailyGoal": "Thời gian học mỗi ngày (mục tiêu)",
     "dailyOptions": {
@@ -1085,6 +1098,13 @@
       "45": "45 phút",
       "60": "60 phút"
     },
+    "sectionReminder": "Nhắc học hằng ngày",
+    "reminderEnabled": "Bật nhắc giờ học",
+    "reminderEnabledDesc": "Thông báo trong app khi đến giờ bạn chọn (cần mở app hoặc đang online)",
+    "reminderTime": "Giờ nhắc",
+    "reminderTimeDesc": "Chọn theo bước 30 phút; hệ thống kiểm tra mỗi 30 phút (múi giờ hồ sơ)",
+    "reminderWeekends": "Nhắc cả cuối tuần",
+    "reminderWeekendsDesc": "Tắt nếu chỉ muốn nhắc ngày trong tuần",
     "sectionPrivacy": "Quyền riêng tư",
     "privacyAnalytics": "Góp phần cải thiện app (phân tích ẩn danh)",
     "privacyDesc": "Giúp đội phát triển hiểu cách dùng tính năng — có thể tắt.",
@@ -1304,6 +1324,8 @@
     "MSG_208": "Lấy tóm tắt học tập thành công",
     "MSG_209": "Lấy trọng tâm ôn thành công",
     "MSG_210": "Cập nhật trọng tâm ôn thành công",
+    "MSG_211": "Đã tải cài đặt",
+    "MSG_212": "Đã lưu cài đặt",
     "MSG_950": "Tạo ghi chú thành công",
     "MSG_951": "Cập nhật ghi chú thành công",
     "MSG_952": "Xóa ghi chú thành công",
@@ -1340,6 +1362,19 @@
     "MSG_710": "Lấy thông tin từ vựng thành công",
     "MSG_711": "Không tìm thấy từ vựng",
     "MSG_712": "Bộ từ vựng đã đầy (tối đa 25 từ)",
+    "MSG_713": "Đã tải tiến độ học từ vựng",
+    "MSG_714": "Đã tải tiến độ bài học",
+    "MSG_715": "Đã cập nhật tiến độ cây nở hoa",
+    "MSG_930": "Tạo bài đọc thành công",
+    "MSG_931": "Cập nhật bài đọc thành công",
+    "MSG_932": "Xóa bài đọc thành công",
+    "MSG_933": "Đã tải bài đọc",
+    "MSG_934": "Không tìm thấy bài đọc",
+    "MSG_935": "Đã tải danh sách bài đọc",
+    "MSG_936": "Slug bài đọc đã tồn tại",
+    "MSG_937": "Đã lưu tiến độ đọc",
+    "MSG_938": "Đã tải tóm tắt tiến độ đọc",
+    "MSG_939": "Đã tải ảnh bìa bài đọc lên",
     "MSG_901": "Tạo Kanji thành công",
     "MSG_902": "Cập nhật Kanji thành công",
     "MSG_903": "Xóa Kanji thành công",
@@ -1352,6 +1387,9 @@
     "MSG_910": "Lấy thông tin bộ Kanji thành công",
     "MSG_911": "Không tìm thấy bộ Kanji",
     "MSG_912": "Bộ Kanji đã đầy (tối đa 25 chữ)",
+    "MSG_920": "Đã tải tiến độ học Kanji",
+    "MSG_921": "Đã tải tiến độ bài Kanji",
+    "MSG_922": "Đã cập nhật tiến độ cây nở hoa (Kanji)",
     "MSG_913": "Tạo bài ngữ pháp thành công",
     "MSG_914": "Cập nhật bài ngữ pháp thành công",
     "MSG_915": "Xóa bài ngữ pháp thành công",

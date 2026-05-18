@@ -1,16 +1,18 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
+import { READING_JLPT_LEVELS } from "../data/readingMock.js";
 import {
-  READING_ITEMS,
-  READING_JLPT_LEVELS,
-  READING_PROGRESS_DEMO,
-  getReadingListFiltered,
-} from "../data/readingMock.js";
+  getReadingSummary,
+  listReadingArticles,
+} from "../services/readingService.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css";
@@ -96,16 +98,52 @@ export default function ReadingListPage() {
   const mode = (searchParams.get("mode") || "all").trim();
   const safeMode = mode === "suggested" || mode === "review" ? mode : "all";
 
-  const list = useMemo(
-    () => getReadingListFiltered(jlpt, safeMode),
-    [jlpt, safeMode],
-  );
+  const [list, setList] = useState([]);
+  const [jlptLevels, setJlptLevels] = useState(READING_JLPT_LEVELS);
+  const [progress, setProgress] = useState({ completed: 0, goal: 60 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const [listRes, summary] = await Promise.all([
+          listReadingArticles({
+            jlpt: jlpt || undefined,
+            mode: safeMode,
+            limit: 50,
+          }),
+          getReadingSummary(),
+        ]);
+        if (cancelled) return;
+        setList(listRes.items ?? []);
+        if (listRes.jlptLevels?.length) {
+          setJlptLevels(listRes.jlptLevels);
+        }
+        setProgress(summary);
+      } catch (err) {
+        if (!cancelled) {
+          setError(getApiErrorMessage(err, t));
+          setList([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, jlpt, safeMode, t]);
 
   const progressPct = useMemo(() => {
-    const { completed, goal } = READING_PROGRESS_DEMO;
+    const { completed, goal } = progress;
     if (!goal) return 0;
     return Math.round((completed / goal) * 100);
-  }, []);
+  }, [progress]);
 
   const setJlpt = (next) => {
     const p = new URLSearchParams(searchParams);
@@ -125,18 +163,24 @@ export default function ReadingListPage() {
     setSearchParams(p, { replace: true });
   };
 
-  const reviewCount = useMemo(
-    () =>
-      READING_ITEMS.filter(
-        (x) => x.status === "in_progress" || x.status === "done",
-      ).length,
-    [],
-  );
+  const reviewCount = progress.reviewCount ?? 0;
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
+
+  if (loading) {
+    return (
+      <Layout
+        userName={headerName}
+        streakDays={mockStreak.days}
+        pageClassName="vocab-dash"
+      >
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
 
   return (
     <Layout
@@ -192,7 +236,7 @@ export default function ReadingListPage() {
                 {t("readingPage.progressLabel")}
               </span>
               <strong className="vocab-lesson-goal-value">
-                {READING_PROGRESS_DEMO.completed} / {READING_PROGRESS_DEMO.goal}
+                {progress.completed} / {progress.goal}
               </strong>
             </div>
             <div className="vocab-lesson-progress-track reading-goal-track">
@@ -203,6 +247,12 @@ export default function ReadingListPage() {
             </div>
           </div>
         </header>
+
+        {error ? (
+          <p className="vocab-empty" role="alert">
+            {error}
+          </p>
+        ) : null}
 
         <div
           className="vocab-tabs reading-jlpt-tabs"
@@ -218,7 +268,7 @@ export default function ReadingListPage() {
           >
             {t("readingPage.filterAll")}
           </button>
-          {READING_JLPT_LEVELS.map((lv) => (
+          {jlptLevels.map((lv) => (
             <button
               key={lv}
               type="button"
@@ -230,13 +280,6 @@ export default function ReadingListPage() {
               {lv}
             </button>
           ))}
-          <button
-            type="button"
-            className="vocab-tab reading-tab-muted"
-            title={t("readingPage.filterMoreTitle")}
-          >
-            {t("readingPage.filterMore")}
-          </button>
         </div>
 
         {list.length === 0 ? (
@@ -245,7 +288,9 @@ export default function ReadingListPage() {
           </p>
         ) : (
           <ul className="vocab-lesson-list">
-            {list.map((item) => (
+            {list.map((item) => {
+              const thumbSrc = resolvePublicMediaUrl(item.imageUrl);
+              return (
               <li key={item.id} className="vocab-lesson-card">
                 <Link className="reading-row-link" to={`/reading/${item.id}`}>
                   <span className="reading-card-bookmark-wrap" aria-hidden>
@@ -254,7 +299,7 @@ export default function ReadingListPage() {
                   <div className="reading-thumb-wrap">
                     <img
                       className="reading-thumb"
-                      src={item.imageUrl}
+                      src={thumbSrc || item.imageUrl}
                       alt=""
                       width={200}
                       height={140}
@@ -312,7 +357,8 @@ export default function ReadingListPage() {
                   </span>
                 </Link>
               </li>
-            ))}
+            );
+            })}
           </ul>
         )}
 

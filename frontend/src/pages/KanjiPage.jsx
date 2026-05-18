@@ -7,14 +7,17 @@ import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildKanjiLessonQuizQuestions,
-  advanceKanjiLessonGrowthStage,
-  getKanjiLessonGrowthStage,
   mergeKanjiMarks,
   kanjiMeaningLine,
   KANJI_LESSON_GROWTH_MAX,
   KANJI_QUIZ_PER_STAGE,
 } from "../data/kanjiMock.js";
-import { loadKanjiPack } from "../services/kanjiService.js";
+import {
+  advanceKanjiDeckProgress,
+  getKanjiDeckProgress,
+} from "../services/kanjiProgressService.js";
+import { getDeckWithKanji, loadKanjiPack } from "../services/kanjiService.js";
+import { mapKanjiRecord } from "../utils/deckStudy.js";
 import {
   getDeckLessonItems,
   isDeckLessonUnlocked,
@@ -74,12 +77,16 @@ export default function KanjiPage() {
     () => (searchParams.get("jlpt") || "").trim(),
     [searchParams],
   );
+  const deckId = useMemo(
+    () => (searchParams.get("deckId") || "").trim(),
+    [searchParams],
+  );
   const isLessonMode = Boolean(
     lessonNoFromQuery != null && lessonJlpt.length > 0,
   );
 
   useEffect(() => {
-    if (!user || !lessonJlpt) {
+    if (!user || !lessonJlpt || !isLessonMode) {
       setLoading(false);
       return;
     }
@@ -88,10 +95,20 @@ export default function KanjiPage() {
       setLoading(true);
       setError("");
       try {
-        const pack = await loadKanjiPack(lessonJlpt);
-        if (!cancelled) {
-          setSortedDecks(pack.decks);
-          setPackItems(pack.items);
+        if (deckId) {
+          const { deck, kanji } = await getDeckWithKanji(deckId);
+          const jlpt = lessonJlpt || deck.jlpt;
+          const items = kanji.map((k) => mapKanjiRecord(k, jlpt, deckId));
+          if (!cancelled) {
+            setSortedDecks([deck]);
+            setPackItems(items);
+          }
+        } else {
+          const pack = await loadKanjiPack(lessonJlpt);
+          if (!cancelled) {
+            setSortedDecks(pack.decks);
+            setPackItems(pack.items);
+          }
         }
       } catch (err) {
         if (!cancelled) {
@@ -106,7 +123,7 @@ export default function KanjiPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, lessonJlpt, t]);
+  }, [user, lessonJlpt, deckId, isLessonMode, t]);
 
   const merged = useMemo(
     () => mergeKanjiMarks(packItems, marks),
@@ -123,17 +140,40 @@ export default function KanjiPage() {
 
   const lessonItemsStable = useMemo(() => {
     if (!isLessonMode || !lessonNoFromQuery) return [];
+    if (deckId) return merged;
     return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
-  }, [merged, sortedDecks, isLessonMode, lessonNoFromQuery]);
+  }, [merged, sortedDecks, deckId, isLessonMode, lessonNoFromQuery]);
+
+  const effectiveDeckId = useMemo(() => {
+    if (deckId) return deckId;
+    if (!lessonNoFromQuery || !sortedDecks.length) return "";
+    const deck = sortedDecks[lessonNoFromQuery - 1];
+    return deck?._id ? String(deck._id) : "";
+  }, [deckId, lessonNoFromQuery, sortedDecks]);
 
   const [growthStage, setGrowthStage] = useState(0);
   useEffect(() => {
-    if (!isLessonMode || !lessonJlpt || !lessonNoFromQuery) {
+    if (!user || !isLessonMode || !effectiveDeckId) {
       setGrowthStage(0);
       return;
     }
-    setGrowthStage(getKanjiLessonGrowthStage(lessonJlpt, lessonNoFromQuery));
-  }, [isLessonMode, lessonJlpt, lessonNoFromQuery]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const row = await getKanjiDeckProgress(effectiveDeckId);
+        if (!cancelled) {
+          setGrowthStage(
+            typeof row.growthStage === "number" ? row.growthStage : 0,
+          );
+        }
+      } catch {
+        if (!cancelled) setGrowthStage(0);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, isLessonMode, effectiveDeckId]);
 
   const [lessonTab, setLessonTab] = useState("detail");
   useEffect(() => {
@@ -150,12 +190,18 @@ export default function KanjiPage() {
     [merged, lessonItemsStable, lang, quizGenKey],
   );
 
-  const handleQuizPerfect = useCallback(() => {
-    if (!lessonJlpt || !lessonNoFromQuery) return;
-    advanceKanjiLessonGrowthStage(lessonJlpt, lessonNoFromQuery);
-    setGrowthStage(getKanjiLessonGrowthStage(lessonJlpt, lessonNoFromQuery));
-    setQuizGenKey((k) => k + 1);
-  }, [lessonJlpt, lessonNoFromQuery]);
+  const handleQuizPerfect = useCallback(async () => {
+    if (!effectiveDeckId) return;
+    try {
+      const row = await advanceKanjiDeckProgress(effectiveDeckId);
+      if (typeof row.growthStage === "number") {
+        setGrowthStage(row.growthStage);
+      }
+      setQuizGenKey((k) => k + 1);
+    } catch {
+      // giữ stage hiện tại nếu API lỗi
+    }
+  }, [effectiveDeckId]);
 
   const handleQuizRegenerate = useCallback(() => {
     setQuizGenKey((k) => k + 1);

@@ -36,6 +36,38 @@ export const schemas = {
 			},
 		},
 	},
+	UserSettings: {
+		type: 'object',
+		properties: {
+			notifications: {
+				type: 'object',
+				properties: {
+					emailDigest: { type: 'boolean', example: true },
+					dailyStudyReminder: { type: 'boolean', example: true },
+					weeklyReport: { type: 'boolean', example: false },
+				},
+			},
+			study: {
+				type: 'object',
+				properties: {
+					dailyGoalMinutes: {
+						type: 'integer',
+						enum: [15, 30, 45, 60],
+						example: 30,
+					},
+					reminderEnabled: { type: 'boolean', example: true },
+					reminderTime: { type: 'string', example: '20:00' },
+					reminderWeekends: { type: 'boolean', example: true },
+				},
+			},
+			privacy: {
+				type: 'object',
+				properties: {
+					analyticsOptIn: { type: 'boolean', example: false },
+				},
+			},
+		},
+	},
 	LearningSummary: {
 		type: 'object',
 		properties: {
@@ -455,6 +487,163 @@ export const schemas = {
 						type: 'array',
 						items: { $ref: '#/components/schemas/GrammarLoc' },
 					},
+				},
+			},
+		},
+	},
+	ReadingGloss: {
+		type: 'object',
+		properties: {
+			vi: { type: 'string' },
+			ja: { type: 'string' },
+		},
+	},
+	ReadingVocab: {
+		type: 'object',
+		properties: {
+			termJa: { type: 'string' },
+			gloss: { $ref: '#/components/schemas/ReadingGloss' },
+		},
+	},
+	ReadingQuestion: {
+		type: 'object',
+		properties: {
+			questionJa: { type: 'string' },
+			choicesJa: { type: 'array', items: { type: 'string' } },
+			answerIndex: { type: 'integer' },
+			explainPerChoice: {
+				type: 'object',
+				properties: {
+					ja: { type: 'array', items: { type: 'string' } },
+					vi: { type: 'array', items: { type: 'string' } },
+				},
+			},
+		},
+	},
+	ReadingArticle: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string' },
+			slug: { type: 'string', example: 'r-seasons' },
+			jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'] },
+			titleJa: { type: 'string' },
+			snippetJa: { type: 'string' },
+			wordCount: { type: 'number' },
+			readingMinutes: { type: 'number' },
+			rating: { type: 'number' },
+			imageUrl: { type: 'string' },
+			featured: { type: 'boolean' },
+			isPublished: { type: 'boolean' },
+			displayOrder: { type: 'number' },
+			paragraphsJa: { type: 'array', items: { type: 'string' } },
+			vocabulary: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/ReadingVocab' },
+			},
+			questions: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/ReadingQuestion' },
+			},
+			status: {
+				type: 'string',
+				enum: ['not_started', 'in_progress', 'done'],
+			},
+		},
+	},
+	ReadingArticleInput: {
+		type: 'object',
+		required: ['slug', 'jlpt', 'titleJa'],
+		properties: {
+			slug: { type: 'string' },
+			jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'] },
+			titleJa: { type: 'string' },
+			snippetJa: { type: 'string' },
+			wordCount: { type: 'number' },
+			readingMinutes: { type: 'number' },
+			rating: { type: 'number' },
+			imageUrl: { type: 'string' },
+			featured: { type: 'boolean' },
+			isPublished: { type: 'boolean' },
+			displayOrder: { type: 'number' },
+			paragraphsJa: { type: 'array', items: { type: 'string' } },
+			vocabulary: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/ReadingVocab' },
+			},
+			questions: {
+				type: 'array',
+				items: { $ref: '#/components/schemas/ReadingQuestion' },
+			},
+		},
+	},
+	ReadingListItem: {
+		type: 'object',
+		properties: {
+			id: { type: 'string' },
+			slug: { type: 'string' },
+			jlpt: { type: 'string' },
+			titleJa: { type: 'string' },
+			snippetJa: { type: 'string' },
+			wordCount: { type: 'number' },
+			readingMinutes: { type: 'number' },
+			rating: { type: 'number' },
+			imageUrl: { type: 'string' },
+			featured: { type: 'boolean' },
+			status: {
+				type: 'string',
+				enum: ['not_started', 'in_progress', 'done'],
+			},
+		},
+	},
+	ReadingSummary: {
+		type: 'object',
+		properties: {
+			completed: { type: 'integer' },
+			goal: { type: 'integer' },
+			reviewCount: { type: 'integer' },
+		},
+	},
+	ReadingProgress: {
+		type: 'object',
+		properties: {
+			status: {
+				type: 'string',
+				enum: ['not_started', 'in_progress', 'done'],
+			},
+			questionAnswers: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						questionIndex: { type: 'integer' },
+						choiceIndex: { type: 'integer' },
+					},
+				},
+			},
+		},
+	},
+	ReadingProgressInput: {
+		type: 'object',
+		properties: {
+			status: {
+				type: 'string',
+				enum: ['not_started', 'in_progress', 'done'],
+			},
+			questionAnswers: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						questionIndex: { type: 'integer' },
+						choiceIndex: { type: 'integer' },
+					},
+				},
+			},
+			recordAnswer: {
+				type: 'object',
+				properties: {
+					questionIndex: { type: 'integer' },
+					choiceIndex: { type: 'integer' },
 				},
 			},
 		},

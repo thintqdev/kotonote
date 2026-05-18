@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
+import StudyPageHeader from '../components/study/StudyPageHeader.jsx';
 import NotebookRichEditor from '../components/notebook/NotebookRichEditor.jsx';
 import { mockStreak } from '../data/dashboardHomeMock.js';
 import { NOTEBOOK_COVER_COLORS } from '../constants/notebookTheme.js';
@@ -241,21 +242,12 @@ export default function NotebookPage() {
 				]}
 			/>
 
-			<div className="nb-page vocab-scope">
-				<header className="nb-page-head">
-					<img
-						className="nb-page-deco"
-						src="/assets/decorates/pin2.png"
-						alt=""
-						width={64}
-						height={64}
-						decoding="async"
-					/>
-					<div>
-						<h1 className="nb-page-title">{t('notebook.pageTitle')}</h1>
-						<p className="nb-page-sub">{t('notebook.pageSubtitle')}</p>
-					</div>
-				</header>
+			<article className="vocab-sheet vocab-scope vocab-notebook vocab-lesson-scope nb-page">
+				<StudyPageHeader
+					titleId="notebook-page-title"
+					title={t('notebook.pageTitle')}
+					subtitle={t('notebook.pageSubtitle')}
+				/>
 
 				<div className="nb-layout">
 					<aside className="nb-sidebar vocab-sheet vocab-notebook">
@@ -409,7 +401,7 @@ export default function NotebookPage() {
 						)}
 					</main>
 				</div>
-			</div>
+			</article>
 		</Layout>
 	);
 }

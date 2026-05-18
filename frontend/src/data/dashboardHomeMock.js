@@ -44,27 +44,32 @@ export const mockSubjectDefs = [
   {
     id: "grammar",
     progress: 68,
+    totalCount: 145,
     tint: "cream",
   },
   {
     id: "vocab",
     progress: 45,
+    totalCount: 213,
     tint: "yellow",
     variant: "binder",
   },
   {
     id: "kanji",
     progress: 52,
+    totalCount: 213,
     tint: "pink",
   },
   {
     id: "reading",
     progress: 33,
+    totalCount: 48,
     tint: "blue",
   },
   {
     id: "listening",
     progress: 41,
+    totalCount: 32,
     tint: "green",
   },
 ];

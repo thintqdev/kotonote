@@ -141,11 +141,15 @@ export default function AdminGrammarHome() {
 						<input
 							id="ag-q"
 							type="search"
+							name="q"
 							value={qDraft}
 							onChange={(e) => setQDraft(e.target.value)}
 							placeholder="Pattern, slug, teaser…"
+							autoComplete="off"
 						/>
-						<button type="submit">Lọc</button>
+						<button type="submit" className="admin-grammar-search__submit">
+							Lọc
+						</button>
 					</form>
 				</div>
 				<div className="admin-grammar-actions">

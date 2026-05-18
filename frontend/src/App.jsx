@@ -37,6 +37,8 @@ import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
 import ReadingListPage from "./pages/ReadingListPage.jsx";
 import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
 import NotebookPage from "./pages/NotebookPage.jsx";
+import ListeningPage from "./pages/ListeningPage.jsx";
+import PracticePage from "./pages/PracticePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AdminShell, {
   AdminStubContent,
@@ -54,6 +56,8 @@ import AdminLoginPage from "./pages/admin/AdminLoginPage.jsx";
 import { TermsPage, PrivacyPage } from "./pages/LegalDocumentPage.jsx";
 import AdminGrammarHome from "./pages/admin/AdminGrammarHome.jsx";
 import AdminGrammarEditorPage from "./pages/admin/AdminGrammarEditorPage.jsx";
+import AdminReadingHome from "./pages/admin/AdminReadingHome.jsx";
+import AdminReadingEditorPage from "./pages/admin/AdminReadingEditorPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -116,6 +120,8 @@ function App() {
                 <Route path="/reading" element={<ReadingListPage />} />
                 <Route path="/reading/:id" element={<ReadingArticlePage />} />
                 <Route path="/notebook" element={<NotebookPage />} />
+                <Route path="/listening" element={<ListeningPage />} />
+                <Route path="/practice" element={<PracticePage />} />
               </Route>
             </Route>
             <Route path="/welcome" element={<Navigate to="/" replace />} />
@@ -137,6 +143,9 @@ function App() {
               <Route path="grammar/new" element={<AdminGrammarEditorPage />} />
               <Route path="grammar/:id/edit" element={<AdminGrammarEditorPage />} />
               <Route path="grammar" element={<AdminGrammarHome />} />
+              <Route path="reading/new" element={<AdminReadingEditorPage />} />
+              <Route path="reading/:id/edit" element={<AdminReadingEditorPage />} />
+              <Route path="reading" element={<AdminReadingHome />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
               <Route path="badges" element={<BadgePage />} />
               <Route path="users" element={<AdminUsersPage />} />

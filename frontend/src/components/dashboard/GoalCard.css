@@ -27,8 +27,12 @@
 }
 
 .goal-card-title-line {
-  font-size: 14px;
+  font-size: 0.95rem;
   line-height: 1.25;
+}
+
+.dash-panel--goal .goal-card-art-line-text {
+  font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 .goal-card-badge {

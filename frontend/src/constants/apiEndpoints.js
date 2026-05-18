@@ -18,6 +18,14 @@ export const GRAMMAR = {
 	bySlug: (slug) => `/grammar/${encodeURIComponent(slug)}`,
 };
 
+/** Đọc hiểu (user) — `/api/reading/*` */
+export const READING = {
+	BASE: '/reading',
+	SUMMARY: '/reading/summary',
+	bySlug: (slug) => `/reading/${encodeURIComponent(slug)}`,
+	progress: (slug) => `/reading/${encodeURIComponent(slug)}/progress`,
+};
+
 /** Trích dẫn công khai — `/api/quotes/*` */
 export const QUOTES = {
 	RANDOM: '/quotes/random',
@@ -28,7 +36,9 @@ export const QUOTES = {
 export const PROFILE = {
 	ME: '/users/me',
 	LEARNING_SUMMARY: '/users/me/learning-summary',
+	DASHBOARD_HOME: '/users/me/dashboard-home',
 	FOCUS_AREAS: '/users/me/focus-areas',
+	SETTINGS: '/users/me/settings',
 	/** POST multipart field `avatar` — lưu file, trả về `user.avatar` dạng `/uploads/avatars/...` */
 	AVATAR: '/users/me/avatar',
 	/** POST JSON `{ badgeKey }` — chỉ bật khi không phải production */
@@ -61,6 +71,10 @@ export const NOTIFICATIONS = {
 /** Đọc deck/từ vựng (user đã đăng nhập) — `/api/vocabulary/*`, Bearer JWT */
 export const VOCABULARY = {
 	DECKS: '/vocabulary/decks',
+	PROGRESS: '/vocabulary/progress',
+	deckProgress: (deckId) => `/vocabulary/progress/${encodeURIComponent(deckId)}`,
+	advanceProgress: (deckId) =>
+		`/vocabulary/progress/${encodeURIComponent(deckId)}/advance`,
 	deck: (id) => `/vocabulary/decks/${id}`,
 	deckWithVocabulary: (id) => `/vocabulary/decks/${id}/vocabulary`,
 	wordsByDeck: (deckId) => `/vocabulary/deck/${deckId}/words`,
@@ -78,6 +92,10 @@ export const ADMIN_VOCABULARY = {
 /** Đọc deck/kanji (user đã đăng nhập) — `/api/kanji/*`, Bearer JWT */
 export const KANJI = {
 	DECKS: '/kanji/decks',
+	PROGRESS: '/kanji/progress',
+	deckProgress: (deckId) => `/kanji/progress/${encodeURIComponent(deckId)}`,
+	advanceProgress: (deckId) =>
+		`/kanji/progress/${encodeURIComponent(deckId)}/advance`,
 	deck: (id) => `/kanji/decks/${id}`,
 	deckWithKanji: (id) => `/kanji/decks/${id}/kanji`,
 };
@@ -102,6 +120,14 @@ export const ADMIN_BADGES = {
 export const ADMIN_GRAMMAR = {
 	BASE: '/admin/grammar',
 	grammar: (id) => `/admin/grammar/${encodeURIComponent(id)}`,
+};
+
+/** Đọc hiểu — `/api/admin/reading` */
+export const ADMIN_READING = {
+	BASE: '/admin/reading',
+	UPLOAD_COVER: '/admin/reading/upload-cover',
+	article: (id) => `/admin/reading/${encodeURIComponent(id)}`,
+	cover: (id) => `/admin/reading/${encodeURIComponent(id)}/cover`,
 };
 
 /** Trích dẫn — `/api/admin/quotes` */

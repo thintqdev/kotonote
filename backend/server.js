@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import mongoose from 'mongoose';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -18,6 +19,8 @@ import { openApiSpec } from './src/config/openapi/index.js';
 import { initializeSocket } from './src/config/socket.js';
 import { setIo } from './src/config/ioRegistry.js';
 import { startNotificationCampaignScheduler } from './src/jobs/notificationCampaignScheduler.js';
+import { startStudyReminderScheduler } from './src/jobs/studyReminderScheduler.js';
+import { startEmailDigestScheduler } from './src/jobs/emailDigestScheduler.js';
 import { notificationQueue } from './src/utils/queue.js';
 import * as notificationService from './src/services/notificationService.js';
 import { ensureAvatarsUploadDir } from './src/middlewares/avatarUpload.js';
@@ -105,6 +108,8 @@ app.use(errorHandler);
 const io = initializeSocket(httpServer);
 setIo(io);
 startNotificationCampaignScheduler();
+startStudyReminderScheduler();
+startEmailDigestScheduler();
 
 // Start notification queue processing
 notificationQueue.startProcessing(async (notification) => {
@@ -115,12 +120,27 @@ notificationQueue.startProcessing(async (notification) => {
 	sendNotificationToUser(io, notification.userId, createdNotification);
 });
 
-// Cleanup expired notifications every hour
+// Cleanup expired notifications every hour (bỏ qua khi MongoDB chưa kết nối)
 setInterval(async () => {
+	if (mongoose.connection.readyState !== 1) {
+		console.warn('[Cleanup] Skipped — MongoDB not connected');
+		return;
+	}
 	try {
-		await notificationService.cleanupExpiredNotifications();
-		console.log('[Cleanup] Expired notifications cleaned up');
+		const result = await notificationService.cleanupExpiredNotifications();
+		const deleted = result?.deletedCount ?? 0;
+		console.log(`[Cleanup] Expired notifications cleaned up (${deleted} removed)`);
 	} catch (error) {
+		const msg = error?.message || String(error);
+		const isPoolTimeout =
+			msg.includes('PoolClearedOnNetworkError') ||
+			msg.includes('server monitor timeout');
+		if (isPoolTimeout) {
+			console.warn(
+				'[Cleanup] MongoDB unreachable (sleep/stopped?) — will retry next hour',
+			);
+			return;
+		}
 		console.error('[Cleanup] Error cleaning up notifications:', error);
 	}
 }, 60 * 60 * 1000); // 1 hour

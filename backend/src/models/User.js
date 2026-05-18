@@ -38,6 +38,35 @@ const userProfileSchema = new mongoose.Schema(
 	{ _id: false }
 );
 
+const userSettingsSchema = new mongoose.Schema(
+	{
+		notifications: {
+			emailDigest: { type: Boolean, default: true },
+			dailyStudyReminder: { type: Boolean, default: true },
+			weeklyReport: { type: Boolean, default: false },
+		},
+		study: {
+			dailyGoalMinutes: {
+				type: Number,
+				enum: [15, 30, 45, 60],
+				default: 30,
+			},
+			reminderEnabled: { type: Boolean, default: true },
+			reminderTime: {
+				type: String,
+				default: '20:00',
+				trim: true,
+				match: /^([01]\d|2[0-3]):(00|30)$/,
+			},
+			reminderWeekends: { type: Boolean, default: true },
+		},
+		privacy: {
+			analyticsOptIn: { type: Boolean, default: false },
+		},
+	},
+	{ _id: false },
+);
+
 const userSchema = new mongoose.Schema(
 	{
 		email: {
@@ -64,6 +93,10 @@ const userSchema = new mongoose.Schema(
 		},
 		profile: {
 			type: userProfileSchema,
+			default: () => ({}),
+		},
+		settings: {
+			type: userSettingsSchema,
 			default: () => ({}),
 		},
 		googleId: {

@@ -590,6 +590,7 @@ export function getLessonMilestoneLitCount(growthStage) {
   return g;
 }
 
+/** @deprecated Tiến độ lưu API — key localStorage cũ (không dùng nữa) */
 const VOCAB_GROWTH_LS = 'sketchpad_vocab_lesson_growth';
 
 function vocabGrowthKey(jlpt, lessonNo) {
@@ -610,6 +611,7 @@ export function findLessonMetaByVocabId(mergedItems, wordId) {
   return { jlpt, lessonNo };
 }
 
+/** @deprecated Dùng vocabularyProgressService + deckId */
 export function getLessonGrowthStage(jlpt, lessonNo) {
   if (typeof window === 'undefined') return 0;
   try {
@@ -623,7 +625,7 @@ export function getLessonGrowthStage(jlpt, lessonNo) {
   }
 }
 
-/** Tăng 1 giai đoạn nếu chưa đạt hoa; trả về giai đoạn mới */
+/** @deprecated Dùng advanceVocabularyDeckProgress(deckId) */
 export function advanceLessonGrowthStage(jlpt, lessonNo) {
   const cur = getLessonGrowthStage(jlpt, lessonNo);
   if (cur >= VOCAB_LESSON_GROWTH_MAX) return VOCAB_LESSON_GROWTH_MAX;

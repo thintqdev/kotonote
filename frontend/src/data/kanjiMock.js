@@ -273,12 +273,14 @@ export function isKanjiLessonUnlocked(mergedItems, jlpt, lessonNo) {
   return prevSlice.length > 0 && prevSlice.every((x) => x.learned);
 }
 
+/** @deprecated Tiến độ lưu API — key localStorage cũ */
 const KANJI_GROWTH_LS = "sketchpad_kanji_lesson_growth";
 
 function kanjiGrowthKey(jlpt, lessonNo) {
   return `${String(jlpt || "").trim()}:${Math.max(1, Math.floor(Number(lessonNo) || 1))}`;
 }
 
+/** @deprecated Dùng kanjiProgressService + deckId */
 export function getKanjiLessonGrowthStage(jlpt, lessonNo) {
   if (typeof window === "undefined") return 0;
   try {
@@ -292,6 +294,7 @@ export function getKanjiLessonGrowthStage(jlpt, lessonNo) {
   }
 }
 
+/** @deprecated Dùng advanceKanjiDeckProgress(deckId) */
 export function advanceKanjiLessonGrowthStage(jlpt, lessonNo) {
   const cur = getKanjiLessonGrowthStage(jlpt, lessonNo);
   if (cur >= KANJI_LESSON_GROWTH_MAX) return KANJI_LESSON_GROWTH_MAX;

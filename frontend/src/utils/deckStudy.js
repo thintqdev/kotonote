@@ -150,7 +150,32 @@ export function findLessonMetaFromDecks(mergedItems, sortedDecks, wordId) {
  * @param {ReturnType<typeof mapKanjiRecord>[]} mergedItems
  */
 /**
- * Tiến độ “nở hoa” theo số bài đạt growth tối đa (localStorage).
+ * Tiến độ “nở hoa” theo map deckId → growthStage (API / DB).
+ * @param {ReturnType<typeof buildDeckLessons>} lessons
+ * @param {Record<string, number>} progressByDeckId
+ * @param {number} growthMax
+ */
+export function packFlowerProgressByDeckMap(lessons, progressByDeckId, growthMax) {
+	const n = lessons.length;
+	if (!n) {
+		return { flowerCount: 0, lessonCount: 0, pct: 0 };
+	}
+	let flowerCount = 0;
+	for (const lesson of lessons) {
+		const stage = progressByDeckId?.[lesson.id] ?? 0;
+		if (stage >= growthMax) {
+			flowerCount += 1;
+		}
+	}
+	return {
+		flowerCount,
+		lessonCount: n,
+		pct: Math.round((flowerCount / n) * 100),
+	};
+}
+
+/**
+ * @deprecated Dùng packFlowerProgressByDeckMap — giữ cho mock/offline.
  * @param {string} jlpt
  * @param {number} lessonCount
  * @param {(jlpt: string, lessonNo: number) => number} getGrowthStage
@@ -186,13 +211,7 @@ export function buildLessonNoInJlptMap(lessons) {
 	return map;
 }
 
-/**
- * Tiến độ nở hoa theo danh sách bài (một hoặc nhiều cấp JLPT).
- * @param {ReturnType<typeof buildDeckLessons>} lessons
- * @param {(jlpt: string, lessonNo: number) => number} getGrowthStage
- * @param {number} growthMax
- * @param {Map<string, number>} [lessonNoInJlpt]
- */
+/** @deprecated Dùng packFlowerProgressByDeckMap */
 export function packFlowerProgressForLessons(
 	lessons,
 	getGrowthStage,

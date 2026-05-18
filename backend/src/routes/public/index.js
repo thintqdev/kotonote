@@ -7,6 +7,7 @@ import profileRoutes from './profileRoutes.js';
 import kanjiRoutes from './kanjiRoutes.js';
 import grammarRoutes from './grammarRoutes.js';
 import notebookRoutes from './notebookRoutes.js';
+import readingRoutes from './readingRoutes.js';
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/surveys', surveyRoutes);
 router.use('/profile', profileRoutes);
 router.use('/users', profileRoutes);
 router.use('/notebook', notebookRoutes);
+router.use('/reading', readingRoutes);
 
 export default router;

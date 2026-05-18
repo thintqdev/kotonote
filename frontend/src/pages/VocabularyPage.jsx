@@ -7,8 +7,6 @@ import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildLessonQuizQuestions,
-  advanceLessonGrowthStage,
-  getLessonGrowthStage,
   getLessonMilestoneLitCount,
   mergeVocabMarks,
   shuffleVocabStudy,
@@ -16,6 +14,10 @@ import {
   VOCAB_LESSON_GROWTH_MAX,
   VOCAB_QUIZ_PER_STAGE,
 } from "../data/vocabularyMock.js";
+import {
+  advanceVocabularyDeckProgress,
+  getVocabularyDeckProgress,
+} from "../services/vocabularyProgressService.js";
 import {
   getDeckWithVocabulary,
   loadVocabularyPack,
@@ -143,14 +145,36 @@ export default function VocabularyPage() {
     return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
   }, [merged, sortedDecks, deckId, isLessonMode, lessonNoFromQuery]);
 
+  const effectiveDeckId = useMemo(() => {
+    if (deckId) return deckId;
+    if (!lessonNoFromQuery || !sortedDecks.length) return "";
+    const deck = sortedDecks[lessonNoFromQuery - 1];
+    return deck?._id ? String(deck._id) : "";
+  }, [deckId, lessonNoFromQuery, sortedDecks]);
+
   const [growthStage, setGrowthStage] = useState(0);
   useEffect(() => {
-    if (!isLessonMode || !lessonJlpt || !lessonNoFromQuery) {
+    if (!user || !isLessonMode || !effectiveDeckId) {
       setGrowthStage(0);
       return;
     }
-    setGrowthStage(getLessonGrowthStage(lessonJlpt, lessonNoFromQuery));
-  }, [isLessonMode, lessonJlpt, lessonNoFromQuery]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const row = await getVocabularyDeckProgress(effectiveDeckId);
+        if (!cancelled) {
+          setGrowthStage(
+            typeof row.growthStage === "number" ? row.growthStage : 0,
+          );
+        }
+      } catch {
+        if (!cancelled) setGrowthStage(0);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, isLessonMode, effectiveDeckId]);
 
   const [lessonTab, setLessonTab] = useState("detail");
   useEffect(() => {
@@ -167,12 +191,18 @@ export default function VocabularyPage() {
     [merged, lessonItemsStable, lang, quizGenKey],
   );
 
-  const handleQuizPerfect = useCallback(() => {
-    if (!lessonJlpt || !lessonNoFromQuery) return;
-    advanceLessonGrowthStage(lessonJlpt, lessonNoFromQuery);
-    setGrowthStage(getLessonGrowthStage(lessonJlpt, lessonNoFromQuery));
-    setQuizGenKey((k) => k + 1);
-  }, [lessonJlpt, lessonNoFromQuery]);
+  const handleQuizPerfect = useCallback(async () => {
+    if (!effectiveDeckId) return;
+    try {
+      const row = await advanceVocabularyDeckProgress(effectiveDeckId);
+      if (typeof row.growthStage === "number") {
+        setGrowthStage(row.growthStage);
+      }
+      setQuizGenKey((k) => k + 1);
+    } catch {
+      // giữ stage hiện tại nếu API lỗi
+    }
+  }, [effectiveDeckId]);
 
   const handleQuizRegenerate = useCallback(() => {
     setQuizGenKey((k) => k + 1);

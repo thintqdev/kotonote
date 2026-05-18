@@ -1,31 +1,34 @@
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import SubjectCard from './SubjectCard.jsx';
-import './SubjectGrid.css';
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import SubjectCard from "./SubjectCard.jsx";
+import "./SubjectGrid.css";
 
 const SubjectGrid = ({ subjects, pinnedCards = false }) => {
   const { t } = useTranslation();
   return (
-  <section className="subject-grid-section" aria-labelledby="subject-grid-heading">
-    <h2 id="subject-grid-heading" className="subject-heading">
-      {t('subjectsSection.heading')}
-    </h2>
-    <div className={`subject-grid${pinnedCards ? ' subject-grid--pinned' : ''}`}>
-      {subjects.map((s) => (
-        <SubjectCard
-          key={s.id}
-          subjectId={s.id}
-          label={s.label}
-          countLabel={s.countLabel}
-          iconSrc={s.iconSrc}
-          progress={s.progress}
-          tint={s.tint}
-          variant={s.variant}
-          showPin={pinnedCards}
-        />
-      ))}
-    </div>
-  </section>
+    <section
+      className="subject-grid-section"
+      aria-labelledby="subject-grid-heading"
+    >
+      <div
+        className={`subject-grid${pinnedCards ? " subject-grid--pinned" : ""}`}
+      >
+        {subjects.map((s) => (
+          <SubjectCard
+            key={s.id}
+            subjectId={s.id}
+            label={s.label}
+            countLabel={s.countLabel}
+            iconSrc={s.iconSrc}
+            progress={s.progress}
+            tint={s.tint}
+            variant={s.variant}
+            showPin={pinnedCards}
+            to={s.route}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -40,7 +43,8 @@ SubjectGrid.propTypes = {
       progress: PropTypes.number.isRequired,
       tint: PropTypes.string.isRequired,
       variant: PropTypes.string,
-    })
+      route: PropTypes.string,
+    }),
   ).isRequired,
 };
 

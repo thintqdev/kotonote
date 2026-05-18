@@ -183,6 +183,86 @@ export const userPaths = {
 			},
 		},
 	},
+	'/api/users/me/settings': {
+		get: {
+			tags: ['User'],
+			summary: 'Get user app settings',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Settings retrieved',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_211' },
+									data: {
+										type: 'object',
+										properties: {
+											settings: { $ref: '#/components/schemas/UserSettings' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+		put: {
+			tags: ['User'],
+			summary: 'Update user app settings',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: { $ref: '#/components/schemas/UserSettings' },
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Settings updated',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_212' },
+									data: {
+										type: 'object',
+										properties: {
+											settings: { $ref: '#/components/schemas/UserSettings' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': {
+					description: 'Unauthorized',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
 	'/api/users/me/learning-summary': {
 		get: {
 			tags: ['User'],

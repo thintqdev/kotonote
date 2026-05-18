@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
-import { getReadingDetail, readingChoiceLetterJa } from "../data/readingMock.js";
+import { readingChoiceLetterJa } from "../data/readingMock.js";
 import { grammarIsViUI } from "../data/grammarMock.js";
+import {
+  getReadingArticle,
+  saveReadingProgress,
+} from "../services/readingService.js";
+import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 import "./ReadingListPage.css";
@@ -14,26 +20,88 @@ import "./ReadingListPage.css";
 export default function ReadingArticlePage() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
-  const { id } = useParams();
+  const { id: slug } = useParams();
   const lang = i18n.language || "ja";
   const showViGloss = grammarIsViUI(lang);
-  /** @type {Record<number, number>} chỉ số câu hỏi → chỉ số đáp án đã chọn */
+
+  const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  /** @type {Record<number, number>} */
   const [quizPick, setQuizPick] = useState({});
 
-  const detail = id ? getReadingDetail(id) : null;
-
   useEffect(() => {
-    setQuizPick({});
-  }, [id]);
+    if (!user || !slug) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const article = await getReadingArticle(slug);
+        if (cancelled) return;
+        if (!article) {
+          setDetail(null);
+          return;
+        }
+        setDetail(article);
+        const pick = {};
+        for (const row of article.questionAnswers ?? []) {
+          pick[row.questionIndex] = row.choiceIndex;
+        }
+        setQuizPick(pick);
+        if (article.status === "not_started") {
+          await saveReadingProgress(slug, { status: "in_progress" });
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(getApiErrorMessage(err, t));
+          setDetail(null);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, slug, t]);
+
+  const handlePick = useCallback(
+    async (qi, ci) => {
+      if (!slug) return;
+      setQuizPick((prev) => ({ ...prev, [qi]: ci }));
+      try {
+        await saveReadingProgress(slug, {
+          recordAnswer: { questionIndex: qi, choiceIndex: ci },
+        });
+      } catch {
+        // giữ lựa chọn local nếu API lỗi
+      }
+    },
+    [slug],
+  );
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
 
+  if (loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
   if (!detail) {
     return <Navigate to="/reading" replace />;
   }
+
+  const coverSrc = resolvePublicMediaUrl(detail.imageUrl);
 
   const ribbon = t("readingArticlePage.metaRibbon", {
     words: detail.wordCount,
@@ -42,10 +110,7 @@ export default function ReadingArticlePage() {
   });
 
   return (
-    <Layout
-      userName={headerName}
-      streakDays={mockStreak.days}
-    >
+    <Layout userName={headerName} streakDays={mockStreak.days}>
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
@@ -53,6 +118,12 @@ export default function ReadingArticlePage() {
           { label: detail.titleJa },
         ]}
       />
+
+      {error ? (
+        <p className="vocab-empty" role="alert">
+          {error}
+        </p>
+      ) : null}
 
       <article
         className="grammar-sheet grammar-scope grammar-detail--journal"
@@ -62,12 +133,12 @@ export default function ReadingArticlePage() {
           {t("readingArticlePage.backToList")}
         </Link>
 
-        {detail.imageUrl ? (
+        {coverSrc ? (
           <div className="grammar-block reading-detail-cover-block">
             <div className="grammar-box reading-detail-cover-wrap">
               <img
                 className="reading-detail-cover-img"
-                src={detail.imageUrl}
+                src={coverSrc}
                 alt=""
                 width={800}
                 height={360}
@@ -189,9 +260,7 @@ export default function ReadingArticlePage() {
                           aria-checked={isThis}
                           disabled={hasPicked}
                           className={optClass}
-                          onClick={() =>
-                            setQuizPick((prev) => ({ ...prev, [qi]: ci }))
-                          }
+                          onClick={() => void handlePick(qi, ci)}
                           lang="ja"
                         >
                           <span className="reading-q-option-letter">{letter}</span>

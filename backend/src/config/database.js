@@ -7,8 +7,15 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
 	try {
 		const conn = await mongoose.connect(process.env.MONGODB_URI, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true
+			serverSelectionTimeoutMS: 10_000,
+			socketTimeoutMS: 45_000,
+		});
+
+		mongoose.connection.on('disconnected', () => {
+			console.warn('[MongoDB] Disconnected');
+		});
+		mongoose.connection.on('reconnected', () => {
+			console.log('[MongoDB] Reconnected');
 		});
 
 		console.log(`MongoDB Connected: ${conn.connection.host}`);

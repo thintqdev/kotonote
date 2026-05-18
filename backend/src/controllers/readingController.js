@@ -1,0 +1,97 @@
+import fs from 'fs';
+import asyncHandler from 'express-async-handler';
+import * as readingService from '../services/readingService.js';
+import { apiSuccess, apiPaginated, apiError } from '../utils/response.js';
+import { READING, COMMON } from '../constants/messages.js';
+
+export const listPublishedArticles = asyncHandler(async (req, res) => {
+	const result = await readingService.listPublishedArticles(req.user._id, req.query);
+	const { items, pagination, jlptLevels, messageCode } = result;
+	return apiPaginated(
+		res,
+		{ items, jlptLevels },
+		pagination,
+		messageCode,
+		200,
+	);
+});
+
+export const getReadingSummary = asyncHandler(async (req, res) => {
+	const summary = await readingService.getReadingSummary(req.user._id);
+	const { messageCode, ...data } = summary;
+	return apiSuccess(res, data, messageCode, 200);
+});
+
+export const getPublishedArticleBySlug = asyncHandler(async (req, res) => {
+	const { article, messageCode } = await readingService.getPublishedArticleBySlug(
+		req.user._id,
+		req.params.slug,
+	);
+	return apiSuccess(res, { article }, messageCode, 200);
+});
+
+export const saveArticleProgress = asyncHandler(async (req, res) => {
+	const { progress, messageCode } = await readingService.saveArticleProgress(
+		req.user._id,
+		req.params.slug,
+		req.body,
+	);
+	return apiSuccess(res, { progress }, messageCode, 200);
+});
+
+export const listAdminArticles = asyncHandler(async (req, res) => {
+	const result = await readingService.listAdminArticles(req.query);
+	const { items, pagination, messageCode } = result;
+	return apiPaginated(res, { items }, pagination, messageCode, 200);
+});
+
+export const getAdminArticleById = asyncHandler(async (req, res) => {
+	const article = await readingService.getArticleById(req.params.id);
+	return apiSuccess(res, { article }, READING.FETCHED, 200);
+});
+
+export const createArticle = asyncHandler(async (req, res) => {
+	const article = await readingService.createArticle(req.body);
+	return apiSuccess(res, { article }, READING.CREATED, 201);
+});
+
+export const updateArticle = asyncHandler(async (req, res) => {
+	const article = await readingService.updateArticle(req.params.id, req.body);
+	return apiSuccess(res, { article }, READING.UPDATED, 200);
+});
+
+export const deleteArticle = asyncHandler(async (req, res) => {
+	await readingService.deleteArticle(req.params.id);
+	return apiSuccess(res, null, READING.DELETED, 200);
+});
+
+/** Upload ảnh bìa trước khi tạo bài (chưa có id) */
+export const uploadReadingCoverDraft = asyncHandler(async (req, res) => {
+	if (!req.file) {
+		return apiError(res, COMMON.VALIDATION_ERROR, 400, [
+			{ field: 'cover', message: 'Image file is required' },
+		]);
+	}
+	const imageUrl = `/uploads/reading/${req.file.filename}`;
+	return apiSuccess(res, { imageUrl }, READING.COVER_UPLOADED, 200);
+});
+
+/** Upload và gán ảnh bìa cho bài đã tồn tại */
+export const uploadArticleCover = asyncHandler(async (req, res) => {
+	if (!req.file) {
+		return apiError(res, COMMON.VALIDATION_ERROR, 400, [
+			{ field: 'cover', message: 'Image file is required' },
+		]);
+	}
+	const publicPath = `/uploads/reading/${req.file.filename}`;
+	try {
+		const article = await readingService.setArticleCoverFromUpload(
+			req.params.id,
+			publicPath,
+		);
+		return apiSuccess(res, { article, imageUrl: publicPath }, READING.COVER_UPLOADED, 200);
+	} catch (err) {
+		await fs.unlink(req.file.path).catch(() => {});
+		throw err;
+	}
+});

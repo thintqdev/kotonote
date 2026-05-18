@@ -1,5 +1,17 @@
 /* Giấy ô li kẻ ngang — mọi thẻ cùng pattern; tint chỉ đổi tông kem nhạt */
 
+.subject-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+}
+
+.subject-card-link:focus-visible {
+  outline: 2px solid rgba(168, 181, 138, 0.85);
+  outline-offset: 3px;
+}
+
 .subject-card {
   --paper-tint-a: #faf8f4;
   --paper-tint-b: #f0ebe3;
@@ -48,11 +60,11 @@
   overflow: visible;
 }
 
-.subject-card:hover {
-  transform: translateY(-2px);
+.subject-card-link:hover .subject-card {
+  transform: translateY(-3px);
   box-shadow:
     0 1px 0 rgba(255, 253, 249, 0.95) inset,
-    2px 6px 14px rgba(60, 45, 30, 0.09);
+    2px 8px 16px rgba(60, 45, 30, 0.1);
 }
 
 .subject-card-pin {
@@ -128,9 +140,6 @@
 .subject-card-cta {
   margin-top: 12px;
   align-self: center;
-  padding: 0;
-  border: none;
-  background: none;
   font-family: var(--font-ui);
   font-size: 12px;
   font-weight: 600;
@@ -138,11 +147,10 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: rgba(106, 138, 90, 0.35);
-  cursor: pointer;
   transition: color 0.15s ease;
 }
 
-.subject-card-cta:hover {
+.subject-card-link:hover .subject-card-cta {
   color: #4a7038;
 }
 
@@ -192,7 +200,7 @@
 }
 
 @media (max-width: 420px) {
-  .subject-card:hover {
+  .subject-card-link:hover .subject-card {
     transform: none;
   }
 }

@@ -17,3 +17,14 @@ export const NAV_MENU_ICON_BY_ID = Object.fromEntries(
 );
 
 export const DASHBOARD_PIN_IMG_SRC = '/assets/decorates/pin.png';
+
+/** Đường dẫn môn học từ thẻ dashboard */
+export const SUBJECT_ROUTE_BY_ID = {
+	grammar: '/grammar',
+	vocab: '/vocabulary',
+	kanji: '/kanji',
+	reading: '/reading',
+	listening: '/listening',
+	practice: '/practice',
+	alphabet: '/alphabet',
+};

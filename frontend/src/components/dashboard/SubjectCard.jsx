@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { DASHBOARD_PIN_IMG_SRC } from "../../constants/dashboardNav.js";
+import {
+  DASHBOARD_PIN_IMG_SRC,
+  SUBJECT_ROUTE_BY_ID,
+} from "../../constants/dashboardNav.js";
 import "./SubjectCard.css";
 
 const tintClass = {
@@ -20,16 +24,24 @@ const SubjectCard = ({
   tint,
   variant = "default",
   showPin = false,
+  to: toProp,
 }) => {
   const { t } = useTranslation();
   const pinVisible = showPin || variant === "binder";
+  const to = toProp || SUBJECT_ROUTE_BY_ID[subjectId] || "/";
 
   return (
+    <Link
+      to={to}
+      className={`subject-card-link ${tintClass[tint] || ""} ${
+        variant === "binder" ? "subject-card-link--binder" : ""
+      }`}
+      data-subject={subjectId}
+    >
     <article
       className={`subject-card ${tintClass[tint] || ""} ${
         variant === "binder" ? "subject-card--binder" : ""
       }`}
-      data-subject={subjectId}
     >
       {pinVisible ? (
         <img
@@ -71,10 +83,11 @@ const SubjectCard = ({
       <p className="subject-card-pct">
         {t("subjectCard.progress", { pct: progress })}
       </p>
-      <button type="button" className="subject-card-cta">
+      <span className="subject-card-cta">
         {t("subjectCard.cta")} <span aria-hidden="true">→</span>
-      </button>
+      </span>
     </article>
+    </Link>
   );
 };
 
@@ -88,6 +101,7 @@ SubjectCard.propTypes = {
     .isRequired,
   variant: PropTypes.oneOf(["default", "binder"]),
   showPin: PropTypes.bool,
+  to: PropTypes.string,
 };
 
 export default SubjectCard;

@@ -10,6 +10,25 @@
   margin: 0 auto;
 }
 
+.alpha-head-romaji {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.alpha-head-romaji input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--vocab-green-deep, #5a6b48);
+}
+
+.alpha-head-romaji .vocab-lesson-goal-label {
+  margin: 0;
+}
+
 .alpha-hero-top {
   display: flex;
   justify-content: flex-end;

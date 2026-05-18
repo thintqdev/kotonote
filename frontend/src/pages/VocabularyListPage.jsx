@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
@@ -6,19 +6,20 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
-  getLessonGrowthStage,
   getLessonMilestoneLitCount,
   VOCAB_LESSON_GROWTH_MAX,
 } from "../data/vocabularyMock.js";
 import { listVocabularyDecks } from "../services/vocabularyService.js";
 import {
+  getMyVocabularyProgress,
+  vocabularyProgressToMap,
+} from "../services/vocabularyProgressService.js";
+import {
   buildDeckLessons,
-  buildLessonNoInJlptMap,
   filterActiveDecks,
   jlptLevelsFromDecks,
   levelToJlpt,
-  packFlowerProgress,
-  packFlowerProgressForLessons,
+  packFlowerProgressByDeckMap,
   sortDecksByJlptAndOrder,
   sortDecksByOrder,
 } from "../utils/deckStudy.js";
@@ -37,6 +38,7 @@ export default function VocabularyListPage() {
   const [selectedJlpt, setSelectedJlpt] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [progressByDeckId, setProgressByDeckId] = useState({});
 
   useEffect(() => {
     if (!user) return;
@@ -45,20 +47,22 @@ export default function VocabularyListPage() {
       setLoading(true);
       setError("");
       try {
-        const { decks } = await listVocabularyDecks({
-          isActive: true,
-          limit: 100,
-        });
+        const [{ decks }, progressList] = await Promise.all([
+          listVocabularyDecks({ isActive: true, limit: 100 }),
+          getMyVocabularyProgress(),
+        ]);
         if (cancelled) return;
 
         const active = filterActiveDecks(decks);
         setAllDecks(active);
         setJlptLevels(jlptLevelsFromDecks(active));
+        setProgressByDeckId(vocabularyProgressToMap(progressList));
       } catch (err) {
         if (!cancelled) {
           setError(getApiErrorMessage(err, t));
           setAllDecks([]);
           setJlptLevels([]);
+          setProgressByDeckId({});
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -84,35 +88,25 @@ export default function VocabularyListPage() {
     [sortedDecks],
   );
 
-  const lessonNoInJlpt = useMemo(
-    () => buildLessonNoInJlptMap(lessons),
-    [lessons],
-  );
-
   const lessonCount = lessons.length;
   const totalWords = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
 
   const displayJlpt = selectedJlpt || t("vocabPage.jlptAll");
 
-  const packProgress = useMemo(() => {
-    if (!lessonCount) {
-      return { flowerCount: 0, lessonCount: 0, pct: 0 };
-    }
-    if (selectedJlpt) {
-      return packFlowerProgress(
-        selectedJlpt,
-        lessonCount,
-        getLessonGrowthStage,
+  const packProgress = useMemo(
+    () =>
+      packFlowerProgressByDeckMap(
+        lessons,
+        progressByDeckId,
         VOCAB_LESSON_GROWTH_MAX,
-      );
-    }
-    return packFlowerProgressForLessons(
-      lessons,
-      getLessonGrowthStage,
-      VOCAB_LESSON_GROWTH_MAX,
-      lessonNoInJlpt,
-    );
-  }, [selectedJlpt, lessonCount, lessons, lessonNoInJlpt]);
+      ),
+    [lessons, progressByDeckId],
+  );
+
+  const getDeckGrowthStage = useCallback(
+    (deckId) => progressByDeckId[String(deckId)] ?? 0,
+    [progressByDeckId],
+  );
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -221,12 +215,7 @@ export default function VocabularyListPage() {
         ) : (
           <ul className="vocab-lesson-list">
             {lessons.map((lesson) => {
-              const growthLessonNo =
-                lessonNoInJlpt.get(lesson.id) ?? lesson.lessonNo;
-              const growth = getLessonGrowthStage(
-                lesson.jlpt,
-                growthLessonNo,
-              );
+              const growth = getDeckGrowthStage(lesson.id);
               const progressPct =
                 VOCAB_LESSON_GROWTH_MAX > 0
                   ? Math.round((growth / VOCAB_LESSON_GROWTH_MAX) * 100)

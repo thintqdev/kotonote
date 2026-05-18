@@ -40,6 +40,46 @@
   );
 }
 
+.dash-home-loading {
+  margin: 12px 0 20px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: #5a5348;
+}
+
+.dash-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 181, 138, 0.45);
+  background: rgba(168, 181, 138, 0.16);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4a5c38;
+}
+
+.dash-streak-flame {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.dash-streak-count {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #3d5a30;
+  line-height: 1;
+}
+
+.dash-streak-label {
+  font-weight: 600;
+  color: #5a6b48;
+}
+
 /* Bóng nhẹ + nghiêng (không dùng ảnh pin — pin chỉ trên thẻ 学習科目) */
 .dash-float {
   position: relative;
@@ -60,7 +100,7 @@
 
 .dash-float--section {
   transform: rotate(-0.22deg);
-  margin-top: 10px;
+  margin-top: 60px;
   margin-bottom: 6px;
 }
 

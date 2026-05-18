@@ -1,15 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
-import {
-  mergeKanjiMarks,
-  getKanjiLessonGrowthStage,
-  KANJI_LESSON_GROWTH_MAX,
-} from "../data/kanjiMock.js";
+import { mergeKanjiMarks, KANJI_LESSON_GROWTH_MAX } from "../data/kanjiMock.js";
 import { getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
 import {
   listKanjiDecks,
@@ -17,12 +13,14 @@ import {
   loadKanjiPack,
 } from "../services/kanjiService.js";
 import {
+  getMyKanjiProgress,
+  kanjiProgressToMap,
+} from "../services/kanjiProgressService.js";
+import {
   buildDeckLessons,
-  buildLessonNoInJlptMap,
   filterActiveDecks,
   jlptLevelsFromDecks,
-  packFlowerProgress,
-  packFlowerProgressForLessons,
+  packFlowerProgressByDeckMap,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
@@ -39,6 +37,7 @@ export default function KanjiListPage() {
   const [sortedDecks, setSortedDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [progressByDeckId, setProgressByDeckId] = useState({});
 
   useEffect(() => {
     if (!user) return;
@@ -68,18 +67,23 @@ export default function KanjiListPage() {
       setLoading(true);
       setError("");
       try {
-        const pack = selectedJlpt
-          ? await loadKanjiPack(selectedJlpt)
-          : await loadAllKanjiPacks();
+        const [pack, progressList] = await Promise.all([
+          selectedJlpt ? loadKanjiPack(selectedJlpt) : loadAllKanjiPacks(),
+          getMyKanjiProgress(
+            selectedJlpt ? { jlpt: selectedJlpt } : undefined,
+          ),
+        ]);
         if (!cancelled) {
           setSortedDecks(pack.decks);
           setPackItems(pack.items);
+          setProgressByDeckId(kanjiProgressToMap(progressList));
         }
       } catch (err) {
         if (!cancelled) {
           setError(getApiErrorMessage(err, t));
           setSortedDecks([]);
           setPackItems([]);
+          setProgressByDeckId({});
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -100,35 +104,25 @@ export default function KanjiListPage() {
     [sortedDecks, merged],
   );
 
-  const lessonNoInJlpt = useMemo(
-    () => buildLessonNoInJlptMap(lessons),
-    [lessons],
-  );
-
   const lessonCount = lessons.length;
   const totalKanji = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
 
   const displayJlpt = selectedJlpt || t("kanjiPage.jlptAll");
 
-  const packProgress = useMemo(() => {
-    if (!lessonCount) {
-      return { flowerCount: 0, lessonCount: 0, pct: 0 };
-    }
-    if (selectedJlpt) {
-      return packFlowerProgress(
-        selectedJlpt,
-        lessonCount,
-        getKanjiLessonGrowthStage,
+  const packProgress = useMemo(
+    () =>
+      packFlowerProgressByDeckMap(
+        lessons,
+        progressByDeckId,
         KANJI_LESSON_GROWTH_MAX,
-      );
-    }
-    return packFlowerProgressForLessons(
-      lessons,
-      getKanjiLessonGrowthStage,
-      KANJI_LESSON_GROWTH_MAX,
-      lessonNoInJlpt,
-    );
-  }, [selectedJlpt, lessonCount, lessons, lessonNoInJlpt]);
+      ),
+    [lessons, progressByDeckId],
+  );
+
+  const getDeckGrowthStage = useCallback(
+    (deckId) => progressByDeckId[String(deckId)] ?? 0,
+    [progressByDeckId],
+  );
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -237,19 +231,14 @@ export default function KanjiListPage() {
         ) : (
           <ul className="vocab-lesson-list">
             {lessons.map((lesson) => {
-              const growthLessonNo =
-                lessonNoInJlpt.get(lesson.id) ?? lesson.lessonNo;
-              const growth = getKanjiLessonGrowthStage(
-                lesson.jlpt,
-                growthLessonNo,
-              );
+              const growth = getDeckGrowthStage(lesson.id);
               const progressPct =
                 KANJI_LESSON_GROWTH_MAX > 0
                   ? Math.round((growth / KANJI_LESSON_GROWTH_MAX) * 100)
                   : 0;
               const milestoneLitCount = getLessonMilestoneLitCount(growth);
-              const studyTo = lesson.lessonNo
-                ? `/kanji/lesson/${growthLessonNo}?jlpt=${encodeURIComponent(lesson.jlpt)}`
+              const studyTo = lesson.id
+                ? `/kanji/lesson/${lesson.lessonNo}?jlpt=${encodeURIComponent(lesson.jlpt)}&deckId=${encodeURIComponent(lesson.id)}`
                 : "/kanji/browse";
 
               const cardInner = (

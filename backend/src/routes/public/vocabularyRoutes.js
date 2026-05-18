@@ -1,10 +1,18 @@
 import express from 'express';
 import * as vocabularyController from '../../controllers/vocabularyController.js';
+import * as vocabularyProgressController from '../../controllers/vocabularyProgressController.js';
 import { authenticate } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
 router.use(authenticate);
+
+router.get('/progress', vocabularyProgressController.getMyDeckProgress);
+router.get('/progress/:deckId', vocabularyProgressController.getDeckProgressById);
+router.post(
+	'/progress/:deckId/advance',
+	vocabularyProgressController.advanceDeckProgress,
+);
 
 router.get('/decks', vocabularyController.getAllDecks);
 router.get('/decks/:id', vocabularyController.getDeckById);

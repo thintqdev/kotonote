@@ -489,6 +489,11 @@
 }
 
 /* —— Bộ lọc danh sách —— */
+.grammar-filters--below-head {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
 .grammar-filters {
   margin-top: 18px;
   padding: 16px 18px;

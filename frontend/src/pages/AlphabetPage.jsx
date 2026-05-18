@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import KanaStrokeAnimation from "../components/alphabet/KanaStrokeAnimation.jsx";
 import AlphaPracticePad from "../components/alphabet/AlphaPracticePad.jsx";
@@ -131,16 +132,27 @@ export default function AlphabetPage() {
           { label: t("breadcrumb.alphabet") },
         ]}
       />
-      <section
-        className="vocab-sheet vocab-notebook alpha-notebook alpha-hero"
+      <article
+        className="vocab-sheet vocab-scope vocab-notebook vocab-lesson-scope alpha-notebook alpha-hero"
         aria-labelledby="alpha-title"
       >
-        <h2 id="alpha-title" className="alpha-title">
-          <span className="alpha-title-star" aria-hidden="true"></span>
-          {t("alphabetPage.title")}
-          <span className="alpha-title-star" aria-hidden="true"></span>
-        </h2>
-        <p className="alpha-subtitle">{t("alphabetPage.subtitle")}</p>
+        <StudyPageHeader
+          titleId="alpha-title"
+          title={t("alphabetPage.title")}
+          subtitle={t("alphabetPage.subtitle")}
+          aside={
+            <label className="vocab-lesson-goal-box alpha-head-romaji">
+              <input
+                type="checkbox"
+                checked={showRomaji}
+                onChange={(e) => setShowRomaji(e.target.checked)}
+              />
+              <span className="vocab-lesson-goal-label">
+                {t("alphabetPage.showRomaji")}
+              </span>
+            </label>
+          }
+        />
 
         <div className="alpha-toolbar">
           <div
@@ -173,14 +185,6 @@ export default function AlphabetPage() {
               {t("alphabetPage.tabKatakana")}
             </button>
           </div>
-          <label className="alpha-check">
-            <input
-              type="checkbox"
-              checked={showRomaji}
-              onChange={(e) => setShowRomaji(e.target.checked)}
-            />
-            <span>{t("alphabetPage.showRomaji")}</span>
-          </label>
         </div>
 
         <div className="alpha-mode-toolbar">
@@ -481,7 +485,7 @@ export default function AlphabetPage() {
             {t("alphabetPage.nextChar")} <span aria-hidden="true">→</span>
           </button>
         </nav>
-      </section>
+      </article>
     </Layout>
   );
 }

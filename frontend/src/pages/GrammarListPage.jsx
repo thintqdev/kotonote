@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   GRAMMAR_PAGE_SIZE,
@@ -18,6 +19,7 @@ import { listGrammars } from "../services/grammarService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
+import "./VocabularyPages.css";
 
 const TAG_ACCENT = new Set([
   "formal",
@@ -179,7 +181,11 @@ export default function GrammarListPage() {
         );
 
   return (
-    <Layout userName={headerName} streakDays={mockStreak.days}>
+    <Layout
+      userName={headerName}
+      streakDays={mockStreak.days}
+      pageClassName="vocab-dash"
+    >
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
@@ -188,27 +194,21 @@ export default function GrammarListPage() {
       />
 
       <article
-        className="grammar-sheet grammar-scope"
+        className="vocab-sheet vocab-scope vocab-notebook vocab-lesson-scope grammar-sheet grammar-scope"
         aria-labelledby="grammar-list-title"
       >
-        <header className="grammar-list-head">
-          <p className="grammar-list-kicker">JLPT</p>
-          <h1 id="grammar-list-title" className="grammar-list-title">
-            {t("grammarPage.listTitle")}
-          </h1>
-          <p className="grammar-list-sub">{t("grammarPage.listSubtitle")}</p>
-
-          <section
-            className="grammar-filters"
-            aria-label={t("grammarPage.filterAria")}
-          >
-            <div className="grammar-filter-row grammar-filter-row--jlpt">
-              <label htmlFor="grammar-filter-jlpt" className="grammar-filter-label">
+        <StudyPageHeader
+          titleId="grammar-list-title"
+          title={t("grammarPage.listTitle")}
+          subtitle={t("grammarPage.listSubtitle")}
+          aside={
+            <div className="vocab-lesson-goal-box grammar-head-jlpt">
+              <label htmlFor="grammar-filter-jlpt" className="vocab-lesson-goal-label">
                 {t("grammarPage.jlptFilter")}
               </label>
               <select
                 id="grammar-filter-jlpt"
-                className="grammar-filter-select"
+                className="vocab-jlpt-select"
                 value={jlpt}
                 onChange={(e) => applyJlpt(e.target.value)}
               >
@@ -220,7 +220,13 @@ export default function GrammarListPage() {
                 ))}
               </select>
             </div>
+          }
+        />
 
+        <section
+          className="grammar-filters grammar-filters--below-head"
+          aria-label={t("grammarPage.filterAria")}
+        >
             <div className="grammar-filter-row">
               <span className="grammar-filter-label">{t("grammarPage.tagFilter")}</span>
               <div className="grammar-filter-tags" role="group">
@@ -269,8 +275,7 @@ export default function GrammarListPage() {
                 {t("grammarPage.clearFilters")}
               </button>
             ) : null}
-          </section>
-        </header>
+        </section>
 
         {loading ? (
           <p className="grammar-empty" role="status">
