@@ -1,0 +1,676 @@
+/* KaiwaListPage.css — CSS thiết kế cao cấp dành riêng cho trang quản lý bài nghe */
+
+.kaiwa-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4px 8px;
+}
+
+/* KPI Summary Cards */
+.kaiwa-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kaiwa-stat-card {
+  background: linear-gradient(135deg, rgba(255, 252, 246, 0.9) 0%, rgba(244, 240, 230, 0.9) 100%);
+  border: 1px solid var(--admin-border, #e5dfd3);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(90, 107, 56, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kaiwa-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(90, 107, 56, 0.08);
+}
+
+.kaiwa-stat-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--admin-ink-soft, #7a7368);
+  margin-bottom: 8px;
+}
+
+.kaiwa-stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--admin-ink, #2a2620);
+  line-height: 1.2;
+}
+
+.kaiwa-stat-subtitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft, #7a7368);
+  margin-top: 6px;
+}
+
+/* Level pills within Stats */
+.kaiwa-stat-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.kaiwa-level-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.kaiwa-level-badge--n1 {
+  background: rgba(220, 53, 69, 0.12);
+  color: #dc3545;
+}
+
+.kaiwa-level-badge--n2 {
+  background: rgba(253, 126, 20, 0.12);
+  color: #fd7e14;
+}
+
+.kaiwa-level-badge--n3 {
+  background: rgba(40, 167, 69, 0.12);
+  color: #28a745;
+}
+
+.kaiwa-level-badge--n4 {
+  background: rgba(23, 162, 184, 0.12);
+  color: #17a2b8;
+}
+
+.kaiwa-level-badge--n5 {
+  background: rgba(108, 117, 125, 0.12);
+  color: #6c757d;
+}
+
+/* Custom Listen Type Badges */
+.kaiwa-type-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.kaiwa-type--task {
+  background-color: rgba(66, 133, 244, 0.08);
+  color: #1a73e8;
+  border-color: rgba(66, 133, 244, 0.2);
+}
+
+.kaiwa-type--point {
+  background-color: rgba(15, 157, 88, 0.08);
+  color: #0f9d58;
+  border-color: rgba(15, 157, 88, 0.2);
+}
+
+.kaiwa-type--summary {
+  background-color: rgba(171, 71, 188, 0.08);
+  color: #ab47bc;
+  border-color: rgba(171, 71, 188, 0.2);
+}
+
+.kaiwa-type--utterance {
+  background-color: rgba(244, 180, 0, 0.08);
+  color: #b08200;
+  border-color: rgba(244, 180, 0, 0.2);
+}
+
+.kaiwa-type--response {
+  background-color: rgba(219, 68, 85, 0.08);
+  color: #db4437;
+  border-color: rgba(219, 68, 85, 0.2);
+}
+
+/* Audio Player Inline Table */
+.kaiwa-audio-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(107, 126, 95, 0.1);
+  color: var(--admin-sage-deep, #3d4e3a);
+  border: 1px solid rgba(107, 126, 95, 0.2);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.kaiwa-audio-trigger:hover {
+  background: var(--admin-sage, #6b7e5f);
+  color: #fff;
+}
+
+.kaiwa-audio-trigger--playing {
+  background: #28a745;
+  color: #fff;
+  border-color: #28a745;
+  animation: pulse-audio 1.5s infinite;
+}
+
+@keyframes pulse-audio {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Expandable Details Row */
+.kaiwa-detail-row {
+  background: rgba(255, 252, 246, 0.85) !important;
+}
+
+.kaiwa-detail-cell {
+  padding: 20px 24px !important;
+  border-top: none !important;
+}
+
+.kaiwa-detail-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  animation: slide-down 0.25s ease-out;
+}
+
+@media (min-width: 900px) {
+  .kaiwa-detail-container {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.kaiwa-detail-panel {
+  background: #fff;
+  border: 1px solid rgba(90, 107, 56, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.kaiwa-panel-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--admin-ink, #2a2620);
+  border-bottom: 1px solid rgba(90, 107, 56, 0.15);
+  padding-bottom: 8px;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Tabbed details buttons */
+.kaiwa-detail-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.kaiwa-tab-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--admin-ink-soft, #7a7368);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.kaiwa-tab-btn--active {
+  background: rgba(107, 126, 95, 0.1);
+  color: var(--admin-sage-deep, #3d4e3a);
+  border-color: rgba(107, 126, 95, 0.2);
+}
+
+.kaiwa-script-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--admin-ink, #2a2620);
+  white-space: pre-wrap;
+  background: rgba(255, 252, 246, 0.6);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(90, 107, 56, 0.1);
+}
+
+.kaiwa-script-content--ja {
+  font-family: var(--font-jp, "Hiragino Sans", "Yu Gothic", sans-serif);
+}
+
+/* Premium Audio Bar inside Details */
+.kaiwa-custom-player {
+  background: #fdfcf9;
+  border: 1px solid rgba(107, 126, 95, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kaiwa-player-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--admin-sage, #6b7e5f);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.kaiwa-player-btn:hover {
+  background: var(--admin-sage-deep, #3d4e3a);
+}
+
+.kaiwa-player-progress-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kaiwa-player-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.08);
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.kaiwa-player-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--admin-sage, #6b7e5f);
+  cursor: pointer;
+}
+
+.kaiwa-player-time {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #7a7368);
+  font-family: monospace;
+}
+
+/* Question detail display */
+.kaiwa-detail-question-item {
+  border: 1px solid rgba(90, 107, 56, 0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  background: #fdfcf9;
+}
+
+.kaiwa-detail-question-item:last-child {
+  margin-bottom: 0;
+}
+
+.kaiwa-dq-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--admin-ink, #2a2620);
+  margin: 0 0 10px;
+}
+
+.kaiwa-dq-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.kaiwa-dq-choice-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.kaiwa-dq-choice-row--correct {
+  background-color: rgba(40, 167, 69, 0.08);
+  border-color: rgba(40, 167, 69, 0.25);
+  color: #1e7e34;
+}
+
+.kaiwa-dq-choice-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--admin-ink-soft, #7a7368);
+}
+
+.kaiwa-dq-choice-row--correct .kaiwa-dq-choice-num {
+  background: #28a745;
+  color: #fff;
+}
+
+.kaiwa-dq-explain {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--admin-ink-soft, #7a7368);
+  border-left: 3px solid var(--admin-sage, #6b7e5f);
+  padding-left: 10px;
+  margin-top: 8px;
+}
+
+/* Modal Form Tabs */
+.kaiwa-form-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--admin-border, #e5dfd3);
+  margin-bottom: 20px;
+  gap: 6px;
+}
+
+.kaiwa-form-tab-btn {
+  padding: 10px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #7a7368);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.kaiwa-form-tab-btn:hover {
+  color: var(--admin-ink, #2a2620);
+}
+
+.kaiwa-form-tab-btn--active {
+  color: var(--admin-sage-deep, #3d4e3a);
+  border-bottom-color: var(--admin-sage, #6b7e5f);
+}
+
+/* Large Editor Modal */
+.kaiwa-modal-lg {
+  width: min(850px, 100%) !important;
+}
+
+/* Dynamic Add Question Card */
+.kaiwa-question-builder-card {
+  border: 1px solid rgba(90, 107, 56, 0.25);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: rgba(255, 252, 246, 0.5);
+  position: relative;
+}
+
+.kaiwa-question-builder-card:last-of-type {
+  margin-bottom: 12px;
+}
+
+.kaiwa-qb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.kaiwa-qb-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--admin-sage-deep, #3d4e3a);
+}
+
+.kaiwa-qb-remove-btn {
+  background: transparent;
+  border: none;
+  color: #dc3545;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kaiwa-qb-remove-btn:hover {
+  text-decoration: underline;
+}
+
+.kaiwa-choice-builder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.kaiwa-choice-builder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kaiwa-choice-builder-item input[type="text"] {
+  flex: 1;
+}
+
+.kaiwa-choice-radio {
+  cursor: pointer;
+}
+
+.kaiwa-add-btn-dashed {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px dashed rgba(90, 107, 56, 0.35);
+  background: transparent;
+  color: var(--admin-sage-deep, #3d4e3a);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.kaiwa-add-btn-dashed:hover {
+  background: rgba(107, 126, 95, 0.08);
+  border-color: var(--admin-sage, #6b7e5f);
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sleek, uniform form layout */
+.kaiwa-form-row {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.kaiwa-form-row--2 {
+  grid-template-columns: 1.2fr 1fr;
+}
+
+.kaiwa-form-row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.kaiwa-form-row--audio {
+  grid-template-columns: 1fr 120px;
+}
+
+.kaiwa-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0 !important;
+  /* Override default margin from theme */
+}
+
+.kaiwa-form-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #7a7368);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin: 0 !important;
+  /* Reset margins completely */
+}
+
+.kaiwa-form-req {
+  color: #dc3545;
+}
+
+.kaiwa-form-input,
+.kaiwa-form-select,
+.kaiwa-form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.35);
+  background: rgba(255, 252, 246, 0.98) !important;
+  color: var(--admin-ink, #2a2620);
+  font-size: 0.88rem;
+  font-family: inherit;
+  height: 42px;
+  /* Standardize inputs & selects heights to be exactly identical! */
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kaiwa-form-textarea {
+  height: auto;
+  min-height: 120px;
+}
+
+.kaiwa-form-input:focus,
+.kaiwa-form-select:focus,
+.kaiwa-form-textarea:focus {
+  outline: none;
+  border-color: var(--admin-sage, #6b7e5f);
+  box-shadow: 0 0 0 2px rgba(107, 126, 95, 0.15);
+}
+
+/* Premium Opaque Modal Content Container */
+.kaiwa-modal-content {
+  width: min(850px, 95vw);
+  max-height: 90vh;
+  background: var(--admin-cream, #fdfcf9) !important;
+  border-radius: 16px;
+  border: 1px solid var(--admin-border, rgba(90, 107, 56, 0.2));
+  box-shadow: 0 20px 50px rgba(42, 38, 32, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1205;
+  animation: slide-down 0.25s ease-out;
+}
+
+/* Premium Modal Tabs Navigation */
+.kaiwa-modal-tabs {
+  display: flex;
+  gap: 12px;
+  padding: 12px 24px;
+  background: rgba(90, 107, 56, 0.04);
+  border-bottom: 1px solid rgba(90, 107, 56, 0.15);
+}
+
+.kaiwa-modal-tab-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--admin-ink-soft, #7a7368);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.kaiwa-modal-tab-btn:hover {
+  background: rgba(107, 126, 95, 0.05);
+  color: var(--admin-sage, #6b7e5f);
+}
+
+.kaiwa-modal-tab-btn--active {
+  background: var(--admin-sage, #6b7e5f) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(107, 126, 95, 0.2);
+}
+
+/* Premium File Upload Button Styling */
+.kaiwa-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px dashed var(--admin-sage, #6b7e5f);
+  background: rgba(107, 126, 95, 0.04);
+  color: var(--admin-sage-deep, #3d4e3a);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  height: 42px;
+}
+
+.kaiwa-upload-label:hover {
+  background: rgba(107, 126, 95, 0.09);
+  border-style: solid;
+  transform: translateY(-1px);
+}
+
+.kaiwa-upload-label:active {
+  transform: translateY(0);
+}
+
+.kaiwa-upload-icon {
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+}

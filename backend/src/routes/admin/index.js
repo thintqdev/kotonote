@@ -13,6 +13,8 @@ import adminNotificationRoutes from './adminNotificationRoutes.js';
 import adminGrammarRoutes from './adminGrammarRoutes.js';
 import adminReadingRoutes from './adminReadingRoutes.js';
 
+import adminListeningRoutes from './adminListeningRoutes.js';
+
 const router = express.Router();
 
 // Apply authentication and admin authorization to all admin routes
@@ -31,5 +33,6 @@ router.use('/users', adminUserRoutes);
 router.use('/notifications', adminNotificationRoutes);
 router.use('/grammar', adminGrammarRoutes);
 router.use('/reading', adminReadingRoutes);
+router.use('/listening', adminListeningRoutes);
 
 export default router;

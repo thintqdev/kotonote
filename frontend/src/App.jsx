@@ -38,6 +38,7 @@ import ReadingListPage from "./pages/ReadingListPage.jsx";
 import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
 import NotebookPage from "./pages/NotebookPage.jsx";
 import ListeningPage from "./pages/ListeningPage.jsx";
+import ListeningExercisePage from "./pages/ListeningExercisePage.jsx";
 import PracticePage from "./pages/PracticePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AdminShell, {
@@ -58,6 +59,7 @@ import AdminGrammarHome from "./pages/admin/AdminGrammarHome.jsx";
 import AdminGrammarEditorPage from "./pages/admin/AdminGrammarEditorPage.jsx";
 import AdminReadingHome from "./pages/admin/AdminReadingHome.jsx";
 import AdminReadingEditorPage from "./pages/admin/AdminReadingEditorPage.jsx";
+import KaiwaListPage from "./pages/admin/KaiwaListPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -121,6 +123,7 @@ function App() {
                 <Route path="/reading/:id" element={<ReadingArticlePage />} />
                 <Route path="/notebook" element={<NotebookPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
+                <Route path="/listening/:id" element={<ListeningExercisePage />} />
                 <Route path="/practice" element={<PracticePage />} />
               </Route>
             </Route>
@@ -146,6 +149,7 @@ function App() {
               <Route path="reading/new" element={<AdminReadingEditorPage />} />
               <Route path="reading/:id/edit" element={<AdminReadingEditorPage />} />
               <Route path="reading" element={<AdminReadingHome />} />
+              <Route path="listening" element={<KaiwaListPage />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
               <Route path="badges" element={<BadgePage />} />
               <Route path="users" element={<AdminUsersPage />} />
