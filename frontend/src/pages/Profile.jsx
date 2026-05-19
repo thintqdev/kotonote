@@ -28,8 +28,10 @@ import {
   resolveGoalExamFields,
 } from '../utils/profileExamDisplay.js';
 import './Profile.css';
+import './Membership.css';
 import { loadOverrides, persistOverrides } from '../utils/profileStorage.js';
 import { getMyLearningSummary } from '../services/learningSummaryService.js';
+import { getMyMembership } from '../services/membershipService.js';
 import {
   getMyFocusAreas,
   updateMyFocusAreas,
@@ -182,6 +184,8 @@ const Profile = () => {
   const [badgeHighlightKey, setBadgeHighlightKey] = useState('');
   const [learningSummary, setLearningSummary] = useState(null);
   const [summaryLoading, setSummaryLoading] = useState(false);
+  const [membership, setMembership] = useState(null);
+  const [membershipLoading, setMembershipLoading] = useState(false);
   const [focusData, setFocusData] = useState(null);
   const [focusLoading, setFocusLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -298,6 +302,59 @@ const Profile = () => {
     }
     void refreshFocusAreas();
   }, [user, refreshFocusAreas]);
+
+  useEffect(() => {
+    if (!user) {
+      setMembership(null);
+      return undefined;
+    }
+    let cancelled = false;
+    (async () => {
+      setMembershipLoading(true);
+      try {
+        const m = await getMyMembership();
+        if (!cancelled) setMembership(m);
+      } catch {
+        if (!cancelled) {
+          setMembership(user.membership ?? null);
+        }
+      } finally {
+        if (!cancelled) setMembershipLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, user?.membership]);
+
+  const membershipDisplay = useMemo(() => {
+    const m = membership ?? user?.membership;
+    const tierId = m?.tierId ?? 'free';
+    const billing = m?.billing ?? 'free';
+    const jlpt = Array.isArray(m?.jlptUnlocked)
+      ? m.jlptUnlocked.join(', ')
+      : 'N5, N4';
+    let expiryText = '';
+    if (billing === 'lifetime') {
+      expiryText = t('profile.membershipLifetime');
+    } else if (billing === 'yearly' && m?.expiresAt) {
+      const iso =
+        typeof m.expiresAt === 'string'
+          ? m.expiresAt.slice(0, 10)
+          : new Date(m.expiresAt).toISOString().slice(0, 10);
+      expiryText = formatExamDateLong(iso, i18n.language);
+    }
+    return {
+      tierId,
+      planName: t(`membershipPage.tiers.${tierId}.name`),
+      billingLabel:
+        billing === 'free'
+          ? t('profile.membershipBillingFree')
+          : t(`membershipPage.billing.${billing}`),
+      jlpt,
+      expiryText,
+    };
+  }, [membership, user?.membership, t, i18n.language]);
 
   const toggleFocusAreaKey = useCallback((key) => {
     setDraft((prev) => {
@@ -938,6 +995,40 @@ const Profile = () => {
                   </li>
                 </ul>
               </section>
+
+              <article className="profile-card profile-card--membership">
+                <span className="profile-card-tape" aria-hidden />
+                <h3 className="profile-section-title profile-section-title--flush">
+                  {t('profile.membershipTitle')}
+                </h3>
+                {membershipLoading ? (
+                  <p className="profile-membership-meta">{t('common.loading')}</p>
+                ) : (
+                  <>
+                    <p className="profile-membership-tier">
+                      {membershipDisplay.planName}
+                    </p>
+                    <p className="profile-membership-meta">
+                      {t('profile.membershipBilling', {
+                        billing: membershipDisplay.billingLabel,
+                      })}
+                      {membershipDisplay.expiryText
+                        ? ` · ${t('profile.membershipExpires', {
+                            date: membershipDisplay.expiryText,
+                          })}`
+                        : ''}
+                    </p>
+                    <p className="profile-membership-jlpt">
+                      {t('profile.membershipJlpt', {
+                        levels: membershipDisplay.jlpt,
+                      })}
+                    </p>
+                    <Link className="profile-membership-link" to="/membership">
+                      {t('profile.membershipManage')}
+                    </Link>
+                  </>
+                )}
+              </article>
 
               <div className="profile-split">
                 <article className="profile-card profile-card--goal">

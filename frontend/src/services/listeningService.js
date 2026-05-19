@@ -1,15 +1,22 @@
 import api from './api';
 
 const listeningService = {
-  getAllPublished: async () => {
-    const response = await api.get('/listening');
-    return response.data;
+  /**
+   * @param {{ jlpt?: string }} [params]
+   */
+  getAllPublished: async (params = {}) => {
+    const body = await api.get('/listening', { params });
+    return {
+      items: body.data?.items ?? [],
+      jlptLevels: body.data?.jlptLevels ?? [],
+      requestedJlptLocked: body.data?.requestedJlptLocked ?? false,
+    };
   },
 
   getById: async (id) => {
-    const response = await api.get(`/listening/${id}`);
-    return response.data;
-  }
+    const body = await api.get(`/listening/${id}`);
+    return body.data?.item ?? body.data ?? null;
+  },
 };
 
 export default listeningService;

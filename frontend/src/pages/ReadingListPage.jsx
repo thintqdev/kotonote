@@ -13,6 +13,9 @@ import {
 } from "../services/readingService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
+import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css";
@@ -92,6 +95,7 @@ function ReadingIconBookmark() {
 export default function ReadingListPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const jlpt = (searchParams.get("jlpt") || "").trim();
@@ -274,10 +278,10 @@ export default function ReadingListPage() {
               type="button"
               role="tab"
               aria-selected={jlpt === lv}
-              className={`vocab-tab${jlpt === lv ? " vocab-tab--active" : ""}`}
+              className={`vocab-tab${jlpt === lv ? " vocab-tab--active" : ""}${isLocked(lv) ? " vocab-tab--jlpt-locked" : ""}`}
               onClick={() => setJlpt(lv)}
             >
-              {lv}
+              {isLocked(lv) ? t("jlptAccess.tabLocked", { level: lv }) : lv}
             </button>
           ))}
         </div>
@@ -290,9 +294,9 @@ export default function ReadingListPage() {
           <ul className="vocab-lesson-list">
             {list.map((item) => {
               const thumbSrc = resolvePublicMediaUrl(item.imageUrl);
-              return (
-              <li key={item.id} className="vocab-lesson-card">
-                <Link className="reading-row-link" to={`/reading/${item.id}`}>
+              const locked = item.locked || isLocked(item.jlpt);
+              const rowInner = (
+                <>
                   <span className="reading-card-bookmark-wrap" aria-hidden>
                     <ReadingIconBookmark />
                   </span>
@@ -352,12 +356,33 @@ export default function ReadingListPage() {
                         : t("readingPage.ctaContinue")}
                     </span>
                   </div>
-                  <span className="vocab-lesson-chevron" aria-hidden>
-                    ›
-                  </span>
-                </Link>
-              </li>
-            );
+                  {!locked ? (
+                    <span className="vocab-lesson-chevron" aria-hidden>
+                      ›
+                    </span>
+                  ) : null}
+                </>
+              );
+              if (locked) {
+                return (
+                  <li
+                    key={item.id}
+                    className="reading-card-wrap--locked vocab-lesson-card"
+                  >
+                    <div className="reading-row-link reading-card--jlpt-locked">
+                      {rowInner}
+                    </div>
+                    <JlptLockedOverlay level={item.jlpt} />
+                  </li>
+                );
+              }
+              return (
+                <li key={item.id} className="vocab-lesson-card">
+                  <Link className="reading-row-link" to={`/reading/${item.id}`}>
+                    {rowInner}
+                  </Link>
+                </li>
+              );
             })}
           </ul>
         )}

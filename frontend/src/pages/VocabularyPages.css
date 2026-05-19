@@ -893,10 +893,73 @@
 }
 
 .vocab-lesson-card {
+  position: relative;
   border-radius: 14px;
   border: 1px solid var(--vocab-border);
   background: rgba(255, 253, 249, 0.95);
   box-shadow: 0 2px 8px var(--vocab-shadow);
+}
+
+.vocab-lesson-card--open {
+  border-color: rgba(72, 120, 88, 0.45);
+}
+
+.vocab-lesson-card--growth-locked {
+  border-color: rgba(180, 140, 60, 0.45);
+  border-style: dashed;
+  background: rgba(252, 248, 240, 0.92);
+}
+
+.vocab-lesson-card--jlpt-locked {
+  border-color: rgba(120, 90, 160, 0.4);
+  background: rgba(248, 245, 252, 0.95);
+}
+
+.vocab-lesson-status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(40, 32, 20, 0.12);
+}
+
+.vocab-lesson-status-badge-ico {
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.vocab-lesson-status-badge--open {
+  color: #1f4d32;
+  background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);
+  border: 1px solid rgba(72, 120, 88, 0.35);
+}
+
+.vocab-lesson-status-badge--growth {
+  color: #6b4e12;
+  background: linear-gradient(180deg, #fff8e6 0%, #ffe8b8 100%);
+  border: 1px solid rgba(180, 140, 60, 0.45);
+}
+
+.vocab-lesson-status-badge--jlpt {
+  color: #4a3270;
+  background: linear-gradient(180deg, #f3ebff 0%, #e4d4f7 100%);
+  border: 1px solid rgba(120, 90, 160, 0.4);
+}
+
+.vocab-lesson-status-badge--jlpt:hover {
+  filter: brightness(1.03);
+  text-decoration: none;
 }
 
 .vocab-lesson-link {
@@ -1027,10 +1090,15 @@
   }
 }
 
-/* Kanji: bài khóa khi chưa thuộc hết bài trước */
+/* Bài khóa (tiến độ / JLPT) */
 .vocab-lesson-link--locked {
   cursor: not-allowed;
-  opacity: 0.82;
+  opacity: 0.9;
+  padding-top: 28px;
+}
+
+.vocab-lesson-card--open .vocab-lesson-link {
+  padding-top: 28px;
 }
 
 .vocab-lesson-lock-badge {

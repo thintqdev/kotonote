@@ -1,0 +1,102 @@
+.jlpt-lock-gate {
+	display: flex;
+	justify-content: center;
+	padding: 2rem 1rem 3rem;
+}
+
+.jlpt-lock-gate-inner {
+	max-width: 28rem;
+	width: 100%;
+	text-align: center;
+	padding: 2rem 1.5rem;
+}
+
+.jlpt-lock-gate-icon {
+	font-size: 2rem;
+	line-height: 1;
+	display: block;
+	margin-bottom: 0.75rem;
+}
+
+.jlpt-lock-gate-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0 0 0.5rem;
+}
+
+.jlpt-lock-gate-desc {
+	margin: 0 0 1.25rem;
+	color: var(--text-muted, #5c5c5c);
+	font-size: 0.95rem;
+	line-height: 1.5;
+}
+
+.jlpt-lock-gate-cta {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.jlpt-locked-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35rem;
+	background: rgba(255, 255, 255, 0.88);
+	border-radius: inherit;
+	text-align: center;
+	padding: 0.75rem;
+}
+
+.jlpt-locked-overlay-badge {
+	font-size: 0.85rem;
+	font-weight: 700;
+}
+
+.jlpt-locked-overlay-text {
+	font-size: 0.8rem;
+	color: var(--text-muted, #5c5c5c);
+}
+
+.jlpt-locked-overlay-link {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--accent, #2d6a4f);
+	text-decoration: underline;
+}
+
+.grammar-card--jlpt-locked,
+.vocab-lesson-card--jlpt-locked,
+.reading-card--jlpt-locked {
+	position: relative;
+	pointer-events: none;
+	opacity: 0.92;
+}
+
+.grammar-card-wrap--locked,
+.vocab-lesson-card-wrap--locked,
+.reading-card-wrap--locked {
+	position: relative;
+	list-style: none;
+}
+
+.grammar-card-wrap--locked .grammar-card,
+.vocab-lesson-card-wrap--locked .vocab-lesson-card {
+	pointer-events: none;
+}
+
+.jlpt-filter-locked-banner {
+	margin: 0 0 1rem;
+	padding: 0.75rem 1rem;
+	border-radius: 8px;
+	background: #fff8e6;
+	border: 1px solid #f0d78c;
+	font-size: 0.9rem;
+}
+
+.vocab-tab--jlpt-locked {
+	opacity: 0.65;
+}

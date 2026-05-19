@@ -1,5 +1,5 @@
 import express from 'express';
-import listeningController from '../../controllers/listeningController.js';
+import * as listeningController from '../../controllers/listeningController.js';
 import { authenticate } from '../../middlewares/auth.js';
 
 const router = express.Router();

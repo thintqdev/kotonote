@@ -7,6 +7,8 @@ import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { isJlptLockedError } from "../utils/jlptAccess.js";
+import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 import "./ReadingListPage.css";
@@ -24,6 +26,8 @@ export default function ListeningExercisePage() {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [jlptLocked, setJlptLocked] = useState(false);
+  const [lockedJlpt, setLockedJlpt] = useState("");
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -44,17 +48,29 @@ export default function ListeningExercisePage() {
       setLoading(true);
       setError("");
       try {
-        const response = await listeningService.getById(id);
+        const item = await listeningService.getById(id);
         if (cancelled) return;
-        if (response.success && response.data) {
-          setDetail(response.data);
+        if (item) {
+          setDetail(item);
         } else {
           setDetail(null);
           setError("Không tìm thấy bài nghe.");
         }
       } catch (err) {
         if (!cancelled) {
-          setError(getApiErrorMessage(err, t));
+          if (isJlptLockedError(err)) {
+            const level =
+              err &&
+              typeof err === "object" &&
+              Array.isArray(/** @type {{ errors?: { message?: string }[] }} */ (err).errors)
+                ? /** @type {{ errors?: { message?: string }[] }} */ (err).errors?.[0]
+                    ?.message
+                : "";
+            setLockedJlpt(level || "");
+            setJlptLocked(true);
+          } else {
+            setError(getApiErrorMessage(err, t));
+          }
           setDetail(null);
         }
       } finally {
@@ -126,12 +142,29 @@ export default function ListeningExercisePage() {
     );
   }
 
+  if (jlptLocked) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <Breadcrumb
+          items={[
+            { label: t("breadcrumb.home"), to: "/", end: true },
+            { label: "Luyện nghe", to: "/listening" },
+          ]}
+        />
+        <JlptLockGate jlpt={lockedJlpt} forceLocked>
+          <span />
+        </JlptLockGate>
+      </Layout>
+    );
+  }
+
   if (!detail && !loading && !error) {
     return <Navigate to="/listening" replace />;
   }
 
   return (
     <Layout userName={headerName} streakDays={mockStreak.days}>
+      <JlptLockGate jlpt={detail?.jlpt}>
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
@@ -364,6 +397,7 @@ export default function ListeningExercisePage() {
           </section>
         </article>
       )}
+      </JlptLockGate>
     </Layout>
   );
 }

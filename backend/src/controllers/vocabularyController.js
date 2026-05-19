@@ -6,10 +6,34 @@ import {
 	assertDeckVisibleToUser,
 	buildDeckListFilters,
 } from '../utils/userDeckAccess.js';
+import {
+	annotateWithJlptLock,
+	assertJlptUnlocked,
+	buildJlptAccessMeta,
+	isJlptUnlocked,
+	jlptFromDeck,
+} from '../utils/jlptAccess.js';
+import { assertVocabDeckLessonUnlocked } from '../utils/vocabLessonUnlock.js';
 
 // Deck Controllers
 export const getAllDecks = asyncHandler(async (req, res) => {
+	const unlocked = req.jlptUnlocked ?? [];
 	const { level, category, isActive, page, limit } = req.query;
+
+	if (level && !isJlptUnlocked(unlocked, level)) {
+		return apiSuccess(
+			res,
+			{
+				decks: [],
+				pagination: { page: 1, limit: 10, total: 0, pages: 0 },
+				jlptAccess: buildJlptAccessMeta(unlocked),
+				requestedJlptLocked: true,
+			},
+			VOCABULARY.DECK_LIST_FETCHED,
+			200,
+		);
+	}
+
 	const filters = buildDeckListFilters(req, { level, category, isActive });
 
 	const { decks, pagination } = await vocabularyService.getAllDecks(filters, {
@@ -17,7 +41,14 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 		limit,
 	});
 
-	return apiSuccess(res, { decks, pagination }, VOCABULARY.DECK_LIST_FETCHED, 200);
+	const annotated = annotateWithJlptLock(decks, unlocked, jlptFromDeck);
+
+	return apiSuccess(
+		res,
+		{ decks: annotated, pagination, jlptAccess: buildJlptAccessMeta(unlocked) },
+		VOCABULARY.DECK_LIST_FETCHED,
+		200,
+	);
 });
 
 export const getDeckById = asyncHandler(async (req, res) => {
@@ -25,8 +56,17 @@ export const getDeckById = asyncHandler(async (req, res) => {
 
 	const deck = await vocabularyService.getDeckById(id);
 	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
+	await assertVocabDeckLessonUnlocked(req.user._id, id, {
+		lessonNo: req.query.lessonNo,
+	});
 
-	return apiSuccess(res, { deck }, VOCABULARY.DECK_FETCHED, 200);
+	return apiSuccess(
+		res,
+		{ deck, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		VOCABULARY.DECK_FETCHED,
+		200,
+	);
 });
 
 export const getDeckWithVocabulary = asyncHandler(async (req, res) => {
@@ -34,8 +74,17 @@ export const getDeckWithVocabulary = asyncHandler(async (req, res) => {
 
 	const result = await vocabularyService.getDeckWithVocabulary(id);
 	assertDeckVisibleToUser(req, result.deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(result.deck));
+	await assertVocabDeckLessonUnlocked(req.user._id, id, {
+		lessonNo: req.query.lessonNo,
+	});
 
-	return apiSuccess(res, result, VOCABULARY.DECK_FETCHED, 200);
+	return apiSuccess(
+		res,
+		{ ...result, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		VOCABULARY.DECK_FETCHED,
+		200,
+	);
 });
 
 export const createDeck = asyncHandler(async (req, res) => {
@@ -69,9 +118,22 @@ export const getVocabularyByDeck = asyncHandler(async (req, res) => {
 
 	const deck = await vocabularyService.getDeckById(deckId);
 	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
+	await assertVocabDeckLessonUnlocked(req.user._id, deckId, {
+		lessonNo: req.query.lessonNo,
+	});
 	const vocabulary = await vocabularyService.getVocabularyByDeck(deckId);
 
-	return apiSuccess(res, { vocabulary, total: vocabulary.length }, VOCABULARY.WORD_FETCHED, 200);
+	return apiSuccess(
+		res,
+		{
+			vocabulary,
+			total: vocabulary.length,
+			jlptAccess: buildJlptAccessMeta(req.jlptUnlocked),
+		},
+		VOCABULARY.WORD_FETCHED,
+		200,
+	);
 });
 
 export const createVocab = asyncHandler(async (req, res) => {

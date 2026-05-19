@@ -11,11 +11,30 @@ export function levelToJlpt(level) {
 	return JLPT_ORDER.includes(v) ? v : v;
 }
 
-/** @param {object[]} decks */
+/**
+ * Khớp backend VOCAB_DECK_SORT: displayOrder ↑, title ↑, _id ↑ khi hòa.
+ * @param {object[]} decks
+ */
 export function sortDecksByOrder(decks) {
-	return [...decks].sort(
-		(a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0),
-	);
+	return [...decks].sort((a, b) => {
+		const orderDiff = (a.displayOrder ?? 0) - (b.displayOrder ?? 0);
+		if (orderDiff !== 0) return orderDiff;
+		const titleA = String(a.titleJa || a.title || '');
+		const titleB = String(b.titleJa || b.title || '');
+		const titleCmp = titleA.localeCompare(titleB, 'vi');
+		if (titleCmp !== 0) return titleCmp;
+		return String(a._id ?? '').localeCompare(String(b._id ?? ''));
+	});
+}
+
+/**
+ * Số thứ tự bài (1-based) của deck trong danh sách đã sort.
+ * @param {object[]} sortedDecks
+ * @param {string} deckId
+ */
+export function lessonNoForDeck(sortedDecks, deckId) {
+	const idx = sortedDecks.findIndex((d) => String(d._id) === String(deckId));
+	return idx >= 0 ? idx + 1 : null;
 }
 
 /** Sắp N5→N1 rồi displayOrder — dùng khi hiển thị mọi cấp trên một trang. */
@@ -111,7 +130,83 @@ export function getDeckLessonItems(mergedItems, sortedDecks, lessonNo) {
 		.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
 }
 
+/** Giai đoạn tối thiểu = đã hoàn thành quiz lần 1 → Nảy mầm (growthStage 1) */
+export const VOCAB_UNLOCK_SPROUT_STAGE = 1;
+
 /**
+ * @param {string|import('mongoose').Types.ObjectId} deckId
+ * @param {Record<string, number>} [progressByDeckId]
+ */
+export function deckGrowthStage(deckId, progressByDeckId) {
+	const s = progressByDeckId?.[String(deckId)];
+	return Number.isFinite(s) ? Math.max(0, Math.floor(Number(s))) : 0;
+}
+
+/**
+ * growthStage của các bài trước bài `lessonNo` (1-based).
+ * @param {object[]} sortedDecks
+ * @param {number} lessonNo
+ * @param {Record<string, number>} progressByDeckId
+ */
+export function previousDeckGrowthStages(sortedDecks, lessonNo, progressByDeckId) {
+	const n = Math.max(1, Math.floor(Number(lessonNo) || 1));
+	/** @type {number[]} */
+	const stages = [];
+	for (let i = 0; i < n - 1; i++) {
+		const deck = sortedDecks[i];
+		if (deck) {
+			stages.push(deckGrowthStage(deck._id, progressByDeckId));
+		}
+	}
+	return stages;
+}
+
+/**
+ * Mở khóa bài từ vựng theo growthStage (API progress):
+ * - Bài 1: luôn mở
+ * - Bài 2: bài 1 đạt Nảy mầm (≥1)
+ * - Bài 3: trong bài 1–2 có ≥1 bài đạt Nảy mầm
+ * - Bài 4+: bài ngay trước đạt Nảy mầm
+ *
+ * @param {object[]} sortedDecks — đã sort displayOrder trong cùng JLPT
+ * @param {number} lessonNo — 1-based
+ * @param {Record<string, number>} progressByDeckId
+ */
+export function isVocabLessonUnlockedByGrowth(
+	sortedDecks,
+	lessonNo,
+	progressByDeckId,
+) {
+	const n = Math.max(1, Math.floor(Number(lessonNo) || 1));
+	if (n <= 1) return true;
+
+	const prev = previousDeckGrowthStages(sortedDecks, lessonNo, progressByDeckId);
+	if (!prev.length) return true;
+
+	const need = VOCAB_UNLOCK_SPROUT_STAGE;
+
+	if (n === 2) {
+		return prev[0] >= need;
+	}
+	if (n === 3) {
+		return prev.filter((s) => s >= need).length >= 1;
+	}
+	return prev[prev.length - 1] >= need;
+}
+
+/**
+ * Key i18n gợi ý vì sao bài còn khóa.
+ * @param {number} lessonNo
+ */
+export function getVocabLessonUnlockReasonKey(lessonNo) {
+	const n = Math.max(1, Math.floor(Number(lessonNo) || 1));
+	if (n === 2) return 'vocabPage.unlockReason.lesson2';
+	if (n === 3) return 'vocabPage.unlockReason.lesson3';
+	return 'vocabPage.unlockReason.lessonDefault';
+}
+
+/**
+ * Kanji / legacy: mở khi thuộc hết từ bài trước.
  * @param {object[]} sortedDecks
  * @param {ReturnType<typeof mapKanjiRecord>[]} mergedItems
  * @param {number} lessonNo
@@ -237,7 +332,15 @@ export function packFlowerProgressForLessons(
 	};
 }
 
-export function buildDeckLessons(sortedDecks, mergedItems) {
+/**
+ * @param {object[]} sortedDecks
+ * @param {ReturnType<typeof mapKanjiRecord>[]} mergedItems
+ * @param {Record<string, number> | null} [progressByDeckId] — khi có: vocab dùng growth unlock
+ */
+export function buildDeckLessons(sortedDecks, mergedItems, progressByDeckId = null) {
+	const useGrowthUnlock =
+		progressByDeckId != null && typeof progressByDeckId === 'object';
+
 	return sortedDecks.map((deck, index) => {
 		const lessonNo = index + 1;
 		const deckItems = mergedItems.filter(
@@ -245,6 +348,14 @@ export function buildDeckLessons(sortedDecks, mergedItems) {
 		);
 		const learned = deckItems.filter((x) => x.learned).length;
 		const jlpt = deck.jlpt || levelToJlpt(deck.level);
+		const unlocked = useGrowthUnlock
+			? isVocabLessonUnlockedByGrowth(
+					sortedDecks,
+					lessonNo,
+					progressByDeckId,
+				)
+			: isDeckLessonUnlocked(sortedDecks, mergedItems, lessonNo);
+
 		return {
 			id: String(deck._id),
 			deck,
@@ -256,7 +367,10 @@ export function buildDeckLessons(sortedDecks, mergedItems) {
 			learned,
 			total: deck.kanjiCount ?? deck.wordCount ?? deck.totalWords ?? deckItems.length,
 			items: deckItems,
-			unlocked: isDeckLessonUnlocked(sortedDecks, mergedItems, lessonNo),
+			unlocked,
+			unlockReasonKey: unlocked
+				? null
+				: getVocabLessonUnlockReasonKey(lessonNo),
 			jlpt,
 		};
 	});

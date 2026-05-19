@@ -12,6 +12,8 @@ import {
   saveReadingProgress,
 } from "../services/readingService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { isJlptLockedError } from "../utils/jlptAccess.js";
+import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
@@ -27,6 +29,8 @@ export default function ReadingArticlePage() {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [jlptLocked, setJlptLocked] = useState(false);
+  const [lockedJlpt, setLockedJlpt] = useState("");
   /** @type {Record<number, number>} */
   const [quizPick, setQuizPick] = useState({});
 
@@ -57,7 +61,19 @@ export default function ReadingArticlePage() {
         }
       } catch (err) {
         if (!cancelled) {
-          setError(getApiErrorMessage(err, t));
+          if (isJlptLockedError(err)) {
+            const level =
+              err &&
+              typeof err === "object" &&
+              Array.isArray(/** @type {{ errors?: { message?: string }[] }} */ (err).errors)
+                ? /** @type {{ errors?: { message?: string }[] }} */ (err).errors?.[0]
+                    ?.message
+                : "";
+            setLockedJlpt(level || "");
+            setJlptLocked(true);
+          } else {
+            setError(getApiErrorMessage(err, t));
+          }
           setDetail(null);
         }
       } finally {
@@ -97,6 +113,22 @@ export default function ReadingArticlePage() {
     );
   }
 
+  if (jlptLocked) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <Breadcrumb
+          items={[
+            { label: t("breadcrumb.home"), to: "/", end: true },
+            { label: t("breadcrumb.reading"), to: "/reading" },
+          ]}
+        />
+        <JlptLockGate jlpt={lockedJlpt} forceLocked>
+          <span />
+        </JlptLockGate>
+      </Layout>
+    );
+  }
+
   if (!detail) {
     return <Navigate to="/reading" replace />;
   }
@@ -111,6 +143,7 @@ export default function ReadingArticlePage() {
 
   return (
     <Layout userName={headerName} streakDays={mockStreak.days}>
+      <JlptLockGate jlpt={detail.jlpt}>
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
@@ -346,6 +379,7 @@ export default function ReadingArticlePage() {
           </section>
         ) : null}
       </article>
+      </JlptLockGate>
     </Layout>
   );
 }

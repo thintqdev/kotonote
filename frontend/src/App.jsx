@@ -23,6 +23,7 @@ import Profile from "./pages/Profile.jsx";
 import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import MembershipPage from "./pages/MembershipPage.jsx";
+import MembershipCheckoutPage from "./pages/MembershipCheckoutPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import GrammarListPage from "./pages/GrammarListPage.jsx";
 import GrammarDetailPage from "./pages/GrammarDetailPage.jsx";
@@ -102,6 +103,10 @@ function App() {
                 <Route path="/change-password" element={<ChangePasswordPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/membership" element={<MembershipPage />} />
+                <Route
+                  path="/membership/checkout"
+                  element={<MembershipCheckoutPage />}
+                />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/grammar" element={<GrammarListPage />} />
                 <Route path="/grammar/:slug" element={<GrammarDetailPage />} />

@@ -23,6 +23,8 @@ import {
   isDeckLessonUnlocked,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import { shuffleVocabStudy, getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
 import "./DashboardHome.css";
@@ -53,6 +55,7 @@ function KanjiSpeakerIcon() {
 export default function KanjiPage() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
   const lang = i18n.language || "ja";
   const [marks] = useState(() => ({}));
   const [packItems, setPackItems] = useState([]);
@@ -328,6 +331,16 @@ export default function KanjiPage() {
         <p className="vocab-empty grammar-empty--error" role="alert">
           {error}
         </p>
+      </Layout>
+    );
+  }
+
+  if (isLocked(lessonJlpt)) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <JlptLockGate jlpt={lessonJlpt} forceLocked>
+          <span />
+        </JlptLockGate>
       </Layout>
     );
   }

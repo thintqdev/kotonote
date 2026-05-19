@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
@@ -20,14 +20,25 @@ import {
 } from "../services/vocabularyProgressService.js";
 import {
   getDeckWithVocabulary,
-  loadVocabularyPack,
+  listVocabularyDecksByJlpt,
 } from "../services/vocabularyService.js";
 import {
+  getMyVocabularyProgress,
+  vocabularyProgressToMap,
+} from "../services/vocabularyProgressService.js";
+import {
+  filterActiveDecks,
   getDeckLessonItems,
+  getVocabLessonUnlockReasonKey,
+  isVocabLessonUnlockedByGrowth,
+  lessonNoForDeck,
   levelToJlpt,
   mapVocabRecord,
+  sortDecksByOrder,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import JlptLockGate from "../components/study/JlptLockGate.jsx";
+import VocabLessonUnlockGate from "../components/study/VocabLessonUnlockGate.jsx";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
@@ -56,6 +67,7 @@ function VocabSpeakerIcon() {
 
 export default function VocabularyPage() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const lang = i18n.language || "ja";
   const showViGloss = String(lang).toLowerCase().startsWith("vi");
@@ -65,6 +77,10 @@ export default function VocabularyPage() {
   const [sortedDecks, setSortedDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [unlockDecks, setUnlockDecks] = useState([]);
+  const [unlockProgress, setUnlockProgress] = useState({});
+  const [unlockReady, setUnlockReady] = useState(false);
+  const [apiLessonLocked, setApiLessonLocked] = useState(false);
 
   const params = useParams();
   const [searchParams] = useSearchParams();
@@ -100,6 +116,7 @@ export default function VocabularyPage() {
     (async () => {
       setLoading(true);
       setError("");
+      setApiLessonLocked(false);
       try {
         if (deckId) {
           const { deck, vocabulary } = await getDeckWithVocabulary(deckId);
@@ -112,15 +129,44 @@ export default function VocabularyPage() {
             setPackItems(items);
           }
         } else {
-          const pack = await loadVocabularyPack(lessonJlpt);
+          const sorted = await listVocabularyDecksByJlpt(lessonJlpt);
+          const lessonDeck =
+            lessonNoFromQuery != null
+              ? sorted[lessonNoFromQuery - 1]
+              : null;
+          if (!lessonDeck) {
+            if (!cancelled) {
+              setSortedDecks(sorted);
+              setPackItems([]);
+            }
+            return;
+          }
+          const { deck, vocabulary } = await getDeckWithVocabulary(
+            String(lessonDeck._id),
+          );
+          const jlpt = lessonJlpt || levelToJlpt(deck.level);
+          const items = vocabulary.map((v) =>
+            mapVocabRecord(v, jlpt, String(lessonDeck._id)),
+          );
           if (!cancelled) {
-            setSortedDecks(pack.decks);
-            setPackItems(pack.items);
+            setSortedDecks(sorted);
+            setPackItems(items);
           }
         }
       } catch (err) {
         if (!cancelled) {
-          setError(getApiErrorMessage(err, t));
+          const code =
+            err && typeof err === "object" && "messageCode" in err
+              ? /** @type {{ messageCode?: string }} */ (err).messageCode
+              : undefined;
+          if (code === "MSG_716") {
+            setApiLessonLocked(true);
+            setUnlockReady(true);
+            setError("");
+          } else {
+            setApiLessonLocked(false);
+            setError(getApiErrorMessage(err, t));
+          }
           setSortedDecks([]);
           setPackItems([]);
         }
@@ -131,7 +177,86 @@ export default function VocabularyPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, lessonJlpt, deckId, isLessonMode, t]);
+  }, [user, lessonJlpt, deckId, lessonNoFromQuery, isLessonMode, t]);
+
+  useEffect(() => {
+    if (!user || !lessonJlpt || !isLessonMode) {
+      setUnlockDecks([]);
+      setUnlockProgress({});
+      setUnlockReady(false);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      setUnlockReady(false);
+      try {
+        const { decks } = await listVocabularyDecksByJlpt(lessonJlpt);
+        const progressList = await getMyVocabularyProgress({
+          jlpt: lessonJlpt,
+        });
+        if (!cancelled) {
+          setUnlockDecks(sortDecksByOrder(filterActiveDecks(decks)));
+          setUnlockProgress(vocabularyProgressToMap(progressList));
+        }
+      } catch {
+        if (!cancelled) {
+          setUnlockDecks([]);
+          setUnlockProgress({});
+        }
+      } finally {
+        if (!cancelled) setUnlockReady(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, lessonJlpt, isLessonMode]);
+
+  /** Luôn ưu tiên vị trí thật của deckId (khớp server), không tin lessonNo trên URL nếu lệch */
+  const effectiveLessonNo = useMemo(() => {
+    if (deckId && unlockDecks.length) {
+      const fromDeck = lessonNoForDeck(unlockDecks, deckId);
+      if (fromDeck) return fromDeck;
+    }
+    if (lessonNoFromQuery) return lessonNoFromQuery;
+    return null;
+  }, [lessonNoFromQuery, deckId, unlockDecks]);
+
+  /** Sửa URL khi lessonNo trên path không khớp deckId (bookmark cũ / sort lệch) */
+  useEffect(() => {
+    if (!unlockReady || !deckId || !lessonJlpt || !effectiveLessonNo) return;
+    if (lessonNoFromQuery != null && lessonNoFromQuery !== effectiveLessonNo) {
+      navigate(
+        `/vocabulary/lesson/${effectiveLessonNo}?jlpt=${encodeURIComponent(lessonJlpt)}&deckId=${encodeURIComponent(deckId)}`,
+        { replace: true },
+      );
+    }
+  }, [
+    unlockReady,
+    deckId,
+    lessonJlpt,
+    effectiveLessonNo,
+    lessonNoFromQuery,
+    navigate,
+  ]);
+
+  const lessonGrowthUnlocked = useMemo(() => {
+    if (!unlockReady || !effectiveLessonNo || !unlockDecks.length) {
+      return true;
+    }
+    return isVocabLessonUnlockedByGrowth(
+      unlockDecks,
+      effectiveLessonNo,
+      unlockProgress,
+    );
+  }, [unlockReady, effectiveLessonNo, unlockDecks, unlockProgress]);
+
+  const growthUnlockReasonKey = useMemo(() => {
+    if ((lessonGrowthUnlocked && !apiLessonLocked) || !effectiveLessonNo) {
+      return null;
+    }
+    return getVocabLessonUnlockReasonKey(effectiveLessonNo);
+  }, [lessonGrowthUnlocked, apiLessonLocked, effectiveLessonNo]);
 
   const merged = useMemo(
     () => mergeVocabMarks(packItems, marks),
@@ -197,6 +322,10 @@ export default function VocabularyPage() {
       const row = await advanceVocabularyDeckProgress(effectiveDeckId);
       if (typeof row.growthStage === "number") {
         setGrowthStage(row.growthStage);
+        setUnlockProgress((prev) => ({
+          ...prev,
+          [String(effectiveDeckId)]: row.growthStage,
+        }));
       }
       setQuizGenKey((k) => k + 1);
     } catch {
@@ -304,7 +433,7 @@ export default function VocabularyPage() {
     return <Navigate to="/vocabulary/browse" replace />;
   }
 
-  if (loading) {
+  if (loading || (isLessonMode && !unlockReady)) {
     return (
       <Layout userName={headerName} streakDays={mockStreak.days}>
         <p className="vocab-empty">{t("common.loading")}</p>
@@ -322,8 +451,24 @@ export default function VocabularyPage() {
     );
   }
 
-  if (lessonItemsStable.length === 0) {
+  if (lessonItemsStable.length === 0 && !apiLessonLocked && !growthUnlockReasonKey) {
     return <Navigate to="/vocabulary/browse" replace />;
+  }
+
+  if (growthUnlockReasonKey) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <JlptLockGate jlpt={lessonJlpt}>
+          <VocabLessonUnlockGate
+            reasonKey={growthUnlockReasonKey}
+            lessonNo={effectiveLessonNo ?? lessonNoFromQuery ?? 0}
+            jlpt={lessonJlpt}
+          >
+            <span />
+          </VocabLessonUnlockGate>
+        </JlptLockGate>
+      </Layout>
+    );
   }
 
   return (
@@ -332,6 +477,7 @@ export default function VocabularyPage() {
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >
+      <JlptLockGate jlpt={lessonJlpt}>
       <div className="vocab-study-breadcrumb-row vocab-study-breadcrumb-row--solo">
               <Breadcrumb
                 items={[
@@ -808,6 +954,7 @@ export default function VocabularyPage() {
                 </div>
               )}
             </article>
+      </JlptLockGate>
     </Layout>
   );
 }

@@ -1,7 +1,9 @@
 import asyncHandler from 'express-async-handler';
 import * as kanjiProgressService from '../services/kanjiProgressService.js';
+import * as kanjiService from '../services/kanjiService.js';
 import { apiSuccess } from '../utils/response.js';
 import { KANJI } from '../constants/messages.js';
+import { assertJlptUnlocked, jlptFromDeck } from '../utils/jlptAccess.js';
 
 export const getMyDeckProgress = asyncHandler(async (req, res) => {
 	const { jlpt } = req.query;
@@ -14,6 +16,8 @@ export const getMyDeckProgress = asyncHandler(async (req, res) => {
 
 export const getDeckProgressById = asyncHandler(async (req, res) => {
 	const { deckId } = req.params;
+	const deck = await kanjiService.getDeckById(deckId);
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
 	const result = await kanjiProgressService.getDeckProgress(
 		req.user._id,
 		deckId,
@@ -24,6 +28,8 @@ export const getDeckProgressById = asyncHandler(async (req, res) => {
 
 export const advanceDeckProgress = asyncHandler(async (req, res) => {
 	const { deckId } = req.params;
+	const deck = await kanjiService.getDeckById(deckId);
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
 	const result = await kanjiProgressService.advanceDeckProgress(
 		req.user._id,
 		deckId,

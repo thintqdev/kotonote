@@ -32,6 +32,15 @@ export const QUOTES = {
 	ACTIVE: '/quotes/active',
 };
 
+/** Gói membership — `/api/membership/*` */
+export const MEMBERSHIP = {
+	PLANS: '/membership/plans',
+	ME: '/membership/me',
+	CHECKOUT: '/membership/checkout',
+	confirmCheckout: (checkoutId) =>
+		`/membership/checkout/${encodeURIComponent(checkoutId)}/confirm`,
+};
+
 /** GET/PUT hồ sơ người đăng nhập — `/api/users/me` (alias tương thích: `/api/profile/me`) */
 export const PROFILE = {
 	ME: '/users/me',

@@ -506,7 +506,19 @@
       "1": "発芽",
       "2": "つぼみ",
       "3": "満開"
-    }
+    },
+    "lessonLockedSubtitle": "前のレッスンのテストを完了すると開きます",
+    "lessonLockedAria": "レッスン {{n}} は成長段階でロック中",
+    "unlockGateTitle": "レッスン {{n}} はまだロック中",
+    "unlockGateBack": "レッスン一覧へ",
+    "unlockReason": {
+      "lesson2": "レッスン1のテストを完了し「発芽」に達するとレッスン2が開きます。",
+      "lesson3": "レッスン1・2のうち少なくとも1つが「発芽」以上ならレッスン3が開きます。",
+      "lessonDefault": "直前のレッスンのテストを完了し「発芽」に達すると開きます。"
+    },
+    "badgeOpen": "解放済み",
+    "badgeGrowthLocked": "未解放",
+    "badgeJlptLocked": "プラン必要 · {{level}}"
   },
   "kanjiPage": {
     "lessonPageTitle": "漢字",
@@ -1127,20 +1139,68 @@
   },
   "membershipPage": {
     "title": "メンバーシップ",
-    "subtitle": "Free と Pro を比べて、自分の JLPT 学習に合うプランを選びましょう。",
-    "planFree": "Free",
-    "planPro": "Pro",
+    "subtitle": "N5・N4は無料。アップグレードでJLPTレベルと教材を解放。",
     "priceFree": "無料",
-    "pricePro": "¥1,480 / 月",
     "badgeCurrent": "利用中",
-    "ctaPro": "Pro にアップグレード",
-    "freeB1": "日々の学習プラン",
-    "freeB2": "ストリーク・基本の進捗",
-    "freeB3": "学習リマインド通知",
-    "proB1": "Free のすべての機能",
-    "proB2": "教材・復習を無制限",
-    "proB3": "詳しい進捗レポート",
-    "proB4": "新コンテンツ・試験のコツを優先"
+    "currentPlan": "現在のプラン: {{plan}}",
+    "jlptUnlock": "解放: {{levels}}",
+    "includedFree": "登録時から利用可能",
+    "billing": {
+      "yearly": "年間",
+      "lifetime": "買い切り"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "tagline": "N5 · N4",
+        "features": [
+          "N5・N4の全コンテンツ",
+          "ストリーク・今日の進捗",
+          "アプリ内リマインド"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "N3を解放",
+        "features": [
+          "Freeのすべて",
+          "文法・語彙・漢字 N3",
+          "読解 N3"
+        ]
+      },
+      "ultra": {
+        "name": "Ultra",
+        "tagline": "N2を解放",
+        "features": [
+          "Proのすべて",
+          "N2教材・演習",
+          "詳細な進捗レポート"
+        ]
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "tagline": "すべて解放",
+        "features": [
+          "JLPT N1–N5 すべて",
+          "全科目・無制限",
+          "新コンテンツ優先"
+        ]
+      }
+    }
+  },
+  "membershipCheckout": {
+    "title": "お支払い",
+    "subtitle": "プランを確認し、お支払いを完了（デモ）。",
+    "plan": "プラン",
+    "billing": "支払い方法",
+    "total": "合計",
+    "mockNote": "これは模擬決済です。本番ではVNPay/Momoなどに接続します。",
+    "paySimulate": "支払い成功（デモ）",
+    "paying": "処理中…",
+    "back": "← プラン選択に戻る",
+    "invalidParams": "プランまたは支払い方法が無効です。",
+    "successTitle": "お支払い完了！",
+    "successDesc": "プランが有効になりました。プロフィールへ移動します…"
   },
   "notificationsPage": {
     "title": "通知",
@@ -1205,6 +1265,13 @@
     "xp": "XP",
     "weeklyMin": "週あたり分",
     "level": "レベル",
+    "membershipTitle": "メンバーシップ",
+    "membershipBilling": "形式: {{billing}}",
+    "membershipBillingFree": "無料",
+    "membershipLifetime": "買い切り",
+    "membershipExpires": "有効期限 {{date}}",
+    "membershipJlpt": "解放JLPT: {{levels}}",
+    "membershipManage": "プラン管理・アップグレード →",
     "goalTitle": "目標",
     "goalExam": "試験／目標",
     "goalWhen": "予定時期",
@@ -1414,6 +1481,31 @@
     "MSG_804": "バッジ情報取得成功",
     "MSG_805": "バッジが見つかりません",
     "MSG_806": "バッジリスト取得成功",
-    "MSG_807": "バッジキーは既に存在します"
+    "MSG_807": "バッジキーは既に存在します",
+    "MSG_1101": "プラン一覧を取得しました",
+    "MSG_1102": "メンバーシップ情報を取得しました",
+    "MSG_1103": "決済セッションを作成しました",
+    "MSG_1104": "お支払い完了 — プランが有効になりました",
+    "MSG_1105": "決済セッションが見つかりません",
+    "MSG_1106": "決済セッションの有効期限切れ",
+    "MSG_1107": "すでに支払い済みです",
+    "MSG_1108": "決済セッションが無効です",
+    "MSG_1109": "プランが無効です",
+    "MSG_1110": "支払い形式が無効です",
+    "MSG_1111": "ダウングレードはできません",
+    "MSG_1112": "ユーザーが見つかりません",
+    "MSG_1113": "JLPT {{level}} は現在のプランでは利用できません。アップグレードしてください。",
+    "MSG_716": "このレッスンはまだロック中です。前のレッスンのテストを完了してください（発芽段階）。"
+  },
+  "jlptAccess": {
+    "lockTitle": "{{level}} はロック中",
+    "lockTitleGeneric": "このコンテンツはロック中",
+    "lockDesc": "現在のプランでは {{level}} の文法・語彙・漢字・読解・聴解が利用できません。アップグレードで解放（下位レベルは引き続き利用可）。",
+    "lockDescGeneric": "このJLPTレベルは現在のプランでは未解放です。メンバーシップをアップグレードしてください。",
+    "upgradeCta": "メンバーシップを見る",
+    "upgradeShort": "解放する",
+    "cardLocked": "アップグレードが必要",
+    "filterLocked": "{{level}} はプランで未解放です。",
+    "tabLocked": "{{level}} 🔒"
   }
 }

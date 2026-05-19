@@ -503,7 +503,19 @@
       "1": "Nảy mầm",
       "2": "Ra nụ",
       "3": "Nở hoa"
-    }
+    },
+    "lessonLockedSubtitle": "Hoàn thành quiz bài trước để mở khóa bài này",
+    "lessonLockedAria": "Bài {{n}} đang khóa theo tiến độ cây",
+    "unlockGateTitle": "Bài {{n}} chưa mở",
+    "unlockGateBack": "Về danh sách bài",
+    "unlockReason": {
+      "lesson2": "Hoàn thành kiểm tra bài 1 (đạt giai đoạn Nảy mầm) để mở bài 2.",
+      "lesson3": "Trong bài 1 và bài 2, cần ít nhất một bài đạt Nảy mầm (sau quiz) để mở bài 3.",
+      "lessonDefault": "Hoàn thành kiểm tra bài ngay trước (đạt Nảy mầm) để mở bài này."
+    },
+    "badgeOpen": "Đã mở",
+    "badgeGrowthLocked": "Chưa mở",
+    "badgeJlptLocked": "Cần gói · {{level}}"
   },
   "kanjiPage": {
     "lessonPageTitle": "Kanji",
@@ -1124,20 +1136,68 @@
   },
   "membershipPage": {
     "title": "Gói thành viên",
-    "subtitle": "So sánh Free và Pro — chọn gói phù hợp với lộ trình ôn JLPT của bạn.",
-    "planFree": "Free",
-    "planPro": "Pro",
+    "subtitle": "N5–N4 miễn phí. Nâng cấp để mở khóa thêm cấp độ JLPT và nội dung ôn luyện.",
     "priceFree": "Miễn phí",
-    "pricePro": "390.000đ / tháng",
     "badgeCurrent": "Đang dùng",
-    "ctaPro": "Nâng cấp Pro",
-    "freeB1": "Lộ trình học theo ngày",
-    "freeB2": "Theo dõi streak và tiến độ cơ bản",
-    "freeB3": "Thông báo nhắc học",
-    "proB1": "Tất cả tính năng Free",
-    "proB2": "Không giới hạn bài học và ôn tập",
-    "proB3": "Báo cáo tiến độ chi tiết",
-    "proB4": "Ưu tiên nội dung và mẹo thi mới"
+    "currentPlan": "Gói hiện tại: {{plan}}",
+    "jlptUnlock": "Mở khóa: {{levels}}",
+    "includedFree": "Đã bao gồm khi đăng ký",
+    "billing": {
+      "yearly": "Theo năm",
+      "lifetime": "Trọn đời"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "tagline": "N5 · N4",
+        "features": [
+          "Toàn bộ nội dung N5, N4",
+          "Streak và tiến độ hôm nay",
+          "Nhắc học trong app"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Mở khóa N3",
+        "features": [
+          "Mọi quyền lợi Free",
+          "Ngữ pháp, từ vựng, kanji N3",
+          "Đọc hiểu N3"
+        ]
+      },
+      "ultra": {
+        "name": "Ultra",
+        "tagline": "Mở khóa N2",
+        "features": [
+          "Mọi quyền lợi Pro",
+          "Nội dung và luyện đề N2",
+          "Báo cáo tiến độ nâng cao"
+        ]
+      },
+      "ultimate": {
+        "name": "Ultimate",
+        "tagline": "Mở khóa tất cả",
+        "features": [
+          "Toàn bộ JLPT N1–N5",
+          "Mọi môn học không giới hạn",
+          "Ưu tiên nội dung mới"
+        ]
+      }
+    }
+  },
+  "membershipCheckout": {
+    "title": "Thanh toán",
+    "subtitle": "Xác nhận gói và hoàn tất thanh toán (mô phỏng).",
+    "plan": "Gói",
+    "billing": "Hình thức",
+    "total": "Tổng thanh toán",
+    "mockNote": "Đây là luồng thanh toán giả lập. Sau khi tích hợp cổng thật, bước này sẽ chuyển sang VNPay/Momo.",
+    "paySimulate": "Thanh toán thành công (mô phỏng)",
+    "paying": "Đang xử lý…",
+    "back": "← Quay lại chọn gói",
+    "invalidParams": "Gói hoặc hình thức thanh toán không hợp lệ.",
+    "successTitle": "Thanh toán thành công!",
+    "successDesc": "Gói của bạn đã được kích hoạt. Đang chuyển tới hồ sơ…"
   },
   "notificationsPage": {
     "title": "Thông báo",
@@ -1202,6 +1262,13 @@
     "xp": "Điểm XP",
     "weeklyMin": "Phút / tuần",
     "level": "Cấp độ",
+    "membershipTitle": "Gói thành viên",
+    "membershipBilling": "Hình thức: {{billing}}",
+    "membershipBillingFree": "Miễn phí",
+    "membershipLifetime": "Trọn đời",
+    "membershipExpires": "Hết hạn {{date}}",
+    "membershipJlpt": "JLPT đã mở: {{levels}}",
+    "membershipManage": "Quản lý / nâng cấp gói →",
     "goalTitle": "Mục tiêu",
     "goalExam": "Kỳ thi / mục tiêu",
     "goalWhen": "Thời gian dự kiến",
@@ -1411,6 +1478,31 @@
     "MSG_804": "Lấy thông tin huy hiệu thành công",
     "MSG_805": "Không tìm thấy huy hiệu",
     "MSG_806": "Lấy danh sách huy hiệu thành công",
-    "MSG_807": "Mã huy hiệu đã tồn tại"
+    "MSG_807": "Mã huy hiệu đã tồn tại",
+    "MSG_1101": "Lấy danh sách gói thành công",
+    "MSG_1102": "Lấy thông tin gói thành viên thành công",
+    "MSG_1103": "Tạo phiên thanh toán thành công",
+    "MSG_1104": "Thanh toán thành công — gói đã được kích hoạt",
+    "MSG_1105": "Không tìm thấy phiên thanh toán",
+    "MSG_1106": "Phiên thanh toán đã hết hạn",
+    "MSG_1107": "Phiên thanh toán đã được thanh toán",
+    "MSG_1108": "Phiên thanh toán không hợp lệ",
+    "MSG_1109": "Gói không hợp lệ",
+    "MSG_1110": "Hình thức thanh toán không hợp lệ",
+    "MSG_1111": "Không thể hạ cấp gói — chỉ nâng cấp hoặc gia hạn",
+    "MSG_1112": "Không tìm thấy người dùng",
+    "MSG_1113": "Cấp JLPT {{level}} chưa được mở trong gói của bạn. Nâng cấp gói để học nội dung này.",
+    "MSG_716": "Bài học này chưa mở — hoàn thành kiểm tra bài trước (đạt giai đoạn Nảy mầm)."
+  },
+  "jlptAccess": {
+    "lockTitle": "Nội dung {{level}} đã khóa",
+    "lockTitleGeneric": "Nội dung này đã khóa",
+    "lockDesc": "Gói hiện tại chưa mở ngữ pháp, từ vựng, kanji, đọc và nghe ở cấp {{level}}. Nâng cấp để mở khóa (các cấp thấp hơn vẫn dùng được).",
+    "lockDescGeneric": "Gói hiện tại chưa mở cấp JLPT này. Nâng cấp gói thành viên để học tiếp.",
+    "upgradeCta": "Xem gói thành viên",
+    "upgradeShort": "Mở khóa",
+    "cardLocked": "Cần nâng cấp gói",
+    "filterLocked": "Cấp {{level}} chưa mở trong gói của bạn.",
+    "tabLocked": "{{level}} 🔒"
   }
 }
