@@ -8,6 +8,7 @@ import seedKanji from '../seeds/kanjiSeeder.js';
 import seedVocabularyDemo from '../seeds/vocabularyDemoSeeder.js';
 import seedBadges from '../seeds/badgeSeeder.js';
 import seedGrammars from '../seeds/grammarSeeder.js';
+import seedPrompts from '../seeds/promptSeeder.js';
 
 // Load environment variables
 dotenv.config();
@@ -24,6 +25,7 @@ const runSeeder = async () => {
 		await seedDemoUsers();
 		await seedSurveyDemo();
 		await seedQuotes();
+		await seedPrompts();
 		await seedGrammars();
 		await seedBadges();
 		await seedKanji();

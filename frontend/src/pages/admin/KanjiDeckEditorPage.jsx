@@ -17,6 +17,8 @@ import {
   KANJI_JLPT_OPTIONS,
   MAX_KANJI_PER_DECK,
 } from "../../constants/kanjiFieldMeta.js";
+import DeckAIGenerateModal from "../../components/admin/DeckAIGenerateModal.jsx";
+import { KANJI_AI_GENERATE } from "../../constants/deckAiGenerateConfig.js";
 import {
   createKanji,
   createKanjiDeck,
@@ -213,6 +215,7 @@ export default function KanjiDeckEditorPage() {
   const [importModalOpen, setImportModalOpen] = useState(false);
   const [importJsonText, setImportJsonText] = useState("");
   const [importBusy, setImportBusy] = useState(false);
+  const [generateOpen, setGenerateOpen] = useState(false);
 
   const loadDeck = useCallback(
     async (opts) => {
@@ -355,6 +358,12 @@ export default function KanjiDeckEditorPage() {
     r.vocabJa.trim() &&
     r.exampleJa.trim() &&
     r.exampleVi.trim();
+
+  const filledKanjiCount = useMemo(() => rows.filter(rowIsValid).length, [rows]);
+  const slotsLeft = useMemo(
+    () => Math.max(0, MAX_KANJI_PER_DECK - filledKanjiCount),
+    [filledKanjiCount],
+  );
 
   const syncKanjiForDeck = async (id) => {
     const initial = initialKanjiIdsRef.current;
@@ -655,6 +664,21 @@ export default function KanjiDeckEditorPage() {
                   <button
                     type="button"
                     className="vdeck-btn vdeck-btn--ghost"
+                    onClick={() => setGenerateOpen(true)}
+                    disabled={isView || saving || isCreate || slotsLeft <= 0}
+                    title={
+                      isCreate
+                        ? "Lưu deck trước để generate AI."
+                        : slotsLeft <= 0
+                          ? `Deck đã đủ ${MAX_KANJI_PER_DECK} chữ.`
+                          : "Generate kanji bằng Gemini"
+                    }
+                  >
+                    Generate AI
+                  </button>
+                  <button
+                    type="button"
+                    className="vdeck-btn vdeck-btn--ghost"
                     onClick={() => setImportModalOpen(true)}
                     disabled={isView || saving}
                     title={
@@ -907,6 +931,16 @@ export default function KanjiDeckEditorPage() {
           </div>
         </div>
       ) : null}
+
+      <DeckAIGenerateModal
+        open={generateOpen}
+        onClose={() => setGenerateOpen(false)}
+        config={KANJI_AI_GENERATE}
+        deckId={isCreate ? undefined : deckId}
+        slotsLeft={slotsLeft}
+        levelKey={jlpt}
+        onApplied={loadDeck}
+      />
     </div>
   );
 }

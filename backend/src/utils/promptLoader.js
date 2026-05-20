@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import * as promptRepository from '../repositories/promptRepository.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -93,7 +94,20 @@ Requirements:
 Format as JSON array.
 Avoid duplicates with existing kanji: {{existingChars}}`;
 	}
-	
+
+	if (type === 'grammar') {
+		return `Create one JLPT {{jlpt}} grammar lesson as a single JSON object.
+Pattern hint: {{patternHint}}
+Admin notes: {{customPrompt}}
+Include pattern, teaser, meaning, usage, examples (ja/vi), ng, compare, memo, practice.items.`;
+	}
+
+	if (type === 'reading') {
+		return `Create one JLPT {{jlpt}} reading article as JSON object.
+Admin notes: {{customPrompt}}
+Include titleJa, snippetJa, paragraphsJa[], vocabulary[], questions[] with choicesJa and explainPerChoice.`;
+	}
+
 	return '';
 };
 
@@ -110,10 +124,11 @@ export const getAIPrompt = (type, templateName, options = {}) => {
 		existingWords = [],
 		existingChars = [],
 		customVariables = {},
+		templateContent,
 	} = options;
-	
-	// Load template
-	const template = loadPromptTemplateByName(type, templateName);
+
+	const template =
+		templateContent ?? loadPromptTemplateByName(type, templateName);
 	
 	// Prepare variables
 	const existingKey = type === 'kanji' ? 'existingChars' : 'existingWords';
@@ -125,6 +140,9 @@ export const getAIPrompt = (type, templateName, options = {}) => {
 	const variables = {
 		count: count.toString(),
 		[existingKey]: existingValue,
+		jlpt: String(customVariables.jlpt ?? 'N5'),
+		patternHint: String(customVariables.patternHint ?? 'không có'),
+		customPrompt: String(customVariables.customPrompt ?? ''),
 		...customVariables,
 	};
 	
@@ -132,6 +150,21 @@ export const getAIPrompt = (type, templateName, options = {}) => {
 	const prompt = processPromptTemplate(template, variables);
 	
 	return prompt;
+};
+
+/**
+ * Build prompt — ưu tiên template trong DB, fallback file .txt
+ */
+export const getAIPromptAsync = async (type, templateName, options = {}) => {
+	const doc = await promptRepository.findActivePromptByTypeAndKey(
+		type,
+		templateName
+	);
+	const dbContent = doc?.content ?? null;
+	return getAIPrompt(type, templateName, {
+		...options,
+		templateContent: dbContent ?? undefined,
+	});
 };
 
 /**

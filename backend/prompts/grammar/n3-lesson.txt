@@ -1,0 +1,11 @@
+Soạn bài ngữ pháp JLPT {{jlpt}} (trung cấp).
+
+Pattern gợi ý: {{patternHint}}
+
+Yêu cầu admin: {{customPrompt}}
+
+Trả về JSON object duy nhất (không bọc markdown) với các field:
+pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
+examples (mảng {ja,vi}), ng ({ja:[], vi:[]}), ngNote, compare (caption, colLabels, rows), memo, practice ({items:[{ja,vi}]}).
+
+So sánh (compare) nên có ít nhất 1 hàng. Ví dụ thực tế, ngữ pháp sai (ng) có 2–3 câu.

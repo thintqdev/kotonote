@@ -145,6 +145,21 @@ export const ADMIN_QUOTES = {
 	quote: (id) => `/admin/quotes/${id}`,
 };
 
+/** Prompt AI generate — `/api/admin/prompts` */
+export const ADMIN_PROMPTS = {
+	BASE: '/admin/prompts',
+	prompt: (id) => `/admin/prompts/${id}`,
+};
+
+/** AI generate — `/api/admin/ai/*` */
+export const ADMIN_AI = {
+	generateVocabulary: '/admin/ai/generate/vocabulary',
+	generateKanji: '/admin/ai/generate/kanji',
+	generateGrammar: '/admin/ai/generate/grammar',
+	generateReading: '/admin/ai/generate/reading',
+	test: '/admin/ai/test',
+};
+
 /** Người dùng — `/api/admin/users` */
 export const ADMIN_USERS = {
 	BASE: '/admin/users',

@@ -2,6 +2,7 @@ import AppError from './AppError.js';
 import { JLPT_ALL_LEVELS } from '../constants/jlpt.js';
 import { normalizeUserMembership } from '../services/membershipService.js';
 import { MEMBERSHIP } from '../constants/messages.js';
+import { isAdminRequest } from './queryBool.js';
 
 /**
  * Chuẩn hóa JLPT: `n3`, `N3`, `3` → `N3`
@@ -55,6 +56,16 @@ export function assertJlptUnlocked(
 			{ field: 'jlpt', message: normalizeJlptLevel(jlpt) || String(jlpt) },
 		]);
 	}
+}
+
+/** Bỏ qua khóa JLPT membership khi admin quản trị deck (token role admin). */
+export function assertJlptUnlockedForRequest(
+	req,
+	jlpt,
+	messageCode = MEMBERSHIP.JLPT_LOCKED,
+) {
+	if (isAdminRequest(req)) return;
+	assertJlptUnlocked(req.jlptUnlocked ?? [], jlpt, messageCode);
 }
 
 /**

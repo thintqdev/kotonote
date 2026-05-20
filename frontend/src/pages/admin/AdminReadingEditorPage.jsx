@@ -9,6 +9,8 @@ import {
 } from '../../services/adminReadingService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import { resolvePublicMediaUrl } from '../../utils/resolveAvatarUrl.js';
+import EditorAIGenerateModal from '../../components/admin/EditorAIGenerateModal.jsx';
+import { READING_AI_GENERATE } from '../../constants/editorAiGenerateConfig.js';
 import {
 	READING_JLPT_LEVELS,
 	articleToForm,
@@ -16,6 +18,7 @@ import {
 	emptyReadingForm,
 	formToArticlePayload,
 } from '../../utils/readingForm.js';
+import { mergeReadingAIIntoForm } from '../../utils/readingAiMerge.js';
 import './AdminGrammarPage.css';
 
 export default function AdminReadingEditorPage() {
@@ -27,6 +30,7 @@ export default function AdminReadingEditorPage() {
 	const [saving, setSaving] = useState(false);
 	const [coverUploading, setCoverUploading] = useState(false);
 	const [coverDragOver, setCoverDragOver] = useState(false);
+	const [generateOpen, setGenerateOpen] = useState(false);
 	const coverFileRef = useRef(null);
 
 	const coverPreviewSrc = resolvePublicMediaUrl(form.imageUrl);
@@ -171,9 +175,18 @@ export default function AdminReadingEditorPage() {
 			<Link to="/admin/reading" className="admin-grammar-back">
 				← Danh sách đọc hiểu
 			</Link>
-			<h1 className="admin-grammar-title">
-				{isEdit ? 'Sửa bài đọc' : 'Thêm bài đọc'}
-			</h1>
+			<div className="admin-grammar-editor-head">
+				<h1 className="admin-grammar-title">
+					{isEdit ? 'Sửa bài đọc' : 'Thêm bài đọc'}
+				</h1>
+				<button
+					type="button"
+					className="admin-grammar-ai-btn"
+					onClick={() => setGenerateOpen(true)}
+				>
+					Generate AI
+				</button>
+			</div>
 
 			<form className="admin-grammar-form" onSubmit={handleSubmit}>
 				<section className="admin-grammar-form-section">
@@ -508,6 +521,14 @@ export default function AdminReadingEditorPage() {
 					</button>
 				</div>
 			</form>
+
+			<EditorAIGenerateModal
+				open={generateOpen}
+				onClose={() => setGenerateOpen(false)}
+				config={READING_AI_GENERATE}
+				levelKey={form.jlpt}
+				onApply={(ai) => setForm((prev) => mergeReadingAIIntoForm(prev, ai))}
+			/>
 		</div>
 	);
 }

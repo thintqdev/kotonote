@@ -1,7 +1,6 @@
 import * as vocabularyRepository from '../repositories/vocabularyRepository.js';
 import { VOCABULARY, COMMON } from '../constants/messages.js';
 import { MAX_WORDS_PER_DECK } from '../constants/vocabulary.js';
-import { getAIPrompt } from '../utils/promptLoader.js';
 
 const DEFAULT_DECK_PAGE = 1;
 const DEFAULT_DECK_PAGE_SIZE = 50;
@@ -202,7 +201,13 @@ export const bulkCreateVocabulary = async (deckId, vocabularyList) => {
 /**
  * Generate vocabulary with AI
  */
-export const generateVocabularyWithAI = async ({ deckId, prompt, count, autoCreate, templateName = 'n3-daily' }) => {
+export const generateVocabularyWithAI = async ({
+	deckId,
+	prompt,
+	count,
+	autoCreate,
+	templateName = 'n5-basic',
+}) => {
 	// Verify deck exists if deckId provided
 	if (deckId) {
 		await getDeckById(deckId);
@@ -217,7 +222,7 @@ export const generateVocabularyWithAI = async ({ deckId, prompt, count, autoCrea
 	const aiResult = await aiGenerate({
 		templateName,
 		count,
-		existingWords,
+		existingItems: existingWords,
 		customPrompt: prompt || '',
 	});
 

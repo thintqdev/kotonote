@@ -70,6 +70,17 @@ export const QUOTE = {
 	LIST_FETCHED: 'MSG_406',
 };
 
+// Prompt template Messages
+export const PROMPT = {
+	CREATED: 'MSG_451',
+	UPDATED: 'MSG_452',
+	DELETED: 'MSG_453',
+	FETCHED: 'MSG_454',
+	NOT_FOUND: 'MSG_455',
+	LIST_FETCHED: 'MSG_456',
+	DUPLICATE_KEY: 'MSG_457',
+};
+
 // Streak Messages
 export const STREAK = {
 	CHECKED_IN: 'MSG_501',
@@ -198,6 +209,7 @@ export const MESSAGES = {
 	...USER,
 	...SURVEY,
 	...QUOTE,
+	...PROMPT,
 	...BADGE,
 	...STREAK,
 	...VOCABULARY,

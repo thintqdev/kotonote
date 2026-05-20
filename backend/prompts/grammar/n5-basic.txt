@@ -1,0 +1,31 @@
+Bạn là chuyên gia soạn bài ngữ pháp tiếng Nhật cho app học JLPT.
+
+Tạo MỘT bài ngữ pháp JLPT {{jlpt}} (mức phù hợp người mới).
+
+Mẫu / chủ đề gợi ý: {{patternHint}}
+
+Ghi chú thêm từ admin: {{customPrompt}}
+
+Trả về MỘT object JSON (không markdown), đúng schema:
+{
+  "pattern": "〜…",
+  "teaser": { "ja": "", "vi": "" },
+  "topicRibbon": { "ja": "", "vi": "" },
+  "connection": { "ja": "", "vi": "" },
+  "meaning": { "ja": "", "vi": "" },
+  "usage": { "ja": "", "vi": "" },
+  "usageNote": { "ja": "", "vi": "" },
+  "pointBubble": { "ja": "", "vi": "" },
+  "examples": [{ "ja": "", "vi": "" }],
+  "ng": { "ja": ["..."], "vi": ["..."] },
+  "ngNote": { "ja": "", "vi": "" },
+  "compare": {
+    "caption": { "ja": "", "vi": "" },
+    "colLabels": [{ "ja": "", "vi": "" }],
+    "rows": [{ "label": { "ja": "", "vi": "" }, "cells": [{ "ja": "", "vi": "" }] }]
+  },
+  "memo": { "ja": "", "vi": "" },
+  "practice": { "items": [{ "ja": "", "vi": "" }] }
+}
+
+Ít nhất 3 ví dụ, 2 mục luyện tập. Nội dung tiếng Nhật tự nhiên, tiếng Việt rõ ràng.

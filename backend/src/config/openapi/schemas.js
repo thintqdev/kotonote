@@ -271,6 +271,34 @@ export const schemas = {
 			updatedAt: { type: 'string', format: 'date-time' },
 		},
 	},
+	Prompt: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
+			type: {
+				type: 'string',
+				enum: ['vocabulary', 'kanji', 'grammar', 'reading', 'listening', 'other'],
+				example: 'vocabulary',
+			},
+			templateKey: { type: 'string', example: 'n5-basic' },
+			name: { type: 'string', example: 'N5 — Từ vựng cơ bản' },
+			description: { type: 'string', example: 'Prompt generate từ vựng JLPT N5' },
+			content: {
+				type: 'string',
+				example: 'Generate {{count}} Japanese vocabulary words for JLPT N5...',
+			},
+			jlptLevel: {
+				type: 'string',
+				enum: ['N5', 'N4', 'N3', 'N2', 'N1'],
+				example: 'N5',
+			},
+			category: { type: 'string', example: 'basic' },
+			isActive: { type: 'boolean', example: true },
+			displayOrder: { type: 'number', example: 1 },
+			createdAt: { type: 'string', format: 'date-time' },
+			updatedAt: { type: 'string', format: 'date-time' },
+		},
+	},
 	Streak: {
 		type: 'object',
 		properties: {

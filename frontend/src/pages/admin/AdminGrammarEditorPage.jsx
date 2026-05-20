@@ -12,11 +12,14 @@ import {
 	updateAdminGrammar,
 } from '../../services/adminGrammarService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import EditorAIGenerateModal from '../../components/admin/EditorAIGenerateModal.jsx';
+import { GRAMMAR_AI_GENERATE } from '../../constants/editorAiGenerateConfig.js';
 import {
 	emptyGrammarForm,
 	formToGrammarPayload,
 	grammarToForm,
 } from '../../utils/grammarForm.js';
+import { mergeGrammarAIIntoForm } from '../../utils/grammarAiMerge.js';
 import './AdminGrammarPage.css';
 
 export default function AdminGrammarEditorPage() {
@@ -26,6 +29,7 @@ export default function AdminGrammarEditorPage() {
 	const [form, setForm] = useState(emptyGrammarForm);
 	const [loading, setLoading] = useState(isEdit);
 	const [saving, setSaving] = useState(false);
+	const [generateOpen, setGenerateOpen] = useState(false);
 
 	useEffect(() => {
 		if (!isEdit) return;
@@ -120,9 +124,18 @@ export default function AdminGrammarEditorPage() {
 			<Link to="/admin/grammar" className="admin-grammar-back">
 				← Danh sách ngữ pháp
 			</Link>
-			<h1 className="admin-grammar-title">
-				{isEdit ? 'Sửa ngữ pháp' : 'Thêm ngữ pháp'}
-			</h1>
+			<div className="admin-grammar-editor-head">
+				<h1 className="admin-grammar-title">
+					{isEdit ? 'Sửa ngữ pháp' : 'Thêm ngữ pháp'}
+				</h1>
+				<button
+					type="button"
+					className="admin-grammar-ai-btn"
+					onClick={() => setGenerateOpen(true)}
+				>
+					Generate AI
+				</button>
+			</div>
 
 			<form className="admin-grammar-form" onSubmit={handleSubmit}>
 				<section className="admin-grammar-form-section">
@@ -362,6 +375,15 @@ export default function AdminGrammarEditorPage() {
 					</button>
 				</div>
 			</form>
+
+			<EditorAIGenerateModal
+				open={generateOpen}
+				onClose={() => setGenerateOpen(false)}
+				config={GRAMMAR_AI_GENERATE}
+				levelKey={form.jlpt}
+				contextHint={form.pattern}
+				onApply={(ai) => setForm((prev) => mergeGrammarAIIntoForm(prev, ai))}
+			/>
 		</div>
 	);
 }

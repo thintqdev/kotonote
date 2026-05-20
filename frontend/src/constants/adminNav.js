@@ -97,6 +97,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.quotes",
       },
       {
+        id: "prompts",
+        to: "/admin/prompts",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.prompts",
+      },
+      {
         id: "badges",
         to: "/admin/badges",
         icon: "doc",

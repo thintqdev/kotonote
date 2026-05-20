@@ -11,6 +11,7 @@ import { grammarPaths } from './paths/grammar.js';
 import { adminGrammarPaths } from './paths/adminGrammar.js';
 import { readingPaths } from './paths/reading.js';
 import { adminReadingPaths } from './paths/adminReading.js';
+import { adminPromptPaths } from './paths/adminPrompts.js';
 import { systemPaths } from './paths/system.js';
 
 export const openApiSpec = {
@@ -75,6 +76,7 @@ export const openApiSpec = {
 		...adminGrammarPaths,
 		...readingPaths,
 		...adminReadingPaths,
+		...adminPromptPaths,
 		...systemPaths,
 	},
 };

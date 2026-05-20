@@ -10,7 +10,10 @@ import {
 	getUserToken,
 } from './tokenStorage.js';
 
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+/** Dev: `/api` qua Vite proxy → backend (xem VITE_API_PROXY_TARGET). */
+const baseURL =
+	import.meta.env.VITE_API_URL ||
+	(import.meta.env.DEV ? '/api' : 'http://localhost:8000/api');
 
 const defaultHeaders = {
 	'Content-Type': 'application/json',

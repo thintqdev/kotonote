@@ -8,11 +8,12 @@ import {
 } from '../utils/userDeckAccess.js';
 import {
 	annotateWithJlptLock,
-	assertJlptUnlocked,
+	assertJlptUnlockedForRequest,
 	buildJlptAccessMeta,
 	isJlptUnlocked,
 	jlptFromDeck,
 } from '../utils/jlptAccess.js';
+import { isAdminRequest } from '../utils/queryBool.js';
 
 // ============ DECK CONTROLLERS ============
 
@@ -25,7 +26,7 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 	const unlocked = req.jlptUnlocked ?? [];
 	const { jlpt, isActive, page, limit } = req.query;
 
-	if (jlpt && !isJlptUnlocked(unlocked, jlpt)) {
+	if (jlpt && !isAdminRequest(req) && !isJlptUnlocked(unlocked, jlpt)) {
 		return apiSuccess(
 			res,
 			{
@@ -64,7 +65,7 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 export const getDeckById = asyncHandler(async (req, res) => {
 	const deck = await kanjiService.getDeckById(req.params.id);
 	assertDeckVisibleToUser(req, deck);
-	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
+	assertJlptUnlockedForRequest(req, jlptFromDeck(deck));
 
 	return apiSuccess(
 		res,
@@ -82,7 +83,7 @@ export const getDeckById = asyncHandler(async (req, res) => {
 export const getDeckWithKanji = asyncHandler(async (req, res) => {
 	const result = await kanjiService.getDeckWithKanji(req.params.id);
 	assertDeckVisibleToUser(req, result.deck);
-	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(result.deck));
+	assertJlptUnlockedForRequest(req, jlptFromDeck(result.deck));
 
 	return apiSuccess(
 		res,

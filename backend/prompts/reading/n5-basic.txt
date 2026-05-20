@@ -1,0 +1,23 @@
+Soạn MỘT bài đọc hiểu tiếng Nhật JLPT {{jlpt}} cho người học.
+
+Chủ đề / gợi ý: {{customPrompt}}
+
+Trả về JSON object (không markdown):
+{
+  "titleJa": "",
+  "snippetJa": "",
+  "paragraphsJa": ["đoạn 1", "đoạn 2"],
+  "vocabulary": [
+    { "termJa": "", "gloss": { "vi": "", "ja": "" } }
+  ],
+  "questions": [
+    {
+      "questionJa": "",
+      "choicesJa": ["A", "B", "C"],
+      "answerIndex": 0,
+      "explainPerChoice": { "ja": ["", "", ""], "vi": ["", "", ""] }
+    }
+  ]
+}
+
+2–4 đoạn văn, 5–8 từ vựng, 2–3 câu hỏi trắc nghiệm (3 lựa chọn). Văn phong {{jlpt}} phù hợp.

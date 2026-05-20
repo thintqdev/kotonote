@@ -218,7 +218,7 @@ export const generateKanjiWithAI = async ({ deckId, prompt, count, autoCreate, t
 	const aiResult = await aiGenerate({
 		templateName,
 		count,
-		existingChars,
+		existingItems: existingChars,
 		customPrompt: prompt || '',
 	});
 	

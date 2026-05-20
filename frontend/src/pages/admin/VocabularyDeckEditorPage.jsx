@@ -26,6 +26,8 @@ import {
   updateVocab,
   updateVocabularyDeck,
 } from "../../services/adminVocabularyService.js";
+import DeckAIGenerateModal from "../../components/admin/DeckAIGenerateModal.jsx";
+import { VOCABULARY_AI_GENERATE } from "../../constants/deckAiGenerateConfig.js";
 import GrammarLocFields from "../../components/admin/GrammarLocFields.jsx";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
 import "./VocabularyDeckEditorPage.css";
@@ -56,6 +58,12 @@ const THUMBNAIL_PRESETS = [
 
 const MAX_UPLOAD_FILE_BYTES = 1.5 * 1024 * 1024;
 const MAX_THUMB_DATA_URL_LENGTH = 560_000;
+const MAX_WORDS_PER_DECK = 25;
+
+function vocabRowsFilledCount(rows) {
+  return rows.filter((r) => r.word.trim() && r.reading.trim() && r.meaning.trim())
+    .length;
+}
 
 /**
  * @param {File} file
@@ -297,6 +305,13 @@ export default function VocabularyDeckEditorPage() {
   const [importModalOpen, setImportModalOpen] = useState(false);
   const [importJsonText, setImportJsonText] = useState("");
   const [importBusy, setImportBusy] = useState(false);
+  const [generateOpen, setGenerateOpen] = useState(false);
+
+  const filledWordCount = useMemo(() => vocabRowsFilledCount(rows), [rows]);
+  const slotsLeft = useMemo(
+    () => Math.max(0, MAX_WORDS_PER_DECK - filledWordCount),
+    [filledWordCount],
+  );
 
   const pickPresetThumbnail = (url) => {
     setThumbnail(url);
@@ -823,6 +838,21 @@ export default function VocabularyDeckEditorPage() {
                   <button
                     type="button"
                     className="vdeck-btn vdeck-btn--ghost"
+                    onClick={() => setGenerateOpen(true)}
+                    disabled={isView || saving || isCreate || slotsLeft <= 0}
+                    title={
+                      isCreate
+                        ? "Lưu deck trước để generate AI."
+                        : slotsLeft <= 0
+                          ? "Deck đã đủ 25 từ."
+                          : "Generate từ vựng bằng Gemini"
+                    }
+                  >
+                    Generate AI
+                  </button>
+                  <button
+                    type="button"
+                    className="vdeck-btn vdeck-btn--ghost"
                     onClick={() => setImportModalOpen(true)}
                     disabled={isView || saving}
                     title={
@@ -1048,6 +1078,16 @@ export default function VocabularyDeckEditorPage() {
           </div>
         </div>
       ) : null}
+
+      <DeckAIGenerateModal
+        open={generateOpen}
+        onClose={() => setGenerateOpen(false)}
+        config={VOCABULARY_AI_GENERATE}
+        deckId={isCreate ? undefined : deckId}
+        slotsLeft={slotsLeft}
+        levelKey={level}
+        onApplied={loadDeck}
+      />
     </div>
   );
 }

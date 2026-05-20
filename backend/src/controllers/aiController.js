@@ -13,13 +13,13 @@ import { MESSAGES } from '../constants/messages.js';
 export const generateVocabulary = asyncHandler(async (req, res) => {
 	const {
 		deckId,
-		templateName = 'n3-daily',
+		templateName = 'n5-basic',
 		prompt = '',
 		count = 10,
 		autoCreate = false,
 	} = req.body;
-	
-	if (!prompt || prompt.trim().length === 0) {
+
+	if (!templateName || String(templateName).trim().length === 0) {
 		return apiSuccess(res, { vocabulary: [], count: 0 }, MESSAGES.MSG_003, 400);
 	}
 	
@@ -33,10 +33,10 @@ export const generateVocabulary = asyncHandler(async (req, res) => {
 	
 	// Generate with AI
 	const result = await aiService.generateVocabularyWithAI({
-		templateName,
-		count: Math.min(count, 25),
+		templateName: String(templateName).trim().toLowerCase(),
+		count: Math.min(Math.max(1, Number(count) || 10), 25),
 		existingItems: existingWords,
-		customPrompt: prompt.trim(),
+		customPrompt: String(prompt ?? '').trim(),
 	});
 	
 	// Auto-create if requested
@@ -79,24 +79,22 @@ export const generateKanji = asyncHandler(async (req, res) => {
 		autoCreate = false,
 	} = req.body;
 	
-	if (!prompt || prompt.trim().length === 0) {
+	if (!templateName || String(templateName).trim().length === 0) {
 		return apiSuccess(res, { kanji: [], count: 0 }, MESSAGES.MSG_003, 400);
 	}
-	
-	// Get existing kanji if deckId provided
+
 	let existingChars = [];
 	if (deckId) {
-		const deck = await kanjiService.getDeckById(deckId);
+		await kanjiService.getDeckById(deckId);
 		const kanjiList = await kanjiService.getKanjiByDeck(deckId);
-		existingChars = kanjiList.map(k => k.char);
+		existingChars = kanjiList.map((k) => k.char);
 	}
-	
-	// Generate with AI
+
 	const result = await aiService.generateKanjiWithAI({
-		templateName,
-		count: Math.min(count, 25),
+		templateName: String(templateName).trim().toLowerCase(),
+		count: Math.min(Math.max(1, Number(count) || 10), 25),
 		existingItems: existingChars,
-		customPrompt: prompt.trim(),
+		customPrompt: String(prompt ?? '').trim(),
 	});
 	
 	// Auto-create if requested
@@ -123,6 +121,76 @@ export const generateKanji = asyncHandler(async (req, res) => {
 		promptUsed: result.promptUsed,
 		templateName: result.templateName,
 	}, MESSAGES.MSG_001, 200);
+});
+
+/**
+ * @desc    Generate grammar lesson with AI
+ * @route   POST /api/admin/ai/generate/grammar
+ */
+export const generateGrammar = asyncHandler(async (req, res) => {
+	const {
+		templateName = 'n5-basic',
+		prompt = '',
+		jlpt = 'N5',
+		patternHint = '',
+	} = req.body;
+
+	if (!templateName || String(templateName).trim().length === 0) {
+		return apiSuccess(res, { grammar: null }, MESSAGES.MSG_003, 400);
+	}
+
+	const result = await aiService.generateGrammarWithAI({
+		templateName: String(templateName).trim().toLowerCase(),
+		customPrompt: String(prompt ?? '').trim(),
+		jlpt: String(jlpt ?? 'N5').trim(),
+		patternHint: String(patternHint ?? '').trim(),
+	});
+
+	return apiSuccess(
+		res,
+		{
+			grammar: result.grammar,
+			source: result.source,
+			promptUsed: result.promptUsed,
+			templateName: result.templateName,
+		},
+		MESSAGES.MSG_001,
+		200,
+	);
+});
+
+/**
+ * @desc    Generate reading article with AI
+ * @route   POST /api/admin/ai/generate/reading
+ */
+export const generateReading = asyncHandler(async (req, res) => {
+	const {
+		templateName = 'n5-basic',
+		prompt = '',
+		jlpt = 'N5',
+	} = req.body;
+
+	if (!templateName || String(templateName).trim().length === 0) {
+		return apiSuccess(res, { article: null }, MESSAGES.MSG_003, 400);
+	}
+
+	const result = await aiService.generateReadingWithAI({
+		templateName: String(templateName).trim().toLowerCase(),
+		customPrompt: String(prompt ?? '').trim(),
+		jlpt: String(jlpt ?? 'N5').trim(),
+	});
+
+	return apiSuccess(
+		res,
+		{
+			article: result.article,
+			source: result.source,
+			promptUsed: result.promptUsed,
+			templateName: result.templateName,
+		},
+		MESSAGES.MSG_001,
+		200,
+	);
 });
 
 /**

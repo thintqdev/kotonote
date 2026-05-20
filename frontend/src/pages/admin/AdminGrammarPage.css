@@ -880,3 +880,39 @@
 .admin-reading-cover-url-label input {
   font-weight: 500;
 }
+
+.admin-grammar-editor-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-grammar-editor-head .admin-grammar-title {
+  margin-bottom: 0;
+}
+
+.admin-grammar-ai-btn {
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 1px solid rgba(107, 126, 95, 0.45);
+  background: rgba(107, 126, 95, 0.12);
+  color: var(--admin-ink);
+  cursor: pointer;
+}
+
+.admin-grammar-ai-btn:hover {
+  background: rgba(107, 126, 95, 0.22);
+}
+
+.admin-grammar-ai-preview-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--admin-ink);
+}

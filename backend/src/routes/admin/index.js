@@ -14,6 +14,7 @@ import adminGrammarRoutes from './adminGrammarRoutes.js';
 import adminReadingRoutes from './adminReadingRoutes.js';
 
 import adminListeningRoutes from './adminListeningRoutes.js';
+import adminPromptRoutes from './adminPromptRoutes.js';
 
 const router = express.Router();
 
@@ -34,5 +35,6 @@ router.use('/notifications', adminNotificationRoutes);
 router.use('/grammar', adminGrammarRoutes);
 router.use('/reading', adminReadingRoutes);
 router.use('/listening', adminListeningRoutes);
+router.use('/prompts', adminPromptRoutes);
 
 export default router;

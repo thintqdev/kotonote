@@ -930,7 +930,61 @@ fieldset:disabled .vdeck-cover-upload--btn {
   backdrop-filter: blur(4px);
 }
 
+.vdeck-modal--wide {
+  width: min(640px, 100%);
+  max-height: min(92vh, 880px);
+}
+
+.vdeck-generate-form {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.vdeck-generate-form .vdeck-field--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 520px) {
+  .vdeck-generate-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vdeck-generate-source {
+  margin: 0 0 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--vdeck-muted);
+}
+
+.vdeck-generate-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  background: rgba(120, 120, 120, 0.15);
+  color: var(--vdeck-ink, #2a2620);
+}
+
+.vdeck-generate-chip--ok {
+  background: rgba(107, 126, 95, 0.2);
+  color: var(--vdeck-green, #5a6b38);
+}
+
+.vdeck-generate-preview {
+  margin-bottom: 14px;
+  max-height: 220px;
+  overflow: auto;
+}
+
 .vdeck-modal {
+  --vdeck-card: #fffefb;
+  --vdeck-border: rgba(74, 56, 36, 0.12);
+  --vdeck-ink: #3a3630;
+  --vdeck-muted: rgba(58, 54, 48, 0.62);
+  --vdeck-green: #6b7e5f;
   width: 100%;
   max-width: 36rem;
   max-height: min(90vh, 640px);
