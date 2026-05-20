@@ -4,60 +4,15 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
-import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
+import { LISTENING_ASSETS } from "../constants/listeningAssets.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css"; // Reuse reading list styles for consistency
 
 const LISTENING_JLPT_LEVELS = ["N1", "N2", "N3", "N4", "N5"];
-
-function ListeningIconHeadphone() {
-  return (
-    <svg
-      className="reading-ico"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <path
-        d="M3 11a9 9 0 0 1 18 0v4a2 2 0 0 1-2 2h-2v-6h4"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M3 11v4a2 2 0 0 0 2 2h2v-6H3z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ListeningIconClock() {
-  return (
-    <svg
-      className="reading-ico"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.6" />
-      <path
-        d="M12 8v5l3 2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export default function ListeningPage() {
   const { t } = useTranslation();
@@ -72,6 +27,7 @@ export default function ListeningPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (!user) return undefined;
     let cancelled = false;
     (async () => {
       setLoading(true);
@@ -96,7 +52,7 @@ export default function ListeningPage() {
     return () => {
       cancelled = true;
     };
-  }, [t]);
+  }, [user, t]);
 
   const filteredList = useMemo(() => {
     if (!jlpt) return list;
@@ -115,24 +71,16 @@ export default function ListeningPage() {
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
 
-  if (loading) {
-    return (
-      <Layout
-        userName={headerName}
-        streakDays={mockStreak.days}
-        pageClassName="vocab-dash"
-      >
-        <p className="vocab-empty">{t("common.loading")}</p>
-      </Layout>
-    );
-  }
-
   return (
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >
+      {loading ? (
+        <p className="vocab-empty">{t("common.loading")}</p>
+      ) : (
+        <>
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
@@ -225,7 +173,15 @@ export default function ListeningPage() {
                           decoding="async"
                         />
                       ) : (
-                        <span style={{ fontSize: '4rem' }}>🎧</span>
+                        <img
+                          className="reading-thumb reading-thumb--placeholder"
+                          src={LISTENING_ASSETS.placeholderThumb}
+                          alt=""
+                          width={200}
+                          height={140}
+                          loading="lazy"
+                          decoding="async"
+                        />
                       )}
                     </div>
                     <div className="vocab-lesson-main reading-row-main">
@@ -250,11 +206,25 @@ export default function ListeningPage() {
                       </p>
                       <div className="reading-row-meta">
                         <span className="reading-meta-item">
-                          <ListeningIconHeadphone />
+                          <img
+                            className="reading-ico"
+                            src={LISTENING_ASSETS.iconHeadphone}
+                            alt=""
+                            width={20}
+                            height={20}
+                            decoding="async"
+                          />
                           {item.questions?.length || 0} câu hỏi
                         </span>
                         <span className="reading-meta-item">
-                          <ListeningIconClock />
+                          <img
+                            className="reading-ico"
+                            src={LISTENING_ASSETS.iconClock}
+                            alt=""
+                            width={20}
+                            height={20}
+                            decoding="async"
+                          />
                           {Math.floor(item.duration / 60)} phút {item.duration % 60} giây
                         </span>
                       </div>
@@ -272,6 +242,8 @@ export default function ListeningPage() {
           </ul>
         )}
       </article>
+        </>
+      )}
     </Layout>
   );
 }

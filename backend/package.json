@@ -10,6 +10,7 @@
 		"seed": "node src/scripts/seed.js",
 		"seed:vocab-demo": "node src/scripts/seedVocabularyDemo.js",
 		"seed:reading": "node src/scripts/seedReadingDemo.js",
+		"seed:listening": "node src/scripts/seedListeningDemo.js",
 		"test": "jest --coverage",
 		"lint": "eslint src/**/*.js"
 	},

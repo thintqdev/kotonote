@@ -18,15 +18,13 @@ export const AuthProvider = ({ children }) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		const ac = new AbortController();
+		let cancelled = false;
 		(async () => {
 			const token = getUserToken();
 			if (token) {
 				try {
-					const { user: profile } = await authService.fetchCurrentUser({
-						signal: ac.signal,
-					});
-					if (!ac.signal.aborted) {
+					const { user: profile } = await authService.fetchCurrentUser();
+					if (!cancelled) {
 						if (needsEmailVerification(profile)) {
 							clearUserToken();
 							setUser(null);
@@ -35,17 +33,19 @@ export const AuthProvider = ({ children }) => {
 						}
 					}
 				} catch {
-					if (!ac.signal.aborted) {
+					if (!cancelled) {
 						clearUserToken();
 						setUser(null);
 					}
 				}
 			}
-			if (!ac.signal.aborted) {
+			if (!cancelled) {
 				setLoading(false);
 			}
 		})();
-		return () => ac.abort();
+		return () => {
+			cancelled = true;
+		};
 	}, []);
 
 	const login = async (email, password, remember = true) => {

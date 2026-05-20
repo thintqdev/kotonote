@@ -6,6 +6,7 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
+import { LISTENING_ASSETS } from "../constants/listeningAssets.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
@@ -189,17 +190,24 @@ export default function ListeningExercisePage() {
               <audio ref={audioRef} src={detail.audioUrl} preload="metadata" />
               
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                <button 
+                <button
+                  type="button"
                   onClick={togglePlay}
+                  aria-label={isPlaying ? "Tạm dừng" : "Phát"}
                   style={{
                     width: '48px', height: '48px', borderRadius: '50%',
                     background: 'var(--admin-sage)', color: '#fff',
                     border: 'none', cursor: 'pointer', display: 'flex',
                     alignItems: 'center', justifyContent: 'center',
-                    fontSize: '1.2rem'
                   }}
                 >
-                  {isPlaying ? '⏸' : '▶️'}
+                  <img
+                    src={isPlaying ? LISTENING_ASSETS.iconPause : LISTENING_ASSETS.iconPlay}
+                    alt=""
+                    width={24}
+                    height={24}
+                    decoding="async"
+                  />
                 </button>
                 <div style={{ flex: 1 }}>
                   <input 

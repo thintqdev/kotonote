@@ -6,6 +6,7 @@ import './AdminGrammarPage.css';
 import './KaiwaListPage.css';
 
 import adminListeningService from '../../services/adminListeningService';
+import { LISTENING_ASSETS } from '../../constants/listeningAssets.js';
 
 // JLPT levels
 const JLPT_LEVELS = ['N1', 'N2', 'N3', 'N4', 'N5'];
@@ -488,7 +489,14 @@ export default function KaiwaListPage() {
 													className={`kaiwa-audio-trigger ${playingId === row._id ? 'kaiwa-audio-trigger--playing' : ''}`}
 													onClick={() => togglePlayAudio(row._id, row.audioUrl)}
 												>
-													{playingId === row._id ? '❚❚ Tạm dừng' : '▶ Nghe thử'}
+													<img
+														src={playingId === row._id ? LISTENING_ASSETS.iconPause : LISTENING_ASSETS.iconPlay}
+														alt=""
+														width={14}
+														height={14}
+														decoding="async"
+													/>
+													<span>{playingId === row._id ? 'Tạm dừng' : 'Nghe thử'}</span>
 													<span style={{ fontSize: '0.7rem', opacity: 0.8 }}> ({formatAudioTime(row.duration)})</span>
 												</button>
 											</td>
@@ -572,8 +580,9 @@ export default function KaiwaListPage() {
 																				allowFullScreen
 																				style={{ borderRadius: '12px', border: '1px solid rgba(107, 126, 95, 0.2)', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }}
 																			/>
-																			<div style={{ fontSize: '0.7rem', color: 'var(--admin-ink-soft)', marginTop: '4px', textAlign: 'center', fontStyle: 'italic' }}>
-																				🔊 Phát âm thanh bài nghe từ YouTube tích hợp
+																			<div style={{ fontSize: '0.7rem', color: 'var(--admin-ink-soft)', marginTop: '4px', textAlign: 'center', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+																				<img src={LISTENING_ASSETS.iconAudio} alt="" width={16} height={16} decoding="async" />
+																				<span>Phát âm thanh bài nghe từ YouTube tích hợp</span>
 																			</div>
 																		</div>
 																	);
@@ -584,8 +593,9 @@ export default function KaiwaListPage() {
 																				type="button"
 																				className="kaiwa-player-btn"
 																				onClick={() => togglePlayAudio(row._id, row.audioUrl)}
+																				aria-label="Tạm dừng"
 																			>
-																				❚❚
+																				<img src={LISTENING_ASSETS.iconPause} alt="" width={20} height={20} decoding="async" />
 																			</button>
 																			<div className="kaiwa-player-progress-container">
 																				<span className="kaiwa-player-time">{formatAudioTime(currentTime)}</span>

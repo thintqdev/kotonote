@@ -1,6 +1,8 @@
 import { AUTH, PROFILE } from '../constants/apiEndpoints.js';
 import { getApiData } from '../utils/apiEnvelope.js';
+import { dedupePromise } from '../utils/dedupePromise.js';
 import api from './api.js';
+import { getUserToken } from './tokenStorage.js';
 
 /**
  * @param {{ email: string, password: string }} credentials
@@ -81,8 +83,15 @@ export async function resetPassword(payload, axiosConfig = {}) {
  * @returns {Promise<{ user: object }>}
  */
 export async function fetchCurrentUser(axiosConfig = {}) {
-	const body = await api.get(PROFILE.ME, axiosConfig);
-	return getApiData(body);
+	if (axiosConfig.signal) {
+		const body = await api.get(PROFILE.ME, axiosConfig);
+		return getApiData(body);
+	}
+	const token = getUserToken() || '';
+	return dedupePromise(`users/me:${token}`, async () => {
+		const body = await api.get(PROFILE.ME, axiosConfig);
+		return getApiData(body);
+	});
 }
 
 /**

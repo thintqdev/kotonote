@@ -1,15 +1,14 @@
-import api from './api';
+import api from './api.js';
+import { dedupePromise } from '../utils/dedupePromise.js';
 
 const listeningService = {
   getAllPublished: async () => {
-    const response = await api.get('/listening');
-    return response.data;
+    return dedupePromise('listening:published', () => api.get('/listening'));
   },
 
   getById: async (id) => {
-    const response = await api.get(`/listening/${id}`);
-    return response.data;
-  }
+    return dedupePromise(`listening:${id}`, () => api.get(`/listening/${id}`));
+  },
 };
 
 export default listeningService;

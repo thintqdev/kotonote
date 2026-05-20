@@ -1,30 +1,28 @@
-import api from './api';
+import { adminApi } from './api.js';
+import { dedupePromise } from '../utils/dedupePromise.js';
 
 const adminListeningService = {
   getAll: async () => {
-    const response = await api.get('/admin/listening');
-    return response.data;
+    return dedupePromise('admin:listening', () => adminApi.get('/admin/listening'));
   },
 
   getById: async (id) => {
-    const response = await api.get(`/admin/listening/${id}`);
-    return response.data;
+    return dedupePromise(`admin:listening:${id}`, () =>
+      adminApi.get(`/admin/listening/${id}`),
+    );
   },
 
   create: async (data) => {
-    const response = await api.post('/admin/listening', data);
-    return response.data;
+    return await adminApi.post('/admin/listening', data);
   },
 
   update: async (id, data) => {
-    const response = await api.put(`/admin/listening/${id}`, data);
-    return response.data;
+    return await adminApi.put(`/admin/listening/${id}`, data);
   },
 
   delete: async (id) => {
-    const response = await api.delete(`/admin/listening/${id}`);
-    return response.data;
-  }
+    return await adminApi.delete(`/admin/listening/${id}`);
+  },
 };
 
 export default adminListeningService;
