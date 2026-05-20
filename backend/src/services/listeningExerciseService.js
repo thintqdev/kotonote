@@ -22,8 +22,20 @@ class ListeningExerciseService {
   }
 
   // User-facing service methods
-  async getAllPublished() {
-    return await listeningExerciseRepository.find({ isPublished: true });
+  async getAllPublished(filters = { isPublished: true }) {
+    return await listeningExerciseRepository.find(filters);
+  }
+
+  async getDistinctJlptLevels(publishedOnly = true) {
+    const filter = publishedOnly ? { isPublished: true } : {};
+    const rows = await listeningExerciseRepository.find(filter);
+    const set = new Set();
+    for (const row of rows) {
+      const lv = String(row.jlpt || '').trim().toUpperCase();
+      if (/^N[1-5]$/.test(lv)) set.add(lv);
+    }
+    const order = ['N5', 'N4', 'N3', 'N2', 'N1'];
+    return order.filter((lv) => set.has(lv));
   }
 }
 

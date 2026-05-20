@@ -3,13 +3,44 @@ import asyncHandler from 'express-async-handler';
 import * as readingService from '../services/readingService.js';
 import { apiSuccess, apiPaginated, apiError } from '../utils/response.js';
 import { READING, COMMON } from '../constants/messages.js';
+import {
+	annotateWithJlptLock,
+	assertJlptUnlocked,
+	buildJlptAccessMeta,
+	isJlptUnlocked,
+} from '../utils/jlptAccess.js';
 
 export const listPublishedArticles = asyncHandler(async (req, res) => {
+	const unlocked = req.jlptUnlocked ?? [];
+	const queryJlpt = req.query.jlpt;
+
+	if (queryJlpt && !isJlptUnlocked(unlocked, queryJlpt)) {
+		const jlptLevels = await readingService.getDistinctJlptLevels(true);
+		return apiPaginated(
+			res,
+			{
+				items: [],
+				jlptLevels,
+				jlptAccess: buildJlptAccessMeta(unlocked),
+				requestedJlptLocked: true,
+			},
+			{ page: 1, limit: 10, total: 0, pages: 0 },
+			READING.LIST_FETCHED,
+			200,
+		);
+	}
+
 	const result = await readingService.listPublishedArticles(req.user._id, req.query);
 	const { items, pagination, jlptLevels, messageCode } = result;
+	const annotated = annotateWithJlptLock(items, unlocked, (it) => it.jlpt);
+
 	return apiPaginated(
 		res,
-		{ items, jlptLevels },
+		{
+			items: annotated,
+			jlptLevels,
+			jlptAccess: buildJlptAccessMeta(unlocked),
+		},
 		pagination,
 		messageCode,
 		200,
@@ -27,10 +58,21 @@ export const getPublishedArticleBySlug = asyncHandler(async (req, res) => {
 		req.user._id,
 		req.params.slug,
 	);
-	return apiSuccess(res, { article }, messageCode, 200);
+	assertJlptUnlocked(req.jlptUnlocked, article.jlpt);
+	return apiSuccess(
+		res,
+		{ article, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		messageCode,
+		200,
+	);
 });
 
 export const saveArticleProgress = asyncHandler(async (req, res) => {
+	const { article } = await readingService.getPublishedArticleBySlug(
+		req.user._id,
+		req.params.slug,
+	);
+	assertJlptUnlocked(req.jlptUnlocked, article.jlpt);
 	const { progress, messageCode } = await readingService.saveArticleProgress(
 		req.user._id,
 		req.params.slug,

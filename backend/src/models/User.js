@@ -38,6 +38,33 @@ const userProfileSchema = new mongoose.Schema(
 	{ _id: false }
 );
 
+const userMembershipSchema = new mongoose.Schema(
+	{
+		tierId: {
+			type: String,
+			enum: ['free', 'pro', 'ultra', 'ultimate'],
+			default: 'free',
+		},
+		billing: {
+			type: String,
+			enum: ['free', 'yearly', 'lifetime'],
+			default: 'free',
+		},
+		status: {
+			type: String,
+			enum: ['active', 'expired'],
+			default: 'active',
+		},
+		jlptUnlocked: {
+			type: [String],
+			default: () => ['N5', 'N4'],
+		},
+		purchasedAt: { type: Date },
+		expiresAt: { type: Date, default: null },
+	},
+	{ _id: false },
+);
+
 const userSettingsSchema = new mongoose.Schema(
 	{
 		notifications: {
@@ -102,6 +129,10 @@ const userSchema = new mongoose.Schema(
 		},
 		settings: {
 			type: userSettingsSchema,
+			default: () => ({}),
+		},
+		membership: {
+			type: userMembershipSchema,
 			default: () => ({}),
 		},
 		googleId: {

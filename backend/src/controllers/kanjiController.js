@@ -6,6 +6,13 @@ import {
 	assertDeckVisibleToUser,
 	buildDeckListFilters,
 } from '../utils/userDeckAccess.js';
+import {
+	annotateWithJlptLock,
+	assertJlptUnlocked,
+	buildJlptAccessMeta,
+	isJlptUnlocked,
+	jlptFromDeck,
+} from '../utils/jlptAccess.js';
 
 // ============ DECK CONTROLLERS ============
 
@@ -15,7 +22,23 @@ import {
  * @access  Private (User)
  */
 export const getAllDecks = asyncHandler(async (req, res) => {
+	const unlocked = req.jlptUnlocked ?? [];
 	const { jlpt, isActive, page, limit } = req.query;
+
+	if (jlpt && !isJlptUnlocked(unlocked, jlpt)) {
+		return apiSuccess(
+			res,
+			{
+				decks: [],
+				pagination: { page: 1, limit: 10, total: 0, pages: 0 },
+				jlptAccess: buildJlptAccessMeta(unlocked),
+				requestedJlptLocked: true,
+			},
+			MESSAGES.MSG_906,
+			200,
+		);
+	}
+
 	const filters = buildDeckListFilters(req, { jlpt, isActive });
 
 	const { decks, pagination } = await kanjiService.getAllDecks(filters, {
@@ -23,7 +46,14 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 		limit,
 	});
 
-	return apiSuccess(res, { decks, pagination }, MESSAGES.MSG_906, 200);
+	const annotated = annotateWithJlptLock(decks, unlocked, jlptFromDeck);
+
+	return apiSuccess(
+		res,
+		{ decks: annotated, pagination, jlptAccess: buildJlptAccessMeta(unlocked) },
+		MESSAGES.MSG_906,
+		200,
+	);
 });
 
 /**
@@ -34,8 +64,14 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 export const getDeckById = asyncHandler(async (req, res) => {
 	const deck = await kanjiService.getDeckById(req.params.id);
 	assertDeckVisibleToUser(req, deck);
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(deck));
 
-	return apiSuccess(res, { deck }, MESSAGES.MSG_904, 200);
+	return apiSuccess(
+		res,
+		{ deck, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		MESSAGES.MSG_904,
+		200,
+	);
 });
 
 /**
@@ -46,8 +82,14 @@ export const getDeckById = asyncHandler(async (req, res) => {
 export const getDeckWithKanji = asyncHandler(async (req, res) => {
 	const result = await kanjiService.getDeckWithKanji(req.params.id);
 	assertDeckVisibleToUser(req, result.deck);
+	assertJlptUnlocked(req.jlptUnlocked, jlptFromDeck(result.deck));
 
-	return apiSuccess(res, result, MESSAGES.MSG_906, 200);
+	return apiSuccess(
+		res,
+		{ ...result, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		MESSAGES.MSG_906,
+		200,
+	);
 });
 
 /**

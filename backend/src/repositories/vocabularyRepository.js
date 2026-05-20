@@ -2,7 +2,9 @@ import mongoose from 'mongoose';
 import VocabularyDeck from '../models/VocabularyDeck.js';
 import Vocabulary from '../models/Vocabulary.js';
 
-const deckSort = { displayOrder: 1, createdAt: -1 };
+/** Khớp list + unlock; title khi displayOrder trùng (tránh lệch ObjectId vs string) */
+export const VOCAB_DECK_SORT = { displayOrder: 1, title: 1, _id: 1 };
+const deckSort = VOCAB_DECK_SORT;
 
 // Deck Repository
 export const findAllDecks = async (filters = {}) => {

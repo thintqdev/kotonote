@@ -12,6 +12,8 @@ import {
 } from "../data/grammarMock.js";
 import { getGrammarBySlug } from "../services/grammarService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { isJlptLockedError } from "../utils/jlptAccess.js";
+import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 
@@ -87,6 +89,8 @@ function GrammarDetailPage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState("");
+  const [jlptLocked, setJlptLocked] = useState(false);
+  const [lockedJlpt, setLockedJlpt] = useState("");
 
   useEffect(() => {
     if (!slug || !user) return;
@@ -109,6 +113,16 @@ function GrammarDetailPage() {
               : undefined;
           if (code === "MSG_917" || code === "MSG_006") {
             setNotFound(true);
+          } else if (isJlptLockedError(err)) {
+            const level =
+              err &&
+              typeof err === "object" &&
+              Array.isArray(/** @type {{ errors?: { message?: string }[] }} */ (err).errors)
+                ? /** @type {{ errors?: { message?: string }[] }} */ (err).errors?.[0]
+                    ?.message
+                : "";
+            setLockedJlpt(level || "");
+            setJlptLocked(true);
           } else {
             setError(getApiErrorMessage(err, t));
           }
@@ -148,6 +162,25 @@ function GrammarDetailPage() {
     );
   }
 
+  if (jlptLocked) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <Breadcrumb
+          items={[
+            { label: t("breadcrumb.home"), to: "/", end: true },
+            { label: t("breadcrumb.grammar"), to: "/grammar" },
+          ]}
+        />
+        <JlptLockGate jlpt={lockedJlpt} forceLocked>
+          <span />
+        </JlptLockGate>
+        <Link className="grammar-back" to="/grammar">
+          {t("grammarPage.backToList")}
+        </Link>
+      </Layout>
+    );
+  }
+
   if (notFound || !detail) {
     return <Navigate to="/grammar" replace />;
   }
@@ -170,6 +203,7 @@ function GrammarDetailPage() {
               ]}
             />
 
+            <JlptLockGate jlpt={detail.jlpt}>
             <article
               className="grammar-sheet grammar-scope grammar-detail--journal"
               aria-labelledby="grammar-detail-pattern"
@@ -366,6 +400,7 @@ function GrammarDetailPage() {
                 </section>
               ) : null}
             </article>
+            </JlptLockGate>
     </Layout>
   );
 }

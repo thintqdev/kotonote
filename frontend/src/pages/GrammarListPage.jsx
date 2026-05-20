@@ -17,6 +17,9 @@ import {
 } from "../data/grammarMock.js";
 import { listGrammars } from "../services/grammarService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
+import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 import "./VocabularyPages.css";
@@ -38,6 +41,7 @@ export default function GrammarListPage() {
   const { t, i18n } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
   const lang = i18n.language || "ja";
 
   const requested = parsePage(searchParams);
@@ -172,6 +176,7 @@ export default function GrammarListPage() {
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const hasActiveFilter = Boolean(jlpt || tag || qUrl);
+  const jlptFilterLocked = Boolean(jlpt && isLocked(jlpt));
 
   const jlptOptions =
     jlptLevels.length > 0
@@ -214,8 +219,10 @@ export default function GrammarListPage() {
               >
                 <option value="">{t("grammarPage.jlptAll")}</option>
                 {jlptOptions.map((lv) => (
-                  <option key={lv} value={lv}>
-                    {lv}
+                  <option key={lv} value={lv} disabled={isLocked(lv)}>
+                    {isLocked(lv)
+                      ? t("jlptAccess.tabLocked", { level: lv })
+                      : lv}
                   </option>
                 ))}
               </select>
@@ -277,6 +284,12 @@ export default function GrammarListPage() {
             ) : null}
         </section>
 
+        {jlptFilterLocked ? (
+          <p className="jlpt-filter-locked-banner" role="status">
+            {t("jlptAccess.filterLocked", { level: jlpt })}
+          </p>
+        ) : null}
+
         {loading ? (
           <p className="grammar-empty" role="status">
             {t("common.loading")}
@@ -293,12 +306,9 @@ export default function GrammarListPage() {
           <div className="grammar-list-grid">
             {items.map((item) => {
               const teaserLn = grammarLine(item.teaser, lang);
-              return (
-                <Link
-                  key={item.slug}
-                  to={`/grammar/${item.slug}`}
-                  className="grammar-card"
-                >
+              const locked = item.locked || isLocked(item.jlpt);
+              const cardInner = (
+                <>
                   <div className="grammar-card-top">
                     <span className="grammar-jlpt-pill">{item.jlpt}</span>
                   </div>
@@ -319,7 +329,28 @@ export default function GrammarListPage() {
                       <span className="grammar-card-teaser-vi">{teaserLn.secondary}</span>
                     ) : null}
                   </div>
-                  <span className="grammar-card-cta">{t("grammarPage.cardCta")}</span>
+                  {!locked ? (
+                    <span className="grammar-card-cta">{t("grammarPage.cardCta")}</span>
+                  ) : null}
+                </>
+              );
+              if (locked) {
+                return (
+                  <div key={item.slug} className="grammar-card-wrap--locked">
+                    <article className="grammar-card grammar-card--jlpt-locked">
+                      {cardInner}
+                    </article>
+                    <JlptLockedOverlay level={item.jlpt} />
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={item.slug}
+                  to={`/grammar/${item.slug}`}
+                  className="grammar-card"
+                >
+                  {cardInner}
                 </Link>
               );
             })}

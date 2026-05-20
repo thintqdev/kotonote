@@ -1,27 +1,62 @@
+import asyncHandler from 'express-async-handler';
 import listeningExerciseService from '../services/listeningExerciseService.js';
 import { apiSuccess, apiError } from '../utils/response.js';
+import { LISTENING } from '../constants/messages.js';
+import {
+	annotateWithJlptLock,
+	assertJlptUnlocked,
+	buildJlptAccessMeta,
+	isJlptUnlocked,
+} from '../utils/jlptAccess.js';
 
-class ListeningController {
-  async getAllPublished(req, res) {
-    try {
-      const items = await listeningExerciseService.getAllPublished();
-      return apiSuccess(res, items, 'Lấy danh sách bài nghe thành công');
-    } catch (error) {
-      return apiError(res, error.message, 500);
-    }
-  }
+export const getAllPublished = asyncHandler(async (req, res) => {
+	const unlocked = req.jlptUnlocked ?? [];
+	const queryJlpt = req.query.jlpt;
 
-  async getById(req, res) {
-    try {
-      const item = await listeningExerciseService.getById(req.params.id);
-      if (!item || !item.isPublished) {
-        return apiError(res, 'Không tìm thấy bài nghe', 404);
-      }
-      return apiSuccess(res, item, 'Lấy bài nghe thành công');
-    } catch (error) {
-      return apiError(res, error.message, 500);
-    }
-  }
-}
+	if (queryJlpt && !isJlptUnlocked(unlocked, queryJlpt)) {
+		return apiSuccess(
+			res,
+			{
+				items: [],
+				jlptLevels: await listeningExerciseService.getDistinctJlptLevels(true),
+				jlptAccess: buildJlptAccessMeta(unlocked),
+				requestedJlptLocked: true,
+			},
+			LISTENING.LIST_FETCHED,
+			200,
+		);
+	}
 
-export default new ListeningController();
+	const filters = { isPublished: true };
+	if (queryJlpt) {
+		filters.jlpt = queryJlpt;
+	}
+
+	const items = await listeningExerciseService.getAllPublished(filters);
+	const annotated = annotateWithJlptLock(items, unlocked, (it) => it.jlpt);
+
+	return apiSuccess(
+		res,
+		{
+			items: annotated,
+			jlptLevels: await listeningExerciseService.getDistinctJlptLevels(true),
+			jlptAccess: buildJlptAccessMeta(unlocked),
+		},
+		LISTENING.LIST_FETCHED,
+		200,
+	);
+});
+
+export const getById = asyncHandler(async (req, res) => {
+	const item = await listeningExerciseService.getById(req.params.id);
+	if (!item || !item.isPublished) {
+		return apiError(res, LISTENING.NOT_FOUND, 404);
+	}
+	assertJlptUnlocked(req.jlptUnlocked, item.jlpt);
+	return apiSuccess(
+		res,
+		{ item, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		LISTENING.FETCHED,
+		200,
+	);
+});

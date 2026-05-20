@@ -23,12 +23,16 @@ import {
   packFlowerProgressByDeckMap,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
+import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 
 export default function KanjiListPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
 
   const [marks] = useState(() => ({}));
   const [jlptLevels, setJlptLevels] = useState([]);
@@ -216,8 +220,10 @@ export default function KanjiListPage() {
             >
               <option value="">{t("kanjiPage.jlptAll")}</option>
               {jlptLevels.map((lv) => (
-                <option key={lv} value={lv}>
-                  {lv}
+                <option key={lv} value={lv} disabled={isLocked(lv)}>
+                  {isLocked(lv)
+                    ? t("jlptAccess.tabLocked", { level: lv })
+                    : lv}
                 </option>
               ))}
             </select>
@@ -338,12 +344,15 @@ export default function KanjiListPage() {
                 </>
               );
 
+              const jlptLocked = isLocked(lesson.jlpt);
+              const canStudy = lesson.unlocked && !jlptLocked;
+
               return (
                 <li
                   key={lesson.id}
-                  className={`vocab-lesson-card${lesson.unlocked ? "" : " vocab-lesson-card--locked"}`}
+                  className={`vocab-lesson-card${canStudy ? "" : " vocab-lesson-card--locked"}${jlptLocked ? " vocab-lesson-card-wrap--locked" : ""}`}
                 >
-                  {lesson.unlocked ? (
+                  {canStudy ? (
                     <Link className="vocab-lesson-link" to={studyTo}>
                       {cardInner}
                     </Link>
@@ -358,6 +367,9 @@ export default function KanjiListPage() {
                       {cardInner}
                     </div>
                   )}
+                  {jlptLocked ? (
+                    <JlptLockedOverlay level={lesson.jlpt} />
+                  ) : null}
                 </li>
               );
             })}

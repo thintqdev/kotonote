@@ -9,6 +9,7 @@ import grammarRoutes from './grammarRoutes.js';
 import notebookRoutes from './notebookRoutes.js';
 import readingRoutes from './readingRoutes.js';
 import listeningRoutes from './listeningRoutes.js';
+import membershipRoutes from './membershipRoutes.js';
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use('/users', profileRoutes);
 router.use('/notebook', notebookRoutes);
 router.use('/reading', readingRoutes);
 router.use('/listening', listeningRoutes);
+router.use('/membership', membershipRoutes);
 
 export default router;

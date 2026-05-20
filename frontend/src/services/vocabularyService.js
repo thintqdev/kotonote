@@ -23,9 +23,14 @@ export async function listVocabularyDecks(params = {}) {
 
 /**
  * @param {string} deckId
+ * @param {{ lessonNo?: number }} [opts]
  */
-export async function getDeckWithVocabulary(deckId) {
-	const body = await api.get(VOCABULARY.deckWithVocabulary(deckId));
+export async function getDeckWithVocabulary(deckId, opts = {}) {
+	const params =
+		opts.lessonNo != null && Number.isFinite(Number(opts.lessonNo))
+			? { lessonNo: opts.lessonNo }
+			: undefined;
+	const body = await api.get(VOCABULARY.deckWithVocabulary(deckId), { params });
 	return {
 		deck: body.data?.deck ?? null,
 		vocabulary: body.data?.vocabulary ?? [],

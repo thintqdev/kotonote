@@ -8,6 +8,9 @@ import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
 import { LISTENING_ASSETS } from "../constants/listeningAssets.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
+import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css"; // Reuse reading list styles for consistency
@@ -17,6 +20,7 @@ const LISTENING_JLPT_LEVELS = ["N1", "N2", "N3", "N4", "N5"];
 export default function ListeningPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const jlpt = (searchParams.get("jlpt") || "").trim();
@@ -33,13 +37,13 @@ export default function ListeningPage() {
       setLoading(true);
       setError("");
       try {
-        const response = await listeningService.getAllPublished();
+        const { items, jlptLevels: levels } =
+          await listeningService.getAllPublished({
+            jlpt: jlpt || undefined,
+          });
         if (cancelled) return;
-        if (response.success) {
-          setList(response.data || []);
-        } else {
-          setError(response.message || "Failed to load listening exercises");
-        }
+        setList(items);
+        if (levels?.length) setJlptLevels(levels);
       } catch (err) {
         if (!cancelled) {
           setError(getApiErrorMessage(err, t));
@@ -52,12 +56,9 @@ export default function ListeningPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, t]);
+  }, [t, jlpt]);
 
-  const filteredList = useMemo(() => {
-    if (!jlpt) return list;
-    return list.filter((item) => item.jlpt === jlpt);
-  }, [list, jlpt]);
+  const filteredList = list;
 
   const setJlpt = (next) => {
     const p = new URLSearchParams(searchParams);
@@ -143,10 +144,10 @@ export default function ListeningPage() {
               type="button"
               role="tab"
               aria-selected={jlpt === lv}
-              className={`vocab-tab${jlpt === lv ? " vocab-tab--active" : ""}`}
+              className={`vocab-tab${jlpt === lv ? " vocab-tab--active" : ""}${isLocked(lv) ? " vocab-tab--jlpt-locked" : ""}`}
               onClick={() => setJlpt(lv)}
             >
-              {lv}
+              {isLocked(lv) ? t("jlptAccess.tabLocked", { level: lv }) : lv}
             </button>
           ))}
         </div>
@@ -158,9 +159,9 @@ export default function ListeningPage() {
         ) : (
           <ul className="vocab-lesson-list">
             {filteredList.map((item) => {
-              return (
-                <li key={item._id} className="vocab-lesson-card">
-                  <Link className="reading-row-link" to={`/listening/${item._id}`}>
+              const locked = item.locked || isLocked(item.jlpt);
+              const rowInner = (
+                <>
                     <div className="reading-thumb-wrap" style={{ background: '#f5f7f3', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {item.image ? (
                         <img
@@ -232,9 +233,30 @@ export default function ListeningPage() {
                         Bắt đầu
                       </span>
                     </div>
-                    <span className="vocab-lesson-chevron" aria-hidden>
-                      ›
-                    </span>
+                    {!locked ? (
+                      <span className="vocab-lesson-chevron" aria-hidden>
+                        ›
+                      </span>
+                    ) : null}
+                </>
+              );
+              if (locked) {
+                return (
+                  <li
+                    key={item._id}
+                    className="reading-card-wrap--locked vocab-lesson-card"
+                  >
+                    <div className="reading-row-link reading-card--jlpt-locked">
+                      {rowInner}
+                    </div>
+                    <JlptLockedOverlay level={item.jlpt} />
+                  </li>
+                );
+              }
+              return (
+                <li key={item._id} className="vocab-lesson-card">
+                  <Link className="reading-row-link" to={`/listening/${item._id}`}>
+                    {rowInner}
                   </Link>
                 </li>
               );

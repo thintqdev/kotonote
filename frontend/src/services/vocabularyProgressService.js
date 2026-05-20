@@ -12,8 +12,18 @@ export async function getVocabularyDeckProgress(deckId) {
 	return body.data ?? { deckId: String(deckId), growthStage: 0 };
 }
 
-export async function advanceVocabularyDeckProgress(deckId) {
-	const body = await api.post(VOCABULARY.advanceProgress(deckId));
+/**
+ * @param {string} deckId
+ * @param {{ lessonNo?: number }} [opts]
+ */
+export async function advanceVocabularyDeckProgress(deckId, opts = {}) {
+	const params =
+		opts.lessonNo != null && Number.isFinite(Number(opts.lessonNo))
+			? { lessonNo: opts.lessonNo }
+			: undefined;
+	const body = await api.post(VOCABULARY.advanceProgress(deckId), null, {
+		params,
+	});
 	return body.data ?? { deckId: String(deckId), growthStage: 0 };
 }
 

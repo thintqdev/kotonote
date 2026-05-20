@@ -4,6 +4,7 @@ import { findUserById } from '../repositories/userRepository.js';
 import { apiError } from '../utils/response.js';
 import { AUTH, COMMON } from '../constants/messages.js';
 import { AUTH_PROVIDER } from '../constants/userStatus.js';
+import { getJlptUnlockedForUser } from '../utils/jlptAccess.js';
 
 export const authenticate = asyncHandler(async (req, res, next) => {
 	let token;
@@ -41,8 +42,8 @@ export const authenticate = asyncHandler(async (req, res, next) => {
 		return apiError(res, AUTH.EMAIL_NOT_VERIFIED, 403);
 	}
 	
-	// Attach user to request
 	req.user = user;
+	req.jlptUnlocked = getJlptUnlockedForUser(user);
 	next();
 });
 

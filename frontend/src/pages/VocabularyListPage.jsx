@@ -24,6 +24,8 @@ import {
   sortDecksByOrder,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import LessonAccessBadge from "../components/study/LessonAccessBadge.jsx";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 
@@ -32,6 +34,7 @@ export default function VocabularyListPage() {
   const lang = i18n.language || "ja";
   const showVi = String(lang).toLowerCase().startsWith("vi");
   const { user } = useAuth();
+  const { isLocked } = useJlptAccess();
 
   const [allDecks, setAllDecks] = useState([]);
   const [jlptLevels, setJlptLevels] = useState([]);
@@ -84,8 +87,8 @@ export default function VocabularyListPage() {
   }, [allDecks, selectedJlpt]);
 
   const lessons = useMemo(
-    () => buildDeckLessons(sortedDecks, []),
-    [sortedDecks],
+    () => buildDeckLessons(sortedDecks, [], progressByDeckId),
+    [sortedDecks, progressByDeckId],
   );
 
   const lessonCount = lessons.length;
@@ -200,8 +203,10 @@ export default function VocabularyListPage() {
             >
               <option value="">{t("vocabPage.jlptAll")}</option>
               {jlptLevels.map((lv) => (
-                <option key={lv} value={lv}>
-                  {lv}
+                <option key={lv} value={lv} disabled={isLocked(lv)}>
+                  {isLocked(lv)
+                    ? t("jlptAccess.tabLocked", { level: lv })
+                    : lv}
                 </option>
               ))}
             </select>
@@ -230,9 +235,20 @@ export default function VocabularyListPage() {
               const studyTo = lesson.id
                 ? `/vocabulary/lesson/${lesson.lessonNo}?jlpt=${encodeURIComponent(lesson.jlpt)}&deckId=${encodeURIComponent(lesson.id)}`
                 : "/vocabulary/browse";
-              return (
-                <li key={lesson.id} className="vocab-lesson-card">
-                  <Link className="vocab-lesson-link" to={studyTo}>
+              const jlptLocked = isLocked(lesson.jlpt);
+              const canStudy = lesson.unlocked && !jlptLocked;
+              const badgeVariant = canStudy
+                ? "open"
+                : jlptLocked
+                  ? "jlptLocked"
+                  : "growthLocked";
+              const cardClass = canStudy
+                ? "vocab-lesson-card vocab-lesson-card--open"
+                : jlptLocked
+                  ? "vocab-lesson-card vocab-lesson-card--jlpt-locked"
+                  : "vocab-lesson-card vocab-lesson-card--growth-locked";
+              const cardBody = (
+                <>
                     <div className="vocab-lesson-book-wrap">
                       {lesson.thumbnail ? (
                         <img
@@ -263,8 +279,10 @@ export default function VocabularyListPage() {
                         {cardTitle}
                       </h2>
                       <p className="vocab-lesson-card-sub">
-                        {lesson.description ||
-                          t("vocabPage.lessonCardSubtitle")}
+                        {!canStudy && !jlptLocked && lesson.unlockReasonKey
+                          ? t(lesson.unlockReasonKey)
+                          : lesson.description ||
+                            t("vocabPage.lessonCardSubtitle")}
                       </p>
                       <p className="vocab-lesson-card-meta">
                         {t("vocabPage.lessonCardWordCount", {
@@ -320,9 +338,34 @@ export default function VocabularyListPage() {
                       />
                     </div>
 
-                    <span className="vocab-lesson-chevron" aria-hidden>
-                      ›
-                    </span>
+                    {canStudy ? (
+                      <span className="vocab-lesson-chevron" aria-hidden>
+                        ›
+                      </span>
+                    ) : null}
+                </>
+              );
+              if (!canStudy) {
+                return (
+                  <li key={lesson.id} className={cardClass}>
+                    <LessonAccessBadge
+                      variant={badgeVariant}
+                      jlpt={lesson.jlpt}
+                    />
+                    <div
+                      className="vocab-lesson-link vocab-lesson-link--locked"
+                      aria-disabled="true"
+                    >
+                      {cardBody}
+                    </div>
+                  </li>
+                );
+              }
+              return (
+                <li key={lesson.id} className={cardClass}>
+                  <LessonAccessBadge variant="open" />
+                  <Link className="vocab-lesson-link" to={studyTo}>
+                    {cardBody}
                   </Link>
                 </li>
               );
