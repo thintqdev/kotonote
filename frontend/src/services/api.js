@@ -87,6 +87,12 @@ function attachAuthInterceptors(instance, opts) {
 				/** @type {Error & { messageCode?: string }} */ (err).messageCode =
 					code;
 			}
+			const apiErrors = error.response?.data?.errors;
+			if (Array.isArray(apiErrors) && apiErrors.length) {
+				/** @type {Error & { apiErrors?: Array<{ field?: string, message?: string }> }} */ (
+					err
+				).apiErrors = apiErrors;
+			}
 			return Promise.reject(err);
 		}
 	);

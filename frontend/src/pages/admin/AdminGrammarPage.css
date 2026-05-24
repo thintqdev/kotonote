@@ -416,6 +416,17 @@
   padding-top: 4px;
 }
 
+.admin-grammar-modal-body--tight-foot {
+  padding-bottom: 10px;
+}
+
+.admin-grammar-modal-actions--foot {
+  margin-top: 0;
+  padding: 12px 18px 16px;
+  border-top: 1px solid var(--admin-border);
+  background: rgba(255, 252, 246, 0.92);
+}
+
 .admin-grammar-btn {
   padding: 9px 16px;
   border-radius: 10px;
@@ -902,18 +913,36 @@
   cursor: wait;
 }
 
-.admin-reading-cover-url-label {
+.admin-cover-url-divider {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.82rem;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 2px;
+  color: var(--admin-ink-soft);
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--admin-ink);
-  max-width: 520px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.admin-reading-cover-url-label input {
-  font-weight: 500;
+.admin-cover-url-divider::before,
+.admin-cover-url-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(90, 107, 56, 0.22);
+}
+
+.admin-cover-url-divider span {
+  flex-shrink: 0;
+}
+
+.admin-cover-url-field {
+  margin-bottom: 0;
+}
+
+.admin-cover-url-field .admin-grammar-input {
+  font-size: 0.86rem;
 }
 
 .admin-grammar-editor-head {

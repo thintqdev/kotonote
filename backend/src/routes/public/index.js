@@ -12,6 +12,7 @@ import listeningRoutes from './listeningRoutes.js';
 import kaiwaRoutes from './kaiwaRoutes.js';
 import journalRoutes from './journalRoutes.js';
 import membershipRoutes from './membershipRoutes.js';
+import examPaperRoutes from './examPaperRoutes.js';
 
 const router = express.Router();
 
@@ -30,5 +31,6 @@ router.use('/listening', listeningRoutes);
 router.use('/kaiwa', kaiwaRoutes);
 router.use('/journal', journalRoutes);
 router.use('/membership', membershipRoutes);
+router.use('/exam-papers', examPaperRoutes);
 
 export default router;

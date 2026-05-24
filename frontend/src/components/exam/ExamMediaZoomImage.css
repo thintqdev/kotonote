@@ -1,0 +1,92 @@
+.exam-media-zoom-trigger {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: transparent;
+	cursor: zoom-in;
+	border-radius: 10px;
+}
+
+.exam-media-zoom-trigger:focus-visible {
+	outline: 2px solid var(--admin-sage-deep, #5a6b38);
+	outline-offset: 3px;
+}
+
+.exam-media-zoom-trigger img {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+	border-radius: 10px;
+	object-fit: contain;
+}
+
+.exam-media-zoom-hint {
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: rgba(28, 32, 24, 0.72);
+	color: #fff;
+	font-size: 0.72rem;
+	font-weight: 600;
+	line-height: 1.2;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+
+.exam-media-zoom-trigger:hover .exam-media-zoom-hint,
+.exam-media-zoom-trigger:focus-visible .exam-media-zoom-hint {
+	opacity: 1;
+}
+
+.exam-media-zoom-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 2000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background: rgba(18, 20, 16, 0.88);
+	backdrop-filter: blur(4px);
+	cursor: zoom-out;
+}
+
+.exam-media-zoom-close {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	z-index: 1;
+	width: 44px;
+	height: 44px;
+	border: none;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	font-size: 1.75rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.exam-media-zoom-close:hover {
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.exam-media-zoom-lightbox-img {
+	display: block;
+	max-width: min(96vw, 1200px);
+	max-height: min(92vh, 900px);
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	border-radius: 8px;
+	box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
+	cursor: default;
+}

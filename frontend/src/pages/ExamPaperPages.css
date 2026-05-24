@@ -1,0 +1,773 @@
+/* Đề thi — bổ sung nhỏ trên nền vocab-sheet / grammar-sheet */
+
+.exam-thumb-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(235, 245, 228, 0.45);
+}
+
+.exam-thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 88px;
+  color: rgba(79, 125, 89, 0.85);
+}
+
+.exam-thumb-placeholder .reading-ico {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.exam-thumb-wrap .exam-thumb-img,
+.exam-thumb-wrap .reading-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exam-reading-block--spaced {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(90, 107, 56, 0.18);
+}
+
+.exam-detail-head .exam-score-box {
+  margin-top: 1rem;
+  max-width: 20rem;
+}
+
+.exam-section-tabs {
+  margin-bottom: 0.5rem;
+}
+
+.exam-section-tab-count {
+  margin-left: 0.35rem;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.exam-passage-box {
+  line-height: 1.75;
+}
+
+.exam-media-box audio {
+  width: 100%;
+}
+
+.exam-media-box .exam-media-zoom-trigger {
+  width: 100%;
+}
+
+.exam-media-box .exam-media-zoom-trigger img {
+  margin: 0 auto;
+}
+
+.reading-q-option--picked {
+  border-color: rgba(90, 115, 64, 0.65);
+  background: rgba(235, 245, 228, 0.45);
+}
+
+/* Câu hỏi — render markup JLPT (furigana, blank, bold…) */
+.exam-take-q {
+  margin-bottom: 1rem;
+  scroll-margin-top: 5.5rem;
+}
+
+.exam-take-q-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  width: 100%;
+  margin-bottom: 0.65rem;
+  padding: 0;
+}
+
+.exam-take-q-num {
+  flex-shrink: 0;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(90, 115, 64, 0.12);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.95);
+}
+
+.exam-take-q-verdict {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.exam-take-q-verdict--ok {
+  background: rgba(235, 245, 228, 0.9);
+  color: #3d6b42;
+}
+
+.exam-take-q-verdict--bad {
+  background: rgba(255, 235, 235, 0.9);
+  color: #9a3838;
+}
+
+.exam-take-q-verdict--skip {
+  background: rgba(245, 245, 242, 0.95);
+  color: rgba(61, 78, 58, 0.62);
+}
+
+.exam-take-q-prompt {
+  margin-bottom: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(255, 252, 246, 0.92);
+  border: 1px solid rgba(90, 107, 56, 0.14);
+}
+
+.exam-take-q--markup .exam-take-q-prompt {
+  background: rgba(235, 245, 228, 0.35);
+}
+
+.exam-take-q-prompt .exam-passage {
+  font-size: 1.02rem;
+}
+
+.exam-take-q-choices {
+  margin-top: 0.15rem;
+}
+
+.exam-take-q-choice {
+  align-items: flex-start;
+}
+
+.exam-take-q-choice-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.exam-take-q-choice-body .exam-passage {
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.exam-take-q-choice--markup {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+.exam-take-q-media {
+  margin-top: 0.65rem;
+  margin-bottom: 0.35rem;
+  display: flex;
+  justify-content: center;
+}
+
+.exam-take-q-media-img {
+  max-width: min(100%, 360px);
+}
+
+.exam-listening-section-audio {
+  margin-bottom: 1rem;
+}
+
+.exam-take-q-explain {
+  margin-top: 0.85rem;
+}
+
+.exam-take-q-explain .exam-passage {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.exam-star-q-line {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 600;
+  color: rgba(45, 55, 42, 0.95);
+  white-space: pre-wrap;
+  letter-spacing: 0.02em;
+}
+
+.exam-star-q-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(92, 118, 86, 0.82);
+}
+
+.exam-star-q-filled {
+  margin: 0.55rem 0 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.45rem;
+  background: rgba(240, 248, 236, 0.9);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(45, 55, 42, 0.92);
+}
+
+.exam-take-q-prompt--star {
+  padding-bottom: 0.15rem;
+}
+
+.exam-star-q-preview {
+  margin-top: 0.45rem;
+}
+
+.exam-take-body {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.exam-take-main {
+  min-width: 0;
+  width: 100%;
+  padding-right: 0;
+}
+
+.exam-take-sidebar {
+  position: fixed;
+  top: 7.25rem;
+  right: max(1rem, calc((100vw - 1200px) / 2 - 5rem));
+  z-index: 30;
+  width: 168px;
+  pointer-events: none;
+}
+
+.exam-take-sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.65rem;
+  border-radius: 14px;
+  background: rgba(255, 252, 246, 0.94);
+  border: 1px solid rgba(90, 107, 56, 0.2);
+  box-shadow:
+    0 10px 28px rgba(61, 78, 58, 0.14),
+    0 2px 8px rgba(61, 78, 58, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-height: calc(100vh - 6.5rem);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.exam-take-timer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 9px;
+  background: rgba(235, 245, 228, 0.65);
+  border: 1px solid rgba(90, 107, 56, 0.14);
+}
+
+.exam-take-timer-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(61, 78, 58, 0.72);
+}
+
+.exam-take-timer-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: rgba(61, 78, 58, 0.95);
+}
+
+.exam-take-timer-hint {
+  font-size: 0.65rem;
+  color: rgba(61, 78, 58, 0.6);
+  line-height: 1.25;
+}
+
+.exam-take-timer--warn .exam-take-timer-value {
+  color: #b45309;
+}
+
+.exam-take-timer--expired {
+  background: rgba(255, 235, 235, 0.85);
+  border-color: rgba(185, 74, 72, 0.35);
+}
+
+.exam-take-timer--expired .exam-take-timer-value {
+  color: #9a3838;
+}
+
+.exam-take-sheet-head {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px dashed rgba(90, 107, 56, 0.18);
+}
+
+.exam-take-sheet-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.95);
+  line-height: 1.25;
+}
+
+.exam-take-sheet-section-label {
+  font-weight: 700;
+  color: rgba(90, 115, 64, 0.92);
+}
+
+.exam-take-sheet-empty {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(61, 78, 58, 0.55);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.exam-take-sheet-count {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.62);
+}
+
+.exam-take-sheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: min(58vh, 460px);
+  overflow-y: auto;
+  padding-right: 0.1rem;
+  scrollbar-width: thin;
+}
+
+.exam-take-sheet-section-title {
+  margin: 0 0 0.28rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.72);
+  line-height: 1.2;
+}
+
+.exam-take-sheet-section--active .exam-take-sheet-section-title {
+  color: rgba(61, 78, 58, 1);
+}
+
+.exam-take-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.28rem;
+}
+
+.exam-take-sheet-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.05rem;
+  min-height: 2.15rem;
+  padding: 0.18rem 0.1rem;
+  border-radius: 7px;
+  border: 1px solid rgba(90, 107, 56, 0.18);
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.12s ease;
+}
+
+.exam-take-sheet-cell:hover {
+  border-color: rgba(90, 115, 64, 0.55);
+  background: rgba(235, 245, 228, 0.35);
+  transform: translateY(-1px);
+}
+
+.exam-take-sheet-cell-num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.78);
+  line-height: 1;
+}
+
+.exam-take-sheet-cell-pick {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.95);
+  line-height: 1;
+}
+
+.exam-take-sheet-cell-empty {
+  font-size: 0.72rem;
+  color: rgba(61, 78, 58, 0.32);
+  line-height: 1;
+}
+
+.exam-take-sheet-cell--filled {
+  border-color: rgba(90, 115, 64, 0.45);
+  background: rgba(235, 245, 228, 0.45);
+}
+
+.exam-take-sheet-cell--ok {
+  border-color: rgba(79, 125, 89, 0.65);
+  background: rgba(235, 245, 228, 0.65);
+}
+
+.exam-take-sheet-cell--bad {
+  border-color: rgba(185, 74, 72, 0.45);
+  background: rgba(255, 235, 235, 0.55);
+}
+
+.exam-take-q-choice-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.15rem;
+  border-radius: 999px;
+  background: rgba(90, 107, 56, 0.1);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.reading-q-option--answer .exam-take-q-choice-letter {
+  background: rgba(79, 125, 89, 0.25);
+}
+
+.exam-submit-block {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.exam-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 12rem;
+  padding: 0.85rem 1.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.exam-submit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Trang kết quả */
+.exam-result-head {
+  margin-bottom: 0.5rem;
+}
+
+.exam-result-overall {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(235, 245, 228, 0.55);
+  border: 1px solid rgba(90, 107, 56, 0.16);
+}
+
+.exam-result-overall-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  min-height: 5.5rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid rgba(90, 115, 64, 0.35);
+}
+
+.exam-result-overall-pct {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: rgba(61, 78, 58, 0.95);
+}
+
+.exam-result-overall-sub {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.7);
+}
+
+.exam-result-overall-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(61, 78, 58, 0.75);
+}
+
+.exam-result-overall-desc {
+  margin: 0.25rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(61, 78, 58, 0.85);
+}
+
+.exam-result-overall-comment {
+  margin: 0.45rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: rgba(61, 78, 58, 0.88);
+}
+
+.exam-result-feedback-grid {
+  display: grid;
+  zgap: 0.75rem;
+}
+
+.exam-result-feedback-block {
+  padding: 0.85rem 0.95rem;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.14);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.exam-result-feedback-block--leverage {
+  background: rgba(235, 245, 228, 0.75);
+  border-color: rgba(90, 115, 64, 0.28);
+}
+
+.exam-result-feedback-block--good {
+  background: rgba(248, 252, 244, 0.9);
+}
+
+.exam-result-feedback-block--improve {
+  background: rgba(255, 246, 236, 0.85);
+  border-color: rgba(196, 120, 48, 0.22);
+}
+
+.exam-result-feedback-block-title {
+  margin: 0 0 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.92);
+}
+
+.exam-result-feedback-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.exam-result-feedback-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: rgba(45, 55, 42, 0.95);
+}
+
+.exam-result-feedback-score {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.68);
+}
+
+.exam-result-feedback-tip {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(61, 78, 58, 0.82);
+}
+
+.exam-result-section-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.exam-result-section-card {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 252, 246, 0.92);
+  border: 1px solid rgba(90, 107, 56, 0.14);
+}
+
+.exam-result-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+
+.exam-result-section-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.exam-result-section-ja {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(61, 78, 58, 0.65);
+}
+
+.exam-result-section-score {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.95);
+  white-space: nowrap;
+}
+
+.exam-result-section-track {
+  margin-bottom: 0.35rem;
+}
+
+.exam-result-section-pct {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.7);
+}
+
+.exam-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1101px) {
+  .exam-take-main {
+    padding-right: 188px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .exam-take-main {
+    padding-right: 176px;
+  }
+
+  .exam-take-sidebar {
+    right: 0.75rem;
+    width: 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  .exam-detail-head .exam-score-box {
+    max-width: 100%;
+  }
+
+  .exam-result-feedback-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exam-result-overall {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .exam-take-main {
+    padding-right: 0;
+  }
+
+  .exam-take-sidebar {
+    position: sticky;
+    top: 0.5rem;
+    right: auto;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 0.75rem;
+    pointer-events: auto;
+  }
+
+  .exam-take-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exam-take-sidebar {
+    order: -1;
+    margin-bottom: 0.75rem;
+  }
+
+  .exam-take-sheet-body {
+    max-height: 180px;
+  }
+
+  .exam-take-sheet-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+.exam-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exam-history-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.08));
+  border-radius: 0.65rem;
+  background: var(--surface-elevated, #fff);
+}
+
+.exam-history-card-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-muted, #666);
+}
+
+.exam-history-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.exam-history-card-ja {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted, #666);
+}
+
+.exam-history-card-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted, #666);
+}
+
+.exam-history-card-actions {
+  flex-shrink: 0;
+  align-self: center;
+}

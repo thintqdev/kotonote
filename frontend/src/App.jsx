@@ -46,7 +46,11 @@ import KaiwaDetailPage from "./pages/KaiwaDetailPage.jsx";
 import KaiwaPracticePage from "./pages/KaiwaPracticePage.jsx";
 import KaiwaSessionHistoryPage from "./pages/KaiwaSessionHistoryPage.jsx";
 import KaiwaSessionViewPage from "./pages/KaiwaSessionViewPage.jsx";
-import PracticePage from "./pages/PracticePage.jsx";
+import ExamPaperListPage from "./pages/ExamPaperListPage.jsx";
+import ExamPaperTakePage from "./pages/ExamPaperTakePage.jsx";
+import ExamPaperResultPage from "./pages/ExamPaperResultPage.jsx";
+import ExamPaperReviewPage from "./pages/ExamPaperReviewPage.jsx";
+import ExamPaperHistoryPage from "./pages/ExamPaperHistoryPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AdminShell, {
   AdminStubContent,
@@ -71,6 +75,10 @@ import AdminListeningHome from "./pages/admin/AdminListeningHome.jsx";
 import AdminSubscriptionsPage from "./pages/admin/AdminSubscriptionsPage.jsx";
 import AdminKaiwaHome from "./pages/admin/AdminKaiwaHome.jsx";
 import AdminKaiwaEditorPage from "./pages/admin/AdminKaiwaEditorPage.jsx";
+import AdminExamPaperHome from "./pages/admin/AdminExamPaperHome.jsx";
+import AdminExamPaperEditorPage from "./pages/admin/AdminExamPaperEditorPage.jsx";
+import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
+import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -151,7 +159,19 @@ function App() {
                 />
                 <Route path="/kaiwa/:id/practice" element={<KaiwaPracticePage />} />
                 <Route path="/kaiwa/:id" element={<KaiwaDetailPage />} />
-                <Route path="/practice" element={<PracticePage />} />
+                <Route path="/practice/history" element={<ExamPaperHistoryPage />} />
+                <Route
+                  path="/practice/history/:attemptId/result"
+                  element={<ExamPaperResultPage />}
+                />
+                <Route
+                  path="/practice/history/:attemptId/review"
+                  element={<ExamPaperReviewPage />}
+                />
+                <Route path="/practice" element={<ExamPaperListPage />} />
+                <Route path="/practice/:slug/result" element={<ExamPaperResultPage />} />
+                <Route path="/practice/:slug/review" element={<ExamPaperReviewPage />} />
+                <Route path="/practice/:slug" element={<ExamPaperTakePage />} />
               </Route>
             </Route>
             <Route path="/welcome" element={<Navigate to="/" replace />} />
@@ -188,6 +208,10 @@ function App() {
               <Route path="kaiwa/new" element={<AdminKaiwaEditorPage />} />
               <Route path="kaiwa/:id/edit" element={<AdminKaiwaEditorPage />} />
               <Route path="kaiwa" element={<AdminKaiwaHome />} />
+              <Route path="exam-papers/:id/edit" element={<AdminExamPaperEditorPage />} />
+              <Route path="exam-papers" element={<AdminExamPaperHome />} />
+              <Route path="exam-structures/:id/edit" element={<AdminExamStructureEditPage />} />
+              <Route path="exam-structures" element={<AdminExamStructureHome />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
               <Route path="prompts" element={<AdminPromptsPage />} />
               <Route path="badges" element={<BadgePage />} />

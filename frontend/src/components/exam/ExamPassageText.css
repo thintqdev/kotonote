@@ -1,0 +1,261 @@
+.exam-passage {
+  line-height: 1.85;
+  font-size: 1rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.exam-passage-bold {
+  font-weight: 800;
+  color: inherit;
+}
+
+.exam-passage-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.exam-passage-highlight {
+  background: rgba(255, 214, 102, 0.55);
+  padding: 0 0.12em;
+  border-radius: 3px;
+  color: inherit;
+}
+
+.exam-passage-strike {
+  opacity: 0.72;
+  text-decoration-thickness: 1.5px;
+}
+
+.exam-passage-ruby {
+  ruby-align: center;
+}
+
+.exam-passage-ruby rt {
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--admin-ink-soft, #5a6b38);
+}
+
+.exam-passage-sup,
+.exam-passage-sub {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #5a6b38);
+}
+
+.exam-passage-blank {
+  display: inline-block;
+  min-width: 2.5em;
+  padding: 0 0.15em;
+  border-bottom: 2px solid rgba(61, 78, 58, 0.55);
+  font-weight: 700;
+  text-align: center;
+  color: var(--admin-sage-deep, #3d4e3a);
+}
+
+.exam-passage-blank--exam {
+  color: transparent;
+  user-select: none;
+}
+
+.exam-passage-blank-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
+  vertical-align: baseline;
+}
+
+.exam-passage-blank-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35em;
+  height: 1.35em;
+  padding: 0 0.2em;
+  border-radius: 999px;
+  background: rgba(61, 78, 58, 0.12);
+  font-size: 0.78em;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.exam-passage-blank-num-slot {
+  display: inline-block;
+  min-width: 2em;
+  border-bottom: 2px solid rgba(61, 78, 58, 0.45);
+}
+
+.exam-passage-inline {
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.exam-markup-preview {
+  margin-top: 0.45rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  background: rgba(107, 126, 95, 0.07);
+  border: 1px solid rgba(90, 107, 56, 0.12);
+}
+
+.exam-markup-preview--compact {
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.88rem;
+}
+
+.exam-markup-preview--inline {
+  display: inline;
+  margin-top: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.exam-markup-preview-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--admin-ink-soft, #5a6b38);
+}
+
+.exam-editor-part-passage-preview {
+  margin: 0.65rem 0 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  background: rgba(255, 252, 246, 0.9);
+  border: 1px solid rgba(90, 107, 56, 0.15);
+}
+
+.exam-editor-part-passage-preview .exam-passage {
+  font-size: 0.92rem;
+}
+
+.exam-editor-reading-passages {
+  margin-top: 0.35rem;
+}
+
+.exam-editor-reading-block .exam-editor-question-preview {
+  margin-top: 0.5rem;
+}
+
+.exam-editor-question-preview .exam-passage-inline {
+  font-size: 0.85rem;
+}
+
+.exam-q-choice-previews {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.exam-q-choice-preview-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  padding: 2px 4px;
+  border-radius: 8px;
+}
+
+.exam-q-choice-preview-row--correct {
+  background: rgba(90, 107, 56, 0.08);
+}
+
+.exam-q-choice-preview-num {
+  flex-shrink: 0;
+  font-weight: 800;
+  color: var(--admin-ink-soft, #5a6b38);
+  min-width: 1.25em;
+  text-align: center;
+}
+
+.exam-q-choice-preview-num--correct {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  border: 2px solid var(--admin-sage-deep, #3d4e3a);
+  background: rgba(90, 107, 56, 0.14);
+  color: var(--admin-sage-deep, #3d4e3a);
+  box-shadow: 0 0 0 2px rgba(90, 107, 56, 0.12);
+}
+
+.exam-passage-markup-help {
+  margin: 0.65rem 0 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(107, 126, 95, 0.08);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.exam-passage-markup-help summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #5a6b38);
+}
+
+.exam-passage-markup-table {
+  width: 100%;
+  margin-top: 0.5rem;
+  border-collapse: collapse;
+}
+
+.exam-passage-markup-table th,
+.exam-passage-markup-table td {
+  padding: 0.3rem 0.45rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.exam-passage-markup-table code {
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+.exam-passage-preview-panel {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px dashed rgba(90, 107, 56, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 252, 246, 0.75);
+}
+
+.exam-passage-preview-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #5a6b38);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.exam-passage-preview-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.exam-passage-preview-col {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.exam-passage-preview-col-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft, #5a6b38);
+}

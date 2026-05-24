@@ -148,6 +148,7 @@ const Header = ({ userName, notificationCount }) => {
   const userMenuLabels = useMemo(
     () => ({
       profile: t("header.profile"),
+      history: t("header.examHistory"),
       password: t("header.changePassword"),
       settings: t("header.settingsMenu"),
       membership: t("header.membershipMenu"),
@@ -291,6 +292,14 @@ const Header = ({ userName, notificationCount }) => {
                     onClick={() => setIsUserMenuOpen(false)}
                   >
                     {userMenuLabels.profile}
+                  </Link>
+                  <Link
+                    className="dash-user-menu-item"
+                    role="menuitem"
+                    to="/practice/history"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    {userMenuLabels.history}
                   </Link>
                   <Link
                     className="dash-user-menu-item"

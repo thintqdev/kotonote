@@ -304,14 +304,23 @@ export default function AdminReadingEditorPage() {
 									? 'Đang tải lên…'
 									: 'Kéo thả ảnh vào đây hoặc bấm để chọn file'}
 							</button>
-							<label className="admin-reading-cover-url-label">
-								Hoặc dán URL
+							<div className="admin-cover-url-divider" aria-hidden>
+								<span>hoặc</span>
+							</div>
+							<div className="admin-grammar-field admin-cover-url-field">
+								<label className="admin-grammar-label" htmlFor="reading-cover-url">
+									Link ảnh (URL)
+								</label>
 								<input
+									id="reading-cover-url"
+									type="url"
+									className="admin-grammar-input"
 									value={form.imageUrl}
 									onChange={(e) => setField('imageUrl', e.target.value)}
-									placeholder="https://… hoặc /uploads/reading/…"
+									placeholder="https://example.com/cover.jpg"
+									autoComplete="off"
 								/>
-							</label>
+							</div>
 						</div>
 						<label className="admin-grammar-check">
 							<input

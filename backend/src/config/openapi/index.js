@@ -21,6 +21,7 @@ import { adminListeningUploadPaths } from './paths/adminListeningUpload.js';
 import { membershipPaths } from './paths/membership.js';
 import { notebookPaths } from './paths/notebook.js';
 import { journalPaths } from './paths/journal.js';
+import { adminExamPaperPaths } from './paths/adminExamPapers.js';
 import { notificationPaths } from './paths/notifications.js';
 import { adminNotificationPaths } from './paths/adminNotifications.js';
 import { adminBadgePaths } from './paths/adminBadges.js';
@@ -99,6 +100,7 @@ export const openApiSpec = {
 		...membershipPaths,
 		...notebookPaths,
 		...journalPaths,
+		...adminExamPaperPaths,
 		...notificationPaths,
 		...adminNotificationPaths,
 		...adminBadgePaths,

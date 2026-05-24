@@ -15,6 +15,8 @@ import adminReadingRoutes from './adminReadingRoutes.js';
 
 import adminListeningRoutes from './adminListeningRoutes.js';
 import adminKaiwaRoutes from './adminKaiwaRoutes.js';
+import adminExamPaperRoutes from './adminExamPaperRoutes.js';
+import adminExamStructureRoutes from './adminExamStructureRoutes.js';
 import adminPromptRoutes from './adminPromptRoutes.js';
 import adminMembershipRoutes from './adminMembershipRoutes.js';
 
@@ -38,6 +40,8 @@ router.use('/grammar', adminGrammarRoutes);
 router.use('/reading', adminReadingRoutes);
 router.use('/listening', adminListeningRoutes);
 router.use('/kaiwa', adminKaiwaRoutes);
+router.use('/exam-papers', adminExamPaperRoutes);
+router.use('/exam-structures', adminExamStructureRoutes);
 router.use('/prompts', adminPromptRoutes);
 router.use('/memberships', adminMembershipRoutes);
 

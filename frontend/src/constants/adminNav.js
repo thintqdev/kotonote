@@ -60,6 +60,18 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         icon: "audio",
         labelKey: "adminLayout.sidebar.kaiwa",
       },
+      {
+        id: "examPapers",
+        to: "/admin/exam-papers",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.examPapers",
+      },
+      {
+        id: "examStructures",
+        to: "/admin/exam-structures",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.examStructures",
+      },
     ],
   },
   {

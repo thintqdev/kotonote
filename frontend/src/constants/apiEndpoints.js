@@ -26,6 +26,19 @@ export const READING = {
 	progress: (slug) => `/reading/${encodeURIComponent(slug)}/progress`,
 };
 
+/** Đề thi JLPT (user) — `/api/exam-papers/*` */
+export const EXAM_PAPERS = {
+	BASE: '/exam-papers',
+	bySlug: (slug) => `/exam-papers/${encodeURIComponent(slug)}`,
+	history: '/exam-papers/history',
+	historyById: (attemptId) =>
+		`/exam-papers/history/${encodeURIComponent(attemptId)}`,
+	historyReview: (attemptId) =>
+		`/exam-papers/history/${encodeURIComponent(attemptId)}/review`,
+	submit: (slug) => `/exam-papers/${encodeURIComponent(slug)}/submit`,
+	review: (slug) => `/exam-papers/${encodeURIComponent(slug)}/review`,
+};
+
 /** Trích dẫn công khai — `/api/quotes/*` */
 export const QUOTES = {
 	RANDOM: '/quotes/random',
@@ -156,6 +169,32 @@ export const KAIWA = {
 export const ADMIN_KAIWA = {
 	BASE: '/admin/kaiwa',
 	context: (id) => `/admin/kaiwa/${encodeURIComponent(id)}`,
+};
+
+/** JLPT đề thi — `/api/admin/exam-papers` */
+export const ADMIN_EXAM_PAPERS = {
+	BASE: '/admin/exam-papers',
+	TEMPLATE: '/admin/exam-papers/sections/template',
+	UPLOAD_MEDIA: '/admin/exam-papers/upload-media',
+	UPLOAD_THUMBNAIL: '/admin/exam-papers/upload-thumbnail',
+	paper: (id) => `/admin/exam-papers/${encodeURIComponent(id)}`,
+	sections: (id) => `/admin/exam-papers/${encodeURIComponent(id)}/sections`,
+	sectionsInit: (id) =>
+		`/admin/exam-papers/${encodeURIComponent(id)}/sections/init`,
+	sectionsImport: (id) =>
+		`/admin/exam-papers/${encodeURIComponent(id)}/sections/import`,
+};
+
+/** Khung cấu trúc JLPT — `/api/admin/exam-structures` */
+export const ADMIN_EXAM_STRUCTURES = {
+	BASE: '/admin/exam-structures',
+	META: '/admin/exam-structures/meta',
+	CATALOG: '/admin/exam-structures/part-catalog',
+	SEED: '/admin/exam-structures/seed',
+	template: (id) => `/admin/exam-structures/${encodeURIComponent(id)}`,
+	defaultByJlpt: (jlpt) =>
+		`/admin/exam-structures/default/${encodeURIComponent(jlpt)}`,
+	reset: (id) => `/admin/exam-structures/${encodeURIComponent(id)}/reset`,
 };
 
 /** Luyện nghe (Choukai) — `/api/admin/listening` */
