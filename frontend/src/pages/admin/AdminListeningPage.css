@@ -1,0 +1,312 @@
+/* Luyện nghe (admin) — bổ sung cho AdminGrammarPage.css */
+
+.admin-listening-type-chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: rgba(107, 126, 95, 0.1);
+  color: var(--admin-sage-deep);
+  border: 1px solid rgba(90, 107, 56, 0.2);
+}
+
+.admin-listening-preview-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(90, 107, 56, 0.3);
+  background: rgba(255, 252, 246, 0.95);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-sage-deep);
+  cursor: pointer;
+}
+
+.admin-listening-preview-btn:hover {
+  background: rgba(107, 126, 95, 0.12);
+}
+
+.admin-listening-preview-btn--active {
+  background: rgba(107, 126, 95, 0.18);
+  border-color: var(--admin-sage);
+}
+
+.admin-listening-detail-row td {
+  background: rgba(107, 126, 95, 0.04);
+  padding: 0 !important;
+}
+
+.admin-listening-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 18px;
+}
+
+@media (max-width: 900px) {
+  .admin-listening-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-listening-detail-panel {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(90, 107, 56, 0.22);
+  background: rgba(255, 252, 246, 0.92);
+}
+
+.admin-listening-detail-panel h3 {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--admin-ink-soft);
+}
+
+.admin-listening-detail-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.admin-listening-detail-tab {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(90, 107, 56, 0.25);
+  background: transparent;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft);
+  cursor: pointer;
+}
+
+.admin-listening-detail-tab--active {
+  background: rgba(107, 126, 95, 0.14);
+  color: var(--admin-ink);
+}
+
+.admin-listening-script {
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  color: var(--admin-ink);
+}
+
+.admin-listening-script[lang='ja'] {
+  font-family: var(--font-jp, 'Hiragino Sans', 'Yu Gothic', sans-serif);
+}
+
+.admin-listening-questions-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.admin-listening-q-item {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(90, 107, 56, 0.2);
+}
+
+.admin-listening-q-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.admin-listening-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+.admin-listening-choice--correct {
+  background: rgba(40, 167, 69, 0.08);
+  border: 1px solid rgba(40, 167, 69, 0.25);
+}
+
+.admin-listening-choice-num {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: rgba(90, 107, 56, 0.12);
+}
+
+.admin-listening-choice--correct .admin-listening-choice-num {
+  background: #28a745;
+  color: #fff;
+}
+
+/* Upload file trong modal */
+.admin-grammar-file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px dashed rgba(90, 107, 56, 0.4);
+  border-radius: 10px;
+  background: rgba(107, 126, 95, 0.04);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--admin-sage-deep);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.admin-grammar-file-upload:hover {
+  background: rgba(107, 126, 95, 0.1);
+}
+
+.admin-grammar-file-upload--loading {
+  pointer-events: none;
+  opacity: 0.85;
+  cursor: wait;
+}
+
+.admin-grammar-file-upload--compact {
+  min-height: 30px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  width: auto;
+}
+
+.admin-grammar-upload-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(107, 126, 95, 0.25);
+  border-top-color: var(--admin-sage);
+  border-radius: 50%;
+  animation: admin-listening-spin 0.7s linear infinite;
+}
+
+@keyframes admin-listening-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-grammar-field-hint {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+}
+
+.admin-grammar-field-hint--warn {
+  color: #b45309;
+}
+
+.admin-listening-audio-preview {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.2);
+  background: rgba(107, 126, 95, 0.05);
+}
+
+.admin-listening-audio-preview audio {
+  width: 100%;
+  height: 36px;
+}
+
+.admin-listening-image-preview {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px dashed rgba(90, 107, 56, 0.25);
+  text-align: center;
+  background: rgba(255, 252, 246, 0.8);
+}
+
+.admin-listening-image-preview img {
+  max-height: 160px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Câu hỏi trong modal */
+.admin-listening-q-card {
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(90, 107, 56, 0.22);
+  background: rgba(255, 252, 246, 0.72);
+}
+
+.admin-listening-q-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.admin-listening-q-card-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--admin-ink);
+}
+
+.admin-listening-choice-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.15);
+  background: rgba(255, 252, 246, 0.5);
+}
+
+.admin-listening-choice-row--answer {
+  border-color: rgba(40, 167, 69, 0.35);
+  background: rgba(40, 167, 69, 0.04);
+}
+
+.admin-listening-choice-row input[type='radio'] {
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+
+.admin-listening-choice-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-listening-choice-img-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-listening-add-q {
+  width: 100%;
+  border-style: dashed !important;
+  border-width: 2px !important;
+  padding: 12px !important;
+}

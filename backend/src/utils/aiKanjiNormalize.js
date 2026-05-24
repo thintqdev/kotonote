@@ -1,3 +1,8 @@
+import {
+	sanitizeKunYomiReading,
+	sanitizeOnYomiReading,
+} from './japaneseReadingSanitize.js';
+
 /**
  * Chuẩn hóa object kanji từ AI / JSON import.
  * @param {unknown} raw
@@ -10,7 +15,7 @@ export function normalizeKanjiFromAI(raw) {
 
 	const o = /** @type {Record<string, unknown>} */ (raw);
 	const char = String(o.char ?? '').trim();
-	const onYomi = String(o.onYomi ?? o.on ?? '').trim();
+	const onYomi = sanitizeOnYomiReading(String(o.onYomi ?? o.on ?? ''), char);
 	const hanViet = String(o.hanViet ?? o.hanVietReading ?? '').trim();
 	const meaningVi = String(o.meaningVi ?? o.meaning ?? '').trim();
 	const vocabJa = String(o.vocabJa ?? o.vocabulary ?? '').trim();
@@ -21,8 +26,10 @@ export function normalizeKanjiFromAI(raw) {
 		return null;
 	}
 
-	const kunRaw = String(o.kunYomi ?? o.kun ?? '').trim();
-	const kunYomi = kunRaw || '—';
+	const kunYomi = sanitizeKunYomiReading(
+		String(o.kunYomi ?? o.kun ?? ''),
+		char,
+	);
 	const displayOrder = Number(o.displayOrder);
 
 	const payload = {

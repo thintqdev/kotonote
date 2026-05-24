@@ -11,6 +11,7 @@
 		"seed:vocab-demo": "node src/scripts/seedVocabularyDemo.js",
 		"seed:reading": "node src/scripts/seedReadingDemo.js",
 		"seed:listening": "node src/scripts/seedListeningDemo.js",
+		"seed:kaiwa": "node src/scripts/seedKaiwaDemo.js",
 		"seed:prompts": "node src/scripts/seedPrompts.js",
 		"test": "jest --coverage",
 		"lint": "eslint src/**/*.js"
@@ -24,6 +25,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@aws-sdk/client-s3": "^3.1052.0",
 		"@google/generative-ai": "^0.24.1",
 		"@scalar/express-api-reference": "^0.9.14",
 		"bcryptjs": "^2.4.3",

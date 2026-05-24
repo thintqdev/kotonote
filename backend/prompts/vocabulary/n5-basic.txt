@@ -1,0 +1,18 @@
+Bạn là chuyên gia biên soạn từ vựng JLPT cho người Việt học tiếng Nhật.
+
+Tạo đúng {{count}} mục từ vựng trình độ JLPT N5 (sơ cấp).
+Ghi chú admin: {{customPrompt}}
+
+Yêu cầu mỗi mục (JSON array):
+- word: từ tiếng Nhật (kanji/kana)
+- reading: cách đọc bằng hiragana (không romaji)
+- meaning: nghĩa tiếng Việt ngắn gọn
+- meaningJa: giải thích tiếng Nhật đơn giản (1 câu)
+- example: câu ví dụ tiếng Nhật (N5)
+- exampleMeaning: dịch câu ví dụ sang tiếng Việt
+- partOfSpeech: noun | verb | adjective | adverb | other
+
+Không trùng các từ đã có: {{existingWords}}
+Chủ đề ưu tiên: đời sống hằng ngày, trường học, gia đình, thời gian, số đếm.
+
+Trả về CHỈ mảng JSON hợp lệ, không markdown.

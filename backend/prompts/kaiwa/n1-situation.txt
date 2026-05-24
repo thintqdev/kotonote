@@ -1,0 +1,6 @@
+Tạo bối cảnh Kaiwa JLPT N1 — JSON object.
+JLPT: {{jlpt}} · Chủ đề: {{category}}
+Ghi chú: {{customPrompt}}
+
+Context phức tạp (học thuật, kinh doanh, xã hội). roles, keyPhrases phong phú; reading = hiragana/katakana, không romaji.
+Không dialogue script. Chỉ JSON.

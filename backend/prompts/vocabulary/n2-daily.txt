@@ -1,0 +1,8 @@
+Tạo {{count}} từ vựng JLPT N2 (trung-cao).
+Ghi chú admin: {{customPrompt}}
+
+JSON array, mỗi item: word, reading (hiragana), meaning, meaningJa, example, exampleMeaning, partOfSpeech. Không romaji.
+Tránh: {{existingWords}}
+Ưu tiên từ báo chí, công việc, xã hội, học thuật nhẹ.
+
+Chỉ mảng JSON.

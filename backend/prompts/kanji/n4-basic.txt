@@ -1,0 +1,7 @@
+Tạo {{count}} Kanji JLPT N4.
+Ghi chú: {{customPrompt}}
+
+Mỗi item JSON: char, onYomi (katakana), kunYomi (hiragana), hanViet, meaningVi, vocabJa, exampleJa, exampleVi. Không romaji.
+Không trùng: {{existingChars}}
+
+Chỉ mảng JSON.

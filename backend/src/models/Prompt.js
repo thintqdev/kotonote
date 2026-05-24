@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 
-const PROMPT_TYPES = ['vocabulary', 'kanji', 'grammar', 'reading', 'listening', 'other'];
+const PROMPT_TYPES = [
+	'vocabulary',
+	'kanji',
+	'grammar',
+	'reading',
+	'listening',
+	'kaiwa',
+	'other',
+];
 const JLPT_LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];
 
 const promptSchema = new mongoose.Schema(

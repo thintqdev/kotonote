@@ -1,8 +1,7 @@
-Tạo bài đọc hiểu JLPT {{jlpt}} (trung cấp).
-
+Tạo một bài đọc hiểu JLPT {{jlpt}} — JSON object.
 Ghi chú: {{customPrompt}}
 
-JSON object duy nhất gồm: titleJa, snippetJa, paragraphsJa (mảng string, 3–5 đoạn),
-vocabulary (termJa + gloss.vi + gloss.ja), questions (questionJa, choicesJa 3–4 phần, answerIndex, explainPerChoice.ja/vi cùng độ dài choices).
+titleJa, snippetJa, paragraphsJa (3–5 đoạn), vocabulary (8–12 từ),
+questions (3–4 câu, mỗi câu 4 choicesJa, answerIndex, explainPerChoice ja/vi).
 
-Nội dung mạch lạc, từ vựng khó có gloss tiếng Việt.
+Chủ đề đời sống, tin tức nhẹ, hoặc văn hóa Nhật. Văn bản tiếng Nhật không romaji. Chỉ JSON.

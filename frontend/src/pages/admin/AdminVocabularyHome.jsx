@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
   JLPT_LEVEL_OPTIONS,
@@ -77,6 +77,7 @@ const PAGE_SIZE_OPTIONS = [10, 20, 50];
 
 /** Trang hub Từ vựng trong Studio — danh sách deck từ API backend. */
 export default function AdminVocabularyHome() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [loading, setLoading] = useState(true);
@@ -169,6 +170,21 @@ export default function AdminVocabularyHome() {
             <li
               key={d._id}
               className={`admin-vocab-deck-card${d.isActive === false ? " admin-vocab-deck-card--inactive" : ""}`}
+              role="button"
+              tabIndex={0}
+              onClick={() =>
+                navigate(
+                  `/admin/vocabulary/decks/${encodeURIComponent(d._id)}`,
+                )
+              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(
+                    `/admin/vocabulary/decks/${encodeURIComponent(d._id)}`,
+                  );
+                }
+              }}
             >
               <div className="admin-vocab-deck-card-visual">
                 <DeckCover deck={d} />
@@ -192,12 +208,14 @@ export default function AdminVocabularyHome() {
                   <Link
                     className="admin-vocab-deck-link"
                     to={`/admin/vocabulary/decks/${encodeURIComponent(d._id)}?mode=view`}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Xem
                   </Link>
                   <Link
                     className="admin-vocab-deck-link admin-vocab-deck-link--primary"
                     to={`/admin/vocabulary/decks/${encodeURIComponent(d._id)}`}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Sửa
                   </Link>

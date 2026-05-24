@@ -1,4 +1,12 @@
-const promptTypeEnum = ['vocabulary', 'kanji', 'grammar', 'reading', 'listening', 'other'];
+const promptTypeEnum = [
+	'vocabulary',
+	'kanji',
+	'grammar',
+	'reading',
+	'listening',
+	'kaiwa',
+	'other',
+];
 const jlptEnum = ['N5', 'N4', 'N3', 'N2', 'N1'];
 
 const promptBodySchema = {

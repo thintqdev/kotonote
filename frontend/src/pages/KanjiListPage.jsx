@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
@@ -28,15 +28,18 @@ import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
 import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
+import "./ReadingListPage.css";
 
 export default function KanjiListPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { isLocked } = useJlptAccess();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedJlpt = (searchParams.get("jlpt") || "").trim();
+
   const [marks] = useState(() => ({}));
   const [jlptLevels, setJlptLevels] = useState([]);
-  const [selectedJlpt, setSelectedJlpt] = useState("");
   const [packItems, setPackItems] = useState([]);
   const [sortedDecks, setSortedDecks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -112,6 +115,13 @@ export default function KanjiListPage() {
   const totalKanji = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
 
   const displayJlpt = selectedJlpt || t("kanjiPage.jlptAll");
+
+  const setJlpt = (next) => {
+    const p = new URLSearchParams(searchParams);
+    if (next) p.set("jlpt", next);
+    else p.delete("jlpt");
+    setSearchParams(p, { replace: true });
+  };
 
   const packProgress = useMemo(
     () =>
@@ -207,28 +217,35 @@ export default function KanjiListPage() {
               </p>
             </div>
           </div>
-
-          <div className="vocab-lesson-goal-box">
-            <label htmlFor="kanji-jlpt-select" className="vocab-lesson-goal-label">
-              {t("kanjiPage.jlptFilter")}
-            </label>
-            <select
-              id="kanji-jlpt-select"
-              className="vocab-jlpt-select"
-              value={selectedJlpt}
-              onChange={(e) => setSelectedJlpt(e.target.value)}
-            >
-              <option value="">{t("kanjiPage.jlptAll")}</option>
-              {jlptLevels.map((lv) => (
-                <option key={lv} value={lv} disabled={isLocked(lv)}>
-                  {isLocked(lv)
-                    ? t("jlptAccess.tabLocked", { level: lv })
-                    : lv}
-                </option>
-              ))}
-            </select>
-          </div>
         </header>
+
+        <div
+          className="vocab-tabs reading-jlpt-tabs"
+          role="tablist"
+          aria-label={t("readingPage.filterAria")}
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={!selectedJlpt}
+            className={`vocab-tab${!selectedJlpt ? " vocab-tab--active" : ""}`}
+            onClick={() => setJlpt("")}
+          >
+            {t("readingPage.filterAll")}
+          </button>
+          {jlptLevels.map((lv) => (
+            <button
+              key={`jlpt-tab-${lv}`}
+              type="button"
+              role="tab"
+              aria-selected={selectedJlpt === lv}
+              className={`vocab-tab${selectedJlpt === lv ? " vocab-tab--active" : ""}${isLocked(lv) ? " vocab-tab--jlpt-locked" : ""}`}
+              onClick={() => setJlpt(lv)}
+            >
+              {isLocked(lv) ? t("jlptAccess.tabLocked", { level: lv }) : lv}
+            </button>
+          ))}
+        </div>
 
         {lessons.length === 0 ? (
           <p className="vocab-empty" role="status">

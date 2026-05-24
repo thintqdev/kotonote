@@ -28,8 +28,13 @@ import {
 } from "../../services/adminVocabularyService.js";
 import DeckAIGenerateModal from "../../components/admin/DeckAIGenerateModal.jsx";
 import { VOCABULARY_AI_GENERATE } from "../../constants/deckAiGenerateConfig.js";
+import {
+  applyVocabularyDeckMeta,
+  mergeVocabularyAIIntoRows,
+} from "../../utils/deckAiMerge.js";
 import GrammarLocFields from "../../components/admin/GrammarLocFields.jsx";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
+import "./AdminGrammarPage.css";
 import "./VocabularyDeckEditorPage.css";
 
 /** Ảnh mẫu — URL công khai, gửi thẳng vào field `thumbnail` backend */
@@ -555,6 +560,45 @@ export default function VocabularyDeckEditorPage() {
   };
 
   const titleCount = title.length;
+  const formLocked = isView || saving;
+
+  const handleDeckAIApply = ({ items, deck }) => {
+    const meta = applyVocabularyDeckMeta(
+      { title, titleJa, description, descriptionJa },
+      deck,
+    );
+    setTitle(meta.title);
+    setTitleJa(meta.titleJa);
+    setDescription(meta.description);
+    setDescriptionJa(meta.descriptionJa);
+    setRows((prev) => mergeVocabularyAIIntoRows(prev, items, MAX_WORDS_PER_DECK));
+  };
+
+  const openGenerateModal = () => {
+    if (formLocked) return;
+    if (slotsLeft <= 0) {
+      toast.error("Deck đã đủ 25 từ");
+      return;
+    }
+    setGenerateOpen(true);
+  };
+
+  const openImportModal = () => {
+    if (formLocked) {
+      toast.message("Chế độ xem", {
+        description: "Bấm «Chỉnh sửa» để nhập JSON.",
+      });
+      return;
+    }
+    if (isCreate) {
+      toast.message("Lưu deck trước", {
+        description:
+          "Bấm «Tạo deck» ở cuối trang, sau đó quay lại để nhập JSON.",
+      });
+      return;
+    }
+    setImportModalOpen(true);
+  };
 
   if (!isCreate && loading) {
     return (
@@ -619,10 +663,6 @@ export default function VocabularyDeckEditorPage() {
         <div className="vdeck-form-body">
           <div className="vdeck-columns">
             <div className="vdeck-col vdeck-col--meta">
-              <fieldset
-                className="vdeck-fieldset-plain"
-                disabled={isView || saving}
-              >
               <section
                 className="vdeck-card"
                 aria-labelledby={`${baseId}-basic`}
@@ -642,6 +682,7 @@ export default function VocabularyDeckEditorPage() {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       placeholder="VD: Từ vựng N5 — Bài 1"
+                      disabled={formLocked}
                     />
                     <span className="vdeck-counter">{titleCount}/200</span>
                   </div>
@@ -659,12 +700,14 @@ export default function VocabularyDeckEditorPage() {
                       value={titleJa}
                       onChange={(e) => setTitleJa(e.target.value)}
                       placeholder="日本語タイトル"
+                      disabled={formLocked}
                     />
                   </div>
                   <div className="vdeck-field vdeck-field--full vdeck-field--loc">
                     <GrammarLocFields
                       label="Mô tả"
                       rows={3}
+                      disabled={formLocked}
                       value={{ ja: descriptionJa, vi: description }}
                       onChange={(loc) => {
                         setDescriptionJa(loc.ja ?? "");
@@ -684,6 +727,7 @@ export default function VocabularyDeckEditorPage() {
                       className="vdeck-select"
                       value={level}
                       onChange={(e) => setLevel(e.target.value)}
+                      disabled={formLocked}
                     >
                       {JLPT_LEVEL_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -701,6 +745,7 @@ export default function VocabularyDeckEditorPage() {
                       className="vdeck-select"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
+                      disabled={formLocked}
                     >
                       {VOCAB_CATEGORY_OPTIONS.map((o) => (
                         <option key={o.value} value={o.value}>
@@ -722,6 +767,7 @@ export default function VocabularyDeckEditorPage() {
                       onChange={(e) =>
                         setDisplayOrder(Number(e.target.value) || 0)
                       }
+                      disabled={formLocked}
                     />
                   </div>
                   <div className="vdeck-field vdeck-field--full">
@@ -745,10 +791,12 @@ export default function VocabularyDeckEditorPage() {
                       accept="image/*"
                       onChange={onThumbnailFileChange}
                       aria-labelledby={`${baseId}-thumb-label`}
+                      disabled={formLocked}
                     />
                     <button
                       type="button"
                       className={`vdeck-cover-upload vdeck-cover-upload--btn${thumbDragOver ? " vdeck-cover-upload--drag" : ""}`}
+                      disabled={formLocked}
                       onClick={() => thumbFileInputRef.current?.click()}
                       onDragOver={(e) => {
                         e.preventDefault();
@@ -772,6 +820,7 @@ export default function VocabularyDeckEditorPage() {
                           role="option"
                           aria-selected={thumbnail === p.src}
                           className={`vdeck-cover-item${thumbnail === p.src ? " vdeck-cover-item--selected" : ""}`}
+                          disabled={formLocked}
                           onClick={() => pickPresetThumbnail(p.src)}
                         >
                           <img
@@ -795,6 +844,7 @@ export default function VocabularyDeckEditorPage() {
                       value={thumbnail}
                       onChange={(e) => setThumbnail(e.target.value)}
                       placeholder="https://… hoặc để trống"
+                      disabled={formLocked}
                     />
                   </div>
                   <div className="vdeck-field vdeck-field--full">
@@ -812,6 +862,7 @@ export default function VocabularyDeckEditorPage() {
                         aria-checked={isActive}
                         aria-labelledby={`${baseId}-active-label`}
                         className={`vdeck-switch${isActive ? " vdeck-switch--on" : ""}`}
+                        disabled={formLocked}
                         onClick={() => setIsActive((v) => !v)}
                       >
                         <span className="vdeck-switch-thumb" aria-hidden />
@@ -823,7 +874,6 @@ export default function VocabularyDeckEditorPage() {
                   </div>
                 </div>
               </section>
-              </fieldset>
             </div>
 
             <div className="vdeck-col vdeck-col--words">
@@ -837,31 +887,17 @@ export default function VocabularyDeckEditorPage() {
                 <div className="vdeck-table-tools">
                   <button
                     type="button"
-                    className="vdeck-btn vdeck-btn--ghost"
-                    onClick={() => setGenerateOpen(true)}
-                    disabled={isView || saving || isCreate || slotsLeft <= 0}
-                    title={
-                      isCreate
-                        ? "Lưu deck trước để generate AI."
-                        : slotsLeft <= 0
-                          ? "Deck đã đủ 25 từ."
-                          : "Generate từ vựng bằng Gemini"
-                    }
+                    className={`vdeck-btn vdeck-btn--ghost${slotsLeft <= 0 ? " vdeck-btn--hint" : ""}`}
+                    onClick={openGenerateModal}
+                    title="Generate từ vựng và tên deck bằng AI"
                   >
                     Generate AI
                   </button>
                   <button
                     type="button"
-                    className="vdeck-btn vdeck-btn--ghost"
-                    onClick={() => setImportModalOpen(true)}
-                    disabled={isView || saving}
-                    title={
-                      isView
-                        ? "Chế độ xem — chuyển sang chỉnh sửa để nhập JSON."
-                        : isCreate
-                          ? "Lưu deck trước, rồi quay lại để nhập JSON."
-                          : "Nhập nhiều từ từ file JSON"
-                    }
+                    className={`vdeck-btn vdeck-btn--ghost${isCreate ? " vdeck-btn--hint" : ""}`}
+                    onClick={openImportModal}
+                    title="Nhập nhiều từ từ file JSON"
                   >
                     Nhập JSON
                   </button>
@@ -869,15 +905,11 @@ export default function VocabularyDeckEditorPage() {
                     type="button"
                     className="vdeck-btn vdeck-btn--primary"
                     onClick={addRow}
-                    disabled={isView || saving}
+                    disabled={formLocked}
                   >
                     + Thêm dòng
                   </button>
                 </div>
-                <fieldset
-                  className="vdeck-fieldset-plain"
-                  disabled={isView || saving}
-                >
                 <div className="vdeck-table-wrap vdeck-table-wrap--wide">
                   <table className="vdeck-table vdeck-table--dense">
                     <thead>
@@ -902,6 +934,7 @@ export default function VocabularyDeckEditorPage() {
                               }
                               placeholder="語"
                               lang="ja"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -912,6 +945,7 @@ export default function VocabularyDeckEditorPage() {
                               }
                               placeholder="よみ"
                               lang="ja"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -921,6 +955,7 @@ export default function VocabularyDeckEditorPage() {
                                 updateRow(r.clientId, "meaning", e.target.value)
                               }
                               placeholder="Tiếng Việt"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -935,6 +970,7 @@ export default function VocabularyDeckEditorPage() {
                               }
                               placeholder="日本語"
                               lang="ja"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -945,6 +981,7 @@ export default function VocabularyDeckEditorPage() {
                               }
                               placeholder="例文"
                               lang="ja"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -958,6 +995,7 @@ export default function VocabularyDeckEditorPage() {
                                 )
                               }
                               placeholder="Dịch ví dụ"
+                              disabled={formLocked}
                             />
                           </td>
                           <td>
@@ -965,6 +1003,7 @@ export default function VocabularyDeckEditorPage() {
                               type="button"
                               className="vdeck-row-icon vdeck-row-icon--danger"
                               title="Xóa dòng"
+                              disabled={formLocked}
                               onClick={() => removeRow(r.clientId)}
                             >
                               <IconTrash />
@@ -978,7 +1017,6 @@ export default function VocabularyDeckEditorPage() {
                 <p className="vdeck-table-foot">
                   {rows.length} dòng · tối đa 25 từ/deck
                 </p>
-                </fieldset>
               </section>
             </div>
           </div>
@@ -1086,7 +1124,8 @@ export default function VocabularyDeckEditorPage() {
         deckId={isCreate ? undefined : deckId}
         slotsLeft={slotsLeft}
         levelKey={level}
-        onApplied={loadDeck}
+        deckHint={title}
+        onApply={handleDeckAIApply}
       />
     </div>
   );

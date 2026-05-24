@@ -1,0 +1,10 @@
+Tạo bối cảnh hội thoại (Kaiwa) JLPT N4 — JSON object, không viết hội thoại chi tiết.
+JLPT: {{jlpt}}
+Chủ đề: {{category}}
+Ghi chú: {{customPrompt}}
+
+Fields: titleVi, titleJa, settingVi, settingJa, situationVi, situationJa,
+objectivesVi, objectivesJa, roles[2-3], keyPhrases[5-8] {phraseJa, reading (hiragana), meaningVi},
+culturalNotesVi, culturalNotesJa. Không romaji.
+
+Tình huống thực tế N4. Chỉ JSON.

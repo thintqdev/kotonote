@@ -8,6 +8,12 @@
 #
 # MongoDB:
 #   URI   → mongodb://localhost:27017/kotonote-nihongo
+#
+# MinIO (S3-compatible object storage — upload ảnh):
+#   API       → http://localhost:9000
+#   Console   → http://localhost:9001  (minioadmin / minioadmin)
+#   Bucket    → kotonote-uploads (public read)
+#   Public URL → http://localhost:9000/kotonote-uploads
 
 services:
   mailpit:
@@ -35,8 +41,52 @@ services:
     networks:
       - kotonote-dev
 
+  minio:
+    image: minio/minio:latest
+    container_name: kotonote-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio_data:/data
+    networks:
+      - kotonote-dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: kotonote-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    networks:
+      - kotonote-dev
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        mc alias set local http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD} &&
+        mc mb local/$${MINIO_BUCKET} --ignore-existing &&
+        mc anonymous set download local/$${MINIO_BUCKET} &&
+        echo "MinIO bucket $${MINIO_BUCKET} ready (public read)"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BUCKET: ${MINIO_BUCKET:-kotonote-uploads}
+
 volumes:
   mongodb_data:
+  minio_data:
 
 networks:
   kotonote-dev:

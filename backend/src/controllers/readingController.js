@@ -114,8 +114,7 @@ export const uploadReadingCoverDraft = asyncHandler(async (req, res) => {
 			{ field: 'cover', message: 'Image file is required' },
 		]);
 	}
-	const imageUrl = `/uploads/reading/${req.file.filename}`;
-	return apiSuccess(res, { imageUrl }, READING.COVER_UPLOADED, 200);
+	return apiSuccess(res, { imageUrl: req.file.publicPath }, READING.COVER_UPLOADED, 200);
 });
 
 /** Upload và gán ảnh bìa cho bài đã tồn tại */
@@ -125,7 +124,7 @@ export const uploadArticleCover = asyncHandler(async (req, res) => {
 			{ field: 'cover', message: 'Image file is required' },
 		]);
 	}
-	const publicPath = `/uploads/reading/${req.file.filename}`;
+	const publicPath = req.file.publicPath;
 	try {
 		const article = await readingService.setArticleCoverFromUpload(
 			req.params.id,

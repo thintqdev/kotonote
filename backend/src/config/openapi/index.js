@@ -4,13 +4,26 @@ import { userPaths } from './paths/users.js';
 import { surveyPaths } from './paths/surveys.js';
 import { quotePaths } from './paths/quotes.js';
 import { vocabularyPaths } from './paths/vocabulary.js';
+import { vocabularyProgressPaths } from './paths/vocabularyProgress.js';
+import { adminVocabularyImportPaths } from './paths/adminVocabularyImport.js';
+import { adminVocabularyGeneratePaths } from './paths/adminVocabularyGenerate.js';
 import { kanjiPaths } from './paths/kanji.js';
+import { kanjiProgressPaths } from './paths/kanjiProgress.js';
 import { aiPaths } from './paths/ai.js';
 import { streakPaths } from './paths/streaks.js';
 import { grammarPaths } from './paths/grammar.js';
 import { adminGrammarPaths } from './paths/adminGrammar.js';
 import { readingPaths } from './paths/reading.js';
 import { adminReadingPaths } from './paths/adminReading.js';
+import { listeningPaths } from './paths/listening.js';
+import { adminListeningPaths } from './paths/adminListening.js';
+import { adminListeningUploadPaths } from './paths/adminListeningUpload.js';
+import { membershipPaths } from './paths/membership.js';
+import { notebookPaths } from './paths/notebook.js';
+import { journalPaths } from './paths/journal.js';
+import { notificationPaths } from './paths/notifications.js';
+import { adminNotificationPaths } from './paths/adminNotifications.js';
+import { adminBadgePaths } from './paths/adminBadges.js';
 import { adminPromptPaths } from './paths/adminPrompts.js';
 import { systemPaths } from './paths/system.js';
 
@@ -69,13 +82,26 @@ export const openApiSpec = {
 		...surveyPaths,
 		...quotePaths,
 		...vocabularyPaths,
+		...vocabularyProgressPaths,
+		...adminVocabularyImportPaths,
+		...adminVocabularyGeneratePaths,
 		...kanjiPaths,
+		...kanjiProgressPaths,
 		...aiPaths,
 		...streakPaths,
 		...grammarPaths,
 		...adminGrammarPaths,
 		...readingPaths,
 		...adminReadingPaths,
+		...listeningPaths,
+		...adminListeningPaths,
+		...adminListeningUploadPaths,
+		...membershipPaths,
+		...notebookPaths,
+		...journalPaths,
+		...notificationPaths,
+		...adminNotificationPaths,
+		...adminBadgePaths,
 		...adminPromptPaths,
 		...systemPaths,
 	},

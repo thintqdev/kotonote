@@ -1,11 +1,10 @@
-Soạn bài ngữ pháp JLPT {{jlpt}} (trung cấp).
-
+Tạo một bài ngữ pháp JLPT {{jlpt}} (trung cấp) — JSON object duy nhất.
 Pattern gợi ý: {{patternHint}}
+Admin: {{customPrompt}}
 
-Yêu cầu admin: {{customPrompt}}
+Gồm: pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
+examples[], ng, ngNote, compare (có thể so sánh 2 mẫu gần nghĩa), memo, practice.items[].
 
-Trả về JSON object duy nhất (không bọc markdown) với các field:
-pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
-examples (mảng {ja,vi}), ng ({ja:[], vi:[]}), ngNote, compare (caption, colLabels, rows), memo, practice ({items:[{ja,vi}]}).
+Mỗi trường song ngữ { ja, vi }. Tiếng Nhật: kanji + kana, không romaji. Ví dụ thực tế, có 1–2 lỗi thường gặp trong ng.
 
-So sánh (compare) nên có ít nhất 1 hàng. Ví dụ thực tế, ngữ pháp sai (ng) có 2–3 câu.
+Chỉ JSON object.

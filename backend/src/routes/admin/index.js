@@ -14,7 +14,9 @@ import adminGrammarRoutes from './adminGrammarRoutes.js';
 import adminReadingRoutes from './adminReadingRoutes.js';
 
 import adminListeningRoutes from './adminListeningRoutes.js';
+import adminKaiwaRoutes from './adminKaiwaRoutes.js';
 import adminPromptRoutes from './adminPromptRoutes.js';
+import adminMembershipRoutes from './adminMembershipRoutes.js';
 
 const router = express.Router();
 
@@ -35,6 +37,8 @@ router.use('/notifications', adminNotificationRoutes);
 router.use('/grammar', adminGrammarRoutes);
 router.use('/reading', adminReadingRoutes);
 router.use('/listening', adminListeningRoutes);
+router.use('/kaiwa', adminKaiwaRoutes);
 router.use('/prompts', adminPromptRoutes);
+router.use('/memberships', adminMembershipRoutes);
 
 export default router;

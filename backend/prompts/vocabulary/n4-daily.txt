@@ -1,0 +1,8 @@
+Tạo {{count}} từ vựng JLPT N4.
+Ghi chú: {{customPrompt}}
+
+Mỗi mục JSON: word, reading (hiragana), meaning, meaningJa, example, exampleMeaning, partOfSpeech. Không romaji.
+Không trùng: {{existingWords}}
+Nội dung: du lịch, mua sắm, cảm xúc, hoạt động hàng ngày — độ khó giữa N5 và N3.
+
+Chỉ trả về mảng JSON.

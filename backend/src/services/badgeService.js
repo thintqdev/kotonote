@@ -1,23 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
 import * as badgeRepository from '../repositories/badgeRepository.js';
 import { BADGE } from '../constants/messages.js';
-
-const UPLOAD_BADGE_PREFIX = '/uploads/badges/';
-
-export async function unlinkLocalBadgeIcon(iconString) {
-	if (!iconString || typeof iconString !== 'string') return;
-	const t = iconString.trim();
-	if (!t.startsWith(UPLOAD_BADGE_PREFIX)) return;
-	const name = t.slice(UPLOAD_BADGE_PREFIX.length);
-	if (!name || name.includes('/') || name.includes('..')) return;
-	const fullPath = path.join(process.cwd(), 'uploads', 'badges', name);
-	try {
-		await fs.unlink(fullPath);
-	} catch {
-		/* đã xóa hoặc không tồn tại */
-	}
-}
+import { deleteByUrl } from './objectStorageService.js';
 
 function stripIconFromBody(data) {
 	if (!data || typeof data !== 'object') return data;
@@ -89,7 +72,7 @@ export const deleteBadge = async (badgeId) => {
 	if (!existing) {
 		throw { messageCode: BADGE.NOT_FOUND, statusCode: 404 };
 	}
-	await unlinkLocalBadgeIcon(existing.iconImage);
+	await deleteByUrl(existing.iconImage);
 	const badge = await badgeRepository.deleteBadge(badgeId);
 	return badge;
 };
@@ -101,7 +84,7 @@ export const deleteBadge = async (badgeId) => {
  */
 export const setBadgeIconFromUploadedFile = async (badgeId, publicPath) => {
 	const badge = await getBadgeById(badgeId);
-	await unlinkLocalBadgeIcon(badge.iconImage);
+	await deleteByUrl(badge.iconImage);
 	badge.iconImage = publicPath;
 	await badge.save();
 	return badge;
@@ -110,7 +93,7 @@ export const setBadgeIconFromUploadedFile = async (badgeId, publicPath) => {
 /** Gỡ icon (chỉ file local trong uploads/badges). */
 export const clearBadgeIcon = async (badgeId) => {
 	const badge = await getBadgeById(badgeId);
-	await unlinkLocalBadgeIcon(badge.iconImage);
+	await deleteByUrl(badge.iconImage);
 	badge.iconImage = '';
 	await badge.save();
 	return badge;

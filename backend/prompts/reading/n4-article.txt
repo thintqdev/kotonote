@@ -1,0 +1,5 @@
+Tạo bài đọc JLPT N4 — JSON object.
+Admin: {{customPrompt}}
+
+titleJa, snippetJa, paragraphsJa, vocabulary, questions (2–3 câu).
+Độ dài trung bình. Chỉ JSON.

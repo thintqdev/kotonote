@@ -68,6 +68,8 @@ export function parseJsonFromAIText(text) {
 				'grammar',
 				'article',
 				'reading',
+				'analysis',
+				'journal',
 				'data',
 				'result',
 			]) {
@@ -104,4 +106,81 @@ export function parseJsonFromAIText(text) {
 	}
 
 	throw new Error('Could not parse JSON from AI response');
+}
+
+/**
+ * Đóng ngoặc JSON bị cắt cụt (Gemini max tokens).
+ * @param {string} raw
+ */
+function closeTruncatedJson(raw) {
+	const stack = [];
+	let inString = false;
+	let escape = false;
+
+	for (const ch of raw) {
+		if (escape) {
+			escape = false;
+			continue;
+		}
+		if (ch === '\\' && inString) {
+			escape = true;
+			continue;
+		}
+		if (ch === '"') {
+			inString = !inString;
+			continue;
+		}
+		if (inString) continue;
+		if (ch === '{') stack.push('}');
+		else if (ch === '[') stack.push(']');
+		else if (ch === '}' || ch === ']') stack.pop();
+	}
+
+	let suffix = '';
+	if (inString) suffix += '"';
+	suffix += stack.reverse().join('');
+	return raw + suffix;
+}
+
+/**
+ * Parse JSON object khi Gemini trả về JSON hỏng hoặc bị cắt.
+ * @param {string} text
+ * @returns {unknown}
+ */
+export function parseJsonObjectLenient(text) {
+	try {
+		return parseJsonFromAIText(text);
+	} catch {
+		// continue
+	}
+
+	const trimmed = String(text ?? '').trim();
+	const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
+	const body = (fenced?.[1] ?? trimmed).trim();
+	const start = body.indexOf('{');
+	if (start < 0) {
+		throw new Error('No JSON object in AI response');
+	}
+
+	let slice = body.slice(start);
+
+	for (let attempt = 0; attempt < 3; attempt += 1) {
+		try {
+			return JSON.parse(slice);
+		} catch {
+			// trim từ cuối đến khi parse được
+			let end = slice.lastIndexOf('}');
+			while (end > start + 20) {
+				try {
+					const parsed = JSON.parse(slice.slice(0, end + 1));
+					return parsed;
+				} catch {
+					end = slice.lastIndexOf('}', end - 1);
+				}
+			}
+			slice = closeTruncatedJson(slice);
+		}
+	}
+
+	throw new Error('Could not lenient-parse JSON object from AI response');
 }

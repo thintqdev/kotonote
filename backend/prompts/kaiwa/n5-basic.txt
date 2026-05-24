@@ -1,0 +1,20 @@
+Bạn là chuyên gia thiết kế bài luyện hội thoại tiếng Nhật (Kaiwa) cho app học JLPT.
+
+Tạo MỘT bối cảnh hội thoại (context) — chưa viết hội thoại chi tiết, chỉ mô tả tình huống để sau này dựng kịch bản.
+
+JLPT: {{jlpt}}
+Chủ đề: {{category}}
+Ghi chú admin: {{customPrompt}}
+
+Trả về JSON object (không markdown) với các field:
+- titleVi (string, bắt buộc): tên tình huống tiếng Việt
+- titleJa (string): tên tiếng Nhật
+- settingVi, settingJa (string): địa điểm / không gian
+- situationVi (string, bắt buộc): mô tả chi tiết tình huống (2–4 câu, tiếng Việt)
+- situationJa (string): cùng nội dung bằng tiếng Nhật đơn giản
+- objectivesVi, objectivesJa (string): mục tiêu luyện tập (gạch ý hoặc đoạn ngắn)
+- roles (array, 2–3 phần tử): { nameVi, nameJa, descriptionVi, descriptionJa }
+- keyPhrases (array, 5–8 phần tử): { phraseJa, reading, meaningVi } — reading = hiragana/katakana, không romaji
+- culturalNotesVi, culturalNotesJa (string): lưu ý văn hóa ngắn (có thể rỗng)
+
+Phù hợp trình độ {{jlpt}}, tự nhiên, thực tế.

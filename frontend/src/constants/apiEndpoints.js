@@ -61,6 +61,14 @@ export const NOTEBOOK = {
 	IMAGES: '/notebook/images',
 };
 
+/** Nhật ký tiếng Nhật — `/api/journal/*` */
+export const JOURNAL = {
+	QUOTA: '/journal/quota',
+	ENTRIES: '/journal/entries',
+	ANALYZE: '/journal/entries/analyze',
+	entry: (id) => `/journal/entries/${encodeURIComponent(id)}`,
+};
+
 /** Streak — `/api/streaks/*` (user: Bearer JWT) */
 export const STREAK = {
 	ME: '/streaks/me',
@@ -131,6 +139,33 @@ export const ADMIN_GRAMMAR = {
 	grammar: (id) => `/admin/grammar/${encodeURIComponent(id)}`,
 };
 
+/** Kaiwa — bối cảnh hội thoại (user) — `/api/kaiwa` */
+export const KAIWA = {
+	BASE: '/kaiwa',
+	context: (id) => `/kaiwa/${encodeURIComponent(id)}`,
+	practiceTurn: (id) =>
+		`/kaiwa/${encodeURIComponent(id)}/practice/turn`,
+	SESSIONS: '/kaiwa/sessions',
+	session: (sessionId) =>
+		`/kaiwa/sessions/${encodeURIComponent(sessionId)}`,
+	contextSessions: (contextId) =>
+		`/kaiwa/${encodeURIComponent(contextId)}/sessions`,
+};
+
+/** Kaiwa — bối cảnh hội thoại — `/api/admin/kaiwa` */
+export const ADMIN_KAIWA = {
+	BASE: '/admin/kaiwa',
+	context: (id) => `/admin/kaiwa/${encodeURIComponent(id)}`,
+};
+
+/** Luyện nghe (Choukai) — `/api/admin/listening` */
+export const ADMIN_LISTENING = {
+	BASE: '/admin/listening',
+	UPLOAD_AUDIO: '/admin/listening/upload/audio',
+	UPLOAD_IMAGE: '/admin/listening/upload/image',
+	item: (id) => `/admin/listening/${encodeURIComponent(id)}`,
+};
+
 /** Đọc hiểu — `/api/admin/reading` */
 export const ADMIN_READING = {
 	BASE: '/admin/reading',
@@ -157,6 +192,7 @@ export const ADMIN_AI = {
 	generateKanji: '/admin/ai/generate/kanji',
 	generateGrammar: '/admin/ai/generate/grammar',
 	generateReading: '/admin/ai/generate/reading',
+	generateKaiwa: '/admin/ai/generate/kaiwa',
 	test: '/admin/ai/test',
 };
 
@@ -167,6 +203,14 @@ export const ADMIN_USERS = {
 	user: (id) => `/admin/users/${id}`,
 	status: (id) => `/admin/users/${id}/status`,
 	bulkStatus: '/admin/users/bulk/status',
+};
+
+/** Gói membership / subscription — `/api/admin/memberships` */
+export const ADMIN_MEMBERSHIPS = {
+	statistics: '/admin/memberships/statistics',
+	users: '/admin/memberships/users',
+	checkouts: '/admin/memberships/checkouts',
+	user: (id) => `/admin/memberships/users/${encodeURIComponent(id)}`,
 };
 
 /** Khảo sát — `/api/admin/surveys` */

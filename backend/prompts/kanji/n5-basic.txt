@@ -1,0 +1,19 @@
+Bạn là chuyên gia Kanji JLPT N5.
+
+Tạo đúng {{count}} chữ Kanji N5.
+Ghi chú: {{customPrompt}}
+
+Mỗi phần tử JSON:
+- char: một chữ kanji
+- onYomi: âm On — katakana (có dấu ・ nếu nhiều âm), không romaji
+- kunYomi: âm Kun — hiragana, không romaji
+- hanViet: âm Hán-Việt
+- meaningVi: nghĩa tiếng Việt
+- vocabJa: 1 từ ghép ví dụ (kanji + kana)
+- exampleJa: câu ví dụ ngắn
+- exampleVi: dịch câu ví dụ
+
+Không trùng: {{existingChars}}
+Ưu tiên chữ SIÊU PHỔ BIẾN trong giáo trình N5.
+
+Chỉ mảng JSON.

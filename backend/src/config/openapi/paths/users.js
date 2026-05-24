@@ -263,6 +263,135 @@ export const userPaths = {
 			},
 		},
 	},
+	'/api/users/me/dashboard-home': {
+		get: {
+			tags: ['User'],
+			summary: 'Dashboard home data',
+			description: 'Subjects, streak, and today progress for home screen',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Dashboard home retrieved',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_209' },
+									data: {
+										type: 'object',
+										properties: {
+											home: { $ref: '#/components/schemas/DashboardHome' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+			},
+		},
+	},
+	'/api/users/me/avatar': {
+		post: {
+			tags: ['User'],
+			summary: 'Upload avatar',
+			description: 'Multipart form upload; field name `avatar`',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'multipart/form-data': {
+						schema: {
+							type: 'object',
+							required: ['avatar'],
+							properties: {
+								avatar: { type: 'string', format: 'binary' },
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Avatar updated',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_203' },
+									data: {
+										type: 'object',
+										properties: {
+											user: { $ref: '#/components/schemas/User' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+			},
+		},
+	},
+	'/api/users/me/badges/test-unlock': {
+		post: {
+			tags: ['User'],
+			summary: 'Test unlock badge (non-production)',
+			description: 'Development helper to unlock a badge by key',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							required: ['badgeKey'],
+							properties: {
+								badgeKey: { type: 'string', example: 'streak_7' },
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Badge unlocked for testing',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_210' },
+									data: {
+										type: 'object',
+										properties: {
+											user: { $ref: '#/components/schemas/User' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+				'403': {
+					description: 'Not allowed in production',
+					content: {
+						'application/json': {
+							schema: { $ref: '#/components/schemas/Error' },
+						},
+					},
+				},
+			},
+		},
+	},
 	'/api/users/me/learning-summary': {
 		get: {
 			tags: ['User'],

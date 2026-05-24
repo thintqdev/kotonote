@@ -6,8 +6,10 @@ export const DASHBOARD_NAV_ITEMS = [
   { id: 'kanji', to: '/kanji', iconSrc: '/assets/menu-icons/kanji.png' },
   { id: 'reading', to: '/reading', iconSrc: '/assets/menu-icons/reading.png' },
   { id: 'listening', to: '/listening', iconSrc: '/assets/menu-icons/listening.png' },
+  { id: 'kaiwa', to: '/kaiwa', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'practice', to: '/practice', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'notebook', to: '/notebook', iconSrc: '/assets/menu-icons/notebook.png' },
+  { id: 'journal', to: '/journal', iconSrc: '/assets/menu-icons/notebook.png' },
   { id: 'stats', to: '/stats', iconSrc: '/assets/menu-icons/statistics.png' },
   { id: 'settings', to: '/settings', iconSrc: '/assets/menu-icons/settings.png' },
 ];
@@ -25,6 +27,7 @@ export const SUBJECT_ROUTE_BY_ID = {
 	kanji: '/kanji',
 	reading: '/reading',
 	listening: '/listening',
+	kaiwa: '/kaiwa',
 	practice: '/practice',
 	alphabet: '/alphabet',
 };

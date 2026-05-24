@@ -58,6 +58,7 @@ export const generateVocabulary = asyncHandler(async (req, res) => {
 	
 	return apiSuccess(res, {
 		vocabulary: result.vocabulary,
+		deck: result.deck ?? null,
 		count: result.vocabulary.length,
 		source: result.source,
 		promptUsed: result.promptUsed,
@@ -116,6 +117,7 @@ export const generateKanji = asyncHandler(async (req, res) => {
 	
 	return apiSuccess(res, {
 		kanji: result.kanji,
+		deck: result.deck ?? null,
 		count: result.kanji.length,
 		source: result.source,
 		promptUsed: result.promptUsed,
@@ -163,6 +165,42 @@ export const generateGrammar = asyncHandler(async (req, res) => {
  * @desc    Generate reading article with AI
  * @route   POST /api/admin/ai/generate/reading
  */
+/**
+ * @desc    Generate kaiwa conversation context with AI
+ * @route   POST /api/admin/ai/generate/kaiwa
+ */
+export const generateKaiwa = asyncHandler(async (req, res) => {
+	const {
+		templateName = 'n5-basic',
+		prompt = '',
+		jlpt = 'N5',
+		category = 'daily',
+	} = req.body;
+
+	if (!templateName || String(templateName).trim().length === 0) {
+		return apiSuccess(res, { context: null }, MESSAGES.MSG_003, 400);
+	}
+
+	const result = await aiService.generateKaiwaContextWithAI({
+		templateName: String(templateName).trim().toLowerCase(),
+		customPrompt: String(prompt ?? '').trim(),
+		jlpt: String(jlpt ?? 'N5').trim().toUpperCase(),
+		category: String(category ?? 'daily').trim(),
+	});
+
+	return apiSuccess(
+		res,
+		{
+			context: result.context,
+			source: result.source,
+			promptUsed: result.promptUsed,
+			templateName: result.templateName,
+		},
+		MESSAGES.MSG_001,
+		200,
+	);
+});
+
 export const generateReading = asyncHandler(async (req, res) => {
 	const {
 		templateName = 'n5-basic',

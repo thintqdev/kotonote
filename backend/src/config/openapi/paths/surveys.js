@@ -81,6 +81,32 @@ export const surveyPaths = {
 			},
 		},
 	},
+	'/api/surveys/me/status': {
+		get: {
+			tags: ['Survey'],
+			summary: 'Survey completion status',
+			description: 'Whether the authenticated user has submitted the onboarding survey',
+			security: [{ bearerAuth: [] }],
+			responses: {
+				'200': {
+					description: 'Status retrieved',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_303' },
+									data: { $ref: '#/components/schemas/SurveyCompletionStatus' },
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+			},
+		},
+	},
 	'/api/surveys/me': {
 		get: {
 			tags: ['Survey'],

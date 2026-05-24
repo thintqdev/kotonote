@@ -1,0 +1,8 @@
+Tạo {{count}} Kanji JLPT N3.
+Ghi chú admin: {{customPrompt}}
+
+JSON array: char, onYomi (katakana), kunYomi (hiragana), hanViet, meaningVi, vocabJa, exampleJa, exampleVi. Không romaji.
+Tránh trùng: {{existingChars}}
+Độ khó N3 — chữ thường gặp trong đời sống và đọc hiểu trung cấp.
+
+Chỉ mảng JSON.

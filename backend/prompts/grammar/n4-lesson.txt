@@ -1,0 +1,8 @@
+Tạo bài ngữ pháp JLPT N4 — một JSON object.
+Pattern: {{patternHint}}
+Ghi chú: {{customPrompt}}
+
+Đủ các field: pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
+examples, ng, ngNote, compare, memo, practice (mỗi field {ja, vi}).
+
+Độ khó N4. Chỉ JSON.

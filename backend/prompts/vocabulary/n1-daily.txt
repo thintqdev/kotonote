@@ -1,0 +1,7 @@
+Tạo {{count}} từ vựng JLPT N1 (cao cấp).
+Ghi chú: {{customPrompt}}
+
+Mỗi mục: word, reading (hiragana), meaning, meaningJa, example (văn viết/hội thoại trang trọng), exampleMeaning, partOfSpeech. Không romaji.
+Không trùng: {{existingWords}}
+
+Chỉ mảng JSON.

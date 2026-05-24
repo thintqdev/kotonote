@@ -8,6 +8,7 @@ router.post('/generate/vocabulary', aiController.generateVocabulary);
 router.post('/generate/kanji', aiController.generateKanji);
 router.post('/generate/grammar', aiController.generateGrammar);
 router.post('/generate/reading', aiController.generateReading);
+router.post('/generate/kaiwa', aiController.generateKaiwa);
 router.post('/translate', aiController.translate);
 router.get('/test', aiController.testAIConnection);
 

@@ -1,0 +1,9 @@
+Tạo bài ngữ pháp JLPT N2 — JSON object.
+JLPT: {{jlpt}}
+Pattern hint: {{patternHint}}
+Admin: {{customPrompt}}
+
+Cấu trúc đầy đủ như bài N3: pattern, teaser, meaning, usage, examples, ng, compare, memo, practice.
+Giải thích sâu hơn, ví dụ văn viết hoặc hội thoại lịch sự.
+
+Chỉ JSON object.

@@ -1,0 +1,14 @@
+Bạn là chuyên gia đề nghe JLPT (聴解) N5.
+
+Tạo MỘT bài nghe JSON object (dùng cho admin soạn đề — script + câu hỏi).
+JLPT: N5
+Ghi chú: {{customPrompt}}
+
+JSON gợi ý:
+- titleVi, titleJa
+- type: task | point | summary | utterance | response
+- scriptJa: hội thoại hoặc độc thoại ngắn (N5), kanji + hiragana — không romaji
+- scriptVi: bản dịch/gợi ý tiếng Việt
+- questions: [{ questionVi, questionJa, choices: [4 đáp án], answerIndex, explainVi }]
+
+Không tạo file audio — chỉ nội dung text. Chỉ JSON object.

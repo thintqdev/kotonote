@@ -7,15 +7,83 @@ import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
 import { LISTENING_ASSETS } from "../constants/listeningAssets.js";
+import { getListeningTypeLabel } from "../constants/listeningFieldMeta.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import { useJlptAccess } from "../hooks/useJlptAccess.js";
 import JlptLockedOverlay from "../components/study/JlptLockedOverlay.jsx";
 import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
-import "./ReadingListPage.css"; // Reuse reading list styles for consistency
+import "./ReadingListPage.css";
 
-const LISTENING_JLPT_LEVELS = ["N1", "N2", "N3", "N4", "N5"];
+function ListeningIconHeadphone() {
+  return (
+    <svg
+      className="reading-ico"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M4 14v-2a8 8 0 0116 0v2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 14a2 2 0 002 2v2a2 2 0 01-2 2H3v-6h1zm16 0a2 2 0 00-2 2v2a2 2 0 002 2h1v-6h-1z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ListeningIconClock() {
+  return (
+    <svg
+      className="reading-ico"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M12 8v5l3 2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/** Chuỗi id ổn định — bỏ qua `id: ""` từ API (?? không coi "" là thiếu). */
+function resolveListeningId(item) {
+  const row = /** @type {{ id?: unknown; _id?: unknown }} */ (item);
+  for (const candidate of [row.id, row._id]) {
+    if (candidate == null) continue;
+    const s = String(candidate).trim();
+    if (s && s !== "undefined" && s !== "null") return s;
+  }
+  return null;
+}
+
+/** @param {unknown} item @param {number} index */
+function listeningItemKey(item, index) {
+  const id = resolveListeningId(item);
+  return id ? `listening-${id}` : `listening-row-${index}`;
+}
+
+/** @param {number} sec */
+function splitDuration(sec) {
+  const n = Math.max(0, Number(sec) || 0);
+  return { min: Math.floor(n / 60), sec: n % 60 };
+}
 
 export default function ListeningPage() {
   const { t } = useTranslation();
@@ -26,7 +94,8 @@ export default function ListeningPage() {
   const jlpt = (searchParams.get("jlpt") || "").trim();
 
   const [list, setList] = useState([]);
-  const [jlptLevels, setJlptLevels] = useState(LISTENING_JLPT_LEVELS);
+  const [jlptLevels, setJlptLevels] = useState([]);
+  const [requestedJlptLocked, setRequestedJlptLocked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -37,13 +106,18 @@ export default function ListeningPage() {
       setLoading(true);
       setError("");
       try {
-        const { items, jlptLevels: levels } =
+        const { items, jlptLevels: levels, requestedJlptLocked: locked } =
           await listeningService.getAllPublished({
             jlpt: jlpt || undefined,
           });
         if (cancelled) return;
-        setList(items);
-        if (levels?.length) setJlptLevels(levels);
+        setList(Array.isArray(items) ? items : []);
+        setJlptLevels(
+          levels?.length
+            ? [...new Set(levels.map((lv) => String(lv).trim()).filter(Boolean))]
+            : [],
+        );
+        setRequestedJlptLocked(Boolean(locked));
       } catch (err) {
         if (!cancelled) {
           setError(getApiErrorMessage(err, t));
@@ -56,9 +130,7 @@ export default function ListeningPage() {
     return () => {
       cancelled = true;
     };
-  }, [t, jlpt]);
-
-  const filteredList = list;
+  }, [user, jlpt, t]);
 
   const setJlpt = (next) => {
     const p = new URLSearchParams(searchParams);
@@ -72,20 +144,35 @@ export default function ListeningPage() {
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
 
+  const emptyMessage = useMemo(() => {
+    if (requestedJlptLocked && jlpt) {
+      return t("listeningPage.jlptLockedEmpty", { level: jlpt });
+    }
+    return t("listeningPage.noResults");
+  }, [requestedJlptLocked, jlpt, t]);
+
+  if (loading) {
+    return (
+      <Layout
+        userName={headerName}
+        streakDays={mockStreak.days}
+        pageClassName="vocab-dash"
+      >
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
+
   return (
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >
-      {loading ? (
-        <p className="vocab-empty">{t("common.loading")}</p>
-      ) : (
-        <>
       <Breadcrumb
         items={[
           { label: t("breadcrumb.home"), to: "/", end: true },
-          { label: "Luyện nghe Choukai" },
+          { label: t("breadcrumb.listening") },
         ]}
       />
 
@@ -104,16 +191,16 @@ export default function ListeningPage() {
             />
             <div>
               <h1 id="listening-list-title" className="vocab-lesson-title">
-                Luyện Nghe Tiếng Nhật
+                {t("listeningPage.listTitle")}
               </h1>
               <p className="vocab-lesson-sub">
                 <span className="reading-sub-kicker" lang="ja">
-                  聴解
+                  {t("listeningPage.kickerJa")}
                 </span>
                 <span className="reading-sub-sep"> · </span>
-                <span>Choukai</span>
+                <span>{t("listeningPage.kicker")}</span>
                 <span className="reading-sub-sep"> — </span>
-                Cải thiện kỹ năng nghe mỗi ngày
+                {t("listeningPage.listSubtitle")}
               </p>
             </div>
           </div>
@@ -128,6 +215,7 @@ export default function ListeningPage() {
         <div
           className="vocab-tabs reading-jlpt-tabs"
           role="tablist"
+          aria-label={t("listeningPage.filterAria")}
         >
           <button
             type="button"
@@ -136,11 +224,11 @@ export default function ListeningPage() {
             className={`vocab-tab${!jlpt ? " vocab-tab--active" : ""}`}
             onClick={() => setJlpt("")}
           >
-            Tất cả
+            {t("listeningPage.filterAll")}
           </button>
           {jlptLevels.map((lv) => (
             <button
-              key={lv}
+              key={`jlpt-tab-${lv}`}
               type="button"
               role="tab"
               aria-selected={jlpt === lv}
@@ -152,98 +240,87 @@ export default function ListeningPage() {
           ))}
         </div>
 
-        {filteredList.length === 0 ? (
+        {list.length === 0 ? (
           <p className="vocab-empty" role="status">
-            Chưa có bài nghe nào ở cấp độ này.
+            {emptyMessage}
           </p>
         ) : (
           <ul className="vocab-lesson-list">
-            {filteredList.map((item) => {
+            {list.map((item, index) => {
+              const key = listeningItemKey(item, index);
+              const thumbSrc =
+                resolvePublicMediaUrl(item.image) ||
+                LISTENING_ASSETS.placeholderThumb;
               const locked = item.locked || isLocked(item.jlpt);
+              const { min, sec } = splitDuration(item.duration);
+              const jlptSlug = String(item.jlpt || "n3").toLowerCase();
+
               const rowInner = (
                 <>
-                    <div className="reading-thumb-wrap" style={{ background: '#f5f7f3', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {item.image ? (
-                        <img
-                          className="reading-thumb"
-                          src={item.image}
-                          alt=""
-                          width={200}
-                          height={140}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <img
-                          className="reading-thumb reading-thumb--placeholder"
-                          src={LISTENING_ASSETS.placeholderThumb}
-                          alt=""
-                          width={200}
-                          height={140}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      )}
+                  <div className="reading-thumb-wrap listening-thumb-wrap">
+                    <img
+                      className={`reading-thumb${!item.image ? " reading-thumb--placeholder" : ""}`}
+                      src={thumbSrc}
+                      alt=""
+                      width={200}
+                      height={140}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="vocab-lesson-main reading-row-main">
+                    <div className="reading-row-titleline">
+                      <span
+                        className={`reading-badge reading-badge--${jlptSlug}`}
+                        lang="ja"
+                      >
+                        {item.jlpt}
+                      </span>
+                      <h2 className="vocab-lesson-card-title reading-row-title">
+                        {item.titleVi}
+                      </h2>
                     </div>
-                    <div className="vocab-lesson-main reading-row-main">
-                      <div className="reading-row-titleline">
-                        <span
-                          className={`reading-badge reading-badge--${item.jlpt?.toLowerCase()}`}
-                          lang="ja"
-                        >
-                          {item.jlpt}
-                        </span>
-                        <h2
-                          className="vocab-lesson-card-title reading-row-title"
-                        >
-                          {item.titleVi}
-                        </h2>
-                      </div>
+                    {item.titleJa ? (
                       <p
                         className="vocab-lesson-card-sub reading-row-snippet"
                         lang="ja"
                       >
                         {item.titleJa}
                       </p>
-                      <div className="reading-row-meta">
-                        <span className="reading-meta-item">
-                          <img
-                            className="reading-ico"
-                            src={LISTENING_ASSETS.iconHeadphone}
-                            alt=""
-                            width={20}
-                            height={20}
-                            decoding="async"
-                          />
-                          {item.questions?.length || 0} câu hỏi
-                        </span>
-                        <span className="reading-meta-item">
-                          <img
-                            className="reading-ico"
-                            src={LISTENING_ASSETS.iconClock}
-                            alt=""
-                            width={20}
-                            height={20}
-                            decoding="async"
-                          />
-                          {Math.floor(item.duration / 60)} phút {item.duration % 60} giây
-                        </span>
-                      </div>
-                      <span className="reading-row-cta vocab-cta-btn reading-cta--not_started">
-                        Bắt đầu
-                      </span>
-                    </div>
-                    {!locked ? (
-                      <span className="vocab-lesson-chevron" aria-hidden>
-                        ›
-                      </span>
                     ) : null}
+                    <div className="reading-row-meta">
+                      <span className="reading-meta-item">
+                        <ListeningIconHeadphone />
+                        {t("listeningPage.metaQuestions", {
+                          n: item.questions?.length ?? 0,
+                        })}
+                      </span>
+                      <span className="reading-meta-item">
+                        <ListeningIconClock />
+                        {t("listeningPage.metaDuration", { min, sec })}
+                      </span>
+                      {item.type ? (
+                        <span className="reading-meta-item reading-meta-item--type">
+                          {getListeningTypeLabel(item.type)}
+                        </span>
+                      ) : null}
+                    </div>
+                    <span className="reading-row-cta vocab-cta-btn reading-cta--not_started">
+                      {t("listeningPage.ctaStart")}
+                    </span>
+                  </div>
+                  {!locked ? (
+                    <span className="vocab-lesson-chevron" aria-hidden>
+                      ›
+                    </span>
+                  ) : null}
                 </>
               );
+
               if (locked) {
                 return (
                   <li
-                    key={item._id}
+                    key={key}
                     className="reading-card-wrap--locked vocab-lesson-card"
                   >
                     <div className="reading-row-link reading-card--jlpt-locked">
@@ -253,9 +330,16 @@ export default function ListeningPage() {
                   </li>
                 );
               }
+
+              const itemId = resolveListeningId(item);
+              if (!itemId) return null;
+
               return (
-                <li key={item._id} className="vocab-lesson-card">
-                  <Link className="reading-row-link" to={`/listening/${item._id}`}>
+                <li key={key} className="vocab-lesson-card">
+                  <Link
+                    className="reading-row-link"
+                    to={`/listening/${itemId}`}
+                  >
                     {rowInner}
                   </Link>
                 </li>
@@ -264,8 +348,6 @@ export default function ListeningPage() {
           </ul>
         )}
       </article>
-        </>
-      )}
     </Layout>
   );
 }

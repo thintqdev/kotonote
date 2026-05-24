@@ -1,23 +1,19 @@
-Soạn MỘT bài đọc hiểu tiếng Nhật JLPT {{jlpt}} cho người học.
+Bạn là biên tập bài đọc hiểu JLPT N5 cho người Việt.
 
-Chủ đề / gợi ý: {{customPrompt}}
+Tạo MỘT bài đọc JSON object.
+JLPT: {{jlpt}}
+Ghi chú admin: {{customPrompt}}
 
-Trả về JSON object (không markdown):
-{
-  "titleJa": "",
-  "snippetJa": "",
-  "paragraphsJa": ["đoạn 1", "đoạn 2"],
-  "vocabulary": [
-    { "termJa": "", "gloss": { "vi": "", "ja": "" } }
-  ],
-  "questions": [
-    {
-      "questionJa": "",
-      "choicesJa": ["A", "B", "C"],
-      "answerIndex": 0,
-      "explainPerChoice": { "ja": ["", "", ""], "vi": ["", "", ""] }
-    }
-  ]
-}
+JSON gồm:
+- titleJa: tiêu đề bài đọc
+- snippetJa: 1–2 câu giới thiệu
+- paragraphsJa: mảng 2–4 đoạn văn ngắn (hiragana/kanji N5; không romaji, không chèn furigana dạng Latin)
+- vocabulary: [{ termJa, gloss: { vi, ja } }, ...] (5–8 từ trong bài)
+- questions: [{
+    questionJa,
+    choicesJa: [4 lựa chọn],
+    answerIndex: 0-3,
+    explainPerChoice: { ja: [4 chuỗi], vi: [4 chuỗi] }
+  }, ...] (2–3 câu hỏi)
 
-2–4 đoạn văn, 5–8 từ vựng, 2–3 câu hỏi trắc nghiệm (3 lựa chọn). Văn phong {{jlpt}} phù hợp.
+Độ dài phù hợp học viên N5. Chỉ JSON object.

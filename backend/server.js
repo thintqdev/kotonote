@@ -23,9 +23,7 @@ import { startStudyReminderScheduler } from './src/jobs/studyReminderScheduler.j
 import { startEmailDigestScheduler } from './src/jobs/emailDigestScheduler.js';
 import { notificationQueue } from './src/utils/queue.js';
 import * as notificationService from './src/services/notificationService.js';
-import { ensureAvatarsUploadDir } from './src/middlewares/avatarUpload.js';
-import { ensureBadgesUploadDir } from './src/middlewares/badgeUpload.js';
-import { ensureNotebookUploadDir } from './src/middlewares/notebookImageUpload.js';
+import { getMinioPublicOrigin, getStorageConfig, isMinioStorage } from './src/config/storage.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -38,6 +36,12 @@ await connectDB();
 const app = express();
 const httpServer = createServer(app);
 
+const minioImgOrigin = getMinioPublicOrigin();
+const helmetImgSrc = ["'self'", 'data:', 'cdn.jsdelivr.net'];
+if (minioImgOrigin) {
+	helmetImgSrc.push(minioImgOrigin);
+}
+
 // Security & Performance Middlewares
 app.use(
 	helmet({
@@ -47,7 +51,7 @@ app.use(
 				...helmet.contentSecurityPolicy.getDefaultDirectives(),
 				'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'],
 				'style-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'],
-				'img-src': ["'self'", 'data:', 'cdn.jsdelivr.net'],
+				'img-src': helmetImgSrc,
 			},
 		},
 	})
@@ -62,10 +66,13 @@ app.use(compression());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-ensureAvatarsUploadDir();
-ensureBadgesUploadDir();
-ensureNotebookUploadDir();
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const storageCfg = getStorageConfig();
+if (isMinioStorage()) {
+	console.log(`Object storage: MinIO → ${storageCfg.minio.publicUrl}`);
+} else {
+	app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+	console.log('Object storage: local → /uploads');
+}
 
 // Health check endpoint
 app.get('/health', (req, res) => {

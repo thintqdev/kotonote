@@ -1,4 +1,5 @@
 import { PART_OF_SPEECH } from '../constants/vocabulary.js';
+import { sanitizeKanaReading } from './japaneseReadingSanitize.js';
 
 const POS_VALUES = new Set(Object.values(PART_OF_SPEECH));
 
@@ -14,7 +15,7 @@ export function normalizeVocabularyFromAI(raw) {
 
 	const o = /** @type {Record<string, unknown>} */ (raw);
 	const word = String(o.word ?? '').trim();
-	const reading = String(o.reading ?? o.kana ?? '').trim();
+	const reading = sanitizeKanaReading(word, String(o.reading ?? o.kana ?? ''));
 	const meaning = String(o.meaning ?? o.meaningVi ?? '').trim();
 
 	if (!word || !reading || !meaning) {

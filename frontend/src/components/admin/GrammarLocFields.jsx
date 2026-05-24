@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import './GrammarLocFields.css';
 
-export default function GrammarLocFields({ label, value, onChange, rows = 3 }) {
+export default function GrammarLocFields({
+	label,
+	value,
+	onChange,
+	rows = 3,
+	disabled = false,
+}) {
 	return (
-		<fieldset className="admin-grammar-loc">
+		<fieldset className="admin-grammar-loc" disabled={disabled}>
 			<legend className="admin-grammar-loc__legend">{label}</legend>
 			<div className="admin-grammar-loc__grid">
 				<label className="admin-grammar-loc__field">
@@ -15,6 +21,7 @@ export default function GrammarLocFields({ label, value, onChange, rows = 3 }) {
 						onChange={(e) => onChange({ ...value, ja: e.target.value })}
 						placeholder="Tiếng Nhật…"
 						lang="ja"
+						disabled={disabled}
 					/>
 				</label>
 				<label className="admin-grammar-loc__field">
@@ -25,6 +32,7 @@ export default function GrammarLocFields({ label, value, onChange, rows = 3 }) {
 						value={value?.vi ?? ''}
 						onChange={(e) => onChange({ ...value, vi: e.target.value })}
 						placeholder="Tiếng Việt (tùy chọn)…"
+						disabled={disabled}
 					/>
 				</label>
 			</div>
@@ -40,4 +48,5 @@ GrammarLocFields.propTypes = {
 	}).isRequired,
 	onChange: PropTypes.func.isRequired,
 	rows: PropTypes.number,
+	disabled: PropTypes.bool,
 };

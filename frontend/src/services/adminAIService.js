@@ -55,6 +55,19 @@ export async function generateAdminReading(payload) {
 	return getApiData(body);
 }
 
+/**
+ * @param {{
+ *   templateName: string,
+ *   prompt?: string,
+ *   jlpt?: string,
+ *   category?: string,
+ * }} payload
+ */
+export async function generateAdminKaiwa(payload) {
+	const body = await adminApi.post(ADMIN_AI.generateKaiwa, payload);
+	return getApiData(body);
+}
+
 export async function testAdminAIConnection() {
 	const body = await adminApi.get(ADMIN_AI.test);
 	return getApiData(body);

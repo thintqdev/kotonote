@@ -1,6 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import * as readingRepository from '../repositories/readingRepository.js';
+import { deleteByUrl } from './objectStorageService.js';
 import * as readingProgressRepository from '../repositories/readingProgressRepository.js';
 import { READING, COMMON } from '../constants/messages.js';
 import {
@@ -9,16 +8,9 @@ import {
 } from '../constants/reading.js';
 import AppError from '../utils/AppError.js';
 
-const UPLOAD_READING_COVER_PREFIX = '/uploads/reading/';
-
 /** @param {string | null | undefined} imageUrl */
-export function deleteLocalReadingCover(imageUrl) {
-	const v = String(imageUrl || '').trim();
-	if (!v.startsWith(UPLOAD_READING_COVER_PREFIX)) return;
-	const name = path.basename(v);
-	if (!name || name.includes('..')) return;
-	const fullPath = path.join(process.cwd(), 'uploads', 'reading', name);
-	fs.unlink(fullPath, () => {});
+export async function deleteStoredReadingCover(imageUrl) {
+	await deleteByUrl(imageUrl);
 }
 
 const normalizeSlug = (slug) =>
@@ -302,7 +294,7 @@ export const updateArticle = async (id, payload) => {
 		next.imageUrl !== undefined &&
 		String(next.imageUrl).trim() !== String(current.imageUrl || '').trim()
 	) {
-		deleteLocalReadingCover(current.imageUrl);
+		await deleteStoredReadingCover(current.imageUrl);
 	}
 
 	const article = await readingRepository.updateArticleById(id, next);
@@ -320,7 +312,7 @@ export async function setArticleCoverFromUpload(articleId, publicPath) {
 	if (!current) {
 		throw new AppError(READING.NOT_FOUND, 404);
 	}
-	deleteLocalReadingCover(current.imageUrl);
+	await deleteStoredReadingCover(current.imageUrl);
 	const article = await readingRepository.updateArticleById(articleId, {
 		imageUrl: publicPath,
 	});
@@ -335,5 +327,5 @@ export const deleteArticle = async (id) => {
 	if (!article) {
 		throw new AppError(READING.NOT_FOUND, 404);
 	}
-	deleteLocalReadingCover(article.imageUrl);
+	await deleteStoredReadingCover(article.imageUrl);
 };

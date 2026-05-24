@@ -22,6 +22,7 @@ export const VOCABULARY_AI_GENERATE = {
 		const result = await generateAdminVocabulary(payload);
 		return {
 			items: result.vocabulary ?? [],
+			deck: result.deck ?? null,
 			source: result.source ?? "",
 		};
 	},
@@ -48,6 +49,7 @@ export const KANJI_AI_GENERATE = {
 		const result = await generateAdminKanji(payload);
 		return {
 			items: result.kanji ?? [],
+			deck: result.deck ?? null,
 			source: result.source ?? "",
 		};
 	},

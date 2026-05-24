@@ -45,7 +45,7 @@ export const uploadBadgeIcon = asyncHandler(async (req, res) => {
 			{ field: 'icon', message: 'Image file is required' },
 		]);
 	}
-	const publicPath = `/uploads/badges/${req.file.filename}`;
+	const publicPath = req.file.publicPath;
 	try {
 		const badge = await badgeService.setBadgeIconFromUploadedFile(
 			req.params.id,

@@ -9,6 +9,18 @@ import {
 	isJlptUnlocked,
 } from '../utils/jlptAccess.js';
 
+/** @param {import('mongoose').Document|Record<string, unknown>} doc */
+function toPublicListeningItem(doc) {
+	const raw =
+		doc && typeof doc.toObject === 'function' ? doc.toObject() : { ...doc };
+	const idRaw = raw?._id ?? raw?.id;
+	const id =
+		idRaw != null && String(idRaw).trim() !== ''
+			? String(idRaw).trim()
+			: '';
+	return { ...raw, ...(id ? { id } : {}) };
+}
+
 export const getAllPublished = asyncHandler(async (req, res) => {
 	const unlocked = req.jlptUnlocked ?? [];
 	const queryJlpt = req.query.jlpt;
@@ -33,7 +45,8 @@ export const getAllPublished = asyncHandler(async (req, res) => {
 	}
 
 	const items = await listeningExerciseService.getAllPublished(filters);
-	const annotated = annotateWithJlptLock(items, unlocked, (it) => it.jlpt);
+	const plain = items.map((doc) => toPublicListeningItem(doc));
+	const annotated = annotateWithJlptLock(plain, unlocked, (it) => it.jlpt);
 
 	return apiSuccess(
 		res,
@@ -55,7 +68,10 @@ export const getById = asyncHandler(async (req, res) => {
 	assertJlptUnlocked(req.jlptUnlocked, item.jlpt);
 	return apiSuccess(
 		res,
-		{ item, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },
+		{
+			item: toPublicListeningItem(item),
+			jlptAccess: buildJlptAccessMeta(req.jlptUnlocked),
+		},
 		LISTENING.FETCHED,
 		200,
 	);

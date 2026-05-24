@@ -546,8 +546,43 @@
 .admin-grammar-pagination {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-grammar-pagination > button {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(90, 107, 56, 0.35);
+  background: var(--admin-card, #fffefb);
+  color: var(--admin-sage-deep);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.admin-grammar-pagination > button:hover:not(:disabled) {
+  background: rgba(107, 126, 95, 0.1);
+}
+
+.admin-grammar-pagination > button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.admin-grammar-pagination > span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+  text-align: center;
+  min-width: min(100%, 10rem);
 }
 
 .admin-grammar-editor .admin-grammar-form {
@@ -915,4 +950,78 @@
   font-size: 0.88rem;
   line-height: 1.5;
   color: var(--admin-ink);
+}
+
+/* Modal rộng (luyện nghe, v.v.) */
+.admin-grammar-modal--wide {
+  width: min(860px, 100%);
+  max-height: min(92vh, 820px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-grammar-modal--wide form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.admin-grammar-modal--wide .admin-grammar-modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.admin-grammar-modal-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--admin-border);
+  background: rgba(255, 252, 246, 0.65);
+}
+
+.admin-grammar-modal-tab {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 107, 56, 0.28);
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-ink-soft);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.admin-grammar-modal-tab:hover {
+  background: rgba(107, 126, 95, 0.08);
+  color: var(--admin-ink);
+}
+
+.admin-grammar-modal-tab--active {
+  background: var(--admin-sage, #6b7e5f);
+  border-color: rgba(61, 78, 58, 0.35);
+  color: #fff;
+}
+
+.admin-grammar-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .admin-grammar-row-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-grammar-form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }

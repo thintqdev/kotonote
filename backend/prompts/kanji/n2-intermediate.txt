@@ -1,0 +1,7 @@
+Tạo {{count}} Kanji JLPT N2.
+Ghi chú: {{customPrompt}}
+
+JSON: char, onYomi (katakana), kunYomi (hiragana), hanViet, meaningVi, vocabJa, exampleJa, exampleVi. Không romaji.
+Tránh: {{existingChars}}
+
+Chỉ mảng JSON.

@@ -54,6 +54,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         iconSrc: "/assets/menu-icons/listening.png",
         labelKey: "adminLayout.sidebar.listening",
       },
+      {
+        id: "kaiwa",
+        to: "/admin/kaiwa",
+        icon: "audio",
+        labelKey: "adminLayout.sidebar.kaiwa",
+      },
     ],
   },
   {
@@ -89,6 +95,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         to: "/admin/users",
         icon: "user",
         labelKey: "adminLayout.sidebar.users",
+      },
+      {
+        id: "subscriptions",
+        to: "/admin/subscriptions",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.subscriptions",
       },
       {
         id: "quotes",

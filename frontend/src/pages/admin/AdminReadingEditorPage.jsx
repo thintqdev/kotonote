@@ -527,7 +527,13 @@ export default function AdminReadingEditorPage() {
 				onClose={() => setGenerateOpen(false)}
 				config={READING_AI_GENERATE}
 				levelKey={form.jlpt}
-				onApply={(ai) => setForm((prev) => mergeReadingAIIntoForm(prev, ai))}
+				onApply={(ai) =>
+					setForm((prev) => ({
+						...mergeReadingAIIntoForm(prev, ai),
+						jlpt: prev.jlpt,
+						slug: prev.slug,
+					}))
+				}
 			/>
 		</div>
 	);

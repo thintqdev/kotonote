@@ -1,6 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
 import mongoose from 'mongoose';
+import { deleteByUrl } from './objectStorageService.js';
 import * as userRepository from '../repositories/userRepository.js';
 import { buildBadgesDisplayForUser, unlockBadgeForUser } from './badgeUnlockService.js';
 import {
@@ -9,8 +8,6 @@ import {
 } from '../constants/profileLocale.js';
 import { USER } from '../constants/messages.js';
 import { USER_STATUS } from '../constants/userStatus.js';
-
-const UPLOAD_AVATAR_PREFIX = '/uploads/avatars/';
 
 /**
  * Bổ sung `badges` (join metadata) cho payload user trả về client.
@@ -26,27 +23,9 @@ export async function enrichUserWithBadges(userDoc) {
 }
 
 /**
- * Xóa file avatar cục bộ (nếu có) — chỉ khi đường dẫn nằm trong thư mục uploads/avatars.
- * @param {string | null | undefined} avatarString
- */
-export async function unlinkLocalAvatarFile(avatarString) {
-	if (!avatarString || typeof avatarString !== 'string') return;
-	const t = avatarString.trim();
-	if (!t.startsWith(UPLOAD_AVATAR_PREFIX)) return;
-	const name = t.slice(UPLOAD_AVATAR_PREFIX.length);
-	if (!name || name.includes('/') || name.includes('..')) return;
-	const fullPath = path.join(process.cwd(), 'uploads', 'avatars', name);
-	try {
-		await fs.unlink(fullPath);
-	} catch {
-		/* file đã xóa hoặc không tồn tại */
-	}
-}
-
-/**
- * Sau khi multer đã ghi file: cập nhật user.avatar = đường dẫn công khai, xóa file cũ nếu là upload cục bộ.
+ * Sau khi upload: cập nhật user.avatar = URL công khai (MinIO hoặc /uploads/…).
  * @param {import('mongoose').Types.ObjectId|string} userId
- * @param {string} publicPath ví dụ `/uploads/avatars/507f...-123.jpg`
+ * @param {string} publicPath
  */
 export const setAvatarFromUploadedFile = async (userId, publicPath) => {
 	const user = await userRepository.findUserById(userId);
@@ -55,7 +34,7 @@ export const setAvatarFromUploadedFile = async (userId, publicPath) => {
 		throw { messageCode: USER.NOT_FOUND, statusCode: 404 };
 	}
 
-	await unlinkLocalAvatarFile(user.avatar);
+	await deleteByUrl(user.avatar);
 	user.avatar = publicPath;
 	await user.save();
 
@@ -101,12 +80,12 @@ export const updateProfile = async (userId, updateData) => {
 	
 	if (Object.prototype.hasOwnProperty.call(updateData, 'avatar')) {
 		if (updateData.avatar === '' || updateData.avatar === null) {
-			await unlinkLocalAvatarFile(user.avatar);
+			await deleteByUrl(user.avatar);
 			user.avatar = null;
 		} else {
 			const next = String(updateData.avatar).trim();
 			if (user.avatar && user.avatar !== next) {
-				await unlinkLocalAvatarFile(user.avatar);
+				await deleteByUrl(user.avatar);
 			}
 			user.avatar = next;
 		}

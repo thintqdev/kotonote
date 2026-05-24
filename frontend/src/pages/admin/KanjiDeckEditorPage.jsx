@@ -20,6 +20,10 @@ import {
 import DeckAIGenerateModal from "../../components/admin/DeckAIGenerateModal.jsx";
 import { KANJI_AI_GENERATE } from "../../constants/deckAiGenerateConfig.js";
 import {
+  applyKanjiDeckMeta,
+  mergeKanjiAIIntoRows,
+} from "../../utils/deckAiMerge.js";
+import {
   createKanji,
   createKanjiDeck,
   deleteKanji,
@@ -365,6 +369,27 @@ export default function KanjiDeckEditorPage() {
     [filledKanjiCount],
   );
 
+  const handleDeckAIApply = ({ items, deck }) => {
+    const meta = applyKanjiDeckMeta(
+      { titleVi, titleJa, descriptionVi, descriptionJa },
+      deck,
+    );
+    setTitleVi(meta.titleVi);
+    setTitleJa(meta.titleJa);
+    setDescriptionVi(meta.descriptionVi);
+    setDescriptionJa(meta.descriptionJa);
+    setRows((prev) => mergeKanjiAIIntoRows(prev, items, MAX_KANJI_PER_DECK));
+  };
+
+  const openGenerateModal = () => {
+    if (isView || saving) return;
+    if (slotsLeft <= 0) {
+      toast.error(`Deck đã đủ ${MAX_KANJI_PER_DECK} chữ`);
+      return;
+    }
+    setGenerateOpen(true);
+  };
+
   const syncKanjiForDeck = async (id) => {
     const initial = initialKanjiIdsRef.current;
     const currentServer = new Set(
@@ -664,14 +689,12 @@ export default function KanjiDeckEditorPage() {
                   <button
                     type="button"
                     className="vdeck-btn vdeck-btn--ghost"
-                    onClick={() => setGenerateOpen(true)}
-                    disabled={isView || saving || isCreate || slotsLeft <= 0}
+                    onClick={openGenerateModal}
+                    disabled={isView || saving || slotsLeft <= 0}
                     title={
-                      isCreate
-                        ? "Lưu deck trước để generate AI."
-                        : slotsLeft <= 0
-                          ? `Deck đã đủ ${MAX_KANJI_PER_DECK} chữ.`
-                          : "Generate kanji bằng Gemini"
+                      slotsLeft <= 0
+                        ? `Deck đã đủ ${MAX_KANJI_PER_DECK} chữ.`
+                        : "Generate kanji và tên deck bằng AI"
                     }
                   >
                     Generate AI
@@ -939,7 +962,8 @@ export default function KanjiDeckEditorPage() {
         deckId={isCreate ? undefined : deckId}
         slotsLeft={slotsLeft}
         levelKey={jlpt}
-        onApplied={loadDeck}
+        deckHint={titleVi}
+        onApply={handleDeckAIApply}
       />
     </div>
   );

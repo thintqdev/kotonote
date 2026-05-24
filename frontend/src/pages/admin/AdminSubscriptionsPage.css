@@ -1,0 +1,81 @@
+.admin-subs-page {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.admin-subs-modal-user {
+  margin: 0 0 14px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--admin-ink);
+}
+
+.admin-subs-modal-user span {
+  color: var(--admin-ink-soft);
+  font-size: 0.82rem;
+}
+
+.admin-subs-jlpt-preview {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft);
+}
+
+.admin-subs-tier-chip {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.admin-subs-tier-chip--free {
+  background: rgba(120, 120, 120, 0.12);
+  color: var(--admin-ink-soft);
+}
+
+.admin-subs-tier-chip--pro {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+}
+
+.admin-subs-tier-chip--ultra {
+  background: rgba(168, 85, 247, 0.12);
+  color: #6b21a8;
+}
+
+.admin-subs-tier-chip--ultimate {
+  background: rgba(234, 179, 8, 0.15);
+  color: #92400e;
+}
+
+.admin-subs-checkout-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.admin-subs-checkout-status--paid {
+  background: rgba(40, 167, 69, 0.12);
+  color: #1e6b34;
+}
+
+.admin-subs-checkout-status--pending {
+  background: rgba(234, 179, 8, 0.15);
+  color: #92400e;
+}
+
+.admin-subs-checkout-status--expired,
+.admin-subs-checkout-status--cancelled {
+  background: rgba(120, 120, 120, 0.12);
+  color: var(--admin-ink-soft);
+}
+
+/* Pagination — đồng bộ admin-vocab-pagination khi cần override trong trang subs */
+.admin-subs-page .admin-grammar-pagination {
+  margin-top: 1.25rem;
+}

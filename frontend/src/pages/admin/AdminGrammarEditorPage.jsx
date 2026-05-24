@@ -382,7 +382,15 @@ export default function AdminGrammarEditorPage() {
 				config={GRAMMAR_AI_GENERATE}
 				levelKey={form.jlpt}
 				contextHint={form.pattern}
-				onApply={(ai) => setForm((prev) => mergeGrammarAIIntoForm(prev, ai))}
+				onApply={(ai) =>
+					setForm((prev) => ({
+						...mergeGrammarAIIntoForm(prev, ai),
+						pattern: prev.pattern.trim() || ai.pattern?.trim() || prev.pattern,
+						jlpt: prev.jlpt,
+						slug: prev.slug,
+						tags: prev.tags,
+					}))
+				}
 			/>
 		</div>
 	);

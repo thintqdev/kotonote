@@ -38,7 +38,7 @@ export const uploadMyAvatar = asyncHandler(async (req, res) => {
 			{ field: 'avatar', message: 'Image file is required' },
 		]);
 	}
-	const publicPath = `/uploads/avatars/${req.file.filename}`;
+	const publicPath = req.file.publicPath;
 	const user = await userService.setAvatarFromUploadedFile(req.user._id, publicPath);
 	return apiSuccess(res, { user }, USER.UPDATED, 200);
 });

@@ -38,8 +38,14 @@ import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
 import ReadingListPage from "./pages/ReadingListPage.jsx";
 import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
 import NotebookPage from "./pages/NotebookPage.jsx";
+import JournalPage from "./pages/JournalPage.jsx";
 import ListeningPage from "./pages/ListeningPage.jsx";
 import ListeningExercisePage from "./pages/ListeningExercisePage.jsx";
+import KaiwaListPage from "./pages/KaiwaListPage.jsx";
+import KaiwaDetailPage from "./pages/KaiwaDetailPage.jsx";
+import KaiwaPracticePage from "./pages/KaiwaPracticePage.jsx";
+import KaiwaSessionHistoryPage from "./pages/KaiwaSessionHistoryPage.jsx";
+import KaiwaSessionViewPage from "./pages/KaiwaSessionViewPage.jsx";
 import PracticePage from "./pages/PracticePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AdminShell, {
@@ -61,7 +67,10 @@ import AdminGrammarHome from "./pages/admin/AdminGrammarHome.jsx";
 import AdminGrammarEditorPage from "./pages/admin/AdminGrammarEditorPage.jsx";
 import AdminReadingHome from "./pages/admin/AdminReadingHome.jsx";
 import AdminReadingEditorPage from "./pages/admin/AdminReadingEditorPage.jsx";
-import KaiwaListPage from "./pages/admin/KaiwaListPage.jsx";
+import AdminListeningHome from "./pages/admin/AdminListeningHome.jsx";
+import AdminSubscriptionsPage from "./pages/admin/AdminSubscriptionsPage.jsx";
+import AdminKaiwaHome from "./pages/admin/AdminKaiwaHome.jsx";
+import AdminKaiwaEditorPage from "./pages/admin/AdminKaiwaEditorPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -128,8 +137,20 @@ function App() {
                 <Route path="/reading" element={<ReadingListPage />} />
                 <Route path="/reading/:id" element={<ReadingArticlePage />} />
                 <Route path="/notebook" element={<NotebookPage />} />
+                <Route path="/journal" element={<JournalPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
                 <Route path="/listening/:id" element={<ListeningExercisePage />} />
+                <Route path="/kaiwa" element={<KaiwaListPage />} />
+                <Route
+                  path="/kaiwa/sessions/:sessionId"
+                  element={<KaiwaSessionViewPage />}
+                />
+                <Route
+                  path="/kaiwa/:id/history"
+                  element={<KaiwaSessionHistoryPage />}
+                />
+                <Route path="/kaiwa/:id/practice" element={<KaiwaPracticePage />} />
+                <Route path="/kaiwa/:id" element={<KaiwaDetailPage />} />
                 <Route path="/practice" element={<PracticePage />} />
               </Route>
             </Route>
@@ -143,6 +164,14 @@ function App() {
                 path="vocabulary/decks/:deckId"
                 element={<VocabularyDeckEditorPage />}
               />
+              <Route
+                path="vocabulary/new"
+                element={<Navigate to="/admin/vocabulary/decks/new" replace />}
+              />
+              <Route
+                path="vocabulary/create"
+                element={<Navigate to="/admin/vocabulary/decks/new" replace />}
+              />
               <Route path="vocabulary" element={<AdminVocabularyHome />} />
               <Route
                 path="kanji/decks/:deckId"
@@ -155,11 +184,15 @@ function App() {
               <Route path="reading/new" element={<AdminReadingEditorPage />} />
               <Route path="reading/:id/edit" element={<AdminReadingEditorPage />} />
               <Route path="reading" element={<AdminReadingHome />} />
-              <Route path="listening" element={<KaiwaListPage />} />
+              <Route path="listening" element={<AdminListeningHome />} />
+              <Route path="kaiwa/new" element={<AdminKaiwaEditorPage />} />
+              <Route path="kaiwa/:id/edit" element={<AdminKaiwaEditorPage />} />
+              <Route path="kaiwa" element={<AdminKaiwaHome />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
               <Route path="prompts" element={<AdminPromptsPage />} />
               <Route path="badges" element={<BadgePage />} />
               <Route path="users" element={<AdminUsersPage />} />
+              <Route path="subscriptions" element={<AdminSubscriptionsPage />} />
               <Route
                 path="notifications"
                 element={<AdminNotificationsDemoPage />}

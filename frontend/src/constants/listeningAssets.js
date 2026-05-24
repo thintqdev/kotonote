@@ -4,7 +4,8 @@
  * Xem `public/assets/listening/README.md` để biết kích thước gợi ý.
  */
 export const LISTENING_ASSETS = {
-	placeholderThumb: '/assets/listening/placeholder-thumb.png',
+	/** Fallback khi bài không có ảnh minh họa (file có sẵn trong public/) */
+	placeholderThumb: '/assets/listening/icon-headphone.png',
 	iconPlay: '/assets/listening/icon-play.png',
 	iconPause: '/assets/listening/icon-pause.png',
 	iconHeadphone: '/assets/listening/icon-headphone.png',

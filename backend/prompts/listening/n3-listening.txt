@@ -1,0 +1,7 @@
+Tạo đề nghe JLPT N3 — JSON object.
+Ghi chú admin: {{customPrompt}}
+
+titleVi, titleJa, type (task/point/summary), scriptJa (hội thoại 2–3 nhân vật),
+scriptVi, questions (2–4 câu, 4 lựa chọn mỗi câu).
+
+Độ khó N3. scriptJa không romaji. Chỉ JSON.

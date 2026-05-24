@@ -1,0 +1,8 @@
+Tạo bài đọc JLPT N2 — JSON object.
+JLPT: {{jlpt}}
+Ghi chú: {{customPrompt}}
+
+Bài báo ngắn hoặc cột ý kiến: paragraphsJa 4–6 đoạn, vocabulary phong phú,
+questions 4–5 câu suy luận và chi tiết.
+
+Chỉ JSON object.

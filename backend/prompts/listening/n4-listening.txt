@@ -1,0 +1,5 @@
+Tạo đề nghe JLPT N4 — JSON object.
+Admin: {{customPrompt}}
+
+scriptJa, scriptVi, questions — độ dài trung bình N4.
+Chỉ JSON.

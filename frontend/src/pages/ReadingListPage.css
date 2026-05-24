@@ -527,3 +527,13 @@
 .reading-q-retry:hover {
   background: rgba(235, 245, 228, 0.85);
 }
+
+.reading-thumb--placeholder {
+  object-fit: contain;
+  padding: 22%;
+  background: rgba(107, 126, 95, 0.08);
+}
+
+.listening-thumb-wrap {
+  background: rgba(107, 126, 95, 0.06);
+}

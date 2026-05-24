@@ -718,6 +718,7 @@
 .vdeck-footer-actions {
   position: sticky;
   bottom: 0;
+  z-index: 6;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -729,6 +730,15 @@
     transparent 0%,
     var(--vdeck-cream) 28%
   );
+}
+
+.vdeck-btn--hint {
+  opacity: 0.88;
+  border-style: dashed;
+}
+
+.vdeck-btn--hint:hover:not(:disabled) {
+  opacity: 1;
 }
 
 .vdeck-draft-toast {

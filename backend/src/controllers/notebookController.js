@@ -49,6 +49,5 @@ export const uploadNoteImage = asyncHandler(async (req, res) => {
 			{ field: 'image', message: 'Image file is required' },
 		]);
 	}
-	const publicPath = `/uploads/notebook/${req.user._id}/${req.file.filename}`;
-	return apiSuccess(res, { url: publicPath }, NOTEBOOK.IMAGE_UPLOADED, 201);
+	return apiSuccess(res, { url: req.file.publicPath }, NOTEBOOK.IMAGE_UPLOADED, 201);
 });

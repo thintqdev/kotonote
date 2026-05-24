@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { AI_JAPANESE_OUTPUT_RULES } from '../constants/aiJapaneseOutputRules.js';
 import * as promptRepository from '../repositories/promptRepository.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -66,7 +67,7 @@ Requirements:
 - Level: ${level}
 - Each word must include:
   * word: Japanese word in kanji
-  * reading: hiragana/katakana reading
+  * reading: hiragana only (never romaji)
   * meaningVi: Vietnamese meaning
   * meaningJa: Japanese explanation
   * exampleSentence: Example sentence
@@ -99,13 +100,31 @@ Avoid duplicates with existing kanji: {{existingChars}}`;
 		return `Create one JLPT {{jlpt}} grammar lesson as a single JSON object.
 Pattern hint: {{patternHint}}
 Admin notes: {{customPrompt}}
+Japanese fields: kanji + hiragana/katakana only — no romaji in examples or pattern labels.
 Include pattern, teaser, meaning, usage, examples (ja/vi), ng, compare, memo, practice.items.`;
 	}
 
 	if (type === 'reading') {
 		return `Create one JLPT {{jlpt}} reading article as JSON object.
 Admin notes: {{customPrompt}}
+paragraphsJa: Japanese text with kanji + kana (no romaji). vocabulary[].termJa with gloss vi/ja.
 Include titleJa, snippetJa, paragraphsJa[], vocabulary[], questions[] with choicesJa and explainPerChoice.`;
+	}
+
+	if (type === 'kaiwa') {
+		return `Create one JLPT {{jlpt}} conversation practice CONTEXT as JSON object.
+Category: {{category}}
+Admin notes: {{customPrompt}}
+keyPhrases[].reading: hiragana (or katakana for loan words) — never romaji.
+Include titleVi, titleJa, settingVi, settingJa, situationVi, situationJa, objectivesVi, objectivesJa, roles[], keyPhrases[], culturalNotesVi, culturalNotesJa.
+No full dialogue — situational context only.`;
+	}
+
+	if (type === 'listening') {
+		return `Create one JLPT {{jlpt}} listening exercise as JSON object.
+Admin notes: {{customPrompt}}
+scriptJa: natural Japanese (kanji + kana), no romaji transliteration.
+Include titleVi, titleJa, type, scriptJa, scriptVi, questions with choices and explainVi.`;
 	}
 
 	return '';
@@ -146,10 +165,9 @@ export const getAIPrompt = (type, templateName, options = {}) => {
 		...customVariables,
 	};
 	
-	// Process template
+	// Process template + quy tắc không romaji (mọi loại prompt)
 	const prompt = processPromptTemplate(template, variables);
-	
-	return prompt;
+	return `${prompt.trim()}\n\n${AI_JAPANESE_OUTPUT_RULES}`;
 };
 
 /**

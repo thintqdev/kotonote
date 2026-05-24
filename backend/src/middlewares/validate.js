@@ -3,7 +3,13 @@ import { COMMON } from '../constants/messages.js';
 
 export const validate = (schema) => {
 	return (req, res, next) => {
-		const { error } = schema.validate(req.body, { abortEarly: false });
+		const { error, value } = schema.validate(req.body, {
+			abortEarly: false,
+			stripUnknown: true,
+		});
+		if (!error && value) {
+			req.body = value;
+		}
 		
 		if (error) {
 			const errors = error.details.map((detail) => ({

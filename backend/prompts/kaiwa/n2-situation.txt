@@ -1,0 +1,7 @@
+Tạo context Kaiwa JLPT N2 — JSON object.
+Category: {{category}}
+Admin: {{customPrompt}}
+
+Đủ field như N5/N3; keyPhrases[].reading chỉ hiragana/katakana (không romaji).
+Tình huống công việc, xã hội, tranh luận lịch sự.
+Chỉ JSON.

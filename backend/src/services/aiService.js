@@ -1,13 +1,18 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GEMINI_MODEL } from '../config/gemini.js';
 import { getAIPromptAsync } from '../utils/promptLoader.js';
 import {
 	parseJsonArrayFromAIText,
 	parseJsonFromAIText,
+	parseJsonObjectLenient,
 } from '../utils/aiJsonParse.js';
-import { normalizeVocabularyListFromAI } from '../utils/aiVocabularyNormalize.js';
-import { normalizeKanjiListFromAI } from '../utils/aiKanjiNormalize.js';
 import { normalizeGrammarFromAI } from '../utils/aiGrammarNormalize.js';
 import { normalizeReadingArticleFromAI } from '../utils/aiReadingNormalize.js';
+import { normalizeKaiwaContextFromAI } from '../utils/aiKaiwaNormalize.js';
+import {
+	getDeckBundleJsonSuffix,
+	normalizeDeckItemsBundleFromAI,
+} from '../utils/aiDeckBundleNormalize.js';
 
 /**
  * AI Service — Gemini + placeholder fallback
@@ -31,11 +36,11 @@ export const callGeminiAPI = async (prompt, options = {}) => {
 		return null;
 	}
 
+	let responseText = '';
 	try {
 		const genAI = new GoogleGenerativeAI(apiKey);
-		const modelName = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 		const model = genAI.getGenerativeModel({
-			model: modelName,
+			model: GEMINI_MODEL,
 			generationConfig: {
 				temperature,
 				maxOutputTokens: maxTokens,
@@ -49,12 +54,20 @@ export const callGeminiAPI = async (prompt, options = {}) => {
 			: 'Return ONLY a valid JSON object. No markdown, no extra text.';
 		const fullPrompt = `${prompt}\n\n${suffix}`;
 		const result = await model.generateContent(fullPrompt);
-		const text = result.response.text();
+		responseText = result.response.text();
 		return arrayMode
-			? parseJsonArrayFromAIText(text)
-			: parseJsonFromAIText(text);
+			? parseJsonArrayFromAIText(responseText)
+			: parseJsonFromAIText(responseText);
 	} catch (error) {
 		console.error('Gemini API error:', error.message);
+		const arrayMode = options.arrayMode !== false;
+		if (!arrayMode && responseText) {
+			try {
+				return parseJsonObjectLenient(responseText);
+			} catch (lenientErr) {
+				console.error('Gemini lenient JSON parse failed:', lenientErr.message);
+			}
+		}
 		return null;
 	}
 };
@@ -72,35 +85,34 @@ export const generateWithAI = async (params) => {
 	} = params;
 
 	const existingKey = type === 'kanji' ? 'existingChars' : 'existingWords';
-	const prompt = await getAIPromptAsync(type, templateName, {
+	const basePrompt = await getAIPromptAsync(type, templateName, {
 		count,
 		[existingKey]: existingItems,
 		customVariables: {
 			customPrompt,
 		},
 	});
+	const prompt = `${basePrompt}\n\n${getDeckBundleJsonSuffix(type)}`;
 
 	const aiResponse = await callGeminiAPI(prompt, {
 		temperature: 0.7,
 		maxTokens: 8192,
+		arrayMode: false,
 	});
 
-	if (aiResponse && Array.isArray(aiResponse)) {
-		const items =
-			type === 'vocabulary'
-				? normalizeVocabularyListFromAI(aiResponse)
-				: type === 'kanji'
-					? normalizeKanjiListFromAI(aiResponse)
-					: aiResponse;
-
-		return {
-			items,
-			source: 'gemini',
-			promptUsed: prompt,
-		};
+	if (aiResponse && (Array.isArray(aiResponse) || typeof aiResponse === 'object')) {
+		const bundle = normalizeDeckItemsBundleFromAI(aiResponse, type);
+		if (bundle.items.length > 0) {
+			return {
+				items: bundle.items,
+				deck: bundle.deck,
+				source: 'gemini',
+				promptUsed: prompt,
+			};
+		}
 	}
 
-	const items =
+	const placeholderItems =
 		type === 'kanji'
 			? generatePlaceholderKanji({
 					count,
@@ -115,8 +127,24 @@ export const generateWithAI = async (params) => {
 					customPrompt,
 				});
 
+	const placeholderDeck =
+		type === 'kanji'
+			? {
+					titleVi: `Deck Kanji ${String(customPrompt || templateName).slice(0, 40)}`,
+					titleJa: '漢字デッキ',
+					descriptionVi: 'Deck mẫu (placeholder).',
+					descriptionJa: 'プレースホルダー',
+				}
+			: {
+					title: `Deck từ vựng ${String(customPrompt || templateName).slice(0, 40)}`,
+					titleJa: '語彙デッキ',
+					description: 'Deck mẫu (placeholder).',
+					descriptionJa: 'プレースホルダー',
+				};
+
 	return {
-		items,
+		items: placeholderItems,
+		deck: placeholderDeck,
 		source: 'placeholder',
 		promptUsed: prompt,
 	};
@@ -130,6 +158,7 @@ export const generateVocabularyWithAI = async (options) => {
 
 	return {
 		vocabulary: result.items,
+		deck: result.deck ?? null,
 		source: result.source,
 		promptUsed: result.promptUsed,
 		templateName: options.templateName,
@@ -144,6 +173,7 @@ export const generateKanjiWithAI = async (options) => {
 
 	return {
 		kanji: result.items,
+		deck: result.deck ?? null,
 		source: result.source,
 		promptUsed: result.promptUsed,
 		templateName: options.templateName,
@@ -198,6 +228,48 @@ export const generateGrammarWithAI = async (options) => {
 /**
  * Generate một bài đọc hiểu (object JSON).
  */
+export const generateKaiwaContextWithAI = async (options) => {
+	const {
+		templateName,
+		customPrompt = '',
+		jlpt = 'N5',
+		category = 'daily',
+	} = options;
+
+	const prompt = await getAIPromptAsync('kaiwa', templateName, {
+		customVariables: {
+			jlpt: String(jlpt).toUpperCase(),
+			category: String(category),
+			customPrompt: String(customPrompt).trim() || 'không có',
+		},
+	});
+
+	const aiResponse = await callGeminiAPI(prompt, {
+		temperature: 0.75,
+		maxTokens: 8192,
+		arrayMode: false,
+	});
+
+	if (aiResponse && typeof aiResponse === 'object') {
+		const context = normalizeKaiwaContextFromAI(aiResponse);
+		if (context) {
+			return {
+				context,
+				source: 'gemini',
+				promptUsed: prompt,
+				templateName,
+			};
+		}
+	}
+
+	return {
+		context: generatePlaceholderKaiwaContext({ jlpt, category, customPrompt }),
+		source: 'placeholder',
+		promptUsed: prompt,
+		templateName,
+	};
+};
+
 export const generateReadingWithAI = async (options) => {
 	const {
 		templateName,
@@ -250,9 +322,7 @@ export const translateWithAI = async (options) => {
 
 	try {
 		const genAI = new GoogleGenerativeAI(apiKey);
-		const model = genAI.getGenerativeModel({
-			model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
-		});
+		const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 		const result = await model.generateContent(prompt);
 		const translated = result.response.text()?.trim();
 		return translated || `[Translation placeholder] ${text}`;
@@ -380,6 +450,49 @@ function generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }) {
 				{ ja: '練習文。', vi: 'Câu luyện tập.' },
 			],
 		},
+	};
+}
+
+function generatePlaceholderKaiwaContext({ jlpt, category, customPrompt }) {
+	const catLabel = String(category || 'daily');
+	return {
+		titleVi: `Tình huống hội thoại ${jlpt} — ${catLabel}`,
+		titleJa: `${jlpt}会話シチュエーション`,
+		settingVi: 'Quán cà phê nhỏ ở Tokyo',
+		settingJa: '東京の小さなカフェ',
+		situationVi: `Bạn (học viên ${jlpt}) gặp nhân viên quán. ${customPrompt ? `Gợi ý: ${customPrompt}. ` : ''}Đây là bối cảnh placeholder — hãy cấu hình GEMINI_API_KEY để generate bằng AI.`,
+		situationJa: 'カフェで店員と話す場面です。',
+		objectivesVi:
+			'- Chào hỏi lịch sự\n- Gọi món đơn giản\n- Cảm ơn và thanh toán',
+		objectivesJa: '挨拶・注文・お礼',
+		roles: [
+			{
+				nameVi: 'Học viên',
+				nameJa: '学習者',
+				descriptionVi: 'Khách hàng đang luyện nói',
+				descriptionJa: '日本語を練習する客',
+			},
+			{
+				nameVi: 'Nhân viên',
+				nameJa: '店員',
+				descriptionVi: 'Nhân viên phục vụ thân thiện',
+				descriptionJa: '丁寧な店員',
+			},
+		],
+		keyPhrases: [
+			{
+				phraseJa: 'いらっしゃいませ',
+				reading: 'いらっしゃいませ',
+				meaningVi: 'Xin chào (nhân viên)',
+			},
+			{
+				phraseJa: '〜をください',
+				reading: '〜をください',
+				meaningVi: 'Cho tôi …',
+			},
+		],
+		culturalNotesVi: 'Giữ giọng lịch sự (です・ます) với nhân viên.',
+		culturalNotesJa: '店員には丁寧語を使います。',
 	};
 }
 

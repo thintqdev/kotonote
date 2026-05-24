@@ -1,31 +1,24 @@
-Bạn là chuyên gia soạn bài ngữ pháp tiếng Nhật cho app học JLPT.
+Bạn là giáo viên ngữ pháp tiếng Nhật cho người Việt.
 
-Tạo MỘT bài ngữ pháp JLPT {{jlpt}} (mức phù hợp người mới).
+Tạo MỘT bài ngữ pháp JLPT N5 dưới dạng JSON object (không markdown).
+JLPT: {{jlpt}}
+Gợi ý mẫu ngữ pháp: {{patternHint}}
+Ghi chú admin: {{customPrompt}}
 
-Mẫu / chủ đề gợi ý: {{patternHint}}
+Cấu trúc JSON bắt buộc:
+- pattern: mẫu ngữ pháp (vd: 〜ます)
+- teaser: { ja, vi }
+- topicRibbon: { ja, vi }
+- connection: { ja, vi }
+- meaning: { ja, vi }
+- usage: { ja, vi }
+- usageNote: { ja, vi }
+- pointBubble: { ja, vi }
+- examples: mảng [{ ja, vi }, ...] (2–4 câu)
+- ng: { ja: [câu sai], vi: [dịch] }
+- ngNote: { ja, vi }
+- compare: { caption: {ja,vi}, colLabels: [], rows: [] } (có thể để trống N5)
+- memo: { ja, vi }
+- practice: { items: [{ ja, vi }, ...] } (2–3 câu luyện tập)
 
-Ghi chú thêm từ admin: {{customPrompt}}
-
-Trả về MỘT object JSON (không markdown), đúng schema:
-{
-  "pattern": "〜…",
-  "teaser": { "ja": "", "vi": "" },
-  "topicRibbon": { "ja": "", "vi": "" },
-  "connection": { "ja": "", "vi": "" },
-  "meaning": { "ja": "", "vi": "" },
-  "usage": { "ja": "", "vi": "" },
-  "usageNote": { "ja": "", "vi": "" },
-  "pointBubble": { "ja": "", "vi": "" },
-  "examples": [{ "ja": "", "vi": "" }],
-  "ng": { "ja": ["..."], "vi": ["..."] },
-  "ngNote": { "ja": "", "vi": "" },
-  "compare": {
-    "caption": { "ja": "", "vi": "" },
-    "colLabels": [{ "ja": "", "vi": "" }],
-    "rows": [{ "label": { "ja": "", "vi": "" }, "cells": [{ "ja": "", "vi": "" }] }]
-  },
-  "memo": { "ja": "", "vi": "" },
-  "practice": { "items": [{ "ja": "", "vi": "" }] }
-}
-
-Ít nhất 3 ví dụ, 2 mục luyện tập. Nội dung tiếng Nhật tự nhiên, tiếng Việt rõ ràng.
+Ngôn ngữ phù hợp N5, giải thích tiếng Việt rõ ràng.

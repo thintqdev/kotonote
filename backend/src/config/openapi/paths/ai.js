@@ -370,6 +370,105 @@ export const aiPaths = {
 			},
 		},
 	},
+	'/api/admin/ai/generate/grammar': {
+		post: {
+			tags: ['Admin - AI Generation'],
+			summary: 'Generate grammar lesson with AI (Admin)',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							properties: {
+								templateName: { type: 'string', example: 'n5-basic' },
+								prompt: { type: 'string', example: 'Daily conversation patterns' },
+								jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'], example: 'N5' },
+								patternHint: { type: 'string', example: '〜てください' },
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Grammar draft generated',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_001' },
+									data: {
+										type: 'object',
+										properties: {
+											grammar: { type: 'object' },
+											source: { type: 'string', example: 'gemini' },
+											promptUsed: { type: 'string' },
+											templateName: { type: 'string' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+				'403': { $ref: '#/components/responses/Forbidden' },
+			},
+		},
+	},
+	'/api/admin/ai/generate/reading': {
+		post: {
+			tags: ['Admin - AI Generation'],
+			summary: 'Generate reading article with AI (Admin)',
+			security: [{ bearerAuth: [] }],
+			requestBody: {
+				required: true,
+				content: {
+					'application/json': {
+						schema: {
+							type: 'object',
+							properties: {
+								templateName: { type: 'string', example: 'n5-basic' },
+								prompt: { type: 'string', example: 'Short story about school' },
+								jlpt: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'], example: 'N5' },
+							},
+						},
+					},
+				},
+			},
+			responses: {
+				'200': {
+					description: 'Reading article draft generated',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_001' },
+									data: {
+										type: 'object',
+										properties: {
+											article: { type: 'object' },
+											source: { type: 'string', example: 'gemini' },
+											promptUsed: { type: 'string' },
+											templateName: { type: 'string' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'401': { $ref: '#/components/responses/Unauthorized' },
+				'403': { $ref: '#/components/responses/Forbidden' },
+			},
+		},
+	},
 	'/api/admin/ai/test': {
 		get: {
 			tags: ['Admin - AI Generation'],

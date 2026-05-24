@@ -24,15 +24,11 @@ export default function EditorAIGenerateModal({
 	const [selectedTemplate, setSelectedTemplate] = useState('n5-basic');
 	const [generateHint, setGenerateHint] = useState('');
 	const [busy, setBusy] = useState(false);
-	const [preview, setPreview] = useState(null);
-	const [source, setSource] = useState('');
 
 	useEffect(() => {
 		if (!open) return undefined;
 		setSelectedTemplate(config.defaultTemplate(levelKey));
 		setGenerateHint('');
-		setPreview(null);
-		setSource('');
 
 		const onKey = (e) => {
 			if (e.key === 'Escape' && !busy) onClose();
@@ -88,15 +84,21 @@ export default function EditorAIGenerateModal({
 				jlpt: levelKey,
 				patternHint: contextHint?.trim() ?? '',
 			});
-			setPreview(result.item ?? null);
-			setSource(result.source ?? '');
+			const item = result.item ?? null;
+			const resultSource = result.source ?? '';
+			if (!item) {
+				toast.error('AI không trả về nội dung');
+				return;
+			}
+			onApply(item);
 			const srcLabel =
-				result.source === 'gemini'
+				resultSource === 'gemini'
 					? 'Gemini AI'
 					: 'Placeholder (chưa có GEMINI_API_KEY)';
-			toast.success('Đã generate nội dung', {
-				description: `Nguồn: ${srcLabel}`,
+			toast.success('Đã điền vào form', {
+				description: `${srcLabel} · Kiểm tra và chỉnh sửa trước khi lưu.`,
 			});
+			onClose();
 		} catch (err) {
 			toast.error('Generate thất bại', {
 				description: getAxiosErrorMessage(err),
@@ -106,18 +108,7 @@ export default function EditorAIGenerateModal({
 		}
 	};
 
-	const applyContent = () => {
-		if (!preview) return;
-		onApply(preview);
-		toast.success('Đã điền vào form', {
-			description: 'Kiểm tra và chỉnh sửa trước khi lưu.',
-		});
-		onClose();
-	};
-
 	if (!open) return null;
-
-	const previewLines = config.previewLines(preview);
 
 	return (
 		<div
@@ -149,8 +140,9 @@ export default function EditorAIGenerateModal({
 
 				<div className="admin-quote-modal-body">
 					<p className="admin-ai-generate-lead">
-						Chọn mẫu từ <Link to="/admin/prompts">Prompt AI</Link>. Nội dung
-						sẽ điền vào form — bạn vẫn cần lưu bài.
+						Chọn mẫu từ <Link to="/admin/prompts">Prompt AI</Link>. Sau khi
+						generate, nội dung tự điền vào form (giống Kaiwa) — bạn vẫn cần
+						lưu bài.
 					</p>
 
 					<div className="admin-ai-generate-form">
@@ -200,28 +192,6 @@ export default function EditorAIGenerateModal({
 						</div>
 					</div>
 
-					{source ? (
-						<p className="admin-ai-generate-source">
-							Nguồn:{' '}
-							<span
-								className={`admin-ai-generate-chip${source === 'gemini' ? ' admin-ai-generate-chip--ok' : ''}`}
-							>
-								{source === 'gemini' ? 'Gemini' : 'Placeholder'}
-							</span>
-						</p>
-					) : null}
-
-					{preview ? (
-						<div className="admin-ai-generate-preview">
-							<p className="admin-quote-label">Xem trước</p>
-							<ul className="admin-grammar-ai-preview-list">
-								{previewLines.map((line) => (
-									<li key={line}>{line}</li>
-								))}
-							</ul>
-						</div>
-					) : null}
-
 					<div className="admin-quote-modal-actions">
 						<button
 							type="button"
@@ -233,25 +203,11 @@ export default function EditorAIGenerateModal({
 						</button>
 						<button
 							type="button"
-							className="admin-quote-btn admin-quote-btn--muted"
-							disabled={busy || !preview}
-							onClick={() => void runGenerate()}
-						>
-							Generate lại
-						</button>
-						<button
-							type="button"
 							className="admin-quote-btn admin-quote-btn--primary"
 							disabled={busy}
-							onClick={() =>
-								preview ? applyContent() : void runGenerate()
-							}
+							onClick={() => void runGenerate()}
 						>
-							{busy
-								? 'Đang xử lý…'
-								: preview
-									? 'Điền vào form'
-									: 'Generate'}
+							{busy ? 'Đang generate…' : 'Generate & điền form'}
 						</button>
 					</div>
 				</div>

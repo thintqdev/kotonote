@@ -8,6 +8,7 @@ import { mockStreak } from "../data/dashboardHomeMock.js";
 import listeningService from "../services/listeningService.js";
 import { LISTENING_ASSETS } from "../constants/listeningAssets.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import { isJlptLockedError } from "../utils/jlptAccess.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import "./DashboardHome.css";
@@ -189,12 +190,12 @@ export default function ListeningExercisePage() {
             Quay lại danh sách
           </Link>
 
-          {detail.image ? (
+          {resolvePublicMediaUrl(detail.image) ? (
             <div className="grammar-block reading-detail-cover-block">
               <div className="grammar-box reading-detail-cover-wrap">
                 <img
                   className="reading-detail-cover-img"
-                  src={detail.image}
+                  src={resolvePublicMediaUrl(detail.image)}
                   alt=""
                   width={800}
                   height={360}
@@ -220,7 +221,7 @@ export default function ListeningExercisePage() {
 
           <section className="grammar-block" aria-labelledby="listening-audio">
             <div className="grammar-box" style={{ padding: '24px', textAlign: 'center', background: '#f8faf6', borderRadius: '12px' }}>
-              <audio ref={audioRef} src={detail.audioUrl} preload="metadata" />
+              <audio ref={audioRef} src={resolvePublicMediaUrl(detail.audioUrl) ?? detail.audioUrl} preload="metadata" />
               
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
                 <button
@@ -318,7 +319,7 @@ export default function ListeningExercisePage() {
                               {!hasImg && <span className="reading-q-option-text" style={{ marginLeft: '12px' }}>{choice}</span>}
                             </div>
                             {hasImg && (
-                              <img src={q.choiceImages[ci]} alt={`Đáp án ${letter}`} style={{ maxWidth: '100%', height: '120px', objectFit: 'contain' }} />
+                              <img src={resolvePublicMediaUrl(q.choiceImages[ci]) ?? q.choiceImages[ci]} alt={`Đáp án ${letter}`} style={{ maxWidth: '100%', height: '120px', objectFit: 'contain' }} />
                             )}
                             {hasImg && choice && (
                               <span style={{ marginTop: '8px', fontSize: '0.9rem' }}>{choice}</span>

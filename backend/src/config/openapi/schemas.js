@@ -277,7 +277,15 @@ export const schemas = {
 			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
 			type: {
 				type: 'string',
-				enum: ['vocabulary', 'kanji', 'grammar', 'reading', 'listening', 'other'],
+				enum: [
+					'vocabulary',
+					'kanji',
+					'grammar',
+					'reading',
+					'listening',
+					'kaiwa',
+					'other',
+				],
 				example: 'vocabulary',
 			},
 			templateKey: { type: 'string', example: 'n5-basic' },
@@ -674,6 +682,123 @@ export const schemas = {
 					choiceIndex: { type: 'integer' },
 				},
 			},
+		},
+	},
+	Notification: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string', example: '507f1f77bcf86cd799439011' },
+			userId: { type: 'string' },
+			title: { type: 'string', example: 'Streak reminder' },
+			message: { type: 'string', example: 'Check in today!' },
+			type: {
+				type: 'string',
+				enum: ['info', 'success', 'warning', 'error', 'task_update', 'system', 'admin_action'],
+			},
+			category: {
+				type: 'string',
+				enum: ['vocabulary', 'kanji', 'quiz', 'streak', 'achievement', 'system', 'admin', 'other'],
+			},
+			priority: { type: 'string', enum: ['low', 'normal', 'high', 'urgent'] },
+			isRead: { type: 'boolean', example: false },
+			createdAt: { type: 'string', format: 'date-time' },
+		},
+	},
+	NotebookNote: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string' },
+			title: { type: 'string', example: 'Ghi chú N5' },
+			contentHtml: { type: 'string', example: '<p>Nội dung</p>' },
+			coverColor: { type: 'string', example: 'sakura' },
+			isPinned: { type: 'boolean', example: false },
+			updatedAt: { type: 'string', format: 'date-time' },
+		},
+	},
+	MembershipPlan: {
+		type: 'object',
+		properties: {
+			id: { type: 'string', enum: ['free', 'pro', 'ultra', 'ultimate'] },
+			nameVi: { type: 'string' },
+			jlptUnlocked: {
+				type: 'array',
+				items: { type: 'string', enum: ['N5', 'N4', 'N3', 'N2', 'N1'] },
+			},
+			pricing: {
+				type: 'object',
+				properties: {
+					yearly: { type: 'integer', example: 199000 },
+					lifetime: { type: 'integer', example: 599000 },
+				},
+			},
+		},
+	},
+	UserMembership: {
+		type: 'object',
+		properties: {
+			tierId: { type: 'string', example: 'free' },
+			billing: { type: 'string', enum: ['free', 'yearly', 'lifetime'] },
+			jlptUnlocked: {
+				type: 'array',
+				items: { type: 'string' },
+			},
+			expiresAt: { type: 'string', format: 'date-time', nullable: true },
+		},
+	},
+	ListeningExercise: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string' },
+			titleVi: { type: 'string' },
+			titleJa: { type: 'string' },
+			jlpt: { type: 'string', enum: ['N1', 'N2', 'N3', 'N4', 'N5'] },
+			type: {
+				type: 'string',
+				enum: ['task', 'point', 'summary', 'utterance', 'response'],
+			},
+			duration: { type: 'number' },
+			audioUrl: { type: 'string' },
+			isPublished: { type: 'boolean' },
+			jlptLocked: { type: 'boolean', description: 'Annotated when JLPT not in user plan' },
+		},
+	},
+	Badge: {
+		type: 'object',
+		properties: {
+			_id: { type: 'string' },
+			key: { type: 'string', example: 'streak_7' },
+			nameVi: { type: 'string' },
+			nameJa: { type: 'string' },
+			category: { type: 'string' },
+			rarity: { type: 'string', enum: ['common', 'rare', 'epic', 'legendary'] },
+			emoji: { type: 'string', nullable: true },
+			iconUrl: { type: 'string', nullable: true },
+			isActive: { type: 'boolean' },
+			displayOrder: { type: 'integer' },
+		},
+	},
+	DeckGrowthProgress: {
+		type: 'object',
+		properties: {
+			deckId: { type: 'string' },
+			jlpt: { type: 'string', example: 'N5' },
+			growthStage: { type: 'integer', minimum: 0, maximum: 3, example: 1 },
+			updatedAt: { type: 'string', format: 'date-time', nullable: true },
+			advanced: { type: 'boolean', description: 'True when stage increased on last advance' },
+		},
+	},
+	DashboardHome: {
+		type: 'object',
+		properties: {
+			streak: { type: 'object' },
+			focusAreas: { type: 'array', items: { type: 'object' } },
+			todayProgress: { type: 'object' },
+		},
+	},
+	SurveyCompletionStatus: {
+		type: 'object',
+		properties: {
+			completed: { type: 'boolean', example: true },
 		},
 	},
 };

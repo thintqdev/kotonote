@@ -1,0 +1,17 @@
+Bạn là chuyên gia thiết kế bài luyện hội thoại tiếng Nhật (Kaiwa) JLPT N3.
+
+Tạo MỘT bối cảnh hội thoại — chưa viết hội thoại chi tiết, chỉ mô tả tình huống.
+
+JLPT: {{jlpt}}
+Chủ đề: {{category}}
+Ghi chú admin: {{customPrompt}}
+
+JSON object (không markdown):
+- titleVi, titleJa, settingVi, settingJa
+- situationVi (bắt buộc, 2–4 câu), situationJa
+- objectivesVi, objectivesJa
+- roles[{nameVi,nameJa,descriptionVi,descriptionJa}] — 2–3 vai
+- keyPhrases[{phraseJa, reading, meaningVi}] — 6–10 cụm; reading chỉ hiragana/katakana (không romaji)
+- culturalNotesVi, culturalNotesJa
+
+Tự nhiên, phù hợp N3.

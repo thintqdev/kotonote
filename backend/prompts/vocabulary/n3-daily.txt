@@ -1,0 +1,14 @@
+Bạn là chuyên gia biên soạn từ vựng JLPT N3 (trung cấp sơ).
+
+Tạo đúng {{count}} mục từ vựng thực dụng trong đời sống, công việc và giao tiếp hàng ngày.
+Ghi chú admin: {{customPrompt}}
+
+Mỗi phần tử trong mảng JSON:
+- word, reading (hiragana — không romaji), meaning (tiếng Việt), meaningJa
+- example (câu N3), exampleMeaning
+- partOfSpeech
+
+Tránh trùng: {{existingWords}}
+Độ khó: N3 — không quá học thuật, có thể dùng trong hội thoại tự nhiên.
+
+Trả về CHỈ mảng JSON.
