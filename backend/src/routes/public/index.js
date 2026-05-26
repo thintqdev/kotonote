@@ -13,6 +13,7 @@ import kaiwaRoutes from './kaiwaRoutes.js';
 import journalRoutes from './journalRoutes.js';
 import membershipRoutes from './membershipRoutes.js';
 import examPaperRoutes from './examPaperRoutes.js';
+import feedbackRoutes from './feedbackRoutes.js';
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.use('/kaiwa', kaiwaRoutes);
 router.use('/journal', journalRoutes);
 router.use('/membership', membershipRoutes);
 router.use('/exam-papers', examPaperRoutes);
+router.use('/feedback', feedbackRoutes);
 
 export default router;

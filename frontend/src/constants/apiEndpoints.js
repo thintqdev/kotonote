@@ -255,6 +255,18 @@ export const ADMIN_MEMBERSHIPS = {
 /** Khảo sát — `/api/admin/surveys` */
 export const ADMIN_SURVEYS = {
 	stats: '/admin/surveys/stats',
+	overview: '/admin/surveys/overview',
+};
+
+/** Góp ý người dùng — `/api/admin/feedback` */
+export const ADMIN_FEEDBACK = {
+	BASE: '/admin/feedback',
+	feedback: (id) => `/admin/feedback/${encodeURIComponent(id)}`,
+};
+
+/** Hiệu suất / sức khỏe hệ thống — `/api/admin/system` */
+export const ADMIN_SYSTEM = {
+	health: '/admin/system/health',
 };
 
 /** Thông báo / chiến dịch — `/api/admin/notifications` */

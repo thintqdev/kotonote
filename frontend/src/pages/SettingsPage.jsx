@@ -431,6 +431,9 @@ const SettingsPage = () => {
               <Link className="settings-quick-link" to="/change-password">
                 {t("settingsPage.linkPassword")}
               </Link>
+              <Link className="settings-quick-link" to="/feedback">
+                {t("settingsPage.linkFeedback")}
+              </Link>
             </nav>
           </section>
 

@@ -3,12 +3,7 @@ import Badge from '../models/Badge.js';
 import * as notificationService from './notificationService.js';
 import { getIo } from '../config/ioRegistry.js';
 import { sendNotificationToUser } from '../config/socket.js';
-
-const STREAK_BADGE_BY_COUNT = new Map([
-	[7, 'streak_7'],
-	[30, 'streak_30'],
-	[100, 'streak_100'],
-]);
+import { resolveMilestoneBadgeKey } from '../constants/badgeMilestones.js';
 
 /**
  * Danh sách badge hiển thị trên profile (đã unlock + join metadata).
@@ -116,12 +111,42 @@ export async function unlockBadgeForUser(userId, badgeKey) {
 }
 
 /**
- * Sau streak check-in: thử unlock badge mốc 7 / 30 / 100 ngày (nếu đã seed `streak_*`).
+ * Thử unlock badge theo track + mốc count (chỉ khi count khớp một ngưỡng đã khai báo).
  * @param {import('mongoose').Types.ObjectId|string} userId
- * @param {number} currentStreak
+ * @param {keyof typeof import('../constants/badgeMilestones.js').BADGE_MILESTONE_TRACKS} track
+ * @param {number} count
  */
-export async function tryUnlockStreakBadgesForCount(userId, currentStreak) {
-	const badgeKey = STREAK_BADGE_BY_COUNT.get(currentStreak);
+export async function tryUnlockMilestoneBadge(userId, track, count) {
+	const badgeKey = resolveMilestoneBadgeKey(track, count);
 	if (!badgeKey) return null;
 	return unlockBadgeForUser(userId, badgeKey);
+}
+
+/**
+ * Sau streak check-in: mốc 7 / 30 / 100 ngày.
+ */
+export async function tryUnlockStreakBadgesForCount(userId, currentStreak) {
+	return tryUnlockMilestoneBadge(userId, 'streak', currentStreak);
+}
+
+/**
+ * Sau hoàn thành bài đọc: mốc 1 / 10 bài (status `done`).
+ */
+export async function tryUnlockReadingBadgesForCount(userId, completedCount) {
+	return tryUnlockMilestoneBadge(userId, 'reading', completedCount);
+}
+
+/**
+ * Gọi sau sự kiện nghiệp vụ — không throw (không chặn luồng chính).
+ */
+export async function safeTryUnlockMilestoneBadge(userId, track, count) {
+	try {
+		return await tryUnlockMilestoneBadge(userId, track, count);
+	} catch (err) {
+		console.warn(
+			`[badge] milestone unlock failed track=${track} count=${count}:`,
+			err?.message || err
+		);
+		return null;
+	}
 }

@@ -151,6 +151,7 @@ const Header = ({ userName, notificationCount }) => {
       history: t("header.examHistory"),
       password: t("header.changePassword"),
       settings: t("header.settingsMenu"),
+      feedback: t("header.feedbackMenu"),
       membership: t("header.membershipMenu"),
       logout: t("header.logout"),
     }),
@@ -316,6 +317,14 @@ const Header = ({ userName, notificationCount }) => {
                     onClick={() => setIsUserMenuOpen(false)}
                   >
                     {userMenuLabels.settings}
+                  </Link>
+                  <Link
+                    className="dash-user-menu-item"
+                    role="menuitem"
+                    to="/feedback"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    {userMenuLabels.feedback}
                   </Link>
                   <Link
                     className="dash-user-menu-item"

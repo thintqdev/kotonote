@@ -14,6 +14,18 @@ export async function login(credentials) {
 }
 
 /**
+ * Đăng nhập bằng Google ID token (từ Google Identity Services).
+ * @param {{ token: string }} payload
+ * @returns {Promise<{ user: object, token: string }>}
+ */
+export async function googleLogin(payload) {
+	const body = await api.post(AUTH.GOOGLE, {
+		token: String(payload?.token || '').trim(),
+	});
+	return getApiData(body);
+}
+
+/**
  * Đăng ký — không trả JWT; client chuyển sang trang chờ xác minh email.
  * @param {{ name: string, email: string, password: string }} payload
  * @returns {Promise<{ email: string }>}

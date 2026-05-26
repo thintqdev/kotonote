@@ -51,6 +51,23 @@ export const USER = {
 	DASHBOARD_HOME_FETCHED: 'MSG_213',
 };
 
+// Feedback Messages
+export const FEEDBACK = {
+	CREATED: 'MSG_1220',
+	LIST_FETCHED: 'MSG_1221',
+	MY_LIST_FETCHED: 'MSG_1222',
+	NOT_FOUND: 'MSG_1223',
+	UPDATED: 'MSG_1224',
+	RATE_LIMIT: 'MSG_1225',
+	MEDIA_UPLOADED: 'MSG_1226',
+	INVALID_ATTACHMENT: 'MSG_1227',
+};
+
+// Admin system health
+export const SYSTEM = {
+	HEALTH_FETCHED: 'MSG_1280',
+};
+
 // Survey Messages
 export const SURVEY = {
 	CREATED: 'MSG_301',
@@ -276,6 +293,7 @@ export const MESSAGES = {
 	...COMMON,
 	...AUTH,
 	...USER,
+	...FEEDBACK,
 	...SURVEY,
 	...QUOTE,
 	...PROMPT,

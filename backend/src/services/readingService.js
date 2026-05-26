@@ -7,6 +7,7 @@ import {
 	READING_WEEKLY_GOAL,
 } from '../constants/reading.js';
 import AppError from '../utils/AppError.js';
+import { safeTryUnlockMilestoneBadge } from './badgeUnlockService.js';
 
 /** @param {string | null | undefined} imageUrl */
 export async function deleteStoredReadingCover(imageUrl) {
@@ -163,6 +164,13 @@ export const saveArticleProgress = async (userId, slug, body = {}) => {
 		throw new AppError(READING.NOT_FOUND, 404);
 	}
 
+	const priorProgress =
+		await readingProgressRepository.findProgressForUserArticle(
+			userId,
+			article._id,
+		);
+	const wasDone = priorProgress?.status === 'done';
+
 	const patch = {};
 	if (body.status) {
 		patch.status = body.status;
@@ -172,11 +180,7 @@ export const saveArticleProgress = async (userId, slug, body = {}) => {
 	}
 	if (body.recordAnswer) {
 		const { questionIndex, choiceIndex } = body.recordAnswer;
-		const existing =
-			(await readingProgressRepository.findProgressForUserArticle(
-				userId,
-				article._id,
-			)) ?? { questionAnswers: [] };
+		const existing = priorProgress ?? { questionAnswers: [] };
 		const answers = [...(existing.questionAnswers ?? [])];
 		const idx = answers.findIndex((a) => a.questionIndex === questionIndex);
 		const entry = { questionIndex, choiceIndex };
@@ -208,6 +212,14 @@ export const saveArticleProgress = async (userId, slug, body = {}) => {
 		article._id,
 		patch,
 	);
+
+	if (progress.status === 'done' && !wasDone) {
+		const completed = await readingProgressRepository.countByUserStatus(
+			userId,
+			'done',
+		);
+		await safeTryUnlockMilestoneBadge(userId, 'reading', completed);
+	}
 
 	return {
 		progress: {

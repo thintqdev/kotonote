@@ -58,8 +58,9 @@
       "quotes": "Quotes",
       "prompts": "Prompt AI",
       "badges": "Huy hiệu",
-      "analytics": "Thống kê",
+      "systemHealth": "Hiệu suất hệ thống",
       "notifications": "Thông báo",
+      "feedback": "Góp ý",
       "studioSettings": "Cài đặt"
     },
     "help": {
@@ -221,10 +222,30 @@
     "title": "Tổng quan",
     "total": "Tổng số khảo sát: {{count}}",
     "kpiLabel": "Khảo sát đã gửi",
+    "kpis": {
+      "feedbackOpen": "Feedback chưa xử lý",
+      "activeUsers": "User đang active",
+      "checkoutConv7d": "Tỷ lệ thanh toán (7 ngày)"
+    },
     "loading": "Đang tải thống kê…",
     "error": "Không tải được thống kê khảo sát.",
     "retry": "Thử lại",
     "empty": "Chưa có khảo sát nào trong hệ thống.",
+    "overviewTrend": {
+      "title": "Xu hướng 7 ngày",
+      "series": {
+        "surveys": "Khảo sát",
+        "feedbacks": "Feedback",
+        "checkouts": "Checkout tạo mới",
+        "paid": "Checkout đã trả"
+      }
+    },
+    "todo": {
+      "title": "Việc cần xử lý",
+      "openFeedback": "Feedback mở gần đây",
+      "topWeak": "Điểm yếu nổi bật từ survey",
+      "empty": "Chưa có dữ liệu."
+    },
     "sections": {
       "level": "Trình độ hiện tại",
       "goal": "Mục tiêu học",
@@ -235,6 +256,54 @@
     "unspecified": "Chưa ghi nhận",
     "countLabel": "Số lượng",
     "pieFoot": "Tổng (các lát): {{total}}"
+  },
+  "adminSystem": {
+    "title": "Hiệu suất hệ thống",
+    "lead": "Theo dõi API, cơ sở dữ liệu, lưu trữ file và tài nguyên máy chủ. Tự làm mới mỗi 60 giây.",
+    "overall": "Trạng thái chung",
+    "statusHealthy": "Ổn định",
+    "statusDegraded": "Suy giảm",
+    "statusUnhealthy": "Có sự cố",
+    "checkedAt": "Kiểm tra lúc {{time}}",
+    "loading": "Đang tải…",
+    "refresh": "Làm mới",
+    "retry": "Thử lại",
+    "error": "Không tải được dữ liệu hệ thống.",
+    "empty": "Chưa có dữ liệu.",
+    "uptimeDays": "{{count}} ngày",
+    "uptimeHours": "{{count}} giờ",
+    "uptimeMinutes": "{{count}} phút",
+    "uptimeSeconds": "{{count}} giây",
+    "services": {
+      "api": "API",
+      "mongodb": "MongoDB",
+      "storage": "Lưu trữ file"
+    },
+    "fields": {
+      "status": "Trạng thái",
+      "state": "Kết nối",
+      "latency": "Độ trễ",
+      "host": "Host",
+      "database": "Database",
+      "driver": "Driver",
+      "endpoint": "Endpoint",
+      "bucket": "Bucket",
+      "path": "Thư mục"
+    },
+    "runtime": {
+      "title": "Runtime",
+      "uptime": "Uptime process",
+      "env": "Môi trường",
+      "node": "Node.js",
+      "queue": "Hàng đợi thông báo"
+    },
+    "collections": {
+      "title": "Quy mô dữ liệu (ước lượng)",
+      "users": "Users",
+      "surveys": "Surveys",
+      "feedbacks": "Feedbacks",
+      "checkouts": "Checkouts"
+    }
   },
   "header": {
     "today": "Hôm nay",
@@ -247,6 +316,7 @@
     "changePassword": "Đổi mật khẩu",
     "examHistory": "Lịch sử luyện đề",
     "settingsMenu": "Cài đặt",
+    "feedbackMenu": "Góp ý & báo lỗi",
     "membershipMenu": "Gói thành viên",
     "logout": "Đăng xuất"
   },
@@ -267,6 +337,7 @@
     "profile": "Trang cá nhân",
     "changePassword": "Đổi mật khẩu",
     "settings": "Cài đặt",
+    "feedback": "Góp ý & báo lỗi",
     "membership": "Gói thành viên",
     "notifications": "Thông báo",
     "grammar": "Ngữ pháp",
@@ -1130,11 +1201,14 @@
     "register": "Đăng ký",
     "success": "Đăng nhập thành công",
     "verifyRequired": "Vui lòng xác minh email trước khi đăng nhập",
+    "googleUnavailable": "Chưa cấu hình đăng nhập Google — thêm VITE_GOOGLE_CLIENT_ID vào frontend/.env rồi khởi động lại dev server",
+    "googleLoading": "Đang tải nút Google…",
     "errors": {
       "emailRequired": "Vui lòng nhập email",
       "emailInvalid": "Email không hợp lệ",
       "passwordRequired": "Vui lòng nhập mật khẩu",
-      "submitFailed": "Đăng nhập không thành công"
+      "submitFailed": "Đăng nhập không thành công",
+      "googleFailed": "Đăng nhập Google không thành công"
     }
   },
   "forgotPassword": {
@@ -1349,8 +1423,81 @@
     "sectionAccount": "Tài khoản nhanh",
     "linkProfile": "Trang cá nhân",
     "linkPassword": "Đổi mật khẩu",
+    "linkFeedback": "Góp ý & báo lỗi",
     "save": "Lưu cài đặt",
     "savedShort": "Đã lưu."
+  },
+  "feedbackPage": {
+    "title": "Góp ý & báo lỗi",
+    "lead": "Mô tả lỗi bạn gặp để team kiểm tra. Có thể đính kèm ảnh/video nếu cần.",
+    "categoryLabel": "Loại góp ý",
+    "messageLabel": "Nội dung",
+    "messagePlaceholder": "Ví dụ: Khi làm bài nghe ở N4, audio không phát sau khi chuyển câu 3…",
+    "messageHint": "Tối thiểu {{min}} ký tự, tối đa {{max}} (đã nhập {{count}}).",
+    "submit": "Gửi góp ý",
+    "successToast": "Đã gửi góp ý — cảm ơn bạn!",
+    "successBanner": "Cảm ơn bạn! Team đã nhận góp ý và sẽ xem sớm.",
+    "historyTitle": "Góp ý gần đây",
+    "historyEmpty": "Chưa có góp ý nào.",
+    "loading": "Đang tải…",
+    "backToSettings": "← Về cài đặt",
+    "attachments": {
+      "label": "Ảnh / video (tuỳ chọn)",
+      "help": "JPEG, PNG, GIF, WebP, MP4, WebM, MOV — tối đa {{maxFiles}} file, mỗi file tối đa {{maxMb}}MB.",
+      "pick": "Chọn file để tải lên",
+      "uploading": "Đang tải…",
+      "count": "{{n}}/{{max}} file",
+      "removeAria": "Gỡ file đính kèm",
+      "limitReached": "Tối đa {{max}} file đính kèm cho mỗi góp ý.",
+      "badType": "Chỉ hỗ trợ ảnh JPEG/PNG/GIF/WebP hoặc video MP4/WebM/MOV.",
+      "tooLarge": "Mỗi file không quá {{maxMb}}MB.",
+      "uploadFailed": "Tải file lên thất bại"
+    },
+    "categories": {
+      "bug": "Báo lỗi / sự cố",
+      "feature": "Đề xuất tính năng",
+      "content": "Nội dung học (sai, thiếu)",
+      "other": "Khác"
+    },
+    "status": {
+      "open": "Chờ xử lý",
+      "read": "Đã xem",
+      "done": "Đã xử lý"
+    },
+    "errors": {
+      "submitFailed": "Không gửi được góp ý"
+    }
+  },
+  "feedbackAdmin": {
+    "title": "Góp ý người dùng",
+    "lead": "Danh sách phản hồi từ app — đổi trạng thái khi đã xem hoặc xử lý xong.",
+    "filterStatus": "Trạng thái",
+    "filterCategory": "Loại",
+    "filterSearch": "Tìm kiếm",
+    "filterAll": "Tất cả",
+    "searchPlaceholder": "Nội dung hoặc URL trang…",
+    "searchBtn": "Tìm",
+    "total": "Tổng: {{count}} góp ý",
+    "loading": "Đang tải…",
+    "empty": "Không có góp ý phù hợp.",
+    "colUser": "Người dùng",
+    "colCategory": "Loại",
+    "colMessage": "Nội dung",
+    "colMedia": "Media",
+    "colPage": "Trang",
+    "colDate": "Thời gian",
+    "colStatus": "Trạng thái",
+    "pager": "Phân trang",
+    "updatedToast": "Đã cập nhật trạng thái",
+    "status": {
+      "open": "Chờ xử lý",
+      "read": "Đã xem",
+      "done": "Đã xử lý"
+    },
+    "errors": {
+      "loadFailed": "Không tải được danh sách góp ý",
+      "updateFailed": "Không cập nhật được trạng thái"
+    }
   },
   "membershipPage": {
     "title": "Gói thành viên",
@@ -1635,6 +1782,15 @@
     "MSG_1206": "Phân tích AI thất bại — thử lại sau",
     "MSG_1207": "Đã tải hạn mức phân tích",
     "MSG_1208": "Nội dung nhật ký không được để trống",
+    "MSG_1220": "Đã gửi góp ý thành công",
+    "MSG_1221": "Đã tải danh sách góp ý",
+    "MSG_1222": "Đã tải góp ý của bạn",
+    "MSG_1223": "Không tìm thấy góp ý",
+    "MSG_1224": "Đã cập nhật góp ý",
+    "MSG_1225": "Bạn đã gửi đủ 3 góp ý hôm nay — thử lại vào ngày mai",
+    "MSG_1226": "Đã tải file đính kèm",
+    "MSG_1227": "Đính kèm không hợp lệ — chỉ dùng file vừa tải lên tại trang này",
+    "MSG_1280": "Đã tải trạng thái hệ thống",
     "MSG_1300": "Đã tải danh sách đề thi",
     "MSG_1301": "Đã tải đề thi",
     "MSG_1302": "Tạo đề thi thành công",

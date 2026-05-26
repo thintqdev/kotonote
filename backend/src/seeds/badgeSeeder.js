@@ -1,6 +1,6 @@
 import Badge from '../models/Badge.js';
 
-const STREAK_BADGES = [
+const MILESTONE_BADGES = [
 	{
 		key: 'streak_7',
 		nameVi: 'Lửa tuần đầu',
@@ -34,14 +34,36 @@ const STREAK_BADGES = [
 		emoji: '🏆',
 		displayOrder: 12,
 	},
+	{
+		key: 'reading_complete_1',
+		nameVi: 'Bài đọc đầu tiên',
+		nameJa: '初めての読解',
+		descriptionVi: 'Hoàn thành 1 bài đọc hiểu.',
+		descriptionJa: '読解を1本完了しました。',
+		category: 'reading',
+		rarity: 'common',
+		emoji: '📖',
+		displayOrder: 20,
+	},
+	{
+		key: 'reading_complete_10',
+		nameVi: 'Đọc giỏi 10 bài',
+		nameJa: '読解10本達成',
+		descriptionVi: 'Hoàn thành 10 bài đọc hiểu.',
+		descriptionJa: '読解を10本完了しました。',
+		category: 'reading',
+		rarity: 'rare',
+		emoji: '📚',
+		displayOrder: 21,
+	},
 ];
 
 /**
- * Seed badge mốc streak (bỏ qua nếu key đã tồn tại).
+ * Seed badge mốc tự động (bỏ qua nếu key đã tồn tại).
  */
 export const seedBadges = async () => {
 	let created = 0;
-	for (const row of STREAK_BADGES) {
+	for (const row of MILESTONE_BADGES) {
 		const exists = await Badge.findOne({ key: row.key }).lean();
 		if (exists) continue;
 		await Badge.create({
@@ -52,9 +74,9 @@ export const seedBadges = async () => {
 		created += 1;
 	}
 	if (created > 0) {
-		console.log(`✓ Seeded ${created} badge(s) (streak milestones)`);
+		console.log(`✓ Seeded ${created} milestone badge(s)`);
 	} else {
-		console.log('Badges: streak keys already present, skipped.');
+		console.log('Badges: milestone keys already present, skipped.');
 	}
 };
 

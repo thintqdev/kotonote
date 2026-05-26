@@ -65,6 +65,15 @@ export const AuthProvider = ({ children }) => {
 		return { user: nextUser, token };
 	};
 
+	const loginWithGoogle = async (googleIdToken, remember = true) => {
+		const { user: nextUser, token } = await authService.googleLogin({
+			token: googleIdToken,
+		});
+		setUserToken(token, remember);
+		setUser(nextUser);
+		return { user: nextUser, token };
+	};
+
 	/** Đăng ký — không đăng nhập; chờ xác minh email. */
 	const signUp = useCallback(async (name, email, password) => {
 		clearUserToken();
@@ -103,6 +112,7 @@ export const AuthProvider = ({ children }) => {
 				user,
 				loading,
 				login,
+				loginWithGoogle,
 				signUp,
 				completeEmailVerification,
 				logout,

@@ -1,8 +1,7 @@
 /* Tổng quan / biểu đồ khảo sát admin (Recharts) */
 
 .admin-overview {
-  max-width: 1120px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .admin-overview-title {
@@ -79,6 +78,118 @@
   box-shadow: 0 6px 22px rgba(42, 38, 32, 0.06);
 }
 
+.admin-overview-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-overview-kpi-grid .admin-overview-kpi {
+  margin-bottom: 0;
+}
+
+.admin-overview-kpi--compact {
+  padding: 12px 14px;
+}
+
+.admin-overview-kpi--compact .admin-overview-kpi-value {
+  font-size: 1.45rem;
+}
+
+.admin-overview-panel {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: rgba(255, 252, 246, 0.9);
+}
+
+.admin-overview-panel-title {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--admin-ink);
+}
+
+.admin-overview-panel-chart {
+  width: 100%;
+}
+
+.admin-overview-todo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.admin-overview-todo-sub {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--admin-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.admin-overview-todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-overview-todo-item {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px dashed rgba(107, 126, 95, 0.38);
+  background: rgba(255, 252, 246, 0.8);
+}
+
+.admin-overview-todo-item p {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--admin-ink);
+}
+
+.admin-overview-todo-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--admin-ink-soft);
+}
+
+.admin-overview-todo-line strong {
+  color: var(--admin-ink);
+}
+
+.admin-overview-weak-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-overview-weak-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.2);
+  background: rgba(232, 238, 228, 0.35);
+  font-size: 0.85rem;
+}
+
+.admin-overview-weak-list strong {
+  font-variant-numeric: tabular-nums;
+}
+
 .admin-overview-kpi-value {
   font-size: 2rem;
   font-weight: 800;
@@ -104,6 +215,14 @@
 }
 
 @media (max-width: 720px) {
+  .admin-overview-kpi-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-overview-todo-grid {
+    grid-template-columns: 1fr;
+  }
+
   .admin-overview-grid {
     grid-template-columns: 1fr;
   }

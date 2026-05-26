@@ -1,6 +1,6 @@
 import * as streakRepository from '../repositories/streakRepository.js';
 import { STREAK } from '../constants/messages.js';
-import { tryUnlockStreakBadgesForCount } from './badgeUnlockService.js';
+import { safeTryUnlockMilestoneBadge } from './badgeUnlockService.js';
 
 export const getUserStreak = async (userId) => {
 	const streak = await streakRepository.getOrCreateStreak(userId);
@@ -19,11 +19,11 @@ export const checkIn = async (userId) => {
 	const result = await streak.checkIn();
 
 	if (result.success) {
-		try {
-			await tryUnlockStreakBadgesForCount(userId, result.currentStreak);
-		} catch {
-			/* không chặn check-in nếu badge/notify lỗi */
-		}
+		await safeTryUnlockMilestoneBadge(
+			userId,
+			'streak',
+			result.currentStreak,
+		);
 	}
 
 	return {

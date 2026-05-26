@@ -1,8 +1,7 @@
 /* Trang quản lý người dùng (admin) — biến màu từ AdminLayout.css */
 
 .admin-users-page {
-  max-width: 1180px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .admin-users-title {

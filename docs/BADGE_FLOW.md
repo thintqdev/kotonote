@@ -38,13 +38,32 @@ unlockBadgeForUser(userId, badgeKey)   ← backend/src/services/badgeUnlockServi
 
 ---
 
-## 3. Gắn vào tính năng (ví dụ đã có: streak)
+## 3. Mốc tự động (`badgeMilestones.js`)
 
-- File: `backend/src/services/streakService.js`
-- Sau khi check-in streak thành công, gọi `tryUnlockStreakBadgesForCount(userId, currentStreak)`.
-- Hàm này map mốc **7 / 30 / 100** → key `streak_7` / `streak_30` / `streak_100`, rồi gọi `unlockBadgeForUser`.
+File: `backend/src/constants/badgeMilestones.js` — map **track + số đếm** → `Badge.key`.
 
-**Badge khác**: tại service tương ứng (từ vựng, quiz, …), khi đủ điều kiện, gọi trực tiếp `unlockBadgeForUser(userId, 'some_key')` hoặc bọc trong `tryUnlock…` riêng (cùng pattern streak).
+| Track | Mốc (count) | Badge key |
+|-------|-------------|-----------|
+| `streak` | 7, 30, 100 | `streak_7`, `streak_30`, `streak_100` |
+| `reading` | 1, 10 | `reading_complete_1`, `reading_complete_10` |
+
+API unlock: `safeTryUnlockMilestoneBadge(userId, track, count)` trong `badgeUnlockService.js` (không throw, không chặn luồng chính).
+
+### Hook đã gắn
+
+| Sự kiện | File | Gọi |
+|---------|------|-----|
+| Streak check-in thành công | `streakService.js` | `safeTryUnlockMilestoneBadge(userId, 'streak', currentStreak)` |
+| Bài đọc chuyển sang `done` lần đầu | `readingService.saveArticleProgress` | đếm `status=done` → `safeTryUnlockMilestoneBadge(userId, 'reading', completed)` |
+
+### Thêm thành tựu mới (checklist)
+
+1. **Admin** (hoặc seed): tạo `Badge` với `key` trùng mốc (ví dụ `vocab_deck_5`).
+2. **`badgeMilestones.js`**: thêm track hoặc mốc, ví dụ `vocabulary: { 5: 'vocab_deck_5' }`.
+3. **Service nghiệp vụ**: sau khi đạt điều kiện, gọi `safeTryUnlockMilestoneBadge(userId, 'vocabulary', count)`.
+4. **Seed** (tuỳ chọn): thêm row trong `badgeSeeder.js`.
+
+Unlock **một lần** khi `count` **khớp chính xác** một mốc (ví dụ đúng bài thứ 10 → `reading_complete_10`). Gọi lại idempotent — không spam notify.
 
 ---
 
@@ -100,7 +119,8 @@ unlockBadgeForUser(userId, badgeKey)   ← backend/src/services/badgeUnlockServi
 
 ## 8. Seed / vận hành
 
-- Chạy seed backend (có `seedBadges`) để có document `Badge` cho các key streak (và sau này các key khác nếu bạn thêm vào seeder).
+- Chạy `npm run seed` (trong thư mục backend) để có document `Badge` cho các key mốc (streak + reading).
+- Admin cũng có thể tạo badge thủ công trên Studio — **`key` phải khớp** `badgeMilestones.js`.
 - Không seed → unlock streak vẫn chạy code nhưng có thể nhận `badge_not_found` cho đến khi có bản ghi `Badge` tương ứng.
 
 ---
@@ -128,4 +148,4 @@ flowchart LR
 
 ---
 
-*Nếu sau này bạn thêm badge mới: thêm document `Badge` + một lời gọi `unlockBadgeForUser` đúng chỗ nghiệp vụ — không cần đổi contract Profile/notification trừ khi muốn deep link khác (`actionData`).*
+*Nếu sau này bạn thêm badge mới: làm theo checklist mục 3 — không cần đổi contract Profile/notification trừ khi muốn deep link khác (`actionData`).*

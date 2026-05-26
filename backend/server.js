@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import './src/config/serverMetrics.js';
 import mongoose from 'mongoose';
 import express from 'express';
 import path from 'path';

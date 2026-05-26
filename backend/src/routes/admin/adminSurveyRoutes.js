@@ -6,5 +6,6 @@ const router = express.Router();
 // Admin Survey routes
 router.get('/', surveyController.getAllSurveys);
 router.get('/stats', surveyController.getSurveyStats);
+router.get('/overview', surveyController.getAdminOverview);
 
 export default router;

@@ -133,16 +133,22 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.badges",
       },
       {
-        id: "analytics",
+        id: "systemHealth",
         to: "/admin/analytics",
         iconSrc: "/assets/menu-icons/statistics.png",
-        labelKey: "adminLayout.sidebar.analytics",
+        labelKey: "adminLayout.sidebar.systemHealth",
       },
       {
         id: "notifications",
         to: "/admin/notifications",
         icon: "doc",
         labelKey: "adminLayout.sidebar.notifications",
+      },
+      {
+        id: "feedback",
+        to: "/admin/feedback",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.feedback",
       },
       {
         id: "settings",

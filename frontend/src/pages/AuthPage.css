@@ -644,6 +644,54 @@
   flex-shrink: 0;
 }
 
+/* Google Identity Services */
+.google-signin-wrap {
+  width: 100%;
+  min-height: 44px;
+}
+
+.google-signin-native {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+}
+
+.google-signin-native > div {
+  width: 100% !important;
+}
+
+.google-signin-wrap--disabled .google-signin-native {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.google-signin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  opacity: 0.85;
+}
+
+.google-signin-hint {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--admin-ink-soft, #8a7a6a);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.google-signin-hint--error {
+  color: #9a3b2f;
+}
+
+.google-signin-fallback .google-signin-hint {
+  margin-top: 6px;
+}
+
 /* =========================================
    SWITCH LOGIN ↔ REGISTER
    ========================================= */
