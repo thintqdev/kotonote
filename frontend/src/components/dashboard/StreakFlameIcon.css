@@ -1,0 +1,15 @@
+.streak-flame-svg {
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.streak-flame-svg--md {
+  width: 20px;
+  height: 20px;
+}
+
+.streak-flame-svg--lg {
+  width: 26px;
+  height: 26px;
+}

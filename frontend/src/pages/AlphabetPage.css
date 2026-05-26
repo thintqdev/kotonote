@@ -1,9 +1,5 @@
 /* Trang Alphabet — cùng token giấy với vocab, accent xanh hồng theo bảng */
 
-.alpha-dash .dash-main-inner {
-  padding-bottom: 1.5rem;
-}
-
 .alpha-notebook.alpha-hero {
   position: relative;
   max-width: 1100px;

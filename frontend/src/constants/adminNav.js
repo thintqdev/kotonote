@@ -74,30 +74,30 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       },
     ],
   },
-  {
-    id: "media",
-    titleKey: "adminLayout.sidebar.sectionMedia",
-    items: [
-      {
-        id: "mediaAudio",
-        to: "/admin/media/audio",
-        icon: "audio",
-        labelKey: "adminLayout.sidebar.mediaAudio",
-      },
-      {
-        id: "mediaImages",
-        to: "/admin/media/images",
-        icon: "image",
-        labelKey: "adminLayout.sidebar.mediaImages",
-      },
-      {
-        id: "mediaDocs",
-        to: "/admin/media/documents",
-        icon: "doc",
-        labelKey: "adminLayout.sidebar.mediaDocs",
-      },
-    ],
-  },
+  // {
+  //   id: "media",
+  //   titleKey: "adminLayout.sidebar.sectionMedia",
+  //   items: [
+  //     {
+  //       id: "mediaAudio",
+  //       to: "/admin/media/audio",
+  //       icon: "audio",
+  //       labelKey: "adminLayout.sidebar.mediaAudio",
+  //     },
+  //     {
+  //       id: "mediaImages",
+  //       to: "/admin/media/images",
+  //       icon: "image",
+  //       labelKey: "adminLayout.sidebar.mediaImages",
+  //     },
+  //     {
+  //       id: "mediaDocs",
+  //       to: "/admin/media/documents",
+  //       icon: "doc",
+  //       labelKey: "adminLayout.sidebar.mediaDocs",
+  //     },
+  //   ],
+  // },
   {
     id: "system",
     titleKey: "adminLayout.sidebar.sectionSystem",

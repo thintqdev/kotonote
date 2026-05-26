@@ -1,9 +1,5 @@
 /* Đọc hiểu — phiên bản 2: khung vocab-sheet + tab chuẩn + thẻ ngang có ảnh lớn */
 
-.reading-dash .dash-main-inner {
-  max-width: 900px;
-}
-
 .reading-sub-kicker {
   font-weight: 800;
   color: var(--vocab-green-deep);

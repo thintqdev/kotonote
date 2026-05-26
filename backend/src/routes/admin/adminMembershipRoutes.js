@@ -1,7 +1,11 @@
 import express from 'express';
 import * as adminMembershipController from '../../controllers/admin/adminMembershipController.js';
 import { validate } from '../../middlewares/validate.js';
-import { updateUserMembershipSchema } from '../../validators/adminMembershipValidator.js';
+import {
+	checkoutIdParamSchema,
+	refundCheckoutSchema,
+	updateUserMembershipSchema,
+} from '../../validators/adminMembershipValidator.js';
 
 const router = express.Router();
 
@@ -12,6 +16,19 @@ router.patch(
 	'/users/:userId',
 	validate(updateUserMembershipSchema),
 	adminMembershipController.updateUserMembership,
+);
+
+router.get(
+	'/checkouts/:checkoutId/receipt',
+	validate(checkoutIdParamSchema, 'params'),
+	adminMembershipController.getCheckoutReceipt,
+);
+
+router.post(
+	'/checkouts/:checkoutId/refund',
+	validate(checkoutIdParamSchema, 'params'),
+	validate(refundCheckoutSchema),
+	adminMembershipController.refundCheckout,
 );
 
 export default router;

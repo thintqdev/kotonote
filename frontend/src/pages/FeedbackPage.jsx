@@ -211,7 +211,7 @@ export default function FeedbackPage() {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main settings-page feedback-page-shell"
+      mainInnerClassName="settings-page feedback-page-shell"
     >
       <Breadcrumb
         items={[

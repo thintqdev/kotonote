@@ -74,8 +74,14 @@ export default function KanjiListPage() {
       setLoading(true);
       setError("");
       try {
+        const packPromise =
+          selectedJlpt && isLocked(selectedJlpt)
+            ? Promise.resolve({ decks: [], items: [] })
+            : selectedJlpt
+              ? loadKanjiPack(selectedJlpt)
+              : loadAllKanjiPacks();
         const [pack, progressList] = await Promise.all([
-          selectedJlpt ? loadKanjiPack(selectedJlpt) : loadAllKanjiPacks(),
+          packPromise,
           getMyKanjiProgress(
             selectedJlpt ? { jlpt: selectedJlpt } : undefined,
           ),
@@ -99,7 +105,7 @@ export default function KanjiListPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, selectedJlpt, t]);
+  }, [user, selectedJlpt, isLocked, t]);
 
   const merged = useMemo(
     () => mergeKanjiMarks(packItems, marks),

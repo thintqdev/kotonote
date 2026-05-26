@@ -25,6 +25,8 @@ import SettingsPage from "./pages/SettingsPage.jsx";
 import FeedbackPage from "./pages/FeedbackPage.jsx";
 import MembershipPage from "./pages/MembershipPage.jsx";
 import MembershipCheckoutPage from "./pages/MembershipCheckoutPage.jsx";
+import MembershipPaymentHistoryPage from "./pages/MembershipPaymentHistoryPage.jsx";
+import MembershipCheckoutReturnPage from "./pages/MembershipCheckoutReturnPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import GrammarListPage from "./pages/GrammarListPage.jsx";
 import GrammarDetailPage from "./pages/GrammarDetailPage.jsx";
@@ -82,6 +84,8 @@ import AdminExamPaperHome from "./pages/admin/AdminExamPaperHome.jsx";
 import AdminExamPaperEditorPage from "./pages/admin/AdminExamPaperEditorPage.jsx";
 import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
 import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
+import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -128,6 +132,18 @@ function App() {
                 <Route
                   path="/membership/checkout"
                   element={<MembershipCheckoutPage />}
+                />
+                <Route
+                  path="/membership/checkout/return"
+                  element={<MembershipCheckoutReturnPage />}
+                />
+                <Route
+                  path="/membership/history"
+                  element={<MembershipPaymentHistoryPage />}
+                />
+                <Route
+                  path="/membership/receipt/:checkoutId"
+                  element={<MembershipReceiptPage />}
                 />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/grammar" element={<GrammarListPage />} />
@@ -226,6 +242,7 @@ function App() {
                 path="notifications"
                 element={<AdminNotificationsDemoPage />}
               />
+              <Route path="settings" element={<AdminSettingsPage />} />
               <Route path="*" element={<AdminStubContent />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />

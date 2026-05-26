@@ -4,6 +4,7 @@ import { useUserNotifications } from "../context/UserNotificationContext.jsx";
 import { useRandomQuoteLine } from "../hooks/useRandomQuoteLine.js";
 import { Sidebar, Header, Footer } from "../components/common";
 import "./Layout.css";
+import "./UserResponsive.css";
 
 /**
  * Vỏ dashboard: Sidebar + Header + vùng nội dung + Footer.
@@ -25,7 +26,7 @@ function Layout({
     staticText: footerQuote,
   });
   const pageClasses = ["dash-page", pageClassName].filter(Boolean).join(" ");
-  const innerClasses = ["dash-main-inner", mainInnerClassName]
+  const innerClasses = ["dash-main-inner", "profile-main", mainInnerClassName]
     .filter(Boolean)
     .join(" ");
 
@@ -34,9 +35,13 @@ function Layout({
       <div className="dash-shell">
         <div className="dash-shell-bg" aria-hidden="true" />
         <div className={pageClasses}>
-          <Sidebar streakDays={streakDays} />
+          <Sidebar />
           <div className="dash-main">
-            <Header userName={userName} notificationCount={unreadCount} />
+            <Header
+              userName={userName}
+              notificationCount={unreadCount}
+              streakDays={streakDays}
+            />
             <div className={innerClasses}>
               {children}
               <Footer quote={footerDisplay} />

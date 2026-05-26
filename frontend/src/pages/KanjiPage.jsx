@@ -24,6 +24,7 @@ import {
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { useJlptAccess } from "../hooks/useJlptAccess.js";
+import { isJlptLockedError } from "../utils/jlptAccess.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import { shuffleVocabStudy, getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
@@ -93,6 +94,13 @@ export default function KanjiPage() {
       setLoading(false);
       return;
     }
+    if (isLocked(lessonJlpt)) {
+      setLoading(false);
+      setError("");
+      setSortedDecks([]);
+      setPackItems([]);
+      return;
+    }
     let cancelled = false;
     (async () => {
       setLoading(true);
@@ -114,7 +122,7 @@ export default function KanjiPage() {
           }
         }
       } catch (err) {
-        if (!cancelled) {
+        if (!cancelled && !isJlptLockedError(err)) {
           setError(getApiErrorMessage(err, t));
           setSortedDecks([]);
           setPackItems([]);
@@ -126,7 +134,7 @@ export default function KanjiPage() {
     return () => {
       cancelled = true;
     };
-  }, [user, lessonJlpt, deckId, isLessonMode, t]);
+  }, [user, lessonJlpt, deckId, isLessonMode, isLocked, t]);
 
   const merged = useMemo(
     () => mergeKanjiMarks(packItems, marks),
@@ -325,22 +333,22 @@ export default function KanjiPage() {
     );
   }
 
-  if (error) {
-    return (
-      <Layout userName={headerName} streakDays={mockStreak.days}>
-        <p className="vocab-empty grammar-empty--error" role="alert">
-          {error}
-        </p>
-      </Layout>
-    );
-  }
-
   if (isLocked(lessonJlpt)) {
     return (
       <Layout userName={headerName} streakDays={mockStreak.days}>
         <JlptLockGate jlpt={lessonJlpt} forceLocked>
           <span />
         </JlptLockGate>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty grammar-empty--error" role="alert">
+          {error}
+        </p>
       </Layout>
     );
   }

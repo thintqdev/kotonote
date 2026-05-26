@@ -43,10 +43,11 @@ export async function loadKanjiPack(jlpt) {
 		limit: 100,
 	});
 	const sorted = sortDecksByOrder(filterActiveDecks(decks));
+	const openDecks = sorted.filter((deck) => !deck.locked);
 	const items = [];
 
 	await Promise.all(
-		sorted.map(async (deck) => {
+		openDecks.map(async (deck) => {
 			const { kanji } = await getDeckWithKanji(deck._id);
 			const deckJlpt = deck.jlpt || jlpt;
 			for (const k of kanji) {
@@ -65,10 +66,11 @@ export async function loadAllKanjiPacks() {
 		limit: 100,
 	});
 	const sorted = sortDecksByJlptAndOrder(filterActiveDecks(decks));
+	const openDecks = sorted.filter((deck) => !deck.locked);
 	const items = [];
 
 	await Promise.all(
-		sorted.map(async (deck) => {
+		openDecks.map(async (deck) => {
 			const { kanji } = await getDeckWithKanji(deck._id);
 			const deckJlpt = deck.jlpt || levelToJlpt(deck.level);
 			for (const k of kanji) {

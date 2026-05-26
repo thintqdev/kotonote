@@ -1,0 +1,167 @@
+.membership-payment-history-page {
+  gap: 14px;
+}
+
+.membership-history-back {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a6b48;
+  text-decoration: none;
+}
+
+.membership-history-back:hover {
+  text-decoration: underline;
+}
+
+.membership-pay-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.membership-pay-filter-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px dashed rgba(168, 181, 138, 0.65);
+  background: rgba(255, 252, 245, 0.85);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: #6a5a4a;
+  cursor: pointer;
+}
+
+.membership-pay-filter-btn--active {
+  background: rgba(168, 181, 138, 0.28);
+  border-color: #a8b58a;
+  color: #2d3d22;
+}
+
+.membership-pay-empty {
+  text-align: center;
+  padding: 24px 12px;
+}
+
+.membership-pay-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.membership-pay-card {
+  padding: 14px 16px;
+  margin: 0;
+}
+
+.membership-pay-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.membership-pay-card-tier {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 700;
+  color: #3a3028;
+}
+
+.membership-pay-card-billing {
+  font-weight: 600;
+  color: #6a5a4a;
+}
+
+.membership-pay-card-date {
+  margin: 4px 0 0;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: #8a7a68;
+}
+
+.membership-pay-status {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.membership-pay-status--paid {
+  color: #2d5a32;
+  background: rgba(168, 200, 138, 0.35);
+}
+
+.membership-pay-status--pending {
+  color: #6a4a20;
+  background: rgba(255, 220, 160, 0.55);
+}
+
+.membership-pay-status--refunded {
+  color: #4338ca;
+  background: rgba(199, 210, 254, 0.45);
+}
+
+.membership-pay-status--expired,
+.membership-pay-status--cancelled {
+  color: #6a5a4a;
+  background: rgba(200, 190, 175, 0.35);
+}
+
+.membership-pay-card-amount {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 700;
+  color: #2d3d22;
+}
+
+.membership-pay-card-note {
+  margin: 8px 0 0;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #8a7a68;
+}
+
+.membership-pay-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 0 16px;
+}
+
+.membership-pay-page-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(168, 181, 138, 0.55);
+  background: rgba(255, 252, 245, 0.9);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a4828;
+  cursor: pointer;
+}
+
+.membership-pay-page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.membership-pay-page-info {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: #6a5a4a;
+}

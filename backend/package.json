@@ -13,6 +13,8 @@
 		"seed:listening": "node src/scripts/seedListeningDemo.js",
 		"seed:kaiwa": "node src/scripts/seedKaiwaDemo.js",
 		"seed:prompts": "node src/scripts/seedPrompts.js",
+		"payos:confirm-webhook": "node src/scripts/payosConfirmWebhook.js",
+		"membership:expire-due": "node src/scripts/membershipExpireDue.js",
 		"test": "jest --coverage",
 		"lint": "eslint src/**/*.js"
 	},
@@ -27,6 +29,7 @@
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.1052.0",
 		"@google/generative-ai": "^0.24.1",
+		"@payos/node": "^2.0.5",
 		"@scalar/express-api-reference": "^0.9.14",
 		"bcryptjs": "^2.4.3",
 		"compression": "^1.7.4",

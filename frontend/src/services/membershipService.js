@@ -12,6 +12,17 @@ export async function getMyMembership() {
 }
 
 /**
+ * @param {{ page?: number, limit?: number, status?: string }} [params]
+ */
+export async function getMembershipCheckoutHistory(params = {}) {
+	const body = await api.get(MEMBERSHIP.CHECKOUT_HISTORY, { params });
+	return {
+		checkouts: body.data?.checkouts ?? [],
+		pagination: body.data?.pagination ?? null,
+	};
+}
+
+/**
  * @param {{ tierId: string, billing: 'yearly'|'lifetime' }} payload
  */
 export async function createMembershipCheckout(payload) {
@@ -22,7 +33,17 @@ export async function createMembershipCheckout(payload) {
 /**
  * @param {string} checkoutId
  */
+export async function getMembershipCheckoutStatus(checkoutId) {
+	const body = await api.get(MEMBERSHIP.checkoutStatus(checkoutId));
+	return body.data ?? {};
+}
+
 export async function confirmMembershipCheckout(checkoutId) {
 	const body = await api.post(MEMBERSHIP.confirmCheckout(checkoutId));
 	return body.data ?? {};
+}
+
+export async function getMembershipCheckoutReceipt(checkoutId) {
+	const body = await api.get(MEMBERSHIP.checkoutReceipt(checkoutId));
+	return body.data?.receipt ?? null;
 }

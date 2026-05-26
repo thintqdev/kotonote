@@ -25,11 +25,29 @@
 .vocab-dash .dash-main-inner {
   position: relative;
   z-index: 0;
+  background-color: var(--vocab-paper);
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(90, 80, 65, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(90, 80, 65, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      168deg,
+      rgba(255, 253, 248, 0.97) 0%,
+      rgba(244, 235, 220, 0.94) 55%,
+      rgba(235, 228, 214, 0.92) 100%
+    );
   background-size:
     24px 24px,
     24px 24px,
-    100% 100%,
     100% 100%;
+  background-position: 0 0, 0 0, 0 0;
   min-height: calc(100vh - 56px);
   border-radius: 14px;
   box-shadow:
@@ -375,6 +393,26 @@
 @media (max-width: 640px) {
   .vocab-card-list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .vocab-tabs:not(.vocab-tabs--filter) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .vocab-tabs:not(.vocab-tabs--filter)::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vocab-tabs:not(.vocab-tabs--filter) .vocab-tab {
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 }
 

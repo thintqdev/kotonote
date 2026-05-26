@@ -25,3 +25,23 @@ export const updateUserMembership = asyncHandler(async (req, res) => {
 	);
 	return apiSuccess(res, data, MEMBERSHIP.ADMIN_MEMBERSHIP_UPDATED, 200);
 });
+
+export const getCheckoutReceipt = asyncHandler(async (req, res) => {
+	const { getCheckoutReceiptForAdmin } = await import(
+		'../../services/membershipReceiptService.js'
+	);
+	const data = await getCheckoutReceiptForAdmin(req.params.checkoutId);
+	return apiSuccess(res, data, MEMBERSHIP.RECEIPT_FETCHED, 200);
+});
+
+export const refundCheckout = asyncHandler(async (req, res) => {
+	const { refundCheckoutByAdmin } = await import(
+		'../../services/membershipRefundService.js'
+	);
+	const data = await refundCheckoutByAdmin(
+		req.params.checkoutId,
+		req.user._id,
+		req.body,
+	);
+	return apiSuccess(res, data, MEMBERSHIP.CHECKOUT_REFUNDED, 200);
+});

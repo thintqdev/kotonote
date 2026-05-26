@@ -41,6 +41,11 @@ const MembershipCheckoutPage = () => {
 
   const locale = i18n.language?.startsWith('ja') ? 'ja-JP' : 'vi-VN';
 
+  const isPayosCheckout =
+    checkout?.provider === 'payos' && Boolean(checkout?.paymentUrl);
+  const isMockCheckout =
+    checkout?.provider === 'mock' || (!checkout?.provider && !isPayosCheckout);
+
   useEffect(() => {
     if (!VALID_TIERS.has(tierId) || !VALID_BILLING.has(billing)) {
       setError(t('membershipCheckout.invalidParams'));
@@ -54,7 +59,12 @@ const MembershipCheckoutPage = () => {
       setError('');
       try {
         const created = await createMembershipCheckout({ tierId, billing });
-        if (!cancelled) setCheckout(created);
+        if (!cancelled) {
+          setCheckout(created);
+          if (created?.provider === 'payos' && !created?.paymentUrl) {
+            setError(t('membershipCheckout.payosUnavailable'));
+          }
+        }
       } catch (err) {
         if (!cancelled) setError(getApiErrorMessage(err, t));
       } finally {
@@ -67,6 +77,11 @@ const MembershipCheckoutPage = () => {
     };
   }, [tierId, billing, t]);
 
+  const handlePayWithPayos = useCallback(() => {
+    if (!checkout?.paymentUrl) return;
+    window.location.assign(checkout.paymentUrl);
+  }, [checkout]);
+
   const handleSimulatePay = useCallback(async () => {
     if (!checkout?.checkoutId) return;
     setPaying(true);
@@ -75,7 +90,7 @@ const MembershipCheckoutPage = () => {
       await confirmMembershipCheckout(checkout.checkoutId);
       await refreshUser();
       setSuccess(true);
-      setTimeout(() => navigate('/profile', { replace: true }), 2200);
+      setTimeout(() => navigate('/membership', { replace: true }), 2200);
     } catch (err) {
       setError(getApiErrorMessage(err, t));
     } finally {
@@ -87,7 +102,7 @@ const MembershipCheckoutPage = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main membership-page"
+      mainInnerClassName="membership-page"
     >
       <Breadcrumb
         items={[
@@ -126,7 +141,7 @@ const MembershipCheckoutPage = () => {
         </div>
       ) : null}
 
-      {checkout && !success ? (
+      {checkout && !success && !error ? (
         <section className="membership-checkout-card profile-card">
           <span className="profile-card-tape" aria-hidden />
           <dl className="membership-checkout-summary">
@@ -144,26 +159,49 @@ const MembershipCheckoutPage = () => {
             </div>
           </dl>
 
-          <p className="membership-checkout-mock-note">
-            {t('membershipCheckout.mockNote')}
-          </p>
+          {isPayosCheckout ? (
+            <p className="membership-checkout-mock-note">
+              {t('membershipCheckout.payosNote')}
+            </p>
+          ) : null}
+          {isMockCheckout ? (
+            <p className="membership-checkout-mock-note">
+              {t('membershipCheckout.mockNote')}
+            </p>
+          ) : null}
 
           <div className="membership-checkout-actions">
-            <button
-              type="button"
-              className="btn-primary btn-login membership-tier-cta"
-              onClick={handleSimulatePay}
-              disabled={paying}
-            >
-              <span className="btn-primary-line1">
-                <span className="btn-primary-main">
-                  {paying
-                    ? t('membershipCheckout.paying')
-                    : t('membershipCheckout.paySimulate')}
+            {isPayosCheckout ? (
+              <button
+                type="button"
+                className="btn-primary btn-login membership-tier-cta"
+                onClick={handlePayWithPayos}
+              >
+                <span className="btn-primary-line1">
+                  <span className="btn-primary-main">
+                    {t('membershipCheckout.payWithPayos')}
+                  </span>
+                  <span className="btn-arrow">→</span>
                 </span>
-                <span className="btn-arrow">→</span>
-              </span>
-            </button>
+              </button>
+            ) : null}
+            {isMockCheckout ? (
+              <button
+                type="button"
+                className="btn-primary btn-login membership-tier-cta"
+                onClick={handleSimulatePay}
+                disabled={paying}
+              >
+                <span className="btn-primary-line1">
+                  <span className="btn-primary-main">
+                    {paying
+                      ? t('membershipCheckout.paying')
+                      : t('membershipCheckout.paySimulate')}
+                  </span>
+                  <span className="btn-arrow">→</span>
+                </span>
+              </button>
+            ) : null}
             <Link className="membership-checkout-back" to="/membership">
               {t('membershipCheckout.back')}
             </Link>

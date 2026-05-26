@@ -112,6 +112,20 @@ npm run dev
 npm run build
 ```
 
+## 📖 Tài liệu dự án (`docs/`)
+
+| Tài liệu | Nội dung |
+|----------|----------|
+| [PAYOS_PAYMENT_FLOW.md](docs/PAYOS_PAYMENT_FLOW.md) | Thanh toán membership PayOS — lấy key, webhook, luồng, xử lý sự cố |
+| [GOOGLE_OAUTH_SETUP.md](docs/GOOGLE_OAUTH_SETUP.md) | Đăng nhập Google — Client ID / Secret |
+| [BADGE_FLOW.md](docs/BADGE_FLOW.md) | Huy hiệu / badge |
+
+Đăng ký webhook PayOS sau deploy:
+
+```bash
+cd backend && npm run payos:confirm-webhook
+```
+
 ## 📚 API Documentation
 
 ### Base URL

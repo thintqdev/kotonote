@@ -24,17 +24,52 @@
   color: #6a5a4a;
 }
 
-.membership-current-pill {
+.membership-intro-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.membership-current-pill,
+.membership-unlocked-pill {
   display: inline-block;
-  margin: 12px 0 0;
+  margin: 0;
   padding: 6px 12px;
   border-radius: 999px;
   font-family: var(--font-ui);
   font-size: 12px;
   font-weight: 700;
+}
+
+.membership-current-pill {
   color: #3a4828;
   background: rgba(168, 181, 138, 0.22);
   border: 1px dashed #a8b58a;
+}
+
+.membership-unlocked-pill {
+  color: #6a4a30;
+  background: rgba(255, 236, 200, 0.55);
+  border: 1px dashed rgba(200, 150, 80, 0.55);
+}
+
+.membership-history-link {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(168, 181, 138, 0.4);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a6b48;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.membership-history-link:hover {
+  text-decoration: underline;
 }
 
 .membership-tiers {
@@ -234,6 +269,19 @@
   color: #5a6b48;
 }
 
+.membership-tier-included--owned {
+  color: #4a6b42;
+  background: rgba(168, 181, 138, 0.14);
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.membership-tier-included--muted {
+  color: #8a7a68;
+  font-weight: 500;
+}
+
 /* Checkout */
 .membership-checkout {
   width: 100%;
@@ -368,4 +416,17 @@
 
 .profile-membership-link:hover {
   color: #4a7038;
+}
+
+.profile-membership-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.profile-membership-link--secondary {
+  color: #7a6a58;
+  font-weight: 500;
 }

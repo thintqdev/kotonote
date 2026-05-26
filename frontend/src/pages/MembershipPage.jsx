@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth.jsx';
@@ -9,7 +9,12 @@ import {
   getMembershipPlans,
   getMyMembership,
 } from '../services/membershipService.js';
-import { formatVnd } from '../constants/membershipPlans.js';
+import {
+  formatVnd,
+  MEMBERSHIP_TIER_RANK,
+  PAID_TIER_IDS,
+} from '../constants/membershipPlans.js';
+import { jlptUnlockedFromMembership } from '../utils/jlptAccess.js';
 import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
 import './AuthPage.css';
 import './Profile.css';
@@ -17,6 +22,10 @@ import './DashboardHome.css';
 import './Membership.css';
 
 const TIER_ORDER = ['free', 'pro', 'ultra', 'ultimate'];
+
+function isPaidTier(tierId) {
+  return PAID_TIER_IDS.includes(tierId);
+}
 
 const MembershipPage = () => {
   const { t, i18n } = useTranslation();
@@ -35,30 +44,29 @@ const MembershipPage = () => {
 
   const locale = i18n.language?.startsWith('ja') ? 'ja-JP' : 'vi-VN';
 
+  const loadMembershipData = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const [planRows, mine] = await Promise.all([
+        getMembershipPlans(),
+        getMyMembership(),
+      ]);
+      setPlans(planRows);
+      setMembership(mine ?? null);
+    } catch (err) {
+      setError(getApiErrorMessage(err, t));
+    } finally {
+      setLoading(false);
+    }
+  }, [t]);
+
+  const userId = user?.id ?? user?._id;
+
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const [planRows, mine] = await Promise.all([
-          getMembershipPlans(),
-          getMyMembership(),
-        ]);
-        if (!cancelled) {
-          setPlans(planRows);
-          setMembership(mine ?? user?.membership ?? null);
-        }
-      } catch (err) {
-        if (!cancelled) setError(getApiErrorMessage(err, t));
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [user?.membership, t]);
+    if (!userId) return;
+    void loadMembershipData();
+  }, [userId, loadMembershipData]);
 
   const planById = useMemo(() => {
     const map = new Map();
@@ -66,7 +74,22 @@ const MembershipPage = () => {
     return map;
   }, [plans]);
 
-  const currentTierId = membership?.tierId ?? user?.membership?.tierId ?? 'free';
+  const effectiveMembership = membership ?? user?.membership ?? null;
+  const currentTierId = effectiveMembership?.tierId ?? 'free';
+  const currentRank = MEMBERSHIP_TIER_RANK[currentTierId] ?? 0;
+  const unlockedLevels = useMemo(
+    () => jlptUnlockedFromMembership(effectiveMembership),
+    [effectiveMembership],
+  );
+  const unlockedLabel = unlockedLevels.join(', ');
+  const hasPaidPlan = isPaidTier(currentTierId);
+
+  const heroSubtitle = hasPaidPlan
+    ? t('membershipPage.subtitleActive', {
+        plan: t(`membershipPage.tiers.${currentTierId}.name`),
+        levels: unlockedLabel,
+      })
+    : t('membershipPage.subtitleFree');
 
   const goCheckout = (tierId, billing) => {
     navigate(
@@ -78,7 +101,7 @@ const MembershipPage = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main membership-page"
+      mainInnerClassName="membership-page"
     >
       <Breadcrumb
         items={[
@@ -92,14 +115,20 @@ const MembershipPage = () => {
         <h1 className="membership-title profile-section-title">
           {t('membershipPage.title')}
         </h1>
-        <p className="membership-subtitle">{t('membershipPage.subtitle')}</p>
-        {currentTierId ? (
+        <p className="membership-subtitle">{heroSubtitle}</p>
+        <div className="membership-intro-pills">
           <p className="membership-current-pill">
             {t('membershipPage.currentPlan', {
               plan: t(`membershipPage.tiers.${currentTierId}.name`),
             })}
           </p>
-        ) : null}
+          <p className="membership-unlocked-pill">
+            {t('membershipPage.unlockedJlpt', { levels: unlockedLabel })}
+          </p>
+        </div>
+        <Link className="membership-history-link" to="/membership/history">
+          {t('membershipPage.paymentHistoryLink')}
+        </Link>
       </section>
 
       {error ? (
@@ -114,10 +143,16 @@ const MembershipPage = () => {
         <div className="membership-tiers membership-tiers--grid">
           {TIER_ORDER.map((tierId) => {
             const plan = planById.get(tierId);
+            const tierRank = MEMBERSHIP_TIER_RANK[tierId] ?? 0;
             const isCurrent = currentTierId === tierId;
+            const isIncluded = tierRank < currentRank;
+            const canUpgrade = tierRank > currentRank;
             const isFree = tierId === 'free';
             const pricing = plan?.pricing ?? { yearly: 0, lifetime: 0 };
-            const jlpt = plan?.jlptLevels ?? [];
+            const jlpt =
+              plan?.jlptLevels?.length > 0
+                ? plan.jlptLevels
+                : jlptUnlockedFromMembership({ tierId });
 
             return (
               <article
@@ -165,7 +200,12 @@ const MembershipPage = () => {
                   ))}
                 </ul>
 
-                {!isFree ? (
+                {isIncluded ? (
+                  <p className="membership-tier-included membership-tier-included--owned">
+                    {t('membershipPage.tierIncludedInPlan')}
+                  </p>
+                ) : null}
+                {!isFree && canUpgrade ? (
                   <div className="membership-tier-prices">
                     <button
                       type="button"
@@ -196,11 +236,22 @@ const MembershipPage = () => {
                       </span>
                     </button>
                   </div>
-                ) : (
+                ) : null}
+                {isFree && !hasPaidPlan ? (
                   <p className="membership-tier-included">
                     {t('membershipPage.includedFree')}
                   </p>
-                )}
+                ) : null}
+                {isFree && hasPaidPlan ? (
+                  <p className="membership-tier-included membership-tier-included--muted">
+                    {t('membershipPage.tierCatalogFree')}
+                  </p>
+                ) : null}
+                {!isFree && isCurrent ? (
+                  <p className="membership-tier-included membership-tier-included--owned">
+                    {t('membershipPage.tierCurrentActive')}
+                  </p>
+                ) : null}
               </article>
             );
           })}
