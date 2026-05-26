@@ -491,7 +491,12 @@ export const aiPaths = {
 											configured: { 
 												type: 'boolean', 
 												example: true,
-												description: 'Whether GEMINI_API_KEY is configured',
+												description: 'Whether GEMINI_API_KEYS (or GEMINI_API_KEY) is configured',
+											},
+											keyCount: {
+												type: 'integer',
+												example: 2,
+												description: 'Number of API keys loaded from GEMINI_API_KEYS / GEMINI_API_KEY',
 											},
 											provider: { 
 												type: 'string', 

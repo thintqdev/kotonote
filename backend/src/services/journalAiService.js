@@ -1,5 +1,6 @@
 import { AI_JAPANESE_OUTPUT_RULES } from '../constants/aiJapaneseOutputRules.js';
 import { JOURNAL } from '../constants/messages.js';
+import { isGeminiConfigured } from '../config/gemini.js';
 import { callGeminiAPI } from './aiService.js';
 import { normalizeJournalAnalysisFromAI } from '../utils/aiJournalNormalize.js';
 
@@ -62,7 +63,7 @@ function placeholderAnalysis(contentJa, jlpt) {
 			index,
 			textJa,
 			reading: '',
-			translationVi: '(Phân tích mẫu — kiểm tra GEMINI_API_KEY hoặc thử lại sau)',
+			translationVi: '(Phân tích mẫu — kiểm tra GEMINI_API_KEYS hoặc thử lại sau)',
 			feedbackVi: 'Hãy kiểm tra trợ động từ và cách kết thúc câu trong nhật ký.',
 			wordSuggestions: [],
 		}),
@@ -120,7 +121,7 @@ export const analyzeJournalContent = async ({ contentJa, jlpt = 'N4' }) => {
 		return { analysis: normalized, source: 'gemini' };
 	}
 
-	if (!process.env.GEMINI_API_KEY) {
+	if (!isGeminiConfigured()) {
 		return placeholderAnalysis(trimmed, level);
 	}
 

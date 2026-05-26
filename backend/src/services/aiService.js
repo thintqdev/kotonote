@@ -1,5 +1,9 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GEMINI_MODEL } from '../config/gemini.js';
+import {
+	GEMINI_MODEL,
+	getGeminiApiKeys,
+	shouldTryNextGeminiKey,
+} from '../config/gemini.js';
 import { getAIPromptAsync } from '../utils/promptLoader.js';
 import {
 	parseJsonArrayFromAIText,
@@ -27,49 +31,106 @@ import {
  * @param {string} prompt
  * @param {{ temperature?: number, maxTokens?: number, arrayMode?: boolean }} [options]
  */
-export const callGeminiAPI = async (prompt, options = {}) => {
-	const { temperature = 0.7, maxTokens = 8192 } = options;
+/**
+ * @param {string} apiKey
+ * @param {string} prompt
+ * @param {{ temperature?: number, maxTokens?: number, arrayMode?: boolean, jsonMode?: boolean }} options
+ */
+async function invokeGeminiWithKey(apiKey, prompt, options = {}) {
+	const { temperature = 0.7, maxTokens = 8192, arrayMode = true, jsonMode = true } =
+		options;
 
-	const apiKey = process.env.GEMINI_API_KEY;
-	if (!apiKey) {
-		console.warn('GEMINI_API_KEY not configured, using placeholder data');
-		return null;
+	const genAI = new GoogleGenerativeAI(apiKey);
+	const generationConfig = {
+		temperature,
+		maxOutputTokens: maxTokens,
+	};
+	if (jsonMode) {
+		generationConfig.responseMimeType = 'application/json';
 	}
 
-	let responseText = '';
-	try {
-		const genAI = new GoogleGenerativeAI(apiKey);
-		const model = genAI.getGenerativeModel({
-			model: GEMINI_MODEL,
-			generationConfig: {
-				temperature,
-				maxOutputTokens: maxTokens,
-				responseMimeType: 'application/json',
-			},
-		});
+	const model = genAI.getGenerativeModel({
+		model: GEMINI_MODEL,
+		generationConfig,
+	});
 
-		const arrayMode = options.arrayMode !== false;
-		const suffix = arrayMode
+	const suffix = jsonMode
+		? arrayMode
 			? 'Return ONLY a valid JSON array. No markdown, no extra text.'
-			: 'Return ONLY a valid JSON object. No markdown, no extra text.';
-		const fullPrompt = `${prompt}\n\n${suffix}`;
-		const result = await model.generateContent(fullPrompt);
-		responseText = result.response.text();
-		return arrayMode
-			? parseJsonArrayFromAIText(responseText)
-			: parseJsonFromAIText(responseText);
-	} catch (error) {
-		console.error('Gemini API error:', error.message);
-		const arrayMode = options.arrayMode !== false;
-		if (!arrayMode && responseText) {
-			try {
-				return parseJsonObjectLenient(responseText);
-			} catch (lenientErr) {
-				console.error('Gemini lenient JSON parse failed:', lenientErr.message);
-			}
-		}
+			: 'Return ONLY a valid JSON object. No markdown, no extra text.'
+		: '';
+	const fullPrompt = suffix ? `${prompt}\n\n${suffix}` : prompt;
+	const result = await model.generateContent(fullPrompt);
+	const responseText = result.response.text();
+
+	if (!jsonMode) {
+		return responseText?.trim() ?? '';
+	}
+
+	return arrayMode
+		? parseJsonArrayFromAIText(responseText)
+		: parseJsonFromAIText(responseText);
+}
+
+/**
+ * @param {string} prompt
+ * @param {{ temperature?: number, maxTokens?: number, arrayMode?: boolean }} [options]
+ */
+export const callGeminiAPI = async (prompt, options = {}) => {
+	const keys = getGeminiApiKeys();
+	if (!keys.length) {
+		console.warn('GEMINI_API_KEYS not configured, using placeholder data');
 		return null;
 	}
+
+	const arrayMode = options.arrayMode !== false;
+	let lastError = null;
+
+	for (let i = 0; i < keys.length; i += 1) {
+		try {
+			return await invokeGeminiWithKey(keys[i], prompt, {
+				...options,
+				arrayMode,
+				jsonMode: true,
+			});
+		} catch (error) {
+			lastError = error;
+			console.error(
+				`Gemini API error (key ${i + 1}/${keys.length}):`,
+				/** @type {Error} */ (error).message,
+			);
+			if (shouldTryNextGeminiKey(error) && i < keys.length - 1) {
+				console.warn(
+					`Trying next Gemini API key (${i + 2}/${keys.length})…`,
+				);
+				continue;
+			}
+			if (!arrayMode) {
+				const responseText = String(
+					/** @type {{ responseText?: string }} */ (error)?.responseText ?? '',
+				);
+				if (responseText) {
+					try {
+						return parseJsonObjectLenient(responseText);
+					} catch (lenientErr) {
+						console.error(
+							'Gemini lenient JSON parse failed:',
+							/** @type {Error} */ (lenientErr).message,
+						);
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	if (lastError) {
+		console.error(
+			'All Gemini API keys failed:',
+			/** @type {Error} */ (lastError).message,
+		);
+	}
+	return null;
 };
 
 /**
@@ -315,21 +376,31 @@ export const translateWithAI = async (options) => {
 
 	const prompt = `Translate the following ${sourceLang} text to ${targetLang}:\n\n${text}\n\nProvide only the translation, no explanations.`;
 
-	const apiKey = process.env.GEMINI_API_KEY;
-	if (!apiKey) {
+	const keys = getGeminiApiKeys();
+	if (!keys.length) {
 		return `[Translation placeholder] ${text}`;
 	}
 
-	try {
-		const genAI = new GoogleGenerativeAI(apiKey);
-		const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
-		const result = await model.generateContent(prompt);
-		const translated = result.response.text()?.trim();
-		return translated || `[Translation placeholder] ${text}`;
-	} catch (error) {
-		console.error('Gemini translate error:', error.message);
-		return `[Translation placeholder] ${text}`;
+	for (let i = 0; i < keys.length; i += 1) {
+		try {
+			const translated = await invokeGeminiWithKey(keys[i], prompt, {
+				temperature: 0.3,
+				maxTokens: 2048,
+				jsonMode: false,
+			});
+			return translated || `[Translation placeholder] ${text}`;
+		} catch (error) {
+			console.error(
+				`Gemini translate error (key ${i + 1}/${keys.length}):`,
+				/** @type {Error} */ (error).message,
+			);
+			if (shouldTryNextGeminiKey(error) && i < keys.length - 1) {
+				continue;
+			}
+		}
 	}
+
+	return `[Translation placeholder] ${text}`;
 };
 
 function generatePlaceholderVocabulary({ count, existingItems, templateName, customPrompt }) {
@@ -443,7 +514,7 @@ function generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }) {
 		},
 		memo: {
 			ja: 'メモ',
-			vi: `Placeholder — ${customPrompt || 'GEMINI_API_KEY chưa cấu hình'}`,
+			vi: `Placeholder — ${customPrompt || 'GEMINI_API_KEYS chưa cấu hình'}`,
 		},
 		practice: {
 			items: [
@@ -460,7 +531,7 @@ function generatePlaceholderKaiwaContext({ jlpt, category, customPrompt }) {
 		titleJa: `${jlpt}会話シチュエーション`,
 		settingVi: 'Quán cà phê nhỏ ở Tokyo',
 		settingJa: '東京の小さなカフェ',
-		situationVi: `Bạn (học viên ${jlpt}) gặp nhân viên quán. ${customPrompt ? `Gợi ý: ${customPrompt}. ` : ''}Đây là bối cảnh placeholder — hãy cấu hình GEMINI_API_KEY để generate bằng AI.`,
+		situationVi: `Bạn (học viên ${jlpt}) gặp nhân viên quán. ${customPrompt ? `Gợi ý: ${customPrompt}. ` : ''}Đây là bối cảnh placeholder — hãy cấu hình GEMINI_API_KEYS trong .env để generate bằng AI.`,
 		situationJa: 'カフェで店員と話す場面です。',
 		objectivesVi:
 			'- Chào hỏi lịch sự\n- Gọi món đơn giản\n- Cảm ơn và thanh toán',
@@ -503,7 +574,7 @@ function generatePlaceholderReading({ jlpt, customPrompt }) {
 		snippetJa: '短い紹介文です。',
 		paragraphsJa: [
 			'これはプレースホルダーの文章です。',
-			'二段落目です。GEMINI_API_KEYを設定してください。',
+			'二段落目です。GEMINI_API_KEYSを設定してください。',
 		],
 		vocabulary: [
 			{

@@ -2,6 +2,7 @@ import AppError from '../utils/AppError.js';
 import { KAIWA } from '../constants/messages.js';
 import { callGeminiAPI } from './aiService.js';
 import { normalizeKaiwaPracticeTurnFromAI } from '../utils/aiKaiwaPracticeNormalize.js';
+import { buildKaiwaOpeningPlaceholderTurn } from '../utils/kaiwaOpeningTurn.js';
 import { getPublishedContextById } from './kaiwaContextService.js';
 
 const MAX_HISTORY = 12;
@@ -46,7 +47,8 @@ RULES:
 - partnerMessageVi: Vietnamese translation of what you said (for learner).
 - After learner speaks, fill "analysis" in Vietnamese: brief feedback on their Japanese (grammar, politeness, naturalness).
 - "suggestion": ONE better/alternative reply the learner could say next (replyJa, replyReading in hiragana, replyVi).
-- If learner message is empty and no history: open the scene with your character's first line (e.g. greeting).
+- If learner message is empty and no history: open the scene with your character's FIRST line that fits THIS scenario only (setting, situation, partner role). Do NOT default to café/restaurant lines unless the scenario is clearly at a shop/restaurant/café.
+- For travel/directions: partner may offer help (e.g. どうしましたか). For hospital: ask symptoms. For business: greet professionally. Match category "${ctx.category ?? 'daily'}".
 - conversationEnded: true only if the scene naturally concludes.
 
 Return ONLY one JSON object:
@@ -125,22 +127,7 @@ ${userBlock}`;
 
 	if (!trimmedUser) {
 		return {
-			turn: {
-				partnerMessageJa: 'いらっしゃいませ。ご注文はお決まりですか。',
-				partnerMessageVi: 'Xin chào. Bạn đã chọn món chưa?',
-				analysis: {
-					summaryVi: 'Bắt đầu tình huống — hãy chào hoặc gọi món.',
-					grammarNoteVi: '',
-					politenessVi: '',
-					naturalnessVi: '',
-				},
-				suggestion: {
-					replyJa: 'すみません、メニューをください。',
-					replyReading: 'すみません、メニューをください。',
-					replyVi: 'Cho tôi xem menu được không?',
-				},
-				conversationEnded: false,
-			},
+			turn: buildKaiwaOpeningPlaceholderTurn(ctx, pIdx),
 			source: 'placeholder',
 			userRoleIndex: uIdx,
 			partnerRoleIndex: pIdx,

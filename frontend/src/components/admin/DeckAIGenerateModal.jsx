@@ -106,7 +106,7 @@ export default function DeckAIGenerateModal({
 			const srcLabel =
 				result.source === "gemini"
 					? "Gemini AI"
-					: "Placeholder (chưa có GEMINI_API_KEY)";
+					: "Placeholder (chưa cấu hình GEMINI_API_KEYS)";
 			toast.success("Đã điền vào form", {
 				description: `${items.length} ${config.unitLabel} · ${srcLabel}`,
 			});

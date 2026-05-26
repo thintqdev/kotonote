@@ -3,7 +3,7 @@ import * as aiService from '../services/aiService.js';
 import * as vocabularyService from '../services/vocabularyService.js';
 import * as kanjiService from '../services/kanjiService.js';
 import { apiSuccess } from '../utils/response.js';
-import { MESSAGES } from '../constants/messages.js';
+import { getGeminiApiKeys } from '../config/gemini.js';
 
 /**
  * @desc    Generate vocabulary with AI
@@ -267,15 +267,16 @@ export const translate = asyncHandler(async (req, res) => {
  * @access  Admin
  */
 export const testAIConnection = asyncHandler(async (req, res) => {
-	const apiKey = process.env.GEMINI_API_KEY;
-	
+	const keys = getGeminiApiKeys();
+
 	const status = {
-		configured: !!apiKey,
+		configured: keys.length > 0,
+		keyCount: keys.length,
 		provider: 'Gemini AI',
-		message: apiKey 
-			? 'AI service is configured and ready' 
-			: 'AI service not configured. Add GEMINI_API_KEY to .env file',
+		message: keys.length
+			? `AI service is configured (${keys.length} API key${keys.length > 1 ? 's' : ''})`
+			: 'AI service not configured. Add GEMINI_API_KEYS (comma-separated) or GEMINI_API_KEY to .env',
 	};
-	
+
 	return apiSuccess(res, status, MESSAGES.MSG_001, 200);
 });

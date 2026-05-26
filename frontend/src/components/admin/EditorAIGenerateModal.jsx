@@ -94,7 +94,7 @@ export default function EditorAIGenerateModal({
 			const srcLabel =
 				resultSource === 'gemini'
 					? 'Gemini AI'
-					: 'Placeholder (chưa có GEMINI_API_KEY)';
+					: 'Placeholder (chưa cấu hình GEMINI_API_KEYS)';
 			toast.success('Đã điền vào form', {
 				description: `${srcLabel} · Kiểm tra và chỉnh sửa trước khi lưu.`,
 			});

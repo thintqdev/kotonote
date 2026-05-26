@@ -141,7 +141,7 @@ export default function AdminKaiwaEditorPage() {
 			const srcLabel =
 				source === 'gemini'
 					? 'Gemini AI'
-					: 'Placeholder (chưa có GEMINI_API_KEY)';
+					: 'Placeholder (chưa cấu hình GEMINI_API_KEYS)';
 			toast.success('Đã điền bối cảnh từ AI', {
 				description: `${srcLabel} · mẫu ${payload.templateName}`,
 			});
