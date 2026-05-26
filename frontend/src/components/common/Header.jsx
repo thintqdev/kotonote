@@ -7,6 +7,7 @@ import { useAuth } from "../../hooks/useAuth.jsx";
 import { useUserNotifications } from "../../context/UserNotificationContext.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import NotificationDropdown from "./NotificationDropdown.jsx";
+import HeaderStreak from "../dashboard/HeaderStreak.jsx";
 import "./Header.css";
 
 function IconBell(props) {
@@ -134,7 +135,7 @@ function DecoFlower(props) {
   );
 }
 
-const Header = ({ userName, notificationCount }) => {
+const Header = ({ userName, notificationCount, streakDays = 0 }) => {
   const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const { recentNotifications, markOneRead } = useUserNotifications();
@@ -151,6 +152,7 @@ const Header = ({ userName, notificationCount }) => {
       history: t("header.examHistory"),
       password: t("header.changePassword"),
       settings: t("header.settingsMenu"),
+      feedback: t("header.feedbackMenu"),
       membership: t("header.membershipMenu"),
       logout: t("header.logout"),
     }),
@@ -216,13 +218,16 @@ const Header = ({ userName, notificationCount }) => {
         />
         <DecoFlower />
         <div className="dash-topbar-body">
-          <div className="dash-topbar-brand">
-            <div className="dash-topbar-kicker-row">
-              <span className="dash-topbar-kicker">{t("header.today")}</span>
-              <span className="dash-topbar-date" suppressHydrationWarning>
-                {dateLine}
-              </span>
+          <div className="dash-topbar-leading">
+            <div className="dash-topbar-brand">
+              <div className="dash-topbar-kicker-row">
+                <span className="dash-topbar-kicker">{t("header.today")}</span>
+                <span className="dash-topbar-date" suppressHydrationWarning>
+                  {dateLine}
+                </span>
+              </div>
             </div>
+            <HeaderStreak days={streakDays} />
           </div>
 
           <div className="dash-topbar-actions">
@@ -320,6 +325,14 @@ const Header = ({ userName, notificationCount }) => {
                   <Link
                     className="dash-user-menu-item"
                     role="menuitem"
+                    to="/feedback"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    {userMenuLabels.feedback}
+                  </Link>
+                  <Link
+                    className="dash-user-menu-item"
+                    role="menuitem"
                     to="/membership"
                     onClick={() => setIsUserMenuOpen(false)}
                   >
@@ -347,6 +360,7 @@ const Header = ({ userName, notificationCount }) => {
 Header.propTypes = {
   userName: PropTypes.string.isRequired,
   notificationCount: PropTypes.number.isRequired,
+  streakDays: PropTypes.number,
 };
 
 export default Header;

@@ -118,6 +118,11 @@
   flex-shrink: 0;
 }
 
+.streak-week--compact {
+  margin-top: 0;
+  gap: 4px;
+}
+
 .streak-day {
   display: flex;
   flex-direction: column;
@@ -199,12 +204,14 @@
 }
 
 .streak-day-flame {
-  display: block;
-  width: 18px;
-  height: auto;
   flex-shrink: 0;
   overflow: visible;
-  transform-origin: 50% 88%;
+  transform-origin: 50% 85%;
+}
+
+.streak-day-flame.streak-flame-svg--md {
+  width: 20px;
+  height: 20px;
 }
 
 .streak-day-flame--off {
@@ -302,8 +309,9 @@
     height: 20px;
   }
 
-  .streak-day-flame {
-    width: 16px;
+  .streak-day-flame.streak-flame-svg--md {
+    width: 18px;
+    height: 18px;
   }
 }
 

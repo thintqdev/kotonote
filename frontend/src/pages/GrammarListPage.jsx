@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
@@ -23,6 +23,7 @@ import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 import "./VocabularyPages.css";
+import "./ReadingListPage.css";
 
 const TAG_ACCENT = new Set([
   "formal",
@@ -32,6 +33,8 @@ const TAG_ACCENT = new Set([
   "change",
 ]);
 
+const DEFAULT_JLPT_LEVELS = ["N5", "N4", "N3", "N2", "N1"];
+
 function parsePage(searchParams) {
   const raw = parseInt(searchParams.get("page") || "1", 10);
   return Number.isFinite(raw) && raw >= 1 ? raw : 1;
@@ -39,6 +42,7 @@ function parsePage(searchParams) {
 
 export default function GrammarListPage() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
   const { isLocked } = useJlptAccess();
@@ -126,6 +130,14 @@ export default function GrammarListPage() {
     );
   };
 
+  const handleJlptTab = (nextJlpt) => {
+    if (nextJlpt && isLocked(nextJlpt)) {
+      navigate("/membership");
+      return;
+    }
+    applyJlpt(nextJlpt);
+  };
+
   const applyTag = (nextTag) => {
     const toggled =
       tag === nextTag && nextTag !== "" ? "" : nextTag === "all" ? "" : nextTag;
@@ -178,12 +190,8 @@ export default function GrammarListPage() {
   const hasActiveFilter = Boolean(jlpt || tag || qUrl);
   const jlptFilterLocked = Boolean(jlpt && isLocked(jlpt));
 
-  const jlptOptions =
-    jlptLevels.length > 0
-      ? jlptLevels
-      : ["N5", "N4", "N3", "N2", "N1"].filter((lv) =>
-          items.some((it) => it.jlpt === lv),
-        );
+  const jlptTabLevels =
+    jlptLevels.length > 0 ? jlptLevels : DEFAULT_JLPT_LEVELS;
 
   return (
     <Layout
@@ -206,29 +214,35 @@ export default function GrammarListPage() {
           titleId="grammar-list-title"
           title={t("grammarPage.listTitle")}
           subtitle={t("grammarPage.listSubtitle")}
-          aside={
-            <div className="vocab-lesson-goal-box grammar-head-jlpt">
-              <label htmlFor="grammar-filter-jlpt" className="vocab-lesson-goal-label">
-                {t("grammarPage.jlptFilter")}
-              </label>
-              <select
-                id="grammar-filter-jlpt"
-                className="vocab-jlpt-select"
-                value={jlpt}
-                onChange={(e) => applyJlpt(e.target.value)}
-              >
-                <option value="">{t("grammarPage.jlptAll")}</option>
-                {jlptOptions.map((lv) => (
-                  <option key={lv} value={lv} disabled={isLocked(lv)}>
-                    {isLocked(lv)
-                      ? t("jlptAccess.tabLocked", { level: lv })
-                      : lv}
-                  </option>
-                ))}
-              </select>
-            </div>
-          }
         />
+
+        <div
+          className="vocab-tabs reading-jlpt-tabs grammar-jlpt-tabs"
+          role="tablist"
+          aria-label={t("grammarPage.levelTabsAria")}
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={!jlpt}
+            className={`vocab-tab${!jlpt ? " vocab-tab--active" : ""}`}
+            onClick={() => handleJlptTab("")}
+          >
+            {t("grammarPage.jlptAll")}
+          </button>
+          {jlptTabLevels.map((lv) => (
+            <button
+              key={`grammar-jlpt-tab-${lv}`}
+              type="button"
+              role="tab"
+              aria-selected={jlpt === lv}
+              className={`vocab-tab${jlpt === lv ? " vocab-tab--active" : ""}${isLocked(lv) ? " vocab-tab--jlpt-locked" : ""}`}
+              onClick={() => handleJlptTab(lv)}
+            >
+              {isLocked(lv) ? t("jlptAccess.tabLocked", { level: lv }) : lv}
+            </button>
+          ))}
+        </div>
 
         <section
           className="grammar-filters grammar-filters--below-head"

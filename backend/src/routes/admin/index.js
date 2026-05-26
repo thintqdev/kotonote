@@ -19,6 +19,9 @@ import adminExamPaperRoutes from './adminExamPaperRoutes.js';
 import adminExamStructureRoutes from './adminExamStructureRoutes.js';
 import adminPromptRoutes from './adminPromptRoutes.js';
 import adminMembershipRoutes from './adminMembershipRoutes.js';
+import adminFeedbackRoutes from './adminFeedbackRoutes.js';
+import adminSystemRoutes from './adminSystemRoutes.js';
+import adminSettingsRoutes from './adminSettingsRoutes.js';
 
 const router = express.Router();
 
@@ -44,5 +47,8 @@ router.use('/exam-papers', adminExamPaperRoutes);
 router.use('/exam-structures', adminExamStructureRoutes);
 router.use('/prompts', adminPromptRoutes);
 router.use('/memberships', adminMembershipRoutes);
+router.use('/feedback', adminFeedbackRoutes);
+router.use('/system', adminSystemRoutes);
+router.use('/settings', adminSettingsRoutes);
 
 export default router;

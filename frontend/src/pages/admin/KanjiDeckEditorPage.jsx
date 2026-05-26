@@ -489,31 +489,36 @@ export default function KanjiDeckEditorPage() {
 
   if (!isCreate && loading) {
     return (
-      <div className="vdeck-page">
-        <p className="vdeck-load-msg">Đang tải deck…</p>
+      <div className="admin-stub-main admin-stub-main--vdeck">
+        <div className="vdeck-page">
+          <p className="vdeck-load-msg">Đang tải deck…</p>
+        </div>
       </div>
     );
   }
 
   if (!isCreate && loadError) {
     return (
-      <div className="vdeck-page">
-        <p className="vdeck-load-msg vdeck-load-msg--error" role="alert">
-          {loadError}
-        </p>
-        <button
-          type="button"
-          className="vdeck-btn vdeck-btn--muted"
-          onClick={() => navigate("/admin/kanji")}
-        >
-          Quay lại danh sách
-        </button>
+      <div className="admin-stub-main admin-stub-main--vdeck">
+        <div className="vdeck-page">
+          <p className="vdeck-load-msg vdeck-load-msg--error" role="alert">
+            {loadError}
+          </p>
+          <button
+            type="button"
+            className="vdeck-btn vdeck-btn--muted"
+            onClick={() => navigate("/admin/kanji")}
+          >
+            Quay lại danh sách
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="vdeck-page">
+    <div className="admin-stub-main admin-stub-main--vdeck">
+      <div className="vdeck-page">
       <div className="vdeck-topbar vdeck-topbar--simple">
         <nav className="vdeck-breadcrumb" aria-label="Breadcrumb">
           <Link to="/admin/kanji">Kanji</Link>
@@ -965,6 +970,7 @@ export default function KanjiDeckEditorPage() {
         deckHint={titleVi}
         onApply={handleDeckAIApply}
       />
+      </div>
     </div>
   );
 }

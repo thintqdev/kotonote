@@ -206,7 +206,10 @@ export async function listMembershipCheckouts(filters = {}) {
 			amountVnd: c.amountVnd,
 			currency: c.currency,
 			status: c.status,
+			provider: c.provider,
 			paidAt: c.paidAt,
+			refundedAt: c.refundedAt ?? null,
+			refundReason: c.refundReason ?? null,
 			sessionExpiresAt: c.sessionExpiresAt,
 			createdAt: c.createdAt,
 			updatedAt: c.updatedAt,
@@ -247,12 +250,6 @@ export async function updateUserMembershipByAdmin(userId, payload) {
 		]);
 	}
 
-	if (tierId !== 'free' && billing === MEMBERSHIP_BILLING.FREE) {
-		throw new AppError(MEMBERSHIP.INVALID_BILLING, 400, [
-			{ field: 'billing', message: 'Paid tier requires yearly or lifetime billing' },
-		]);
-	}
-
 	const user = await User.findById(userId);
 	if (!user) {
 		throw new AppError(MEMBERSHIP.USER_NOT_FOUND, 404);
@@ -270,8 +267,12 @@ export async function updateUserMembershipByAdmin(userId, payload) {
 		expiresAt = null;
 	} else if (status === 'active') {
 		if (!purchasedAt) purchasedAt = now;
-		if (billing === MEMBERSHIP_BILLING.LIFETIME) {
-			expiresAt = null;
+		if (
+			billing === MEMBERSHIP_BILLING.LIFETIME ||
+			billing === MEMBERSHIP_BILLING.FREE
+		) {
+			expiresAt =
+				payload.expiresAt === undefined ? null : payload.expiresAt;
 		} else if (billing === MEMBERSHIP_BILLING.YEARLY) {
 			if (payload.expiresAt === undefined || payload.expiresAt === null) {
 				expiresAt = computeMembershipExpiry(billing, purchasedAt);

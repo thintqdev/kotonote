@@ -22,8 +22,11 @@ import DashboardHome from "./pages/DashboardHome.jsx";
 import Profile from "./pages/Profile.jsx";
 import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
+import FeedbackPage from "./pages/FeedbackPage.jsx";
 import MembershipPage from "./pages/MembershipPage.jsx";
 import MembershipCheckoutPage from "./pages/MembershipCheckoutPage.jsx";
+import MembershipPaymentHistoryPage from "./pages/MembershipPaymentHistoryPage.jsx";
+import MembershipCheckoutReturnPage from "./pages/MembershipCheckoutReturnPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import GrammarListPage from "./pages/GrammarListPage.jsx";
 import GrammarDetailPage from "./pages/GrammarDetailPage.jsx";
@@ -56,6 +59,7 @@ import AdminShell, {
   AdminStubContent,
 } from "./pages/admin/AdminShell.jsx";
 import AdminOverviewPage from "./pages/admin/AdminOverviewPage.jsx";
+import AdminSystemPage from "./pages/admin/AdminSystemPage.jsx";
 import AdminVocabularyHome from "./pages/admin/AdminVocabularyHome.jsx";
 import AdminKanjiHome from "./pages/admin/AdminKanjiHome.jsx";
 import VocabularyDeckEditorPage from "./pages/admin/VocabularyDeckEditorPage.jsx";
@@ -73,12 +77,15 @@ import AdminReadingHome from "./pages/admin/AdminReadingHome.jsx";
 import AdminReadingEditorPage from "./pages/admin/AdminReadingEditorPage.jsx";
 import AdminListeningHome from "./pages/admin/AdminListeningHome.jsx";
 import AdminSubscriptionsPage from "./pages/admin/AdminSubscriptionsPage.jsx";
+import AdminFeedbackPage from "./pages/admin/AdminFeedbackPage.jsx";
 import AdminKaiwaHome from "./pages/admin/AdminKaiwaHome.jsx";
 import AdminKaiwaEditorPage from "./pages/admin/AdminKaiwaEditorPage.jsx";
 import AdminExamPaperHome from "./pages/admin/AdminExamPaperHome.jsx";
 import AdminExamPaperEditorPage from "./pages/admin/AdminExamPaperEditorPage.jsx";
 import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
 import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
+import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -120,10 +127,23 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/change-password" element={<ChangePasswordPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/feedback" element={<FeedbackPage />} />
                 <Route path="/membership" element={<MembershipPage />} />
                 <Route
                   path="/membership/checkout"
                   element={<MembershipCheckoutPage />}
+                />
+                <Route
+                  path="/membership/checkout/return"
+                  element={<MembershipCheckoutReturnPage />}
+                />
+                <Route
+                  path="/membership/history"
+                  element={<MembershipPaymentHistoryPage />}
+                />
+                <Route
+                  path="/membership/receipt/:checkoutId"
+                  element={<MembershipReceiptPage />}
                 />
                 <Route path="/notifications" element={<NotificationsPage />} />
                 <Route path="/grammar" element={<GrammarListPage />} />
@@ -179,7 +199,7 @@ function App() {
             <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/admin" element={<AdminShell />}>
               <Route index element={<AdminOverviewPage />} />
-              <Route path="analytics" element={<AdminOverviewPage />} />
+              <Route path="analytics" element={<AdminSystemPage />} />
               <Route
                 path="vocabulary/decks/:deckId"
                 element={<VocabularyDeckEditorPage />}
@@ -213,6 +233,7 @@ function App() {
               <Route path="exam-structures/:id/edit" element={<AdminExamStructureEditPage />} />
               <Route path="exam-structures" element={<AdminExamStructureHome />} />
               <Route path="quotes" element={<AdminQuotesPage />} />
+              <Route path="feedback" element={<AdminFeedbackPage />} />
               <Route path="prompts" element={<AdminPromptsPage />} />
               <Route path="badges" element={<BadgePage />} />
               <Route path="users" element={<AdminUsersPage />} />
@@ -221,6 +242,7 @@ function App() {
                 path="notifications"
                 element={<AdminNotificationsDemoPage />}
               />
+              <Route path="settings" element={<AdminSettingsPage />} />
               <Route path="*" element={<AdminStubContent />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />

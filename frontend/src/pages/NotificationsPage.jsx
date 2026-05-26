@@ -88,7 +88,7 @@ const NotificationsPage = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main notifications-page"
+      mainInnerClassName="notifications-page"
     >
       <Breadcrumb
         items={[

@@ -169,7 +169,7 @@ const SettingsPage = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main settings-page"
+      mainInnerClassName="settings-page"
     >
       <Breadcrumb
         items={[
@@ -430,6 +430,9 @@ const SettingsPage = () => {
               </Link>
               <Link className="settings-quick-link" to="/change-password">
                 {t("settingsPage.linkPassword")}
+              </Link>
+              <Link className="settings-quick-link" to="/feedback">
+                {t("settingsPage.linkFeedback")}
               </Link>
             </nav>
           </section>

@@ -223,18 +223,6 @@ function AdminSidebar() {
             </div>
           ))}
         </nav>
-
-        <div className="admin-sidebar-help">
-          <div className="admin-sidebar-help-deco" aria-hidden="true">
-            🪴
-          </div>
-          <p className="admin-sidebar-help-title">
-            {t("adminLayout.help.title")}
-          </p>
-          <a className="admin-sidebar-help-link" href="#admin-guide">
-            {t("adminLayout.help.link")}
-          </a>
-        </div>
       </div>
     </aside>
   );

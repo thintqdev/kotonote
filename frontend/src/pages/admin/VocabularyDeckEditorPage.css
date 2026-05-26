@@ -44,8 +44,12 @@
   --vdeck-card: #fffefb;
   --vdeck-col-gap: clamp(1rem, 2.2vw, 1.75rem);
   min-height: 100%;
-  padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 2rem) 5rem;
+  padding: 0 0 5rem;
   color: var(--vdeck-ink);
+}
+
+.admin-stub-main--vdeck {
+  width: 100%;
 }
 
 /* Cột 4 : 6 (40% meta / 60% bảng từ) */

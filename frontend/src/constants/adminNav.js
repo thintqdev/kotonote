@@ -74,30 +74,30 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       },
     ],
   },
-  {
-    id: "media",
-    titleKey: "adminLayout.sidebar.sectionMedia",
-    items: [
-      {
-        id: "mediaAudio",
-        to: "/admin/media/audio",
-        icon: "audio",
-        labelKey: "adminLayout.sidebar.mediaAudio",
-      },
-      {
-        id: "mediaImages",
-        to: "/admin/media/images",
-        icon: "image",
-        labelKey: "adminLayout.sidebar.mediaImages",
-      },
-      {
-        id: "mediaDocs",
-        to: "/admin/media/documents",
-        icon: "doc",
-        labelKey: "adminLayout.sidebar.mediaDocs",
-      },
-    ],
-  },
+  // {
+  //   id: "media",
+  //   titleKey: "adminLayout.sidebar.sectionMedia",
+  //   items: [
+  //     {
+  //       id: "mediaAudio",
+  //       to: "/admin/media/audio",
+  //       icon: "audio",
+  //       labelKey: "adminLayout.sidebar.mediaAudio",
+  //     },
+  //     {
+  //       id: "mediaImages",
+  //       to: "/admin/media/images",
+  //       icon: "image",
+  //       labelKey: "adminLayout.sidebar.mediaImages",
+  //     },
+  //     {
+  //       id: "mediaDocs",
+  //       to: "/admin/media/documents",
+  //       icon: "doc",
+  //       labelKey: "adminLayout.sidebar.mediaDocs",
+  //     },
+  //   ],
+  // },
   {
     id: "system",
     titleKey: "adminLayout.sidebar.sectionSystem",
@@ -133,16 +133,22 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.badges",
       },
       {
-        id: "analytics",
+        id: "systemHealth",
         to: "/admin/analytics",
         iconSrc: "/assets/menu-icons/statistics.png",
-        labelKey: "adminLayout.sidebar.analytics",
+        labelKey: "adminLayout.sidebar.systemHealth",
       },
       {
         id: "notifications",
         to: "/admin/notifications",
         icon: "doc",
         labelKey: "adminLayout.sidebar.notifications",
+      },
+      {
+        id: "feedback",
+        to: "/admin/feedback",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.feedback",
       },
       {
         id: "settings",

@@ -31,3 +31,20 @@ export async function patchAdminUserMembership(userId, payload) {
 	const body = await adminApi.patch(ADMIN_MEMBERSHIPS.user(userId), payload);
 	return getApiData(body);
 }
+
+export async function getAdminCheckoutReceipt(checkoutId) {
+	const body = await adminApi.get(ADMIN_MEMBERSHIPS.checkoutReceipt(checkoutId));
+	return getApiData(body)?.receipt ?? null;
+}
+
+/**
+ * @param {string} checkoutId
+ * @param {{ reason?: string, revokeMembership?: boolean }} payload
+ */
+export async function refundAdminCheckout(checkoutId, payload = {}) {
+	const body = await adminApi.post(
+		ADMIN_MEMBERSHIPS.refundCheckout(checkoutId),
+		payload,
+	);
+	return getApiData(body);
+}

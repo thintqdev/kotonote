@@ -7,7 +7,7 @@ export const MEMBERSHIP_TIER_OPTIONS = [
 ];
 
 export const MEMBERSHIP_BILLING_OPTIONS = [
-	{ value: 'free', label: 'Miễn phí' },
+	{ value: 'free', label: 'Tặng bởi admin (không thu phí)' },
 	{ value: 'yearly', label: 'Theo năm' },
 	{ value: 'lifetime', label: 'Trọn đời' },
 ];
@@ -21,6 +21,7 @@ export const CHECKOUT_STATUS_OPTIONS = [
 	{ value: '', label: 'Tất cả' },
 	{ value: 'pending', label: 'Chờ thanh toán' },
 	{ value: 'paid', label: 'Đã thanh toán' },
+	{ value: 'refunded', label: 'Đã hoàn tiền' },
 	{ value: 'expired', label: 'Hết phiên' },
 	{ value: 'cancelled', label: 'Đã hủy' },
 ];

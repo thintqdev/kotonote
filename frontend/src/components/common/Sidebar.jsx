@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DASHBOARD_NAV_ITEMS } from '../../constants/dashboardNav.js';
 import { useSidebarCollapse } from '../../context/SidebarCollapseContext.jsx';
-import StreakCard from '../dashboard/StreakCard.jsx';
 import './Sidebar.css';
 
 function IconSidebarCollapseChevron({ expanded }) {
@@ -59,13 +59,47 @@ NavIcon.propTypes = {
   src: PropTypes.string.isRequired,
 };
 
-const Sidebar = ({ streakDays }) => {
+const MOBILE_NAV_MQ = '(max-width: 960px)';
+
+function useMobileNavLayout() {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia(MOBILE_NAV_MQ).matches;
+  });
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_NAV_MQ);
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  return isMobile;
+}
+
+const Sidebar = () => {
   const { t } = useTranslation();
   const { collapsed, toggle } = useSidebarCollapse();
+  const isMobile = useMobileNavLayout();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMobile) setMobileMenuOpen(false);
+  }, [isMobile]);
+
+  const sidebarClass = [
+    'dash-sidebar',
+    collapsed ? 'dash-sidebar--collapsed' : '',
+    isMobile && !mobileMenuOpen ? 'dash-sidebar--mobile-nav-closed' : '',
+    isMobile && mobileMenuOpen ? 'dash-sidebar--mobile-nav-open' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <aside
-      className={`dash-sidebar${collapsed ? ' dash-sidebar--collapsed' : ''}`}
+      className={sidebarClass}
       aria-label={t('sidebar.ariaNav')}
     >
       <button
@@ -80,9 +114,38 @@ const Sidebar = ({ streakDays }) => {
         <IconSidebarCollapseChevron expanded={!collapsed} />
       </button>
       <div className="dash-sidebar-inner">
+        {isMobile ? (
+          <div className="dash-sidebar-mobile-bar">
+            <a
+              href="/"
+              className="dash-sidebar-logo dash-sidebar-logo--mobile-bar"
+              title={import.meta.env.VITE_APP_NAME}
+            >
+              <span className="dash-sidebar-logo-crop">
+                <img
+                  src="/assets/logo.png"
+                  alt={import.meta.env.VITE_APP_NAME}
+                  className="dash-sidebar-logo-img"
+                  decoding="async"
+                />
+              </span>
+            </a>
+            <button
+              type="button"
+              className="dash-sidebar-mobile-toggle"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="dash-sidebar-nav"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+            >
+              {mobileMenuOpen
+                ? t('sidebar.closeMenu')
+                : t('sidebar.openMenu')}
+            </button>
+          </div>
+        ) : null}
         <a
           href="/"
-          className="dash-sidebar-logo"
+          className={`dash-sidebar-logo${isMobile ? ' dash-sidebar-logo--desktop-hidden' : ''}`}
           title={import.meta.env.VITE_APP_NAME}
         >
           <span className="dash-sidebar-logo-crop">
@@ -110,6 +173,9 @@ const Sidebar = ({ streakDays }) => {
                     to={item.to}
                     end={item.end}
                     title={label}
+                    onClick={() => {
+                      if (isMobile) setMobileMenuOpen(false);
+                    }}
                     className={({ isActive }) =>
                       `dash-nav-item${
                         isActive ? ' dash-nav-item--active' : ''
@@ -141,17 +207,9 @@ const Sidebar = ({ streakDays }) => {
             })}
           </ul>
         </nav>
-
-        <div className="dash-sidebar-streak-wrap">
-          <StreakCard days={streakDays} />
-        </div>
       </div>
     </aside>
   );
-};
-
-Sidebar.propTypes = {
-  streakDays: PropTypes.number,
 };
 
 export default Sidebar;

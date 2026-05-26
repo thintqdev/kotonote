@@ -1,0 +1,134 @@
+/* Responsive — chỉ vùng user (Layout.jsx), không áp dụng /admin */
+
+.dash-page {
+  overflow-x: clip;
+}
+
+.dash-main {
+  min-width: 0;
+}
+
+.dash-main-inner.profile-main {
+  min-width: 0;
+}
+
+.dash-main-inner.profile-main > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.profile-main :where(img, video, svg, canvas) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tránh lề kép: .dash-main đã có safe-area ngang */
+@media (max-width: 960px) {
+  .dash-main-inner.profile-main,
+  .vocab-dash .dash-main-inner.profile-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-main-inner.profile-main,
+  .vocab-dash .dash-main-inner.profile-main {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 8px;
+  }
+}
+
+/* Topbar dính khi cuộn — tiện trên điện thoại */
+@media (max-width: 960px) {
+  .dash-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    margin-bottom: 4px;
+  }
+}
+
+/* Tab JLPT / filter — cuộn ngang thay vì tràn layout */
+@media (max-width: 720px) {
+  .reading-jlpt-tabs,
+  .grammar-jlpt-tabs,
+  .vocab-tabs--scroll-mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    margin-top: 14px;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+  }
+
+  .reading-jlpt-tabs::-webkit-scrollbar,
+  .grammar-jlpt-tabs::-webkit-scrollbar,
+  .vocab-tabs--scroll-mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reading-jlpt-tabs .vocab-tab,
+  .grammar-jlpt-tabs .vocab-tab,
+  .vocab-tabs--scroll-mobile .vocab-tab {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    padding: 10px 16px 12px;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .vocab-list-head-row,
+  .grammar-list-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vocab-jlpt-inline {
+    align-items: flex-start;
+  }
+
+  .vocab-toolbar-panel {
+    padding: 12px;
+  }
+
+  .grammar-filters {
+    padding: 12px 14px;
+  }
+}
+
+/* Bảng / nội dung rộng — cuộn trong khung */
+@media (max-width: 960px) {
+  .profile-main .grammar-compare {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Nút / link — vùng chạm tối thiểu (~44px) */
+@media (max-width: 720px) and (pointer: coarse) {
+  .profile-main :where(
+      .vocab-tab,
+      .grammar-page-btn,
+      .profile-btn,
+      .membership-tier-cta,
+      .settings-row-action
+    ) {
+    min-height: 44px;
+  }
+}
+
+/* Trang chủ */
+@media (max-width: 640px) {
+  .dash-float--tilt-b {
+    position: static;
+    right: auto;
+    top: auto;
+    width: 100%;
+  }
+}

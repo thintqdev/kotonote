@@ -9,6 +9,9 @@
   --admin-ink-soft: rgba(58, 54, 48, 0.72);
   --admin-border: rgba(74, 56, 36, 0.12);
   --admin-sidebar-width: 272px;
+  /* Chiều rộng nội dung trang con (đồng bộ toàn Studio) */
+  --admin-content-max: 72rem;
+  --admin-content-pad: clamp(1.25rem, 4vw, 2rem);
 }
 
 .admin-shell {
@@ -40,7 +43,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px 20px;
-  padding: 14px clamp(1rem, 3vw, 1.75rem);
+  padding: 14px var(--admin-content-pad);
   border-bottom: 1px solid var(--admin-border);
   background: rgba(255, 252, 246, 0.72);
   backdrop-filter: blur(10px);
@@ -232,7 +235,7 @@
 
 .admin-main-footer {
   flex-shrink: 0;
-  padding: 14px clamp(1rem, 3vw, 1.75rem);
+  padding: 14px var(--admin-content-pad);
   border-top: 1px solid var(--admin-border);
   background: rgba(250, 244, 234, 0.85);
 }
@@ -485,26 +488,21 @@
   color: #4a6b42;
 }
 
-/* Placeholder khi chưa có trang con */
+/* Vỏ nội dung trang admin — padding & max-width thống nhất */
 .admin-stub-main {
-  padding: clamp(1.25rem, 4vw, 2rem);
-  max-width: 56rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--admin-content-max);
+  margin-inline: auto;
+  padding: var(--admin-content-pad);
 }
 
-/* Trang danh sách deck — dùng full chiều ngang vùng admin-main */
-.admin-stub-main.admin-vocab-home {
-  max-width: none;
+.admin-vocab-home {
   width: 100%;
-  box-sizing: border-box;
 }
 
 .admin-vocab-home .admin-vocab-home-lead {
   max-width: min(40rem, 100%);
-}
-
-.admin-vocab-home .admin-vocab-home-toolbar,
-.admin-vocab-home .admin-vocab-pagination {
-  max-width: none;
 }
 
 .admin-stub-path {

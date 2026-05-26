@@ -1,0 +1,53 @@
+.admin-receipt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20, 24, 18, 0.45);
+}
+
+.admin-receipt-modal {
+  width: min(520px, 100%);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  padding: 20px 22px 24px;
+  border-radius: 14px;
+  background: #fffdf8;
+  border: 1px solid rgba(168, 181, 138, 0.45);
+  box-shadow: 0 18px 48px rgba(30, 40, 22, 0.18);
+}
+
+.admin-receipt-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admin-receipt-modal-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.admin-receipt-close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--admin-ink-soft, #6a5a4a);
+}
+
+.admin-receipt-modal-status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--admin-ink-soft, #6a5a4a);
+}
+
+.admin-receipt-modal-status--error {
+  color: #b42318;
+}

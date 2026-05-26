@@ -50,6 +50,11 @@ export const MEMBERSHIP = {
 	PLANS: '/membership/plans',
 	ME: '/membership/me',
 	CHECKOUT: '/membership/checkout',
+	CHECKOUT_HISTORY: '/membership/checkout-history',
+	checkoutStatus: (checkoutId) =>
+		`/membership/checkout/${encodeURIComponent(checkoutId)}/status`,
+	checkoutReceipt: (checkoutId) =>
+		`/membership/checkout/${encodeURIComponent(checkoutId)}/receipt`,
 	confirmCheckout: (checkoutId) =>
 		`/membership/checkout/${encodeURIComponent(checkoutId)}/confirm`,
 };
@@ -249,12 +254,33 @@ export const ADMIN_MEMBERSHIPS = {
 	statistics: '/admin/memberships/statistics',
 	users: '/admin/memberships/users',
 	checkouts: '/admin/memberships/checkouts',
+	checkoutReceipt: (checkoutId) =>
+		`/admin/memberships/checkouts/${encodeURIComponent(checkoutId)}/receipt`,
+	refundCheckout: (checkoutId) =>
+		`/admin/memberships/checkouts/${encodeURIComponent(checkoutId)}/refund`,
 	user: (id) => `/admin/memberships/users/${encodeURIComponent(id)}`,
+};
+
+/** Cài đặt studio — `/api/admin/settings` */
+export const ADMIN_SETTINGS = {
+	BASE: '/admin/settings',
 };
 
 /** Khảo sát — `/api/admin/surveys` */
 export const ADMIN_SURVEYS = {
 	stats: '/admin/surveys/stats',
+	overview: '/admin/surveys/overview',
+};
+
+/** Góp ý người dùng — `/api/admin/feedback` */
+export const ADMIN_FEEDBACK = {
+	BASE: '/admin/feedback',
+	feedback: (id) => `/admin/feedback/${encodeURIComponent(id)}`,
+};
+
+/** Hiệu suất / sức khỏe hệ thống — `/api/admin/system` */
+export const ADMIN_SYSTEM = {
+	health: '/admin/system/health',
 };
 
 /** Thông báo / chiến dịch — `/api/admin/notifications` */

@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import './src/config/serverMetrics.js';
 import mongoose from 'mongoose';
 import express from 'express';
 import path from 'path';
@@ -21,9 +22,16 @@ import { setIo } from './src/config/ioRegistry.js';
 import { startNotificationCampaignScheduler } from './src/jobs/notificationCampaignScheduler.js';
 import { startStudyReminderScheduler } from './src/jobs/studyReminderScheduler.js';
 import { startEmailDigestScheduler } from './src/jobs/emailDigestScheduler.js';
+import { startMembershipExpiryScheduler } from './src/jobs/membershipExpiryScheduler.js';
 import { notificationQueue } from './src/utils/queue.js';
 import * as notificationService from './src/services/notificationService.js';
 import { getMinioPublicOrigin, getStorageConfig, isMinioStorage } from './src/config/storage.js';
+import {
+	getPayosWebhookUrl,
+	isPayosConfigured,
+	isPayosPaymentProvider,
+} from './src/config/payment.js';
+import { confirmPayosWebhookUrl } from './src/services/payment/payosPaymentService.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,6 +40,22 @@ validateEnv();
 
 // Connect to database
 await connectDB();
+
+if (
+	process.env.PAYOS_AUTO_CONFIRM_WEBHOOK === 'true' &&
+	isPayosPaymentProvider() &&
+	isPayosConfigured()
+) {
+	try {
+		await confirmPayosWebhookUrl();
+		console.log(`[payos] Webhook auto-confirmed: ${getPayosWebhookUrl()}`);
+	} catch (err) {
+		console.warn(
+			'[payos] PAYOS_AUTO_CONFIRM_WEBHOOK failed:',
+			err?.message || err,
+		);
+	}
+}
 
 const app = express();
 const httpServer = createServer(app);
@@ -119,6 +143,7 @@ setIo(io);
 startNotificationCampaignScheduler();
 startStudyReminderScheduler();
 startEmailDigestScheduler();
+startMembershipExpiryScheduler();
 
 // Start notification queue processing
 notificationQueue.startProcessing(async (notification) => {

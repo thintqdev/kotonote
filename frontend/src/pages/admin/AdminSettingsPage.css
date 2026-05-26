@@ -1,0 +1,54 @@
+.admin-settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-settings-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .admin-settings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.admin-settings-card {
+  padding: 16px 18px;
+  margin: 0;
+}
+
+.admin-settings-card-title {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.admin-settings-dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 38%) 1fr;
+  gap: 8px 12px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.admin-settings-dl dt {
+  margin: 0;
+  color: var(--admin-ink-soft, #6a5a4a);
+  font-weight: 600;
+}
+
+.admin-settings-dl dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.admin-settings-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--admin-ink-soft, #6a5a4a);
+}

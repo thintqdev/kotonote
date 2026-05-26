@@ -4,6 +4,13 @@ export const MEMBERSHIP_TIER_IDS = ['free', 'pro', 'ultra', 'ultimate'];
 
 export const PAID_TIER_IDS = ['pro', 'ultra', 'ultimate'];
 
+export const MEMBERSHIP_TIER_RANK = {
+	free: 0,
+	pro: 1,
+	ultra: 2,
+	ultimate: 3,
+};
+
 export const JLPT_BY_TIER = {
 	free: ['N5', 'N4'],
 	pro: ['N5', 'N4', 'N3'],

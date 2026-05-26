@@ -95,7 +95,7 @@ const ChangePasswordPage = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main change-password-page"
+      mainInnerClassName="change-password-page"
     >
       <Breadcrumb
               items={[

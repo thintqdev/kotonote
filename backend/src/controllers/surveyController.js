@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import * as surveyService from '../services/surveyService.js';
+import * as adminOverviewService from '../services/adminOverviewService.js';
 import { apiSuccess } from '../utils/response.js';
 import { SURVEY } from '../constants/messages.js';
 
@@ -49,4 +50,9 @@ export const getSurveyStats = asyncHandler(async (req, res) => {
 	const stats = await surveyService.getSurveyStatistics();
 
 	return apiSuccess(res, { stats }, SURVEY.FETCHED, 200);
+});
+
+export const getAdminOverview = asyncHandler(async (_req, res) => {
+	const overview = await adminOverviewService.getAdminOverviewStats();
+	return apiSuccess(res, { overview }, SURVEY.FETCHED, 200);
 });

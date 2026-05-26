@@ -58,8 +58,9 @@
       "quotes": "Quotes",
       "prompts": "Prompt AI",
       "badges": "Huy hiệu",
-      "analytics": "Thống kê",
+      "systemHealth": "Hiệu suất hệ thống",
       "notifications": "Thông báo",
+      "feedback": "Góp ý",
       "studioSettings": "Cài đặt"
     },
     "help": {
@@ -221,10 +222,30 @@
     "title": "Tổng quan",
     "total": "Tổng số khảo sát: {{count}}",
     "kpiLabel": "Khảo sát đã gửi",
+    "kpis": {
+      "feedbackOpen": "Feedback chưa xử lý",
+      "activeUsers": "User đang active",
+      "checkoutConv7d": "Tỷ lệ thanh toán (7 ngày)"
+    },
     "loading": "Đang tải thống kê…",
     "error": "Không tải được thống kê khảo sát.",
     "retry": "Thử lại",
     "empty": "Chưa có khảo sát nào trong hệ thống.",
+    "overviewTrend": {
+      "title": "Xu hướng 7 ngày",
+      "series": {
+        "surveys": "Khảo sát",
+        "feedbacks": "Feedback",
+        "checkouts": "Checkout tạo mới",
+        "paid": "Checkout đã trả"
+      }
+    },
+    "todo": {
+      "title": "Việc cần xử lý",
+      "openFeedback": "Feedback mở gần đây",
+      "topWeak": "Điểm yếu nổi bật từ survey",
+      "empty": "Chưa có dữ liệu."
+    },
     "sections": {
       "level": "Trình độ hiện tại",
       "goal": "Mục tiêu học",
@@ -235,6 +256,54 @@
     "unspecified": "Chưa ghi nhận",
     "countLabel": "Số lượng",
     "pieFoot": "Tổng (các lát): {{total}}"
+  },
+  "adminSystem": {
+    "title": "Hiệu suất hệ thống",
+    "lead": "Theo dõi API, cơ sở dữ liệu, lưu trữ file và tài nguyên máy chủ. Tự làm mới mỗi 60 giây.",
+    "overall": "Trạng thái chung",
+    "statusHealthy": "Ổn định",
+    "statusDegraded": "Suy giảm",
+    "statusUnhealthy": "Có sự cố",
+    "checkedAt": "Kiểm tra lúc {{time}}",
+    "loading": "Đang tải…",
+    "refresh": "Làm mới",
+    "retry": "Thử lại",
+    "error": "Không tải được dữ liệu hệ thống.",
+    "empty": "Chưa có dữ liệu.",
+    "uptimeDays": "{{count}} ngày",
+    "uptimeHours": "{{count}} giờ",
+    "uptimeMinutes": "{{count}} phút",
+    "uptimeSeconds": "{{count}} giây",
+    "services": {
+      "api": "API",
+      "mongodb": "MongoDB",
+      "storage": "Lưu trữ file"
+    },
+    "fields": {
+      "status": "Trạng thái",
+      "state": "Kết nối",
+      "latency": "Độ trễ",
+      "host": "Host",
+      "database": "Database",
+      "driver": "Driver",
+      "endpoint": "Endpoint",
+      "bucket": "Bucket",
+      "path": "Thư mục"
+    },
+    "runtime": {
+      "title": "Runtime",
+      "uptime": "Uptime process",
+      "env": "Môi trường",
+      "node": "Node.js",
+      "queue": "Hàng đợi thông báo"
+    },
+    "collections": {
+      "title": "Quy mô dữ liệu (ước lượng)",
+      "users": "Users",
+      "surveys": "Surveys",
+      "feedbacks": "Feedbacks",
+      "checkouts": "Checkouts"
+    }
   },
   "header": {
     "today": "Hôm nay",
@@ -247,6 +316,7 @@
     "changePassword": "Đổi mật khẩu",
     "examHistory": "Lịch sử luyện đề",
     "settingsMenu": "Cài đặt",
+    "feedbackMenu": "Góp ý & báo lỗi",
     "membershipMenu": "Gói thành viên",
     "logout": "Đăng xuất"
   },
@@ -260,14 +330,19 @@
     "ariaNav": "Điều hướng chính",
     "ariaMenu": "Menu",
     "expandSidebar": "Mở rộng sidebar",
-    "collapseSidebar": "Thu gọn sidebar"
+    "collapseSidebar": "Thu gọn sidebar",
+    "openMenu": "Menu",
+    "closeMenu": "Đóng"
   },
   "breadcrumb": {
     "home": "Trang chủ",
     "profile": "Trang cá nhân",
     "changePassword": "Đổi mật khẩu",
     "settings": "Cài đặt",
+    "feedback": "Góp ý & báo lỗi",
     "membership": "Gói thành viên",
+    "membershipPaymentHistory": "Lịch sử thanh toán",
+    "membershipHistory": "Lịch sử thanh toán",
     "notifications": "Thông báo",
     "grammar": "Ngữ pháp",
     "vocabulary": "Từ vựng",
@@ -633,8 +708,9 @@
     "listTitle": "Ngữ pháp",
     "listSubtitle": "Lọc theo cấp JLPT, chủ đề tag hoặc từ khóa (mẫu câu / phần mô tả).",
     "filterAria": "Bộ lọc danh sách ngữ pháp",
+    "levelTabsAria": "Chọn cấp JLPT",
     "jlptFilter": "Cấp JLPT",
-    "jlptAll": "Tất cả cấp",
+    "jlptAll": "Tất cả",
     "tagFilter": "Chủ đề",
     "tagAll": "Tất cả",
     "searchLabel": "Tìm kiếm",
@@ -1015,6 +1091,8 @@
   "streak": {
     "headline": "Chuỗi học",
     "subline": "ngày liên tiếp!",
+    "headerToggle": "Mở bảng chuỗi học tuần",
+    "headerWeekLit": "{{count}}/7 ngày tuần này",
     "weekAria": "Lịch tuần · ngày đã check-in có lửa · chỉ chạm được vào ô hôm nay",
     "checkedToday": "Đã check-in hôm nay",
     "tapToCheck": "Chạm để check-in",
@@ -1130,11 +1208,14 @@
     "register": "Đăng ký",
     "success": "Đăng nhập thành công",
     "verifyRequired": "Vui lòng xác minh email trước khi đăng nhập",
+    "googleUnavailable": "Chưa cấu hình đăng nhập Google — thêm VITE_GOOGLE_CLIENT_ID vào frontend/.env rồi khởi động lại dev server",
+    "googleLoading": "Đang tải nút Google…",
     "errors": {
       "emailRequired": "Vui lòng nhập email",
       "emailInvalid": "Email không hợp lệ",
       "passwordRequired": "Vui lòng nhập mật khẩu",
-      "submitFailed": "Đăng nhập không thành công"
+      "submitFailed": "Đăng nhập không thành công",
+      "googleFailed": "Đăng nhập Google không thành công"
     }
   },
   "forgotPassword": {
@@ -1349,17 +1430,97 @@
     "sectionAccount": "Tài khoản nhanh",
     "linkProfile": "Trang cá nhân",
     "linkPassword": "Đổi mật khẩu",
+    "linkFeedback": "Góp ý & báo lỗi",
     "save": "Lưu cài đặt",
     "savedShort": "Đã lưu."
+  },
+  "feedbackPage": {
+    "title": "Góp ý & báo lỗi",
+    "lead": "Mô tả lỗi bạn gặp để team kiểm tra. Có thể đính kèm ảnh/video nếu cần.",
+    "categoryLabel": "Loại góp ý",
+    "messageLabel": "Nội dung",
+    "messagePlaceholder": "Ví dụ: Khi làm bài nghe ở N4, audio không phát sau khi chuyển câu 3…",
+    "messageHint": "Tối thiểu {{min}} ký tự, tối đa {{max}} (đã nhập {{count}}).",
+    "submit": "Gửi góp ý",
+    "successToast": "Đã gửi góp ý — cảm ơn bạn!",
+    "successBanner": "Cảm ơn bạn! Team đã nhận góp ý và sẽ xem sớm.",
+    "historyTitle": "Góp ý gần đây",
+    "historyEmpty": "Chưa có góp ý nào.",
+    "loading": "Đang tải…",
+    "backToSettings": "← Về cài đặt",
+    "attachments": {
+      "label": "Ảnh / video (tuỳ chọn)",
+      "help": "JPEG, PNG, GIF, WebP, MP4, WebM, MOV — tối đa {{maxFiles}} file, mỗi file tối đa {{maxMb}}MB.",
+      "pick": "Chọn file để tải lên",
+      "uploading": "Đang tải…",
+      "count": "{{n}}/{{max}} file",
+      "removeAria": "Gỡ file đính kèm",
+      "limitReached": "Tối đa {{max}} file đính kèm cho mỗi góp ý.",
+      "badType": "Chỉ hỗ trợ ảnh JPEG/PNG/GIF/WebP hoặc video MP4/WebM/MOV.",
+      "tooLarge": "Mỗi file không quá {{maxMb}}MB.",
+      "uploadFailed": "Tải file lên thất bại"
+    },
+    "categories": {
+      "bug": "Báo lỗi / sự cố",
+      "feature": "Đề xuất tính năng",
+      "content": "Nội dung học (sai, thiếu)",
+      "other": "Khác"
+    },
+    "status": {
+      "open": "Chờ xử lý",
+      "read": "Đã xem",
+      "done": "Đã xử lý"
+    },
+    "errors": {
+      "submitFailed": "Không gửi được góp ý"
+    }
+  },
+  "feedbackAdmin": {
+    "title": "Góp ý người dùng",
+    "lead": "Danh sách phản hồi từ app — đổi trạng thái khi đã xem hoặc xử lý xong.",
+    "filterStatus": "Trạng thái",
+    "filterCategory": "Loại",
+    "filterSearch": "Tìm kiếm",
+    "filterAll": "Tất cả",
+    "searchPlaceholder": "Nội dung hoặc URL trang…",
+    "searchBtn": "Tìm",
+    "total": "Tổng: {{count}} góp ý",
+    "loading": "Đang tải…",
+    "empty": "Không có góp ý phù hợp.",
+    "colUser": "Người dùng",
+    "colCategory": "Loại",
+    "colMessage": "Nội dung",
+    "colMedia": "Media",
+    "colPage": "Trang",
+    "colDate": "Thời gian",
+    "colStatus": "Trạng thái",
+    "pager": "Phân trang",
+    "updatedToast": "Đã cập nhật trạng thái",
+    "status": {
+      "open": "Chờ xử lý",
+      "read": "Đã xem",
+      "done": "Đã xử lý"
+    },
+    "errors": {
+      "loadFailed": "Không tải được danh sách góp ý",
+      "updateFailed": "Không cập nhật được trạng thái"
+    }
   },
   "membershipPage": {
     "title": "Gói thành viên",
     "subtitle": "N5–N4 miễn phí. Nâng cấp để mở khóa thêm cấp độ JLPT và nội dung ôn luyện.",
+    "subtitleFree": "N5–N4 miễn phí khi đăng ký. Nâng cấp để mở khóa thêm cấp JLPT và nội dung ôn luyện.",
+    "subtitleActive": "Bạn đang dùng gói {{plan}} — đã mở khóa {{levels}} trên toàn bộ môn học.",
     "priceFree": "Miễn phí",
     "badgeCurrent": "Đang dùng",
     "currentPlan": "Gói hiện tại: {{plan}}",
-    "jlptUnlock": "Mở khóa: {{levels}}",
+    "unlockedJlpt": "JLPT đang học: {{levels}}",
+    "jlptUnlock": "Gói này mở khóa: {{levels}}",
     "includedFree": "Đã bao gồm khi đăng ký",
+    "tierIncludedInPlan": "Đã có trong gói hiện tại của bạn",
+    "tierCurrentActive": "Đang sử dụng gói này",
+    "tierCatalogFree": "Gói miễn phí (tham khảo)",
+    "paymentHistoryLink": "Xem lịch sử thanh toán →",
     "billing": {
       "yearly": "Theo năm",
       "lifetime": "Trọn đời"
@@ -1409,13 +1570,99 @@
     "plan": "Gói",
     "billing": "Hình thức",
     "total": "Tổng thanh toán",
-    "mockNote": "Đây là luồng thanh toán giả lập. Sau khi tích hợp cổng thật, bước này sẽ chuyển sang VNPay/Momo.",
+    "mockNote": "Chế độ thử: thanh toán mô phỏng (chỉ khi PAYMENT_PROVIDER=mock).",
+    "payosNote": "Bạn sẽ được chuyển sang cổng PayOS (chuyển khoản / ví). Gói chỉ kích hoạt sau khi PayOS xác nhận thanh toán.",
+    "payWithPayos": "Thanh toán qua PayOS",
+    "payosUnavailable": "Không tạo được liên kết PayOS. Vui lòng thử lại sau.",
     "paySimulate": "Thanh toán thành công (mô phỏng)",
     "paying": "Đang xử lý…",
     "back": "← Quay lại chọn gói",
     "invalidParams": "Gói hoặc hình thức thanh toán không hợp lệ.",
     "successTitle": "Thanh toán thành công!",
-    "successDesc": "Gói của bạn đã được kích hoạt. Đang chuyển tới hồ sơ…"
+    "successDesc": "Gói của bạn đã được kích hoạt. Đang chuyển về trang gói thành viên…"
+  },
+  "membershipCheckoutReturn": {
+    "title": "Xác nhận thanh toán",
+    "verifying": "Đang xác nhận giao dịch với PayOS…",
+    "successDesc": "Gói thành viên đã được kích hoạt.",
+    "backMembership": "Về trang gói thành viên →",
+    "pending": "Thanh toán chưa được xác nhận. Nếu bạn đã chuyển khoản, vui lòng đợi vài phút hoặc xem lịch sử thanh toán.",
+    "cancelled": "Bạn đã hủy thanh toán. Có thể thử lại từ trang gói thành viên.",
+    "failed": "Phiên thanh toán đã hết hạn hoặc không thành công.",
+    "invalidSession": "Phiên thanh toán không hợp lệ."
+  },
+  "membershipPaymentHistory": {
+    "title": "Lịch sử thanh toán",
+    "subtitle": "Các giao dịch nâng cấp gói thành viên của bạn (bao gồm thanh toán mô phỏng).",
+    "back": "← Quay lại gói thành viên",
+    "empty": "Chưa có giao dịch nào.",
+    "dateLabel": "Thời gian: {{when}}",
+    "pendingNote": "Phiên thanh toán chưa hoàn tất — có thể đã hết hạn nếu không thanh toán kịp.",
+    "filterAria": "Lọc theo trạng thái",
+    "paginationAria": "Phân trang lịch sử",
+    "prev": "Trước",
+    "next": "Sau",
+    "pageInfo": "Trang {{page}} / {{pages}}",
+    "viewReceipt": "Xem biên lai",
+    "filters": {
+      "all": "Tất cả",
+      "paid": "Đã thanh toán",
+      "pending": "Chờ thanh toán",
+      "refunded": "Đã hoàn tiền",
+      "expired": "Hết hạn",
+      "cancelled": "Đã hủy"
+    },
+    "status": {
+      "paid": "Đã thanh toán",
+      "pending": "Chờ thanh toán",
+      "refunded": "Đã hoàn tiền",
+      "expired": "Hết hạn",
+      "cancelled": "Đã hủy"
+    }
+  },
+  "membershipReceipt": {
+    "title": "Biên lai thanh toán",
+    "back": "← Quay lại lịch sử",
+    "print": "In biên lai",
+    "invoiceTitle": "Biên lai thanh toán",
+    "invoiceNo": "Mã: {{number}}",
+    "buyer": "Người mua",
+    "plan": "Gói",
+    "amount": "Số tiền",
+    "paidAt": "Thanh toán lúc",
+    "status": "Trạng thái",
+    "transactionId": "Mã giao dịch",
+    "refundedAt": "Hoàn tiền lúc",
+    "footer": "Biên lai điện tử từ Kotonote — không thay thế hóa đơn GTGT nếu có yêu cầu pháp lý."
+  },
+  "adminSettings": {
+    "title": "Cài đặt hệ thống",
+    "lead": "Xem cấu hình runtime (chỉ đọc) — không lưu thay đổi tại đây.",
+    "loading": "Đang tải…",
+    "refresh": "Tải lại",
+    "loadError": "Không tải được cài đặt",
+    "yes": "Có",
+    "no": "Không",
+    "note": "Thay đổi biến môi trường trên server và khởi động lại backend.",
+    "sections": {
+      "app": "Ứng dụng",
+      "payment": "Thanh toán",
+      "ai": "AI",
+      "storage": "Lưu trữ",
+      "membership": "Gói thành viên"
+    },
+    "nodeEnv": "NODE_ENV",
+    "clientUrl": "CLIENT_URL",
+    "apiPublicUrl": "API_PUBLIC_URL",
+    "paymentProvider": "PAYMENT_PROVIDER",
+    "payosConfigured": "PayOS đã cấu hình",
+    "webhookUrl": "Webhook PayOS",
+    "mockConfirm": "Mock xác nhận thanh toán",
+    "gemini": "Gemini API",
+    "geminiModel": "Model Gemini",
+    "storageDriver": "Storage driver",
+    "expiryJob": "Cron hết hạn gói yearly",
+    "expiryJobHint": "Chạy mỗi {{hours}} giờ (phút :10 UTC)"
   },
   "notificationsPage": {
     "title": "Thông báo",
@@ -1487,6 +1734,7 @@
     "membershipExpires": "Hết hạn {{date}}",
     "membershipJlpt": "JLPT đã mở: {{levels}}",
     "membershipManage": "Quản lý / nâng cấp gói →",
+    "membershipPaymentHistory": "Lịch sử thanh toán →",
     "goalTitle": "Mục tiêu",
     "goalExam": "Kỳ thi / mục tiêu",
     "goalWhen": "Thời gian dự kiến",
@@ -1635,6 +1883,15 @@
     "MSG_1206": "Phân tích AI thất bại — thử lại sau",
     "MSG_1207": "Đã tải hạn mức phân tích",
     "MSG_1208": "Nội dung nhật ký không được để trống",
+    "MSG_1220": "Đã gửi góp ý thành công",
+    "MSG_1221": "Đã tải danh sách góp ý",
+    "MSG_1222": "Đã tải góp ý của bạn",
+    "MSG_1223": "Không tìm thấy góp ý",
+    "MSG_1224": "Đã cập nhật góp ý",
+    "MSG_1225": "Bạn đã gửi đủ 3 góp ý hôm nay — thử lại vào ngày mai",
+    "MSG_1226": "Đã tải file đính kèm",
+    "MSG_1227": "Đính kèm không hợp lệ — chỉ dùng file vừa tải lên tại trang này",
+    "MSG_1280": "Đã tải trạng thái hệ thống",
     "MSG_1300": "Đã tải danh sách đề thi",
     "MSG_1301": "Đã tải đề thi",
     "MSG_1302": "Tạo đề thi thành công",
@@ -1742,6 +1999,12 @@
     "MSG_1112": "Không tìm thấy người dùng",
     "MSG_1113": "Cấp JLPT {{level}} chưa được mở trong gói của bạn. Nâng cấp gói để học nội dung này.",
     "MSG_1118": "Tính năng này dành cho gói thành viên trả phí. Nâng cấp để xem giải thích chi tiết.",
+    "MSG_1119": "Đã tải lịch sử thanh toán",
+    "MSG_1120": "Cổng thanh toán chưa được cấu hình",
+    "MSG_1121": "Webhook thanh toán không hợp lệ",
+    "MSG_1122": "Đã lấy trạng thái phiên thanh toán",
+    "MSG_1123": "Số tiền thanh toán không khớp đơn hàng",
+    "MSG_1124": "Thanh toán mô phỏng không được bật trên môi trường này",
     "MSG_716": "Bài học này chưa mở — hoàn thành kiểm tra bài trước (đạt giai đoạn Nảy mầm)."
   },
   "jlptAccess": {

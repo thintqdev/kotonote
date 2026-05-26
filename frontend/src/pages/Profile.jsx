@@ -683,7 +683,6 @@ const Profile = () => {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      mainInnerClassName="profile-main"
     >
       <Breadcrumb
               items={[
@@ -1023,9 +1022,17 @@ const Profile = () => {
                         levels: membershipDisplay.jlpt,
                       })}
                     </p>
-                    <Link className="profile-membership-link" to="/membership">
-                      {t('profile.membershipManage')}
-                    </Link>
+                    <div className="profile-membership-links">
+                      <Link className="profile-membership-link" to="/membership">
+                        {t('profile.membershipManage')}
+                      </Link>
+                      <Link
+                        className="profile-membership-link profile-membership-link--secondary"
+                        to="/membership/history"
+                      >
+                        {t('profile.membershipPaymentHistory')}
+                      </Link>
+                    </div>
                   </>
                 )}
               </article>

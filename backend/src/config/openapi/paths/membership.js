@@ -65,6 +65,50 @@ export const membershipPaths = {
 			},
 		},
 	},
+	'/api/membership/checkout-history': {
+		get: {
+			tags: ['Membership'],
+			summary: 'List my checkout / payment history',
+			security: [{ bearerAuth: [] }],
+			parameters: [
+				{
+					name: 'page',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1 },
+				},
+				{
+					name: 'limit',
+					in: 'query',
+					schema: { type: 'integer', minimum: 1, maximum: 50 },
+				},
+				{
+					name: 'status',
+					in: 'query',
+					schema: {
+						type: 'string',
+						enum: ['pending', 'paid', 'cancelled', 'expired'],
+					},
+				},
+			],
+			responses: {
+				'200': {
+					description: 'Checkout history',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean', example: true },
+									messageCode: { type: 'string', example: 'MSG_1119' },
+								},
+							},
+						},
+					},
+				},
+				...authResponses,
+			},
+		},
+	},
 	'/api/membership/checkout': {
 		post: {
 			tags: ['Membership'],

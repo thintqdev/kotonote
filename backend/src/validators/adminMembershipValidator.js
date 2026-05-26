@@ -15,3 +15,12 @@ export const updateUserMembershipSchema = Joi.object({
 export const userIdParamSchema = Joi.object({
 	userId: Joi.string().hex().length(24).required(),
 });
+
+export const checkoutIdParamSchema = Joi.object({
+	checkoutId: Joi.string().hex().length(24).required(),
+});
+
+export const refundCheckoutSchema = Joi.object({
+	reason: Joi.string().max(500).allow('', null).optional(),
+	revokeMembership: Joi.boolean().optional(),
+});

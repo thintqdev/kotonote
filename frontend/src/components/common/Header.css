@@ -111,10 +111,19 @@
   z-index: 0;
 }
 
+.dash-topbar-leading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .dash-topbar-brand {
   flex: 1 1 auto;
-  min-width: min(100%, 200px);
-  padding-right: 8px;
+  min-width: min(100%, 160px);
+  padding-right: 0;
 }
 
 .dash-topbar-kicker-row {
@@ -419,10 +428,15 @@ button.dash-user-menu-item:focus-visible {
     transform: rotate(0deg);
   }
 
-  .dash-topbar-brand {
+  .dash-topbar-leading {
     flex: 1 1 100%;
+    align-items: flex-start;
+    padding-right: 28px;
+  }
+
+  .dash-topbar-brand {
+    flex: 1 1 auto;
     min-width: 0;
-    padding-right: 36px;
   }
 
   .dash-topbar-actions {

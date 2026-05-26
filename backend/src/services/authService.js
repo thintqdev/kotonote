@@ -140,6 +140,7 @@ export const googleLogin = async (googleToken) => {
 			user.googleId = googleUser.googleId;
 			user.authProvider = AUTH_PROVIDER.GOOGLE;
 			user.avatar = googleUser.avatar;
+			user.isEmailVerified = true;
 			user.lastLogin = Date.now();
 			await user.save();
 		} else {
@@ -149,6 +150,7 @@ export const googleLogin = async (googleToken) => {
 				avatar: googleUser.avatar,
 				googleId: googleUser.googleId,
 				authProvider: AUTH_PROVIDER.GOOGLE,
+				isEmailVerified: true,
 				lastLogin: Date.now(),
 			});
 		}

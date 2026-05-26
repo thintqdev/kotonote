@@ -58,8 +58,9 @@
       "quotes": "引用",
       "prompts": "AIプロンプト",
       "badges": "バッジ",
-      "analytics": "統計",
+      "systemHealth": "システム稼働",
       "notifications": "通知",
+      "feedback": "フィードバック",
       "studioSettings": "設定"
     },
     "help": {
@@ -224,10 +225,30 @@
     "subtitle": "送信済みアンケートの集計（API /api/admin/surveys/stats）。",
     "total": "回答数: {{count}}",
     "kpiLabel": "件の回答",
+    "kpis": {
+      "feedbackOpen": "未対応フィードバック",
+      "activeUsers": "アクティブユーザー",
+      "checkoutConv7d": "決済率（7日）"
+    },
     "loading": "統計を読み込み中…",
     "error": "アンケート統計を読み込めませんでした。",
     "retry": "再試行",
     "empty": "まだアンケート回答がありません。",
+    "overviewTrend": {
+      "title": "7日トレンド",
+      "series": {
+        "surveys": "アンケート",
+        "feedbacks": "フィードバック",
+        "checkouts": "新規チェックアウト",
+        "paid": "支払い完了"
+      }
+    },
+    "todo": {
+      "title": "今日の対応項目",
+      "openFeedback": "未対応フィードバック（最新）",
+      "topWeak": "アンケート上位の苦手分野",
+      "empty": "データはまだありません。"
+    },
     "sections": {
       "level": "現在のレベル",
       "goal": "学習の目標",
@@ -238,6 +259,54 @@
     "unspecified": "未回答",
     "countLabel": "件数",
     "pieFoot": "合計（スライス合算）: {{total}}"
+  },
+  "adminSystem": {
+    "title": "システム稼働状況",
+    "lead": "API・データベース・ファイルストレージ・サーバーリソースを監視します。60秒ごとに自動更新。",
+    "overall": "全体ステータス",
+    "statusHealthy": "正常",
+    "statusDegraded": "一部低下",
+    "statusUnhealthy": "障害あり",
+    "checkedAt": "確認: {{time}}",
+    "loading": "読み込み中…",
+    "refresh": "更新",
+    "retry": "再試行",
+    "error": "システム情報を読み込めませんでした。",
+    "empty": "データがありません。",
+    "uptimeDays": "{{count}}日",
+    "uptimeHours": "{{count}}時間",
+    "uptimeMinutes": "{{count}}分",
+    "uptimeSeconds": "{{count}}秒",
+    "services": {
+      "api": "API",
+      "mongodb": "MongoDB",
+      "storage": "ファイルストレージ"
+    },
+    "fields": {
+      "status": "状態",
+      "state": "接続",
+      "latency": "レイテンシ",
+      "host": "ホスト",
+      "database": "DB名",
+      "driver": "ドライバ",
+      "endpoint": "エンドポイント",
+      "bucket": "バケット",
+      "path": "パス"
+    },
+    "runtime": {
+      "title": "ランタイム",
+      "uptime": "プロセス稼働時間",
+      "env": "環境",
+      "node": "Node.js",
+      "queue": "通知キュー"
+    },
+    "collections": {
+      "title": "データ規模（概算）",
+      "users": "ユーザー",
+      "surveys": "アンケート",
+      "feedbacks": "フィードバック",
+      "checkouts": "チェックアウト"
+    }
   },
   "header": {
     "today": "今日",
@@ -250,6 +319,7 @@
     "changePassword": "パスワード変更",
     "examHistory": "模擬試験の履歴",
     "settingsMenu": "設定",
+    "feedbackMenu": "フィードバック・不具合報告",
     "membershipMenu": "メンバーシップ",
     "logout": "ログアウト"
   },
@@ -263,14 +333,19 @@
     "ariaNav": "メインナビゲーション",
     "ariaMenu": "メニュー",
     "expandSidebar": "サイドバーを広げる",
-    "collapseSidebar": "サイドバーを閉じる"
+    "collapseSidebar": "サイドバーを閉じる",
+    "openMenu": "メニュー",
+    "closeMenu": "閉じる"
   },
   "breadcrumb": {
     "home": "ホーム",
     "profile": "プロフィール",
     "changePassword": "パスワード変更",
     "settings": "設定",
+    "feedback": "フィードバック",
     "membership": "メンバーシップ",
+    "membershipPaymentHistory": "支払い履歴",
+    "membershipHistory": "支払い履歴",
     "notifications": "通知",
     "grammar": "文法",
     "vocabulary": "語彙",
@@ -636,8 +711,9 @@
     "listTitle": "文法リスト",
     "listSubtitle": "JLPTレベル・タグ・キーワード（文型や説明文）で絞り込みできます。",
     "filterAria": "文法一覧のフィルター",
+    "levelTabsAria": "JLPTレベルを選ぶ",
     "jlptFilter": "JLPT",
-    "jlptAll": "すべてのレベル",
+    "jlptAll": "すべて",
     "tagFilter": "タグ",
     "tagAll": "すべて",
     "searchLabel": "検索",
@@ -1019,6 +1095,8 @@
   "streak": {
     "headline": "連続学習",
     "subline": "日連続！",
+    "headerToggle": "週間ストリークを開く",
+    "headerWeekLit": "今週 {{count}}/7",
     "weekAria": "週カレンダー · チェックした日は炎 · 今日のマスだけタップ可能",
     "checkedToday": "今日チェック済み",
     "tapToCheck": "タップしてチェックイン",
@@ -1134,11 +1212,14 @@
     "register": "新規登録",
     "success": "ログインしました",
     "verifyRequired": "ログインする前にメール確認を完了してください",
+    "googleUnavailable": "Googleログイン未設定 — frontend/.env に VITE_GOOGLE_CLIENT_ID を追加し dev を再起動",
+    "googleLoading": "Googleボタンを読み込み中…",
     "errors": {
       "emailRequired": "メールを入力してください",
       "emailInvalid": "メールの形式が正しくありません",
       "passwordRequired": "パスワードを入力してください",
-      "submitFailed": "ログインに失敗しました"
+      "submitFailed": "ログインに失敗しました",
+      "googleFailed": "Googleログインに失敗しました"
     }
   },
   "forgotPassword": {
@@ -1353,17 +1434,97 @@
     "sectionAccount": "アカウント",
     "linkProfile": "プロフィール",
     "linkPassword": "パスワード変更",
+    "linkFeedback": "フィードバック・不具合報告",
     "save": "設定を保存",
     "savedShort": "保存しました。"
+  },
+  "feedbackPage": {
+    "title": "フィードバック・不具合報告",
+    "lead": "発生した不具合の内容を入力してください。必要なら画像・動画も添付できます。",
+    "categoryLabel": "種類",
+    "messageLabel": "内容",
+    "messagePlaceholder": "例：N4の聴解で、問題3の後に音声が再生されない…",
+    "messageHint": "最少{{min}}文字、最大{{max}}文字（現在{{count}}文字）。",
+    "submit": "送信する",
+    "successToast": "送信しました。ありがとうございます！",
+    "successBanner": "ありがとうございます。チームが確認します。",
+    "historyTitle": "最近のフィードバック",
+    "historyEmpty": "まだ送信がありません。",
+    "loading": "読み込み中…",
+    "backToSettings": "← 設定に戻る",
+    "attachments": {
+      "label": "画像・動画（任意）",
+      "help": "JPEG / PNG / GIF / WebP、MP4 / WebM / MOV — 最大{{maxFiles}}ファイル、各{{maxMb}}MBまで。",
+      "pick": "ファイルを選択してアップロード",
+      "uploading": "アップロード中…",
+      "count": "{{n}}/{{max}} ファイル",
+      "removeAria": "添付を削除",
+      "limitReached": "1件のフィードバックにつき{{max}}ファイルまでです。",
+      "badType": "JPEG / PNG / GIF / WebP、または MP4 / WebM / MOV のみ利用できます。",
+      "tooLarge": "ファイルは {{maxMb}}MB までです。",
+      "uploadFailed": "アップロードに失敗しました"
+    },
+    "categories": {
+      "bug": "不具合・障害",
+      "feature": "機能の提案",
+      "content": "学習コンテンツ（誤り・不足）",
+      "other": "その他"
+    },
+    "status": {
+      "open": "未対応",
+      "read": "確認済み",
+      "done": "対応済み"
+    },
+    "errors": {
+      "submitFailed": "送信に失敗しました"
+    }
+  },
+  "feedbackAdmin": {
+    "title": "ユーザーフィードバック",
+    "lead": "アプリからのフィードバック一覧。確認・対応後にステータスを更新してください。",
+    "filterStatus": "ステータス",
+    "filterCategory": "種類",
+    "filterSearch": "検索",
+    "filterAll": "すべて",
+    "searchPlaceholder": "内容またはページURL…",
+    "searchBtn": "検索",
+    "total": "合計: {{count}}件",
+    "loading": "読み込み中…",
+    "empty": "該当するフィードバックがありません。",
+    "colUser": "ユーザー",
+    "colCategory": "種類",
+    "colMessage": "内容",
+    "colMedia": "メディア",
+    "colPage": "ページ",
+    "colDate": "日時",
+    "colStatus": "ステータス",
+    "pager": "ページ送り",
+    "updatedToast": "ステータスを更新しました",
+    "status": {
+      "open": "未対応",
+      "read": "確認済み",
+      "done": "対応済み"
+    },
+    "errors": {
+      "loadFailed": "一覧の読み込みに失敗しました",
+      "updateFailed": "ステータスの更新に失敗しました"
+    }
   },
   "membershipPage": {
     "title": "メンバーシップ",
     "subtitle": "N5・N4は無料。アップグレードでJLPTレベルと教材を解放。",
+    "subtitleFree": "登録でN5・N4が無料。アップグレードでJLPTと教材をさらに解放。",
+    "subtitleActive": "{{plan}}プラン利用中 — {{levels}}が解放済みです。",
     "priceFree": "無料",
     "badgeCurrent": "利用中",
     "currentPlan": "現在のプラン: {{plan}}",
-    "jlptUnlock": "解放: {{levels}}",
+    "unlockedJlpt": "学習中のJLPT: {{levels}}",
+    "jlptUnlock": "このプランで解放: {{levels}}",
     "includedFree": "登録時から利用可能",
+    "tierIncludedInPlan": "現在のプランに含まれています",
+    "tierCurrentActive": "このプランを利用中",
+    "tierCatalogFree": "無料プラン（参考）",
+    "paymentHistoryLink": "支払い履歴を見る →",
     "billing": {
       "yearly": "年間",
       "lifetime": "買い切り"
@@ -1413,13 +1574,99 @@
     "plan": "プラン",
     "billing": "支払い方法",
     "total": "合計",
-    "mockNote": "これは模擬決済です。本番ではVNPay/Momoなどに接続します。",
+    "mockNote": "テストモード：模擬決済（PAYMENT_PROVIDER=mock のときのみ）。",
+    "payosNote": "PayOSの決済画面に移動します。支払い確認後にプランが有効になります。",
+    "payWithPayos": "PayOSで支払う",
+    "payosUnavailable": "PayOSのリンクを作成できませんでした。",
     "paySimulate": "支払い成功（デモ）",
     "paying": "処理中…",
     "back": "← プラン選択に戻る",
     "invalidParams": "プランまたは支払い方法が無効です。",
     "successTitle": "お支払い完了！",
-    "successDesc": "プランが有効になりました。プロフィールへ移動します…"
+    "successDesc": "プランが有効になりました。メンバーシップページへ移動します…"
+  },
+  "membershipCheckoutReturn": {
+    "title": "支払い確認",
+    "verifying": "PayOSで取引を確認しています…",
+    "successDesc": "プランが有効になりました。",
+    "backMembership": "メンバーシップへ →",
+    "pending": "まだ確認されていません。振込済みの場合は数分お待ちください。",
+    "cancelled": "支払いをキャンセルしました。",
+    "failed": "セッションの期限切れまたは失敗です。",
+    "invalidSession": "無効な決済セッションです。"
+  },
+  "membershipPaymentHistory": {
+    "title": "支払い履歴",
+    "subtitle": "メンバーシップのアップグレード取引（模擬決済を含む）。",
+    "back": "← メンバーシップに戻る",
+    "empty": "取引はまだありません。",
+    "dateLabel": "日時: {{when}}",
+    "pendingNote": "未完了の決済セッションです。期限内に支払わないと失効します。",
+    "filterAria": "ステータスで絞り込み",
+    "paginationAria": "履歴のページ送り",
+    "prev": "前へ",
+    "next": "次へ",
+    "pageInfo": "{{page}} / {{pages}} ページ",
+    "viewReceipt": "領収書を見る",
+    "filters": {
+      "all": "すべて",
+      "paid": "支払い済み",
+      "pending": "保留中",
+      "refunded": "返金済み",
+      "expired": "期限切れ",
+      "cancelled": "キャンセル"
+    },
+    "status": {
+      "paid": "支払い済み",
+      "pending": "保留中",
+      "refunded": "返金済み",
+      "expired": "期限切れ",
+      "cancelled": "キャンセル"
+    }
+  },
+  "membershipReceipt": {
+    "title": "支払い領収書",
+    "back": "← 履歴に戻る",
+    "print": "印刷",
+    "invoiceTitle": "支払い領収書",
+    "invoiceNo": "番号: {{number}}",
+    "buyer": "購入者",
+    "plan": "プラン",
+    "amount": "金額",
+    "paidAt": "支払日時",
+    "status": "ステータス",
+    "transactionId": "取引ID",
+    "refundedAt": "返金日時",
+    "footer": "Kotonote の電子領収書です。法的な VAT 請求書の代替にはなりません。"
+  },
+  "adminSettings": {
+    "title": "システム設定",
+    "lead": "ランタイム設定の参照のみ（ここでは保存しません）。",
+    "loading": "読み込み中…",
+    "refresh": "再読み込み",
+    "loadError": "設定を読み込めませんでした",
+    "yes": "はい",
+    "no": "いいえ",
+    "note": "サーバーの環境変数を変更し、バックエンドを再起動してください。",
+    "sections": {
+      "app": "アプリ",
+      "payment": "決済",
+      "ai": "AI",
+      "storage": "ストレージ",
+      "membership": "メンバーシップ"
+    },
+    "nodeEnv": "NODE_ENV",
+    "clientUrl": "CLIENT_URL",
+    "apiPublicUrl": "API_PUBLIC_URL",
+    "paymentProvider": "PAYMENT_PROVIDER",
+    "payosConfigured": "PayOS 設定済み",
+    "webhookUrl": "PayOS Webhook URL",
+    "mockConfirm": "模擬決済の確認",
+    "gemini": "Gemini API",
+    "geminiModel": "Gemini モデル",
+    "storageDriver": "Storage driver",
+    "expiryJob": "年間プラン期限切れ cron",
+    "expiryJobHint": "{{hours}} 時間ごと（UTC :10 分）"
   },
   "notificationsPage": {
     "title": "通知",
@@ -1491,6 +1738,7 @@
     "membershipExpires": "有効期限 {{date}}",
     "membershipJlpt": "解放JLPT: {{levels}}",
     "membershipManage": "プラン管理・アップグレード →",
+    "membershipPaymentHistory": "支払い履歴 →",
     "goalTitle": "目標",
     "goalExam": "試験／目標",
     "goalWhen": "予定時期",
@@ -1639,6 +1887,15 @@
     "MSG_1206": "AI分析に失敗しました — しばらくして再試行してください",
     "MSG_1207": "分析枠を取得しました",
     "MSG_1208": "日記の内容を入力してください",
+    "MSG_1220": "フィードバックを送信しました",
+    "MSG_1221": "フィードバック一覧を読み込みました",
+    "MSG_1222": "あなたのフィードバックを読み込みました",
+    "MSG_1223": "フィードバックが見つかりません",
+    "MSG_1224": "フィードバックを更新しました",
+    "MSG_1225": "本日の送信上限（3件）に達しました。明日お試しください",
+    "MSG_1226": "添付ファイルをアップロードしました",
+    "MSG_1227": "無効な添付です。この画面でアップロードしたファイルのみ使えます",
+    "MSG_1280": "システム状態を取得しました",
     "MSG_1300": "試験一覧を取得しました",
     "MSG_1301": "試験を取得しました",
     "MSG_1302": "試験を作成しました",
@@ -1744,6 +2001,12 @@
     "MSG_1112": "ユーザーが見つかりません",
     "MSG_1113": "JLPT {{level}} は現在のプランでは利用できません。アップグレードしてください。",
     "MSG_1118": "この機能は有料プラン限定です。詳しい解説を見るにはアップグレードしてください。",
+    "MSG_1119": "支払い履歴を取得しました",
+    "MSG_1120": "決済ゲートウェイが未設定です",
+    "MSG_1121": "決済Webhookが無効です",
+    "MSG_1122": "決済セッションの状態を取得しました",
+    "MSG_1123": "支払い金額が注文と一致しません",
+    "MSG_1124": "この環境では模擬決済は無効です",
     "MSG_716": "このレッスンはまだロック中です。前のレッスンのテストを完了してください（発芽段階）。"
   },
   "jlptAccess": {
