@@ -18,6 +18,7 @@ function AlphaPracticePad({
   variant,
   clearTick,
   padIndex,
+  ariaLabel = "",
   showGuide = true,
 }) {
   const { t } = useTranslation();
@@ -132,10 +133,13 @@ function AlphaPracticePad({
         ref={canvasRef}
         className="alpha-practice-pad-canvas"
         role="img"
-        aria-label={t("alphabetPage.practicePadAria", {
-          n: padIndex + 1,
-          char: guideText,
-        })}
+        aria-label={
+          ariaLabel ||
+          t("alphabetPage.practicePadAria", {
+            n: padIndex + 1,
+            char: guideText,
+          })
+        }
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endStroke}
@@ -153,6 +157,7 @@ AlphaPracticePad.propTypes = {
   variant: PropTypes.oneOf(["bold", "trace"]).isRequired,
   clearTick: PropTypes.number.isRequired,
   padIndex: PropTypes.number.isRequired,
+  ariaLabel: PropTypes.string,
   showGuide: PropTypes.bool,
 };
 

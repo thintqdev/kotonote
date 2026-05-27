@@ -1364,3 +1364,210 @@ button.vocab-cta-reset {
   line-height: 1.35;
   white-space: normal;
 }
+
+/* Kanji write tab */
+.kanji-write-wrap {
+  max-width: var(--vs-column-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kanji-write-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  background: rgba(255, 252, 248, 0.95);
+}
+
+.kanji-write-char {
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  line-height: 1;
+}
+
+.kanji-write-progress {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--vs-muted);
+}
+
+.kanji-write-stroke-stage {
+  border-radius: 14px;
+  border: 1px dashed rgba(58, 53, 48, 0.2);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(245, 240, 230, 0.55));
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.kanji-stroke-svg {
+  width: min(220px, 50vw);
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.kanji-stroke-ghost {
+  fill: rgba(58, 53, 48, 0.12);
+}
+
+.kanji-stroke-path {
+  fill: color-mix(in srgb, var(--vocab-ink) 85%, #111 15%);
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.35;
+  paint-order: stroke fill;
+  shape-rendering: geometricPrecision;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  filter: blur(1.1px) brightness(1.08) saturate(0.95)
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08));
+  animation: kanji-stroke-fill 0.74s cubic-bezier(0.16, 0.78, 0.2, 1) forwards;
+}
+
+.kanji-stroke-step-badge {
+  fill: rgba(255, 255, 255, 0.98);
+  stroke: rgba(66, 98, 52, 0.75);
+  stroke-width: 3.5;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.kanji-stroke-step-num {
+  font-family: var(--font-ui);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  fill: #234018;
+}
+
+@keyframes kanji-stroke-fill {
+  0% {
+    opacity: 0;
+    transform: scale(0.982);
+    filter: blur(1.6px) brightness(1.14)
+      drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  }
+  45% {
+    opacity: 0.82;
+    transform: scale(0.995);
+    filter: blur(0.8px) brightness(1.06)
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+  }
+  72% {
+    opacity: 1;
+    transform: scale(1.004);
+    filter: blur(0.28px) brightness(1.02)
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.13));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) brightness(1) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08));
+  }
+}
+
+.kanji-stroke-loading {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.kanji-stroke-loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vocab-green);
+  opacity: 0.35;
+  animation: kanji-dot 1s ease-in-out infinite;
+}
+
+.kanji-stroke-loading-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.kanji-stroke-loading-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes kanji-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.kanji-stroke-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 160px;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.kanji-stroke-fallback-char {
+  font-size: clamp(3.5rem, 15vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--vocab-ink);
+  opacity: 0.88;
+}
+
+.kanji-stroke-fallback-hint {
+  font-size: 0.78rem;
+  color: var(--vocab-muted);
+  max-width: 16rem;
+}
+
+.kanji-write-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.kanji-write-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.kanji-write-sample-wrap {
+  border-radius: 12px;
+  border: 2px dashed rgba(92, 122, 82, 0.35);
+  background: rgba(255, 252, 248, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kanji-write-sample {
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--vocab-green-deep);
+}
+
+@media (max-width: 640px) {
+  .kanji-write-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

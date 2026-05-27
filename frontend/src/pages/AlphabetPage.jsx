@@ -20,6 +20,7 @@ import {
 } from "../data/alphabetData.js";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
+import "./ReadingListPage.css";
 import "./AlphabetPage.css";
 
 function getRowLabel(row, tableKind) {
@@ -46,7 +47,8 @@ function firstSelection(script, tableKind) {
 export default function AlphabetPage() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
-  const lang = i18n.language?.startsWith("ja") ? "ja" : "vi";
+  const rawLang = i18n.language || "ja";
+  const mnemonicLang = rawLang.startsWith("ja") ? "ja" : "vi";
 
   const [script, setScript] = useState("hiragana");
   const [tableKind, setTableKind] = useState("gojuon");
@@ -90,7 +92,7 @@ export default function AlphabetPage() {
     setSelected(flat[selectedIndex + 1]);
   }, [flat, selectedIndex]);
 
-  const mnemonic = getMnemonic(selected.char, lang);
+  const mnemonic = getMnemonic(selected.char, mnemonicLang);
   const mnemonicText =
     mnemonic ||
     t("alphabetPage.mnemonicFallback", {
@@ -106,6 +108,18 @@ export default function AlphabetPage() {
   const videoHref = `https://www.youtube.com/results?search_query=${encodeURIComponent(
     `${selected.char} 書き方 筆順`,
   )}`;
+
+  if (!user) {
+    return (
+      <Layout
+        userName={headerName}
+        streakDays={mockStreak.days}
+        pageClassName="vocab-dash"
+      >
+        <p className="vocab-empty">{t("common.loading")}</p>
+      </Layout>
+    );
+  }
 
   const yoonColYa =
     script === "hiragana"
@@ -124,7 +138,7 @@ export default function AlphabetPage() {
     <Layout
       userName={headerName}
       streakDays={mockStreak.days}
-      pageClassName="vocab-dash alpha-dash"
+      pageClassName="vocab-dash"
     >
       <Breadcrumb
         items={[
@@ -133,13 +147,23 @@ export default function AlphabetPage() {
         ]}
       />
       <article
-        className="vocab-sheet vocab-scope vocab-notebook vocab-lesson-scope alpha-notebook alpha-hero"
+        className="vocab-sheet vocab-scope vocab-notebook vocab-lesson-scope alphabet-sheet alphabet-scope"
         aria-labelledby="alpha-title"
       >
         <StudyPageHeader
           titleId="alpha-title"
           title={t("alphabetPage.title")}
-          subtitle={t("alphabetPage.subtitle")}
+          subtitle={
+            <>
+              <span className="reading-sub-kicker" lang="ja">
+                {t("alphabetPage.kickerJa")}
+              </span>
+              <span className="reading-sub-sep"> · </span>
+              <span>{t("alphabetPage.kicker")}</span>
+              <span className="reading-sub-sep"> — </span>
+              {t("alphabetPage.subtitle")}
+            </>
+          }
           aside={
             <label className="vocab-lesson-goal-box alpha-head-romaji">
               <input
@@ -156,7 +180,7 @@ export default function AlphabetPage() {
 
         <div className="alpha-toolbar">
           <div
-            className="alpha-tabs"
+            className="alpha-tabs vocab-tabs vocab-tabs--scroll-mobile"
             role="tablist"
             aria-label={t("alphabetPage.tabListAria")}
           >
@@ -189,7 +213,7 @@ export default function AlphabetPage() {
 
         <div className="alpha-mode-toolbar">
           <div
-            className="alpha-mode-tabs"
+            className="alpha-mode-tabs vocab-tabs vocab-tabs--scroll-mobile"
             role="tablist"
             aria-label={t("alphabetPage.modeTabListAria")}
           >
@@ -422,7 +446,9 @@ export default function AlphabetPage() {
                 {t("alphabetPage.clearPractice")}
               </button>
             </div>
-            <div className="alpha-practice-layout">
+            <div
+              className={`alpha-practice-layout${isCompound ? " alpha-practice-layout--compound" : ""}`}
+            >
               <div className="alpha-practice-sample-wrap">
                 <span
                   className="alpha-practice-sample"
@@ -434,22 +460,16 @@ export default function AlphabetPage() {
                   {selected.char}
                 </span>
               </div>
-              <div
-                className="alpha-practice-row"
-                role="group"
-                aria-label={t("alphabetPage.practicePadsAria")}
-              >
-                {[0, 1, 2, 3].map((i) => (
-                  <AlphaPracticePad
-                    key={`${selected.char}-${i}`}
-                    guideText={selected.char}
-                    variant={i === 0 ? "bold" : "trace"}
-                    clearTick={practiceClearTick}
-                    padIndex={i}
-                    showGuide
-                  />
-                ))}
-              </div>
+              {[0, 1, 2, 3].map((i) => (
+                <AlphaPracticePad
+                  key={`${selected.char}-${i}`}
+                  guideText={selected.char}
+                  variant={i === 0 ? "bold" : "trace"}
+                  clearTick={practiceClearTick}
+                  padIndex={i}
+                  showGuide
+                />
+              ))}
             </div>
           </article>
 

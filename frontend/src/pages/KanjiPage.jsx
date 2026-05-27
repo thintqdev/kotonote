@@ -28,6 +28,8 @@ import { isJlptLockedError } from "../utils/jlptAccess.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import { shuffleVocabStudy, getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
+import AlphaPracticePad from "../components/alphabet/AlphaPracticePad.jsx";
+import KanjiStrokeAnimation from "../components/kanji/KanjiStrokeAnimation.jsx";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./VocabularyPage.css";
@@ -233,6 +235,9 @@ export default function KanjiPage() {
   const [flashSessionKey, setFlashSessionKey] = useState(0);
   const [flashIndex, setFlashIndex] = useState(0);
   const [flashRevealed, setFlashRevealed] = useState(false);
+  const [writeIndex, setWriteIndex] = useState(0);
+  const [writeReplayTick, setWriteReplayTick] = useState(0);
+  const [writeClearTick, setWriteClearTick] = useState(0);
 
   useEffect(() => {
     if (lessonTab !== "flash") return;
@@ -263,6 +268,25 @@ export default function KanjiPage() {
       : flashDone
         ? 100
         : Math.round((flashIndex / flashTotal) * 100);
+
+  useEffect(() => {
+    if (lessonTab !== "write") return;
+    setWriteIndex(0);
+    setWriteReplayTick(0);
+    setWriteClearTick(0);
+  }, [lessonTab, lessonNoFromQuery, lessonJlpt]);
+
+  const writeTotal = lessonItemsStable.length;
+  const writeCurrent =
+    writeIndex >= 0 && writeIndex < writeTotal ? lessonItemsStable[writeIndex] : null;
+
+  const goWritePrev = useCallback(() => {
+    setWriteIndex((i) => Math.max(0, i - 1));
+  }, []);
+
+  const goWriteNext = useCallback(() => {
+    setWriteIndex((i) => Math.min(writeTotal - 1, i + 1));
+  }, [writeTotal]);
 
   const restartFlashSession = useCallback(() => {
     setFlashSessionKey((k) => k + 1);
@@ -444,6 +468,15 @@ export default function KanjiPage() {
           onClick={() => setLessonTab("quiz")}
         >
           {t("kanjiStudyPage.tabQuiz")}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={lessonTab === "write"}
+          className={`vocab-study-tab${lessonTab === "write" ? " is-active" : ""}`}
+          onClick={() => setLessonTab("write")}
+        >
+          {t("kanjiStudyPage.tabWrite")}
         </button>
       </div>
 
@@ -805,7 +838,7 @@ export default function KanjiPage() {
               </p>
             )}
           </>
-        ) : (
+        ) : lessonTab === "quiz" ? (
           <div className="vocab-lesson-quiz-board kanji-lesson-quiz-board">
             <h1
               id="kanji-study-title"
@@ -835,6 +868,115 @@ export default function KanjiPage() {
               onRegenerate={handleQuizRegenerate}
               t={t}
             />
+          </div>
+        ) : (
+          <div className="vocab-lesson-quiz-board kanji-write-board">
+            <h1
+              id="kanji-study-title"
+              className="scrap-flash-title vocab-lesson-panel-title"
+            >
+              {t("kanjiStudyPage.writeBoardTitle")}
+            </h1>
+            <p className="vocab-lesson-quiz-intro">
+              {t("kanjiStudyPage.writeIntro")}
+            </p>
+            {writeCurrent ? (
+              <div className="kanji-write-wrap">
+                <div className="kanji-write-status">
+                  <span className="kanji-write-char" lang="ja">
+                    {writeCurrent.char}
+                  </span>
+                  <span className="kanji-write-progress">
+                    {t("kanjiStudyPage.writeProgress", {
+                      current: writeIndex + 1,
+                      total: writeTotal,
+                    })}
+                  </span>
+                </div>
+
+                <div className="kanji-write-stroke-stage">
+                  <KanjiStrokeAnimation
+                    char={writeCurrent.char}
+                    replayTick={writeReplayTick}
+                    fallbackHint={t("kanjiStudyPage.strokeFallback")}
+                  />
+                </div>
+
+                <div className="kanji-write-actions">
+                  <button
+                    type="button"
+                    className="vocab-study-nav-pill vocab-cta-reset"
+                    onClick={() => setWriteReplayTick((v) => v + 1)}
+                  >
+                    {t("kanjiStudyPage.replayStroke")}
+                  </button>
+                  <button
+                    type="button"
+                    className="vocab-study-nav-pill vocab-cta-reset"
+                    onClick={() => setWriteClearTick((v) => v + 1)}
+                  >
+                    {t("kanjiStudyPage.clearPractice")}
+                  </button>
+                </div>
+
+                <div className="kanji-write-grid" role="group" aria-label={t("kanjiStudyPage.writePadsAria")}>
+                  <div className="kanji-write-sample-wrap">
+                    <span
+                      className="kanji-write-sample"
+                      lang="ja"
+                      aria-label={t("kanjiStudyPage.writeSampleAria", {
+                        char: writeCurrent.char,
+                      })}
+                    >
+                      {writeCurrent.char}
+                    </span>
+                  </div>
+                  {[0, 1, 2].map((i) => (
+                    <AlphaPracticePad
+                      key={`${writeCurrent.char}-${i}`}
+                      guideText={writeCurrent.char}
+                      variant={i === 0 ? "bold" : "trace"}
+                      clearTick={writeClearTick}
+                      padIndex={i}
+                      ariaLabel={t("kanjiStudyPage.writePadAria", {
+                        n: i + 1,
+                        char: writeCurrent.char,
+                      })}
+                      showGuide
+                    />
+                  ))}
+                </div>
+
+                <div className="vocab-study-foot-nav">
+                  <button
+                    type="button"
+                    className="vocab-study-nav-pill vocab-cta-reset"
+                    onClick={goWritePrev}
+                    disabled={writeIndex <= 0}
+                  >
+                    ← {t("kanjiStudyPage.navPrev")}
+                  </button>
+                  <p className="vocab-study-foot-count" aria-live="polite">
+                    {t("kanjiStudyPage.writeProgress", {
+                      current: writeIndex + 1,
+                      total: writeTotal,
+                    })}
+                  </p>
+                  <button
+                    type="button"
+                    className="vocab-study-nav-pill vocab-cta-reset"
+                    onClick={goWriteNext}
+                    disabled={writeIndex >= writeTotal - 1}
+                  >
+                    {t("kanjiStudyPage.navNext")} →
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p className="vocab-empty" role="status">
+                {t("kanjiStudyPage.emptyLesson")}
+              </p>
+            )}
           </div>
         )}
       </article>

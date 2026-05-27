@@ -672,6 +672,8 @@
   },
   "alphabetPage": {
     "title": "Alphabet",
+    "kickerJa": "五十音・かな",
+    "kicker": "Alphabet",
     "subtitle": "一文字ずつ、毎日少しずつ覚えよう！",
     "tabListAria": "ひらがなまたはカタカナを選択",
     "tabHiragana": "ひらがな",
@@ -868,6 +870,7 @@
     "tabDetail": "レッスン詳細",
     "tabFlash": "フラッシュ",
     "tabQuiz": "テスト",
+    "tabWrite": "書き練習",
     "lessonDetailTitle": "レッスン {{n}} · {{jlpt}} — 漢字一覧",
     "lessonScrapTitle": "レッスン {{n}} · フラッシュ",
     "jlptTag": "{{level}} · 漢字",
@@ -889,7 +892,16 @@
     "quizNeedPerfect": "次のステージに進むには {{n}} 問すべて正解が必要です。",
     "quizFlowerDone": "このレッスンは満開。漢字テストも完了おめでとう！",
     "quizNoWords": "テストできる漢字がありません。",
-    "doneGoQuiz": "テストへ"
+    "doneGoQuiz": "テストへ",
+    "writeBoardTitle": "漢字の書き練習",
+    "writeIntro": "筆順アニメーションを見て、すぐ下のマスで書いて覚えよう。",
+    "writeProgress": "{{current}} / {{total}}",
+    "writePadsAria": "見本と練習マスを含む漢字の書き練習エリア",
+    "writeSampleAria": "漢字の見本: {{char}}",
+    "writePadAria": "練習マス {{n}}、見本 {{char}}",
+    "replayStroke": "筆順を再生",
+    "clearPractice": "書きを消す",
+    "strokeFallback": "筆順アニメーションを読み込めませんでした。見本を見ながら練習してください。"
   },
   "vocabStudyPage": {
     "linkBrowse": "検索・リスト",

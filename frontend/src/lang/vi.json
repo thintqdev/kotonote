@@ -669,6 +669,8 @@
   },
   "alphabetPage": {
     "title": "Alphabet",
+    "kickerJa": "五十音・かな",
+    "kicker": "Alphabet",
     "subtitle": "Học từng chữ cái, mỗi ngày một chút nhé!",
     "tabListAria": "Chọn hiragana hoặc katakana",
     "tabHiragana": "ひらがな",
@@ -864,6 +866,7 @@
     "tabDetail": "Chi tiết bài",
     "tabFlash": "Flashcard",
     "tabQuiz": "Kiểm tra",
+    "tabWrite": "Luyện viết",
     "lessonDetailTitle": "Bài {{n}} · {{jlpt}} — các chữ",
     "lessonScrapTitle": "Ôn bài {{n}} · flashcard",
     "jlptTag": "{{level}} · 漢字",
@@ -885,7 +888,16 @@
     "quizNeedPerfect": "Cần đúng cả {{n}} câu trong một lượt mới được lên giai đoạn mới.",
     "quizFlowerDone": "Bài này đã nở hoa — bạn đã hoàn thành chặng kiểm tra Kanji.",
     "quizNoWords": "Chưa có chữ Kanji để kiểm tra.",
-    "doneGoQuiz": "Tới bài kiểm tra"
+    "doneGoQuiz": "Tới bài kiểm tra",
+    "writeBoardTitle": "Luyện viết Kanji",
+    "writeIntro": "Xem animation thứ tự nét rồi viết lại ngay trên ô tập để nhớ sâu hơn.",
+    "writeProgress": "{{current}} / {{total}}",
+    "writePadsAria": "Vùng luyện viết Kanji gồm mẫu và các ô tập",
+    "writeSampleAria": "Chữ mẫu Kanji: {{char}}",
+    "writePadAria": "Ô luyện viết {{n}}, mẫu {{char}}",
+    "replayStroke": "Phát lại nét",
+    "clearPractice": "Xóa nét vẽ",
+    "strokeFallback": "Không tải được animation nét viết. Vẫn có thể luyện viết theo chữ mẫu."
   },
   "vocabStudyPage": {
     "linkBrowse": "Tra cứu và danh sách",
