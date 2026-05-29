@@ -57,6 +57,8 @@ export const MEMBERSHIP = {
 		`/membership/checkout/${encodeURIComponent(checkoutId)}/receipt`,
 	confirmCheckout: (checkoutId) =>
 		`/membership/checkout/${encodeURIComponent(checkoutId)}/confirm`,
+	refundRequest: (checkoutId) =>
+		`/membership/checkout/${encodeURIComponent(checkoutId)}/refund-request`,
 };
 
 /** GET/PUT hồ sơ người đăng nhập — `/api/users/me` (alias tương thích: `/api/profile/me`) */
@@ -94,6 +96,11 @@ export const STREAK = {
 	FREEZE: '/streaks/freeze',
 	WEEKLY: '/streaks/weekly',
 	LEADERBOARD: '/streaks/leaderboard',
+};
+
+/** Bảng xếp hạng — `/api/leaderboard` */
+export const LEADERBOARD = {
+	BASE: '/leaderboard',
 };
 
 /** Thông báo người dùng — `/api/notifications` */

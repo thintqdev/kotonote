@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
 import { mockStreak } from '../data/dashboardHomeMock.js';
 import {
-  createMembershipCheckout,
   confirmMembershipCheckout,
+  getMembershipCheckoutStatus,
 } from '../services/membershipService.js';
 import { formatVnd } from '../constants/membershipPlans.js';
 import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
@@ -19,14 +19,22 @@ import './Membership.css';
 const VALID_TIERS = new Set(['pro', 'ultra', 'ultimate']);
 const VALID_BILLING = new Set(['yearly', 'lifetime']);
 
+function checkoutIdFromRecord(record) {
+  if (!record) return '';
+  return record.checkoutId ?? record.id ?? '';
+}
+
 const MembershipCheckoutPage = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const { user, refreshUser } = useAuth();
 
+  const checkoutId = searchParams.get('checkoutId') || '';
   const tierId = searchParams.get('plan') || '';
   const billing = searchParams.get('billing') || '';
+  const stateCheckout = location.state?.checkout ?? null;
 
   const [checkout, setCheckout] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,8 +55,17 @@ const MembershipCheckoutPage = () => {
     checkout?.provider === 'mock' || (!checkout?.provider && !isPayosCheckout);
 
   useEffect(() => {
-    if (!VALID_TIERS.has(tierId) || !VALID_BILLING.has(billing)) {
-      setError(t('membershipCheckout.invalidParams'));
+    if (!checkoutId) {
+      setError(t('membershipCheckout.missingSession'));
+      setLoading(false);
+      return undefined;
+    }
+
+    if (
+      stateCheckout &&
+      checkoutIdFromRecord(stateCheckout) === checkoutId
+    ) {
+      setCheckout(stateCheckout);
       setLoading(false);
       return undefined;
     }
@@ -58,11 +75,11 @@ const MembershipCheckoutPage = () => {
       setLoading(true);
       setError('');
       try {
-        const created = await createMembershipCheckout({ tierId, billing });
+        const data = await getMembershipCheckoutStatus(checkoutId);
         if (!cancelled) {
-          setCheckout(created);
-          if (created?.provider === 'payos' && !created?.paymentUrl) {
-            setError(t('membershipCheckout.payosUnavailable'));
+          setCheckout(data.checkout ?? null);
+          if (data.checkout?.status === 'paid') {
+            setSuccess(true);
           }
         }
       } catch (err) {
@@ -75,7 +92,7 @@ const MembershipCheckoutPage = () => {
     return () => {
       cancelled = true;
     };
-  }, [tierId, billing, t]);
+  }, [checkoutId, stateCheckout, t]);
 
   const handlePayWithPayos = useCallback(() => {
     if (!checkout?.paymentUrl) return;
@@ -83,11 +100,11 @@ const MembershipCheckoutPage = () => {
   }, [checkout]);
 
   const handleSimulatePay = useCallback(async () => {
-    if (!checkout?.checkoutId) return;
+    if (!checkoutId) return;
     setPaying(true);
     setError('');
     try {
-      await confirmMembershipCheckout(checkout.checkoutId);
+      await confirmMembershipCheckout(checkoutId);
       await refreshUser();
       setSuccess(true);
       setTimeout(() => navigate('/membership', { replace: true }), 2200);
@@ -96,7 +113,12 @@ const MembershipCheckoutPage = () => {
     } finally {
       setPaying(false);
     }
-  }, [checkout, refreshUser, navigate, t]);
+  }, [checkoutId, refreshUser, navigate, t]);
+
+  const displayTierId = checkout?.tierId || tierId;
+  const displayBilling = checkout?.billing || billing;
+  const paramsValid =
+    VALID_TIERS.has(displayTierId) && VALID_BILLING.has(displayBilling);
 
   return (
     <Layout
@@ -132,6 +154,12 @@ const MembershipCheckoutPage = () => {
         </p>
       ) : null}
 
+      {!loading && !checkoutId ? (
+        <Link className="membership-checkout-back" to="/membership">
+          {t('membershipCheckout.back')}
+        </Link>
+      ) : null}
+
       {success ? (
         <div className="membership-checkout-success" role="status">
           <p className="membership-checkout-success-title">
@@ -141,17 +169,17 @@ const MembershipCheckoutPage = () => {
         </div>
       ) : null}
 
-      {checkout && !success && !error ? (
+      {checkout && !success && !error && paramsValid ? (
         <section className="membership-checkout-card profile-card">
           <span className="profile-card-tape" aria-hidden />
           <dl className="membership-checkout-summary">
             <div className="membership-checkout-row">
               <dt>{t('membershipCheckout.plan')}</dt>
-              <dd>{t(`membershipPage.tiers.${checkout.tierId}.name`)}</dd>
+              <dd>{t(`membershipPage.tiers.${displayTierId}.name`)}</dd>
             </div>
             <div className="membership-checkout-row">
               <dt>{t('membershipCheckout.billing')}</dt>
-              <dd>{t(`membershipPage.billing.${checkout.billing}`)}</dd>
+              <dd>{t(`membershipPage.billing.${displayBilling}`)}</dd>
             </div>
             <div className="membership-checkout-row membership-checkout-row--total">
               <dt>{t('membershipCheckout.total')}</dt>
@@ -185,7 +213,7 @@ const MembershipCheckoutPage = () => {
                 </span>
               </button>
             ) : null}
-            {isMockCheckout ? (
+            {isMockCheckout && checkout.status === 'pending' ? (
               <button
                 type="button"
                 className="btn-primary btn-login membership-tier-cta"

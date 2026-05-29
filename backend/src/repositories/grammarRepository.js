@@ -2,6 +2,7 @@ import Grammar from '../models/Grammar.js';
 import {
 	GRAMMAR_DEFAULT_PAGE_SIZE,
 	GRAMMAR_MAX_PAGE_SIZE,
+	GRAMMAR_TAG_IDS,
 } from '../constants/grammar.js';
 
 const normalizePagination = ({ page = 1, limit = GRAMMAR_DEFAULT_PAGE_SIZE } = {}) => {
@@ -17,7 +18,7 @@ const buildFilter = ({ jlpt, tag, q, isPublished } = {}) => {
 		filter.isPublished = isPublished;
 	}
 	if (jlpt) filter.jlpt = jlpt;
-	if (tag) filter.tagIds = tag;
+	if (tag) filter.tagIds = { $in: [tag] };
 	const qt = String(q || '').trim();
 	if (qt) {
 		const re = new RegExp(qt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
@@ -58,6 +59,27 @@ export const findGrammarsPaginated = async (filters = {}, pagination = {}) => {
 export const findDistinctJlptLevels = async (publishedOnly = true) => {
 	const filter = publishedOnly ? { isPublished: true } : {};
 	return Grammar.distinct('jlpt', filter);
+};
+
+/**
+ * Tag + số bài trong phạm vi jlpt + q (không lọc theo tag đang chọn).
+ * @param {{ jlpt?: string, q?: string, isPublished?: boolean }} filters
+ * @returns {Promise<{ availableTagIds: string[], tagCounts: Record<string, number> }>}
+ */
+export const findTagFacetForScope = async (filters = {}) => {
+	const { tag: _tag, ...rest } = filters;
+	const match = buildFilter(rest);
+	const rows = await Grammar.aggregate([
+		{ $match: match },
+		{ $unwind: '$tagIds' },
+		{ $group: { _id: '$tagIds', count: { $sum: 1 } } },
+	]);
+	const tagCounts = {};
+	for (const row of rows) {
+		if (row._id) tagCounts[row._id] = row.count;
+	}
+	const availableTagIds = GRAMMAR_TAG_IDS.filter((id) => tagCounts[id] > 0);
+	return { availableTagIds, tagCounts };
 };
 
 export const findGrammarBySlug = async (slug, { publishedOnly = false } = {}) => {

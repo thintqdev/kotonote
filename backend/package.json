@@ -15,6 +15,7 @@
 		"seed:prompts": "node src/scripts/seedPrompts.js",
 		"payos:confirm-webhook": "node src/scripts/payosConfirmWebhook.js",
 		"membership:expire-due": "node src/scripts/membershipExpireDue.js",
+		"membership:clear-checkouts": "node src/scripts/clearMembershipCheckouts.js",
 		"test": "jest --coverage",
 		"lint": "eslint src/**/*.js"
 	},

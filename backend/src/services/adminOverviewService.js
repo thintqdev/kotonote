@@ -2,6 +2,7 @@ import Survey from '../models/Survey.js';
 import User from '../models/User.js';
 import Feedback from '../models/Feedback.js';
 import MembershipCheckout from '../models/MembershipCheckout.js';
+import * as siteViewRepository from '../repositories/siteViewRepository.js';
 
 function startOfDay(d) {
 	const x = new Date(d);
@@ -60,6 +61,9 @@ export async function getAdminOverviewStats() {
 	const days = buildLast7Days();
 	const since = days[0].date;
 
+	const dayKeys = days.map((d) => d.key);
+	const todayKey = dayKey(new Date());
+
 	const [
 		totalUsers,
 		activeUsers,
@@ -69,6 +73,8 @@ export async function getAdminOverviewStats() {
 		feedbackToday,
 		checkoutsToday,
 		paidToday,
+		viewsToday,
+		viewsByDayMap,
 		surveyByDayRows,
 		feedbackByDayRows,
 		checkoutByDayRows,
@@ -87,6 +93,8 @@ export async function getAdminOverviewStats() {
 			status: 'paid',
 			createdAt: { $gte: startOfDay(new Date()) },
 		}),
+		siteViewRepository.getViewsForDateKey(todayKey),
+		siteViewRepository.getViewsByDateKeys(dayKeys),
 		aggregateByCreatedAt(Survey, { createdAt: { $gte: since } }),
 		aggregateByCreatedAt(Feedback, { createdAt: { $gte: since } }),
 		aggregateByCreatedAt(MembershipCheckout, { createdAt: { $gte: since } }),
@@ -115,6 +123,7 @@ export async function getAdminOverviewStats() {
 	const trends7d = days.map((d) => ({
 		dateKey: d.key,
 		label: d.label,
+		views: viewsByDayMap.get(d.key) ?? 0,
 		surveys: surveyMap.get(d.key) ?? 0,
 		feedbacks: feedbackMap.get(d.key) ?? 0,
 		checkouts: checkoutMap.get(d.key) ?? 0,
@@ -138,6 +147,7 @@ export async function getAdminOverviewStats() {
 			feedbackToday,
 			checkoutsToday,
 			paidToday,
+			viewsToday,
 			conversion7d,
 		},
 		trends7d,

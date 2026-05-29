@@ -22,12 +22,26 @@ export async function getMembershipCheckoutHistory(params = {}) {
 	};
 }
 
+/** Chặn double-click / gọi create trùng khi đang xử lý. */
+let checkoutCreateInflight = null;
+
 /**
+ * Chỉ gọi từ MembershipPage khi user bấm nâng cấp — không gọi trong useEffect.
  * @param {{ tierId: string, billing: 'yearly'|'lifetime' }} payload
  */
 export async function createMembershipCheckout(payload) {
-	const body = await api.post(MEMBERSHIP.CHECKOUT, payload);
-	return body.data?.checkout ?? null;
+	if (checkoutCreateInflight) {
+		return checkoutCreateInflight;
+	}
+
+	checkoutCreateInflight = api
+		.post(MEMBERSHIP.CHECKOUT, payload)
+		.then((body) => body.data?.checkout ?? null)
+		.finally(() => {
+			checkoutCreateInflight = null;
+		});
+
+	return checkoutCreateInflight;
 }
 
 /**
@@ -46,4 +60,13 @@ export async function confirmMembershipCheckout(checkoutId) {
 export async function getMembershipCheckoutReceipt(checkoutId) {
 	const body = await api.get(MEMBERSHIP.checkoutReceipt(checkoutId));
 	return body.data?.receipt ?? null;
+}
+
+/**
+ * @param {string} checkoutId
+ * @param {{ note?: string }} [payload]
+ */
+export async function requestMembershipRefund(checkoutId, payload = {}) {
+	const body = await api.post(MEMBERSHIP.refundRequest(checkoutId), payload);
+	return body.data ?? null;
 }

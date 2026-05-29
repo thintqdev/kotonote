@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import AdminCheckoutReceiptModal from '../../components/admin/AdminCheckoutReceiptModal.jsx';
 import AdminMembershipEditModal from '../../components/admin/AdminMembershipEditModal.jsx';
+import AdminRefundCheckoutModal from '../../components/admin/AdminRefundCheckoutModal.jsx';
 import {
 	CHECKOUT_STATUS_OPTIONS,
 	MEMBERSHIP_TIER_OPTIONS,
@@ -13,7 +14,6 @@ import {
 	getAdminMembershipStatistics,
 	listAdminMembershipCheckouts,
 	listAdminMembershipUsers,
-	refundAdminCheckout,
 } from '../../services/adminMembershipService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import './AdminGrammarPage.css';
@@ -76,7 +76,7 @@ export default function AdminSubscriptionsPage() {
 
 	const [editOpen, setEditOpen] = useState(false);
 	const [editUser, setEditUser] = useState(null);
-	const [refundingId, setRefundingId] = useState('');
+	const [refundCheckout, setRefundCheckout] = useState(null);
 	const [receiptCheckoutId, setReceiptCheckoutId] = useState('');
 
 	const loadStats = useCallback(async () => {
@@ -121,32 +121,6 @@ export default function AdminSubscriptionsPage() {
 		if (checkoutSearch.trim()) p.search = checkoutSearch.trim();
 		return p;
 	}, [checkoutPage, checkoutStatus, checkoutSearch]);
-
-	const handleRefundCheckout = async (checkoutId) => {
-		const reason = window.prompt(
-			'Lý do hoàn tiền (tuỳ chọn). Hoàn tiền PayOS thực tế cần xử lý trên dashboard PayOS.',
-			'',
-		);
-		if (reason === null) return;
-		setRefundingId(checkoutId);
-		try {
-			const result = await refundAdminCheckout(checkoutId, {
-				reason: reason.trim() || undefined,
-				revokeMembership: true,
-			});
-			toast.success('Đã ghi nhận hoàn tiền', {
-				description: result.membershipRevoked
-					? 'Đã thu hồi gói membership của user.'
-					: 'Checkout đã đánh dấu refunded.',
-			});
-			void loadCheckouts();
-			void loadUsers();
-		} catch (e) {
-			toast.error('Hoàn tiền thất bại', { description: getApiErrorMessage(e) });
-		} finally {
-			setRefundingId('');
-		}
-	};
 
 	const loadCheckouts = useCallback(async () => {
 		setCheckoutsLoading(true);
@@ -496,45 +470,54 @@ export default function AdminSubscriptionsPage() {
 												{membershipTierLabel(c.tierId)} · {c.billing}
 											</td>
 											<td>{formatVnd(c.amountVnd)}</td>
-											<td>
-												<span
-													className={`admin-subs-checkout-status ${checkoutStatusClass(c.status)}`}
-												>
-													{checkoutStatusLabel(c.status)}
-												</span>
+											<td className="admin-subs-status-cell">
+												<div className="admin-subs-status-stack">
+													<span
+														className={`admin-subs-checkout-status ${checkoutStatusClass(c.status)}`}
+													>
+														{checkoutStatusLabel(c.status)}
+													</span>
+													{c.status === 'paid' && c.refundRequestedAt ? (
+														<span className="admin-subs-refund-pending">
+															Chờ hoàn
+														</span>
+													) : null}
+												</div>
 											</td>
 											<td>{formatShortDate(c.paidAt)}</td>
-											<td className="admin-subs-actions">
-												{(c.status === 'paid' ||
-													c.status === 'refunded') && (
-													<button
-														type="button"
-														className="admin-subs-link"
-														onClick={() =>
-															setReceiptCheckoutId(c.id ?? c._id)
-														}
-													>
-														Biên lai
-													</button>
-												)}
-												{c.status === 'paid' ? (
-													<button
-														type="button"
-														className="admin-subs-link admin-subs-link--danger"
-														disabled={
-															refundingId === (c.id ?? c._id)
-														}
-														onClick={() =>
-															void handleRefundCheckout(
-																c.id ?? c._id,
-															)
-														}
-													>
-														{refundingId === (c.id ?? c._id)
-															? '…'
-															: 'Hoàn tiền'}
-													</button>
-												) : null}
+											<td className="admin-subs-actions-cell">
+												<div className="admin-grammar-row-actions admin-subs-checkout-actions">
+													{c.status === 'paid' ||
+													c.status === 'refunded' ? (
+														<button
+															type="button"
+															className="admin-grammar-btn admin-grammar-btn--ghost"
+															onClick={() =>
+																setReceiptCheckoutId(c.id ?? c._id)
+															}
+														>
+															Biên lai
+														</button>
+													) : null}
+													{c.status === 'paid' && c.refundRequestedAt ? (
+														<button
+															type="button"
+															className="admin-grammar-btn admin-grammar-btn--danger"
+															onClick={() => setRefundCheckout(c)}
+														>
+															Hoàn tiền
+														</button>
+													) : null}
+													{c.status !== 'paid' &&
+													c.status !== 'refunded' ? (
+														<span
+															className="admin-subs-actions-empty"
+															aria-hidden="true"
+														>
+															—
+														</span>
+													) : null}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -586,6 +569,16 @@ export default function AdminSubscriptionsPage() {
 				checkoutId={receiptCheckoutId}
 				open={Boolean(receiptCheckoutId)}
 				onClose={() => setReceiptCheckoutId('')}
+			/>
+
+			<AdminRefundCheckoutModal
+				open={Boolean(refundCheckout)}
+				checkout={refundCheckout}
+				onClose={() => setRefundCheckout(null)}
+				onRefunded={() => {
+					void loadCheckouts();
+					void loadUsers();
+				}}
 			/>
 		</div>
 	);

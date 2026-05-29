@@ -42,6 +42,7 @@ import ReadingListPage from "./pages/ReadingListPage.jsx";
 import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
 import NotebookPage from "./pages/NotebookPage.jsx";
 import JournalPage from "./pages/JournalPage.jsx";
+import LeaderboardPage from "./pages/LeaderboardPage.jsx";
 import ListeningPage from "./pages/ListeningPage.jsx";
 import ListeningExercisePage from "./pages/ListeningExercisePage.jsx";
 import KaiwaListPage from "./pages/KaiwaListPage.jsx";
@@ -86,6 +87,7 @@ import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
 import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
 import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
+import PageViewTracker from "./components/analytics/PageViewTracker.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -94,6 +96,7 @@ function App() {
       <SurveyCompletionProvider>
         <UserNotificationProvider>
           <Router>
+          <PageViewTracker />
           <Toaster
             position="top-center"
             richColors
@@ -166,6 +169,7 @@ function App() {
                 <Route path="/reading/:id" element={<ReadingArticlePage />} />
                 <Route path="/notebook" element={<NotebookPage />} />
                 <Route path="/journal" element={<JournalPage />} />
+                <Route path="/leaderboard" element={<LeaderboardPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
                 <Route path="/listening/:id" element={<ListeningExercisePage />} />
                 <Route path="/kaiwa" element={<KaiwaListPage />} />

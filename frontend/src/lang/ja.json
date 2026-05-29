@@ -29,7 +29,7 @@
     "practice": "模試",
     "notebook": "ノート",
     "journal": "日記",
-    "stats": "統計",
+    "stats": "ランキング",
     "settings": "設定",
     "soon": "{{label}}（準備中）"
   },
@@ -228,6 +228,7 @@
     "kpis": {
       "feedbackOpen": "未対応フィードバック",
       "activeUsers": "アクティブユーザー",
+      "viewsToday": "本日のページビュー",
       "checkoutConv7d": "決済率（7日）"
     },
     "loading": "統計を読み込み中…",
@@ -237,6 +238,7 @@
     "overviewTrend": {
       "title": "7日トレンド",
       "series": {
+        "views": "ページビュー",
         "surveys": "アンケート",
         "feedbacks": "フィードバック",
         "checkouts": "新規チェックアウト",
@@ -356,7 +358,8 @@
     "notebook": "ノート",
     "listening": "リスニング",
     "kaiwa": "会話（Kaiwa）",
-    "practice": "練習"
+    "practice": "練習",
+    "leaderboard": "ランキング"
   },
   "kaiwaPage": {
     "listTitle": "日本語会話の練習",
@@ -654,6 +657,25 @@
     "pathLabel": "アクセスしたパス:",
     "backHome": "ホームへ戻る"
   },
+  "leaderboardPage": {
+    "title": "ランキング",
+    "subtitle": "Kotonoteで最も頑張っているトップ10",
+    "streakTitle": "連続学習日数",
+    "streakHint": "現在の連続日数順（連続中のユーザーのみ）。",
+    "streakEmpty": "まだランキングに載っていません。チェックインして連続記録を伸ばそう！",
+    "streakDays": "{{count}}日",
+    "streakBest": "最高: {{count}}日",
+    "lessonTitle": "満開レッスン数",
+    "lessonHint": "各JLPTレベルで、単語・漢字デックが満開（最大成長段階）になった数。",
+    "lessonEmpty": "このレベルではまだ完了レッスンがありません。",
+    "lessonCount": "{{count}}レッスン",
+    "lessonBreakdown": "単語: {{vocab}} · 漢字: {{kanji}}",
+    "jlptTabsAria": "JLPTレベルを選択",
+    "yourRank": "あなた: {{rank}}位",
+    "yourRankShort": "あなた: {{rank}}位 · {{value}}",
+    "yourRankStreak": "連続{{count}}日 · 最高{{best}}日",
+    "yourRankLesson": "{{count}}レッスン · 単語{{vocab}} · 漢字{{kanji}}"
+  },
   "readingPage": {
     "kicker": "Dokkai",
     "kickerJa": "読解",
@@ -743,13 +765,18 @@
   },
   "grammarPage": {
     "listTitle": "文法リスト",
-    "listSubtitle": "JLPTレベル・タグ・キーワード（文型や説明文）で絞り込みできます。",
+    "listSubtitle": "JLPTレベルやキーワード（文型・説明）で絞り込み。タグは表示中のレベルにある項目だけ表示します。",
     "filterAria": "文法一覧のフィルター",
     "levelTabsAria": "JLPTレベルを選ぶ",
     "jlptFilter": "JLPT",
     "jlptAll": "すべて",
     "tagFilter": "タグ",
     "tagAll": "すべて",
+    "tagChipCount": "{{tag}}（{{count}}）",
+    "tagFilterResult": "「{{tag}}」で絞り込み中 — {{count}} 件",
+    "tagFilterLoading": "「{{tag}}」で絞り込み中…",
+    "tagFilterClear": "タグを解除",
+    "filterRefreshing": "一覧を更新しています…",
     "searchLabel": "検索",
     "searchPlaceholder": "例：ため、伝聞、わけ…",
     "searchApply": "検索",
@@ -1136,9 +1163,29 @@
     "cancel": "キャンセル",
     "editAria": "メモの内容"
   },
+  "continueLearning": {
+    "title": "続きから",
+    "cta": "続ける →",
+    "kindInProgress": "学習の続き",
+    "kindSuggested": "おすすめ",
+    "headerShort": "続き",
+    "headerTitle": "{{subject}}を続ける: {{lesson}}",
+    "detailQuestions": "{{answered}}/{{total}} 問",
+    "detailGrowth": "段階 {{stage}}/{{max}}",
+    "detailKaiwa": "{{count}} ターン"
+  },
   "dashboard": {
     "streakDays": "{{count}}日連続",
     "editDailyGoals": "目標を編集",
+    "leaderboardPreview": {
+      "title": "今日のランキング",
+      "subtitle": "{{jlpt}}級 · トップ3",
+      "viewAll": "トップ10を見る",
+      "streakTitle": "連続学習日数",
+      "lessonTitle": "花開いたレッスン",
+      "streakEmpty": "まだ誰もいません — 連続記録をつくろう！",
+      "lessonEmpty": "この級ではまだ完了がありません。"
+    },
     "quotes": {
       "note": "学びは未来の自分への贈り物。",
       "footer": "毎日が、昨日の自分を少し超えるチャンス。"
@@ -1454,8 +1501,14 @@
     "sectionNotif": "通知",
     "notifEmail": "メールサマリー",
     "notifEmailDesc": "毎朝8時（TZ）に進捗メール：ストリーク・目標・試験日",
-    "notifStudy": "毎日の学習リマインダー",
-    "notifStudyDesc": "アプリ内の毎日の学習リマインダーを有効にする",
+    "notifStudy": "アプリ内リマインダー",
+    "notifStudyDesc": "アプリ内のスマートリマインダー（アプリ起動中・オンライン時）",
+    "notifStreak": "連続記録リマインダー",
+    "notifStreakDesc": "21:00（プロフィールTZ）：未チェックインなら通知",
+    "notifGoalNudge": "今日の目標リマインダー",
+    "notifGoalNudgeDesc": "18:00：単語・漢字の日次目標未達なら通知",
+    "notifExam": "試験カウントダウン",
+    "notifExamDesc": "9:00：試験日まで14・7・3・1日の朝に通知",
     "notifWeekly": "週次レポート",
     "notifWeeklyDesc": "月曜8時に週間メール（ストリーク・チェックイン）",
     "sectionStudy": "学習目標",
@@ -1634,6 +1687,7 @@
     "paying": "処理中…",
     "back": "← プラン選択に戻る",
     "invalidParams": "プランまたは支払い方法が無効です。",
+    "missingSession": "決済セッションがありません。メンバーシップページからプランを選び直してください。",
     "successTitle": "お支払い完了！",
     "successDesc": "プランが有効になりました。メンバーシップページへ移動します…"
   },
@@ -1660,6 +1714,15 @@
     "next": "次へ",
     "pageInfo": "{{page}} / {{pages}} ページ",
     "viewReceipt": "領収書を見る",
+    "requestRefund": "返金を申請",
+    "refundPending": "申請済み — 処理待ち",
+    "refundRequestTitle": "返金申請",
+    "refundRequestLead": "内容を確認のうえ、アカウントのメールにご連絡します。返金が承認された場合、反映まで数日かかることがあります。",
+    "refundRequestNoteLabel": "理由（任意）",
+    "refundRequestNotePlaceholder": "例：誤って支払った、まだ利用していない…",
+    "refundRequestSubmit": "申請を送信",
+    "refundRequestSubmitting": "送信中…",
+    "refundRequestSuccess": "返金申請を送信しました",
     "filters": {
       "all": "すべて",
       "paid": "支払い済み",
@@ -1765,6 +1828,8 @@
     },
     "aboutTitle": "自己紹介",
     "aboutField": "自己紹介",
+    "bioShowMore": "もっと見る",
+    "bioShowLess": "閉じる",
     "statsTitle": "学習サマリー",
     "statsAria": "学習統計",
     "statsLoading": "読み込み中…",
@@ -2059,6 +2124,11 @@
     "MSG_1122": "決済セッションの状態を取得しました",
     "MSG_1123": "支払い金額が注文と一致しません",
     "MSG_1124": "この環境では模擬決済は無効です",
+    "MSG_1128": "返金を記録しました",
+    "MSG_1129": "この取引はすでに返金済みです",
+    "MSG_1131": "返金申請を送信しました",
+    "MSG_1132": "この取引にはすでに返金申請があります",
+    "MSG_1133": "ユーザーから返金申請がないため、返金を記録できません",
     "MSG_716": "このレッスンはまだロック中です。前のレッスンのテストを完了してください（発芽段階）。"
   },
   "jlptAccess": {

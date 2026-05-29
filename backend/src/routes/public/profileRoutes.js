@@ -26,6 +26,11 @@ router.get(
 	authenticate,
 	dashboardHomeController.getMyDashboardHome,
 );
+router.get(
+	'/me/study-continue',
+	authenticate,
+	dashboardHomeController.getMyStudyContinue,
+);
 router.get('/me/focus-areas', authenticate, focusAreaController.getMyFocusAreas);
 router.put(
 	'/me/focus-areas',

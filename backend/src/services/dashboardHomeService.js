@@ -12,25 +12,18 @@ import { VOCAB_GROWTH_STAGE_MAX } from '../constants/vocabGrowth.js';
 import { KANJI_LESSON_GROWTH_MAX } from '../constants/kanji.js';
 import User from '../models/User.js';
 import { normalizeUserSettings } from '../constants/userSettings.js';
-import { normalizeDailySubjectGoals } from '../constants/dailySubjectGoals.js';
 import {
 	DASHBOARD_SUBJECT_ORDER,
 	DASHBOARD_SUBJECT_ROUTES,
 	DASHBOARD_SUBJECT_STYLE,
-	DASHBOARD_TODAY_DETAIL_KEYS,
-	DASHBOARD_TODAY_SUBJECT_IDS,
 } from '../constants/dashboardHome.js';
+import { getTodayStudyProgress } from '../utils/todayStudyProgress.js';
+import { getContinueStudy } from './continueStudyService.js';
 
 function clampPct(value) {
 	const n = Number(value);
 	if (!Number.isFinite(n)) return 0;
 	return Math.min(100, Math.max(0, Math.round(n)));
-}
-
-function startOfToday() {
-	const d = new Date();
-	d.setHours(0, 0, 0, 0);
-	return d;
 }
 
 /**
@@ -52,8 +45,6 @@ function progressFromDeckStages(rows, totalDecks, maxStage) {
  * @param {import('mongoose').Types.ObjectId} userId
  */
 export async function getDashboardHome(userId) {
-	const todayStart = startOfToday();
-
 	const [
 		userDoc,
 		streak,
@@ -66,8 +57,6 @@ export async function getDashboardHome(userId) {
 		vocabProgressRows,
 		kanjiProgressRows,
 		readingDone,
-		vocabActivityToday,
-		kanjiActivityToday,
 	] = await Promise.all([
 		User.findById(userId).select('settings').lean(),
 		streakRepository.getOrCreateStreak(userId),
@@ -80,14 +69,6 @@ export async function getDashboardHome(userId) {
 		VocabularyDeckProgress.find({ userId }).select('growthStage').lean(),
 		KanjiDeckProgress.find({ userId }).select('growthStage').lean(),
 		readingProgressRepository.countByUserStatus(userId, 'done'),
-		VocabularyDeckProgress.countDocuments({
-			userId,
-			updatedAt: { $gte: todayStart },
-		}),
-		KanjiDeckProgress.countDocuments({
-			userId,
-			updatedAt: { $gte: todayStart },
-		}),
 	]);
 
 	const totalCounts = {
@@ -132,34 +113,11 @@ export async function getDashboardHome(userId) {
 	});
 
 	const settings = normalizeUserSettings(userDoc?.settings);
-	const dailyGoals = normalizeDailySubjectGoals(
-		settings.study?.dailySubjectGoals,
-	);
-
-	const todayTasks = DASHBOARD_TODAY_SUBJECT_IDS.map((subjectId) => {
-		const target = dailyGoals[subjectId] ?? 1;
-		let completed = 0;
-		if (subjectId === 'vocab') {
-			completed = Math.min(target, vocabActivityToday * 5);
-		} else if (subjectId === 'kanji') {
-			completed = Math.min(target, kanjiActivityToday * 4);
-		}
-		return {
-			subjectId,
-			detailKey: DASHBOARD_TODAY_DETAIL_KEYS[subjectId],
-			target,
-			completed,
-		};
-	});
-
-	const taskRatios = todayTasks.map((task) =>
-		task.target > 0 ? Math.min(1, task.completed / task.target) : 0,
-	);
-	const todayPercent = taskRatios.length
-		? clampPct(
-				(taskRatios.reduce((a, b) => a + b, 0) / taskRatios.length) * 100,
-			)
-		: 0;
+	const [{ percent: todayPercent, tasks: todayTasks, goals: dailyGoals }, continueStudy] =
+		await Promise.all([
+			getTodayStudyProgress(userId, settings.study?.dailySubjectGoals),
+			getContinueStudy(userId),
+		]);
 
 	return {
 		streak: {
@@ -171,5 +129,6 @@ export async function getDashboardHome(userId) {
 			tasks: todayTasks,
 			goals: dailyGoals,
 		},
+		continue: continueStudy,
 	};
 }

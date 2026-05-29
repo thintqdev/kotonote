@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import listeningExerciseService from '../services/listeningExerciseService.js';
+import * as listeningProgressService from '../services/listeningProgressService.js';
 import { apiSuccess, apiPaginated, apiError } from '../utils/response.js';
 import { LISTENING } from '../constants/messages.js';
 import {
@@ -73,13 +74,39 @@ export const getById = asyncHandler(async (req, res) => {
 		return apiError(res, LISTENING.NOT_FOUND, 404);
 	}
 	assertJlptUnlocked(req.jlptUnlocked, item.jlpt);
+	const exerciseId = item._id ?? item.id;
+	const progressRow = await listeningProgressService.saveListeningProgress(
+		req.user._id,
+		exerciseId,
+		{ status: 'in_progress' },
+	);
 	return apiSuccess(
 		res,
 		{
-			item: toPublicListeningItem(item),
+			item: {
+				...toPublicListeningItem(item),
+				progress: {
+					status: progressRow.status,
+					questionAnswers: progressRow.questionAnswers ?? [],
+				},
+			},
 			jlptAccess: buildJlptAccessMeta(req.jlptUnlocked),
 		},
 		LISTENING.FETCHED,
+		200,
+	);
+});
+
+export const saveExerciseProgress = asyncHandler(async (req, res) => {
+	const progress = await listeningProgressService.saveListeningProgress(
+		req.user._id,
+		req.params.id,
+		req.body,
+	);
+	return apiSuccess(
+		res,
+		{ progress },
+		LISTENING.PROGRESS_SAVED,
 		200,
 	);
 });

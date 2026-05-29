@@ -102,6 +102,21 @@ export const getCheckoutReceipt = asyncHandler(async (req, res) => {
 	return apiSuccess(res, data, MEMBERSHIP.RECEIPT_FETCHED, 200);
 });
 
+/**
+ * @route POST /api/membership/checkout/:checkoutId/refund-request
+ */
+export const requestCheckoutRefund = asyncHandler(async (req, res) => {
+	const { requestRefundByUser } = await import(
+		'../services/membershipRefundRequestService.js'
+	);
+	const data = await requestRefundByUser(
+		req.user._id,
+		req.params.checkoutId,
+		{ note: req.body.note },
+	);
+	return apiSuccess(res, data, MEMBERSHIP.REFUND_REQUESTED, 200);
+});
+
 export const payosWebhook = asyncHandler(async (req, res) => {
 	try {
 		await processPayosPaymentWebhook(req.body);

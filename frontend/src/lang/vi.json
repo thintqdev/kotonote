@@ -29,7 +29,7 @@
     "practice": "Luyện thi JLPT",
     "notebook": "Sổ tay",
     "journal": "Nhật ký",
-    "stats": "Thống kê",
+    "stats": "Xếp hạng",
     "settings": "Cài đặt",
     "soon": "{{label}} (sắp có)"
   },
@@ -225,6 +225,7 @@
     "kpis": {
       "feedbackOpen": "Feedback chưa xử lý",
       "activeUsers": "User đang active",
+      "viewsToday": "Lượt xem hôm nay",
       "checkoutConv7d": "Tỷ lệ thanh toán (7 ngày)"
     },
     "loading": "Đang tải thống kê…",
@@ -234,6 +235,7 @@
     "overviewTrend": {
       "title": "Xu hướng 7 ngày",
       "series": {
+        "views": "Lượt xem trang",
         "surveys": "Khảo sát",
         "feedbacks": "Feedback",
         "checkouts": "Checkout tạo mới",
@@ -353,7 +355,8 @@
     "notebook": "Sổ tay",
     "listening": "Nghe hiểu",
     "kaiwa": "Hội thoại",
-    "practice": "Luyện tập"
+    "practice": "Luyện tập",
+    "leaderboard": "Xếp hạng"
   },
   "kaiwaPage": {
     "listTitle": "Luyện hội thoại tiếng Nhật",
@@ -651,6 +654,25 @@
     "pathLabel": "Bạn đang mở:",
     "backHome": "Về trang chủ"
   },
+  "leaderboardPage": {
+    "title": "Bảng xếp hạng",
+    "subtitle": "Top 10 người học tích cực nhất trên Kotonote",
+    "streakTitle": "Chuỗi ngày học",
+    "streakHint": "Xếp theo số ngày học liên tiếp hiện tại (chỉ tính khi đang có chuỗi).",
+    "streakEmpty": "Chưa có ai trong bảng — hãy check-in và giữ chuỗi nhé!",
+    "streakDays": "{{count}} ngày",
+    "streakBest": "Kỷ lục: {{count}} ngày",
+    "lessonTitle": "Bài đã nở hoa",
+    "lessonHint": "Đếm bài từ vựng + Kanji đạt giai đoạn nở hoa tối đa trong từng cấp JLPT.",
+    "lessonEmpty": "Chưa có bài hoàn thành ở cấp này.",
+    "lessonCount": "{{count}} bài",
+    "lessonBreakdown": "Từ: {{vocab}} · Kanji: {{kanji}}",
+    "jlptTabsAria": "Chọn cấp JLPT cho bảng bài học",
+    "yourRank": "Bạn: hạng #{{rank}}",
+    "yourRankShort": "Bạn: hạng #{{rank}} · {{value}}",
+    "yourRankStreak": "{{count}} ngày liên tiếp · Kỷ lục {{best}} ngày",
+    "yourRankLesson": "{{count}} bài · Từ: {{vocab}} · Kanji: {{kanji}}"
+  },
   "readingPage": {
     "kicker": "Dokkai",
     "kickerJa": "読解",
@@ -740,13 +762,18 @@
   },
   "grammarPage": {
     "listTitle": "Ngữ pháp",
-    "listSubtitle": "Lọc theo cấp JLPT, chủ đề tag hoặc từ khóa (mẫu câu / phần mô tả).",
+    "listSubtitle": "Lọc theo cấp JLPT hoặc từ khóa (mẫu câu / phần mô tả). Chủ đề tag hiện theo bài có trong cấp đang xem.",
     "filterAria": "Bộ lọc danh sách ngữ pháp",
     "levelTabsAria": "Chọn cấp JLPT",
     "jlptFilter": "Cấp JLPT",
     "jlptAll": "Tất cả",
     "tagFilter": "Chủ đề",
     "tagAll": "Tất cả",
+    "tagChipCount": "{{tag}} ({{count}})",
+    "tagFilterResult": "Đang lọc「{{tag}}」— {{count}} bài khớp",
+    "tagFilterLoading": "Đang lọc「{{tag}}」…",
+    "tagFilterClear": "Bỏ lọc chủ đề",
+    "filterRefreshing": "Đang cập nhật danh sách…",
     "searchLabel": "Tìm kiếm",
     "searchPlaceholder": "Ví dụ: ため、伝聞、わけ…",
     "searchApply": "Tìm",
@@ -1132,9 +1159,29 @@
     "cancel": "Hủy",
     "editAria": "Nội dung ghi chú"
   },
+  "continueLearning": {
+    "title": "Tiếp tục học",
+    "cta": "Học tiếp →",
+    "kindInProgress": "Đang học dở",
+    "kindSuggested": "Gợi ý tiếp theo",
+    "headerShort": "Tiếp tục",
+    "headerTitle": "Tiếp tục {{subject}}: {{lesson}}",
+    "detailQuestions": "Đã làm {{answered}}/{{total}} câu",
+    "detailGrowth": "Giai đoạn {{stage}}/{{max}}",
+    "detailKaiwa": "{{count}} lượt hội thoại"
+  },
   "dashboard": {
     "streakDays": "{{count}} ngày liên tiếp",
     "editDailyGoals": "Chỉnh mục tiêu",
+    "leaderboardPreview": {
+      "title": "Xếp hạng hôm nay",
+      "subtitle": "Top 3 theo cấp {{jlpt}} trên Kotonote",
+      "viewAll": "Xem top 10",
+      "streakTitle": "Chuỗi ngày học",
+      "lessonTitle": "Bài đã nở hoa",
+      "streakEmpty": "Chưa có ai — hãy giữ chuỗi học nhé!",
+      "lessonEmpty": "Chưa có bài hoàn thành ở cấp này."
+    },
     "quotes": {
       "note": "Học tập là món quà dành cho chính bạn trong tương lai.",
       "footer": "Mỗi ngày là cơ hội vượt qua chính mình hôm qua một chút."
@@ -1450,8 +1497,14 @@
     "sectionNotif": "Thông báo",
     "notifEmail": "Email tóm tắt",
     "notifEmailDesc": "Email mỗi sáng 8:00 (múi giờ hồ sơ): streak, mục tiêu, ngày thi",
-    "notifStudy": "Nhắc học hằng ngày",
-    "notifStudyDesc": "Cho phép gửi nhắc học hằng ngày trong app",
+    "notifStudy": "Nhắc học trong app",
+    "notifStudyDesc": "Bật thông báo nhắc học thông minh trong ứng dụng (cần mở app hoặc đang online)",
+    "notifStreak": "Nhắc giữ chuỗi",
+    "notifStreakDesc": "21:00 (giờ hồ sơ): chưa check-in hôm nay thì nhắc giữ lửa",
+    "notifGoalNudge": "Nhắc mục tiêu ngày",
+    "notifGoalNudgeDesc": "18:00: chưa đạt mục tiêu từ/kanji hôm nay thì nhắc học thêm",
+    "notifExam": "Nhắc đếm ngược kỳ thi",
+    "notifExamDesc": "9:00: nhắc khi còn 14, 7, 3 hoặc 1 ngày đến ngày thi trên hồ sơ",
     "notifWeekly": "Báo cáo tuần",
     "notifWeeklyDesc": "Email thứ Hai 8:00: tổng hợp tuần (streak, check-in)",
     "sectionStudy": "Mục tiêu học",
@@ -1630,6 +1683,7 @@
     "paying": "Đang xử lý…",
     "back": "← Quay lại chọn gói",
     "invalidParams": "Gói hoặc hình thức thanh toán không hợp lệ.",
+    "missingSession": "Thiếu phiên thanh toán. Vui lòng chọn gói từ trang membership.",
     "successTitle": "Thanh toán thành công!",
     "successDesc": "Gói của bạn đã được kích hoạt. Đang chuyển về trang gói thành viên…"
   },
@@ -1656,6 +1710,15 @@
     "next": "Sau",
     "pageInfo": "Trang {{page}} / {{pages}}",
     "viewReceipt": "Xem biên lai",
+    "requestRefund": "Yêu cầu hoàn tiền",
+    "refundPending": "Đã gửi yêu cầu — chờ xử lý",
+    "refundRequestTitle": "Yêu cầu hoàn tiền",
+    "refundRequestLead": "Chúng tôi sẽ xem xét và phản hồi qua email tài khoản. Hoàn tiền thực tế (nếu được duyệt) có thể mất vài ngày làm việc.",
+    "refundRequestNoteLabel": "Lý do (tuỳ chọn)",
+    "refundRequestNotePlaceholder": "Ví dụ: thanh toán nhầm, chưa dùng gói…",
+    "refundRequestSubmit": "Gửi yêu cầu",
+    "refundRequestSubmitting": "Đang gửi…",
+    "refundRequestSuccess": "Đã gửi yêu cầu hoàn tiền",
     "filters": {
       "all": "Tất cả",
       "paid": "Đã thanh toán",
@@ -1761,6 +1824,8 @@
     },
     "aboutTitle": "Giới thiệu",
     "aboutField": "Về bản thân",
+    "bioShowMore": "Xem thêm",
+    "bioShowLess": "Thu gọn",
     "statsTitle": "Tóm tắt học tập",
     "statsAria": "Thống kê học tập",
     "statsLoading": "Đang tải…",
@@ -2057,6 +2122,11 @@
     "MSG_1122": "Đã lấy trạng thái phiên thanh toán",
     "MSG_1123": "Số tiền thanh toán không khớp đơn hàng",
     "MSG_1124": "Thanh toán mô phỏng không được bật trên môi trường này",
+    "MSG_1128": "Đã ghi nhận hoàn tiền",
+    "MSG_1129": "Giao dịch đã được hoàn tiền trước đó",
+    "MSG_1131": "Đã gửi yêu cầu hoàn tiền",
+    "MSG_1132": "Đã gửi yêu cầu hoàn tiền cho giao dịch này",
+    "MSG_1133": "User chưa yêu cầu hoàn tiền — không thể ghi nhận hoàn",
     "MSG_716": "Bài học này chưa mở — hoàn thành kiểm tra bài trước (đạt giai đoạn Nảy mầm)."
   },
   "jlptAccess": {

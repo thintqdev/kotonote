@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import * as grammarService from '../services/grammarService.js';
+import * as grammarProgressService from '../services/grammarProgressService.js';
 import { apiSuccess, apiPaginated } from '../utils/response.js';
 import { GRAMMAR } from '../constants/messages.js';
 import {
@@ -19,6 +20,8 @@ export const listPublishedGrammars = asyncHandler(async (req, res) => {
 			{
 				items: [],
 				jlptLevels: await grammarService.getDistinctJlptLevels(true),
+				availableTagIds: [],
+				tagCounts: {},
 				jlptAccess: buildJlptAccessMeta(unlocked),
 				requestedJlptLocked: true,
 			},
@@ -29,7 +32,7 @@ export const listPublishedGrammars = asyncHandler(async (req, res) => {
 	}
 
 	const result = await grammarService.listPublishedGrammars(req.query);
-	const { items, pagination, messageCode } = result;
+	const { items, pagination, messageCode, availableTagIds, tagCounts } = result;
 	const annotated = annotateWithJlptLock(items, unlocked, (it) => it.jlpt);
 
 	return apiPaginated(
@@ -37,6 +40,8 @@ export const listPublishedGrammars = asyncHandler(async (req, res) => {
 		{
 			items: annotated,
 			jlptLevels: await grammarService.getDistinctJlptLevels(true),
+			availableTagIds: availableTagIds ?? [],
+			tagCounts: tagCounts ?? {},
 			jlptAccess: buildJlptAccessMeta(unlocked),
 		},
 		pagination,
@@ -48,6 +53,10 @@ export const listPublishedGrammars = asyncHandler(async (req, res) => {
 export const getPublishedGrammarBySlug = asyncHandler(async (req, res) => {
 	const grammar = await grammarService.getPublishedGrammarBySlug(req.params.slug);
 	assertJlptUnlocked(req.jlptUnlocked, grammar.jlpt);
+	const grammarId = grammar?._id ?? grammar?.id;
+	if (req.user?._id && grammarId) {
+		await grammarProgressService.touchGrammarProgress(req.user._id, grammarId);
+	}
 	return apiSuccess(
 		res,
 		{ grammar, jlptAccess: buildJlptAccessMeta(req.jlptUnlocked) },

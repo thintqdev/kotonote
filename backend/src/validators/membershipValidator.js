@@ -11,3 +11,7 @@ export const createCheckoutSchema = Joi.object({
 export const checkoutIdParamSchema = Joi.object({
 	checkoutId: Joi.string().hex().length(24).required(),
 });
+
+export const refundRequestSchema = Joi.object({
+	note: Joi.string().max(500).allow('', null).optional(),
+});

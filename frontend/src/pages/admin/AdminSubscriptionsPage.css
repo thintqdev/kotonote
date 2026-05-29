@@ -79,31 +79,71 @@
   color: var(--admin-ink-soft);
 }
 
-.admin-subs-actions {
+.admin-subs-page .admin-grammar-table td {
+  vertical-align: middle;
+}
+
+.admin-subs-page .admin-grammar-table th:last-child,
+.admin-subs-page .admin-grammar-table .admin-subs-actions-cell {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.admin-subs-status-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
+  gap: 6px;
 }
 
-.admin-subs-link {
-  border: none;
-  background: none;
-  padding: 0;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--admin-accent, #3d5a2e);
-  cursor: pointer;
-  text-decoration: underline;
+.admin-subs-refund-pending {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  background: rgba(234, 179, 8, 0.15);
+  white-space: nowrap;
 }
 
-.admin-subs-link--danger {
-  color: #b42318;
+.admin-subs-checkout-actions {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
 }
 
-.admin-subs-link:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.admin-subs-actions-empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  font-size: 0.84rem;
+  color: var(--admin-ink-soft);
+}
+
+.admin-subs-refund-user-note {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  background: rgba(255, 251, 235, 0.95);
+}
+
+.admin-subs-refund-user-note-text {
+  margin: 4px 0 6px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--admin-ink);
+  white-space: pre-wrap;
+}
+
+.admin-subs-refund-user-note-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--admin-ink-soft);
 }
 
 /* Pagination — đồng bộ admin-vocab-pagination khi cần override trong trang subs */

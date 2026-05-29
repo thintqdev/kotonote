@@ -70,6 +70,9 @@ const userSettingsSchema = new mongoose.Schema(
 		notifications: {
 			emailDigest: { type: Boolean, default: true },
 			dailyStudyReminder: { type: Boolean, default: true },
+			streakCheckInReminder: { type: Boolean, default: true },
+			dailyGoalNudge: { type: Boolean, default: true },
+			examCountdownReminder: { type: Boolean, default: true },
 			weeklyReport: { type: Boolean, default: false },
 		},
 		study: {

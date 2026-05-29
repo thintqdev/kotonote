@@ -73,6 +73,17 @@
   margin-bottom: 6px;
 }
 
+.dash-float--lb {
+  transform: rotate(0.18deg);
+  margin-top: 1.25rem;
+}
+
+.dash-float--continue {
+  transform: rotate(0.15deg);
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+}
+
 .dash-float--tilt-c {
   transform: rotate(0.38deg);
 }

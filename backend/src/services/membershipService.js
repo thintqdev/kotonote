@@ -21,6 +21,35 @@ import { createPayosPaymentLinkForCheckout } from './payment/payosPaymentService
 
 export { normalizeUserMembership } from '../utils/membershipNormalize.js';
 
+/** Hàng đợi create checkout theo user — tránh race 2 request song song. */
+const checkoutCreateChains = new Map();
+
+/**
+ * Mutex theo user — chờ tuần tự, tránh 2 request cùng lúc đều thấy map trống.
+ * @param {string} userKey
+ * @param {() => Promise<T>} fn
+ * @returns {Promise<T>}
+ * @template T
+ */
+async function withCheckoutCreateLock(userKey, fn) {
+	while (checkoutCreateChains.has(userKey)) {
+		await checkoutCreateChains.get(userKey);
+	}
+
+	let releaseLock = () => {};
+	const held = new Promise((resolve) => {
+		releaseLock = resolve;
+	});
+	checkoutCreateChains.set(userKey, held);
+
+	try {
+		return await fn();
+	} finally {
+		releaseLock();
+		checkoutCreateChains.delete(userKey);
+	}
+}
+
 /**
  * @param {import('mongoose').Document | Record<string, unknown>} checkout
  */
@@ -39,6 +68,8 @@ export function serializeCheckout(checkout) {
 		providerOrderCode: checkout.providerOrderCode ?? null,
 		sessionExpiresAt: checkout.sessionExpiresAt,
 		paidAt: checkout.paidAt ?? null,
+		refundRequestedAt: checkout.refundRequestedAt ?? null,
+		refundRequestNote: checkout.refundRequestNote ?? null,
 		createdAt: checkout.createdAt,
 	};
 }
@@ -63,10 +94,61 @@ export async function getUserMembership(userId) {
 
 /**
  * @param {import('mongoose').Types.ObjectId} userId
+ * @param {Date} now
+ * @param {string} tierId
+ * @param {string} billing
+ * @param {number} amountVnd
+ * @param {string} provider
+ */
+async function findReusablePendingCheckout(
+	userId,
+	now,
+	tierId,
+	billing,
+	amountVnd,
+	provider,
+) {
+	const pendingSamePlan = await MembershipCheckout.find({
+		userId,
+		tierId,
+		billing,
+		status: 'pending',
+		amountVnd,
+		provider,
+		sessionExpiresAt: { $gt: now },
+	})
+		.sort({ createdAt: -1 })
+		.limit(5);
+
+	if (pendingSamePlan.length === 0) return null;
+
+	const [keep, ...duplicates] = pendingSamePlan;
+	if (duplicates.length > 0) {
+		await MembershipCheckout.updateMany(
+			{ _id: { $in: duplicates.map((d) => d._id) } },
+			{ $set: { status: 'expired' } },
+		);
+	}
+	return keep;
+}
+
+/**
+ * @param {import('mongoose').Types.ObjectId} userId
  * @param {string} tierId
  * @param {'yearly'|'lifetime'} billing
  */
 export async function createCheckout(userId, tierId, billing) {
+	return withCheckoutCreateLock(String(userId), () =>
+		createCheckoutLocked(userId, tierId, billing),
+	);
+}
+
+/**
+ * @param {import('mongoose').Types.ObjectId} userId
+ * @param {string} tierId
+ * @param {'yearly'|'lifetime'} billing
+ */
+async function createCheckoutLocked(userId, tierId, billing) {
 	if (!PAID_TIER_IDS.includes(tierId)) {
 		throw new AppError(MEMBERSHIP.INVALID_PLAN, 400);
 	}
@@ -92,26 +174,76 @@ export async function createCheckout(userId, tierId, billing) {
 		throw new AppError(MEMBERSHIP.DOWNGRADE_NOT_ALLOWED, 400);
 	}
 
+	const now = new Date();
 	const sessionExpiresAt = new Date(Date.now() + CHECKOUT_TTL_MS);
+	const provider = getPaymentProvider();
+	if (provider === 'payos' && !isPayosConfigured()) {
+		throw new AppError(MEMBERSHIP.PAYMENT_NOT_CONFIGURED, 503);
+	}
+
+	const reusablePending = await findReusablePendingCheckout(
+		userId,
+		now,
+		tierId,
+		billing,
+		amountVnd,
+		provider,
+	);
+
+	if (reusablePending) {
+		await MembershipCheckout.updateMany(
+			{
+				userId,
+				status: 'pending',
+				_id: { $ne: reusablePending._id },
+			},
+			{ $set: { status: 'expired' } },
+		);
+		if (provider === 'payos' && !reusablePending.paymentUrl) {
+			try {
+				const payos = await createPayosPaymentLinkForCheckout(reusablePending);
+				reusablePending.providerOrderCode = payos.orderCode;
+				reusablePending.paymentUrl = payos.paymentUrl;
+				reusablePending.providerPaymentLinkId = payos.paymentLinkId;
+				await reusablePending.save();
+			} catch (err) {
+				reusablePending.status = 'cancelled';
+				await reusablePending.save();
+				throw err;
+			}
+		}
+		return serializeCheckout(reusablePending);
+	}
 
 	await MembershipCheckout.updateMany(
 		{ userId, status: 'pending' },
 		{ $set: { status: 'expired' } },
 	);
 
-	const provider = getPaymentProvider();
-	if (provider === 'payos' && !isPayosConfigured()) {
-		throw new AppError(MEMBERSHIP.PAYMENT_NOT_CONFIGURED, 503);
+	let checkout;
+	try {
+		checkout = await MembershipCheckout.create({
+			userId,
+			tierId,
+			billing,
+			amountVnd,
+			sessionExpiresAt,
+			provider,
+		});
+	} catch (err) {
+		if (err?.code === 11000) {
+			const existing = await findReusablePendingCheckout(
+				userId,
+				now,
+				tierId,
+				billing,
+				amountVnd,
+				provider,
+			);
+			if (existing) return serializeCheckout(existing);
+		}
+		throw err;
 	}
-
-	const checkout = await MembershipCheckout.create({
-		userId,
-		tierId,
-		billing,
-		amountVnd,
-		sessionExpiresAt,
-		provider,
-	});
 
 	if (provider === 'payos') {
 		try {
@@ -243,6 +375,8 @@ export async function listUserCheckoutHistory(userId, filters = {}) {
 			providerTransactionId: c.providerTransactionId ?? null,
 			refundedAt: c.refundedAt ?? null,
 			refundReason: c.refundReason ?? null,
+			refundRequestedAt: c.refundRequestedAt ?? null,
+			refundRequestNote: c.refundRequestNote ?? null,
 		})),
 		pagination: {
 			page,

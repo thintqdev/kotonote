@@ -33,6 +33,9 @@ export const DEFAULT_USER_SETTINGS = {
 	notifications: {
 		emailDigest: true,
 		dailyStudyReminder: true,
+		streakCheckInReminder: true,
+		dailyGoalNudge: true,
+		examCountdownReminder: true,
 		weeklyReport: false,
 	},
 	study: {
@@ -69,6 +72,18 @@ export function normalizeUserSettings(raw) {
 				typeof n.dailyStudyReminder === 'boolean'
 					? n.dailyStudyReminder
 					: DEFAULT_USER_SETTINGS.notifications.dailyStudyReminder,
+			streakCheckInReminder:
+				typeof n.streakCheckInReminder === 'boolean'
+					? n.streakCheckInReminder
+					: DEFAULT_USER_SETTINGS.notifications.streakCheckInReminder,
+			dailyGoalNudge:
+				typeof n.dailyGoalNudge === 'boolean'
+					? n.dailyGoalNudge
+					: DEFAULT_USER_SETTINGS.notifications.dailyGoalNudge,
+			examCountdownReminder:
+				typeof n.examCountdownReminder === 'boolean'
+					? n.examCountdownReminder
+					: DEFAULT_USER_SETTINGS.notifications.examCountdownReminder,
 			weeklyReport:
 				typeof n.weeklyReport === 'boolean'
 					? n.weeklyReport

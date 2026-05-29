@@ -165,3 +165,81 @@
   font-size: 13px;
   color: #6a5a4a;
 }
+
+.membership-pay-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 10px;
+}
+
+.membership-history-link--button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.membership-pay-refund-pending {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: #6a4a20;
+}
+
+.membership-refund-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(42, 38, 32, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.membership-refund-modal {
+  width: min(440px, 100%);
+  max-height: min(90vh, 560px);
+  overflow: auto;
+  padding: 20px 18px 18px;
+}
+
+.membership-refund-modal-title {
+  margin: 0 0 8px;
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #3a3028;
+}
+
+.membership-refund-modal-lead {
+  margin: 0 0 14px;
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #6a5a4a;
+}
+
+.membership-refund-modal-error {
+  margin: 10px 0 0;
+  font-size: 0.84rem;
+  color: #a33;
+}
+
+.membership-refund-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.membership-refund-modal-submit {
+  background: linear-gradient(145deg, #6a8a5a, #4a6a3a);
+  color: #fff;
+  border-color: transparent;
+}

@@ -14,18 +14,27 @@ export const listPublishedGrammars = async (query = {}) => {
 	const jlptFilter =
 		jlpt && GRAMMAR_JLPT_LEVELS.includes(jlpt) ? jlpt : undefined;
 
-	const result = await grammarRepository.findGrammarsPaginated(
-		{
-			jlpt: jlptFilter,
-			tag: tag || undefined,
-			q,
-			isPublished: true,
-		},
-		{ page, limit },
-	);
+	const scopeFilters = {
+		jlpt: jlptFilter,
+		q,
+		isPublished: true,
+	};
+
+	const [result, tagFacet] = await Promise.all([
+		grammarRepository.findGrammarsPaginated(
+			{
+				...scopeFilters,
+				tag: tag || undefined,
+			},
+			{ page, limit },
+		),
+		grammarRepository.findTagFacetForScope(scopeFilters),
+	]);
 
 	return {
 		...result,
+		availableTagIds: tagFacet.availableTagIds,
+		tagCounts: tagFacet.tagCounts,
 		messageCode: GRAMMAR.LIST_FETCHED,
 	};
 };

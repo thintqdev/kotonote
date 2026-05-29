@@ -210,6 +210,8 @@ export async function listMembershipCheckouts(filters = {}) {
 			paidAt: c.paidAt,
 			refundedAt: c.refundedAt ?? null,
 			refundReason: c.refundReason ?? null,
+			refundRequestedAt: c.refundRequestedAt ?? null,
+			refundRequestNote: c.refundRequestNote ?? null,
 			sessionExpiresAt: c.sessionExpiresAt,
 			createdAt: c.createdAt,
 			updatedAt: c.updatedAt,

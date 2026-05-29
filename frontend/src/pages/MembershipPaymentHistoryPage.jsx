@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
 import { mockStreak } from '../data/dashboardHomeMock.js';
+import MembershipRefundRequestModal from '../components/membership/MembershipRefundRequestModal.jsx';
 import { getMembershipCheckoutHistory } from '../services/membershipService.js';
 import { formatVnd } from '../constants/membershipPlans.js';
 import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
@@ -63,6 +65,7 @@ export default function MembershipPaymentHistoryPage() {
 	const [pagination, setPagination] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
+	const [refundRequestId, setRefundRequestId] = useState('');
 
 	const headerName =
 		(user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -216,14 +219,30 @@ export default function MembershipPaymentHistoryPage() {
 										{t('membershipPaymentHistory.pendingNote')}
 									</p>
 								) : null}
-								{row.status === 'paid' || row.status === 'refunded' ? (
-									<Link
-										className="membership-history-link"
-										to={`/membership/receipt/${id}`}
-									>
-										{t('membershipPaymentHistory.viewReceipt')}
-									</Link>
-								) : null}
+								<div className="membership-pay-card-actions">
+									{row.status === 'paid' || row.status === 'refunded' ? (
+										<Link
+											className="membership-history-link"
+											to={`/membership/receipt/${id}`}
+										>
+											{t('membershipPaymentHistory.viewReceipt')}
+										</Link>
+									) : null}
+									{row.status === 'paid' && !row.refundRequestedAt ? (
+										<button
+											type="button"
+											className="membership-history-link membership-history-link--button"
+											onClick={() => setRefundRequestId(id)}
+										>
+											{t('membershipPaymentHistory.requestRefund')}
+										</button>
+									) : null}
+									{row.status === 'paid' && row.refundRequestedAt ? (
+										<span className="membership-pay-refund-pending">
+											{t('membershipPaymentHistory.refundPending')}
+										</span>
+									) : null}
+								</div>
 							</li>
 						);
 					})}
@@ -259,6 +278,16 @@ export default function MembershipPaymentHistoryPage() {
 					</button>
 				</nav>
 			) : null}
+
+			<MembershipRefundRequestModal
+				open={Boolean(refundRequestId)}
+				checkoutId={refundRequestId}
+				onClose={() => setRefundRequestId('')}
+				onSubmitted={() => {
+					toast.success(t('membershipPaymentHistory.refundRequestSuccess'));
+					void loadHistory();
+				}}
+			/>
 		</Layout>
 	);
 }

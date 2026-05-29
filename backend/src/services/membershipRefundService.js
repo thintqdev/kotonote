@@ -28,6 +28,9 @@ export async function refundCheckoutByAdmin(
 	if (checkout.status !== 'paid') {
 		throw new AppError(MEMBERSHIP.CHECKOUT_INVALID, 400);
 	}
+	if (!checkout.refundRequestedAt) {
+		throw new AppError(MEMBERSHIP.REFUND_NOT_REQUESTED, 400);
+	}
 
 	const revokeMembership = options.revokeMembership !== false;
 	const reason = String(options.reason ?? '').trim() || null;
