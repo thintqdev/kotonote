@@ -1,0 +1,202 @@
+[
+    {
+        "word": "考えます",
+        "reading": "かんがえます",
+        "meaning": "suy nghĩ",
+        "meaningJa": "頭の中で考える",
+        "example": "将来について考えます。",
+        "exampleMeaning": "Tôi suy nghĩ về tương lai."
+    },
+    {
+        "word": "着きます",
+        "reading": "つきます",
+        "meaning": "đến nơi",
+        "meaningJa": "目的地に到着する",
+        "example": "七時に駅に着きます。",
+        "exampleMeaning": "Tôi đến ga lúc 7 giờ."
+    },
+    {
+        "word": "留学します",
+        "reading": "りゅうがくします",
+        "meaning": "du học",
+        "meaningJa": "外国で勉強する",
+        "example": "来年日本へ留学します。",
+        "exampleMeaning": "Năm sau tôi sẽ du học Nhật."
+    },
+    {
+        "word": "田舎",
+        "reading": "いなか",
+        "meaning": "quê, nông thôn",
+        "meaningJa": "自然が多い場所",
+        "example": "私の田舎は静かです。",
+        "exampleMeaning": "Quê tôi yên tĩnh."
+    },
+    {
+        "word": "大使館",
+        "reading": "たいしかん",
+        "meaning": "đại sứ quán",
+        "meaningJa": "外国の政府の建物",
+        "example": "大使館へビザを取りに行きます。",
+        "exampleMeaning": "Tôi đến đại sứ quán lấy visa."
+    },
+    {
+        "word": "グループ",
+        "reading": "グループ",
+        "meaning": "nhóm",
+        "meaningJa": "人の集まり",
+        "example": "グループで話し合います。",
+        "exampleMeaning": "Chúng tôi thảo luận theo nhóm."
+    },
+    {
+        "word": "チャンス",
+        "reading": "チャンス",
+        "meaning": "cơ hội",
+        "meaningJa": "いい機会",
+        "example": "これはいいチャンスです。",
+        "exampleMeaning": "Đây là cơ hội tốt."
+    },
+    {
+        "word": "億",
+        "reading": "おく",
+        "meaning": "trăm triệu",
+        "meaningJa": "一億は一〇〇〇〇〇〇〇〇",
+        "example": "日本の人口は一億人以上です。",
+        "exampleMeaning": "Dân số Nhật hơn 100 triệu người."
+    },
+    {
+        "word": "もし",
+        "reading": "もし",
+        "meaning": "nếu",
+        "meaningJa": "仮定を表す言葉",
+        "example": "もし時間があったら、映画を見ます。",
+        "exampleMeaning": "Nếu có thời gian, tôi sẽ xem phim."
+    },
+    {
+        "word": "意味",
+        "reading": "いみ",
+        "meaning": "ý nghĩa",
+        "meaningJa": "言葉の内容",
+        "example": "この言葉の意味がわかりません。",
+        "exampleMeaning": "Tôi không hiểu ý nghĩa từ này."
+    },
+    {
+        "word": "気持ち",
+        "reading": "きもち",
+        "meaning": "cảm xúc",
+        "meaningJa": "心の状態",
+        "example": "うれしい気持ちになりました。",
+        "exampleMeaning": "Tôi cảm thấy vui."
+    },
+    {
+        "word": "約束",
+        "reading": "やくそく",
+        "meaning": "lời hứa",
+        "meaningJa": "守ると決めたこと",
+        "example": "友達と約束があります。",
+        "exampleMeaning": "Tôi có hẹn với bạn."
+    },
+    {
+        "word": "予定",
+        "reading": "よてい",
+        "meaning": "dự định",
+        "meaningJa": "前もって決めたこと",
+        "example": "来週の予定を確認します。",
+        "exampleMeaning": "Tôi xác nhận kế hoạch tuần sau."
+    },
+    {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích",
+        "meaningJa": "内容をわかりやすく話すこと",
+        "example": "先生の説明はわかりやすいです。",
+        "exampleMeaning": "Giải thích của giáo viên dễ hiểu."
+    },
+    {
+        "word": "連絡",
+        "reading": "れんらく",
+        "meaning": "liên lạc",
+        "meaningJa": "情報を伝えること",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "都合",
+        "reading": "つごう",
+        "meaning": "thuận tiện, tình hình",
+        "meaningJa": "事情や予定",
+        "example": "明日は都合が悪いです。",
+        "exampleMeaning": "Ngày mai tôi không tiện."
+    },
+    {
+        "word": "必要",
+        "reading": "ひつよう",
+        "meaning": "cần thiết",
+        "meaningJa": "なくてはいけない",
+        "example": "パスポートが必要です。",
+        "exampleMeaning": "Cần hộ chiếu."
+    },
+    {
+        "word": "無理",
+        "reading": "むり",
+        "meaning": "quá sức, không thể",
+        "meaningJa": "できないこと",
+        "example": "今日は無理をしないでください。",
+        "exampleMeaning": "Hôm nay đừng cố quá."
+    },
+    {
+        "word": "自由",
+        "reading": "じゆう",
+        "meaning": "tự do",
+        "meaningJa": "好きにできること",
+        "example": "自由な時間が欲しいです。",
+        "exampleMeaning": "Tôi muốn thời gian tự do."
+    },
+    {
+        "word": "成功",
+        "reading": "せいこう",
+        "meaning": "thành công",
+        "meaningJa": "うまくいくこと",
+        "example": "試験に成功しました。",
+        "exampleMeaning": "Tôi đã thành công trong kỳ thi."
+    },
+    {
+        "word": "失敗",
+        "reading": "しっぱい",
+        "meaning": "thất bại",
+        "meaningJa": "うまくいかないこと",
+        "example": "失敗しても大丈夫です。",
+        "exampleMeaning": "Thất bại cũng không sao."
+    },
+    {
+        "word": "安心",
+        "reading": "あんしん",
+        "meaning": "yên tâm",
+        "meaningJa": "心配がない状態",
+        "example": "無事だと聞いて安心しました。",
+        "exampleMeaning": "Nghe bình an nên tôi yên tâm."
+    },
+    {
+        "word": "心配",
+        "reading": "しんぱい",
+        "meaning": "lo lắng",
+        "meaningJa": "不安な気持ち",
+        "example": "試験が心配です。",
+        "exampleMeaning": "Tôi lo kỳ thi."
+    },
+    {
+        "word": "将来",
+        "reading": "しょうらい",
+        "meaning": "tương lai",
+        "meaningJa": "これから先",
+        "example": "将来日本で働きたいです。",
+        "exampleMeaning": "Tôi muốn làm việc ở Nhật trong tương lai."
+    },
+    {
+        "word": "夢",
+        "reading": "ゆめ",
+        "meaning": "ước mơ",
+        "meaningJa": "将来したいこと",
+        "example": "私の夢はエンジニアになることです。",
+        "exampleMeaning": "Ước mơ của tôi là trở thành kỹ sư."
+    }
+]

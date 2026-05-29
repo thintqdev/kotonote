@@ -5,6 +5,7 @@ import {
 	levelToJlpt,
 	sortDecksByJlptAndOrder,
 	sortDecksByOrder,
+	sortDeckItemsByDisplayOrder,
 } from '../utils/deckStudy.js';
 import api from './api.js';
 
@@ -16,7 +17,7 @@ import api from './api.js';
 export async function listKanjiDecks(params = {}) {
 	const body = await api.get(KANJI.DECKS, { params });
 	return {
-		decks: body.data?.decks ?? [],
+		decks: sortDecksByOrder(filterActiveDecks(body.data?.decks ?? [])),
 		pagination: body.pagination ?? null,
 	};
 }
@@ -28,7 +29,7 @@ export async function getDeckWithKanji(deckId) {
 	const body = await api.get(KANJI.deckWithKanji(deckId));
 	return {
 		deck: body.data?.deck ?? null,
-		kanji: body.data?.kanji ?? [],
+		kanji: sortDeckItemsByDisplayOrder(body.data?.kanji ?? []),
 	};
 }
 

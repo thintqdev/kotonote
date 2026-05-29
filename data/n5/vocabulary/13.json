@@ -1,0 +1,202 @@
+[
+    {
+        "word": "遊びます",
+        "reading": "あそびます",
+        "meaning": "chơi",
+        "meaningJa": "楽しむために活動する",
+        "example": "友達と公園で遊びます。",
+        "exampleMeaning": "Tôi chơi ở công viên với bạn."
+    },
+    {
+        "word": "泳ぎます",
+        "reading": "およぎます",
+        "meaning": "bơi",
+        "meaningJa": "水の中を進む",
+        "example": "夏に海で泳ぎます。",
+        "exampleMeaning": "Mùa hè tôi bơi ở biển."
+    },
+    {
+        "word": "迎えます",
+        "reading": "むかえます",
+        "meaning": "đón",
+        "meaningJa": "人を迎えに行く",
+        "example": "駅へ友達を迎えます。",
+        "exampleMeaning": "Tôi đi đón bạn ở ga."
+    },
+    {
+        "word": "疲れます",
+        "reading": "つかれます",
+        "meaning": "mệt",
+        "meaningJa": "体や心が疲れる",
+        "example": "今日はとても疲れました。",
+        "exampleMeaning": "Hôm nay tôi rất mệt."
+    },
+    {
+        "word": "出します",
+        "reading": "だします",
+        "meaning": "gửi, nộp",
+        "meaningJa": "外へ出す",
+        "example": "レポートを先生に出します。",
+        "exampleMeaning": "Tôi nộp báo cáo cho giáo viên."
+    },
+    {
+        "word": "入ります",
+        "reading": "はいります",
+        "meaning": "vào",
+        "meaningJa": "中に入る",
+        "example": "喫茶店に入ります。",
+        "exampleMeaning": "Tôi vào quán cà phê."
+    },
+    {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "ra ngoài",
+        "meaningJa": "外へ行く",
+        "example": "七時に家を出ます。",
+        "exampleMeaning": "Tôi ra khỏi nhà lúc 7 giờ."
+    },
+    {
+        "word": "結婚します",
+        "reading": "けっこんします",
+        "meaning": "kết hôn",
+        "meaningJa": "夫婦になる",
+        "example": "姉は来年結婚します。",
+        "exampleMeaning": "Chị tôi sẽ kết hôn năm sau."
+    },
+    {
+        "word": "買い物します",
+        "reading": "かいものします",
+        "meaning": "mua sắm",
+        "meaningJa": "物を買う",
+        "example": "週末に買い物します。",
+        "exampleMeaning": "Cuối tuần tôi đi mua sắm."
+    },
+    {
+        "word": "食事します",
+        "reading": "しょくじします",
+        "meaning": "dùng bữa",
+        "meaningJa": "ご飯を食べる",
+        "example": "家族と食事します。",
+        "exampleMeaning": "Tôi dùng bữa cùng gia đình."
+    },
+    {
+        "word": "散歩します",
+        "reading": "さんぽします",
+        "meaning": "đi dạo",
+        "meaningJa": "歩きながら楽しむ",
+        "example": "夜に公園を散歩します。",
+        "exampleMeaning": "Tôi đi dạo công viên vào buổi tối."
+    },
+    {
+        "word": "大変",
+        "reading": "たいへん",
+        "meaning": "vất vả",
+        "meaningJa": "難しくて大変な状態",
+        "example": "この仕事は大変です。",
+        "exampleMeaning": "Công việc này vất vả."
+    },
+    {
+        "word": "欲しい",
+        "reading": "ほしい",
+        "meaning": "muốn",
+        "meaningJa": "手に入れたい",
+        "example": "新しいパソコンが欲しいです。",
+        "exampleMeaning": "Tôi muốn máy tính mới."
+    },
+    {
+        "word": "寂しい",
+        "reading": "さびしい",
+        "meaning": "cô đơn",
+        "meaningJa": "一人で悲しい",
+        "example": "一人で寂しいです。",
+        "exampleMeaning": "Một mình thật cô đơn."
+    },
+    {
+        "word": "広い",
+        "reading": "ひろい",
+        "meaning": "rộng",
+        "meaningJa": "面積が大きい",
+        "example": "この部屋は広いです。",
+        "exampleMeaning": "Căn phòng này rộng."
+    },
+    {
+        "word": "狭い",
+        "reading": "せまい",
+        "meaning": "hẹp",
+        "meaningJa": "広くない",
+        "example": "私の部屋は狭いです。",
+        "exampleMeaning": "Phòng tôi hẹp."
+    },
+    {
+        "word": "市役所",
+        "reading": "しやくしょ",
+        "meaning": "ủy ban thành phố",
+        "meaningJa": "市の仕事をする場所",
+        "example": "市役所へ行きます。",
+        "exampleMeaning": "Tôi đi đến ủy ban thành phố."
+    },
+    {
+        "word": "プール",
+        "reading": "プール",
+        "meaning": "hồ bơi",
+        "meaningJa": "泳ぐ場所",
+        "example": "夏にプールで泳ぎます。",
+        "exampleMeaning": "Mùa hè tôi bơi ở hồ bơi."
+    },
+    {
+        "word": "川",
+        "reading": "かわ",
+        "meaning": "sông",
+        "meaningJa": "水が流れる場所",
+        "example": "川の近くを散歩します。",
+        "exampleMeaning": "Tôi đi dạo gần sông."
+    },
+    {
+        "word": "経済",
+        "reading": "けいざい",
+        "meaning": "kinh tế",
+        "meaningJa": "お金や社会の活動",
+        "example": "大学で経済を勉強しています。",
+        "exampleMeaning": "Tôi đang học kinh tế ở đại học."
+    },
+    {
+        "word": "美術",
+        "reading": "びじゅつ",
+        "meaning": "mỹ thuật",
+        "meaningJa": "絵や芸術",
+        "example": "美術が好きです。",
+        "exampleMeaning": "Tôi thích mỹ thuật."
+    },
+    {
+        "word": "釣り",
+        "reading": "つり",
+        "meaning": "câu cá",
+        "meaningJa": "魚を捕る遊び",
+        "example": "父は釣りが好きです。",
+        "exampleMeaning": "Bố tôi thích câu cá."
+    },
+    {
+        "word": "スキー",
+        "reading": "スキー",
+        "meaning": "trượt tuyết",
+        "meaningJa": "雪の上を滑るスポーツ",
+        "example": "冬にスキーをします。",
+        "exampleMeaning": "Mùa đông tôi đi trượt tuyết."
+    },
+    {
+        "word": "会議",
+        "reading": "かいぎ",
+        "meaning": "cuộc họp",
+        "meaningJa": "人が集まって話すこと",
+        "example": "午後に会議があります。",
+        "exampleMeaning": "Buổi chiều có cuộc họp."
+    },
+    {
+        "word": "登録",
+        "reading": "とうろく",
+        "meaning": "đăng ký",
+        "meaningJa": "名前などを記録すること",
+        "example": "インターネットで登録します。",
+        "exampleMeaning": "Tôi đăng ký trên internet."
+    }
+]

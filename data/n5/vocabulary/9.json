@@ -1,0 +1,202 @@
+[
+    {
+        "word": "わかります",
+        "reading": "わかります",
+        "meaning": "hiểu",
+        "meaningJa": "意味や内容が理解できる",
+        "example": "日本語が少しわかります。",
+        "exampleMeaning": "Tôi hiểu một ít tiếng Nhật."
+    },
+    {
+        "word": "あります",
+        "reading": "あります",
+        "meaning": "có (đồ vật)",
+        "meaningJa": "物が存在する",
+        "example": "机の上に本があります。",
+        "exampleMeaning": "Có quyển sách trên bàn."
+    },
+    {
+        "word": "好き",
+        "reading": "すき",
+        "meaning": "thích",
+        "meaningJa": "気に入っている",
+        "example": "私は音楽が好きです。",
+        "exampleMeaning": "Tôi thích âm nhạc."
+    },
+    {
+        "word": "嫌い",
+        "reading": "きらい",
+        "meaning": "ghét",
+        "meaningJa": "好きではない",
+        "example": "私は納豆が嫌いです。",
+        "exampleMeaning": "Tôi ghét natto."
+    },
+    {
+        "word": "上手",
+        "reading": "じょうず",
+        "meaning": "giỏi",
+        "meaningJa": "能力が高い",
+        "example": "妹はピアノが上手です。",
+        "exampleMeaning": "Em gái tôi chơi piano giỏi."
+    },
+    {
+        "word": "下手",
+        "reading": "へた",
+        "meaning": "dở",
+        "meaningJa": "能力が低い",
+        "example": "私は歌が下手です。",
+        "exampleMeaning": "Tôi hát dở."
+    },
+    {
+        "word": "料理",
+        "reading": "りょうり",
+        "meaning": "món ăn, nấu ăn",
+        "meaningJa": "食べ物を作ること",
+        "example": "母は料理が上手です。",
+        "exampleMeaning": "Mẹ tôi nấu ăn giỏi."
+    },
+    {
+        "word": "飲み物",
+        "reading": "のみもの",
+        "meaning": "đồ uống",
+        "meaningJa": "飲む物",
+        "example": "冷たい飲み物を買いました。",
+        "exampleMeaning": "Tôi đã mua đồ uống lạnh."
+    },
+    {
+        "word": "スポーツ",
+        "reading": "スポーツ",
+        "meaning": "thể thao",
+        "meaningJa": "体を動かす活動",
+        "example": "私はスポーツが好きです。",
+        "exampleMeaning": "Tôi thích thể thao."
+    },
+    {
+        "word": "野球",
+        "reading": "やきゅう",
+        "meaning": "bóng chày",
+        "meaningJa": "ボールを使うスポーツ",
+        "example": "兄は野球が好きです。",
+        "exampleMeaning": "Anh trai tôi thích bóng chày."
+    },
+    {
+        "word": "ダンス",
+        "reading": "ダンス",
+        "meaning": "nhảy múa",
+        "meaningJa": "音楽に合わせて踊ること",
+        "example": "彼女はダンスが上手です。",
+        "exampleMeaning": "Cô ấy nhảy giỏi."
+    },
+    {
+        "word": "旅行",
+        "reading": "りょこう",
+        "meaning": "du lịch",
+        "meaningJa": "ほかの場所へ行くこと",
+        "example": "旅行が大好きです。",
+        "exampleMeaning": "Tôi rất thích du lịch."
+    },
+    {
+        "word": "音楽",
+        "reading": "おんがく",
+        "meaning": "âm nhạc",
+        "meaningJa": "歌や楽器の音",
+        "example": "毎日音楽を聞きます。",
+        "exampleMeaning": "Mỗi ngày tôi nghe nhạc."
+    },
+    {
+        "word": "歌",
+        "reading": "うた",
+        "meaning": "bài hát",
+        "meaningJa": "歌う音楽",
+        "example": "この歌が好きです。",
+        "exampleMeaning": "Tôi thích bài hát này."
+    },
+    {
+        "word": "クラシック",
+        "reading": "クラシック",
+        "meaning": "nhạc cổ điển",
+        "meaningJa": "昔からある音楽",
+        "example": "父はクラシックが好きです。",
+        "exampleMeaning": "Bố tôi thích nhạc cổ điển."
+    },
+    {
+        "word": "ジャズ",
+        "reading": "ジャズ",
+        "meaning": "nhạc jazz",
+        "meaningJa": "アメリカ生まれの音楽",
+        "example": "夜にジャズを聞きます。",
+        "exampleMeaning": "Tôi nghe nhạc jazz vào buổi tối."
+    },
+    {
+        "word": "コンサート",
+        "reading": "コンサート",
+        "meaning": "buổi hòa nhạc",
+        "meaningJa": "音楽を聞くイベント",
+        "example": "友達とコンサートへ行きます。",
+        "exampleMeaning": "Tôi đi concert cùng bạn."
+    },
+    {
+        "word": "カラオケ",
+        "reading": "カラオケ",
+        "meaning": "karaoke",
+        "meaningJa": "音楽に合わせて歌うこと",
+        "example": "週末にカラオケへ行きました。",
+        "exampleMeaning": "Cuối tuần tôi đã đi karaoke."
+    },
+    {
+        "word": "歌舞伎",
+        "reading": "かぶき",
+        "meaning": "kabuki",
+        "meaningJa": "日本の伝統的な劇",
+        "example": "日本で歌舞伎を見ました。",
+        "exampleMeaning": "Tôi đã xem kabuki ở Nhật."
+    },
+    {
+        "word": "絵",
+        "reading": "え",
+        "meaning": "tranh",
+        "meaningJa": "描いた作品",
+        "example": "きれいな絵があります。",
+        "exampleMeaning": "Có một bức tranh đẹp."
+    },
+    {
+        "word": "字",
+        "reading": "じ",
+        "meaning": "chữ viết",
+        "meaningJa": "書く文字",
+        "example": "彼の字はきれいです。",
+        "exampleMeaning": "Chữ của anh ấy đẹp."
+    },
+    {
+        "word": "漢字",
+        "reading": "かんじ",
+        "meaning": "kanji",
+        "meaningJa": "中国から来た文字",
+        "example": "漢字は難しいです。",
+        "exampleMeaning": "Kanji khó."
+    },
+    {
+        "word": "ひらがな",
+        "reading": "ひらがな",
+        "meaning": "hiragana",
+        "meaningJa": "日本の文字の一つ",
+        "example": "ひらがなを書けます。",
+        "exampleMeaning": "Tôi có thể viết hiragana."
+    },
+    {
+        "word": "カタカナ",
+        "reading": "カタカナ",
+        "meaning": "katakana",
+        "meaningJa": "外国語を書く日本の文字",
+        "example": "カタカナを勉強しています。",
+        "exampleMeaning": "Tôi đang học katakana."
+    },
+    {
+        "word": "ローマ字",
+        "reading": "ローマじ",
+        "meaning": "romaji",
+        "meaningJa": "アルファベットで書く日本語",
+        "example": "最初はローマ字を使いました。",
+        "exampleMeaning": "Lúc đầu tôi dùng romaji."
+    }
+]

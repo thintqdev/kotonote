@@ -179,8 +179,12 @@ export const bulkCreateVocabulary = async (deckId, vocabularyList) => {
 		throw { messageCode: VOCABULARY.DECK_FULL, statusCode: 400 };
 	}
 
-	// Add deckId to all vocabulary
-	const vocabularyWithDeck = vocabularyList.map(v => ({ ...v, deckId }));
+	// Thứ tự mảng JSON = displayOrder (cũ → mới), nối sau số từ hiện có
+	const vocabularyWithDeck = vocabularyList.map((v, index) => ({
+		...v,
+		deckId,
+		displayOrder: currentCount + index + 1,
+	}));
 
 	try {
 		const result = await vocabularyRepository.bulkCreateVocabulary(vocabularyWithDeck);

@@ -1,5 +1,6 @@
 import { ADMIN_KANJI, KANJI } from '../constants/apiEndpoints.js';
 import { getApiData } from '../utils/apiEnvelope.js';
+import { sortDeckItemsByDisplayOrder } from '../utils/deckStudy.js';
 import { adminApi } from './api.js';
 
 /**
@@ -20,7 +21,11 @@ export async function listKanjiDecks(params = {}, axiosConfig = {}) {
  */
 export async function getDeckWithKanji(deckId, axiosConfig = {}) {
 	const body = await adminApi.get(KANJI.deckWithKanji(deckId), axiosConfig);
-	return getApiData(body);
+	const data = getApiData(body);
+	return {
+		...data,
+		kanji: sortDeckItemsByDisplayOrder(data?.kanji ?? []),
+	};
 }
 
 export async function createKanjiDeck(payload) {

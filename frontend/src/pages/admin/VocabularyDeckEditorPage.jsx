@@ -34,6 +34,7 @@ import {
 } from "../../utils/deckAiMerge.js";
 import GrammarLocFields from "../../components/admin/GrammarLocFields.jsx";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
+import { sortVocabApiList } from "../../utils/deckStudy.js";
 import "./AdminGrammarPage.css";
 import "./VocabularyDeckEditorPage.css";
 
@@ -276,7 +277,8 @@ export default function VocabularyDeckEditorPage() {
         return {
           pageTitle: "Tạo deck từ vựng",
           breadcrumbLast: "Tạo mới",
-          subtitle: "Điền thông tin deck và danh sách từ.",
+          subtitle:
+            "Điền thông tin deck; có thể nhập JSON để tạo deck và từ cùng lúc.",
           primaryActionLabel: "Tạo deck",
         };
       }
@@ -310,6 +312,7 @@ export default function VocabularyDeckEditorPage() {
   const [importModalOpen, setImportModalOpen] = useState(false);
   const [importJsonText, setImportJsonText] = useState("");
   const [importBusy, setImportBusy] = useState(false);
+  const importFileInputRef = useRef(null);
   const [generateOpen, setGenerateOpen] = useState(false);
 
   const filledWordCount = useMemo(() => vocabRowsFilledCount(rows), [rows]);
@@ -368,7 +371,7 @@ export default function VocabularyDeckEditorPage() {
         setThumbnail(d.thumbnail ?? "");
         setDisplayOrder(Number(d.displayOrder) || 0);
         setIsActive(d.isActive !== false);
-        const list = data.vocabulary ?? [];
+        const list = sortVocabApiList(data.vocabulary ?? []);
         initialWordIdsRef.current = new Set(
           list.map((v) => String(v._id)).filter(Boolean),
         );
@@ -418,18 +421,60 @@ export default function VocabularyDeckEditorPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [importModalOpen]);
 
+  const handleImportJsonFile = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      const text = await file.text();
+      setImportJsonText(text);
+      toast.success("Đã đọc file", { description: file.name });
+    } catch {
+      toast.error("Không đọc được file", {
+        description: "Chọn file JSON hợp lệ.",
+      });
+    }
+  };
+
   const submitImportJson = async () => {
-    if (isCreate || !deckId) {
-      toast.error("Chưa thể nhập", {
-        description:
-          "Hãy bấm «Tạo deck» hoặc «Lưu thay đổi» trước, rồi quay lại trang này.",
+    if (isCreate && !title.trim()) {
+      toast.error("Thiếu thông tin", {
+        description: "Nhập tiêu đề deck ở form phía trên trước khi nhập JSON.",
       });
       return;
     }
+    if (!isCreate && !deckId) {
+      toast.error("Chưa thể nhập", {
+        description: "Deck chưa có ID hợp lệ.",
+      });
+      return;
+    }
+
     setImportBusy(true);
     try {
       const list = parseVocabularyImportJson(importJsonText);
-      const { created } = await importVocabularyFromJson(deckId, list);
+      const capped = list.slice(0, MAX_WORDS_PER_DECK);
+      if (list.length > MAX_WORDS_PER_DECK) {
+        toast.message("Đã giới hạn số từ", {
+          description: `Chỉ nhập ${MAX_WORDS_PER_DECK} từ đầu (tối đa/deck).`,
+        });
+      }
+
+      if (isCreate) {
+        const { deck } = await createVocabularyDeck(buildDeckPayload());
+        const id = deck?._id;
+        if (!id) throw new Error("Không nhận được ID deck từ server.");
+        const { created } = await importVocabularyFromJson(String(id), capped);
+        toast.success("Đã tạo deck và nhập từ", {
+          description: `${created} từ đã được thêm.`,
+        });
+        setImportModalOpen(false);
+        setImportJsonText("");
+        navigate(`/admin/vocabulary/decks/${id}`, { replace: true });
+        return;
+      }
+
+      const { created } = await importVocabularyFromJson(deckId, capped);
       toast.success("Đã nhập xong", {
         description: `Thêm ${created} từ vào deck.`,
       });
@@ -587,13 +632,6 @@ export default function VocabularyDeckEditorPage() {
     if (formLocked) {
       toast.message("Chế độ xem", {
         description: "Bấm «Chỉnh sửa» để nhập JSON.",
-      });
-      return;
-    }
-    if (isCreate) {
-      toast.message("Lưu deck trước", {
-        description:
-          "Bấm «Tạo deck» ở cuối trang, sau đó quay lại để nhập JSON.",
       });
       return;
     }
@@ -900,9 +938,9 @@ export default function VocabularyDeckEditorPage() {
                   </button>
                   <button
                     type="button"
-                    className={`vdeck-btn vdeck-btn--ghost${isCreate ? " vdeck-btn--hint" : ""}`}
+                    className="vdeck-btn vdeck-btn--ghost"
                     onClick={openImportModal}
-                    title="Nhập nhiều từ từ file JSON"
+                    title="Dán hoặc chọn file JSON; khi tạo mới sẽ tạo deck và nhập từ cùng lúc"
                   >
                     Nhập JSON
                   </button>
@@ -1079,10 +1117,35 @@ export default function VocabularyDeckEditorPage() {
             <p className="vdeck-modal-lead">
               Dán mảng <code className="vdeck-modal-code">[...]</code> hoặc{" "}
               <code className="vdeck-modal-code">{"{ \"vocabularyList\": [...] }"}</code>
-              . Mỗi mục cần <strong>word</strong>, <strong>reading</strong>,{" "}
-              <strong>meaning</strong> (hoặc <strong>meaningVi</strong>). Có thể
-              thêm: meaningJa, example, exampleMeaning…
+              , hoặc chọn file <code className="vdeck-modal-code">.json</code>.
+              Mỗi mục cần <strong>word</strong>, <strong>reading</strong>,{" "}
+              <strong>meaning</strong> (hoặc <strong>meaningVi</strong>).
+              {isCreate ? (
+                <>
+                  {" "}
+                  Khi tạo deck mới: điền <strong>tiêu đề</strong> ở form trước,
+                  bấm «Tạo deck và nhập» — không cần lưu deck trước.
+                </>
+              ) : null}
             </p>
+            <div className="vdeck-modal-file-row">
+              <input
+                ref={importFileInputRef}
+                type="file"
+                accept=".json,application/json"
+                className="vdeck-modal-file-input"
+                disabled={importBusy}
+                onChange={(e) => void handleImportJsonFile(e)}
+              />
+              <button
+                type="button"
+                className="vdeck-btn vdeck-btn--ghost"
+                disabled={importBusy}
+                onClick={() => importFileInputRef.current?.click()}
+              >
+                Chọn file JSON
+              </button>
+            </div>
             <details className="vdeck-modal-sample">
               <summary>Ví dụ</summary>
               <pre className="vdeck-modal-pre">{IMPORT_JSON_EXAMPLE}</pre>
@@ -1115,7 +1178,11 @@ export default function VocabularyDeckEditorPage() {
                 disabled={importBusy}
                 onClick={() => void submitImportJson()}
               >
-                {importBusy ? "Đang nhập…" : "Nhập"}
+                {importBusy
+                  ? "Đang nhập…"
+                  : isCreate
+                    ? "Tạo deck và nhập"
+                    : "Nhập"}
               </button>
             </div>
           </div>

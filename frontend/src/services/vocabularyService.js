@@ -5,6 +5,8 @@ import {
 	levelToJlpt,
 	mapVocabRecord,
 	sortDecksByOrder,
+	sortDeckItemsByDisplayOrder,
+	sortVocabApiList,
 } from '../utils/deckStudy.js';
 import api from './api.js';
 
@@ -16,7 +18,7 @@ import api from './api.js';
 export async function listVocabularyDecks(params = {}) {
 	const body = await api.get(VOCABULARY.DECKS, { params });
 	return {
-		decks: body.data?.decks ?? [],
+		decks: sortDecksByOrder(filterActiveDecks(body.data?.decks ?? [])),
 		pagination: body.pagination ?? null,
 	};
 }
@@ -33,7 +35,7 @@ export async function getDeckWithVocabulary(deckId, opts = {}) {
 	const body = await api.get(VOCABULARY.deckWithVocabulary(deckId), { params });
 	return {
 		deck: body.data?.deck ?? null,
-		vocabulary: body.data?.vocabulary ?? [],
+		vocabulary: sortVocabApiList(body.data?.vocabulary ?? []),
 	};
 }
 
@@ -69,7 +71,7 @@ export async function loadVocabularyPack(jlpt) {
 		sorted.map(async (deck) => {
 			const { vocabulary } = await getDeckWithVocabulary(deck._id);
 			const deckJlpt = levelToJlpt(deck.level);
-			for (const v of vocabulary) {
+			for (const v of sortDeckItemsByDisplayOrder(vocabulary)) {
 				items.push(mapVocabRecord(v, deckJlpt, deck._id));
 			}
 		}),

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "つけます",
+        "reading": "つけます",
+        "meaning": "bật",
+        "meaningJa": "電気などをつける",
+        "example": "電気をつけます。",
+        "exampleMeaning": "Tôi bật đèn."
+    },
+    {
+        "word": "消します",
+        "reading": "けします",
+        "meaning": "tắt",
+        "meaningJa": "電気などを消す",
+        "example": "テレビを消してください。",
+        "exampleMeaning": "Hãy tắt TV."
+    },
+    {
+        "word": "開けます",
+        "reading": "あけます",
+        "meaning": "mở",
+        "meaningJa": "閉まっている物を開く",
+        "example": "窓を開けます。",
+        "exampleMeaning": "Tôi mở cửa sổ."
+    },
+    {
+        "word": "閉めます",
+        "reading": "しめます",
+        "meaning": "đóng",
+        "meaningJa": "開いている物を閉じる",
+        "example": "ドアを閉めます。",
+        "exampleMeaning": "Tôi đóng cửa."
+    },
+    {
+        "word": "急ぎます",
+        "reading": "いそぎます",
+        "meaning": "vội",
+        "meaningJa": "早くする",
+        "example": "駅まで急ぎます。",
+        "exampleMeaning": "Tôi vội đến ga."
+    },
+    {
+        "word": "待ちます",
+        "reading": "まちます",
+        "meaning": "đợi",
+        "meaningJa": "来るまでそのままでいる",
+        "example": "友達を待っています。",
+        "exampleMeaning": "Tôi đang đợi bạn."
+    },
+    {
+        "word": "持ちます",
+        "reading": "もちます",
+        "meaning": "cầm, mang",
+        "meaningJa": "手で持つ",
+        "example": "荷物を持ちます。",
+        "exampleMeaning": "Tôi cầm hành lý."
+    },
+    {
+        "word": "取ります",
+        "reading": "とります",
+        "meaning": "lấy",
+        "meaningJa": "手に入れる",
+        "example": "机の上の本を取ります。",
+        "exampleMeaning": "Tôi lấy quyển sách trên bàn."
+    },
+    {
+        "word": "手伝います",
+        "reading": "てつだいます",
+        "meaning": "giúp đỡ",
+        "meaningJa": "仕事などを一緒にする",
+        "example": "母の仕事を手伝います。",
+        "exampleMeaning": "Tôi giúp công việc của mẹ."
+    },
+    {
+        "word": "呼びます",
+        "reading": "よびます",
+        "meaning": "gọi",
+        "meaningJa": "声を出して来てもらう",
+        "example": "タクシーを呼びます。",
+        "exampleMeaning": "Tôi gọi taxi."
+    },
+    {
+        "word": "話します",
+        "reading": "はなします",
+        "meaning": "nói chuyện",
+        "meaningJa": "言葉で伝える",
+        "example": "先生と話します。",
+        "exampleMeaning": "Tôi nói chuyện với giáo viên."
+    },
+    {
+        "word": "使います",
+        "reading": "つかいます",
+        "meaning": "sử dụng",
+        "meaningJa": "道具などを利用する",
+        "example": "日本語で辞書を使います。",
+        "exampleMeaning": "Tôi dùng từ điển tiếng Nhật."
+    },
+    {
+        "word": "止めます",
+        "reading": "とめます",
+        "meaning": "dừng",
+        "meaningJa": "動きを止める",
+        "example": "車を止めます。",
+        "exampleMeaning": "Tôi dừng xe."
+    },
+    {
+        "word": "見せます",
+        "reading": "みせます",
+        "meaning": "cho xem",
+        "meaningJa": "相手に見えるようにする",
+        "example": "写真を見せます。",
+        "exampleMeaning": "Tôi cho xem ảnh."
+    },
+    {
+        "word": "教えます",
+        "reading": "おしえます",
+        "meaning": "chỉ, dạy",
+        "meaningJa": "情報や知識を伝える",
+        "example": "道を教えてください。",
+        "exampleMeaning": "Hãy chỉ đường cho tôi."
+    },
+    {
+        "word": "座ります",
+        "reading": "すわります",
+        "meaning": "ngồi",
+        "meaningJa": "いすなどに座る",
+        "example": "ここに座ってください。",
+        "exampleMeaning": "Hãy ngồi ở đây."
+    },
+    {
+        "word": "立ちます",
+        "reading": "たちます",
+        "meaning": "đứng",
+        "meaningJa": "足で立つ",
+        "example": "ドアの前に立っています。",
+        "exampleMeaning": "Tôi đang đứng trước cửa."
+    },
+    {
+        "word": "入ります",
+        "reading": "はいります",
+        "meaning": "vào",
+        "meaningJa": "中へ行く",
+        "example": "部屋に入ります。",
+        "exampleMeaning": "Tôi vào phòng."
+    },
+    {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "ra ngoài",
+        "meaningJa": "外へ行く",
+        "example": "家を出ます。",
+        "exampleMeaning": "Tôi ra khỏi nhà."
+    },
+    {
+        "word": "降ります",
+        "reading": "おります",
+        "meaning": "xuống",
+        "meaningJa": "乗り物から出る",
+        "example": "次の駅で降ります。",
+        "exampleMeaning": "Tôi xuống ở ga tiếp theo."
+    },
+    {
+        "word": "雨",
+        "reading": "あめ",
+        "meaning": "mưa",
+        "meaningJa": "空から降る水",
+        "example": "今日は雨が降っています。",
+        "exampleMeaning": "Hôm nay trời đang mưa."
+    },
+    {
+        "word": "コピー",
+        "reading": "コピー",
+        "meaning": "bản sao",
+        "meaningJa": "同じ物を写したもの",
+        "example": "資料をコピーします。",
+        "exampleMeaning": "Tôi photo tài liệu."
+    },
+    {
+        "word": "エアコン",
+        "reading": "エアコン",
+        "meaning": "máy điều hòa",
+        "meaningJa": "部屋の温度を調整する機械",
+        "example": "エアコンをつけます。",
+        "exampleMeaning": "Tôi bật điều hòa."
+    },
+    {
+        "word": "パスポート",
+        "reading": "パスポート",
+        "meaning": "hộ chiếu",
+        "meaningJa": "外国へ行くための書類",
+        "example": "パスポートを見せてください。",
+        "exampleMeaning": "Hãy cho xem hộ chiếu."
+    },
+    {
+        "word": "名前",
+        "reading": "なまえ",
+        "meaning": "tên",
+        "meaningJa": "人を呼ぶ言葉",
+        "example": "ここに名前を書いてください。",
+        "exampleMeaning": "Hãy viết tên ở đây."
+    }
+]

@@ -1,0 +1,210 @@
+[
+    {
+      "word": "食べます",
+      "reading": "たべます",
+      "meaning": "ăn",
+      "meaningJa": "食べ物を口に入れる",
+      "example": "毎朝パンを食べます。",
+      "exampleMeaning": "Mỗi sáng tôi ăn bánh mì."
+    },
+    {
+      "word": "飲みます",
+      "reading": "のみます",
+      "meaning": "uống",
+      "meaningJa": "飲み物を飲む",
+      "example": "水をたくさん飲みます。",
+      "exampleMeaning": "Tôi uống nhiều nước."
+    },
+    {
+      "word": "吸います",
+      "reading": "すいます",
+      "meaning": "hút",
+      "meaningJa": "たばこなどを吸う",
+      "example": "父はたばこを吸いません。",
+      "exampleMeaning": "Bố tôi không hút thuốc."
+    },
+    {
+      "word": "見ます",
+      "reading": "みます",
+      "meaning": "xem, nhìn",
+      "meaningJa": "目で見る",
+      "example": "毎晩テレビを見ます。",
+      "exampleMeaning": "Mỗi tối tôi xem TV."
+    },
+    {
+      "word": "聞きます",
+      "reading": "ききます",
+      "meaning": "nghe, hỏi",
+      "meaningJa": "音や話を聞く",
+      "example": "日本の音楽を聞きます。",
+      "exampleMeaning": "Tôi nghe nhạc Nhật."
+    },
+    {
+      "word": "読みます",
+      "reading": "よみます",
+      "meaning": "đọc",
+      "meaningJa": "文字を読む",
+      "example": "毎日新聞を読みます。",
+      "exampleMeaning": "Mỗi ngày tôi đọc báo."
+    },
+    {
+      "word": "書きます",
+      "reading": "かきます",
+      "meaning": "viết",
+      "meaningJa": "文字を書く",
+      "example": "ノートに名前を書きます。",
+      "exampleMeaning": "Tôi viết tên vào vở."
+    },
+    {
+      "word": "買います",
+      "reading": "かいます",
+      "meaning": "mua",
+      "meaningJa": "お金を払って物を手に入れる",
+      "example": "コンビニでジュースを買いました。",
+      "exampleMeaning": "Tôi đã mua nước trái cây ở cửa hàng tiện lợi."
+    },
+    {
+      "word": "撮ります",
+      "reading": "とります",
+      "meaning": "chụp",
+      "meaningJa": "写真を写す",
+      "example": "公園で写真を撮りました。",
+      "exampleMeaning": "Tôi đã chụp ảnh ở công viên."
+    },
+    {
+      "word": "します",
+      "reading": "します",
+      "meaning": "làm",
+      "meaningJa": "何かを行う",
+      "example": "毎日運動をします。",
+      "exampleMeaning": "Mỗi ngày tôi tập thể dục."
+    },
+    {
+      "word": "会います",
+      "reading": "あいます",
+      "meaning": "gặp",
+      "meaningJa": "人と会う",
+      "example": "駅で友達に会いました。",
+      "exampleMeaning": "Tôi đã gặp bạn ở ga."
+    },
+    {
+      "word": "ご飯",
+      "reading": "ごはん",
+      "meaning": "cơm, bữa ăn",
+      "meaningJa": "食事",
+      "example": "ご飯を食べましょう。",
+      "exampleMeaning": "Hãy ăn cơm nào."
+    },
+    {
+      "word": "朝ご飯",
+      "reading": "あさごはん",
+      "meaning": "bữa sáng",
+      "meaningJa": "朝に食べるご飯",
+      "example": "朝ご飯を食べましたか。",
+      "exampleMeaning": "Bạn đã ăn sáng chưa?"
+    },
+    {
+      "word": "昼ご飯",
+      "reading": "ひるごはん",
+      "meaning": "bữa trưa",
+      "meaningJa": "昼に食べるご飯",
+      "example": "昼ご飯はラーメンでした。",
+      "exampleMeaning": "Bữa trưa là mì ramen."
+    },
+    {
+      "word": "晩ご飯",
+      "reading": "ばんごはん",
+      "meaning": "bữa tối",
+      "meaningJa": "夜に食べるご飯",
+      "example": "家族と晩ご飯を食べます。",
+      "exampleMeaning": "Tôi ăn tối cùng gia đình."
+    },
+    {
+      "word": "パン",
+      "reading": "パン",
+      "meaning": "bánh mì",
+      "meaningJa": "小麦粉で作る食べ物",
+      "example": "朝パンを食べます。",
+      "exampleMeaning": "Buổi sáng tôi ăn bánh mì."
+    },
+    {
+      "word": "卵",
+      "reading": "たまご",
+      "meaning": "trứng",
+      "meaningJa": "鳥などの卵",
+      "example": "卵を二つ食べました。",
+      "exampleMeaning": "Tôi đã ăn hai quả trứng."
+    },
+    {
+      "word": "肉",
+      "reading": "にく",
+      "meaning": "thịt",
+      "meaningJa": "動物の食べ物の部分",
+      "example": "私は肉が好きです。",
+      "exampleMeaning": "Tôi thích thịt."
+    },
+    {
+      "word": "魚",
+      "reading": "さかな",
+      "meaning": "cá",
+      "meaningJa": "水の中で生きる動物",
+      "example": "昨日魚を食べました。",
+      "exampleMeaning": "Hôm qua tôi đã ăn cá."
+    },
+    {
+      "word": "水",
+      "reading": "みず",
+      "meaning": "nước",
+      "meaningJa": "飲むための透明な液体",
+      "example": "水を飲んでください。",
+      "exampleMeaning": "Hãy uống nước."
+    },
+    {
+      "word": "お茶",
+      "reading": "おちゃ",
+      "meaning": "trà",
+      "meaningJa": "茶葉で作る飲み物",
+      "example": "お茶を飲みます。",
+      "exampleMeaning": "Tôi uống trà."
+    },
+    {
+      "word": "コーヒー",
+      "reading": "コーヒー",
+      "meaning": "cà phê",
+      "meaningJa": "コーヒー豆で作る飲み物",
+      "example": "毎朝コーヒーを飲みます。",
+      "exampleMeaning": "Mỗi sáng tôi uống cà phê."
+    },
+    {
+      "word": "新聞",
+      "reading": "しんぶん",
+      "meaning": "báo",
+      "meaningJa": "ニュースが書いてある紙",
+      "example": "父は新聞を読みます。",
+      "exampleMeaning": "Bố tôi đọc báo."
+    },
+    {
+      "word": "雑誌",
+      "reading": "ざっし",
+      "meaning": "tạp chí",
+      "meaningJa": "いろいろな記事がある本",
+      "example": "日本の雑誌を買いました。",
+      "exampleMeaning": "Tôi đã mua tạp chí Nhật."
+    },
+    {
+      "word": "写真",
+      "reading": "しゃしん",
+      "meaning": "ảnh",
+      "meaningJa": "カメラで撮ったもの",
+      "example": "旅行の写真を見せます。",
+      "exampleMeaning": "Tôi sẽ cho xem ảnh chuyến du lịch."
+    },
+    {
+      "word": "映画",
+      "reading": "えいが",
+      "meaning": "phim",
+      "meaningJa": "スクリーンで見る物語",
+      "example": "友達と映画を見ました。",
+      "exampleMeaning": "Tôi đã xem phim với bạn."
+    }
+  ]

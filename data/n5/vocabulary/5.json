@@ -1,0 +1,202 @@
+[
+  {
+    "word": "行きます",
+    "reading": "いきます",
+    "meaning": "đi",
+    "meaningJa": "ある場所へ移動する",
+    "example": "毎日学校へ行きます。",
+    "exampleMeaning": "Mỗi ngày tôi đi đến trường."
+  },
+  {
+    "word": "来ます",
+    "reading": "きます",
+    "meaning": "đến",
+    "meaningJa": "こちらへ移動する",
+    "example": "友だちが家へ来ます。",
+    "exampleMeaning": "Bạn tôi đến nhà."
+  },
+  {
+    "word": "帰ります",
+    "reading": "かえります",
+    "meaning": "trở về",
+    "meaningJa": "元の場所へ戻る",
+    "example": "午後六時に家へ帰ります。",
+    "exampleMeaning": "Tôi về nhà lúc 6 giờ chiều."
+  },
+  {
+    "word": "学校",
+    "reading": "がっこう",
+    "meaning": "trường học",
+    "meaningJa": "勉強する場所",
+    "example": "学校は駅の近くです。",
+    "exampleMeaning": "Trường học ở gần ga."
+  },
+  {
+    "word": "スーパー",
+    "reading": "スーパー",
+    "meaning": "siêu thị",
+    "meaningJa": "食べ物や物を売る大きい店",
+    "example": "スーパーで飲み物を買いました。",
+    "exampleMeaning": "Tôi đã mua đồ uống ở siêu thị."
+  },
+  {
+    "word": "駅",
+    "reading": "えき",
+    "meaning": "ga",
+    "meaningJa": "電車が止まる場所",
+    "example": "駅で先生に会いました。",
+    "exampleMeaning": "Tôi đã gặp giáo viên ở ga."
+  },
+  {
+    "word": "飛行機",
+    "reading": "ひこうき",
+    "meaning": "máy bay",
+    "meaningJa": "空を飛ぶ乗り物",
+    "example": "飛行機で東京へ行きます。",
+    "exampleMeaning": "Tôi đi Tokyo bằng máy bay."
+  },
+  {
+    "word": "船",
+    "reading": "ふね",
+    "meaning": "tàu thủy",
+    "meaningJa": "海や川を進む乗り物",
+    "example": "船で島へ行きました。",
+    "exampleMeaning": "Tôi đã đi đảo bằng tàu thủy."
+  },
+  {
+    "word": "電車",
+    "reading": "でんしゃ",
+    "meaning": "tàu điện",
+    "meaningJa": "レールの上を走る乗り物",
+    "example": "電車で会社へ行きます。",
+    "exampleMeaning": "Tôi đi công ty bằng tàu điện."
+  },
+  {
+    "word": "地下鉄",
+    "reading": "ちかてつ",
+    "meaning": "tàu điện ngầm",
+    "meaningJa": "地下を走る電車",
+    "example": "地下鉄はとても便利です。",
+    "exampleMeaning": "Tàu điện ngầm rất tiện lợi."
+  },
+  {
+    "word": "新幹線",
+    "reading": "しんかんせん",
+    "meaning": "tàu siêu tốc",
+    "meaningJa": "速い日本の電車",
+    "example": "新幹線で大阪へ行きます。",
+    "exampleMeaning": "Tôi đi Osaka bằng tàu siêu tốc."
+  },
+  {
+    "word": "バス",
+    "reading": "バス",
+    "meaning": "xe buýt",
+    "meaningJa": "たくさんの人が乗る車",
+    "example": "バスで学校へ通っています。",
+    "exampleMeaning": "Tôi đi học bằng xe buýt."
+  },
+  {
+    "word": "タクシー",
+    "reading": "タクシー",
+    "meaning": "taxi",
+    "meaningJa": "お金を払って乗る車",
+    "example": "タクシーでホテルへ帰ります。",
+    "exampleMeaning": "Tôi về khách sạn bằng taxi."
+  },
+  {
+    "word": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "xe đạp",
+    "meaningJa": "ペダルをこいで進む乗り物",
+    "example": "自転車で公園へ行きます。",
+    "exampleMeaning": "Tôi đi công viên bằng xe đạp."
+  },
+  {
+    "word": "歩いて",
+    "reading": "あるいて",
+    "meaning": "đi bộ",
+    "meaningJa": "足で歩くこと",
+    "example": "駅まで歩いて行きます。",
+    "exampleMeaning": "Tôi đi bộ đến ga."
+  },
+  {
+    "word": "友達",
+    "reading": "ともだち",
+    "meaning": "bạn bè",
+    "meaningJa": "仲がいい人",
+    "example": "友達と映画を見ます。",
+    "exampleMeaning": "Tôi xem phim cùng bạn."
+  },
+  {
+    "word": "彼",
+    "reading": "かれ",
+    "meaning": "anh ấy, bạn trai",
+    "meaningJa": "男の人を指す言葉",
+    "example": "彼と京都へ行きます。",
+    "exampleMeaning": "Tôi đi Kyoto cùng anh ấy."
+  },
+  {
+    "word": "彼女",
+    "reading": "かのじょ",
+    "meaning": "cô ấy, bạn gái",
+    "meaningJa": "女の人を指す言葉",
+    "example": "彼女は駅へ来ます。",
+    "exampleMeaning": "Cô ấy sẽ đến ga."
+  },
+  {
+    "word": "家族",
+    "reading": "かぞく",
+    "meaning": "gia đình",
+    "meaningJa": "家の人たち",
+    "example": "家族と旅行します。",
+    "exampleMeaning": "Tôi đi du lịch cùng gia đình."
+  },
+  {
+    "word": "一人で",
+    "reading": "ひとりで",
+    "meaning": "một mình",
+    "meaningJa": "ほかの人がいない状態",
+    "example": "一人で東京へ行きます。",
+    "exampleMeaning": "Tôi đi Tokyo một mình."
+  },
+  {
+    "word": "美術館",
+    "reading": "びじゅつかん",
+    "meaning": "bảo tàng mỹ thuật",
+    "meaningJa": "絵や芸術を見る場所",
+    "example": "美術館で絵を見ました。",
+    "exampleMeaning": "Tôi đã xem tranh ở bảo tàng mỹ thuật."
+  },
+  {
+    "word": "図書館",
+    "reading": "としょかん",
+    "meaning": "thư viện",
+    "meaningJa": "本を読む場所",
+    "example": "図書館で勉強します。",
+    "exampleMeaning": "Tôi học ở thư viện."
+  },
+  {
+    "word": "喫茶店",
+    "reading": "きっさてん",
+    "meaning": "quán cà phê",
+    "meaningJa": "コーヒーを飲む店",
+    "example": "喫茶店で友達と話しました。",
+    "exampleMeaning": "Tôi đã nói chuyện với bạn ở quán cà phê."
+  },
+  {
+    "word": "うち",
+    "reading": "うち",
+    "meaning": "nhà",
+    "meaningJa": "自分の家",
+    "example": "友達がうちへ来ます。",
+    "exampleMeaning": "Bạn tôi sẽ đến nhà."
+  },
+  {
+    "word": "一緒に",
+    "reading": "いっしょに",
+    "meaning": "cùng nhau",
+    "meaningJa": "同じ行動を一緒にする",
+    "example": "友達と一緒に帰ります。",
+    "exampleMeaning": "Tôi về cùng bạn."
+  }
+]

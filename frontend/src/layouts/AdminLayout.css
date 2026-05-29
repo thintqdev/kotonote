@@ -1,4 +1,5 @@
 /* Studio / Admin — sidebar (sổ tay, nền assets/admin) */
+@import "../styles/adminModalLayout.css";
 
 :root {
   --admin-cream: #fdf8f1;
@@ -200,7 +201,7 @@
 
 .admin-account-dropdown-role {
   margin: 0;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -359,7 +360,7 @@
 
 .admin-nav-section-title {
   margin: 0 0 8px 4px;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -697,7 +698,7 @@
   z-index: 4;
   padding: 5px 11px;
   border-radius: 10px;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "置きます",
+        "reading": "おきます",
+        "meaning": "đặt, để",
+        "meaningJa": "物をある場所に置く",
+        "example": "机の上に本を置きます。",
+        "exampleMeaning": "Tôi đặt sách lên bàn."
+    },
+    {
+        "word": "作ります",
+        "reading": "つくります",
+        "meaning": "làm, tạo",
+        "meaningJa": "新しい物を作る",
+        "example": "母は晩ご飯を作ります。",
+        "exampleMeaning": "Mẹ tôi nấu bữa tối."
+    },
+    {
+        "word": "売ります",
+        "reading": "うります",
+        "meaning": "bán",
+        "meaningJa": "物をお金で渡す",
+        "example": "店で野菜を売っています。",
+        "exampleMeaning": "Cửa hàng đang bán rau."
+    },
+    {
+        "word": "知ります",
+        "reading": "しります",
+        "meaning": "biết",
+        "meaningJa": "情報を理解する",
+        "example": "その人を知っています。",
+        "exampleMeaning": "Tôi biết người đó."
+    },
+    {
+        "word": "住みます",
+        "reading": "すみます",
+        "meaning": "sống, cư trú",
+        "meaningJa": "ある場所で生活する",
+        "example": "ダナンに住んでいます。",
+        "exampleMeaning": "Tôi sống ở Đà Nẵng."
+    },
+    {
+        "word": "研究します",
+        "reading": "けんきゅうします",
+        "meaning": "nghiên cứu",
+        "meaningJa": "深く調べる",
+        "example": "大学でAIを研究しています。",
+        "exampleMeaning": "Tôi đang nghiên cứu AI ở đại học."
+    },
+    {
+        "word": "資料",
+        "reading": "しりょう",
+        "meaning": "tài liệu",
+        "meaningJa": "調べるための材料",
+        "example": "会議の資料を読みます。",
+        "exampleMeaning": "Tôi đọc tài liệu cuộc họp."
+    },
+    {
+        "word": "カタログ",
+        "reading": "カタログ",
+        "meaning": "catalog",
+        "meaningJa": "商品の一覧",
+        "example": "カタログを見ています。",
+        "exampleMeaning": "Tôi đang xem catalog."
+    },
+    {
+        "word": "時刻表",
+        "reading": "じこくひょう",
+        "meaning": "bảng giờ tàu",
+        "meaningJa": "電車などの時間表",
+        "example": "時刻表を調べます。",
+        "exampleMeaning": "Tôi kiểm tra bảng giờ tàu."
+    },
+    {
+        "word": "服",
+        "reading": "ふく",
+        "meaning": "quần áo",
+        "meaningJa": "体に着る物",
+        "example": "新しい服を買いました。",
+        "exampleMeaning": "Tôi đã mua quần áo mới."
+    },
+    {
+        "word": "製品",
+        "reading": "せいひん",
+        "meaning": "sản phẩm",
+        "meaningJa": "工場などで作った物",
+        "example": "日本の製品は有名です。",
+        "exampleMeaning": "Sản phẩm Nhật Bản nổi tiếng."
+    },
+    {
+        "word": "ソフト",
+        "reading": "ソフト",
+        "meaning": "phần mềm",
+        "meaningJa": "コンピューターのプログラム",
+        "example": "新しいソフトを使っています。",
+        "exampleMeaning": "Tôi đang dùng phần mềm mới."
+    },
+    {
+        "word": "専門",
+        "reading": "せんもん",
+        "meaning": "chuyên ngành",
+        "meaningJa": "特別に勉強する分野",
+        "example": "専門は経済です。",
+        "exampleMeaning": "Chuyên ngành của tôi là kinh tế."
+    },
+    {
+        "word": "歯医者",
+        "reading": "はいしゃ",
+        "meaning": "nha sĩ",
+        "meaningJa": "歯を治す医者",
+        "example": "歯医者へ行きます。",
+        "exampleMeaning": "Tôi đi nha sĩ."
+    },
+    {
+        "word": "床屋",
+        "reading": "とこや",
+        "meaning": "tiệm cắt tóc",
+        "meaningJa": "髪を切る店",
+        "example": "床屋で髪を切りました。",
+        "exampleMeaning": "Tôi đã cắt tóc ở tiệm."
+    },
+    {
+        "word": "独身",
+        "reading": "どくしん",
+        "meaning": "độc thân",
+        "meaningJa": "結婚していない",
+        "example": "兄はまだ独身です。",
+        "exampleMeaning": "Anh tôi vẫn độc thân."
+    },
+    {
+        "word": "特に",
+        "reading": "とくに",
+        "meaning": "đặc biệt",
+        "meaningJa": "ほかより強く",
+        "example": "特に問題はありません。",
+        "exampleMeaning": "Đặc biệt không có vấn đề gì."
+    },
+    {
+        "word": "思い出します",
+        "reading": "おもいだします",
+        "meaning": "nhớ ra",
+        "meaningJa": "忘れていたことを思い出す",
+        "example": "子どものころを思い出します。",
+        "exampleMeaning": "Tôi nhớ lại thời thơ ấu."
+    },
+    {
+        "word": "家賃",
+        "reading": "やちん",
+        "meaning": "tiền thuê nhà",
+        "meaningJa": "部屋を借りるお金",
+        "example": "毎月家賃を払います。",
+        "exampleMeaning": "Mỗi tháng tôi trả tiền thuê nhà."
+    },
+    {
+        "word": "店員",
+        "reading": "てんいん",
+        "meaning": "nhân viên cửa hàng",
+        "meaningJa": "店で働く人",
+        "example": "店員は親切でした。",
+        "exampleMeaning": "Nhân viên cửa hàng rất tốt bụng."
+    },
+    {
+        "word": "春",
+        "reading": "はる",
+        "meaning": "mùa xuân",
+        "meaningJa": "暖かい季節",
+        "example": "春に日本へ行きたいです。",
+        "exampleMeaning": "Tôi muốn đi Nhật vào mùa xuân."
+    },
+    {
+        "word": "花",
+        "reading": "はな",
+        "meaning": "hoa",
+        "meaningJa": "きれいな植物の部分",
+        "example": "公園に花があります。",
+        "exampleMeaning": "Có hoa trong công viên."
+    },
+    {
+        "word": "弁当",
+        "reading": "べんとう",
+        "meaning": "cơm hộp",
+        "meaningJa": "持って行く食事",
+        "example": "毎日弁当を持って行きます。",
+        "exampleMeaning": "Mỗi ngày tôi mang cơm hộp."
+    },
+    {
+        "word": "今度",
+        "reading": "こんど",
+        "meaning": "lần tới",
+        "meaningJa": "次の機会",
+        "example": "今度一緒に食事しましょう。",
+        "exampleMeaning": "Lần tới cùng ăn nhé."
+    },
+    {
+        "word": "ぜひ",
+        "reading": "ぜひ",
+        "meaning": "nhất định",
+        "meaningJa": "強くすすめる気持ち",
+        "example": "ぜひ遊びに来てください。",
+        "exampleMeaning": "Nhất định hãy đến chơi nhé."
+    }
+]

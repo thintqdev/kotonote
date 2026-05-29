@@ -129,8 +129,11 @@ export const findKanjiById = async (id) => {
 /**
  * Get kanji by deck ID
  */
+/** Kanji trong deck: cũ → mới */
+const KANJI_IN_DECK_SORT = { displayOrder: 1, createdAt: 1, _id: 1 };
+
 export const findKanjiByDeck = async (deckId) => {
-	return await Kanji.find({ deckId }).sort({ displayOrder: 1 });
+	return await Kanji.find({ deckId }).sort(KANJI_IN_DECK_SORT);
 };
 
 /**

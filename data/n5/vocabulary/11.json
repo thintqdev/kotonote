@@ -1,0 +1,202 @@
+[
+    {
+        "word": "います",
+        "reading": "います",
+        "meaning": "có mặt, ở",
+        "meaningJa": "人や動物が存在する",
+        "example": "兄は部屋にいます。",
+        "exampleMeaning": "Anh trai tôi ở trong phòng."
+    },
+    {
+        "word": "かかります",
+        "reading": "かかります",
+        "meaning": "mất (thời gian, tiền)",
+        "meaningJa": "時間やお金が必要になる",
+        "example": "駅まで三十分かかります。",
+        "exampleMeaning": "Mất 30 phút đến ga."
+    },
+    {
+        "word": "休みます",
+        "reading": "やすみます",
+        "meaning": "nghỉ",
+        "meaningJa": "仕事や学校を休む",
+        "example": "明日会社を休みます。",
+        "exampleMeaning": "Ngày mai tôi nghỉ công ty."
+    },
+    {
+        "word": "一つ",
+        "reading": "ひとつ",
+        "meaning": "một cái",
+        "meaningJa": "物を数える言葉",
+        "example": "りんごを一つ食べました。",
+        "exampleMeaning": "Tôi đã ăn một quả táo."
+    },
+    {
+        "word": "二つ",
+        "reading": "ふたつ",
+        "meaning": "hai cái",
+        "meaningJa": "物を数える言葉",
+        "example": "卵を二つ買いました。",
+        "exampleMeaning": "Tôi đã mua hai quả trứng."
+    },
+    {
+        "word": "三つ",
+        "reading": "みっつ",
+        "meaning": "ba cái",
+        "meaningJa": "物を数える言葉",
+        "example": "みかんを三つください。",
+        "exampleMeaning": "Cho tôi ba quả quýt."
+    },
+    {
+        "word": "四つ",
+        "reading": "よっつ",
+        "meaning": "bốn cái",
+        "meaningJa": "物を数える言葉",
+        "example": "箱が四つあります。",
+        "exampleMeaning": "Có bốn cái hộp."
+    },
+    {
+        "word": "五つ",
+        "reading": "いつつ",
+        "meaning": "năm cái",
+        "meaningJa": "物を数える言葉",
+        "example": "クッキーを五つ食べました。",
+        "exampleMeaning": "Tôi đã ăn năm cái bánh quy."
+    },
+    {
+        "word": "いくつ",
+        "reading": "いくつ",
+        "meaning": "bao nhiêu cái",
+        "meaningJa": "数を聞く言葉",
+        "example": "りんごはいくつありますか。",
+        "exampleMeaning": "Có bao nhiêu quả táo?"
+    },
+    {
+        "word": "一人",
+        "reading": "ひとり",
+        "meaning": "một người",
+        "meaningJa": "人を数える言葉",
+        "example": "部屋に一人います。",
+        "exampleMeaning": "Có một người trong phòng."
+    },
+    {
+        "word": "二人",
+        "reading": "ふたり",
+        "meaning": "hai người",
+        "meaningJa": "人を数える言葉",
+        "example": "学生が二人います。",
+        "exampleMeaning": "Có hai học sinh."
+    },
+    {
+        "word": "～人",
+        "reading": "～にん",
+        "meaning": "~ người",
+        "meaningJa": "人を数える助数詞",
+        "example": "教室に五人います。",
+        "exampleMeaning": "Có 5 người trong lớp."
+    },
+    {
+        "word": "～台",
+        "reading": "～だい",
+        "meaning": "~ cái (máy móc, xe cộ)",
+        "meaningJa": "機械や車を数える言葉",
+        "example": "車が三台あります。",
+        "exampleMeaning": "Có 3 chiếc xe."
+    },
+    {
+        "word": "～枚",
+        "reading": "～まい",
+        "meaning": "~ tờ, cái mỏng",
+        "meaningJa": "薄い物を数える言葉",
+        "example": "紙を二枚ください。",
+        "exampleMeaning": "Cho tôi hai tờ giấy."
+    },
+    {
+        "word": "～回",
+        "reading": "～かい",
+        "meaning": "~ lần",
+        "meaningJa": "回数を数える言葉",
+        "example": "日本へ三回行きました。",
+        "exampleMeaning": "Tôi đã đi Nhật 3 lần."
+    },
+    {
+        "word": "りんご",
+        "reading": "りんご",
+        "meaning": "táo",
+        "meaningJa": "赤い果物",
+        "example": "りんごを食べます。",
+        "exampleMeaning": "Tôi ăn táo."
+    },
+    {
+        "word": "みかん",
+        "reading": "みかん",
+        "meaning": "quýt",
+        "meaningJa": "オレンジ色の果物",
+        "example": "みかんが好きです。",
+        "exampleMeaning": "Tôi thích quýt."
+    },
+    {
+        "word": "サンドイッチ",
+        "reading": "サンドイッチ",
+        "meaning": "sandwich",
+        "meaningJa": "パンに具をはさんだ食べ物",
+        "example": "昼ご飯にサンドイッチを食べました。",
+        "exampleMeaning": "Tôi đã ăn sandwich cho bữa trưa."
+    },
+    {
+        "word": "カレー",
+        "reading": "カレー",
+        "meaning": "cà ri",
+        "meaningJa": "スパイスを使った料理",
+        "example": "昨日カレーを作りました。",
+        "exampleMeaning": "Hôm qua tôi đã nấu cà ri."
+    },
+    {
+        "word": "アイスクリーム",
+        "reading": "アイスクリーム",
+        "meaning": "kem",
+        "meaningJa": "冷たい甘い食べ物",
+        "example": "暑い日にアイスクリームを食べます。",
+        "exampleMeaning": "Tôi ăn kem vào ngày nóng."
+    },
+    {
+        "word": "切手",
+        "reading": "きって",
+        "meaning": "tem",
+        "meaningJa": "手紙に貼るもの",
+        "example": "郵便局で切手を買いました。",
+        "exampleMeaning": "Tôi đã mua tem ở bưu điện."
+    },
+    {
+        "word": "葉書",
+        "reading": "はがき",
+        "meaning": "bưu thiếp",
+        "meaningJa": "短い手紙を書くカード",
+        "example": "友達に葉書を送りました。",
+        "exampleMeaning": "Tôi đã gửi bưu thiếp cho bạn."
+    },
+    {
+        "word": "封筒",
+        "reading": "ふうとう",
+        "meaning": "phong bì",
+        "meaningJa": "手紙を入れる袋",
+        "example": "封筒に名前を書きます。",
+        "exampleMeaning": "Tôi viết tên lên phong bì."
+    },
+    {
+        "word": "速達",
+        "reading": "そくたつ",
+        "meaning": "chuyển phát nhanh",
+        "meaningJa": "早く届ける郵便",
+        "example": "この手紙を速達で送ります。",
+        "exampleMeaning": "Tôi gửi lá thư này bằng chuyển phát nhanh."
+    },
+    {
+        "word": "書留",
+        "reading": "かきとめ",
+        "meaning": "thư bảo đảm",
+        "meaningJa": "安全に送る特別な郵便",
+        "example": "大事な書類を書留で送りました。",
+        "exampleMeaning": "Tôi đã gửi tài liệu quan trọng bằng thư bảo đảm."
+    }
+]

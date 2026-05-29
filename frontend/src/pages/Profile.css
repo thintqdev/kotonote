@@ -518,7 +518,7 @@
 .profile-stat-hint {
   display: block;
   margin-top: 2px;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--profile-ink-muted, #7a6f5f);

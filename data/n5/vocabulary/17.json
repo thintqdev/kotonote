@@ -1,0 +1,202 @@
+[
+    {
+        "word": "覚えます",
+        "reading": "おぼえます",
+        "meaning": "ghi nhớ",
+        "meaningJa": "忘れないように覚える",
+        "example": "漢字をたくさん覚えます。",
+        "exampleMeaning": "Tôi ghi nhớ nhiều kanji."
+    },
+    {
+        "word": "忘れます",
+        "reading": "わすれます",
+        "meaning": "quên",
+        "meaningJa": "思い出せなくなる",
+        "example": "傘を忘れました。",
+        "exampleMeaning": "Tôi quên ô rồi."
+    },
+    {
+        "word": "なくします",
+        "reading": "なくします",
+        "meaning": "làm mất",
+        "meaningJa": "物が見つからなくなる",
+        "example": "財布をなくしました。",
+        "exampleMeaning": "Tôi làm mất ví."
+    },
+    {
+        "word": "払います",
+        "reading": "はらいます",
+        "meaning": "trả tiền",
+        "meaningJa": "お金を出す",
+        "example": "コンビニでお金を払います。",
+        "exampleMeaning": "Tôi trả tiền ở cửa hàng tiện lợi."
+    },
+    {
+        "word": "返します",
+        "reading": "かえします",
+        "meaning": "trả lại",
+        "meaningJa": "借りた物を戻す",
+        "example": "図書館に本を返します。",
+        "exampleMeaning": "Tôi trả sách cho thư viện."
+    },
+    {
+        "word": "出かけます",
+        "reading": "でかけます",
+        "meaning": "ra ngoài",
+        "meaningJa": "外へ行く",
+        "example": "午後友達と出かけます。",
+        "exampleMeaning": "Buổi chiều tôi ra ngoài với bạn."
+    },
+    {
+        "word": "脱ぎます",
+        "reading": "ぬぎます",
+        "meaning": "cởi",
+        "meaningJa": "服を体から外す",
+        "example": "家で靴を脱ぎます。",
+        "exampleMeaning": "Tôi cởi giày ở nhà."
+    },
+    {
+        "word": "持って行きます",
+        "reading": "もっていきます",
+        "meaning": "mang đi",
+        "meaningJa": "物を持って移動する",
+        "example": "昼ご飯を学校へ持って行きます。",
+        "exampleMeaning": "Tôi mang cơm trưa đến trường."
+    },
+    {
+        "word": "持って来ます",
+        "reading": "もってきます",
+        "meaning": "mang đến",
+        "meaningJa": "物をこちらへ持って来る",
+        "example": "ノートを持って来てください。",
+        "exampleMeaning": "Hãy mang vở đến."
+    },
+    {
+        "word": "心配します",
+        "reading": "しんぱいします",
+        "meaning": "lo lắng",
+        "meaningJa": "不安に思う",
+        "example": "母は私を心配しています。",
+        "exampleMeaning": "Mẹ đang lo cho tôi."
+    },
+    {
+        "word": "残業します",
+        "reading": "ざんぎょうします",
+        "meaning": "làm thêm giờ",
+        "meaningJa": "仕事を長く続ける",
+        "example": "今日は残業します。",
+        "exampleMeaning": "Hôm nay tôi làm thêm giờ."
+    },
+    {
+        "word": "出張します",
+        "reading": "しゅっちょうします",
+        "meaning": "đi công tác",
+        "meaningJa": "仕事で遠くへ行く",
+        "example": "来週東京へ出張します。",
+        "exampleMeaning": "Tuần sau tôi đi công tác Tokyo."
+    },
+    {
+        "word": "薬",
+        "reading": "くすり",
+        "meaning": "thuốc",
+        "meaningJa": "病気を治す物",
+        "example": "薬を飲みました。",
+        "exampleMeaning": "Tôi đã uống thuốc."
+    },
+    {
+        "word": "お風呂",
+        "reading": "おふろ",
+        "meaning": "bồn tắm",
+        "meaningJa": "体を洗う場所",
+        "example": "毎晩お風呂に入ります。",
+        "exampleMeaning": "Mỗi tối tôi tắm bồn."
+    },
+    {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "meaningJa": "上半身に着る服",
+        "example": "寒いので上着を着ます。",
+        "exampleMeaning": "Vì lạnh nên tôi mặc áo khoác."
+    },
+    {
+        "word": "下着",
+        "reading": "したぎ",
+        "meaning": "đồ lót",
+        "meaningJa": "服の下に着る物",
+        "example": "新しい下着を買いました。",
+        "exampleMeaning": "Tôi đã mua đồ lót mới."
+    },
+    {
+        "word": "会社員",
+        "reading": "かいしゃいん",
+        "meaning": "nhân viên công ty",
+        "meaningJa": "会社で働く人",
+        "example": "父は会社員です。",
+        "exampleMeaning": "Bố tôi là nhân viên công ty."
+    },
+    {
+        "word": "残業",
+        "reading": "ざんぎょう",
+        "meaning": "làm thêm giờ",
+        "meaningJa": "仕事を長くすること",
+        "example": "残業が多いです。",
+        "exampleMeaning": "Việc tăng ca nhiều."
+    },
+    {
+        "word": "出張",
+        "reading": "しゅっちょう",
+        "meaning": "chuyến công tác",
+        "meaningJa": "仕事で遠くへ行くこと",
+        "example": "大阪へ出張があります。",
+        "exampleMeaning": "Có chuyến công tác đến Osaka."
+    },
+    {
+        "word": "大丈夫",
+        "reading": "だいじょうぶ",
+        "meaning": "ổn, không sao",
+        "meaningJa": "問題がない",
+        "example": "もう大丈夫です。",
+        "exampleMeaning": "Giờ ổn rồi."
+    },
+    {
+        "word": "危ない",
+        "reading": "あぶない",
+        "meaning": "nguy hiểm",
+        "meaningJa": "安全ではない",
+        "example": "その道は危ないです。",
+        "exampleMeaning": "Con đường đó nguy hiểm."
+    },
+    {
+        "word": "問題",
+        "reading": "もんだい",
+        "meaning": "vấn đề",
+        "meaningJa": "困ったこと",
+        "example": "問題があります。",
+        "exampleMeaning": "Có vấn đề."
+    },
+    {
+        "word": "答え",
+        "reading": "こたえ",
+        "meaning": "câu trả lời",
+        "meaningJa": "質問への返事",
+        "example": "答えを書いてください。",
+        "exampleMeaning": "Hãy viết câu trả lời."
+    },
+    {
+        "word": "禁煙",
+        "reading": "きんえん",
+        "meaning": "cấm hút thuốc",
+        "meaningJa": "たばこを吸ってはいけない",
+        "example": "ここは禁煙です。",
+        "exampleMeaning": "Ở đây cấm hút thuốc."
+    },
+    {
+        "word": "健康",
+        "reading": "けんこう",
+        "meaning": "sức khỏe",
+        "meaningJa": "元気な状態",
+        "example": "健康に気をつけています。",
+        "exampleMeaning": "Tôi chú ý đến sức khỏe."
+    }
+]

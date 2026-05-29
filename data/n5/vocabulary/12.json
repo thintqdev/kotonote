@@ -1,0 +1,202 @@
+[
+    {
+        "word": "簡単",
+        "reading": "かんたん",
+        "meaning": "đơn giản",
+        "meaningJa": "難しくない",
+        "example": "この問題は簡単です。",
+        "exampleMeaning": "Câu hỏi này đơn giản."
+    },
+    {
+        "word": "近い",
+        "reading": "ちかい",
+        "meaning": "gần",
+        "meaningJa": "距離が短い",
+        "example": "駅はここから近いです。",
+        "exampleMeaning": "Ga ở gần đây."
+    },
+    {
+        "word": "遠い",
+        "reading": "とおい",
+        "meaning": "xa",
+        "meaningJa": "距離が長い",
+        "example": "学校は家から遠いです。",
+        "exampleMeaning": "Trường ở xa nhà."
+    },
+    {
+        "word": "早い",
+        "reading": "はやい",
+        "meaning": "sớm, nhanh",
+        "meaningJa": "時間や速度が速い",
+        "example": "毎朝早く起きます。",
+        "exampleMeaning": "Mỗi sáng tôi dậy sớm."
+    },
+    {
+        "word": "遅い",
+        "reading": "おそい",
+        "meaning": "muộn, chậm",
+        "meaningJa": "時間や速度が遅い",
+        "example": "昨日寝るのが遅かったです。",
+        "exampleMeaning": "Hôm qua tôi ngủ muộn."
+    },
+    {
+        "word": "多い",
+        "reading": "おおい",
+        "meaning": "nhiều",
+        "meaningJa": "数がたくさんある",
+        "example": "この町は人が多いです。",
+        "exampleMeaning": "Thị trấn này có nhiều người."
+    },
+    {
+        "word": "少ない",
+        "reading": "すくない",
+        "meaning": "ít",
+        "meaningJa": "数が少ししかない",
+        "example": "今日は車が少ないです。",
+        "exampleMeaning": "Hôm nay có ít xe."
+    },
+    {
+        "word": "暖かい",
+        "reading": "あたたかい",
+        "meaning": "ấm",
+        "meaningJa": "ちょうどいい暖かさ",
+        "example": "今日は暖かいですね。",
+        "exampleMeaning": "Hôm nay ấm nhỉ."
+    },
+    {
+        "word": "涼しい",
+        "reading": "すずしい",
+        "meaning": "mát mẻ",
+        "meaningJa": "少し冷たくて気持ちいい",
+        "example": "山は涼しいです。",
+        "exampleMeaning": "Trên núi mát mẻ."
+    },
+    {
+        "word": "甘い",
+        "reading": "あまい",
+        "meaning": "ngọt",
+        "meaningJa": "砂糖の味がする",
+        "example": "このケーキは甘いです。",
+        "exampleMeaning": "Cái bánh này ngọt."
+    },
+    {
+        "word": "辛い",
+        "reading": "からい",
+        "meaning": "cay",
+        "meaningJa": "刺激が強い味",
+        "example": "この料理は辛いです。",
+        "exampleMeaning": "Món ăn này cay."
+    },
+    {
+        "word": "重い",
+        "reading": "おもい",
+        "meaning": "nặng",
+        "meaningJa": "重さがある",
+        "example": "この荷物は重いです。",
+        "exampleMeaning": "Hành lý này nặng."
+    },
+    {
+        "word": "軽い",
+        "reading": "かるい",
+        "meaning": "nhẹ",
+        "meaningJa": "重くない",
+        "example": "このかばんは軽いです。",
+        "exampleMeaning": "Cái cặp này nhẹ."
+    },
+    {
+        "word": "いい",
+        "reading": "いい",
+        "meaning": "tốt",
+        "meaningJa": "よい",
+        "example": "今日は気分がいいです。",
+        "exampleMeaning": "Hôm nay tâm trạng tốt."
+    },
+    {
+        "word": "季節",
+        "reading": "きせつ",
+        "meaning": "mùa",
+        "meaningJa": "一年の中の時期",
+        "example": "春は好きな季節です。",
+        "exampleMeaning": "Mùa xuân là mùa tôi thích."
+    },
+    {
+        "word": "春",
+        "reading": "はる",
+        "meaning": "mùa xuân",
+        "meaningJa": "暖かくなる季節",
+        "example": "春に桜が咲きます。",
+        "exampleMeaning": "Hoa anh đào nở vào mùa xuân."
+    },
+    {
+        "word": "夏",
+        "reading": "なつ",
+        "meaning": "mùa hè",
+        "meaningJa": "暑い季節",
+        "example": "夏は海へ行きます。",
+        "exampleMeaning": "Mùa hè tôi đi biển."
+    },
+    {
+        "word": "秋",
+        "reading": "あき",
+        "meaning": "mùa thu",
+        "meaningJa": "涼しくなる季節",
+        "example": "秋は涼しいです。",
+        "exampleMeaning": "Mùa thu mát mẻ."
+    },
+    {
+        "word": "冬",
+        "reading": "ふゆ",
+        "meaning": "mùa đông",
+        "meaningJa": "寒い季節",
+        "example": "冬は寒いです。",
+        "exampleMeaning": "Mùa đông lạnh."
+    },
+    {
+        "word": "天気",
+        "reading": "てんき",
+        "meaning": "thời tiết",
+        "meaningJa": "空の様子",
+        "example": "今日は天気がいいです。",
+        "exampleMeaning": "Hôm nay thời tiết đẹp."
+    },
+    {
+        "word": "雨",
+        "reading": "あめ",
+        "meaning": "mưa",
+        "meaningJa": "空から降る水",
+        "example": "明日は雨です。",
+        "exampleMeaning": "Ngày mai trời mưa."
+    },
+    {
+        "word": "雪",
+        "reading": "ゆき",
+        "meaning": "tuyết",
+        "meaningJa": "白い氷の雨",
+        "example": "北海道で雪を見ました。",
+        "exampleMeaning": "Tôi đã thấy tuyết ở Hokkaido."
+    },
+    {
+        "word": "曇り",
+        "reading": "くもり",
+        "meaning": "nhiều mây",
+        "meaningJa": "雲が多い天気",
+        "example": "今日は曇りです。",
+        "exampleMeaning": "Hôm nay nhiều mây."
+    },
+    {
+        "word": "ホテル",
+        "reading": "ホテル",
+        "meaning": "khách sạn",
+        "meaningJa": "泊まる場所",
+        "example": "駅の近くのホテルに泊まります。",
+        "exampleMeaning": "Tôi ở khách sạn gần ga."
+    },
+    {
+        "word": "空港",
+        "reading": "くうこう",
+        "meaning": "sân bay",
+        "meaningJa": "飛行機に乗る場所",
+        "example": "空港までバスで行きます。",
+        "exampleMeaning": "Tôi đi xe buýt đến sân bay."
+    }
+]

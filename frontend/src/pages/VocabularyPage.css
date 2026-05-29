@@ -1284,7 +1284,7 @@ button.vocab-cta-reset {
 .kanji-flash-cell-label {
   display: block;
   margin-bottom: 6px;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.22em;
   color: var(--vs-muted);

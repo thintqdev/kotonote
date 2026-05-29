@@ -1,0 +1,202 @@
+[
+    {
+        "word": "思います",
+        "reading": "おもいます",
+        "meaning": "nghĩ",
+        "meaningJa": "心の中で考える",
+        "example": "日本は便利だと思います。",
+        "exampleMeaning": "Tôi nghĩ Nhật Bản tiện lợi."
+    },
+    {
+        "word": "言います",
+        "reading": "いいます",
+        "meaning": "nói",
+        "meaningJa": "言葉で伝える",
+        "example": "先生は大丈夫だと言いました。",
+        "exampleMeaning": "Giáo viên đã nói là ổn."
+    },
+    {
+        "word": "勝ちます",
+        "reading": "かちます",
+        "meaning": "thắng",
+        "meaningJa": "試合などで相手より上になる",
+        "example": "日本チームが勝ちました。",
+        "exampleMeaning": "Đội Nhật đã thắng."
+    },
+    {
+        "word": "負けます",
+        "reading": "まけます",
+        "meaning": "thua",
+        "meaningJa": "試合などで相手より下になる",
+        "example": "昨日の試合で負けました。",
+        "exampleMeaning": "Hôm qua đã thua trận."
+    },
+    {
+        "word": "役に立ちます",
+        "reading": "やくにたちます",
+        "meaning": "có ích",
+        "meaningJa": "便利で助けになる",
+        "example": "この本は勉強に役に立ちます。",
+        "exampleMeaning": "Quyển sách này có ích cho việc học."
+    },
+    {
+        "word": "動きます",
+        "reading": "うごきます",
+        "meaning": "chuyển động",
+        "meaningJa": "位置が変わる",
+        "example": "時計が動いていません。",
+        "exampleMeaning": "Đồng hồ không chạy."
+    },
+    {
+        "word": "やめます",
+        "reading": "やめます",
+        "meaning": "nghỉ, bỏ",
+        "meaningJa": "続けるのを止める",
+        "example": "会社をやめました。",
+        "exampleMeaning": "Tôi đã nghỉ công ty."
+    },
+    {
+        "word": "気をつけます",
+        "reading": "きをつけます",
+        "meaning": "chú ý, cẩn thận",
+        "meaningJa": "注意する",
+        "example": "車に気をつけてください。",
+        "exampleMeaning": "Hãy cẩn thận xe cộ."
+    },
+    {
+        "word": "留学します",
+        "reading": "りゅうがくします",
+        "meaning": "du học",
+        "meaningJa": "外国で勉強する",
+        "example": "来年日本へ留学します。",
+        "exampleMeaning": "Năm sau tôi sẽ du học Nhật."
+    },
+    {
+        "word": "無駄",
+        "reading": "むだ",
+        "meaning": "lãng phí",
+        "meaningJa": "役に立たない",
+        "example": "それは無駄だと思います。",
+        "exampleMeaning": "Tôi nghĩ điều đó lãng phí."
+    },
+    {
+        "word": "不便",
+        "reading": "ふべん",
+        "meaning": "bất tiện",
+        "meaningJa": "便利ではない",
+        "example": "この町は少し不便です。",
+        "exampleMeaning": "Thị trấn này hơi bất tiện."
+    },
+    {
+        "word": "すごい",
+        "reading": "すごい",
+        "meaning": "ghê thật, tuyệt vời",
+        "meaningJa": "とても素晴らしい",
+        "example": "日本語が上手ですね。すごい！",
+        "exampleMeaning": "Tiếng Nhật giỏi thật đấy!"
+    },
+    {
+        "word": "本当",
+        "reading": "ほんとう",
+        "meaning": "thật",
+        "meaningJa": "うそではない",
+        "example": "それは本当ですか。",
+        "exampleMeaning": "Điều đó là thật sao?"
+    },
+    {
+        "word": "うそ",
+        "reading": "うそ",
+        "meaning": "dối trá",
+        "meaningJa": "本当ではないこと",
+        "example": "それはうそです。",
+        "exampleMeaning": "Đó là nói dối."
+    },
+    {
+        "word": "自動車",
+        "reading": "じどうしゃ",
+        "meaning": "ô tô",
+        "meaningJa": "エンジンで動く車",
+        "example": "父は自動車を持っています。",
+        "exampleMeaning": "Bố tôi có ô tô."
+    },
+    {
+        "word": "交通",
+        "reading": "こうつう",
+        "meaning": "giao thông",
+        "meaningJa": "人や車の移動",
+        "example": "朝は交通が多いです。",
+        "exampleMeaning": "Buổi sáng giao thông đông."
+    },
+    {
+        "word": "物価",
+        "reading": "ぶっか",
+        "meaning": "giá cả",
+        "meaningJa": "物の値段",
+        "example": "東京は物価が高いです。",
+        "exampleMeaning": "Tokyo có giá cả đắt."
+    },
+    {
+        "word": "放送",
+        "reading": "ほうそう",
+        "meaning": "phát sóng",
+        "meaningJa": "テレビやラジオで伝えること",
+        "example": "ニュースを放送しています。",
+        "exampleMeaning": "Đang phát sóng tin tức."
+    },
+    {
+        "word": "ニュース",
+        "reading": "ニュース",
+        "meaning": "tin tức",
+        "meaningJa": "新しい情報",
+        "example": "毎朝ニュースを見ます。",
+        "exampleMeaning": "Mỗi sáng tôi xem tin tức."
+    },
+    {
+        "word": "アニメ",
+        "reading": "アニメ",
+        "meaning": "anime",
+        "meaningJa": "日本のアニメーション",
+        "example": "日本のアニメが好きです。",
+        "exampleMeaning": "Tôi thích anime Nhật."
+    },
+    {
+        "word": "漫画",
+        "reading": "まんが",
+        "meaning": "truyện tranh",
+        "meaningJa": "絵で読む本",
+        "example": "漫画をよく読みます。",
+        "exampleMeaning": "Tôi thường đọc truyện tranh."
+    },
+    {
+        "word": "デザイン",
+        "reading": "デザイン",
+        "meaning": "thiết kế",
+        "meaningJa": "形や見た目を考えること",
+        "example": "このデザインはおしゃれです。",
+        "exampleMeaning": "Thiết kế này rất đẹp."
+    },
+    {
+        "word": "夢",
+        "reading": "ゆめ",
+        "meaning": "giấc mơ, ước mơ",
+        "meaningJa": "将来したいこと",
+        "example": "私の夢は医者になることです。",
+        "exampleMeaning": "Ước mơ của tôi là trở thành bác sĩ."
+    },
+    {
+        "word": "天才",
+        "reading": "てんさい",
+        "meaning": "thiên tài",
+        "meaningJa": "とても頭がいい人",
+        "example": "彼は天才だと思います。",
+        "exampleMeaning": "Tôi nghĩ anh ấy là thiên tài."
+    },
+    {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến",
+        "meaningJa": "自分の考え",
+        "example": "あなたの意見を聞きたいです。",
+        "exampleMeaning": "Tôi muốn nghe ý kiến của bạn."
+    }
+]

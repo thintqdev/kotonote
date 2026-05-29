@@ -1,0 +1,202 @@
+[
+  {
+    "word": "起きます",
+    "reading": "おきます",
+    "meaning": "thức dậy",
+    "meaningJa": "寝たあと、目を覚ます",
+    "example": "毎朝六時に起きます。",
+    "exampleMeaning": "Mỗi sáng tôi thức dậy lúc 6 giờ."
+  },
+  {
+    "word": "寝ます",
+    "reading": "ねます",
+    "meaning": "ngủ",
+    "meaningJa": "目を閉じて休む",
+    "example": "十一時に寝ます。",
+    "exampleMeaning": "Tôi ngủ lúc 11 giờ."
+  },
+  {
+    "word": "働きます",
+    "reading": "はたらきます",
+    "meaning": "làm việc",
+    "meaningJa": "仕事をする",
+    "example": "銀行で働きます。",
+    "exampleMeaning": "Tôi làm việc ở ngân hàng."
+  },
+  {
+    "word": "休みます",
+    "reading": "やすみます",
+    "meaning": "nghỉ",
+    "meaningJa": "仕事や勉強をやめる",
+    "example": "日曜日は休みます。",
+    "exampleMeaning": "Chủ nhật tôi nghỉ."
+  },
+  {
+    "word": "勉強します",
+    "reading": "べんきょうします",
+    "meaning": "học",
+    "meaningJa": "知識を身につける",
+    "example": "毎晩日本語を勉強します。",
+    "exampleMeaning": "Mỗi tối tôi học tiếng Nhật."
+  },
+  {
+    "word": "終わります",
+    "reading": "おわります",
+    "meaning": "kết thúc",
+    "meaningJa": "物事が終わる",
+    "example": "仕事は五時に終わります。",
+    "exampleMeaning": "Công việc kết thúc lúc 5 giờ."
+  },
+  {
+    "word": "今",
+    "reading": "いま",
+    "meaning": "bây giờ",
+    "meaningJa": "この時",
+    "example": "今、何時ですか。",
+    "exampleMeaning": "Bây giờ mấy giờ?"
+  },
+  {
+    "word": "先週",
+    "reading": "せんしゅう",
+    "meaning": "tuần trước",
+    "meaningJa": "この前の一週間",
+    "example": "先週、東京へ行きました。",
+    "exampleMeaning": "Tuần trước tôi đã đi Tokyo."
+  },
+  {
+    "word": "今週",
+    "reading": "こんしゅう",
+    "meaning": "tuần này",
+    "meaningJa": "いまの一週間",
+    "example": "今週はとても忙しいです。",
+    "exampleMeaning": "Tuần này tôi rất bận."
+  },
+  {
+    "word": "来週",
+    "reading": "らいしゅう",
+    "meaning": "tuần sau",
+    "meaningJa": "次の一週間",
+    "example": "来週、テストがあります。",
+    "exampleMeaning": "Tuần sau có bài kiểm tra."
+  },
+  {
+    "word": "先月",
+    "reading": "せんげつ",
+    "meaning": "tháng trước",
+    "meaningJa": "この前の月",
+    "example": "先月、日本へ来ました。",
+    "exampleMeaning": "Tháng trước tôi đến Nhật."
+  },
+  {
+    "word": "今月",
+    "reading": "こんげつ",
+    "meaning": "tháng này",
+    "meaningJa": "いまの月",
+    "example": "今月は五月です。",
+    "exampleMeaning": "Tháng này là tháng 5."
+  },
+  {
+    "word": "来月",
+    "reading": "らいげつ",
+    "meaning": "tháng sau",
+    "meaningJa": "次の月",
+    "example": "来月、国へ帰ります。",
+    "exampleMeaning": "Tháng sau tôi về nước."
+  },
+  {
+    "word": "去年",
+    "reading": "きょねん",
+    "meaning": "năm ngoái",
+    "meaningJa": "この前の年",
+    "example": "去年、大学を卒業しました。",
+    "exampleMeaning": "Năm ngoái tôi tốt nghiệp đại học."
+  },
+  {
+    "word": "今年",
+    "reading": "ことし",
+    "meaning": "năm nay",
+    "meaningJa": "いまの年",
+    "example": "今年、日本に来ました。",
+    "exampleMeaning": "Năm nay tôi đến Nhật."
+  },
+  {
+    "word": "来年",
+    "reading": "らいねん",
+    "meaning": "năm sau",
+    "meaningJa": "次の年",
+    "example": "来年、日本で働きたいです。",
+    "exampleMeaning": "Năm sau tôi muốn làm việc ở Nhật."
+  },
+  {
+    "word": "一昨日",
+    "reading": "おととい",
+    "meaning": "hôm kia",
+    "meaningJa": "きのうの前の日",
+    "example": "一昨日、雨でした。",
+    "exampleMeaning": "Hôm kia trời mưa."
+  },
+  {
+    "word": "昨日",
+    "reading": "きのう",
+    "meaning": "hôm qua",
+    "meaningJa": "今日の前の日",
+    "example": "昨日、映画を見ました。",
+    "exampleMeaning": "Hôm qua tôi xem phim."
+  },
+  {
+    "word": "今日",
+    "reading": "きょう",
+    "meaning": "hôm nay",
+    "meaningJa": "いまの日",
+    "example": "今日は暑いです。",
+    "exampleMeaning": "Hôm nay trời nóng."
+  },
+  {
+    "word": "明日",
+    "reading": "あした",
+    "meaning": "ngày mai",
+    "meaningJa": "今日の次の日",
+    "example": "明日、会議があります。",
+    "exampleMeaning": "Ngày mai có cuộc họp."
+  },
+  {
+    "word": "明後日",
+    "reading": "あさって",
+    "meaning": "ngày kia",
+    "meaningJa": "あしたの次の日",
+    "example": "明後日、友達と会います。",
+    "exampleMeaning": "Ngày kia tôi gặp bạn."
+  },
+  {
+    "word": "年月日",
+    "reading": "ねんがっぴ",
+    "meaning": "ngày tháng năm",
+    "meaningJa": "年・月・日のこと",
+    "example": "生年月日を書いてください。",
+    "exampleMeaning": "Hãy viết ngày tháng năm sinh."
+  },
+  {
+    "word": "何時",
+    "reading": "なんじ",
+    "meaning": "mấy giờ",
+    "meaningJa": "時間を聞く言葉",
+    "example": "今、何時ですか。",
+    "exampleMeaning": "Bây giờ mấy giờ?"
+  },
+  {
+    "word": "何分",
+    "reading": "なんぷん",
+    "meaning": "mấy phút",
+    "meaningJa": "分を聞く言葉",
+    "example": "何分かかりますか。",
+    "exampleMeaning": "Mất mấy phút?"
+  },
+  {
+    "word": "何時間",
+    "reading": "なんじかん",
+    "meaning": "mấy tiếng",
+    "meaningJa": "時間の長さを聞く言葉",
+    "example": "日本まで何時間かかりますか。",
+    "exampleMeaning": "Đến Nhật mất mấy tiếng?"
+  }
+]

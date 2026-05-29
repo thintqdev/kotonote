@@ -1,0 +1,202 @@
+[
+  {
+    "word": "これ",
+    "reading": "これ",
+    "meaning": "cái này, đây",
+    "meaningJa": "近くにある物を指す言葉",
+    "example": "これは本です。",
+    "exampleMeaning": "Đây là quyển sách."
+  },
+  {
+    "word": "それ",
+    "reading": "それ",
+    "meaning": "cái đó",
+    "meaningJa": "相手の近くにある物を指す言葉",
+    "example": "それは辞書ですか。",
+    "exampleMeaning": "Cái đó có phải từ điển không?"
+  },
+  {
+    "word": "あれ",
+    "reading": "あれ",
+    "meaning": "cái kia",
+    "meaningJa": "遠くにある物を指す言葉",
+    "example": "あれは時計です。",
+    "exampleMeaning": "Cái kia là đồng hồ."
+  },
+  {
+    "word": "どれ",
+    "reading": "どれ",
+    "meaning": "cái nào",
+    "meaningJa": "物を選ぶときに使う言葉",
+    "example": "どれがあなたのかばんですか。",
+    "exampleMeaning": "Cái nào là cặp của bạn?"
+  },
+  {
+    "word": "この",
+    "reading": "この",
+    "meaning": "...này",
+    "meaningJa": "近くの物の前につける言葉",
+    "example": "この本は面白いです。",
+    "exampleMeaning": "Quyển sách này thú vị."
+  },
+  {
+    "word": "その",
+    "reading": "その",
+    "meaning": "...đó",
+    "meaningJa": "相手の近くの物の前につける言葉",
+    "example": "その雑誌を見せてください。",
+    "exampleMeaning": "Cho tôi xem tạp chí đó."
+  },
+  {
+    "word": "あの",
+    "reading": "あの",
+    "meaning": "...kia",
+    "meaningJa": "遠くの物の前につける言葉",
+    "example": "あの人は先生です。",
+    "exampleMeaning": "Người kia là giáo viên."
+  },
+  {
+    "word": "どの",
+    "reading": "どの",
+    "meaning": "...nào",
+    "meaningJa": "物を選ぶとき、名詞の前につける言葉",
+    "example": "どの新聞を読みますか。",
+    "exampleMeaning": "Bạn đọc báo nào?"
+  },
+  {
+    "word": "ここ",
+    "reading": "ここ",
+    "meaning": "chỗ này, đây",
+    "meaningJa": "自分の近くの場所を指す言葉",
+    "example": "ここは教室です。",
+    "exampleMeaning": "Đây là phòng học."
+  },
+  {
+    "word": "そこ",
+    "reading": "そこ",
+    "meaning": "chỗ đó",
+    "meaningJa": "相手の近くの場所を指す言葉",
+    "example": "そこにかさがあります。",
+    "exampleMeaning": "Ở đó có cái ô."
+  },
+  {
+    "word": "あそこ",
+    "reading": "あそこ",
+    "meaning": "chỗ kia",
+    "meaningJa": "遠くの場所を指す言葉",
+    "example": "あそこは銀行です。",
+    "exampleMeaning": "Chỗ kia là ngân hàng."
+  },
+  {
+    "word": "どこ",
+    "reading": "どこ",
+    "meaning": "ở đâu",
+    "meaningJa": "場所を聞くときの言葉",
+    "example": "トイレはどこですか。",
+    "exampleMeaning": "Nhà vệ sinh ở đâu?"
+  },
+  {
+    "word": "こちら",
+    "reading": "こちら",
+    "meaning": "phía này, đây (lịch sự)",
+    "meaningJa": "丁寧に場所や人を指す言葉",
+    "example": "こちらは田中さんです。",
+    "exampleMeaning": "Đây là anh Tanaka."
+  },
+  {
+    "word": "そちら",
+    "reading": "そちら",
+    "meaning": "phía đó (lịch sự)",
+    "meaningJa": "相手の方を丁寧に指す言葉",
+    "example": "そちらは何ですか。",
+    "exampleMeaning": "Phía đó là gì?"
+  },
+  {
+    "word": "あちら",
+    "reading": "あちら",
+    "meaning": "phía kia (lịch sự)",
+    "meaningJa": "遠い方を丁寧に指す言葉",
+    "example": "あちらは出口です。",
+    "exampleMeaning": "Phía kia là lối ra."
+  },
+  {
+    "word": "どちら",
+    "reading": "どちら",
+    "meaning": "phía nào (lịch sự)",
+    "meaningJa": "丁寧に場所や人を聞く言葉",
+    "example": "お手洗いはどちらですか。",
+    "exampleMeaning": "Nhà vệ sinh ở phía nào?"
+  },
+  {
+    "word": "本",
+    "reading": "ほん",
+    "meaning": "sách",
+    "meaningJa": "読むためのもの",
+    "example": "この本はいくらですか。",
+    "exampleMeaning": "Quyển sách này bao nhiêu tiền?"
+  },
+  {
+    "word": "辞書",
+    "reading": "じしょ",
+    "meaning": "từ điển",
+    "meaningJa": "言葉の意味を調べる本",
+    "example": "辞書を使ってください。",
+    "exampleMeaning": "Hãy dùng từ điển."
+  },
+  {
+    "word": "雑誌",
+    "reading": "ざっし",
+    "meaning": "tạp chí",
+    "meaningJa": "写真や記事がたくさんある本",
+    "example": "毎月雑誌を買います。",
+    "exampleMeaning": "Hàng tháng tôi mua tạp chí."
+  },
+  {
+    "word": "新聞",
+    "reading": "しんぶん",
+    "meaning": "báo",
+    "meaningJa": "毎日のニュースが書いてある紙",
+    "example": "父は新聞を読みます。",
+    "exampleMeaning": "Bố tôi đọc báo."
+  },
+  {
+    "word": "ノート",
+    "reading": "ノート",
+    "meaning": "vở",
+    "meaningJa": "字を書くための紙",
+    "example": "ノートに名前を書きます。",
+    "exampleMeaning": "Viết tên vào vở."
+  },
+  {
+    "word": "手帳",
+    "reading": "てちょう",
+    "meaning": "sổ tay",
+    "meaningJa": "予定やメモを書く小さい本",
+    "example": "手帳に電話番号を書きます。",
+    "exampleMeaning": "Viết số điện thoại vào sổ tay."
+  },
+  {
+    "word": "名刺",
+    "reading": "めいし",
+    "meaning": "danh thiếp",
+    "meaningJa": "名前や会社が書いてあるカード",
+    "example": "名刺を交換します。",
+    "exampleMeaning": "Trao đổi danh thiếp."
+  },
+  {
+    "word": "カレンダー",
+    "reading": "カレンダー",
+    "meaning": "lịch",
+    "meaningJa": "日付が書いてあるもの",
+    "example": "カレンダーを壁にかけます。",
+    "exampleMeaning": "Treo lịch lên tường."
+  },
+  {
+    "word": "時計",
+    "reading": "とけい",
+    "meaning": "đồng hồ",
+    "meaningJa": "時間がわかる道具",
+    "example": "時計は机の上にあります。",
+    "exampleMeaning": "Đồng hồ ở trên bàn."
+  }
+]

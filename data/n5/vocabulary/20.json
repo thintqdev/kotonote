@@ -1,0 +1,202 @@
+[
+    {
+        "word": "要ります",
+        "reading": "いります",
+        "meaning": "cần",
+        "meaningJa": "必要である",
+        "example": "パスポートが要ります。",
+        "exampleMeaning": "Cần hộ chiếu."
+    },
+    {
+        "word": "調べます",
+        "reading": "しらべます",
+        "meaning": "tìm hiểu, tra cứu",
+        "meaningJa": "詳しく確認する",
+        "example": "インターネットで調べます。",
+        "exampleMeaning": "Tôi tra cứu trên internet."
+    },
+    {
+        "word": "修理します",
+        "reading": "しゅうりします",
+        "meaning": "sửa chữa",
+        "meaningJa": "壊れた物を直す",
+        "example": "パソコンを修理します。",
+        "exampleMeaning": "Tôi sửa máy tính."
+    },
+    {
+        "word": "僕",
+        "reading": "ぼく",
+        "meaning": "tôi (nam)",
+        "meaningJa": "男性が使う自分の言い方",
+        "example": "僕は学生です。",
+        "exampleMeaning": "Tôi là học sinh."
+    },
+    {
+        "word": "君",
+        "reading": "きみ",
+        "meaning": "cậu, bạn",
+        "meaningJa": "親しい相手の呼び方",
+        "example": "君はどう思いますか。",
+        "exampleMeaning": "Cậu nghĩ sao?"
+    },
+    {
+        "word": "うん",
+        "reading": "うん",
+        "meaning": "ừ",
+        "meaningJa": "はいのカジュアルな言い方",
+        "example": "うん、わかった。",
+        "exampleMeaning": "Ừ, hiểu rồi."
+    },
+    {
+        "word": "ううん",
+        "reading": "ううん",
+        "meaning": "không đâu",
+        "meaningJa": "いいえのカジュアルな言い方",
+        "example": "ううん、大丈夫。",
+        "exampleMeaning": "Không đâu, ổn mà."
+    },
+    {
+        "word": "サラリーマン",
+        "reading": "サラリーマン",
+        "meaning": "nhân viên văn phòng",
+        "meaningJa": "会社で働く人",
+        "example": "父はサラリーマンです。",
+        "exampleMeaning": "Bố tôi là nhân viên văn phòng."
+    },
+    {
+        "word": "言葉",
+        "reading": "ことば",
+        "meaning": "ngôn ngữ, lời nói",
+        "meaningJa": "話すための表現",
+        "example": "日本の言葉は難しいです。",
+        "exampleMeaning": "Ngôn ngữ Nhật khó."
+    },
+    {
+        "word": "物価",
+        "reading": "ぶっか",
+        "meaning": "giá cả",
+        "meaningJa": "物の値段",
+        "example": "東京は物価が高いです。",
+        "exampleMeaning": "Tokyo có giá cả đắt."
+    },
+    {
+        "word": "着物",
+        "reading": "きもの",
+        "meaning": "kimono",
+        "meaningJa": "日本の伝統的な服",
+        "example": "着物を着たことがあります。",
+        "exampleMeaning": "Tôi đã từng mặc kimono."
+    },
+    {
+        "word": "ビザ",
+        "reading": "ビザ",
+        "meaning": "visa",
+        "meaningJa": "外国へ行く許可",
+        "example": "日本のビザを取りました。",
+        "exampleMeaning": "Tôi đã lấy visa Nhật."
+    },
+    {
+        "word": "初め",
+        "reading": "はじめ",
+        "meaning": "lúc đầu",
+        "meaningJa": "最初",
+        "example": "初めは難しかったです。",
+        "exampleMeaning": "Lúc đầu khá khó."
+    },
+    {
+        "word": "終わり",
+        "reading": "おわり",
+        "meaning": "kết thúc",
+        "meaningJa": "最後",
+        "example": "映画の終わりは感動しました。",
+        "exampleMeaning": "Kết thúc phim rất cảm động."
+    },
+    {
+        "word": "こっち",
+        "reading": "こっち",
+        "meaning": "phía này",
+        "meaningJa": "こちらのカジュアルな言い方",
+        "example": "こっちへ来てください。",
+        "exampleMeaning": "Hãy đến phía này."
+    },
+    {
+        "word": "そっち",
+        "reading": "そっち",
+        "meaning": "phía đó",
+        "meaningJa": "そちらのカジュアルな言い方",
+        "example": "そっちは静かですか。",
+        "exampleMeaning": "Phía đó yên tĩnh không?"
+    },
+    {
+        "word": "あっち",
+        "reading": "あっち",
+        "meaning": "phía kia",
+        "meaningJa": "あちらのカジュアルな言い方",
+        "example": "あっちにコンビニがあります。",
+        "exampleMeaning": "Có cửa hàng tiện lợi phía kia."
+    },
+    {
+        "word": "どっち",
+        "reading": "どっち",
+        "meaning": "phía nào",
+        "meaningJa": "どちらのカジュアルな言い方",
+        "example": "駅はどっちですか。",
+        "exampleMeaning": "Ga ở phía nào?"
+    },
+    {
+        "word": "皆で",
+        "reading": "みんなで",
+        "meaning": "mọi người cùng",
+        "meaningJa": "全員一緒に",
+        "example": "皆で食事します。",
+        "exampleMeaning": "Mọi người cùng ăn."
+    },
+    {
+        "word": "～けど",
+        "reading": "～けど",
+        "meaning": "nhưng",
+        "meaningJa": "逆の内容を続ける",
+        "example": "高いけど、おいしいです。",
+        "exampleMeaning": "Đắt nhưng ngon."
+    },
+    {
+        "word": "本当",
+        "reading": "ほんとう",
+        "meaning": "thật",
+        "meaningJa": "うそではない",
+        "example": "それは本当ですか。",
+        "exampleMeaning": "Điều đó là thật sao?"
+    },
+    {
+        "word": "もう",
+        "reading": "もう",
+        "meaning": "đã, nữa",
+        "meaningJa": "すでに",
+        "example": "もう宿題をしました。",
+        "exampleMeaning": "Tôi đã làm bài tập rồi."
+    },
+    {
+        "word": "まだ",
+        "reading": "まだ",
+        "meaning": "vẫn chưa",
+        "meaningJa": "今も続いている",
+        "example": "まだご飯を食べていません。",
+        "exampleMeaning": "Tôi vẫn chưa ăn cơm."
+    },
+    {
+        "word": "本当に",
+        "reading": "ほんとうに",
+        "meaning": "thật sự",
+        "meaningJa": "とても本当",
+        "example": "本当にありがとうございます。",
+        "exampleMeaning": "Thật sự cảm ơn bạn."
+    },
+    {
+        "word": "最近",
+        "reading": "さいきん",
+        "meaning": "gần đây",
+        "meaningJa": "近い過去",
+        "example": "最近忙しいです。",
+        "exampleMeaning": "Gần đây tôi bận."
+    }
+]

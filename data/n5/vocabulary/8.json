@@ -1,0 +1,202 @@
+[
+    {
+        "word": "ハンサム",
+        "reading": "ハンサム",
+        "meaning": "đẹp trai",
+        "meaningJa": "男の人の顔がかっこいい",
+        "example": "田中さんはハンサムです。",
+        "exampleMeaning": "Anh Tanaka đẹp trai."
+    },
+    {
+        "word": "きれい",
+        "reading": "きれい",
+        "meaning": "đẹp, sạch",
+        "meaningJa": "美しくて汚くない",
+        "example": "この公園はきれいです。",
+        "exampleMeaning": "Công viên này đẹp."
+    },
+    {
+        "word": "静か",
+        "reading": "しずか",
+        "meaning": "yên tĩnh",
+        "meaningJa": "音が少ない",
+        "example": "この部屋は静かです。",
+        "exampleMeaning": "Căn phòng này yên tĩnh."
+    },
+    {
+        "word": "にぎやか",
+        "reading": "にぎやか",
+        "meaning": "nhộn nhịp",
+        "meaningJa": "人や音が多くて楽しい",
+        "example": "東京はにぎやかです。",
+        "exampleMeaning": "Tokyo nhộn nhịp."
+    },
+    {
+        "word": "有名",
+        "reading": "ゆうめい",
+        "meaning": "nổi tiếng",
+        "meaningJa": "多くの人が知っている",
+        "example": "その店は有名です。",
+        "exampleMeaning": "Quán đó nổi tiếng."
+    },
+    {
+        "word": "親切",
+        "reading": "しんせつ",
+        "meaning": "tốt bụng",
+        "meaningJa": "やさしくて思いやりがある",
+        "example": "先生はとても親切です。",
+        "exampleMeaning": "Giáo viên rất tốt bụng."
+    },
+    {
+        "word": "元気",
+        "reading": "げんき",
+        "meaning": "khỏe mạnh, năng động",
+        "meaningJa": "体や気持ちが強い",
+        "example": "今日は元気です。",
+        "exampleMeaning": "Hôm nay tôi khỏe."
+    },
+    {
+        "word": "暇",
+        "reading": "ひま",
+        "meaning": "rảnh",
+        "meaningJa": "することがない",
+        "example": "日曜日は暇です。",
+        "exampleMeaning": "Chủ nhật tôi rảnh."
+    },
+    {
+        "word": "便利",
+        "reading": "べんり",
+        "meaning": "tiện lợi",
+        "meaningJa": "使いやすくて役に立つ",
+        "example": "スマホは便利です。",
+        "exampleMeaning": "Điện thoại thông minh rất tiện lợi."
+    },
+    {
+        "word": "素敵",
+        "reading": "すてき",
+        "meaning": "tuyệt vời",
+        "meaningJa": "とてもいい",
+        "example": "素敵な音楽ですね。",
+        "exampleMeaning": "Âm nhạc tuyệt thật nhỉ."
+    },
+    {
+        "word": "大きい",
+        "reading": "おおきい",
+        "meaning": "to",
+        "meaningJa": "サイズが大きい",
+        "example": "大きい犬がいます。",
+        "exampleMeaning": "Có một con chó to."
+    },
+    {
+        "word": "小さい",
+        "reading": "ちいさい",
+        "meaning": "nhỏ",
+        "meaningJa": "サイズが小さい",
+        "example": "小さい箱を買いました。",
+        "exampleMeaning": "Tôi đã mua chiếc hộp nhỏ."
+    },
+    {
+        "word": "新しい",
+        "reading": "あたらしい",
+        "meaning": "mới",
+        "meaningJa": "できたばかり",
+        "example": "新しい車です。",
+        "exampleMeaning": "Đó là xe mới."
+    },
+    {
+        "word": "古い",
+        "reading": "ふるい",
+        "meaning": "cũ",
+        "meaningJa": "長い時間使われている",
+        "example": "古い本があります。",
+        "exampleMeaning": "Có quyển sách cũ."
+    },
+    {
+        "word": "いい",
+        "reading": "いい",
+        "meaning": "tốt",
+        "meaningJa": "質が高い",
+        "example": "今日は天気がいいです。",
+        "exampleMeaning": "Hôm nay thời tiết đẹp."
+    },
+    {
+        "word": "悪い",
+        "reading": "わるい",
+        "meaning": "xấu, tệ",
+        "meaningJa": "よくない",
+        "example": "頭が悪いです。",
+        "exampleMeaning": "Tôi đau đầu."
+    },
+    {
+        "word": "暑い",
+        "reading": "あつい",
+        "meaning": "nóng (thời tiết)",
+        "meaningJa": "気温が高い",
+        "example": "今日は暑いです。",
+        "exampleMeaning": "Hôm nay nóng."
+    },
+    {
+        "word": "寒い",
+        "reading": "さむい",
+        "meaning": "lạnh",
+        "meaningJa": "気温が低い",
+        "example": "北海道は寒いです。",
+        "exampleMeaning": "Hokkaido lạnh."
+    },
+    {
+        "word": "熱い",
+        "reading": "あつい",
+        "meaning": "nóng (đồ vật)",
+        "meaningJa": "触ると熱を感じる",
+        "example": "このお茶は熱いです。",
+        "exampleMeaning": "Trà này nóng."
+    },
+    {
+        "word": "冷たい",
+        "reading": "つめたい",
+        "meaning": "lạnh (đồ vật)",
+        "meaningJa": "触ると冷たく感じる",
+        "example": "冷たい水を飲みます。",
+        "exampleMeaning": "Tôi uống nước lạnh."
+    },
+    {
+        "word": "難しい",
+        "reading": "むずかしい",
+        "meaning": "khó",
+        "meaningJa": "簡単ではない",
+        "example": "漢字は難しいです。",
+        "exampleMeaning": "Kanji khó."
+    },
+    {
+        "word": "易しい",
+        "reading": "やさしい",
+        "meaning": "dễ",
+        "meaningJa": "簡単でわかりやすい",
+        "example": "この問題は易しいです。",
+        "exampleMeaning": "Câu này dễ."
+    },
+    {
+        "word": "高い",
+        "reading": "たかい",
+        "meaning": "cao, đắt",
+        "meaningJa": "値段や高さが大きい",
+        "example": "このバッグは高いです。",
+        "exampleMeaning": "Cái túi này đắt."
+    },
+    {
+        "word": "安い",
+        "reading": "やすい",
+        "meaning": "rẻ",
+        "meaningJa": "値段が低い",
+        "example": "この店は安いです。",
+        "exampleMeaning": "Quán này rẻ."
+    },
+    {
+        "word": "低い",
+        "reading": "ひくい",
+        "meaning": "thấp",
+        "meaningJa": "高さが低い",
+        "example": "あの山は低いです。",
+        "exampleMeaning": "Ngọn núi kia thấp."
+    }
+]

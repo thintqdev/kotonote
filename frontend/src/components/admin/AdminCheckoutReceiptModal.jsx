@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { getAdminCheckoutReceipt } from '../../services/adminMembershipService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import '../../pages/MembershipReceiptPage.css';
-import './AdminCheckoutReceiptModal.css';
+import "./AdminCheckoutReceiptModal.css";
+import "../../styles/adminModalLayout.css";
 
 function formatWhen(iso, lang) {
 	if (!iso) return '—';

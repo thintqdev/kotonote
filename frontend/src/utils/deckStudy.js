@@ -11,20 +11,22 @@ export function levelToJlpt(level) {
 	return JLPT_ORDER.includes(v) ? v : v;
 }
 
+/** So sánh hai deck (cũ → mới). */
+export function compareDecksByOrder(a, b) {
+	const orderDiff = (a.displayOrder ?? 0) - (b.displayOrder ?? 0);
+	if (orderDiff !== 0) return orderDiff;
+	const ta = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+	const tb = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+	if (ta !== tb) return ta - tb;
+	return String(a._id ?? '').localeCompare(String(b._id ?? ''));
+}
+
 /**
  * Khớp backend VOCAB_DECK_SORT: displayOrder ↑, title ↑, _id ↑ khi hòa.
  * @param {object[]} decks
  */
 export function sortDecksByOrder(decks) {
-	return [...decks].sort((a, b) => {
-		const orderDiff = (a.displayOrder ?? 0) - (b.displayOrder ?? 0);
-		if (orderDiff !== 0) return orderDiff;
-		const titleA = String(a.titleJa || a.title || '');
-		const titleB = String(b.titleJa || b.title || '');
-		const titleCmp = titleA.localeCompare(titleB, 'vi');
-		if (titleCmp !== 0) return titleCmp;
-		return String(a._id ?? '').localeCompare(String(b._id ?? ''));
-	});
+	return [...decks].sort(compareDecksByOrder);
 }
 
 /**
@@ -45,13 +47,38 @@ export function sortDecksByJlptAndOrder(decks) {
 		const rankA = ja === -1 ? JLPT_ORDER.length : ja;
 		const rankB = jb === -1 ? JLPT_ORDER.length : jb;
 		if (rankA !== rankB) return rankA - rankB;
-		return (a.displayOrder ?? 0) - (b.displayOrder ?? 0);
+		return compareDecksByOrder(a, b);
 	});
 }
 
 /** Chỉ deck đang bật — lớp phòng khi API/admin trả thêm bản ghi tắt. */
 export function filterActiveDecks(decks) {
 	return (decks ?? []).filter((d) => d.isActive !== false);
+}
+
+/**
+ * So sánh thứ tự từ/kanji trong deck (cũ → mới), khớp API `displayOrder` ↑.
+ * @param {{ order?: number, displayOrder?: number, id?: string, _id?: string, createdAt?: string }} a
+ * @param {{ order?: number, displayOrder?: number, id?: string, _id?: string, createdAt?: string }} b
+ */
+export function compareDeckItemDisplayOrder(a, b) {
+	const oa = a.order ?? a.displayOrder ?? 0;
+	const ob = b.order ?? b.displayOrder ?? 0;
+	if (oa !== ob) return oa - ob;
+	const ta = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+	const tb = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+	if (ta !== tb) return ta - tb;
+	return String(a.id ?? a._id ?? '').localeCompare(String(b.id ?? b._id ?? ''));
+}
+
+/** @param {object[]} items */
+export function sortDeckItemsByDisplayOrder(items) {
+	return [...(items ?? [])].sort(compareDeckItemDisplayOrder);
+}
+
+/** Danh sách vocabulary thô từ API (trước mapVocabRecord). */
+export function sortVocabApiList(list) {
+	return sortDeckItemsByDisplayOrder(list);
 }
 
 /** @param {object[]} decks */
@@ -70,6 +97,7 @@ export function mapKanjiRecord(k, jlpt, deckId) {
 		id: String(k._id),
 		deckId: String(deckId),
 		order: k.displayOrder ?? 0,
+		createdAt: k.createdAt,
 		jlpt,
 		char: k.char,
 		onYomi: k.onYomi,
@@ -102,6 +130,7 @@ export function mapVocabRecord(v, jlpt, deckId) {
 		id: String(v._id),
 		deckId: String(deckId),
 		order: v.displayOrder ?? 0,
+		createdAt: v.createdAt,
 		jlpt,
 		pos: POS_MAP[v.partOfSpeech] || 'noun',
 		surface: v.word,
@@ -125,9 +154,9 @@ export function getDeckLessonItems(mergedItems, sortedDecks, lessonNo) {
 	const deck = sortedDecks[n - 1];
 	if (!deck) return [];
 	const deckId = String(deck._id);
-	return mergedItems
-		.filter((x) => String(x.deckId) === deckId)
-		.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
+	return sortDeckItemsByDisplayOrder(
+		mergedItems.filter((x) => String(x.deckId) === deckId),
+	);
 }
 
 /** Giai đoạn tối thiểu = đã hoàn thành quiz lần 1 → Nảy mầm (growthStage 1) */
@@ -343,8 +372,8 @@ export function buildDeckLessons(sortedDecks, mergedItems, progressByDeckId = nu
 
 	return sortedDecks.map((deck, index) => {
 		const lessonNo = index + 1;
-		const deckItems = mergedItems.filter(
-			(x) => String(x.deckId) === String(deck._id),
+		const deckItems = sortDeckItemsByDisplayOrder(
+			mergedItems.filter((x) => String(x.deckId) === String(deck._id)),
 		);
 		const learned = deckItems.filter((x) => x.learned).length;
 		const jlpt = deck.jlpt || levelToJlpt(deck.level);

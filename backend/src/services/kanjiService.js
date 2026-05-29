@@ -182,8 +182,11 @@ export const bulkCreateKanji = async (deckId, kanjiList) => {
 		throw new AppError(MESSAGES.MSG_912, 400);
 	}
 	
-	// Add deckId to all kanji
-	const kanjiWithDeck = kanjiList.map(k => ({ ...k, deckId }));
+	const kanjiWithDeck = kanjiList.map((k, index) => ({
+		...k,
+		deckId,
+		displayOrder: currentCount + index + 1,
+	}));
 	
 	try {
 		const result = await kanjiRepository.bulkCreateKanji(kanjiWithDeck);

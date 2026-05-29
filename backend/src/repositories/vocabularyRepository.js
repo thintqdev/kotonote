@@ -2,8 +2,12 @@ import mongoose from 'mongoose';
 import VocabularyDeck from '../models/VocabularyDeck.js';
 import Vocabulary from '../models/Vocabulary.js';
 
-/** Khớp list + unlock; title khi displayOrder trùng (tránh lệch ObjectId vs string) */
-export const VOCAB_DECK_SORT = { displayOrder: 1, title: 1, _id: 1 };
+/** Khớp list + unlock: displayOrder ↑, cũ→mới theo createdAt khi trùng. */
+export const VOCAB_DECK_SORT = { displayOrder: 1, createdAt: 1, _id: 1 };
+
+/** Từ trong deck: cũ → mới (thứ tự bài / import JSON) */
+export const VOCAB_IN_DECK_SORT = { displayOrder: 1, createdAt: 1, _id: 1 };
+
 const deckSort = VOCAB_DECK_SORT;
 
 // Deck Repository
@@ -72,7 +76,7 @@ export const deleteDeck = async (deckId) => {
 
 // Vocabulary Repository
 export const findVocabByDeck = async (deckId) => {
-	return await Vocabulary.find({ deckId, isActive: true }).sort({ displayOrder: 1 });
+	return await Vocabulary.find({ deckId, isActive: true }).sort(VOCAB_IN_DECK_SORT);
 };
 
 export const findVocabById = async (vocabId) => {

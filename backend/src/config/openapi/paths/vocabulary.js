@@ -116,7 +116,8 @@ export const vocabularyPaths = {
 		get: {
 			tags: ['Vocabulary - User'],
 			summary: 'Get deck with vocabulary (User)',
-			description: 'Requires authentication.',
+			description:
+				'Requires authentication. Vocabulary sorted by displayOrder ascending (oldest first), then createdAt, _id.',
 			security: [{ bearerAuth: [] }],
 			parameters: [
 				{

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "います",
+        "reading": "います",
+        "meaning": "có, tồn tại (người, động vật)",
+        "meaningJa": "人や動物が存在する",
+        "example": "教室に学生がいます。",
+        "exampleMeaning": "Có học sinh trong lớp."
+    },
+    {
+        "word": "あります",
+        "reading": "あります",
+        "meaning": "có, tồn tại (đồ vật)",
+        "meaningJa": "物が存在する",
+        "example": "机の上に本があります。",
+        "exampleMeaning": "Có quyển sách trên bàn."
+    },
+    {
+        "word": "いろいろ",
+        "reading": "いろいろ",
+        "meaning": "nhiều loại",
+        "meaningJa": "さまざま",
+        "example": "スーパーにいろいろな物があります。",
+        "exampleMeaning": "Có nhiều thứ ở siêu thị."
+    },
+    {
+        "word": "男の人",
+        "reading": "おとこのひと",
+        "meaning": "người đàn ông",
+        "meaningJa": "大人の男性",
+        "example": "あそこに男の人がいます。",
+        "exampleMeaning": "Có người đàn ông ở đằng kia."
+    },
+    {
+        "word": "女の人",
+        "reading": "おんなのひと",
+        "meaning": "người phụ nữ",
+        "meaningJa": "大人の女性",
+        "example": "受付に女の人がいます。",
+        "exampleMeaning": "Có người phụ nữ ở quầy lễ tân."
+    },
+    {
+        "word": "男の子",
+        "reading": "おとこのこ",
+        "meaning": "bé trai",
+        "meaningJa": "男の子ども",
+        "example": "公園に男の子がいます。",
+        "exampleMeaning": "Có bé trai ở công viên."
+    },
+    {
+        "word": "女の子",
+        "reading": "おんなのこ",
+        "meaning": "bé gái",
+        "meaningJa": "女の子ども",
+        "example": "女の子が歌っています。",
+        "exampleMeaning": "Có bé gái đang hát."
+    },
+    {
+        "word": "犬",
+        "reading": "いぬ",
+        "meaning": "chó",
+        "meaningJa": "人と暮らす動物",
+        "example": "犬が二匹います。",
+        "exampleMeaning": "Có hai con chó."
+    },
+    {
+        "word": "猫",
+        "reading": "ねこ",
+        "meaning": "mèo",
+        "meaningJa": "小さい人気の動物",
+        "example": "猫が好きです。",
+        "exampleMeaning": "Tôi thích mèo."
+    },
+    {
+        "word": "木",
+        "reading": "き",
+        "meaning": "cây",
+        "meaningJa": "大きい植物",
+        "example": "庭に大きい木があります。",
+        "exampleMeaning": "Có cây lớn trong vườn."
+    },
+    {
+        "word": "物",
+        "reading": "もの",
+        "meaning": "đồ vật",
+        "meaningJa": "形があるもの",
+        "example": "机の下に物があります。",
+        "exampleMeaning": "Có đồ vật dưới bàn."
+    },
+    {
+        "word": "フィルム",
+        "reading": "フィルム",
+        "meaning": "cuộn phim",
+        "meaningJa": "写真を撮るための材料",
+        "example": "フィルムを買いました。",
+        "exampleMeaning": "Tôi đã mua cuộn phim."
+    },
+    {
+        "word": "電池",
+        "reading": "でんち",
+        "meaning": "pin",
+        "meaningJa": "電気をためる物",
+        "example": "電池がありません。",
+        "exampleMeaning": "Không có pin."
+    },
+    {
+        "word": "箱",
+        "reading": "はこ",
+        "meaning": "cái hộp",
+        "meaningJa": "物を入れる入れ物",
+        "example": "箱の中に手紙があります。",
+        "exampleMeaning": "Có lá thư trong hộp."
+    },
+    {
+        "word": "スイッチ",
+        "reading": "スイッチ",
+        "meaning": "công tắc",
+        "meaningJa": "電気をつけたり消したりする物",
+        "example": "スイッチを押してください。",
+        "exampleMeaning": "Hãy nhấn công tắc."
+    },
+    {
+        "word": "冷蔵庫",
+        "reading": "れいぞうこ",
+        "meaning": "tủ lạnh",
+        "meaningJa": "食べ物を冷たく保つ機械",
+        "example": "冷蔵庫にジュースがあります。",
+        "exampleMeaning": "Có nước trái cây trong tủ lạnh."
+    },
+    {
+        "word": "テーブル",
+        "reading": "テーブル",
+        "meaning": "cái bàn",
+        "meaningJa": "物を置く家具",
+        "example": "テーブルの上に本があります。",
+        "exampleMeaning": "Có sách trên bàn."
+    },
+    {
+        "word": "ベッド",
+        "reading": "ベッド",
+        "meaning": "cái giường",
+        "meaningJa": "寝るための家具",
+        "example": "部屋にベッドがあります。",
+        "exampleMeaning": "Có giường trong phòng."
+    },
+    {
+        "word": "棚",
+        "reading": "たな",
+        "meaning": "cái kệ",
+        "meaningJa": "物を置くための家具",
+        "example": "棚に辞書があります。",
+        "exampleMeaning": "Có từ điển trên kệ."
+    },
+    {
+        "word": "ドア",
+        "reading": "ドア",
+        "meaning": "cửa",
+        "meaningJa": "部屋の入口",
+        "example": "ドアを開けてください。",
+        "exampleMeaning": "Hãy mở cửa."
+    },
+    {
+        "word": "窓",
+        "reading": "まど",
+        "meaning": "cửa sổ",
+        "meaningJa": "光や風を入れる場所",
+        "example": "窓のそばに猫がいます。",
+        "exampleMeaning": "Có mèo bên cửa sổ."
+    },
+    {
+        "word": "ポスト",
+        "reading": "ポスト",
+        "meaning": "hòm thư",
+        "meaningJa": "手紙を入れる箱",
+        "example": "ポストに手紙があります。",
+        "exampleMeaning": "Có thư trong hòm thư."
+    },
+    {
+        "word": "ビル",
+        "reading": "ビル",
+        "meaning": "tòa nhà",
+        "meaningJa": "大きい建物",
+        "example": "駅の前にビルがあります。",
+        "exampleMeaning": "Có tòa nhà trước ga."
+    },
+    {
+        "word": "公園",
+        "reading": "こうえん",
+        "meaning": "công viên",
+        "meaningJa": "遊んだり休んだりする場所",
+        "example": "公園に子どもがいます。",
+        "exampleMeaning": "Có trẻ em ở công viên."
+    },
+    {
+        "word": "喫茶店",
+        "reading": "きっさてん",
+        "meaning": "quán cà phê",
+        "meaningJa": "コーヒーなどを飲む店",
+        "example": "駅の近くに喫茶店があります。",
+        "exampleMeaning": "Có quán cà phê gần ga."
+    }
+]

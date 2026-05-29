@@ -1,0 +1,202 @@
+[
+  {
+    "word": "行きます",
+    "reading": "いきます",
+    "meaning": "đi",
+    "meaningJa": "ある場所へ移動する",
+    "example": "毎日学校へ行きます。",
+    "exampleMeaning": "Mỗi ngày tôi đi học."
+  },
+  {
+    "word": "来ます",
+    "reading": "きます",
+    "meaning": "đến",
+    "meaningJa": "こちらへ移動する",
+    "example": "友達が家に来ます。",
+    "exampleMeaning": "Bạn tôi đến nhà."
+  },
+  {
+    "word": "帰ります",
+    "reading": "かえります",
+    "meaning": "về",
+    "meaningJa": "家や国へ戻る",
+    "example": "六時にうちへ帰ります。",
+    "exampleMeaning": "Tôi về nhà lúc 6 giờ."
+  },
+  {
+    "word": "学校",
+    "reading": "がっこう",
+    "meaning": "trường học",
+    "meaningJa": "勉強する場所",
+    "example": "学校は駅の近くです。",
+    "exampleMeaning": "Trường học ở gần ga."
+  },
+  {
+    "word": "スーパー",
+    "reading": "スーパー",
+    "meaning": "siêu thị",
+    "meaningJa": "食べ物を売る店",
+    "example": "スーパーで野菜を買います。",
+    "exampleMeaning": "Tôi mua rau ở siêu thị."
+  },
+  {
+    "word": "駅",
+    "reading": "えき",
+    "meaning": "ga (tàu)",
+    "meaningJa": "電車やバスが止まる場所",
+    "example": "駅まで歩いて行きます。",
+    "exampleMeaning": "Tôi đi bộ đến ga."
+  },
+  {
+    "word": "飛行機",
+    "reading": "ひこうき",
+    "meaning": "máy bay",
+    "meaningJa": "空を飛ぶ乗り物",
+    "example": "飛行機で日本へ行きます。",
+    "exampleMeaning": "Tôi đi Nhật bằng máy bay."
+  },
+  {
+    "word": "船",
+    "reading": "ふね",
+    "meaning": "tàu thủy",
+    "meaningJa": "海を進む乗り物",
+    "example": "船で島へ行きます。",
+    "exampleMeaning": "Tôi đi đảo bằng tàu thủy."
+  },
+  {
+    "word": "電車",
+    "reading": "でんしゃ",
+    "meaning": "tàu điện",
+    "meaningJa": "レールの上を走る乗り物",
+    "example": "電車で会社へ行きます。",
+    "exampleMeaning": "Tôi đi công ty bằng tàu điện."
+  },
+  {
+    "word": "地下鉄",
+    "reading": "ちかてつ",
+    "meaning": "tàu điện ngầm",
+    "meaningJa": "地下を走る電車",
+    "example": "地下鉄は速いです。",
+    "exampleMeaning": "Tàu điện ngầm nhanh."
+  },
+  {
+    "word": "新幹線",
+    "reading": "しんかんせん",
+    "meaning": "tàu Shinkansen",
+    "meaningJa": "とても速い日本の電車",
+    "example": "新幹線で東京へ行きます。",
+    "exampleMeaning": "Tôi đi Tokyo bằng Shinkansen."
+  },
+  {
+    "word": "バス",
+    "reading": "バス",
+    "meaning": "xe buýt",
+    "meaningJa": "道を走る大きな車",
+    "example": "バスで学校へ行きます。",
+    "exampleMeaning": "Tôi đi học bằng xe buýt."
+  },
+  {
+    "word": "タクシー",
+    "reading": "タクシー",
+    "meaning": "taxi",
+    "meaningJa": "お金を払って乗る車",
+    "example": "タクシーで空港へ行きます。",
+    "exampleMeaning": "Tôi đi sân bay bằng taxi."
+  },
+  {
+    "word": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "xe đạp",
+    "meaningJa": "ペダルをこぐ乗り物",
+    "example": "自転車で公園へ行きます。",
+    "exampleMeaning": "Tôi đi công viên bằng xe đạp."
+  },
+  {
+    "word": "歩いて",
+    "reading": "あるいて",
+    "meaning": "đi bộ",
+    "meaningJa": "足で移動する",
+    "example": "駅から歩いて十分です。",
+    "exampleMeaning": "Từ ga đi bộ mười phút."
+  },
+  {
+    "word": "お国",
+    "reading": "おくに",
+    "meaning": "nước (của bạn, lịch sự)",
+    "meaningJa": "自分の出身の国を丁寧に言う",
+    "example": "お国はどちらですか。",
+    "exampleMeaning": "Nước của bạn là nước nào?"
+  },
+  {
+    "word": "イタリア",
+    "reading": "イタリア",
+    "meaning": "Ý",
+    "meaningJa": "ヨーロッパにある国",
+    "example": "イタリアはピザが有名です。",
+    "exampleMeaning": "Ý nổi tiếng về pizza."
+  },
+  {
+    "word": "スイス",
+    "reading": "スイス",
+    "meaning": "Thụy Sĩ",
+    "meaningJa": "山が多いヨーロッパの国",
+    "example": "スイスはきれいな国です。",
+    "exampleMeaning": "Thụy Sĩ là đất nước đẹp."
+  },
+  {
+    "word": "フィンランド",
+    "reading": "フィンランド",
+    "meaning": "Phần Lan",
+    "meaningJa": "北ヨーロッパにある国",
+    "example": "フィンランドは寒いです。",
+    "exampleMeaning": "Phần Lan lạnh."
+  },
+  {
+    "word": "インドネシア",
+    "reading": "インドネシア",
+    "meaning": "Indonesia",
+    "meaningJa": "東南アジアにある国",
+    "example": "インドネシアは島が多いです。",
+    "exampleMeaning": "Indonesia có nhiều đảo."
+  },
+  {
+    "word": "韓国",
+    "reading": "かんこく",
+    "meaning": "Hàn Quốc",
+    "meaningJa": "アジアにある国",
+    "example": "韓国へ旅行したいです。",
+    "exampleMeaning": "Tôi muốn du lịch Hàn Quốc."
+  },
+  {
+    "word": "中国",
+    "reading": "ちゅうごく",
+    "meaning": "Trung Quốc",
+    "meaningJa": "アジアの大きな国",
+    "example": "中国は人口が多いです。",
+    "exampleMeaning": "Trung Quốc đông dân."
+  },
+  {
+    "word": "タイ",
+    "reading": "タイ",
+    "meaning": "Thái Lan",
+    "meaningJa": "東南アジアにある国",
+    "example": "タイの料理が好きです。",
+    "exampleMeaning": "Tôi thích món Thái."
+  },
+  {
+    "word": "ベトナム",
+    "reading": "ベトナム",
+    "meaning": "Việt Nam",
+    "meaningJa": "東南アジアにある国",
+    "example": "ベトナムから来ました。",
+    "exampleMeaning": "Tôi đến từ Việt Nam."
+  },
+  {
+    "word": "日本",
+    "reading": "にほん",
+    "meaning": "Nhật Bản",
+    "meaningJa": "アジアにある島の国",
+    "example": "日本で日本語を勉強します。",
+    "exampleMeaning": "Tôi học tiếng Nhật ở Nhật."
+  }
+]

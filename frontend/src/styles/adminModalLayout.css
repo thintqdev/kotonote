@@ -1,0 +1,201 @@
+/**
+ * Layout modal admin — tách header / nội dung / footer (đồng bộ vdeck-modal).
+ * Dùng --admin-modal-x cho padding ngang; specificity .admin-shell để áp sau CSS trang.
+ */
+
+.admin-shell {
+  --admin-modal-x: 1.15rem;
+}
+
+/* —— Shell —— */
+.admin-shell .admin-grammar-modal,
+.admin-shell .admin-quote-modal,
+.admin-shell .admin-users-modal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-shell .admin-grammar-modal--wide {
+  overflow: hidden;
+}
+
+.admin-shell .vdeck-modal {
+  overflow: hidden;
+}
+
+/* —— Header (không viền dưới, pad nhẹ) —— */
+.admin-shell .admin-grammar-modal-header,
+.admin-shell .admin-quote-modal-header,
+.admin-shell .admin-users-modal-header,
+.admin-shell .vdeck-modal-header,
+.admin-shell .exam-bulk-import-modal .exam-modal-header {
+  padding: 1.1rem var(--admin-modal-x) 0.45rem;
+  border-bottom: none;
+}
+
+/* —— Lead / mô tả —— */
+.admin-shell .vdeck-modal-lead,
+.admin-shell .admin-modal-lead {
+  margin: 0;
+  padding: 0 var(--admin-modal-x) 0.75rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.admin-shell .admin-ai-generate-lead {
+  margin: 0;
+  padding: 0 var(--admin-modal-x) 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--admin-ink-soft);
+}
+
+.admin-shell .admin-ai-generate-lead a {
+  color: var(--admin-sage-deep, #5a6b38);
+  font-weight: 700;
+}
+
+/* —— Body (cuộn, pad ngang) —— */
+.admin-shell .admin-grammar-modal-body,
+.admin-shell .admin-quote-modal-body,
+.admin-shell .admin-users-modal-body {
+  padding: 0.35rem var(--admin-modal-x) 0.85rem;
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 0;
+}
+
+.admin-shell .admin-grammar-modal--wide .admin-grammar-modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* —— Khối form AI / generate —— */
+.admin-shell .admin-ai-generate-form,
+.admin-shell .vdeck-generate-form {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 12px 14px;
+  margin: 0 0 14px;
+  padding: 0 var(--admin-modal-x);
+}
+
+.admin-shell .admin-ai-generate-form .admin-quote-field,
+.admin-shell .vdeck-generate-form .vdeck-field {
+  margin-bottom: 0;
+}
+
+.admin-shell .admin-ai-generate-field--full,
+.admin-shell .vdeck-generate-form .vdeck-field--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 520px) {
+  .admin-shell .admin-ai-generate-form,
+  .admin-shell .vdeck-generate-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* —— Actions trong body — footer tách —— */
+.admin-shell .admin-quote-modal-body .admin-quote-modal-actions,
+.admin-shell .admin-users-modal-body .admin-users-modal-actions,
+.admin-shell .admin-grammar-modal-body .admin-grammar-modal-actions {
+  margin-top: 0.85rem;
+  padding: 0.85rem var(--admin-modal-x) 0.25rem;
+  border-top: 1px solid var(--admin-border);
+  margin-left: calc(-1 * var(--admin-modal-x));
+  margin-right: calc(-1 * var(--admin-modal-x));
+  margin-bottom: calc(-1 * 0.85rem);
+}
+
+/* —— Actions gắn trực tiếp shell modal (AI generate tách body) —— */
+.admin-shell .admin-quote-modal > .admin-quote-modal-actions,
+.admin-shell .vdeck-modal > .vdeck-modal-actions {
+  margin-top: auto;
+  padding: 0.65rem var(--admin-modal-x) 1.15rem;
+  border-top: none;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.admin-shell .admin-grammar-modal-actions--foot {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 0.85rem var(--admin-modal-x) 1.1rem;
+  border-top: 1px solid var(--admin-border);
+  background: rgba(255, 252, 246, 0.92);
+}
+
+.admin-shell .admin-grammar-modal-body--tight-foot {
+  padding-bottom: 0.45rem;
+}
+
+/* —— Tabs modal rộng —— */
+.admin-shell .admin-grammar-modal-tabs {
+  padding: 0.65rem var(--admin-modal-x);
+  margin: 0;
+}
+
+/* —— vdeck import / file —— */
+.admin-shell .vdeck-modal-file-row,
+.admin-shell .vdeck-modal-sample {
+  padding-left: var(--admin-modal-x);
+  padding-right: var(--admin-modal-x);
+}
+
+.admin-shell .vdeck-modal-file-row {
+  margin: 0 0 1rem;
+}
+
+.admin-shell .vdeck-modal-sample {
+  margin: 0 var(--admin-modal-x) 0.75rem;
+}
+
+.admin-shell .vdeck-modal .vdeck-label {
+  padding: 0 var(--admin-modal-x);
+  margin-bottom: 6px;
+}
+
+.admin-shell .vdeck-generate-form .vdeck-label,
+.admin-shell .admin-ai-generate-form .admin-quote-label {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.admin-shell .vdeck-modal-textarea {
+  margin-left: var(--admin-modal-x);
+  margin-right: var(--admin-modal-x);
+  width: calc(100% - 2 * var(--admin-modal-x));
+}
+
+/* —— Exam bulk import footer —— */
+.admin-shell .exam-bulk-import-modal .exam-modal-footer {
+  padding: 0.85rem var(--admin-modal-x) 1.1rem;
+  flex-shrink: 0;
+}
+
+/* —— Receipt modal —— */
+.admin-shell .admin-receipt-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.admin-shell .admin-receipt-modal-head {
+  padding: 1.1rem var(--admin-modal-x) 0.45rem;
+  margin: 0;
+}
+
+.admin-shell .admin-receipt-modal > :not(.admin-receipt-modal-head) {
+  padding-left: var(--admin-modal-x);
+  padding-right: var(--admin-modal-x);
+}
+
+.admin-shell .admin-receipt-modal > :last-child:not(.admin-receipt-modal-head) {
+  padding-bottom: 1.15rem;
+}

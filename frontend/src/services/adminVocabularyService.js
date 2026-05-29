@@ -1,5 +1,6 @@
 import { ADMIN_VOCABULARY, VOCABULARY } from '../constants/apiEndpoints.js';
 import { getApiData } from '../utils/apiEnvelope.js';
+import { sortVocabApiList } from '../utils/deckStudy.js';
 import { adminApi } from './api.js';
 
 /**
@@ -23,7 +24,11 @@ export async function getDeckWithVocabulary(deckId, axiosConfig = {}) {
 		VOCABULARY.deckWithVocabulary(deckId),
 		axiosConfig,
 	);
-	return getApiData(body);
+	const data = getApiData(body);
+	return {
+		...data,
+		vocabulary: sortVocabApiList(data?.vocabulary ?? []),
+	};
 }
 
 export async function createVocabularyDeck(payload) {

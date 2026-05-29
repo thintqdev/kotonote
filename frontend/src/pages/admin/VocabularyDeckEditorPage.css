@@ -593,7 +593,7 @@
 .vdeck-table th {
   text-align: left;
   padding: 10px 12px;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -949,22 +949,7 @@ fieldset:disabled .vdeck-cover-upload--btn {
   max-height: min(92vh, 880px);
 }
 
-.vdeck-generate-form {
-  display: grid;
-  grid-template-columns: 1fr 100px;
-  gap: 12px 14px;
-  margin-bottom: 14px;
-}
-
-.vdeck-generate-form .vdeck-field--full {
-  grid-column: 1 / -1;
-}
-
-@media (max-width: 520px) {
-  .vdeck-generate-form {
-    grid-template-columns: 1fr;
-  }
-}
+/* .vdeck-generate-form — layout trong adminModalLayout.css */
 
 .vdeck-generate-source {
   margin: 0 0 12px;
@@ -1017,7 +1002,6 @@ fieldset:disabled .vdeck-cover-upload--btn {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 1.1rem 1.15rem 0.35rem;
 }
 
 .vdeck-modal-title {
@@ -1051,11 +1035,26 @@ fieldset:disabled .vdeck-cover-upload--btn {
   cursor: not-allowed;
 }
 
+.vdeck-modal-file-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vdeck-modal-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .vdeck-modal-lead {
-  margin: 0;
-  padding: 0 1.15rem 0.75rem;
-  font-size: 0.84rem;
-  line-height: 1.5;
   color: var(--vdeck-muted);
 }
 
@@ -1068,7 +1067,6 @@ fieldset:disabled .vdeck-cover-upload--btn {
 }
 
 .vdeck-modal-sample {
-  margin: 0 1.15rem 0.75rem;
   font-size: 0.82rem;
   color: var(--vdeck-ink);
 }
@@ -1092,13 +1090,11 @@ fieldset:disabled .vdeck-cover-upload--btn {
 }
 
 .vdeck-modal .vdeck-label {
-  padding: 0 1.15rem;
   margin-bottom: 6px;
 }
 
 .vdeck-modal-textarea {
-  margin: 0 1.15rem 1rem;
-  width: calc(100% - 2.3rem);
+  margin-bottom: 1rem;
   box-sizing: border-box;
   min-height: 12rem;
   padding: 12px 14px;
@@ -1127,6 +1123,4 @@ fieldset:disabled .vdeck-cover-upload--btn {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px;
-  padding: 0 1.15rem 1.15rem;
-  margin-top: auto;
 }

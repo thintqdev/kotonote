@@ -1,0 +1,202 @@
+[
+    {
+        "word": "できます",
+        "reading": "できます",
+        "meaning": "có thể",
+        "meaningJa": "能力がある",
+        "example": "私は日本語を話すことができます。",
+        "exampleMeaning": "Tôi có thể nói tiếng Nhật."
+    },
+    {
+        "word": "洗います",
+        "reading": "あらいます",
+        "meaning": "rửa",
+        "meaningJa": "水できれいにする",
+        "example": "毎朝顔を洗います。",
+        "exampleMeaning": "Mỗi sáng tôi rửa mặt."
+    },
+    {
+        "word": "弾きます",
+        "reading": "ひきます",
+        "meaning": "chơi (nhạc cụ dây/phím)",
+        "meaningJa": "楽器を演奏する",
+        "example": "妹はピアノを弾きます。",
+        "exampleMeaning": "Em gái tôi chơi piano."
+    },
+    {
+        "word": "歌います",
+        "reading": "うたいます",
+        "meaning": "hát",
+        "meaningJa": "歌を歌う",
+        "example": "カラオケで歌います。",
+        "exampleMeaning": "Tôi hát karaoke."
+    },
+    {
+        "word": "集めます",
+        "reading": "あつめます",
+        "meaning": "sưu tầm, thu thập",
+        "meaningJa": "たくさん集める",
+        "example": "切手を集めています。",
+        "exampleMeaning": "Tôi sưu tầm tem."
+    },
+    {
+        "word": "捨てます",
+        "reading": "すてます",
+        "meaning": "vứt bỏ",
+        "meaningJa": "いらない物を捨てる",
+        "example": "古い雑誌を捨てました。",
+        "exampleMeaning": "Tôi đã vứt tạp chí cũ."
+    },
+    {
+        "word": "換えます",
+        "reading": "かえます",
+        "meaning": "đổi",
+        "meaningJa": "別の物に変える",
+        "example": "ドルを円に換えます。",
+        "exampleMeaning": "Tôi đổi đô sang yên."
+    },
+    {
+        "word": "運転します",
+        "reading": "うんてんします",
+        "meaning": "lái xe",
+        "meaningJa": "車を動かす",
+        "example": "父は毎日車を運転します。",
+        "exampleMeaning": "Bố tôi lái xe mỗi ngày."
+    },
+    {
+        "word": "予約します",
+        "reading": "よやくします",
+        "meaning": "đặt trước",
+        "meaningJa": "前もって申し込む",
+        "example": "レストランを予約しました。",
+        "exampleMeaning": "Tôi đã đặt trước nhà hàng."
+    },
+    {
+        "word": "見学します",
+        "reading": "けんがくします",
+        "meaning": "tham quan",
+        "meaningJa": "見て学ぶ",
+        "example": "工場を見学しました。",
+        "exampleMeaning": "Tôi đã tham quan nhà máy."
+    },
+    {
+        "word": "ピアノ",
+        "reading": "ピアノ",
+        "meaning": "đàn piano",
+        "meaningJa": "鍵盤楽器",
+        "example": "ピアノを弾くことができます。",
+        "exampleMeaning": "Tôi có thể chơi piano."
+    },
+    {
+        "word": "メートル",
+        "reading": "メートル",
+        "meaning": "mét",
+        "meaningJa": "長さの単位",
+        "example": "この橋は百メートルです。",
+        "exampleMeaning": "Cây cầu này dài 100 mét."
+    },
+    {
+        "word": "国際",
+        "reading": "こくさい",
+        "meaning": "quốc tế",
+        "meaningJa": "国と国の関係",
+        "example": "国際会議があります。",
+        "exampleMeaning": "Có hội nghị quốc tế."
+    },
+    {
+        "word": "現金",
+        "reading": "げんきん",
+        "meaning": "tiền mặt",
+        "meaningJa": "紙や硬貨のお金",
+        "example": "現金で払います。",
+        "exampleMeaning": "Tôi trả bằng tiền mặt."
+    },
+    {
+        "word": "趣味",
+        "reading": "しゅみ",
+        "meaning": "sở thích",
+        "meaningJa": "好きでしていること",
+        "example": "趣味は映画を見ることです。",
+        "exampleMeaning": "Sở thích của tôi là xem phim."
+    },
+    {
+        "word": "日記",
+        "reading": "にっき",
+        "meaning": "nhật ký",
+        "meaningJa": "毎日の記録",
+        "example": "毎日日記を書いています。",
+        "exampleMeaning": "Tôi viết nhật ký mỗi ngày."
+    },
+    {
+        "word": "祈ります",
+        "reading": "いのります",
+        "meaning": "cầu nguyện",
+        "meaningJa": "神様にお願いする",
+        "example": "神社で祈ります。",
+        "exampleMeaning": "Tôi cầu nguyện ở đền."
+    },
+    {
+        "word": "部長",
+        "reading": "ぶちょう",
+        "meaning": "trưởng phòng",
+        "meaningJa": "会社の部の責任者",
+        "example": "部長は会議中です。",
+        "exampleMeaning": "Trưởng phòng đang họp."
+    },
+    {
+        "word": "課長",
+        "reading": "かちょう",
+        "meaning": "trưởng ban",
+        "meaningJa": "課の責任者",
+        "example": "課長に相談します。",
+        "exampleMeaning": "Tôi trao đổi với trưởng ban."
+    },
+    {
+        "word": "社長",
+        "reading": "しゃちょう",
+        "meaning": "giám đốc",
+        "meaningJa": "会社の一番上の人",
+        "example": "社長は忙しいです。",
+        "exampleMeaning": "Giám đốc bận."
+    },
+    {
+        "word": "動物",
+        "reading": "どうぶつ",
+        "meaning": "động vật",
+        "meaningJa": "生きて動くもの",
+        "example": "私は動物が好きです。",
+        "exampleMeaning": "Tôi thích động vật."
+    },
+    {
+        "word": "馬",
+        "reading": "うま",
+        "meaning": "ngựa",
+        "meaningJa": "大きい動物",
+        "example": "馬に乗りました。",
+        "exampleMeaning": "Tôi đã cưỡi ngựa."
+    },
+    {
+        "word": "へえ",
+        "reading": "へえ",
+        "meaning": "ồ, vậy à",
+        "meaningJa": "驚いたときの言葉",
+        "example": "へえ、日本語が上手ですね。",
+        "exampleMeaning": "Ồ, tiếng Nhật giỏi nhỉ."
+    },
+    {
+        "word": "本当ですか",
+        "reading": "ほんとうですか",
+        "meaning": "thật sao?",
+        "meaningJa": "本当か確認する言葉",
+        "example": "本当ですか。すごいですね。",
+        "exampleMeaning": "Thật sao? Ghê thật."
+    },
+    {
+        "word": "ぜひ",
+        "reading": "ぜひ",
+        "meaning": "nhất định",
+        "meaningJa": "強くすすめる気持ち",
+        "example": "ぜひ遊びに来てください。",
+        "exampleMeaning": "Nhất định hãy đến chơi nhé."
+    }
+]

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "くれます",
+        "reading": "くれます",
+        "meaning": "cho tôi",
+        "meaningJa": "相手が私に物をくれる",
+        "example": "友達が本をくれました。",
+        "exampleMeaning": "Bạn đã cho tôi quyển sách."
+    },
+    {
+        "word": "連れて行きます",
+        "reading": "つれていきます",
+        "meaning": "dẫn đi",
+        "meaningJa": "人と一緒に行く",
+        "example": "妹を公園へ連れて行きます。",
+        "exampleMeaning": "Tôi dẫn em gái đến công viên."
+    },
+    {
+        "word": "連れて来ます",
+        "reading": "つれてきます",
+        "meaning": "dẫn đến",
+        "meaningJa": "人をこちらへ連れて来る",
+        "example": "友達を家へ連れて来ました。",
+        "exampleMeaning": "Tôi đã dẫn bạn đến nhà."
+    },
+    {
+        "word": "送ります",
+        "reading": "おくります",
+        "meaning": "tiễn, đưa",
+        "meaningJa": "人を目的地まで送る",
+        "example": "駅まで友達を送ります。",
+        "exampleMeaning": "Tôi tiễn bạn đến ga."
+    },
+    {
+        "word": "紹介します",
+        "reading": "しょうかいします",
+        "meaning": "giới thiệu",
+        "meaningJa": "人や物を説明する",
+        "example": "先生を紹介します。",
+        "exampleMeaning": "Tôi giới thiệu giáo viên."
+    },
+    {
+        "word": "案内します",
+        "reading": "あんないします",
+        "meaning": "hướng dẫn",
+        "meaningJa": "場所などを教える",
+        "example": "京都を案内します。",
+        "exampleMeaning": "Tôi hướng dẫn tham quan Kyoto."
+    },
+    {
+        "word": "説明します",
+        "reading": "せつめいします",
+        "meaning": "giải thích",
+        "meaningJa": "内容をわかりやすく話す",
+        "example": "使い方を説明します。",
+        "exampleMeaning": "Tôi giải thích cách dùng."
+    },
+    {
+        "word": "おじいさん",
+        "reading": "おじいさん",
+        "meaning": "ông",
+        "meaningJa": "年を取った男性",
+        "example": "おじいさんは元気です。",
+        "exampleMeaning": "Ông rất khỏe."
+    },
+    {
+        "word": "おばあさん",
+        "reading": "おばあさん",
+        "meaning": "bà",
+        "meaningJa": "年を取った女性",
+        "example": "おばあさんは親切です。",
+        "exampleMeaning": "Bà rất tốt bụng."
+    },
+    {
+        "word": "準備",
+        "reading": "じゅんび",
+        "meaning": "chuẩn bị",
+        "meaningJa": "前もって用意すること",
+        "example": "旅行の準備をします。",
+        "exampleMeaning": "Tôi chuẩn bị cho chuyến đi."
+    },
+    {
+        "word": "意味",
+        "reading": "いみ",
+        "meaning": "ý nghĩa",
+        "meaningJa": "言葉の内容",
+        "example": "この漢字の意味がわかりません。",
+        "exampleMeaning": "Tôi không hiểu ý nghĩa kanji này."
+    },
+    {
+        "word": "お菓子",
+        "reading": "おかし",
+        "meaning": "bánh kẹo",
+        "meaningJa": "甘い食べ物",
+        "example": "子どもにお菓子をあげます。",
+        "exampleMeaning": "Tôi cho trẻ con bánh kẹo."
+    },
+    {
+        "word": "全部",
+        "reading": "ぜんぶ",
+        "meaning": "toàn bộ",
+        "meaningJa": "すべて",
+        "example": "全部食べました。",
+        "exampleMeaning": "Tôi đã ăn hết."
+    },
+    {
+        "word": "自分で",
+        "reading": "じぶんで",
+        "meaning": "tự mình",
+        "meaningJa": "ほかの人を使わない",
+        "example": "宿題を自分でします。",
+        "exampleMeaning": "Tôi tự làm bài tập."
+    },
+    {
+        "word": "他に",
+        "reading": "ほかに",
+        "meaning": "ngoài ra",
+        "meaningJa": "そのほか",
+        "example": "他に質問がありますか。",
+        "exampleMeaning": "Ngoài ra còn câu hỏi nào không?"
+    },
+    {
+        "word": "お弁当",
+        "reading": "おべんとう",
+        "meaning": "cơm hộp",
+        "meaningJa": "持って行く食事",
+        "example": "毎日お弁当を作ります。",
+        "exampleMeaning": "Mỗi ngày tôi làm cơm hộp."
+    },
+    {
+        "word": "お見舞い",
+        "reading": "おみまい",
+        "meaning": "thăm bệnh",
+        "meaningJa": "病気の人を訪ねること",
+        "example": "友達のお見舞いに行きます。",
+        "exampleMeaning": "Tôi đi thăm bệnh bạn."
+    },
+    {
+        "word": "興味",
+        "reading": "きょうみ",
+        "meaning": "hứng thú",
+        "meaningJa": "面白いと思う気持ち",
+        "example": "日本文化に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với văn hóa Nhật."
+    },
+    {
+        "word": "情報",
+        "reading": "じょうほう",
+        "meaning": "thông tin",
+        "meaningJa": "知らせ",
+        "example": "新しい情報を知りました。",
+        "exampleMeaning": "Tôi đã biết thông tin mới."
+    },
+    {
+        "word": "文法",
+        "reading": "ぶんぽう",
+        "meaning": "ngữ pháp",
+        "meaningJa": "言葉のルール",
+        "example": "日本語の文法は難しいです。",
+        "exampleMeaning": "Ngữ pháp tiếng Nhật khó."
+    },
+    {
+        "word": "発音",
+        "reading": "はつおん",
+        "meaning": "phát âm",
+        "meaningJa": "言葉の音",
+        "example": "発音を練習します。",
+        "exampleMeaning": "Tôi luyện phát âm."
+    },
+    {
+        "word": "会話",
+        "reading": "かいわ",
+        "meaning": "hội thoại",
+        "meaningJa": "人と話すこと",
+        "example": "日本語で会話します。",
+        "exampleMeaning": "Tôi hội thoại bằng tiếng Nhật."
+    },
+    {
+        "word": "自由",
+        "reading": "じゆう",
+        "meaning": "tự do",
+        "meaningJa": "好きにできること",
+        "example": "今日は自由な時間があります。",
+        "exampleMeaning": "Hôm nay tôi có thời gian tự do."
+    },
+    {
+        "word": "簡単",
+        "reading": "かんたん",
+        "meaning": "đơn giản",
+        "meaningJa": "難しくない",
+        "example": "この問題は簡単です。",
+        "exampleMeaning": "Câu hỏi này đơn giản."
+    },
+    {
+        "word": "親切",
+        "reading": "しんせつ",
+        "meaning": "tốt bụng",
+        "meaningJa": "やさしい",
+        "example": "日本人は親切です。",
+        "exampleMeaning": "Người Nhật tốt bụng."
+    }
+]

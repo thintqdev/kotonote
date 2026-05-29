@@ -1,0 +1,202 @@
+[
+    {
+        "word": "登ります",
+        "reading": "のぼります",
+        "meaning": "leo",
+        "meaningJa": "高い所へ上がる",
+        "example": "山に登ります。",
+        "exampleMeaning": "Tôi leo núi."
+    },
+    {
+        "word": "泊まります",
+        "reading": "とまります",
+        "meaning": "trọ, ở lại",
+        "meaningJa": "宿で休む",
+        "example": "ホテルに泊まります。",
+        "exampleMeaning": "Tôi ở khách sạn."
+    },
+    {
+        "word": "掃除します",
+        "reading": "そうじします",
+        "meaning": "dọn dẹp",
+        "meaningJa": "きれいにする",
+        "example": "毎朝部屋を掃除します。",
+        "exampleMeaning": "Mỗi sáng tôi dọn phòng."
+    },
+    {
+        "word": "洗濯します",
+        "reading": "せんたくします",
+        "meaning": "giặt giũ",
+        "meaningJa": "服などを洗う",
+        "example": "日曜日に洗濯します。",
+        "exampleMeaning": "Tôi giặt đồ vào chủ nhật."
+    },
+    {
+        "word": "練習します",
+        "reading": "れんしゅうします",
+        "meaning": "luyện tập",
+        "meaningJa": "上手になるために続ける",
+        "example": "毎日日本語を練習します。",
+        "exampleMeaning": "Mỗi ngày tôi luyện tiếng Nhật."
+    },
+    {
+        "word": "なります",
+        "reading": "なります",
+        "meaning": "trở thành",
+        "meaningJa": "別の状態に変わる",
+        "example": "医者になりたいです。",
+        "exampleMeaning": "Tôi muốn trở thành bác sĩ."
+    },
+    {
+        "word": "眠い",
+        "reading": "ねむい",
+        "meaning": "buồn ngủ",
+        "meaningJa": "眠りたい気持ち",
+        "example": "今日はとても眠いです。",
+        "exampleMeaning": "Hôm nay tôi rất buồn ngủ."
+    },
+    {
+        "word": "強い",
+        "reading": "つよい",
+        "meaning": "mạnh",
+        "meaningJa": "力がある",
+        "example": "彼は体が強いです。",
+        "exampleMeaning": "Anh ấy khỏe mạnh."
+    },
+    {
+        "word": "弱い",
+        "reading": "よわい",
+        "meaning": "yếu",
+        "meaningJa": "力が少ない",
+        "example": "私はお酒に弱いです。",
+        "exampleMeaning": "Tôi yếu rượu."
+    },
+    {
+        "word": "調子",
+        "reading": "ちょうし",
+        "meaning": "tình trạng",
+        "meaningJa": "体や物の状態",
+        "example": "今日は調子がいいです。",
+        "exampleMeaning": "Hôm nay tình trạng tốt."
+    },
+    {
+        "word": "調子がいい",
+        "reading": "ちょうしがいい",
+        "meaning": "tình trạng tốt",
+        "meaningJa": "元気な状態",
+        "example": "最近調子がいいです。",
+        "exampleMeaning": "Gần đây tình trạng tốt."
+    },
+    {
+        "word": "調子が悪い",
+        "reading": "ちょうしがわるい",
+        "meaning": "tình trạng xấu",
+        "meaningJa": "元気ではない状態",
+        "example": "今日は調子が悪いです。",
+        "exampleMeaning": "Hôm nay tình trạng không tốt."
+    },
+    {
+        "word": "熱",
+        "reading": "ねつ",
+        "meaning": "sốt",
+        "meaningJa": "体温が高い状態",
+        "example": "熱があります。",
+        "exampleMeaning": "Tôi bị sốt."
+    },
+    {
+        "word": "風邪",
+        "reading": "かぜ",
+        "meaning": "cảm lạnh",
+        "meaningJa": "よくある病気",
+        "example": "風邪をひきました。",
+        "exampleMeaning": "Tôi bị cảm."
+    },
+    {
+        "word": "病気",
+        "reading": "びょうき",
+        "meaning": "bệnh",
+        "meaningJa": "体が悪い状態",
+        "example": "病気で学校を休みました。",
+        "exampleMeaning": "Tôi nghỉ học vì bệnh."
+    },
+    {
+        "word": "薬",
+        "reading": "くすり",
+        "meaning": "thuốc",
+        "meaningJa": "病気を治す物",
+        "example": "薬を飲みます。",
+        "exampleMeaning": "Tôi uống thuốc."
+    },
+    {
+        "word": "お風呂",
+        "reading": "おふろ",
+        "meaning": "bồn tắm",
+        "meaningJa": "体を洗う場所",
+        "example": "お風呂に入ります。",
+        "exampleMeaning": "Tôi tắm bồn."
+    },
+    {
+        "word": "上着",
+        "reading": "うわぎ",
+        "meaning": "áo khoác",
+        "meaningJa": "上半身に着る服",
+        "example": "寒いので上着を着ます。",
+        "exampleMeaning": "Vì lạnh nên tôi mặc áo khoác."
+    },
+    {
+        "word": "海",
+        "reading": "うみ",
+        "meaning": "biển",
+        "meaningJa": "大きな水の場所",
+        "example": "夏に海へ行きます。",
+        "exampleMeaning": "Mùa hè tôi đi biển."
+    },
+    {
+        "word": "山",
+        "reading": "やま",
+        "meaning": "núi",
+        "meaningJa": "高い土地",
+        "example": "富士山に登りたいです。",
+        "exampleMeaning": "Tôi muốn leo núi Phú Sĩ."
+    },
+    {
+        "word": "パーティー",
+        "reading": "パーティー",
+        "meaning": "tiệc",
+        "meaningJa": "人が集まるイベント",
+        "example": "友達のパーティーへ行きます。",
+        "exampleMeaning": "Tôi đi tiệc của bạn."
+    },
+    {
+        "word": "ゴルフ",
+        "reading": "ゴルフ",
+        "meaning": "golf",
+        "meaningJa": "ボールを打つスポーツ",
+        "example": "父はゴルフが好きです。",
+        "exampleMeaning": "Bố tôi thích golf."
+    },
+    {
+        "word": "相撲",
+        "reading": "すもう",
+        "meaning": "sumo",
+        "meaningJa": "日本の伝統的なスポーツ",
+        "example": "相撲を見たことがあります。",
+        "exampleMeaning": "Tôi đã từng xem sumo."
+    },
+    {
+        "word": "できるだけ",
+        "reading": "できるだけ",
+        "meaning": "cố gắng hết sức",
+        "meaningJa": "可能な限り",
+        "example": "できるだけ早く行きます。",
+        "exampleMeaning": "Tôi sẽ đi nhanh nhất có thể."
+    },
+    {
+        "word": "無理",
+        "reading": "むり",
+        "meaning": "quá sức, không thể",
+        "meaningJa": "できないこと",
+        "example": "今日は無理をしないでください。",
+        "exampleMeaning": "Hôm nay đừng cố quá."
+    }
+]

@@ -1,0 +1,202 @@
+[
+    {
+      "word": "乗ります",
+      "reading": "のります",
+      "meaning": "lên, đi (xe)",
+      "meaningJa": "乗り物に入る",
+      "example": "毎朝電車に乗ります。",
+      "exampleMeaning": "Mỗi sáng tôi đi tàu điện."
+    },
+    {
+      "word": "降ります",
+      "reading": "おります",
+      "meaning": "xuống (xe)",
+      "meaningJa": "乗り物から出る",
+      "example": "次の駅で降ります。",
+      "exampleMeaning": "Tôi xuống ở ga tiếp theo."
+    },
+    {
+      "word": "乗り換えます",
+      "reading": "のりかえます",
+      "meaning": "chuyển tuyến",
+      "meaningJa": "別の乗り物に変える",
+      "example": "東京駅で地下鉄に乗り換えます。",
+      "exampleMeaning": "Tôi chuyển sang tàu điện ngầm ở ga Tokyo."
+    },
+    {
+      "word": "浴びます",
+      "reading": "あびます",
+      "meaning": "tắm",
+      "meaningJa": "水やお湯を体にかける",
+      "example": "朝シャワーを浴びます。",
+      "exampleMeaning": "Buổi sáng tôi tắm vòi sen."
+    },
+    {
+      "word": "入れます",
+      "reading": "いれます",
+      "meaning": "cho vào",
+      "meaningJa": "中に入れる",
+      "example": "かばんに本を入れます。",
+      "exampleMeaning": "Tôi cho sách vào cặp."
+    },
+    {
+      "word": "出します",
+      "reading": "だします",
+      "meaning": "lấy ra",
+      "meaningJa": "中から外へ出す",
+      "example": "財布からお金を出します。",
+      "exampleMeaning": "Tôi lấy tiền ra khỏi ví."
+    },
+    {
+      "word": "入ります",
+      "reading": "はいります",
+      "meaning": "vào",
+      "meaningJa": "中へ行く",
+      "example": "喫茶店に入ります。",
+      "exampleMeaning": "Tôi vào quán cà phê."
+    },
+    {
+      "word": "出ます",
+      "reading": "でます",
+      "meaning": "ra ngoài",
+      "meaningJa": "外へ行く",
+      "example": "九時に家を出ます。",
+      "exampleMeaning": "Tôi ra khỏi nhà lúc 9 giờ."
+    },
+    {
+      "word": "押します",
+      "reading": "おします",
+      "meaning": "ấn",
+      "meaningJa": "力を入れて押す",
+      "example": "このボタンを押してください。",
+      "exampleMeaning": "Hãy nhấn nút này."
+    },
+    {
+      "word": "若い",
+      "reading": "わかい",
+      "meaning": "trẻ",
+      "meaningJa": "年齢が低い",
+      "example": "あの先生は若いです。",
+      "exampleMeaning": "Giáo viên kia còn trẻ."
+    },
+    {
+      "word": "長い",
+      "reading": "ながい",
+      "meaning": "dài",
+      "meaningJa": "長さがある",
+      "example": "彼女は髪が長いです。",
+      "exampleMeaning": "Cô ấy có tóc dài."
+    },
+    {
+      "word": "短い",
+      "reading": "みじかい",
+      "meaning": "ngắn",
+      "meaningJa": "長くない",
+      "example": "この鉛筆は短いです。",
+      "exampleMeaning": "Cây bút chì này ngắn."
+    },
+    {
+      "word": "明るい",
+      "reading": "あかるい",
+      "meaning": "sáng",
+      "meaningJa": "光が多い",
+      "example": "この部屋は明るいです。",
+      "exampleMeaning": "Căn phòng này sáng."
+    },
+    {
+      "word": "暗い",
+      "reading": "くらい",
+      "meaning": "tối",
+      "meaningJa": "光が少ない",
+      "example": "夜の公園は暗いです。",
+      "exampleMeaning": "Công viên ban đêm tối."
+    },
+    {
+      "word": "背が高い",
+      "reading": "せがたかい",
+      "meaning": "cao (người)",
+      "meaningJa": "身長が高い",
+      "example": "兄は背が高いです。",
+      "exampleMeaning": "Anh tôi cao."
+    },
+    {
+      "word": "頭がいい",
+      "reading": "あたまがいい",
+      "meaning": "thông minh",
+      "meaningJa": "考える力が高い",
+      "example": "彼は頭がいいです。",
+      "exampleMeaning": "Anh ấy thông minh."
+    },
+    {
+      "word": "体",
+      "reading": "からだ",
+      "meaning": "cơ thể",
+      "meaningJa": "人の全身",
+      "example": "体に気をつけてください。",
+      "exampleMeaning": "Hãy giữ gìn sức khỏe."
+    },
+    {
+      "word": "頭",
+      "reading": "あたま",
+      "meaning": "đầu",
+      "meaningJa": "体の上の部分",
+      "example": "頭が痛いです。",
+      "exampleMeaning": "Tôi đau đầu."
+    },
+    {
+      "word": "髪",
+      "reading": "かみ",
+      "meaning": "tóc",
+      "meaningJa": "頭にある毛",
+      "example": "髪を切りました。",
+      "exampleMeaning": "Tôi đã cắt tóc."
+    },
+    {
+      "word": "顔",
+      "reading": "かお",
+      "meaning": "khuôn mặt",
+      "meaningJa": "目や口がある部分",
+      "example": "顔を洗います。",
+      "exampleMeaning": "Tôi rửa mặt."
+    },
+    {
+      "word": "目",
+      "reading": "め",
+      "meaning": "mắt",
+      "meaningJa": "見るための器官",
+      "example": "目が大きいですね。",
+      "exampleMeaning": "Mắt to nhỉ."
+    },
+    {
+      "word": "耳",
+      "reading": "みみ",
+      "meaning": "tai",
+      "meaningJa": "音を聞く器官",
+      "example": "耳が痛いです。",
+      "exampleMeaning": "Tôi đau tai."
+    },
+    {
+      "word": "口",
+      "reading": "くち",
+      "meaning": "miệng",
+      "meaningJa": "食べたり話したりする部分",
+      "example": "口を開けてください。",
+      "exampleMeaning": "Hãy mở miệng."
+    },
+    {
+      "word": "歯",
+      "reading": "は",
+      "meaning": "răng",
+      "meaningJa": "食べ物をかむ部分",
+      "example": "毎日歯を磨きます。",
+      "exampleMeaning": "Mỗi ngày tôi đánh răng."
+    },
+    {
+      "word": "シャワー",
+      "reading": "シャワー",
+      "meaning": "vòi sen",
+      "meaningJa": "水を浴びる設備",
+      "example": "シャワーを浴びます。",
+      "exampleMeaning": "Tôi tắm vòi sen."
+    }
+  ]

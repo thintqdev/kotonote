@@ -17,10 +17,11 @@ import {
   getKanjiDeckProgress,
 } from "../services/kanjiProgressService.js";
 import { getDeckWithKanji, loadKanjiPack } from "../services/kanjiService.js";
-import { mapKanjiRecord } from "../utils/deckStudy.js";
 import {
   getDeckLessonItems,
   isDeckLessonUnlocked,
+  mapKanjiRecord,
+  sortDeckItemsByDisplayOrder,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { useJlptAccess } from "../hooks/useJlptAccess.js";
@@ -111,7 +112,9 @@ export default function KanjiPage() {
         if (deckId) {
           const { deck, kanji } = await getDeckWithKanji(deckId);
           const jlpt = lessonJlpt || deck.jlpt;
-          const items = kanji.map((k) => mapKanjiRecord(k, jlpt, deckId));
+          const items = sortDeckItemsByDisplayOrder(
+            kanji.map((k) => mapKanjiRecord(k, jlpt, deckId)),
+          );
           if (!cancelled) {
             setSortedDecks([deck]);
             setPackItems(items);
@@ -153,7 +156,11 @@ export default function KanjiPage() {
 
   const lessonItemsStable = useMemo(() => {
     if (!isLessonMode || !lessonNoFromQuery) return [];
-    if (deckId) return merged;
+    if (deckId) {
+      return sortDeckItemsByDisplayOrder(
+        merged.filter((x) => String(x.deckId) === String(deckId)),
+      );
+    }
     return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
   }, [merged, sortedDecks, deckId, isLessonMode, lessonNoFromQuery]);
 

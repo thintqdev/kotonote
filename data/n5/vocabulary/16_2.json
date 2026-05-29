@@ -1,0 +1,202 @@
+[
+    {
+        "word": "足",
+        "reading": "あし",
+        "meaning": "chân",
+        "meaningJa": "歩くための体の部分",
+        "example": "足が痛いです。",
+        "exampleMeaning": "Tôi đau chân."
+    },
+    {
+        "word": "手",
+        "reading": "て",
+        "meaning": "tay",
+        "meaningJa": "物を持つ体の部分",
+        "example": "手を洗いました。",
+        "exampleMeaning": "Tôi đã rửa tay."
+    },
+    {
+        "word": "鼻",
+        "reading": "はな",
+        "meaning": "mũi",
+        "meaningJa": "においを感じる部分",
+        "example": "鼻が高いですね。",
+        "exampleMeaning": "Mũi cao nhỉ."
+    },
+    {
+        "word": "お腹",
+        "reading": "おなか",
+        "meaning": "bụng",
+        "meaningJa": "食べ物が入る部分",
+        "example": "お腹が空きました。",
+        "exampleMeaning": "Tôi đói bụng rồi."
+    },
+    {
+        "word": "背",
+        "reading": "せ",
+        "meaning": "chiều cao",
+        "meaningJa": "体の高さ",
+        "example": "妹は背が高いです。",
+        "exampleMeaning": "Em gái tôi cao."
+    },
+    {
+        "word": "サービス",
+        "reading": "サービス",
+        "meaning": "dịch vụ",
+        "meaningJa": "客のためにすること",
+        "example": "この店のサービスはいいです。",
+        "exampleMeaning": "Dịch vụ của quán này tốt."
+    },
+    {
+        "word": "ジョギング",
+        "reading": "ジョギング",
+        "meaning": "chạy bộ",
+        "meaningJa": "ゆっくり走る運動",
+        "example": "毎朝ジョギングをします。",
+        "exampleMeaning": "Mỗi sáng tôi chạy bộ."
+    },
+    {
+        "word": "緑",
+        "reading": "みどり",
+        "meaning": "màu xanh lá",
+        "meaningJa": "草や木の色",
+        "example": "緑のシャツを着ています。",
+        "exampleMeaning": "Tôi mặc áo màu xanh lá."
+    },
+    {
+        "word": "寺",
+        "reading": "てら",
+        "meaning": "chùa",
+        "meaningJa": "仏教の建物",
+        "example": "京都の寺へ行きました。",
+        "exampleMeaning": "Tôi đã đi chùa ở Kyoto."
+    },
+    {
+        "word": "神社",
+        "reading": "じんじゃ",
+        "meaning": "đền thần đạo",
+        "meaningJa": "神様をまつる場所",
+        "example": "神社でお参りします。",
+        "exampleMeaning": "Tôi viếng đền thần đạo."
+    },
+    {
+        "word": "留学生",
+        "reading": "りゅうがくせい",
+        "meaning": "du học sinh",
+        "meaningJa": "外国で勉強する学生",
+        "example": "彼は中国から来た留学生です。",
+        "exampleMeaning": "Anh ấy là du học sinh đến từ Trung Quốc."
+    },
+    {
+        "word": "一度",
+        "reading": "いちど",
+        "meaning": "một lần",
+        "meaningJa": "一回",
+        "example": "一度日本へ行きたいです。",
+        "exampleMeaning": "Tôi muốn đến Nhật một lần."
+    },
+    {
+        "word": "もちろん",
+        "reading": "もちろん",
+        "meaning": "đương nhiên",
+        "meaningJa": "当然",
+        "example": "もちろん手伝います。",
+        "exampleMeaning": "Đương nhiên tôi sẽ giúp."
+    },
+    {
+        "word": "便利",
+        "reading": "べんり",
+        "meaning": "tiện lợi",
+        "meaningJa": "使いやすい",
+        "example": "このアプリは便利です。",
+        "exampleMeaning": "Ứng dụng này tiện lợi."
+    },
+    {
+        "word": "有名",
+        "reading": "ゆうめい",
+        "meaning": "nổi tiếng",
+        "meaningJa": "多くの人が知っている",
+        "example": "そのラーメン屋は有名です。",
+        "exampleMeaning": "Quán ramen đó nổi tiếng."
+    },
+    {
+        "word": "元気",
+        "reading": "げんき",
+        "meaning": "khỏe mạnh",
+        "meaningJa": "体や気持ちがいい状態",
+        "example": "今日は元気です。",
+        "exampleMeaning": "Hôm nay tôi khỏe."
+    },
+    {
+        "word": "暇",
+        "reading": "ひま",
+        "meaning": "rảnh",
+        "meaningJa": "時間がある",
+        "example": "日曜日は暇です。",
+        "exampleMeaning": "Chủ nhật tôi rảnh."
+    },
+    {
+        "word": "親切",
+        "reading": "しんせつ",
+        "meaning": "tốt bụng",
+        "meaningJa": "やさしい",
+        "example": "店員さんは親切でした。",
+        "exampleMeaning": "Nhân viên rất tốt bụng."
+    },
+    {
+        "word": "便利な",
+        "reading": "べんりな",
+        "meaning": "tiện lợi",
+        "meaningJa": "役に立つ",
+        "example": "便利な辞書を買いました。",
+        "exampleMeaning": "Tôi đã mua quyển từ điển tiện lợi."
+    },
+    {
+        "word": "ハンサムな",
+        "reading": "ハンサムな",
+        "meaning": "đẹp trai",
+        "meaningJa": "かっこいい男の人",
+        "example": "彼はハンサムな人です。",
+        "exampleMeaning": "Anh ấy là người đẹp trai."
+    },
+    {
+        "word": "静かな",
+        "reading": "しずかな",
+        "meaning": "yên tĩnh",
+        "meaningJa": "音が少ない",
+        "example": "静かな場所が好きです。",
+        "exampleMeaning": "Tôi thích nơi yên tĩnh."
+    },
+    {
+        "word": "にぎやかな",
+        "reading": "にぎやかな",
+        "meaning": "nhộn nhịp",
+        "meaningJa": "人が多くて楽しい",
+        "example": "にぎやかな町ですね。",
+        "exampleMeaning": "Thị trấn nhộn nhịp nhỉ."
+    },
+    {
+        "word": "きれいな",
+        "reading": "きれいな",
+        "meaning": "đẹp",
+        "meaningJa": "美しい",
+        "example": "きれいな花があります。",
+        "exampleMeaning": "Có những bông hoa đẹp."
+    },
+    {
+        "word": "若い",
+        "reading": "わかい",
+        "meaning": "trẻ",
+        "meaningJa": "年齢が低い",
+        "example": "若い先生ですね。",
+        "exampleMeaning": "Giáo viên trẻ nhỉ."
+    },
+    {
+        "word": "親しい",
+        "reading": "したしい",
+        "meaning": "thân thiết",
+        "meaningJa": "関係が近い",
+        "example": "彼は親しい友達です。",
+        "exampleMeaning": "Anh ấy là bạn thân."
+    }
+]

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "切ります",
+        "reading": "きります",
+        "meaning": "cắt",
+        "meaningJa": "物を分ける",
+        "example": "紙をはさみで切ります。",
+        "exampleMeaning": "Tôi cắt giấy bằng kéo."
+    },
+    {
+        "word": "送ります",
+        "reading": "おくります",
+        "meaning": "gửi",
+        "meaningJa": "物や人を別の場所へ送る",
+        "example": "友達にメールを送ります。",
+        "exampleMeaning": "Tôi gửi mail cho bạn."
+    },
+    {
+        "word": "あげます",
+        "reading": "あげます",
+        "meaning": "cho, tặng",
+        "meaningJa": "相手に物を渡す",
+        "example": "母に花をあげました。",
+        "exampleMeaning": "Tôi đã tặng hoa cho mẹ."
+    },
+    {
+        "word": "もらいます",
+        "reading": "もらいます",
+        "meaning": "nhận",
+        "meaningJa": "人から物を受け取る",
+        "example": "先生に本をもらいました。",
+        "exampleMeaning": "Tôi đã nhận sách từ giáo viên."
+    },
+    {
+        "word": "貸します",
+        "reading": "かします",
+        "meaning": "cho mượn",
+        "meaningJa": "一時的に物を使わせる",
+        "example": "友達に傘を貸します。",
+        "exampleMeaning": "Tôi cho bạn mượn ô."
+    },
+    {
+        "word": "借ります",
+        "reading": "かります",
+        "meaning": "mượn",
+        "meaningJa": "人から物を借りる",
+        "example": "図書館で本を借ります。",
+        "exampleMeaning": "Tôi mượn sách ở thư viện."
+    },
+    {
+        "word": "教えます",
+        "reading": "おしえます",
+        "meaning": "dạy, chỉ",
+        "meaningJa": "知識や方法を伝える",
+        "example": "先生は日本語を教えます。",
+        "exampleMeaning": "Giáo viên dạy tiếng Nhật."
+    },
+    {
+        "word": "習います",
+        "reading": "ならいます",
+        "meaning": "học",
+        "meaningJa": "教えてもらって学ぶ",
+        "example": "学校で英語を習っています。",
+        "exampleMeaning": "Tôi đang học tiếng Anh ở trường."
+    },
+    {
+        "word": "かけます",
+        "reading": "かけます",
+        "meaning": "gọi (điện thoại)",
+        "meaningJa": "電話をする",
+        "example": "後で電話をかけます。",
+        "exampleMeaning": "Lát nữa tôi sẽ gọi điện."
+    },
+    {
+        "word": "手",
+        "reading": "て",
+        "meaning": "tay",
+        "meaningJa": "腕の先にある体の部分",
+        "example": "手を洗ってください。",
+        "exampleMeaning": "Hãy rửa tay."
+    },
+    {
+        "word": "箸",
+        "reading": "はし",
+        "meaning": "đũa",
+        "meaningJa": "食事に使う道具",
+        "example": "日本では箸を使います。",
+        "exampleMeaning": "Ở Nhật người ta dùng đũa."
+    },
+    {
+        "word": "スプーン",
+        "reading": "スプーン",
+        "meaning": "muỗng",
+        "meaningJa": "食べ物をすくう道具",
+        "example": "スープをスプーンで飲みます。",
+        "exampleMeaning": "Tôi uống súp bằng muỗng."
+    },
+    {
+        "word": "ナイフ",
+        "reading": "ナイフ",
+        "meaning": "dao",
+        "meaningJa": "切るための道具",
+        "example": "ナイフで肉を切ります。",
+        "exampleMeaning": "Tôi cắt thịt bằng dao."
+    },
+    {
+        "word": "フォーク",
+        "reading": "フォーク",
+        "meaning": "nĩa",
+        "meaningJa": "食べ物を刺す道具",
+        "example": "フォークでパスタを食べます。",
+        "exampleMeaning": "Tôi ăn pasta bằng nĩa."
+    },
+    {
+        "word": "はさみ",
+        "reading": "はさみ",
+        "meaning": "kéo",
+        "meaningJa": "紙などを切る道具",
+        "example": "はさみを貸してください。",
+        "exampleMeaning": "Hãy cho tôi mượn kéo."
+    },
+    {
+        "word": "ファクス",
+        "reading": "ファクス",
+        "meaning": "fax",
+        "meaningJa": "書類を送る機械",
+        "example": "会社へファクスを送ります。",
+        "exampleMeaning": "Tôi gửi fax đến công ty."
+    },
+    {
+        "word": "ワープロ",
+        "reading": "ワープロ",
+        "meaning": "máy đánh chữ điện tử",
+        "meaningJa": "文章を書く機械",
+        "example": "ワープロでレポートを書きます。",
+        "exampleMeaning": "Tôi viết báo cáo bằng máy đánh chữ điện tử."
+    },
+    {
+        "word": "パソコン",
+        "reading": "パソコン",
+        "meaning": "máy tính cá nhân",
+        "meaningJa": "個人用のコンピューター",
+        "example": "パソコンで日本語を勉強します。",
+        "exampleMeaning": "Tôi học tiếng Nhật bằng máy tính."
+    },
+    {
+        "word": "パンチ",
+        "reading": "パンチ",
+        "meaning": "cái đục lỗ",
+        "meaningJa": "紙に穴を開ける道具",
+        "example": "パンチで紙に穴を開けます。",
+        "exampleMeaning": "Tôi dùng dụng cụ đục lỗ để đục giấy."
+    },
+    {
+        "word": "ホッチキス",
+        "reading": "ホッチキス",
+        "meaning": "cái bấm kim",
+        "meaningJa": "紙を留める道具",
+        "example": "資料をホッチキスで留めます。",
+        "exampleMeaning": "Tôi bấm tài liệu bằng kim bấm."
+    },
+    {
+        "word": "セロテープ",
+        "reading": "セロテープ",
+        "meaning": "băng keo",
+        "meaningJa": "物を貼るためのテープ",
+        "example": "箱をセロテープで閉じます。",
+        "exampleMeaning": "Tôi dán hộp bằng băng keo."
+    },
+    {
+        "word": "消しゴム",
+        "reading": "けしゴム",
+        "meaning": "cục tẩy",
+        "meaningJa": "字を消す道具",
+        "example": "消しゴムを借りてもいいですか。",
+        "exampleMeaning": "Tôi mượn cục tẩy được không?"
+    },
+    {
+        "word": "花",
+        "reading": "はな",
+        "meaning": "hoa",
+        "meaningJa": "きれいな植物の部分",
+        "example": "母に花をあげます。",
+        "exampleMeaning": "Tôi tặng hoa cho mẹ."
+    },
+    {
+        "word": "シャツ",
+        "reading": "シャツ",
+        "meaning": "áo sơ mi",
+        "meaningJa": "上半身に着る服",
+        "example": "新しいシャツを買いました。",
+        "exampleMeaning": "Tôi đã mua áo sơ mi mới."
+    },
+    {
+        "word": "プレゼント",
+        "reading": "プレゼント",
+        "meaning": "quà tặng",
+        "meaningJa": "人にあげる物",
+        "example": "誕生日にプレゼントをもらいました。",
+        "exampleMeaning": "Tôi đã nhận quà vào sinh nhật."
+    }
+]

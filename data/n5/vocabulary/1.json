@@ -1,0 +1,202 @@
+[
+    {
+      "word": "私",
+      "reading": "わたし",
+      "meaning": "tôi",
+      "meaningJa": "自分のことを言う言葉",
+      "example": "私はベトナム人です。",
+      "exampleMeaning": "Tôi là người Việt Nam."
+    },
+    {
+      "word": "あなた",
+      "reading": "あなた",
+      "meaning": "bạn",
+      "meaningJa": "相手のことを言う言葉",
+      "example": "あなたは学生ですか。",
+      "exampleMeaning": "Bạn là học sinh à?"
+    },
+    {
+      "word": "あの人",
+      "reading": "あのひと",
+      "meaning": "người kia",
+      "meaningJa": "少し遠くにいる人",
+      "example": "あの人は先生です。",
+      "exampleMeaning": "Người kia là giáo viên."
+    },
+    {
+      "word": "皆さん",
+      "reading": "みなさん",
+      "meaning": "mọi người",
+      "meaningJa": "そこにいる人たち全部",
+      "example": "皆さん、おはようございます。",
+      "exampleMeaning": "Chào buổi sáng mọi người."
+    },
+    {
+      "word": "先生",
+      "reading": "せんせい",
+      "meaning": "giáo viên",
+      "meaningJa": "教える仕事をする人",
+      "example": "田中先生は優しいです。",
+      "exampleMeaning": "Thầy Tanaka rất tốt bụng."
+    },
+    {
+      "word": "教師",
+      "reading": "きょうし",
+      "meaning": "giáo viên",
+      "meaningJa": "学校で教える人",
+      "example": "父は高校の教師です。",
+      "exampleMeaning": "Bố tôi là giáo viên cấp ba."
+    },
+    {
+      "word": "学生",
+      "reading": "がくせい",
+      "meaning": "học sinh, sinh viên",
+      "meaningJa": "学校で勉強する人",
+      "example": "私は日本語学校の学生です。",
+      "exampleMeaning": "Tôi là học sinh của trường tiếng Nhật."
+    },
+    {
+      "word": "会社員",
+      "reading": "かいしゃいん",
+      "meaning": "nhân viên công ty",
+      "meaningJa": "会社で働く人",
+      "example": "兄は会社員です。",
+      "exampleMeaning": "Anh trai tôi là nhân viên công ty."
+    },
+    {
+      "word": "社員",
+      "reading": "しゃいん",
+      "meaning": "nhân viên",
+      "meaningJa": "会社のメンバー",
+      "example": "あの社員は新しいです。",
+      "exampleMeaning": "Nhân viên kia là người mới."
+    },
+    {
+      "word": "銀行員",
+      "reading": "ぎんこういん",
+      "meaning": "nhân viên ngân hàng",
+      "meaningJa": "銀行で働く人",
+      "example": "母は銀行員です。",
+      "exampleMeaning": "Mẹ tôi là nhân viên ngân hàng."
+    },
+    {
+      "word": "医者",
+      "reading": "いしゃ",
+      "meaning": "bác sĩ",
+      "meaningJa": "病気を治す人",
+      "example": "父は医者です。",
+      "exampleMeaning": "Bố tôi là bác sĩ."
+    },
+    {
+      "word": "研究者",
+      "reading": "けんきゅうしゃ",
+      "meaning": "nhà nghiên cứu",
+      "meaningJa": "研究をする人",
+      "example": "彼は有名な研究者です。",
+      "exampleMeaning": "Anh ấy là nhà nghiên cứu nổi tiếng."
+    },
+    {
+      "word": "大学",
+      "reading": "だいがく",
+      "meaning": "đại học",
+      "meaningJa": "高いレベルの学校",
+      "example": "姉は大学で勉強しています。",
+      "exampleMeaning": "Chị tôi đang học đại học."
+    },
+    {
+      "word": "病院",
+      "reading": "びょういん",
+      "meaning": "bệnh viện",
+      "meaningJa": "病気の人が行く場所",
+      "example": "毎月病院へ行きます。",
+      "exampleMeaning": "Hàng tháng tôi đi bệnh viện."
+    },
+    {
+      "word": "誰",
+      "reading": "だれ",
+      "meaning": "ai",
+      "meaningJa": "人について質問する言葉",
+      "example": "あの人は誰ですか。",
+      "exampleMeaning": "Người kia là ai?"
+    },
+    {
+      "word": "何歳",
+      "reading": "なんさい",
+      "meaning": "bao nhiêu tuổi",
+      "meaningJa": "年齢を聞く言葉",
+      "example": "山田さんは何歳ですか。",
+      "exampleMeaning": "Anh Yamada bao nhiêu tuổi?"
+    },
+    {
+      "word": "はい",
+      "reading": "はい",
+      "meaning": "vâng",
+      "meaningJa": "肯定するときの言葉",
+      "example": "はい、わかりました。",
+      "exampleMeaning": "Vâng, tôi hiểu rồi."
+    },
+    {
+      "word": "いいえ",
+      "reading": "いいえ",
+      "meaning": "không",
+      "meaningJa": "否定するときの言葉",
+      "example": "いいえ、学生ではありません。",
+      "exampleMeaning": "Không, tôi không phải học sinh."
+    },
+    {
+      "word": "会社",
+      "reading": "かいしゃ",
+      "meaning": "công ty",
+      "meaningJa": "仕事をする場所",
+      "example": "会社は駅の近くにあります。",
+      "exampleMeaning": "Công ty ở gần ga."
+    },
+    {
+      "word": "日本",
+      "reading": "にほん",
+      "meaning": "Nhật Bản",
+      "meaningJa": "アジアにある国",
+      "example": "日本はきれいな国です。",
+      "exampleMeaning": "Nhật Bản là một đất nước đẹp."
+    },
+    {
+      "word": "ベトナム",
+      "reading": "ベトナム",
+      "meaning": "Việt Nam",
+      "meaningJa": "東南アジアにある国",
+      "example": "私はベトナムから来ました。",
+      "exampleMeaning": "Tôi đến từ Việt Nam."
+    },
+    {
+      "word": "英語",
+      "reading": "えいご",
+      "meaning": "tiếng Anh",
+      "meaningJa": "イギリスやアメリカなどの言葉",
+      "example": "英語を少し話せます。",
+      "exampleMeaning": "Tôi có thể nói một ít tiếng Anh."
+    },
+    {
+      "word": "日本語",
+      "reading": "にほんご",
+      "meaning": "tiếng Nhật",
+      "meaningJa": "日本で使う言葉",
+      "example": "毎日日本語を勉強しています。",
+      "exampleMeaning": "Mỗi ngày tôi học tiếng Nhật."
+    },
+    {
+      "word": "名前",
+      "reading": "なまえ",
+      "meaning": "tên",
+      "meaningJa": "人や物の呼び方",
+      "example": "あなたの名前は何ですか。",
+      "exampleMeaning": "Tên của bạn là gì?"
+    },
+    {
+      "word": "初めまして",
+      "reading": "はじめまして",
+      "meaning": "rất vui được gặp",
+      "meaningJa": "初めて会うときのあいさつ",
+      "example": "初めまして、トランです。",
+      "exampleMeaning": "Rất vui được gặp, tôi là Trần."
+    }
+  ]

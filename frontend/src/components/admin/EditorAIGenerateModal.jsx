@@ -138,78 +138,76 @@ export default function EditorAIGenerateModal({
 					</button>
 				</div>
 
-				<div className="admin-quote-modal-body">
-					<p className="admin-ai-generate-lead">
-						Chọn mẫu từ <Link to="/admin/prompts">Prompt AI</Link>. Sau khi
-						generate, nội dung tự điền vào form (giống Kaiwa) — bạn vẫn cần
-						lưu bài.
-					</p>
+				<p className="admin-ai-generate-lead">
+					Chọn mẫu từ <Link to="/admin/prompts">Prompt AI</Link>. Sau khi
+					generate, nội dung tự điền vào form (giống Kaiwa) — bạn vẫn cần lưu
+					bài.
+				</p>
 
-					<div className="admin-ai-generate-form">
-						<div className="admin-quote-field">
-							<label
-								className="admin-quote-label"
-								htmlFor={`${baseId}-gen-template`}
-							>
-								Mẫu prompt
-							</label>
-							<select
-								id={`${baseId}-gen-template`}
-								className="admin-quote-select"
-								value={selectedTemplate}
-								onChange={(e) => setSelectedTemplate(e.target.value)}
-								disabled={busy || promptsLoading}
-							>
-								{promptOptions.length === 0 ? (
-									<option value={selectedTemplate}>
-										{promptsLoading ? 'Đang tải…' : selectedTemplate}
+				<div className="admin-ai-generate-form">
+					<div className="admin-quote-field admin-ai-generate-field--full">
+						<label
+							className="admin-quote-label"
+							htmlFor={`${baseId}-gen-template`}
+						>
+							Mẫu prompt
+						</label>
+						<select
+							id={`${baseId}-gen-template`}
+							className="admin-quote-select"
+							value={selectedTemplate}
+							onChange={(e) => setSelectedTemplate(e.target.value)}
+							disabled={busy || promptsLoading}
+						>
+							{promptOptions.length === 0 ? (
+								<option value={selectedTemplate}>
+									{promptsLoading ? 'Đang tải…' : selectedTemplate}
+								</option>
+							) : (
+								promptOptions.map((p) => (
+									<option key={p._id} value={p.templateKey}>
+										{p.name} ({p.templateKey})
 									</option>
-								) : (
-									promptOptions.map((p) => (
-										<option key={p._id} value={p.templateKey}>
-											{p.name} ({p.templateKey})
-										</option>
-									))
-								)}
-							</select>
-						</div>
-						<div className="admin-quote-field admin-ai-generate-field--full">
-							<label
-								className="admin-quote-label"
-								htmlFor={`${baseId}-gen-hint`}
-							>
-								Ghi chú / chủ đề (tùy chọn)
-							</label>
-							<input
-								id={`${baseId}-gen-hint`}
-								className="admin-quote-input"
-								type="text"
-								value={generateHint}
-								onChange={(e) => setGenerateHint(e.target.value)}
-								placeholder="vd: chủ đề du lịch, mẫu 〜によると…"
-								disabled={busy}
-							/>
-						</div>
+								))
+							)}
+						</select>
 					</div>
+					<div className="admin-quote-field admin-ai-generate-field--full">
+						<label
+							className="admin-quote-label"
+							htmlFor={`${baseId}-gen-hint`}
+						>
+							Ghi chú / chủ đề (tùy chọn)
+						</label>
+						<input
+							id={`${baseId}-gen-hint`}
+							className="admin-quote-input"
+							type="text"
+							value={generateHint}
+							onChange={(e) => setGenerateHint(e.target.value)}
+							placeholder="vd: chủ đề du lịch, mẫu 〜によると…"
+							disabled={busy}
+						/>
+					</div>
+				</div>
 
-					<div className="admin-quote-modal-actions">
-						<button
-							type="button"
-							className="admin-quote-btn admin-quote-btn--muted"
-							disabled={busy}
-							onClick={onClose}
-						>
-							Hủy
-						</button>
-						<button
-							type="button"
-							className="admin-quote-btn admin-quote-btn--primary"
-							disabled={busy}
-							onClick={() => void runGenerate()}
-						>
-							{busy ? 'Đang generate…' : 'Generate & điền form'}
-						</button>
-					</div>
+				<div className="admin-quote-modal-actions">
+					<button
+						type="button"
+						className="admin-quote-btn admin-quote-btn--muted"
+						disabled={busy}
+						onClick={onClose}
+					>
+						Hủy
+					</button>
+					<button
+						type="button"
+						className="admin-quote-btn admin-quote-btn--primary"
+						disabled={busy}
+						onClick={() => void runGenerate()}
+					>
+						{busy ? 'Đang generate…' : 'Generate & điền form'}
+					</button>
 				</div>
 			</div>
 		</div>

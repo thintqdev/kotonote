@@ -1,0 +1,202 @@
+[
+    {
+        "word": "着ます",
+        "reading": "きます",
+        "meaning": "mặc",
+        "meaningJa": "服を体に着ける",
+        "example": "毎日スーツを着ます。",
+        "exampleMeaning": "Mỗi ngày tôi mặc vest."
+    },
+    {
+        "word": "はきます",
+        "reading": "はきます",
+        "meaning": "mặc, đi (quần/giày)",
+        "meaningJa": "下半身に着ける",
+        "example": "黒い靴をはいています。",
+        "exampleMeaning": "Tôi đang mang giày đen."
+    },
+    {
+        "word": "かぶります",
+        "reading": "かぶります",
+        "meaning": "đội",
+        "meaningJa": "頭に着ける",
+        "example": "帽子をかぶっています。",
+        "exampleMeaning": "Tôi đang đội mũ."
+    },
+    {
+        "word": "かけます",
+        "reading": "かけます",
+        "meaning": "đeo",
+        "meaningJa": "眼鏡などを着ける",
+        "example": "眼鏡をかけています。",
+        "exampleMeaning": "Tôi đang đeo kính."
+    },
+    {
+        "word": "生まれます",
+        "reading": "うまれます",
+        "meaning": "sinh ra",
+        "meaningJa": "この世に出る",
+        "example": "私はダナンで生まれました。",
+        "exampleMeaning": "Tôi sinh ra ở Đà Nẵng."
+    },
+    {
+        "word": "コート",
+        "reading": "コート",
+        "meaning": "áo khoác",
+        "meaningJa": "寒いときに着る服",
+        "example": "冬にコートを着ます。",
+        "exampleMeaning": "Mùa đông tôi mặc áo khoác."
+    },
+    {
+        "word": "スーツ",
+        "reading": "スーツ",
+        "meaning": "vest",
+        "meaningJa": "仕事で着る服",
+        "example": "会社でスーツを着ます。",
+        "exampleMeaning": "Tôi mặc vest ở công ty."
+    },
+    {
+        "word": "セーター",
+        "reading": "セーター",
+        "meaning": "áo len",
+        "meaningJa": "暖かい服",
+        "example": "寒いのでセーターを着ます。",
+        "exampleMeaning": "Vì lạnh nên tôi mặc áo len."
+    },
+    {
+        "word": "帽子",
+        "reading": "ぼうし",
+        "meaning": "mũ",
+        "meaningJa": "頭にかぶる物",
+        "example": "赤い帽子を買いました。",
+        "exampleMeaning": "Tôi đã mua mũ đỏ."
+    },
+    {
+        "word": "眼鏡",
+        "reading": "めがね",
+        "meaning": "kính",
+        "meaningJa": "目にかける物",
+        "example": "眼鏡をかけています。",
+        "exampleMeaning": "Tôi đang đeo kính."
+    },
+    {
+        "word": "よく",
+        "reading": "よく",
+        "meaning": "thường",
+        "meaningJa": "頻繁に",
+        "example": "よく映画を見ます。",
+        "exampleMeaning": "Tôi thường xem phim."
+    },
+    {
+        "word": "おめでとうございます",
+        "reading": "おめでとうございます",
+        "meaning": "chúc mừng",
+        "meaningJa": "祝いの言葉",
+        "example": "お誕生日おめでとうございます。",
+        "exampleMeaning": "Chúc mừng sinh nhật."
+    },
+    {
+        "word": "こちら",
+        "reading": "こちら",
+        "meaning": "phía này",
+        "meaningJa": "この方向",
+        "example": "こちらへどうぞ。",
+        "exampleMeaning": "Xin mời phía này."
+    },
+    {
+        "word": "家賃",
+        "reading": "やちん",
+        "meaning": "tiền thuê nhà",
+        "meaningJa": "部屋を借りるお金",
+        "example": "毎月家賃を払います。",
+        "exampleMeaning": "Mỗi tháng tôi trả tiền thuê nhà."
+    },
+    {
+        "word": "アパート",
+        "reading": "アパート",
+        "meaning": "căn hộ",
+        "meaningJa": "人が住む建物",
+        "example": "アパートに住んでいます。",
+        "exampleMeaning": "Tôi sống ở căn hộ."
+    },
+    {
+        "word": "マンション",
+        "reading": "マンション",
+        "meaning": "chung cư",
+        "meaningJa": "大きい集合住宅",
+        "example": "新しいマンションを買いました。",
+        "exampleMeaning": "Tôi đã mua chung cư mới."
+    },
+    {
+        "word": "台所",
+        "reading": "だいどころ",
+        "meaning": "nhà bếp",
+        "meaningJa": "料理をする場所",
+        "example": "母は台所にいます。",
+        "exampleMeaning": "Mẹ tôi ở trong bếp."
+    },
+    {
+        "word": "トイレ",
+        "reading": "トイレ",
+        "meaning": "toilet",
+        "meaningJa": "用を足す場所",
+        "example": "トイレはどこですか。",
+        "exampleMeaning": "Toilet ở đâu?"
+    },
+    {
+        "word": "シャワー",
+        "reading": "シャワー",
+        "meaning": "vòi sen",
+        "meaningJa": "水を浴びる設備",
+        "example": "朝シャワーを浴びます。",
+        "exampleMeaning": "Buổi sáng tôi tắm vòi sen."
+    },
+    {
+        "word": "押し入れ",
+        "reading": "おしいれ",
+        "meaning": "tủ âm tường",
+        "meaningJa": "布団などを入れる場所",
+        "example": "押し入れに布団があります。",
+        "exampleMeaning": "Có chăn trong tủ âm tường."
+    },
+    {
+        "word": "布団",
+        "reading": "ふとん",
+        "meaning": "nệm futon",
+        "meaningJa": "日本の寝具",
+        "example": "布団で寝ます。",
+        "exampleMeaning": "Tôi ngủ bằng futon."
+    },
+    {
+        "word": "畳",
+        "reading": "たたみ",
+        "meaning": "chiếu tatami",
+        "meaningJa": "日本の床",
+        "example": "畳の部屋が好きです。",
+        "exampleMeaning": "Tôi thích phòng tatami."
+    },
+    {
+        "word": "玄関",
+        "reading": "げんかん",
+        "meaning": "lối vào nhà",
+        "meaningJa": "家の入口",
+        "example": "玄関で靴を脱ぎます。",
+        "exampleMeaning": "Tôi cởi giày ở lối vào."
+    },
+    {
+        "word": "庭",
+        "reading": "にわ",
+        "meaning": "sân vườn",
+        "meaningJa": "家の外の空間",
+        "example": "庭に花があります。",
+        "exampleMeaning": "Có hoa trong vườn."
+    },
+    {
+        "word": "駐車場",
+        "reading": "ちゅうしゃじょう",
+        "meaning": "bãi đỗ xe",
+        "meaningJa": "車を止める場所",
+        "example": "駐車場は広いです。",
+        "exampleMeaning": "Bãi đỗ xe rộng."
+    }
+]

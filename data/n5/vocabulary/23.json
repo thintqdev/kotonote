@@ -1,0 +1,202 @@
+[
+    {
+        "word": "聞きます",
+        "reading": "ききます",
+        "meaning": "hỏi",
+        "meaningJa": "質問する",
+        "example": "先生に意味を聞きます。",
+        "exampleMeaning": "Tôi hỏi giáo viên ý nghĩa."
+    },
+    {
+        "word": "回します",
+        "reading": "まわします",
+        "meaning": "xoay",
+        "meaningJa": "ぐるぐる動かす",
+        "example": "ドアノブを回します。",
+        "exampleMeaning": "Tôi xoay tay nắm cửa."
+    },
+    {
+        "word": "引きます",
+        "reading": "ひきます",
+        "meaning": "kéo",
+        "meaningJa": "自分の方へ動かす",
+        "example": "ドアを引いてください。",
+        "exampleMeaning": "Hãy kéo cửa."
+    },
+    {
+        "word": "変えます",
+        "reading": "かえます",
+        "meaning": "thay đổi",
+        "meaningJa": "別の状態にする",
+        "example": "予定を変えました。",
+        "exampleMeaning": "Tôi đã đổi kế hoạch."
+    },
+    {
+        "word": "触ります",
+        "reading": "さわります",
+        "meaning": "chạm vào",
+        "meaningJa": "手で触る",
+        "example": "この機械に触らないでください。",
+        "exampleMeaning": "Xin đừng chạm vào máy này."
+    },
+    {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "ra ngoài, tham gia",
+        "meaningJa": "外へ行く",
+        "example": "会議に出ます。",
+        "exampleMeaning": "Tôi tham gia cuộc họp."
+    },
+    {
+        "word": "歩きます",
+        "reading": "あるきます",
+        "meaning": "đi bộ",
+        "meaningJa": "足で進む",
+        "example": "駅まで歩きます。",
+        "exampleMeaning": "Tôi đi bộ đến ga."
+    },
+    {
+        "word": "渡ります",
+        "reading": "わたります",
+        "meaning": "băng qua",
+        "meaningJa": "向こう側へ行く",
+        "example": "橋を渡ります。",
+        "exampleMeaning": "Tôi băng qua cầu."
+    },
+    {
+        "word": "曲がります",
+        "reading": "まがります",
+        "meaning": "rẽ",
+        "meaningJa": "方向を変える",
+        "example": "右へ曲がってください。",
+        "exampleMeaning": "Hãy rẽ phải."
+    },
+    {
+        "word": "寂しい",
+        "reading": "さびしい",
+        "meaning": "cô đơn",
+        "meaningJa": "一人で悲しい",
+        "example": "一人で寂しいです。",
+        "exampleMeaning": "Một mình thật cô đơn."
+    },
+    {
+        "word": "湯",
+        "reading": "ゆ",
+        "meaning": "nước nóng",
+        "meaningJa": "熱い水",
+        "example": "お湯を入れてください。",
+        "exampleMeaning": "Hãy cho nước nóng vào."
+    },
+    {
+        "word": "お湯",
+        "reading": "おゆ",
+        "meaning": "nước nóng",
+        "meaningJa": "熱い水",
+        "example": "お湯を飲みます。",
+        "exampleMeaning": "Tôi uống nước nóng."
+    },
+    {
+        "word": "音",
+        "reading": "おと",
+        "meaning": "âm thanh",
+        "meaningJa": "耳で聞こえるもの",
+        "example": "変な音がします。",
+        "exampleMeaning": "Có âm thanh lạ."
+    },
+    {
+        "word": "サイズ",
+        "reading": "サイズ",
+        "meaning": "kích cỡ",
+        "meaningJa": "大きさ",
+        "example": "この靴のサイズは大きいです。",
+        "exampleMeaning": "Kích cỡ đôi giày này lớn."
+    },
+    {
+        "word": "故障",
+        "reading": "こしょう",
+        "meaning": "hỏng hóc",
+        "meaningJa": "機械が壊れること",
+        "example": "エアコンが故障しました。",
+        "exampleMeaning": "Điều hòa bị hỏng."
+    },
+    {
+        "word": "道",
+        "reading": "みち",
+        "meaning": "đường",
+        "meaningJa": "人や車が通る場所",
+        "example": "この道は広いです。",
+        "exampleMeaning": "Con đường này rộng."
+    },
+    {
+        "word": "交差点",
+        "reading": "こうさてん",
+        "meaning": "ngã tư",
+        "meaningJa": "道が交わる場所",
+        "example": "交差点を右へ曲がります。",
+        "exampleMeaning": "Rẽ phải ở ngã tư."
+    },
+    {
+        "word": "信号",
+        "reading": "しんごう",
+        "meaning": "đèn giao thông",
+        "meaningJa": "交通を管理するライト",
+        "example": "信号が赤です。",
+        "exampleMeaning": "Đèn giao thông màu đỏ."
+    },
+    {
+        "word": "角",
+        "reading": "かど",
+        "meaning": "góc",
+        "meaningJa": "道が曲がる場所",
+        "example": "次の角を左へ曲がります。",
+        "exampleMeaning": "Rẽ trái ở góc tiếp theo."
+    },
+    {
+        "word": "橋",
+        "reading": "はし",
+        "meaning": "cầu",
+        "meaningJa": "川の上を渡る道",
+        "example": "大きい橋を渡ります。",
+        "exampleMeaning": "Tôi băng qua cây cầu lớn."
+    },
+    {
+        "word": "駐車場",
+        "reading": "ちゅうしゃじょう",
+        "meaning": "bãi đỗ xe",
+        "meaningJa": "車を止める場所",
+        "example": "駐車場はあそこです。",
+        "exampleMeaning": "Bãi đỗ xe ở đằng kia."
+    },
+    {
+        "word": "建物",
+        "reading": "たてもの",
+        "meaning": "tòa nhà",
+        "meaningJa": "人が使う建築物",
+        "example": "あの建物は有名です。",
+        "exampleMeaning": "Tòa nhà kia nổi tiếng."
+    },
+    {
+        "word": "受付",
+        "reading": "うけつけ",
+        "meaning": "quầy lễ tân",
+        "meaningJa": "案内する場所",
+        "example": "受付で名前を書きます。",
+        "exampleMeaning": "Tôi viết tên ở quầy lễ tân."
+    },
+    {
+        "word": "自動販売機",
+        "reading": "じどうはんばいき",
+        "meaning": "máy bán hàng tự động",
+        "meaningJa": "自動で物を売る機械",
+        "example": "自動販売機でジュースを買いました。",
+        "exampleMeaning": "Tôi đã mua nước ở máy bán hàng tự động."
+    },
+    {
+        "word": "切符",
+        "reading": "きっぷ",
+        "meaning": "vé",
+        "meaningJa": "電車などに乗るための紙",
+        "example": "駅で切符を買います。",
+        "exampleMeaning": "Tôi mua vé ở ga."
+    }
+]

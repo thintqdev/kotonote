@@ -255,29 +255,7 @@
   max-height: min(92vh, 880px);
 }
 
-.admin-ai-generate-lead {
-  margin: 0 0 14px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: var(--admin-ink-soft);
-}
-
-.admin-ai-generate-lead a {
-  color: var(--admin-sage-deep, #5a6b38);
-  font-weight: 700;
-}
-
-.admin-ai-generate-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.admin-ai-generate-field--full {
-  grid-column: 1 / -1;
-}
+/* admin-ai-generate-lead / admin-ai-generate-form — adminModalLayout.css */
 
 .admin-ai-generate-source {
   margin: 0 0 12px;

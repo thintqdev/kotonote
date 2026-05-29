@@ -34,6 +34,7 @@ import {
   lessonNoForDeck,
   levelToJlpt,
   mapVocabRecord,
+  sortDeckItemsByDisplayOrder,
   sortDecksByOrder,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
@@ -121,8 +122,8 @@ export default function VocabularyPage() {
         if (deckId) {
           const { deck, vocabulary } = await getDeckWithVocabulary(deckId);
           const jlpt = lessonJlpt || levelToJlpt(deck.level);
-          const items = vocabulary.map((v) =>
-            mapVocabRecord(v, jlpt, deckId),
+          const items = sortDeckItemsByDisplayOrder(
+            vocabulary.map((v) => mapVocabRecord(v, jlpt, deckId)),
           );
           if (!cancelled) {
             setSortedDecks([deck]);
@@ -145,8 +146,10 @@ export default function VocabularyPage() {
             String(lessonDeck._id),
           );
           const jlpt = lessonJlpt || levelToJlpt(deck.level);
-          const items = vocabulary.map((v) =>
-            mapVocabRecord(v, jlpt, String(lessonDeck._id)),
+          const items = sortDeckItemsByDisplayOrder(
+            vocabulary.map((v) =>
+              mapVocabRecord(v, jlpt, String(lessonDeck._id)),
+            ),
           );
           if (!cancelled) {
             setSortedDecks(sorted);
@@ -265,7 +268,11 @@ export default function VocabularyPage() {
 
   const lessonItemsStable = useMemo(() => {
     if (!isLessonMode) return [];
-    if (deckId) return merged;
+    if (deckId) {
+      return sortDeckItemsByDisplayOrder(
+        merged.filter((x) => String(x.deckId) === String(deckId)),
+      );
+    }
     if (!lessonNoFromQuery) return [];
     return getDeckLessonItems(merged, sortedDecks, lessonNoFromQuery);
   }, [merged, sortedDecks, deckId, isLessonMode, lessonNoFromQuery]);
