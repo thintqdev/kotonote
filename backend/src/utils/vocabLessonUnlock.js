@@ -94,3 +94,67 @@ export async function assertVocabDeckLessonUnlocked(userId, deckId, opts = {}) {
 		]);
 	}
 }
+
+/**
+ * Gắn lessonNo + lessonUnlocked cho danh sách deck (phân trang) — tính theo toàn bộ deck cùng level.
+ * @param {import('mongoose').Types.ObjectId | string} userId
+ * @param {object[]} decks
+ */
+export async function annotateVocabDeckLessonUnlock(userId, decks) {
+	if (!userId || !Array.isArray(decks) || decks.length === 0) {
+		return decks;
+	}
+
+	/** @type {Map<string, object[]>} */
+	const siblingsByLevel = new Map();
+
+	const loadSiblings = async (level) => {
+		const key = String(level);
+		if (!siblingsByLevel.has(key)) {
+			const rows = await vocabularyRepository.findAllDecks({
+				level: key,
+				isActive: true,
+			});
+			siblingsByLevel.set(
+				key,
+				rows.map((d) => (typeof d.toObject === 'function' ? d.toObject() : d)),
+			);
+		}
+		return siblingsByLevel.get(key);
+	};
+
+	const levels = [...new Set(decks.map((d) => String(d.level)))];
+	await Promise.all(levels.map((level) => loadSiblings(level)));
+
+	/** @type {Set<string>} */
+	const allDeckIds = new Set();
+	for (const level of levels) {
+		for (const s of siblingsByLevel.get(level) ?? []) {
+			allDeckIds.add(String(s._id));
+		}
+	}
+
+	const progressRows = await VocabularyDeckProgress.find({
+		userId,
+		deckId: { $in: [...allDeckIds] },
+	})
+		.select('deckId growthStage')
+		.lean();
+
+	const progressMap = new Map();
+	for (const row of progressRows) {
+		progressMap.set(String(row.deckId), row.growthStage ?? 0);
+	}
+
+	return decks.map((deck) => {
+		const siblings = siblingsByLevel.get(String(deck.level)) ?? [];
+		const lessonNo = resolveLessonNoFromDeckId(siblings, deck._id);
+		const lessonUnlocked =
+			lessonNo <= 1 || isVocabLessonUnlockedByGrowth(siblings, lessonNo, progressMap);
+		return {
+			...deck,
+			lessonNo,
+			lessonUnlocked,
+		};
+	});
+}

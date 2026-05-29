@@ -74,6 +74,14 @@ class ListeningExerciseService {
     return await listeningExerciseRepository.find(filters);
   }
 
+  /**
+   * @param {Record<string, unknown>} filters
+   * @param {{ page?: number, limit?: number }} pagination
+   */
+  async getAllPublishedPaginated(filters = { isPublished: true }, pagination = {}) {
+    return await listeningExerciseRepository.findPaginated(filters, pagination);
+  }
+
   async getDistinctJlptLevels(publishedOnly = true) {
     const filter = publishedOnly ? { isPublished: true } : {};
     const rows = await listeningExerciseRepository.find(filter);

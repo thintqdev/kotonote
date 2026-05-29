@@ -16,9 +16,14 @@ import api from './api.js';
  */
 export async function listKanjiDecks(params = {}) {
 	const body = await api.get(KANJI.DECKS, { params });
+	const decks = filterActiveDecks(body.data?.decks ?? []);
 	return {
-		decks: sortDecksByOrder(filterActiveDecks(body.data?.decks ?? [])),
-		pagination: body.pagination ?? null,
+		decks:
+			params.page != null || params.limit != null
+				? decks
+				: sortDecksByOrder(decks),
+		pagination: body.data?.pagination ?? body.pagination ?? null,
+		requestedJlptLocked: Boolean(body.data?.requestedJlptLocked),
 	};
 }
 

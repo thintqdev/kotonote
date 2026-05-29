@@ -5,6 +5,9 @@ import Vocabulary from '../models/Vocabulary.js';
 /** Khớp list + unlock: displayOrder ↑, cũ→mới theo createdAt khi trùng. */
 export const VOCAB_DECK_SORT = { displayOrder: 1, createdAt: 1, _id: 1 };
 
+/** Thứ tự cấp JLPT khi list không lọc level (tab «Tất cả»). */
+const JLPT_LEVEL_ORDER = ['n5', 'n4', 'n3', 'n2', 'n1'];
+
 /** Từ trong deck: cũ → mới (thứ tự bài / import JSON) */
 export const VOCAB_IN_DECK_SORT = { displayOrder: 1, createdAt: 1, _id: 1 };
 
@@ -24,11 +27,33 @@ export const countDecks = async (filters = {}) => {
  * @param {{ skip: number, limit: number }} opts
  */
 export const findDecksPaginated = async (filters = {}, { skip, limit } = {}) => {
-	return await VocabularyDeck.find(filters)
-		.sort(deckSort)
-		.skip(skip)
-		.limit(limit)
-		.lean();
+	if (filters.level) {
+		return await VocabularyDeck.find(filters)
+			.sort(deckSort)
+			.skip(skip)
+			.limit(limit)
+			.lean();
+	}
+
+	return await VocabularyDeck.aggregate([
+		{ $match: filters },
+		{
+			$addFields: {
+				_levelRank: { $indexOfArray: [JLPT_LEVEL_ORDER, '$level'] },
+			},
+		},
+		{
+			$sort: {
+				_levelRank: 1,
+				displayOrder: 1,
+				createdAt: 1,
+				_id: 1,
+			},
+		},
+		{ $skip: skip },
+		{ $limit: limit },
+		{ $project: { _levelRank: 0 } },
+	]);
 };
 
 /**

@@ -1,13 +1,20 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
 import { mockStreak } from '../data/dashboardHomeMock.js';
-import { EXAM_JLPT_LEVELS } from '../constants/examPaperFieldMeta.js';
 import { examSessionLabel } from '../constants/examPaperFieldMeta.js';
 import { listExamPapers } from '../services/examPaperService.js';
+import { STUDY_LIST_PAGE_SIZE } from '../constants/deckLessonList.js';
+import { JLPT_ORDER } from '../utils/deckStudy.js';
+import StudyListPagination from '../components/study/StudyListPagination.jsx';
+import {
+	parseStudyListPage,
+	studyListPath,
+	studyListSearchParams,
+} from '../utils/studyListNav.js';
 import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
 import { resolvePublicMediaUrl } from '../utils/resolveAvatarUrl.js';
 import { useJlptAccess } from '../hooks/useJlptAccess.js';
@@ -17,6 +24,7 @@ import './DashboardHome.css';
 import './VocabularyPages.css';
 import './ReadingListPage.css';
 import './ExamPaperPages.css';
+import './GrammarPages.css';
 
 function ExamIconClipboard() {
 	return (
@@ -64,9 +72,10 @@ export default function ExamPaperListPage() {
 	const { isLocked } = useJlptAccess();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const jlpt = (searchParams.get('jlpt') || '').trim();
+	const requestedPage = parseStudyListPage(searchParams);
 
 	const [items, setItems] = useState([]);
-	const [jlptLevels, setJlptLevels] = useState([]);
+	const [pagination, setPagination] = useState(null);
 	const [requestedJlptLocked, setRequestedJlptLocked] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
@@ -76,40 +85,56 @@ export default function ExamPaperListPage() {
 		user?.email?.split('@')[0] ||
 		t('demoProfile.firstName');
 
+	const fetchList = useCallback(async () => {
+		if (!user) return;
+		setLoading(true);
+		setError('');
+		try {
+			const data = await listExamPapers({
+				jlpt: jlpt || undefined,
+				page: requestedPage,
+				limit: STUDY_LIST_PAGE_SIZE,
+			});
+			setItems(data.items ?? []);
+			setPagination(data.pagination);
+			setRequestedJlptLocked(Boolean(data.requestedJlptLocked));
+			const serverPage = data.pagination?.page ?? requestedPage;
+			if (serverPage !== requestedPage) {
+				setSearchParams(
+					studyListSearchParams({ page: serverPage, jlpt }),
+					{ replace: true },
+				);
+			}
+		} catch (err) {
+			setError(getApiErrorMessage(err, t));
+			setItems([]);
+			setPagination(null);
+		} finally {
+			setLoading(false);
+		}
+	}, [user, jlpt, requestedPage, setSearchParams, t]);
+
 	useEffect(() => {
 		if (!user) return undefined;
-		let cancelled = false;
-		(async () => {
-			setLoading(true);
-			setError('');
-			try {
-				const data = await listExamPapers({
-					jlpt: jlpt || undefined,
-					limit: 50,
-				});
-				if (cancelled) return;
-				setItems(data.items ?? []);
-				setJlptLevels(
-					data.jlptLevels?.length ? data.jlptLevels : [...EXAM_JLPT_LEVELS],
-				);
-				setRequestedJlptLocked(Boolean(data.requestedJlptLocked));
-			} catch (err) {
-				if (!cancelled) setError(getApiErrorMessage(err, t));
-			} finally {
-				if (!cancelled) setLoading(false);
-			}
-		})();
-		return () => {
-			cancelled = true;
-		};
-	}, [user, jlpt, t]);
+		void fetchList();
+		return undefined;
+	}, [fetchList, user]);
+
+	const page = pagination?.page ?? requestedPage;
+	const totalPages = Math.max(1, pagination?.pages ?? 1);
+	const totalItems = pagination?.total ?? 0;
 
 	const setJlptFilter = (level) => {
-		const p = new URLSearchParams(searchParams);
-		if (level) p.set('jlpt', level);
-		else p.delete('jlpt');
-		setSearchParams(p, { replace: true });
+		setSearchParams(
+			studyListSearchParams({ page: 1, jlpt: level }),
+			{ replace: true },
+		);
 	};
+
+	const getPageHref = useCallback(
+		(p) => studyListPath('/practice', { page: p, jlpt }),
+		[jlpt],
+	);
 
 	const emptyMessage = useMemo(() => {
 		if (requestedJlptLocked && jlpt) {
@@ -118,7 +143,7 @@ export default function ExamPaperListPage() {
 		return t('examPage.noResults');
 	}, [requestedJlptLocked, jlpt, t]);
 
-	if (loading) {
+	if (loading && !items.length) {
 		return (
 			<Layout userName={headerName} streakDays={mockStreak.days} pageClassName="vocab-dash">
 				<p className="vocab-empty">{t('common.loading')}</p>
@@ -185,7 +210,7 @@ export default function ExamPaperListPage() {
 					>
 						{t('examPage.filterAll')}
 					</button>
-					{jlptLevels.map((lv) => (
+					{JLPT_ORDER.map((lv) => (
 						<button
 							key={lv}
 							type="button"
@@ -199,7 +224,9 @@ export default function ExamPaperListPage() {
 					))}
 				</div>
 
-				{items.length === 0 ? (
+				{loading ? (
+					<p className="vocab-empty">{t('common.loading')}</p>
+				) : items.length === 0 ? (
 					<p className="vocab-empty" role="status">
 						{emptyMessage}
 					</p>
@@ -304,6 +331,17 @@ export default function ExamPaperListPage() {
 						})}
 					</ul>
 				)}
+
+				{!loading && !error && totalItems > 0 ? (
+					<StudyListPagination
+						i18nKey="examPage"
+						page={page}
+						totalPages={totalPages}
+						total={totalItems}
+						pageSize={STUDY_LIST_PAGE_SIZE}
+						getPageHref={getPageHref}
+					/>
+				) : null}
 			</article>
 		</Layout>
 	);

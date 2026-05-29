@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import listeningExerciseService from '../services/listeningExerciseService.js';
-import { apiSuccess, apiError } from '../utils/response.js';
+import { apiSuccess, apiPaginated, apiError } from '../utils/response.js';
 import { LISTENING } from '../constants/messages.js';
 import {
 	annotateWithJlptLock,
@@ -26,7 +26,7 @@ export const getAllPublished = asyncHandler(async (req, res) => {
 	const queryJlpt = req.query.jlpt;
 
 	if (queryJlpt && !isJlptUnlocked(unlocked, queryJlpt)) {
-		return apiSuccess(
+		return apiPaginated(
 			res,
 			{
 				items: [],
@@ -34,6 +34,7 @@ export const getAllPublished = asyncHandler(async (req, res) => {
 				jlptAccess: buildJlptAccessMeta(unlocked),
 				requestedJlptLocked: true,
 			},
+			{ page: 1, limit: 10, total: 0, pages: 0 },
 			LISTENING.LIST_FETCHED,
 			200,
 		);
@@ -44,17 +45,23 @@ export const getAllPublished = asyncHandler(async (req, res) => {
 		filters.jlpt = queryJlpt;
 	}
 
-	const items = await listeningExerciseService.getAllPublished(filters);
+	const { page, limit } = req.query;
+	const { items, pagination } =
+		await listeningExerciseService.getAllPublishedPaginated(filters, {
+			page,
+			limit,
+		});
 	const plain = items.map((doc) => toPublicListeningItem(doc));
 	const annotated = annotateWithJlptLock(plain, unlocked, (it) => it.jlpt);
 
-	return apiSuccess(
+	return apiPaginated(
 		res,
 		{
 			items: annotated,
 			jlptLevels: await listeningExerciseService.getDistinctJlptLevels(true),
 			jlptAccess: buildJlptAccessMeta(unlocked),
 		},
+		pagination,
 		LISTENING.LIST_FETCHED,
 		200,
 	);

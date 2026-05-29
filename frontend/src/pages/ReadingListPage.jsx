@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
@@ -7,10 +7,17 @@ import { Breadcrumb } from "../components/common";
 import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import { READING_JLPT_LEVELS } from "../data/readingMock.js";
+import { STUDY_LIST_PAGE_SIZE } from "../constants/deckLessonList.js";
 import {
   getReadingSummary,
   listReadingArticles,
 } from "../services/readingService.js";
+import StudyListPagination from "../components/study/StudyListPagination.jsx";
+import {
+  parseStudyListPage,
+  studyListPath,
+  studyListSearchParams,
+} from "../utils/studyListNav.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { resolvePublicMediaUrl } from "../utils/resolveAvatarUrl.js";
 import { useJlptAccess } from "../hooks/useJlptAccess.js";
@@ -19,6 +26,7 @@ import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css";
+import "./GrammarPages.css";
 
 function ReadingIconBook() {
   return (
@@ -101,47 +109,60 @@ export default function ReadingListPage() {
   const jlpt = (searchParams.get("jlpt") || "").trim();
   const mode = (searchParams.get("mode") || "all").trim();
   const safeMode = mode === "suggested" || mode === "review" ? mode : "all";
+  const requestedPage = parseStudyListPage(searchParams);
 
   const [list, setList] = useState([]);
-  const [jlptLevels, setJlptLevels] = useState(READING_JLPT_LEVELS);
+  const [jlptLevels] = useState(READING_JLPT_LEVELS);
+  const [pagination, setPagination] = useState(null);
   const [progress, setProgress] = useState({ completed: 0, goal: 60 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const fetchList = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    setError("");
+    try {
+      const [listRes, summary] = await Promise.all([
+        listReadingArticles({
+          jlpt: jlpt || undefined,
+          mode: safeMode,
+          page: requestedPage,
+          limit: STUDY_LIST_PAGE_SIZE,
+        }),
+        getReadingSummary(),
+      ]);
+      setList(listRes.items ?? []);
+      setPagination(listRes.pagination);
+      setProgress(summary);
+      const serverPage = listRes.pagination?.page ?? requestedPage;
+      if (serverPage !== requestedPage) {
+        setSearchParams(
+          studyListSearchParams({
+            page: serverPage,
+            jlpt,
+            mode: safeMode,
+          }),
+          { replace: true },
+        );
+      }
+    } catch (err) {
+      setError(getApiErrorMessage(err, t));
+      setList([]);
+      setPagination(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, jlpt, safeMode, requestedPage, setSearchParams, t]);
+
   useEffect(() => {
     if (!user) return;
-    let cancelled = false;
-    (async () => {
-      setLoading(true);
-      setError("");
-      try {
-        const [listRes, summary] = await Promise.all([
-          listReadingArticles({
-            jlpt: jlpt || undefined,
-            mode: safeMode,
-            limit: 50,
-          }),
-          getReadingSummary(),
-        ]);
-        if (cancelled) return;
-        setList(listRes.items ?? []);
-        if (listRes.jlptLevels?.length) {
-          setJlptLevels(listRes.jlptLevels);
-        }
-        setProgress(summary);
-      } catch (err) {
-        if (!cancelled) {
-          setError(getApiErrorMessage(err, t));
-          setList([]);
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [user, jlpt, safeMode, t]);
+    void fetchList();
+  }, [fetchList, user]);
+
+  const page = pagination?.page ?? requestedPage;
+  const totalPages = Math.max(1, pagination?.pages ?? 1);
+  const totalItems = pagination?.total ?? 0;
 
   const progressPct = useMemo(() => {
     const { completed, goal } = progress;
@@ -150,22 +171,32 @@ export default function ReadingListPage() {
   }, [progress]);
 
   const setJlpt = (next) => {
-    const p = new URLSearchParams(searchParams);
-    if (next) p.set("jlpt", next);
-    else p.delete("jlpt");
-    if (safeMode !== "all") p.set("mode", safeMode);
-    else p.delete("mode");
-    setSearchParams(p, { replace: true });
+    setSearchParams(
+      studyListSearchParams({ page: 1, jlpt: next, mode: safeMode }),
+      { replace: true },
+    );
   };
 
   const setMode = (next) => {
-    const p = new URLSearchParams(searchParams);
-    if (jlpt) p.set("jlpt", jlpt);
-    else p.delete("jlpt");
-    if (next === "all") p.delete("mode");
-    else p.set("mode", next);
-    setSearchParams(p, { replace: true });
+    setSearchParams(
+      studyListSearchParams({
+        page: 1,
+        jlpt,
+        mode: next === "all" ? "" : next,
+      }),
+      { replace: true },
+    );
   };
+
+  const getPageHref = useCallback(
+    (p) =>
+      studyListPath("/reading", {
+        page: p,
+        jlpt,
+        mode: safeMode,
+      }),
+    [jlpt, safeMode],
+  );
 
   const reviewCount = progress.reviewCount ?? 0;
 
@@ -174,7 +205,7 @@ export default function ReadingListPage() {
     user?.email?.split("@")[0] ||
     t("demoProfile.firstName");
 
-  if (loading) {
+  if (loading && !list.length) {
     return (
       <Layout
         userName={headerName}
@@ -286,7 +317,9 @@ export default function ReadingListPage() {
           ))}
         </div>
 
-        {list.length === 0 ? (
+        {loading ? (
+          <p className="vocab-empty">{t("common.loading")}</p>
+        ) : list.length === 0 ? (
           <p className="vocab-empty" role="status">
             {t("readingPage.noResults")}
           </p>
@@ -386,6 +419,17 @@ export default function ReadingListPage() {
             })}
           </ul>
         )}
+
+        {!loading && !error && totalItems > 0 ? (
+          <StudyListPagination
+            i18nKey="readingPage"
+            page={page}
+            totalPages={totalPages}
+            total={totalItems}
+            pageSize={STUDY_LIST_PAGE_SIZE}
+            getPageHref={getPageHref}
+          />
+        ) : null}
 
         <nav
           className="reading-foot-nav"

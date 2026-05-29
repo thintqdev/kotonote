@@ -14,6 +14,7 @@ import {
 	jlptFromDeck,
 } from '../utils/jlptAccess.js';
 import { isAdminRequest } from '../utils/queryBool.js';
+import { annotateKanjiDeckLessonUnlock } from '../utils/kanjiLessonUnlock.js';
 
 // ============ DECK CONTROLLERS ============
 
@@ -47,7 +48,11 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 		limit,
 	});
 
-	const annotated = annotateWithJlptLock(decks, unlocked, jlptFromDeck);
+	let annotated = annotateWithJlptLock(decks, unlocked, jlptFromDeck);
+
+	if (!isAdminRequest(req) && req.user?._id) {
+		annotated = await annotateKanjiDeckLessonUnlock(req.user._id, annotated);
+	}
 
 	return apiSuccess(
 		res,

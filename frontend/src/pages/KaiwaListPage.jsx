@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
@@ -6,6 +6,14 @@ import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import { listPublishedKaiwaContexts } from "../services/kaiwaService.js";
+import { STUDY_LIST_PAGE_SIZE } from "../constants/deckLessonList.js";
+import { JLPT_ORDER } from "../utils/deckStudy.js";
+import StudyListPagination from "../components/study/StudyListPagination.jsx";
+import {
+  parseStudyListPage,
+  studyListPath,
+  studyListSearchParams,
+} from "../utils/studyListNav.js";
 import { kaiwaCategoryLabelI18n } from "../constants/kaiwaFieldMeta.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { useJlptAccess } from "../hooks/useJlptAccess.js";
@@ -14,6 +22,7 @@ import "../components/study/JlptLockGate.css";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./ReadingListPage.css";
+import "./GrammarPages.css";
 
 function KaiwaChatIcon() {
   return (
@@ -58,53 +67,65 @@ export default function KaiwaListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const jlpt = (searchParams.get("jlpt") || "").trim();
+  const requestedPage = parseStudyListPage(searchParams);
 
   const [list, setList] = useState([]);
-  const [jlptLevels, setJlptLevels] = useState([]);
+  const [pagination, setPagination] = useState(null);
   const [requestedJlptLocked, setRequestedJlptLocked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const fetchList = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    setError("");
+    try {
+      const { items, pagination: pag, requestedJlptLocked: locked } =
+        await listPublishedKaiwaContexts({
+          jlpt: jlpt || undefined,
+          page: requestedPage,
+          limit: STUDY_LIST_PAGE_SIZE,
+        });
+      setList(Array.isArray(items) ? items : []);
+      setPagination(pag);
+      setRequestedJlptLocked(Boolean(locked));
+      const serverPage = pag?.page ?? requestedPage;
+      if (serverPage !== requestedPage) {
+        setSearchParams(
+          studyListSearchParams({ page: serverPage, jlpt }),
+          { replace: true },
+        );
+      }
+    } catch (err) {
+      setError(getApiErrorMessage(err, t));
+      setList([]);
+      setPagination(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, jlpt, requestedPage, setSearchParams, t]);
+
   useEffect(() => {
     if (!user) return undefined;
-    let cancelled = false;
-    (async () => {
-      setLoading(true);
-      setError("");
-      try {
-        const { items, jlptLevels: levels, requestedJlptLocked: locked } =
-          await listPublishedKaiwaContexts({
-            jlpt: jlpt || undefined,
-            limit: 50,
-          });
-        if (cancelled) return;
-        setList(Array.isArray(items) ? items : []);
-        setJlptLevels(
-          levels?.length
-            ? [...new Set(levels.map((lv) => String(lv).trim()).filter(Boolean))]
-            : [],
-        );
-        setRequestedJlptLocked(Boolean(locked));
-      } catch (err) {
-        if (!cancelled) {
-          setError(getApiErrorMessage(err, t));
-          setList([]);
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [user, jlpt, t]);
+    void fetchList();
+    return undefined;
+  }, [fetchList, user]);
+
+  const page = pagination?.page ?? requestedPage;
+  const totalPages = Math.max(1, pagination?.pages ?? 1);
+  const totalItems = pagination?.total ?? 0;
 
   const setJlpt = (next) => {
-    const p = new URLSearchParams(searchParams);
-    if (next) p.set("jlpt", next);
-    else p.delete("jlpt");
-    setSearchParams(p, { replace: true });
+    setSearchParams(
+      studyListSearchParams({ page: 1, jlpt: next }),
+      { replace: true },
+    );
   };
+
+  const getPageHref = useCallback(
+    (p) => studyListPath("/kaiwa", { page: p, jlpt }),
+    [jlpt],
+  );
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -118,7 +139,7 @@ export default function KaiwaListPage() {
     return t("kaiwaPage.noResults");
   }, [requestedJlptLocked, jlpt, t]);
 
-  if (loading) {
+  if (loading && !list.length) {
     return (
       <Layout
         userName={headerName}
@@ -193,7 +214,7 @@ export default function KaiwaListPage() {
           >
             {t("kaiwaPage.filterAll")}
           </button>
-          {jlptLevels.map((lv) => (
+          {JLPT_ORDER.map((lv) => (
             <button
               key={`kaiwa-jlpt-${lv}`}
               type="button"
@@ -207,7 +228,9 @@ export default function KaiwaListPage() {
           ))}
         </div>
 
-        {list.length === 0 ? (
+        {loading ? (
+          <p className="vocab-empty">{t("common.loading")}</p>
+        ) : list.length === 0 ? (
           <p className="vocab-empty" role="status">
             {emptyMessage}
           </p>
@@ -298,6 +321,17 @@ export default function KaiwaListPage() {
             })}
           </ul>
         )}
+
+        {!loading && !error && totalItems > 0 ? (
+          <StudyListPagination
+            i18nKey="kaiwaPage"
+            page={page}
+            totalPages={totalPages}
+            total={totalItems}
+            pageSize={STUDY_LIST_PAGE_SIZE}
+            getPageHref={getPageHref}
+          />
+        ) : null}
       </article>
     </Layout>
   );

@@ -11,6 +11,7 @@ const listeningService = {
       items: body.data?.items ?? [],
       jlptLevels: body.data?.jlptLevels ?? [],
       requestedJlptLocked: body.data?.requestedJlptLocked ?? false,
+      pagination: body.pagination ?? body.data?.pagination ?? null,
     };
   },
 

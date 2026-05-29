@@ -1,4 +1,4 @@
-const JLPT_ORDER = ['N5', 'N4', 'N3', 'N2', 'N1'];
+export const JLPT_ORDER = ['N5', 'N4', 'N3', 'N2', 'N1'];
 
 /** @param {string} jlpt — N3 */
 export function jlptToApiLevel(jlpt) {
@@ -371,19 +371,25 @@ export function buildDeckLessons(sortedDecks, mergedItems, progressByDeckId = nu
 		progressByDeckId != null && typeof progressByDeckId === 'object';
 
 	return sortedDecks.map((deck, index) => {
-		const lessonNo = index + 1;
+		const lessonNo =
+			Number.isFinite(Number(deck.lessonNo)) && Number(deck.lessonNo) > 0
+				? Number(deck.lessonNo)
+				: index + 1;
 		const deckItems = sortDeckItemsByDisplayOrder(
 			mergedItems.filter((x) => String(x.deckId) === String(deck._id)),
 		);
 		const learned = deckItems.filter((x) => x.learned).length;
 		const jlpt = deck.jlpt || levelToJlpt(deck.level);
-		const unlocked = useGrowthUnlock
-			? isVocabLessonUnlockedByGrowth(
-					sortedDecks,
-					lessonNo,
-					progressByDeckId,
-				)
-			: isDeckLessonUnlocked(sortedDecks, mergedItems, lessonNo);
+		const unlocked =
+			typeof deck.lessonUnlocked === 'boolean'
+				? deck.lessonUnlocked
+				: useGrowthUnlock
+					? isVocabLessonUnlockedByGrowth(
+							sortedDecks,
+							lessonNo,
+							progressByDeckId,
+						)
+					: isDeckLessonUnlocked(sortedDecks, mergedItems, lessonNo);
 
 		return {
 			id: String(deck._id),

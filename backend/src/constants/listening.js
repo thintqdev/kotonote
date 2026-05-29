@@ -1,0 +1,2 @@
+export const LISTENING_DEFAULT_PAGE_SIZE = 10;
+export const LISTENING_MAX_PAGE_SIZE = 50;
