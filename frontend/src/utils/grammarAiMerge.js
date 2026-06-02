@@ -1,10 +1,18 @@
+import { GRAMMAR_TAG_IDS } from '../constants/grammarFieldMeta.js';
+
+const allowedTags = new Set(GRAMMAR_TAG_IDS);
+
 /**
- * Gộp nội dung AI vào form editor ngữ pháp (giữ slug, jlpt, tags nếu đã có).
+ * Gộp nội dung AI vào form editor ngữ pháp (giữ slug/jlpt/tagIds nếu admin đã nhập).
  * @param {ReturnType<import('./grammarForm.js').emptyGrammarForm>} form
  * @param {object} ai
  */
 export function mergeGrammarAIIntoForm(form, ai) {
 	if (!ai) return form;
+
+	const aiTags = Array.isArray(ai.tagIds)
+		? [...new Set(ai.tagIds.filter((t) => allowedTags.has(t)))]
+		: [];
 
 	const examples =
 		ai.examples?.length > 0
@@ -24,6 +32,8 @@ export function mergeGrammarAIIntoForm(form, ai) {
 
 	return {
 		...form,
+		slug: form.slug.trim() || String(ai.slug ?? '').trim() || form.slug,
+		tagIds: form.tagIds.length > 0 ? form.tagIds : aiTags,
 		pattern: ai.pattern?.trim() || form.pattern,
 		teaser: ai.teaser ?? form.teaser,
 		topicRibbon: ai.topicRibbon ?? form.topicRibbon,

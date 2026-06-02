@@ -19,6 +19,13 @@ const compareRowSchema = Joi.object({
 	cells: Joi.array().items(locSchema).default([]),
 });
 
+const compareSectionSchema = Joi.object({
+	id: Joi.string().trim().allow('').default(''),
+	title: locSchema.default({}),
+	intro: locSchema.default({}),
+	rows: Joi.array().items(compareRowSchema).default([]),
+});
+
 const grammarBodySchema = {
 	slug: Joi.string()
 		.trim()
@@ -55,7 +62,8 @@ const grammarBodySchema = {
 		caption: locSchema.default({}),
 		colLabels: Joi.array().items(locSchema).default([]),
 		rows: Joi.array().items(compareRowSchema).default([]),
-	}).default({ caption: {}, colLabels: [], rows: [] }),
+		sections: Joi.array().items(compareSectionSchema).default([]),
+	}).default({ caption: {}, colLabels: [], rows: [], sections: [] }),
 	memo: locSchema.default({}),
 	practice: Joi.object({
 		items: Joi.array().items(locSchema).default([]),

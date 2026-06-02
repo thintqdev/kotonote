@@ -1,0 +1,202 @@
+[
+    {
+        "word": "信じます",
+        "reading": "しんじます",
+        "meaning": "tin tưởng",
+        "meaningJa": "本当だと思う",
+        "example": "私は彼の言葉を信じています。",
+        "exampleMeaning": "Tôi tin lời của anh ấy."
+    },
+    {
+        "word": "キャンセルします",
+        "reading": "キャンセルします",
+        "meaning": "hủy",
+        "meaningJa": "予約などを取り消す",
+        "example": "旅行をキャンセルしました。",
+        "exampleMeaning": "Tôi đã hủy chuyến du lịch."
+    },
+    {
+        "word": "知らせます",
+        "reading": "しらせます",
+        "meaning": "thông báo",
+        "meaningJa": "情報を伝える",
+        "example": "結果を知らせます。",
+        "exampleMeaning": "Tôi sẽ thông báo kết quả."
+    },
+    {
+        "word": "保証書",
+        "reading": "ほしょうしょ",
+        "meaning": "phiếu bảo hành",
+        "meaningJa": "保証のための書類",
+        "example": "保証書をなくしました。",
+        "exampleMeaning": "Tôi đã làm mất phiếu bảo hành."
+    },
+    {
+        "word": "領収書",
+        "reading": "りょうしゅうしょ",
+        "meaning": "hóa đơn, biên lai",
+        "meaningJa": "お金を受け取った証明",
+        "example": "領収書をください。",
+        "exampleMeaning": "Xin hãy cho tôi hóa đơn."
+    },
+    {
+        "word": "キャンプ",
+        "reading": "キャンプ",
+        "meaning": "cắm trại",
+        "meaningJa": "野外で泊まること",
+        "example": "友達とキャンプに行きました。",
+        "exampleMeaning": "Tôi đã đi cắm trại với bạn."
+    },
+    {
+        "word": "中止",
+        "reading": "ちゅうし",
+        "meaning": "hủy bỏ",
+        "meaningJa": "途中でやめること",
+        "example": "試合は中止になりました。",
+        "exampleMeaning": "Trận đấu đã bị hủy."
+    },
+    {
+        "word": "火事",
+        "reading": "かじ",
+        "meaning": "hỏa hoạn",
+        "meaningJa": "建物などが燃える事故",
+        "example": "近所で火事がありました。",
+        "exampleMeaning": "Đã xảy ra hỏa hoạn gần nhà."
+    },
+    {
+        "word": "地震",
+        "reading": "じしん",
+        "meaning": "động đất",
+        "meaningJa": "地面が揺れる現象",
+        "example": "昨夜地震がありました。",
+        "exampleMeaning": "Tối qua đã xảy ra động đất."
+    },
+    {
+        "word": "台風",
+        "reading": "たいふう",
+        "meaning": "bão",
+        "meaningJa": "強い風を伴う嵐",
+        "example": "台風が近づいています。",
+        "exampleMeaning": "Cơn bão đang đến gần."
+    },
+    {
+        "word": "原因",
+        "reading": "げんいん",
+        "meaning": "nguyên nhân",
+        "meaningJa": "物事が起こる理由",
+        "example": "事故の原因を調べます。",
+        "exampleMeaning": "Tôi sẽ điều tra nguyên nhân tai nạn."
+    },
+    {
+        "word": "結果",
+        "reading": "けっか",
+        "meaning": "kết quả",
+        "meaningJa": "最後の状態",
+        "example": "試験の結果が出ました。",
+        "exampleMeaning": "Kết quả kỳ thi đã có."
+    },
+    {
+        "word": "場合",
+        "reading": "ばあい",
+        "meaning": "trường hợp",
+        "meaningJa": "ある状況",
+        "example": "雨の場合は中止です。",
+        "exampleMeaning": "Trường hợp trời mưa sẽ hủy."
+    },
+    {
+        "word": "途中",
+        "reading": "とちゅう",
+        "meaning": "giữa chừng",
+        "meaningJa": "終わる前の段階",
+        "example": "途中で帰りました。",
+        "exampleMeaning": "Tôi đã về giữa chừng."
+    },
+    {
+        "word": "連絡",
+        "reading": "れんらく",
+        "meaning": "liên lạc",
+        "meaningJa": "情報を伝えること",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "利用します",
+        "reading": "りようします",
+        "meaning": "sử dụng",
+        "meaningJa": "役立てて使う",
+        "example": "インターネットを利用します。",
+        "exampleMeaning": "Tôi sử dụng Internet."
+    },
+    {
+        "word": "予約します",
+        "reading": "よやくします",
+        "meaning": "đặt trước",
+        "meaningJa": "前もって申し込む",
+        "example": "ホテルを予約しました。",
+        "exampleMeaning": "Tôi đã đặt khách sạn."
+    },
+    {
+        "word": "変更します",
+        "reading": "へんこうします",
+        "meaning": "thay đổi",
+        "meaningJa": "内容を変える",
+        "example": "予定を変更しました。",
+        "exampleMeaning": "Tôi đã thay đổi kế hoạch."
+    },
+    {
+        "word": "確認します",
+        "reading": "かくにんします",
+        "meaning": "xác nhận",
+        "meaningJa": "確かめる",
+        "example": "予約を確認します。",
+        "exampleMeaning": "Tôi xác nhận đặt chỗ."
+    },
+    {
+        "word": "故障",
+        "reading": "こしょう",
+        "meaning": "hỏng hóc",
+        "meaningJa": "機械が動かないこと",
+        "example": "エアコンが故障しました。",
+        "exampleMeaning": "Điều hòa đã bị hỏng."
+    },
+    {
+        "word": "修理",
+        "reading": "しゅうり",
+        "meaning": "sửa chữa",
+        "meaningJa": "壊れた物を直す",
+        "example": "車を修理しています。",
+        "exampleMeaning": "Tôi đang sửa xe."
+    },
+    {
+        "word": "無料",
+        "reading": "むりょう",
+        "meaning": "miễn phí",
+        "meaningJa": "お金がかからない",
+        "example": "このサービスは無料です。",
+        "exampleMeaning": "Dịch vụ này miễn phí."
+    },
+    {
+        "word": "有料",
+        "reading": "ゆうりょう",
+        "meaning": "có phí",
+        "meaningJa": "料金が必要",
+        "example": "駐車場は有料です。",
+        "exampleMeaning": "Bãi đỗ xe có thu phí."
+    },
+    {
+        "word": "受付",
+        "reading": "うけつけ",
+        "meaning": "quầy tiếp nhận",
+        "meaningJa": "申し込みを受ける場所",
+        "example": "受付で手続きをします。",
+        "exampleMeaning": "Tôi làm thủ tục ở quầy tiếp nhận."
+    },
+    {
+        "word": "手続き",
+        "reading": "てつづき",
+        "meaning": "thủ tục",
+        "meaningJa": "決められた方法",
+        "example": "手続きをしてください。",
+        "exampleMeaning": "Xin hãy làm thủ tục."
+    }
+]

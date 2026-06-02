@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
@@ -88,6 +88,7 @@ export default function KanjiPage() {
     () => (searchParams.get("deckId") || "").trim(),
     [searchParams],
   );
+  const isUserDeck = searchParams.get("userDeck") === "1";
   const isLessonMode = Boolean(
     lessonNoFromQuery != null && lessonJlpt.length > 0,
   );
@@ -147,11 +148,13 @@ export default function KanjiPage() {
   );
 
   const lessonUnlocked = useMemo(
-    () =>
-      isLessonMode && lessonNoFromQuery
+    () => {
+      if (isUserDeck) return true;
+      return isLessonMode && lessonNoFromQuery
         ? isDeckLessonUnlocked(sortedDecks, merged, lessonNoFromQuery)
-        : false,
-    [merged, sortedDecks, isLessonMode, lessonNoFromQuery],
+        : false;
+    },
+    [isUserDeck, merged, sortedDecks, isLessonMode, lessonNoFromQuery],
   );
 
   const lessonItemsStable = useMemo(() => {
@@ -384,12 +387,28 @@ export default function KanjiPage() {
     );
   }
 
-  if (!lessonUnlocked) {
+  if (!lessonUnlocked && !isUserDeck) {
     return <Navigate to="/kanji/browse" replace />;
   }
 
-  if (lessonItemsStable.length === 0) {
+  if (lessonItemsStable.length === 0 && !isUserDeck) {
     return <Navigate to="/kanji/browse" replace />;
+  }
+
+  if (isUserDeck && lessonItemsStable.length === 0 && !loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty">{t("kanjiPage.userDeckStudyEmpty")}</p>
+        <p>
+          <Link
+            to={`/kanji/mine/${encodeURIComponent(deckId || effectiveDeckId)}/edit`}
+            className="admin-grammar-btn admin-grammar-btn--primary"
+          >
+            {t("kanjiPage.userDeckEdit")}
+          </Link>
+        </p>
+      </Layout>
+    );
   }
 
   return (
@@ -402,13 +421,21 @@ export default function KanjiPage() {
         <Breadcrumb
           items={[
             { label: t("breadcrumb.home"), to: "/", end: true },
-            { label: t("breadcrumb.kanji"), to: "/kanji/browse" },
             {
-              label: t("kanjiStudyPage.lessonBreadcrumb", {
-                n: lessonNoFromQuery,
-                jlpt: lessonJlpt,
-              }),
+              label: t("breadcrumb.kanji"),
+              to: isUserDeck ? "/kanji/mine" : "/kanji/browse",
             },
+            isUserDeck
+              ? {
+                  label:
+                    sortedDecks[0]?.titleVi ?? t("kanjiPage.userDeckStudyBreadcrumb"),
+                }
+              : {
+                  label: t("kanjiStudyPage.lessonBreadcrumb", {
+                    n: lessonNoFromQuery,
+                    jlpt: lessonJlpt,
+                  }),
+                },
           ]}
         />
       </div>
@@ -725,9 +752,6 @@ export default function KanjiPage() {
                 {flashRevealed ? (
                   <div className="vocab-study-rate-strip vocab-study-rate-strip--lesson">
                     <p className="vocab-study-rate-hint">
-                      <span className="vocab-study-rate-hint-icon" aria-hidden>
-                        💡
-                      </span>
                       {t("kanjiStudyPage.rateHint")}
                     </p>
                     <div
@@ -740,9 +764,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--rose vocab-cta-reset"
                         onClick={handleFlashReviewAgain}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          😢
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateForgotTitle")}
                         </span>
@@ -755,9 +776,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--honey vocab-cta-reset"
                         onClick={handleFlashReviewSoon}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          🤔
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateSoonTitle")}
                         </span>
@@ -770,9 +788,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--mint vocab-cta-reset"
                         onClick={handleFlashKnow}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          😎
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateKnowTitle")}
                         </span>

@@ -5,6 +5,13 @@ export const GRAMMAR_TAG_IDS = [
 	'purpose',
 	'goal',
 	'change',
+	'conjugation',
+	'conditional',
+	'permission',
+	'obligation',
+	'passive',
+	'potential',
+	'comparison',
 ];
 
 export const GRAMMAR_JLPT_LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];

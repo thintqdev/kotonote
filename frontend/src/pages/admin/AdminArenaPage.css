@@ -1,0 +1,374 @@
+.admin-arena {
+	max-width: 960px;
+}
+
+.admin-arena-header {
+	margin-bottom: 20px;
+}
+
+.admin-arena-title {
+	margin: 0 0 6px;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: #1e2a18;
+}
+
+.admin-arena-lead {
+	margin: 0;
+	color: #5a5348;
+	font-size: 0.95rem;
+	line-height: 1.5;
+}
+
+.admin-arena-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 12px;
+	margin-bottom: 20px;
+}
+
+.admin-arena-stat {
+	padding: 14px 16px;
+	border-radius: 12px;
+	border: 1px solid rgba(90, 115, 64, 0.22);
+	background: linear-gradient(145deg, #f4f9ee, #fffdf8);
+}
+
+.admin-arena-stat-value {
+	display: block;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: #3d5c32;
+}
+
+.admin-arena-stat-label {
+	font-size: 0.8rem;
+	color: #6b6458;
+}
+
+.admin-arena-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.admin-arena-tab {
+	padding: 8px 14px;
+	border-radius: 999px;
+	border: 1px solid rgba(90, 115, 64, 0.35);
+	background: #fff;
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: #3d4a32;
+	cursor: pointer;
+	transition: background 0.15s, border-color 0.15s;
+}
+
+.admin-arena-tab:hover {
+	background: rgba(90, 115, 64, 0.08);
+}
+
+.admin-arena-tab--active {
+	background: #5a7340;
+	border-color: #5a7340;
+	color: #fff;
+}
+
+.admin-arena-panel {
+	padding: 20px 22px;
+	border-radius: 14px;
+	border: 1px solid rgba(90, 115, 64, 0.2);
+	background: #fffdf9;
+	box-shadow: 0 2px 12px rgba(40, 50, 30, 0.04);
+}
+
+.admin-arena-panel-title {
+	margin: 0 0 12px;
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: #2f3d28;
+}
+
+.admin-arena-window {
+	margin: 0 0 16px;
+	padding: 10px 14px;
+	border-radius: 10px;
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.admin-arena-window--open {
+	background: rgba(61, 107, 58, 0.12);
+	color: #2d5a28;
+}
+
+.admin-arena-window--closed {
+	background: rgba(120, 110, 100, 0.1);
+	color: #5a5348;
+}
+
+.admin-arena-form-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 14px 18px;
+}
+
+.admin-arena-enabled-row {
+	grid-column: 1 / -1;
+}
+
+.admin-arena-schedule-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
+}
+
+.admin-arena-schedule-view {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 12px 20px;
+	margin: 0;
+}
+
+.admin-arena-schedule-view > div {
+	margin: 0;
+}
+
+.admin-arena-schedule-view dt {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: #6b6358;
+	margin: 0 0 4px;
+}
+
+.admin-arena-schedule-view dd {
+	margin: 0;
+	font-size: 0.9375rem;
+	color: #2a2620;
+}
+
+.admin-arena-schedule-view--full {
+	grid-column: 1 / -1;
+}
+
+.admin-arena-schedule-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 16px;
+}
+
+.admin-arena-game-view {
+	margin-top: 8px;
+}
+
+.admin-arena-game-status {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #5a5348;
+	white-space: nowrap;
+}
+
+.admin-arena-active-count {
+	margin: -4px 0 12px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: #5a7340;
+}
+
+.admin-arena-lead--muted {
+	margin-top: -8px;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: #6b6358;
+}
+
+.admin-arena-form-grid label {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: #4a443c;
+}
+
+.admin-arena-form-grid input,
+.admin-arena-form-grid select,
+.admin-arena-form-grid textarea {
+	padding: 8px 10px;
+	border-radius: 8px;
+	border: 1px solid rgba(90, 115, 64, 0.35);
+	font-size: 0.9rem;
+}
+
+.admin-arena-weekdays-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 6px;
+}
+
+.admin-arena-weekday-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	border: 1px solid rgba(90, 115, 64, 0.3);
+	background: #fff;
+	font-weight: 600;
+	font-size: 0.8rem;
+	cursor: pointer;
+}
+
+.admin-arena-weekday-chip input {
+	margin: 0;
+}
+
+.admin-arena-btn {
+	margin-top: 16px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	border: none;
+	background: #5a7340;
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.admin-arena-btn:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+.admin-arena-btn--ghost {
+	background: transparent;
+	border: 1px solid rgba(90, 115, 64, 0.4);
+	color: #3d4a32;
+}
+
+.admin-arena-games {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.admin-arena-game-card {
+	padding: 16px 18px;
+	border-radius: 12px;
+	border: 1px solid rgba(90, 115, 64, 0.25);
+	background: #fff;
+}
+
+.admin-arena-game-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.admin-arena-game-name {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 800;
+	color: #2f3d28;
+}
+
+.admin-arena-game-desc {
+	margin: 0 0 12px;
+	font-size: 0.85rem;
+	color: #6b6458;
+	line-height: 1.45;
+}
+
+.admin-arena-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.85rem;
+	font-weight: 600;
+}
+
+.admin-arena-data-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.admin-arena-data-item {
+	border-bottom: 1px solid rgba(90, 115, 64, 0.12);
+	padding: 12px 0;
+}
+
+.admin-arena-data-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	font-size: 0.875rem;
+}
+
+.admin-arena-row-off {
+	opacity: 0.5;
+}
+
+.admin-arena-row-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+}
+
+.admin-arena-btn--sm {
+	margin-top: 0;
+	padding: 6px 12px;
+	font-size: 0.8125rem;
+}
+
+.admin-arena-btn--danger {
+	color: #8a4a4a;
+	border-color: rgba(185, 74, 72, 0.45);
+}
+
+.admin-arena-edit-form {
+	margin-top: 12px;
+	padding: 14px;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.85);
+	border: 1px solid rgba(90, 115, 64, 0.2);
+}
+
+.admin-arena-edit-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	grid-column: 1 / -1;
+}
+
+.admin-arena-data-row strong {
+	color: #2f3d28;
+}
+
+.admin-arena-import {
+	margin-top: 16px;
+}
+
+.admin-arena-import textarea {
+	width: 100%;
+	min-height: 140px;
+	font-family: ui-monospace, monospace;
+	font-size: 0.8rem;
+}
+
+.admin-arena-import-hint {
+	margin: 0 0 8px;
+	font-size: 0.8rem;
+	color: #6b6458;
+}

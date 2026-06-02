@@ -35,9 +35,13 @@ import VocabularyDetailPage from "./pages/VocabularyDetailPage.jsx";
 import VocabularyPage, {
   VocabularyIndexRedirect,
 } from "./pages/VocabularyPage.jsx";
+import UserVocabularyMyDecksPage from "./pages/UserVocabularyMyDecksPage.jsx";
+import UserVocabularyDeckEditorPage from "./pages/UserVocabularyDeckEditorPage.jsx";
 import AlphabetPage from "./pages/AlphabetPage.jsx";
 import KanjiListPage from "./pages/KanjiListPage.jsx";
 import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
+import UserKanjiMyDecksPage from "./pages/UserKanjiMyDecksPage.jsx";
+import UserKanjiDeckEditorPage from "./pages/UserKanjiDeckEditorPage.jsx";
 import ReadingListPage from "./pages/ReadingListPage.jsx";
 import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
 import NotebookPage from "./pages/NotebookPage.jsx";
@@ -86,8 +90,10 @@ import AdminExamPaperEditorPage from "./pages/admin/AdminExamPaperEditorPage.jsx
 import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
 import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
+import AdminArenaPage from "./pages/admin/AdminArenaPage.jsx";
 import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
 import PageViewTracker from "./components/analytics/PageViewTracker.jsx";
+import ArenaPage from "./pages/ArenaPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -157,12 +163,25 @@ function App() {
                   element={<VocabularyListPage />}
                 />
                 <Route
+                  path="/vocabulary/mine"
+                  element={<UserVocabularyMyDecksPage />}
+                />
+                <Route
+                  path="/vocabulary/mine/:deckId/edit"
+                  element={<UserVocabularyDeckEditorPage />}
+                />
+                <Route
                   path="/vocabulary/lesson/:lessonNo"
                   element={<VocabularyPage />}
                 />
                 <Route path="/vocabulary/:id" element={<VocabularyDetailPage />} />
                 <Route path="/vocabulary" element={<VocabularyIndexRedirect />} />
                 <Route path="/kanji/browse" element={<KanjiListPage />} />
+                <Route path="/kanji/mine" element={<UserKanjiMyDecksPage />} />
+                <Route
+                  path="/kanji/mine/:deckId/edit"
+                  element={<UserKanjiDeckEditorPage />}
+                />
                 <Route path="/kanji/lesson/:lessonNo" element={<KanjiPage />} />
                 <Route path="/kanji" element={<KanjiIndexRedirect />} />
                 <Route path="/reading" element={<ReadingListPage />} />
@@ -170,6 +189,7 @@ function App() {
                 <Route path="/notebook" element={<NotebookPage />} />
                 <Route path="/journal" element={<JournalPage />} />
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
+                <Route path="/arena" element={<ArenaPage />} />
                 <Route path="/listening" element={<ListeningPage />} />
                 <Route path="/listening/:id" element={<ListeningExercisePage />} />
                 <Route path="/kaiwa" element={<KaiwaListPage />} />
@@ -247,6 +267,7 @@ function App() {
                 element={<AdminNotificationsDemoPage />}
               />
               <Route path="settings" element={<AdminSettingsPage />} />
+              <Route path="arena" element={<AdminArenaPage />} />
               <Route path="*" element={<AdminStubContent />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />

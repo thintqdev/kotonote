@@ -334,6 +334,37 @@
   z-index: 4;
 }
 
+/* —— Flashcard (tab Flash): một thẻ, gọn —— */
+.vocab-study-card-wrap--flash {
+  margin-bottom: 20px;
+}
+
+.vocab-study-scrap-board:has(.vocab-study-card-wrap--flash) {
+  padding-left: 0;
+}
+
+.vocab-study-scrap-board:has(.vocab-study-card-wrap--flash) .vocab-scrap-hole-rail {
+  display: none;
+}
+
+.vocab-study-scrap-board:has(.vocab-study-card-wrap--flash) .vocab-study-scrap-head {
+  margin-bottom: 14px;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card {
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(58, 48, 38, 0.1);
+  background: #fffcfa;
+  box-shadow: 0 8px 28px rgba(48, 40, 32, 0.08);
+  min-height: clamp(260px, 40vh, 360px);
+  overflow: hidden;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card--scrap.vocab-study-card--front {
+  padding-top: 0;
+}
+
 .vocab-study-card {
   position: relative;
   z-index: 3;
@@ -409,6 +440,142 @@
   line-height: 1.12;
 }
 
+.vocab-study-card-wrap--flash .vocab-study-word-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: clamp(120px, 22vh, 180px);
+  margin-inline: auto;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-word--kanji-only {
+  font-size: clamp(2.75rem, 9vw, 4rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--vs-ink);
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-tap-zone {
+  min-height: clamp(180px, 32vh, 280px);
+  padding: 44px 20px 18px;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-tap-zone:hover {
+  background: rgba(92, 122, 82, 0.04);
+}
+
+.vocab-study-front-prompt-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--vocab-muted);
+  background: rgba(92, 122, 82, 0.06);
+}
+
+.vocab-study-card-wrap--flash .vocab-study-front-prompt {
+  margin: 0;
+  padding-top: 8px;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-tools {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.vocab-study-card-wrap--flash .vocab-icon-btn--scrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(58, 48, 38, 0.12);
+  box-shadow: 0 2px 8px rgba(48, 40, 32, 0.06);
+}
+
+.vocab-study-flash-head-back {
+  padding: 0 0 12px;
+  margin-bottom: 4px;
+  text-align: center;
+  border-bottom: 1px solid rgba(58, 48, 38, 0.08);
+  background: transparent;
+  border-radius: 0;
+}
+
+.vocab-study-flash-surface {
+  margin: 0 0 4px;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(1.65rem, 5vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.vocab-study-flash-reading {
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--vocab-muted);
+  letter-spacing: 0.08em;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-tap-zone--back {
+  min-height: 0;
+  padding: 20px 20px 52px;
+  align-items: stretch;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-reveal-zone--back {
+  gap: 12px;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-meaning-sheet,
+.vocab-study-card-wrap--flash .vocab-study-example-sheet {
+  padding: 12px 0 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-example-sheet {
+  padding-top: 14px;
+  margin-top: 2px;
+  border-top: 1px solid rgba(58, 48, 38, 0.08);
+}
+
+.vocab-study-card-wrap--flash .vocab-study-sheet-label {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(92, 122, 82, 0.75);
+}
+
+.vocab-study-card-wrap--flash .vocab-study-meaning-vi-below,
+.vocab-study-card-wrap--flash .vocab-study-meaning-single {
+  font-size: 1.12rem;
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-example-ja-block {
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.vocab-study-card-wrap--flash .vocab-study-rate-strip--lesson {
+  margin-top: 4px;
+}
+
 .vocab-study-card-flag {
   position: absolute;
   top: 10px;
@@ -424,6 +591,22 @@
   background: rgba(227, 240, 215, 0.85);
   border: 1px solid rgba(92, 122, 82, 0.35);
   box-shadow: 0 1px 4px rgba(42, 35, 28, 0.07);
+}
+
+.vocab-study-card-wrap--flash .vocab-study-card-flag {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vocab-muted);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .vocab-study-deco {
@@ -506,18 +689,13 @@ button.vocab-cta-reset {
 }
 
 .vocab-study-rate-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   margin: 0 0 12px;
-  font-size: 0.875rem;
-  font-weight: 700;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.45;
   color: var(--vocab-ink-soft);
-}
-
-.vocab-study-rate-hint-icon {
-  flex-shrink: 0;
 }
 
 .vocab-study-rate-row {
@@ -535,13 +713,16 @@ button.vocab-cta-reset {
 }
 
 .vocab-study-rate-tile {
-  padding: 12px 10px;
+  padding: 14px 12px;
   border-radius: 13px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 6px;
+  min-height: 4.5rem;
   text-align: center;
+  font-family: var(--font-ui);
   cursor: pointer;
   box-shadow:
     0 2px 10px rgba(42, 35, 28, 0.08),
@@ -587,22 +768,21 @@ button.vocab-cta-reset {
   border: 1px solid rgba(92, 122, 82, 0.42);
 }
 
-.vocab-study-rate-emoji {
-  font-size: 1.55rem;
-  line-height: 1;
-}
-
 .vocab-study-rate-tile-title {
-  font-size: 0.88rem;
-  font-weight: 800;
+  font-family: var(--font-hand);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
   color: var(--vocab-ink);
 }
 
 .vocab-study-rate-tile-sub {
-  font-size: 0.71rem;
-  font-weight: 600;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--vocab-muted);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .vocab-study-foot-nav {
@@ -724,7 +904,8 @@ button.vocab-cta-reset {
 .vocab-study-meaning-ja {
   margin: 0 0 8px;
   font-family: var(--font-serif-jp, serif);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.52;
   color: var(--vocab-muted);
   font-weight: 500;
@@ -855,8 +1036,12 @@ button.vocab-cta-reset {
   color: var(--vs-muted);
 }
 
+.vocab-study-rate-strip--lesson .vocab-study-rate-tile-title {
+  font-size: 1.05rem;
+}
+
 .vocab-study-rate-strip--lesson .vocab-study-rate-tile-sub {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
 }
 
 .vocab-study-growth-strip {
@@ -1041,7 +1226,7 @@ button.vocab-cta-reset {
 
 .vocab-lesson-quiz-prompt {
   margin: 0 0 14px;
-  font-size: 1.05rem;
+  font-size: 2.05rem;
   font-weight: 800;
   line-height: 1.45;
   text-align: center;
@@ -1360,7 +1545,7 @@ button.vocab-cta-reset {
 }
 
 .kanji-lesson-quiz-board .vocab-lesson-quiz-opt {
-  font-size: 0.78rem;
+  font-size: 1rem;
   line-height: 1.35;
   white-space: normal;
 }
@@ -1540,6 +1725,7 @@ button.vocab-cta-reset {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .kanji-write-grid {

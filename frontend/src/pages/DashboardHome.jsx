@@ -16,6 +16,8 @@ import SubjectGrid from "../components/dashboard/SubjectGrid.jsx";
 import DailyProgressCard from "../components/dashboard/DailyProgressCard.jsx";
 import DailyNoteCard from "../components/dashboard/DailyNoteCard.jsx";
 import LeaderboardPreviewCard from "../components/dashboard/LeaderboardPreviewCard.jsx";
+import ArenaPreviewCard from "../components/dashboard/ArenaPreviewCard.jsx";
+import { useArenaPreview } from "../hooks/useArenaPreview.js";
 import ContinueLearningCard from "../components/dashboard/ContinueLearningCard.jsx";
 import { buildDemoProfile } from "../data/dashboardHomeMock.js";
 import { useLeaderboardPreview } from "../hooks/useLeaderboardPreview.js";
@@ -113,6 +115,14 @@ const DashboardHome = () => {
     jlpt: profileJlpt,
   });
 
+  const {
+    data: arenaPreview,
+    loading: arenaLoading,
+    error: arenaError,
+  } = useArenaPreview({
+    enabled: Boolean(user) && !showHomeSkeleton,
+  });
+
   const myUserId = user?._id ? String(user._id) : "";
 
   const subjects = useMemo(() => {
@@ -193,6 +203,16 @@ const DashboardHome = () => {
             <ContinueLearningCard
               continueData={homePayload.continue}
               loading={showHomeSkeleton}
+            />
+          </div>
+        ) : null}
+
+        {user ? (
+          <div className="dash-float dash-float--section dash-float--arena">
+            <ArenaPreviewCard
+              arena={arenaPreview}
+              loading={arenaLoading}
+              error={arenaError}
             />
           </div>
         ) : null}

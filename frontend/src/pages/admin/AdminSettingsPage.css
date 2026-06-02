@@ -35,6 +35,51 @@
   font-size: 13px;
 }
 
+.admin-settings-form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 14px;
+}
+
+.admin-settings-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-settings-form-grid input,
+.admin-settings-form-grid select {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(90, 80, 70, 0.25);
+}
+
+.admin-arena-weekdays {
+  grid-column: 1 / -1;
+}
+
+.admin-arena-weekdays-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.admin-arena-weekday-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(90, 80, 70, 0.2);
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .admin-settings-dl dt {
   margin: 0;
   color: var(--admin-ink-soft, #6a5a4a);

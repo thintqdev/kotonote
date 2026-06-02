@@ -1,0 +1,202 @@
+[
+    {
+        "word": "包みます",
+        "reading": "つつみます",
+        "meaning": "gói, bọc",
+        "meaningJa": "紙や布で包む",
+        "example": "プレゼントを包みます。",
+        "exampleMeaning": "Tôi gói quà."
+    },
+    {
+        "word": "沸かします",
+        "reading": "わかします",
+        "meaning": "đun sôi",
+        "meaningJa": "水などを熱して沸騰させる",
+        "example": "お湯を沸かします。",
+        "exampleMeaning": "Tôi đun nước sôi."
+    },
+    {
+        "word": "混ぜます",
+        "reading": "まぜます",
+        "meaning": "trộn",
+        "meaningJa": "いろいろな物を合わせる",
+        "example": "材料を混ぜます。",
+        "exampleMeaning": "Tôi trộn các nguyên liệu."
+    },
+    {
+        "word": "計算します",
+        "reading": "けいさんします",
+        "meaning": "tính toán",
+        "meaningJa": "数を計算する",
+        "example": "料金を計算します。",
+        "exampleMeaning": "Tôi tính tiền."
+    },
+    {
+        "word": "厚い",
+        "reading": "あつい",
+        "meaning": "dày",
+        "meaningJa": "厚みがある",
+        "example": "この本は厚いです。",
+        "exampleMeaning": "Quyển sách này dày."
+    },
+    {
+        "word": "薄い",
+        "reading": "うすい",
+        "meaning": "mỏng, nhạt",
+        "meaningJa": "厚くない",
+        "example": "この紙は薄いです。",
+        "exampleMeaning": "Tờ giấy này mỏng."
+    },
+    {
+        "word": "弁護士",
+        "reading": "べんごし",
+        "meaning": "luật sư",
+        "meaningJa": "法律の専門家",
+        "example": "弁護士に相談します。",
+        "exampleMeaning": "Tôi tham khảo ý kiến luật sư."
+    },
+    {
+        "word": "音楽家",
+        "reading": "おんがくか",
+        "meaning": "nhạc sĩ",
+        "meaningJa": "音楽を作る人",
+        "example": "彼は有名な音楽家です。",
+        "exampleMeaning": "Anh ấy là nhạc sĩ nổi tiếng."
+    },
+    {
+        "word": "子どもたち",
+        "reading": "こどもたち",
+        "meaning": "trẻ em",
+        "meaningJa": "子どもの複数形",
+        "example": "子どもたちが遊んでいます。",
+        "exampleMeaning": "Bọn trẻ đang chơi."
+    },
+    {
+        "word": "自然",
+        "reading": "しぜん",
+        "meaning": "thiên nhiên",
+        "meaningJa": "山や川など",
+        "example": "自然が豊かです。",
+        "exampleMeaning": "Thiên nhiên rất phong phú."
+    },
+    {
+        "word": "教育",
+        "reading": "きょういく",
+        "meaning": "giáo dục",
+        "meaningJa": "教え育てること",
+        "example": "教育は大切です。",
+        "exampleMeaning": "Giáo dục rất quan trọng."
+    },
+    {
+        "word": "文化",
+        "reading": "ぶんか",
+        "meaning": "văn hóa",
+        "meaningJa": "生活様式や伝統",
+        "example": "日本文化を勉強しています。",
+        "exampleMeaning": "Tôi đang học văn hóa Nhật Bản."
+    },
+    {
+        "word": "社会",
+        "reading": "しゃかい",
+        "meaning": "xã hội",
+        "meaningJa": "人々の集まり",
+        "example": "社会について考えます。",
+        "exampleMeaning": "Tôi suy nghĩ về xã hội."
+    },
+    {
+        "word": "制度",
+        "reading": "せいど",
+        "meaning": "chế độ, hệ thống",
+        "meaningJa": "決まりの仕組み",
+        "example": "新しい制度が始まりました。",
+        "exampleMeaning": "Chế độ mới đã bắt đầu."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "thói quen",
+        "meaningJa": "いつもすること",
+        "example": "毎朝散歩する習慣があります。",
+        "exampleMeaning": "Tôi có thói quen đi dạo mỗi sáng."
+    },
+    {
+        "word": "経験",
+        "reading": "けいけん",
+        "meaning": "kinh nghiệm",
+        "meaningJa": "実際にしたこと",
+        "example": "いい経験になりました。",
+        "exampleMeaning": "Đó đã trở thành một kinh nghiệm tốt."
+    },
+    {
+        "word": "発達",
+        "reading": "はったつ",
+        "meaning": "phát triển",
+        "meaningJa": "進歩すること",
+        "example": "科学が発達しています。",
+        "exampleMeaning": "Khoa học đang phát triển."
+    },
+    {
+        "word": "研究",
+        "reading": "けんきゅう",
+        "meaning": "nghiên cứu",
+        "meaningJa": "詳しく調べること",
+        "example": "日本語を研究しています。",
+        "exampleMeaning": "Tôi đang nghiên cứu tiếng Nhật."
+    },
+    {
+        "word": "発見",
+        "reading": "はっけん",
+        "meaning": "phát hiện",
+        "meaningJa": "新しく見つけること",
+        "example": "新しい星を発見しました。",
+        "exampleMeaning": "Đã phát hiện một ngôi sao mới."
+    },
+    {
+        "word": "発明",
+        "reading": "はつめい",
+        "meaning": "phát minh",
+        "meaningJa": "新しい物を作ること",
+        "example": "便利な物を発明しました。",
+        "exampleMeaning": "Đã phát minh ra một vật hữu ích."
+    },
+    {
+        "word": "課題",
+        "reading": "かだい",
+        "meaning": "đề tài, bài tập",
+        "meaningJa": "解決する問題",
+        "example": "課題を提出しました。",
+        "exampleMeaning": "Tôi đã nộp bài tập."
+    },
+    {
+        "word": "解決",
+        "reading": "かいけつ",
+        "meaning": "giải quyết",
+        "meaningJa": "問題をなくす",
+        "example": "問題を解決しました。",
+        "exampleMeaning": "Tôi đã giải quyết vấn đề."
+    },
+    {
+        "word": "協力",
+        "reading": "きょうりょく",
+        "meaning": "hợp tác",
+        "meaningJa": "力を合わせること",
+        "example": "協力してください。",
+        "exampleMeaning": "Xin hãy hợp tác."
+    },
+    {
+        "word": "支援",
+        "reading": "しえん",
+        "meaning": "hỗ trợ",
+        "meaningJa": "助けること",
+        "example": "被災地を支援します。",
+        "exampleMeaning": "Tôi hỗ trợ vùng bị thiên tai."
+    },
+    {
+        "word": "感謝",
+        "reading": "かんしゃ",
+        "meaning": "biết ơn",
+        "meaningJa": "ありがとうという気持ち",
+        "example": "感謝しています。",
+        "exampleMeaning": "Tôi rất biết ơn."
+    }
+]

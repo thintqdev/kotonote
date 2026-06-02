@@ -80,7 +80,10 @@ export const getDeckWithKanji = async (id) => {
  * Create new deck
  */
 export const createDeck = async (deckData) => {
-	return await kanjiRepository.createDeck(deckData);
+	return await kanjiRepository.createDeck({
+		...deckData,
+		ownerId: null,
+	});
 };
 
 /**

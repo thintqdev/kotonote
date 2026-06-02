@@ -28,6 +28,9 @@ const TAG_ACCENT = new Set([
   "purpose",
   "goal",
   "change",
+  "conjugation",
+  "conditional",
+  "comparison",
 ]);
 
 const DEFAULT_JLPT_LEVELS = ["N5", "N4", "N3", "N2", "N1"];

@@ -1155,3 +1155,166 @@
   font-weight: 700;
   color: rgba(74, 56, 36, 0.72);
 }
+
+/* —— Bộ từ vựng user (Pro+) —— */
+.vocab-lesson-head .user-vocab-mine-tab-link {
+  flex-shrink: 0;
+  align-self: center;
+  margin-left: auto;
+}
+
+.user-vocab-mine-tab-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--vocab-ink, #4a3824);
+  background: rgba(255, 248, 235, 0.95);
+  border: 2px solid rgba(74, 56, 36, 0.18);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.user-vocab-mine-tab-link:hover {
+  border-color: rgba(74, 56, 36, 0.35);
+  background: #fff;
+}
+
+.user-vocab-mine-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.user-vocab-mine-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.user-vocab-quota {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.user-vocab-deck-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.user-vocab-deck-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 252, 245, 0.92);
+  border: 2px solid rgba(74, 56, 36, 0.12);
+}
+
+.user-vocab-deck-card h2 {
+  margin: 8px 0 4px;
+  font-size: 1.1rem;
+}
+
+.user-vocab-deck-ja {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.user-vocab-deck-meta {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+}
+
+.user-vocab-deck-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.user-vocab-editor-section {
+  margin-bottom: 28px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(74, 56, 36, 0.15);
+}
+
+.user-vocab-editor-section:first-of-type {
+  border-top: none;
+}
+
+.user-vocab-editor-h2 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.user-vocab-editor-h3 {
+  margin: 16px 0 10px;
+  font-size: 0.98rem;
+}
+
+.user-vocab-editor-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.user-vocab-meta-form {
+  display: grid;
+  gap: 12px;
+  max-width: 520px;
+}
+
+.user-vocab-word-list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.user-vocab-word-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(74, 56, 36, 0.1);
+}
+
+.user-vocab-word-reading {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.user-vocab-word-row-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.user-vocab-word-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.user-vocab-import-hint {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+.user-kanji-char {
+  font-size: 1.35rem;
+}

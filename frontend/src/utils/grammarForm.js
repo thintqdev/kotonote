@@ -18,7 +18,8 @@ export const emptyGrammarForm = () => ({
 	ngJaText: '',
 	ngViText: '',
 	ngNote: emptyLoc(),
-	compareJson: '{\n  "caption": { "ja": "", "vi": "" },\n  "colLabels": [],\n  "rows": []\n}',
+	compareJson:
+		'{\n  "caption": { "ja": "", "vi": "" },\n  "colLabels": [],\n  "rows": [],\n  "sections": []\n}',
 	memo: emptyLoc(),
 	practiceItems: [{ ja: '', vi: '' }],
 });
@@ -50,7 +51,12 @@ export function grammarToForm(g) {
 		ngViText: (g.ng?.vi ?? []).join('\n'),
 		ngNote: { ja: g.ngNote?.ja ?? '', vi: g.ngNote?.vi ?? '' },
 		compareJson: JSON.stringify(
-			g.compare ?? { caption: emptyLoc(), colLabels: [], rows: [] },
+			g.compare ?? {
+				caption: emptyLoc(),
+				colLabels: [],
+				rows: [],
+				sections: [],
+			},
 			null,
 			2,
 		),
@@ -72,7 +78,12 @@ const linesToArray = (text) =>
  * @param {ReturnType<typeof emptyGrammarForm>} form
  */
 export function formToGrammarPayload(form) {
-	let compare = { caption: emptyLoc(), colLabels: [], rows: [] };
+	let compare = {
+		caption: emptyLoc(),
+		colLabels: [],
+		rows: [],
+		sections: [],
+	};
 	try {
 		const parsed = JSON.parse(form.compareJson || '{}');
 		if (parsed && typeof parsed === 'object') compare = parsed;

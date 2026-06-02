@@ -1,0 +1,202 @@
+[
+    {
+        "word": "見ます",
+        "reading": "みます",
+        "meaning": "xem, nhìn",
+        "meaningJa": "目で確認する",
+        "example": "子どもが遊ぶのを見ます。",
+        "exampleMeaning": "Tôi xem bọn trẻ chơi."
+    },
+    {
+        "word": "探します",
+        "reading": "さがします",
+        "meaning": "tìm kiếm",
+        "meaningJa": "見つけようとする",
+        "example": "仕事を探しています。",
+        "exampleMeaning": "Tôi đang tìm việc."
+    },
+    {
+        "word": "遅れます",
+        "reading": "おくれます",
+        "meaning": "trễ",
+        "meaningJa": "予定より遅くなる",
+        "example": "電車が遅れています。",
+        "exampleMeaning": "Tàu đang bị trễ."
+    },
+    {
+        "word": "間に合います",
+        "reading": "まにあいます",
+        "meaning": "kịp",
+        "meaningJa": "時間に間に合う",
+        "example": "九時の会議に間に合います。",
+        "exampleMeaning": "Tôi kịp cuộc họp lúc 9 giờ."
+    },
+    {
+        "word": "やります",
+        "reading": "やります",
+        "meaning": "làm",
+        "meaningJa": "何かを行う",
+        "example": "宿題をやります。",
+        "exampleMeaning": "Tôi làm bài tập."
+    },
+    {
+        "word": "参加します",
+        "reading": "さんかします",
+        "meaning": "tham gia",
+        "meaningJa": "集まりに入る",
+        "example": "イベントに参加します。",
+        "exampleMeaning": "Tôi tham gia sự kiện."
+    },
+    {
+        "word": "申し込みます",
+        "reading": "もうしこみます",
+        "meaning": "đăng ký",
+        "meaningJa": "希望を伝える",
+        "example": "コースに申し込みます。",
+        "exampleMeaning": "Tôi đăng ký khóa học."
+    },
+    {
+        "word": "都合がいい",
+        "reading": "つごうがいい",
+        "meaning": "thuận tiện",
+        "meaningJa": "予定に問題がない",
+        "example": "土曜日は都合がいいです。",
+        "exampleMeaning": "Thứ Bảy tôi thuận tiện."
+    },
+    {
+        "word": "都合が悪い",
+        "reading": "つごうがわるい",
+        "meaning": "không tiện",
+        "meaningJa": "予定に問題がある",
+        "example": "明日は都合が悪いです。",
+        "exampleMeaning": "Ngày mai tôi không tiện."
+    },
+    {
+        "word": "気分がいい",
+        "reading": "きぶんがいい",
+        "meaning": "tâm trạng tốt",
+        "meaningJa": "気持ちがいい",
+        "example": "今日は気分がいいです。",
+        "exampleMeaning": "Hôm nay tâm trạng tôi tốt."
+    },
+    {
+        "word": "気分が悪い",
+        "reading": "きぶんがわるい",
+        "meaning": "khó chịu, không khỏe",
+        "meaningJa": "気持ちや体調が悪い",
+        "example": "少し気分が悪いです。",
+        "exampleMeaning": "Tôi hơi khó chịu."
+    },
+    {
+        "word": "新聞社",
+        "reading": "しんぶんしゃ",
+        "meaning": "tòa soạn báo",
+        "meaningJa": "新聞を作る会社",
+        "example": "兄は新聞社で働いています。",
+        "exampleMeaning": "Anh tôi làm ở tòa soạn báo."
+    },
+    {
+        "word": "柔道",
+        "reading": "じゅうどう",
+        "meaning": "judo",
+        "meaningJa": "日本の武道",
+        "example": "柔道を習っています。",
+        "exampleMeaning": "Tôi đang học judo."
+    },
+    {
+        "word": "運動会",
+        "reading": "うんどうかい",
+        "meaning": "hội thao",
+        "meaningJa": "学校などのスポーツ行事",
+        "example": "来週運動会があります。",
+        "exampleMeaning": "Tuần sau có hội thao."
+    },
+    {
+        "word": "場所",
+        "reading": "ばしょ",
+        "meaning": "địa điểm",
+        "meaningJa": "物や人がある所",
+        "example": "集合場所は駅前です。",
+        "exampleMeaning": "Địa điểm tập trung là trước ga."
+    },
+    {
+        "word": "ボランティア",
+        "reading": "ボランティア",
+        "meaning": "tình nguyện",
+        "meaningJa": "無料で人を助ける活動",
+        "example": "ボランティアに参加しました。",
+        "exampleMeaning": "Tôi đã tham gia tình nguyện."
+    },
+    {
+        "word": "弁護士",
+        "reading": "べんごし",
+        "meaning": "luật sư",
+        "meaningJa": "法律の専門家",
+        "example": "彼は弁護士です。",
+        "exampleMeaning": "Anh ấy là luật sư."
+    },
+    {
+        "word": "経済",
+        "reading": "けいざい",
+        "meaning": "kinh tế",
+        "meaningJa": "お金や社会の活動",
+        "example": "大学で経済を勉強しています。",
+        "exampleMeaning": "Tôi học kinh tế ở đại học."
+    },
+    {
+        "word": "美術館",
+        "reading": "びじゅつかん",
+        "meaning": "bảo tàng mỹ thuật",
+        "meaningJa": "絵や芸術を展示する場所",
+        "example": "美術館へ行きました。",
+        "exampleMeaning": "Tôi đã đi bảo tàng mỹ thuật."
+    },
+    {
+        "word": "宇宙",
+        "reading": "うちゅう",
+        "meaning": "vũ trụ",
+        "meaningJa": "地球の外の世界",
+        "example": "宇宙に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với vũ trụ."
+    },
+    {
+        "word": "地球",
+        "reading": "ちきゅう",
+        "meaning": "Trái Đất",
+        "meaningJa": "私たちが住む星",
+        "example": "地球は丸いです。",
+        "exampleMeaning": "Trái Đất hình tròn."
+    },
+    {
+        "word": "最近",
+        "reading": "さいきん",
+        "meaning": "gần đây",
+        "meaningJa": "近い過去",
+        "example": "最近忙しいです。",
+        "exampleMeaning": "Gần đây tôi bận."
+    },
+    {
+        "word": "今度",
+        "reading": "こんど",
+        "meaning": "lần tới",
+        "meaningJa": "次の機会",
+        "example": "今度一緒に行きましょう。",
+        "exampleMeaning": "Lần tới cùng đi nhé."
+    },
+    {
+        "word": "きっと",
+        "reading": "きっと",
+        "meaning": "chắc chắn",
+        "meaningJa": "必ずそうなる",
+        "example": "きっと成功します。",
+        "exampleMeaning": "Chắc chắn sẽ thành công."
+    },
+    {
+        "word": "ぜひ",
+        "reading": "ぜひ",
+        "meaning": "nhất định",
+        "meaningJa": "強くすすめる気持ち",
+        "example": "ぜひ来てください。",
+        "exampleMeaning": "Nhất định hãy đến nhé."
+    }
+]

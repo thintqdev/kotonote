@@ -1,0 +1,202 @@
+[
+    {
+        "word": "開きます",
+        "reading": "あきます",
+        "meaning": "mở (cửa, cửa sổ tự mở)",
+        "meaningJa": "閉じていたものが開く",
+        "example": "ドアが開きました。",
+        "exampleMeaning": "Cửa đã mở."
+    },
+    {
+        "word": "閉まります",
+        "reading": "しまります",
+        "meaning": "đóng (tự đóng)",
+        "meaningJa": "開いていたものが閉じる",
+        "example": "窓が閉まりました。",
+        "exampleMeaning": "Cửa sổ đã đóng."
+    },
+    {
+        "word": "つきます",
+        "reading": "つきます",
+        "meaning": "bật lên",
+        "meaningJa": "電気などがつく",
+        "example": "電気がつきました。",
+        "exampleMeaning": "Đèn đã bật."
+    },
+    {
+        "word": "消えます",
+        "reading": "きえます",
+        "meaning": "tắt, biến mất",
+        "meaningJa": "見えなくなる",
+        "example": "電気が消えました。",
+        "exampleMeaning": "Đèn đã tắt."
+    },
+    {
+        "word": "壊れます",
+        "reading": "こわれます",
+        "meaning": "hỏng",
+        "meaningJa": "使えなくなる",
+        "example": "パソコンが壊れました。",
+        "exampleMeaning": "Máy tính đã hỏng."
+    },
+    {
+        "word": "割れます",
+        "reading": "われます",
+        "meaning": "vỡ",
+        "meaningJa": "固い物が割れる",
+        "example": "コップが割れました。",
+        "exampleMeaning": "Cái cốc đã vỡ."
+    },
+    {
+        "word": "折れます",
+        "reading": "おれます",
+        "meaning": "gãy",
+        "meaningJa": "長い物が折れる",
+        "example": "木の枝が折れました。",
+        "exampleMeaning": "Cành cây đã gãy."
+    },
+    {
+        "word": "破れます",
+        "reading": "やぶれます",
+        "meaning": "rách",
+        "meaningJa": "紙や布が破れる",
+        "example": "シャツが破れました。",
+        "exampleMeaning": "Áo đã bị rách."
+    },
+    {
+        "word": "汚れます",
+        "reading": "よごれます",
+        "meaning": "bị bẩn",
+        "meaningJa": "きれいではなくなる",
+        "example": "服が汚れました。",
+        "exampleMeaning": "Quần áo đã bị bẩn."
+    },
+    {
+        "word": "付きます",
+        "reading": "つきます",
+        "meaning": "dính vào",
+        "meaningJa": "表面に付く",
+        "example": "靴に泥が付きました。",
+        "exampleMeaning": "Bùn dính vào giày."
+    },
+    {
+        "word": "外れます",
+        "reading": "はずれます",
+        "meaning": "bong ra, tuột ra",
+        "meaningJa": "付いていた物が取れる",
+        "example": "ボタンが外れました。",
+        "exampleMeaning": "Cúc áo đã tuột."
+    },
+    {
+        "word": "止まります",
+        "reading": "とまります",
+        "meaning": "dừng lại",
+        "meaningJa": "動かなくなる",
+        "example": "エレベーターが止まりました。",
+        "exampleMeaning": "Thang máy đã dừng."
+    },
+    {
+        "word": "間違えます",
+        "reading": "まちがえます",
+        "meaning": "làm sai",
+        "meaningJa": "正しくないことをする",
+        "example": "答えを間違えました。",
+        "exampleMeaning": "Tôi đã trả lời sai."
+    },
+    {
+        "word": "落とします",
+        "reading": "おとします",
+        "meaning": "làm rơi",
+        "meaningJa": "下に落ちるようにする",
+        "example": "携帯電話を落としました。",
+        "exampleMeaning": "Tôi đã làm rơi điện thoại."
+    },
+    {
+        "word": "掛かります",
+        "reading": "かかります",
+        "meaning": "được khóa",
+        "meaningJa": "鍵が閉まる",
+        "example": "ドアに鍵が掛かっています。",
+        "exampleMeaning": "Cửa đang được khóa."
+    },
+    {
+        "word": "不注意",
+        "reading": "ふちゅうい",
+        "meaning": "bất cẩn",
+        "meaningJa": "注意が足りないこと",
+        "example": "不注意でミスしました。",
+        "exampleMeaning": "Tôi mắc lỗi do bất cẩn."
+    },
+    {
+        "word": "故障",
+        "reading": "こしょう",
+        "meaning": "hỏng hóc",
+        "meaningJa": "機械が壊れること",
+        "example": "機械が故障しました。",
+        "exampleMeaning": "Máy móc đã hỏng."
+    },
+    {
+        "word": "エレベーター",
+        "reading": "エレベーター",
+        "meaning": "thang máy",
+        "meaningJa": "人や物を上下に運ぶ設備",
+        "example": "エレベーターで上へ行きます。",
+        "exampleMeaning": "Tôi lên tầng bằng thang máy."
+    },
+    {
+        "word": "ガラス",
+        "reading": "ガラス",
+        "meaning": "kính",
+        "meaningJa": "透明な材料",
+        "example": "ガラスが割れました。",
+        "exampleMeaning": "Kính đã vỡ."
+    },
+    {
+        "word": "袋",
+        "reading": "ふくろ",
+        "meaning": "cái túi",
+        "meaningJa": "物を入れる物",
+        "example": "袋に入れてください。",
+        "exampleMeaning": "Hãy cho vào túi."
+    },
+    {
+        "word": "財布",
+        "reading": "さいふ",
+        "meaning": "ví tiền",
+        "meaningJa": "お金を入れる物",
+        "example": "財布をなくしました。",
+        "exampleMeaning": "Tôi đã làm mất ví."
+    },
+    {
+        "word": "枝",
+        "reading": "えだ",
+        "meaning": "cành cây",
+        "meaningJa": "木から伸びる部分",
+        "example": "枝が折れました。",
+        "exampleMeaning": "Cành cây đã gãy."
+    },
+    {
+        "word": "駅員",
+        "reading": "えきいん",
+        "meaning": "nhân viên nhà ga",
+        "meaningJa": "駅で働く人",
+        "example": "駅員に聞きました。",
+        "exampleMeaning": "Tôi đã hỏi nhân viên nhà ga."
+    },
+    {
+        "word": "この辺",
+        "reading": "このへん",
+        "meaning": "khu vực này",
+        "meaningJa": "この近く",
+        "example": "この辺にコンビニがあります。",
+        "exampleMeaning": "Có cửa hàng tiện lợi ở khu vực này."
+    },
+    {
+        "word": "今すぐ",
+        "reading": "いますぐ",
+        "meaning": "ngay bây giờ",
+        "meaningJa": "すぐに",
+        "example": "今すぐ行きます。",
+        "exampleMeaning": "Tôi đi ngay bây giờ."
+    }
+]

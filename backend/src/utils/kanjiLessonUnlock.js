@@ -1,6 +1,7 @@
 import KanjiDeckProgress from '../models/KanjiDeckProgress.js';
 import * as kanjiRepository from '../repositories/kanjiRepository.js';
 import { isVocabLessonUnlockedByGrowth } from './vocabLessonUnlock.js';
+import { isUserOwnedDeck, officialDeckFilter } from './userVocabularyDeck.js';
 
 /**
  * @param {object[]} siblings
@@ -28,6 +29,7 @@ export async function annotateKanjiDeckLessonUnlock(userId, decks) {
 		const key = String(jlpt).trim().toUpperCase();
 		if (!siblingsByJlpt.has(key)) {
 			const rows = await kanjiRepository.findAllDecks({
+				...officialDeckFilter(),
 				jlpt: key,
 				isActive: true,
 			});
@@ -67,6 +69,14 @@ export async function annotateKanjiDeckLessonUnlock(userId, decks) {
 	}
 
 	return decks.map((deck) => {
+		if (isUserOwnedDeck(deck)) {
+			return {
+				...deck,
+				lessonNo: 1,
+				lessonUnlocked: true,
+				isUserDeck: true,
+			};
+		}
 		const jlpt = String(deck.jlpt || '').trim().toUpperCase();
 		const siblings = siblingsByJlpt.get(jlpt) ?? [];
 		const lessonNo = resolveLessonNoFromDeckId(siblings, deck._id);

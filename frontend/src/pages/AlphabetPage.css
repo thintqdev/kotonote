@@ -685,8 +685,7 @@
   z-index: 1;
   margin: 0;
   padding: 0;
-  font-family: var(--font-hand, ui-serif), "Yu Mincho", "Hiragino Mincho ProN",
-    serif;
+  font-family: var(--font-serif-jp);
   /* Fallback: không dùng cqmin; max đồng bộ với .alpha-practice-layout */
   font-size: clamp(
     2.35rem,
@@ -750,8 +749,7 @@
   margin: 0;
   padding: 0;
   z-index: 0;
-  font-family: var(--font-hand, ui-serif), "Yu Mincho", "Hiragino Mincho ProN",
-    serif;
+  font-family: var(--font-serif-jp);
   font-size: clamp(
     2.35rem,
     min(18.5vw, var(--alpha-pr-kana-pad-max)),
@@ -785,10 +783,14 @@
 .alpha-practice-pad--bold .alpha-practice-pad-guide {
   color: var(--vocab-ink);
   opacity: 0.22;
+  font-weight: 700;
+  font-size: 4rem;
 }
 
 .alpha-practice-pad--trace .alpha-practice-pad-guide {
   color: rgba(58, 53, 48, 0.14);
+  font-weight: 700;
+  font-size: 4rem;
 }
 
 .alpha-practice-pad-canvas {

@@ -10,6 +10,7 @@ export const DASHBOARD_NAV_ITEMS = [
   { id: 'practice', to: '/practice', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'notebook', to: '/notebook', iconSrc: '/assets/menu-icons/notebook.png' },
   { id: 'journal', to: '/journal', iconSrc: '/assets/menu-icons/notebook.png' },
+  { id: 'arena', to: '/arena', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'stats', to: '/leaderboard', iconSrc: '/assets/menu-icons/statistics.png' },
   { id: 'settings', to: '/settings', iconSrc: '/assets/menu-icons/settings.png' },
 ];

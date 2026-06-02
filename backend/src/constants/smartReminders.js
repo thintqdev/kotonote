@@ -4,6 +4,7 @@ export const REMINDER_KIND = {
 	STREAK_CHECKIN: 'streak_checkin',
 	DAILY_GOAL_NUDGE: 'daily_goal_nudge',
 	EXAM_COUNTDOWN: 'exam_countdown',
+	ARENA_UPCOMING: 'arena_upcoming',
 };
 
 /** Giờ local cố định (HH:mm, slot :00/:30) */

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "参ります",
+        "reading": "まいります",
+        "meaning": "đi/đến (khiêm nhường)",
+        "meaningJa": "行きます・来ますの謙譲語",
+        "example": "明日、そちらへ参ります。",
+        "exampleMeaning": "Ngày mai tôi sẽ đến chỗ của quý công ty."
+    },
+    {
+        "word": "おります",
+        "reading": "おります",
+        "meaning": "ở (khiêm nhường)",
+        "meaningJa": "いますの謙譲語",
+        "example": "田中はただ今席におります。",
+        "exampleMeaning": "Anh Tanaka hiện đang có mặt ở chỗ ngồi."
+    },
+    {
+        "word": "申します",
+        "reading": "もうします",
+        "meaning": "nói/tên là (khiêm nhường)",
+        "meaningJa": "言いますの謙譲語",
+        "example": "私はトランと申します。",
+        "exampleMeaning": "Tôi tên là Trần."
+    },
+    {
+        "word": "いたします",
+        "reading": "いたします",
+        "meaning": "làm (khiêm nhường)",
+        "meaningJa": "しますの謙譲語",
+        "example": "私がご説明いたします。",
+        "exampleMeaning": "Tôi xin phép được giải thích."
+    },
+    {
+        "word": "いただきます",
+        "reading": "いただきます",
+        "meaning": "nhận/ăn (khiêm nhường)",
+        "meaningJa": "もらいます・食べますの謙譲語",
+        "example": "社長からお土産をいただきました。",
+        "exampleMeaning": "Tôi đã nhận quà lưu niệm từ giám đốc."
+    },
+    {
+        "word": "くださいます",
+        "reading": "くださいます",
+        "meaning": "cho (kính ngữ)",
+        "meaningJa": "くれますの尊敬語",
+        "example": "先生が本をくださいました。",
+        "exampleMeaning": "Thầy giáo đã cho tôi một quyển sách."
+    },
+    {
+        "word": "ご覧になります",
+        "reading": "ごらんになります",
+        "meaning": "xem (kính ngữ)",
+        "meaningJa": "見ますの尊敬語",
+        "example": "この資料をご覧になりますか。",
+        "exampleMeaning": "Ngài có muốn xem tài liệu này không?"
+    },
+    {
+        "word": "おっしゃいます",
+        "reading": "おっしゃいます",
+        "meaning": "nói (kính ngữ)",
+        "meaningJa": "言いますの尊敬語",
+        "example": "部長は何とおっしゃいましたか。",
+        "exampleMeaning": "Trưởng phòng đã nói gì vậy?"
+    },
+    {
+        "word": "召し上がります",
+        "reading": "めしあがります",
+        "meaning": "ăn/uống (kính ngữ)",
+        "meaningJa": "食べます・飲みますの尊敬語",
+        "example": "どうぞ召し上がってください。",
+        "exampleMeaning": "Xin mời dùng ạ."
+    },
+    {
+        "word": "なさいます",
+        "reading": "なさいます",
+        "meaning": "làm (kính ngữ)",
+        "meaningJa": "しますの尊敬語",
+        "example": "部長は何をなさいますか。",
+        "exampleMeaning": "Trưởng phòng sẽ làm gì ạ?"
+    },
+    {
+        "word": "いらっしゃいます",
+        "reading": "いらっしゃいます",
+        "meaning": "đi/đến/ở (kính ngữ)",
+        "meaningJa": "行きます・来ます・いますの尊敬語",
+        "example": "社長はいらっしゃいますか。",
+        "exampleMeaning": "Giám đốc có ở đây không ạ?"
+    },
+    {
+        "word": "存じます",
+        "reading": "ぞんじます",
+        "meaning": "biết (khiêm nhường)",
+        "meaningJa": "知っていますの謙譲語",
+        "example": "その件は存じております。",
+        "exampleMeaning": "Tôi có biết về việc đó."
+    },
+    {
+        "word": "伺います",
+        "reading": "うかがいます",
+        "meaning": "hỏi/đến thăm (khiêm nhường)",
+        "meaningJa": "聞きます・訪問しますの謙譲語",
+        "example": "明日、会社へ伺います。",
+        "exampleMeaning": "Ngày mai tôi sẽ đến công ty."
+    },
+    {
+        "word": "拝見します",
+        "reading": "はいけんします",
+        "meaning": "xem (khiêm nhường)",
+        "meaningJa": "見ますの謙譲語",
+        "example": "資料を拝見しました。",
+        "exampleMeaning": "Tôi đã xem tài liệu."
+    },
+    {
+        "word": "お目にかかります",
+        "reading": "おめにかかります",
+        "meaning": "gặp (khiêm nhường)",
+        "meaningJa": "会いますの謙譲語",
+        "example": "お目にかかれて光栄です。",
+        "exampleMeaning": "Rất vinh dự được gặp ngài."
+    },
+    {
+        "word": "社長",
+        "reading": "しゃちょう",
+        "meaning": "giám đốc",
+        "meaningJa": "会社の代表者",
+        "example": "社長は会議中です。",
+        "exampleMeaning": "Giám đốc đang họp."
+    },
+    {
+        "word": "部長",
+        "reading": "ぶちょう",
+        "meaning": "trưởng phòng",
+        "meaningJa": "部門の責任者",
+        "example": "部長に報告しました。",
+        "exampleMeaning": "Tôi đã báo cáo với trưởng phòng."
+    },
+    {
+        "word": "課長",
+        "reading": "かちょう",
+        "meaning": "trưởng ban",
+        "meaningJa": "課の責任者",
+        "example": "課長と相談しました。",
+        "exampleMeaning": "Tôi đã trao đổi với trưởng ban."
+    },
+    {
+        "word": "担当者",
+        "reading": "たんとうしゃ",
+        "meaning": "người phụ trách",
+        "meaningJa": "担当する人",
+        "example": "担当者に連絡してください。",
+        "exampleMeaning": "Xin hãy liên hệ người phụ trách."
+    },
+    {
+        "word": "名刺",
+        "reading": "めいし",
+        "meaning": "danh thiếp",
+        "meaningJa": "名前や会社名が書かれたカード",
+        "example": "名刺を交換しました。",
+        "exampleMeaning": "Chúng tôi đã trao đổi danh thiếp."
+    },
+    {
+        "word": "挨拶",
+        "reading": "あいさつ",
+        "meaning": "chào hỏi",
+        "meaningJa": "会った時の礼儀",
+        "example": "最初に挨拶をしました。",
+        "exampleMeaning": "Trước tiên tôi đã chào hỏi."
+    },
+    {
+        "word": "受付",
+        "reading": "うけつけ",
+        "meaning": "lễ tân",
+        "meaningJa": "来客対応をする場所",
+        "example": "受付で名前を書きました。",
+        "exampleMeaning": "Tôi đã ghi tên tại quầy lễ tân."
+    },
+    {
+        "word": "会議",
+        "reading": "かいぎ",
+        "meaning": "cuộc họp",
+        "meaningJa": "話し合いをする集まり",
+        "example": "午後に会議があります。",
+        "exampleMeaning": "Buổi chiều có cuộc họp."
+    },
+    {
+        "word": "訪問",
+        "reading": "ほうもん",
+        "meaning": "thăm viếng",
+        "meaningJa": "人や会社を訪ねること",
+        "example": "来週お客様を訪問します。",
+        "exampleMeaning": "Tuần sau tôi sẽ đến thăm khách hàng."
+    },
+    {
+        "word": "失礼します",
+        "reading": "しつれいします",
+        "meaning": "xin phép, thất lễ",
+        "meaningJa": "礼儀正しく断る表現",
+        "example": "先に失礼します。",
+        "exampleMeaning": "Tôi xin phép về trước."
+    }
+]

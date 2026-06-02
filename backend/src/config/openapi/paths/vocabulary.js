@@ -9,7 +9,7 @@ export const vocabularyPaths = {
 			tags: ['Vocabulary - User'],
 			summary: 'Get all vocabulary decks (User)',
 			description:
-				'Requires authentication. Danh sách deck có phân trang; mỗi phần tử có `wordCount` và `totalWords`.',
+				'Requires authentication. Chỉ deck hệ thống (`ownerId` null). Deck riêng user: `/api/vocabulary/my/decks`. Phân trang; mỗi phần tử có `wordCount` và `totalWords`.',
 			security: [{ bearerAuth: [] }],
 			parameters: [
 				{ name: 'level', in: 'query', schema: { type: 'string', enum: ['n5', 'n4', 'n3', 'n2', 'n1'] } },

@@ -233,6 +233,9 @@ export default function KanjiListPage() {
               </p>
             </div>
           </div>
+          <Link to="/kanji/mine" className="user-vocab-mine-tab-link">
+            {t("kanjiPage.userDeckTab")}
+          </Link>
         </header>
 
         <div

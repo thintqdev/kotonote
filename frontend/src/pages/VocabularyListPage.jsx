@@ -304,6 +304,9 @@ export default function VocabularyListPage() {
               </p>
             </div>
           </div>
+          <Link to="/vocabulary/mine" className="user-vocab-mine-tab-link">
+            {t("vocabPage.userDeckTab")}
+          </Link>
         </header>
 
         <div

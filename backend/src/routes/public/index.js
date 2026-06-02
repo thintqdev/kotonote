@@ -16,6 +16,7 @@ import membershipRoutes from './membershipRoutes.js';
 import examPaperRoutes from './examPaperRoutes.js';
 import feedbackRoutes from './feedbackRoutes.js';
 import analyticsRoutes from './analyticsRoutes.js';
+import arenaRoutes from './arenaRoutes.js';
 
 const router = express.Router();
 
@@ -38,5 +39,6 @@ router.use('/membership', membershipRoutes);
 router.use('/exam-papers', examPaperRoutes);
 router.use('/feedback', feedbackRoutes);
 router.use('/analytics', analyticsRoutes);
+router.use('/arena', arenaRoutes);
 
 export default router;

@@ -14,6 +14,8 @@ import { getGrammarBySlug } from "../services/grammarService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { isJlptLockedError } from "../utils/jlptAccess.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
+import GrammarCompareTables from "../components/grammar/GrammarCompareTables.jsx";
+import { hasGrammarCompareContent } from "../utils/grammarCompareNormalize.js";
 import "./DashboardHome.css";
 import "./GrammarPages.css";
 
@@ -35,24 +37,6 @@ GrammarJpVi.propTypes = {
   ]),
   lang: PropTypes.string.isRequired,
   className: PropTypes.string,
-};
-
-function GrammarJpViTd({ loc, lang }) {
-  const { primary, secondary } = grammarLine(loc, lang);
-  return (
-    <>
-      <span className="grammar-td-jp">{primary}</span>
-      {secondary ? <span className="grammar-td-vi">{secondary}</span> : null}
-    </>
-  );
-}
-
-GrammarJpViTd.propTypes = {
-  loc: PropTypes.shape({
-    ja: PropTypes.string,
-    vi: PropTypes.string,
-  }).isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 function GrammarExampleItem({ pair, lang }) {
@@ -333,39 +317,16 @@ function GrammarDetailPage() {
                 </section>
               ) : null}
 
-              {detail.compare?.rows?.length ? (
+              {hasGrammarCompareContent(detail.compare) ? (
                 <section className="grammar-block" aria-labelledby="g-cmp">
                   <h2 id="g-cmp" className="grammar-h">
                     {t("grammar.labels.compare")}
                   </h2>
-                  <div className="grammar-compare">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th scope="col" />
-                          {(detail.compare.colLabels || []).map((col, i) => (
-                            <th key={`ch-${i}`} scope="col">
-                              <GrammarJpViTd loc={col} lang={lang} />
-                            </th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {detail.compare.rows.map((row, ri) => (
-                          <tr key={`cr-${slug}-${ri}`}>
-                            <th scope="row">
-                              <GrammarJpViTd loc={row.label} lang={lang} />
-                            </th>
-                            {(row.cells || []).map((cell, ci) => (
-                              <td key={`cc-${ri}-${ci}`}>
-                                <GrammarJpViTd loc={cell} lang={lang} />
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <GrammarCompareTables
+                    compare={detail.compare}
+                    lang={lang}
+                    slug={slug}
+                  />
                 </section>
               ) : null}
 

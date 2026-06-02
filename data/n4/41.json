@@ -1,0 +1,202 @@
+[
+    {
+        "word": "いただきます",
+        "reading": "いただきます",
+        "meaning": "nhận (khiêm nhường)",
+        "meaningJa": "もらいますの謙譲語",
+        "example": "先生に本をいただきました。",
+        "exampleMeaning": "Tôi đã nhận sách từ giáo viên."
+    },
+    {
+        "word": "くださいます",
+        "reading": "くださいます",
+        "meaning": "cho (kính ngữ)",
+        "meaningJa": "くれますの尊敬語",
+        "example": "先生が本をくださいました。",
+        "exampleMeaning": "Thầy giáo đã cho tôi một quyển sách."
+    },
+    {
+        "word": "やります",
+        "reading": "やります",
+        "meaning": "cho (động vật, cây cối)",
+        "meaningJa": "動物や植物に与える",
+        "example": "犬にえさをやります。",
+        "exampleMeaning": "Tôi cho chó ăn."
+    },
+    {
+        "word": "呼びます",
+        "reading": "よびます",
+        "meaning": "gọi",
+        "meaningJa": "人を来させる",
+        "example": "タクシーを呼びました。",
+        "exampleMeaning": "Tôi đã gọi taxi."
+    },
+    {
+        "word": "取り替えます",
+        "reading": "とりかえます",
+        "meaning": "thay thế",
+        "meaningJa": "別の物に変える",
+        "example": "電池を取り替えます。",
+        "exampleMeaning": "Tôi thay pin."
+    },
+    {
+        "word": "親",
+        "reading": "おや",
+        "meaning": "cha mẹ",
+        "meaningJa": "父と母",
+        "example": "親に電話をしました。",
+        "exampleMeaning": "Tôi đã gọi điện cho bố mẹ."
+    },
+    {
+        "word": "申し上げます",
+        "reading": "もうしあげます",
+        "meaning": "thưa, nói (khiêm nhường)",
+        "meaningJa": "言いますの謙譲語",
+        "example": "お礼を申し上げます。",
+        "exampleMeaning": "Tôi xin gửi lời cảm ơn."
+    },
+    {
+        "word": "拝借します",
+        "reading": "はいしゃくします",
+        "meaning": "mượn (khiêm nhường)",
+        "meaningJa": "借りますの謙譲語",
+        "example": "ペンを拝借します。",
+        "exampleMeaning": "Tôi xin phép mượn cây bút."
+    },
+    {
+        "word": "お祝い",
+        "reading": "おいわい",
+        "meaning": "chúc mừng, quà mừng",
+        "meaningJa": "おめでたいことを祝う",
+        "example": "結婚のお祝いを贈りました。",
+        "exampleMeaning": "Tôi đã gửi quà mừng đám cưới."
+    },
+    {
+        "word": "お年玉",
+        "reading": "おとしだま",
+        "meaning": "tiền mừng tuổi",
+        "meaningJa": "正月にもらうお金",
+        "example": "お年玉をもらいました。",
+        "exampleMeaning": "Tôi đã nhận tiền lì xì."
+    },
+    {
+        "word": "お見舞い",
+        "reading": "おみまい",
+        "meaning": "thăm bệnh",
+        "meaningJa": "病人を訪ねること",
+        "example": "友達のお見舞いに行きました。",
+        "exampleMeaning": "Tôi đã đi thăm người bạn bị bệnh."
+    },
+    {
+        "word": "興味",
+        "reading": "きょうみ",
+        "meaning": "hứng thú",
+        "meaningJa": "関心を持つこと",
+        "example": "日本文化に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với văn hóa Nhật Bản."
+    },
+    {
+        "word": "情報",
+        "reading": "じょうほう",
+        "meaning": "thông tin",
+        "meaningJa": "知らせ",
+        "example": "新しい情報を集めます。",
+        "exampleMeaning": "Tôi thu thập thông tin mới."
+    },
+    {
+        "word": "文法",
+        "reading": "ぶんぽう",
+        "meaning": "ngữ pháp",
+        "meaningJa": "言葉のルール",
+        "example": "文法を勉強しています。",
+        "exampleMeaning": "Tôi đang học ngữ pháp."
+    },
+    {
+        "word": "発音",
+        "reading": "はつおん",
+        "meaning": "phát âm",
+        "meaningJa": "言葉の読み方",
+        "example": "発音を練習します。",
+        "exampleMeaning": "Tôi luyện phát âm."
+    },
+    {
+        "word": "会話",
+        "reading": "かいわ",
+        "meaning": "hội thoại",
+        "meaningJa": "話し合うこと",
+        "example": "日本語で会話します。",
+        "exampleMeaning": "Tôi hội thoại bằng tiếng Nhật."
+    },
+    {
+        "word": "意味",
+        "reading": "いみ",
+        "meaning": "ý nghĩa",
+        "meaningJa": "言葉の内容",
+        "example": "この単語の意味が分かります。",
+        "exampleMeaning": "Tôi hiểu nghĩa của từ này."
+    },
+    {
+        "word": "気持ち",
+        "reading": "きもち",
+        "meaning": "tâm trạng, cảm xúc",
+        "meaningJa": "心の状態",
+        "example": "気持ちを伝えました。",
+        "exampleMeaning": "Tôi đã truyền đạt cảm xúc của mình."
+    },
+    {
+        "word": "気分",
+        "reading": "きぶん",
+        "meaning": "tâm trạng",
+        "meaningJa": "その時の心の状態",
+        "example": "今日は気分がいいです。",
+        "exampleMeaning": "Hôm nay tâm trạng tôi rất tốt."
+    },
+    {
+        "word": "連絡",
+        "reading": "れんらく",
+        "meaning": "liên lạc",
+        "meaningJa": "情報を伝えること",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "用事",
+        "reading": "ようじ",
+        "meaning": "công việc cần làm",
+        "meaningJa": "しなければならないこと",
+        "example": "用事があります。",
+        "exampleMeaning": "Tôi có việc bận."
+    },
+    {
+        "word": "準備",
+        "reading": "じゅんび",
+        "meaning": "chuẩn bị",
+        "meaningJa": "前もって用意すること",
+        "example": "旅行の準備をします。",
+        "exampleMeaning": "Tôi chuẩn bị cho chuyến đi."
+    },
+    {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích",
+        "meaningJa": "わかるように話すこと",
+        "example": "先生が説明してくださいました。",
+        "exampleMeaning": "Giáo viên đã giải thích cho tôi."
+    },
+    {
+        "word": "協力",
+        "reading": "きょうりょく",
+        "meaning": "hợp tác",
+        "meaningJa": "力を合わせること",
+        "example": "ご協力ありがとうございます。",
+        "exampleMeaning": "Cảm ơn sự hợp tác của quý vị."
+    },
+    {
+        "word": "お願い",
+        "reading": "おねがい",
+        "meaning": "yêu cầu, nhờ vả",
+        "meaningJa": "頼みごと",
+        "example": "お願いがあります。",
+        "exampleMeaning": "Tôi có một điều muốn nhờ."
+    }
+]

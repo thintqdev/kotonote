@@ -22,6 +22,7 @@ import adminMembershipRoutes from './adminMembershipRoutes.js';
 import adminFeedbackRoutes from './adminFeedbackRoutes.js';
 import adminSystemRoutes from './adminSystemRoutes.js';
 import adminSettingsRoutes from './adminSettingsRoutes.js';
+import adminArenaRoutes from './adminArenaRoutes.js';
 
 const router = express.Router();
 
@@ -50,5 +51,6 @@ router.use('/memberships', adminMembershipRoutes);
 router.use('/feedback', adminFeedbackRoutes);
 router.use('/system', adminSystemRoutes);
 router.use('/settings', adminSettingsRoutes);
+router.use('/arena', adminArenaRoutes);
 
 export default router;

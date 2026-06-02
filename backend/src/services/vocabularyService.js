@@ -61,7 +61,12 @@ export const getDeckById = async (deckId) => {
 };
 
 export const createDeck = async (deckData) => {
-	const deck = await vocabularyRepository.createDeck(deckData);
+	const data = { ...deckData };
+	delete data.ownerId;
+	const deck = await vocabularyRepository.createDeck({
+		...data,
+		ownerId: null,
+	});
 	return deck;
 };
 

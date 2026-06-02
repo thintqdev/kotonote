@@ -1,0 +1,84 @@
+.dash-arena-preview {
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(90, 115, 64, 0.22);
+  background: linear-gradient(145deg, rgba(232, 244, 218, 0.55), rgba(255, 252, 246, 0.98));
+}
+
+.dash-arena-preview-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 12px;
+}
+
+.dash-arena-preview-title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #2f3d28;
+}
+
+.dash-arena-preview-sub {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: #6a6258;
+}
+
+.dash-arena-preview-link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #4a6334;
+  text-decoration: underline;
+}
+
+.dash-arena-preview-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+}
+
+.dash-arena-preview-badge--live {
+  background: #3d6b3a;
+  color: #fff;
+}
+
+.dash-arena-preview-badge--soon {
+  background: #c49a3a;
+  color: #fff;
+}
+
+.dash-arena-preview-badge--today {
+  background: rgba(90, 115, 64, 0.18);
+  color: #3d5230;
+}
+
+.dash-arena-preview-badge--next {
+  background: rgba(107, 140, 174, 0.2);
+  color: #3a4f62;
+}
+
+.dash-arena-preview-badge--upcoming,
+.dash-arena-preview-badge--off {
+  background: rgba(90, 80, 70, 0.12);
+  color: #5a5348;
+}
+
+.dash-arena-preview-meta {
+  margin: 0 0 6px;
+  font-size: 0.875rem;
+  color: #4a433c;
+  line-height: 1.45;
+}
+
+.dash-arena-preview-error {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  color: #8a4a4a;
+}

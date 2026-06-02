@@ -2,7 +2,11 @@ Tạo bài ngữ pháp JLPT N4 — một JSON object.
 Pattern: {{patternHint}}
 Ghi chú: {{customPrompt}}
 
-Đủ các field: pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
+Đủ các field: slug (kebab-case EN), tagIds (0–3), pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble,
 examples, ng, ngNote, compare, memo, practice (mỗi field {ja, vi}).
+
+compare: bài gần nghĩa → rows phẳng; bài chia thể/活用 → sections I・II・III, nhóm I nhiều dòng theo đuôi (うつる, むぶぬ, く, ぐ, す, 行く). rows: [] khi dùng sections.
+
+tagIds: hearsay, formal, conjecture, purpose, goal, change, conjugation, conditional, permission, obligation, passive, potential, comparison
 
 Độ khó N4. Chỉ JSON.

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "集まります",
+        "reading": "あつまります",
+        "meaning": "tập trung",
+        "meaningJa": "人や物が一つの場所に来る",
+        "example": "公園に人が集まっています。",
+        "exampleMeaning": "Mọi người đang tập trung ở công viên."
+    },
+    {
+        "word": "別れます",
+        "reading": "わかれます",
+        "meaning": "chia tay",
+        "meaningJa": "離れる",
+        "example": "駅で友達と別れました。",
+        "exampleMeaning": "Tôi đã chia tay bạn ở nhà ga."
+    },
+    {
+        "word": "長生きします",
+        "reading": "ながいきします",
+        "meaning": "sống lâu",
+        "meaningJa": "長く生きる",
+        "example": "祖父は長生きしています。",
+        "exampleMeaning": "Ông tôi sống rất thọ."
+    },
+    {
+        "word": "音",
+        "reading": "おと",
+        "meaning": "âm thanh",
+        "meaningJa": "聞こえるもの",
+        "example": "変な音がします。",
+        "exampleMeaning": "Có âm thanh lạ."
+    },
+    {
+        "word": "声",
+        "reading": "こえ",
+        "meaning": "giọng nói",
+        "meaningJa": "人が話す音",
+        "example": "大きい声で話してください。",
+        "exampleMeaning": "Xin hãy nói lớn tiếng."
+    },
+    {
+        "word": "味",
+        "reading": "あじ",
+        "meaning": "vị",
+        "meaningJa": "食べ物の感じ",
+        "example": "この料理は味がいいです。",
+        "exampleMeaning": "Món ăn này có vị ngon."
+    },
+    {
+        "word": "匂い",
+        "reading": "におい",
+        "meaning": "mùi",
+        "meaningJa": "鼻で感じるもの",
+        "example": "いい匂いがします。",
+        "exampleMeaning": "Có mùi thơm."
+    },
+    {
+        "word": "空",
+        "reading": "そら",
+        "meaning": "bầu trời",
+        "meaningJa": "頭の上に広がる空間",
+        "example": "空が青いです。",
+        "exampleMeaning": "Bầu trời xanh."
+    },
+    {
+        "word": "星",
+        "reading": "ほし",
+        "meaning": "ngôi sao",
+        "meaningJa": "夜空に見える光",
+        "example": "星がきれいです。",
+        "exampleMeaning": "Các vì sao rất đẹp."
+    },
+    {
+        "word": "月",
+        "reading": "つき",
+        "meaning": "mặt trăng",
+        "meaningJa": "地球の衛星",
+        "example": "今夜は月が明るいです。",
+        "exampleMeaning": "Tối nay trăng rất sáng."
+    },
+    {
+        "word": "自然",
+        "reading": "しぜん",
+        "meaning": "thiên nhiên",
+        "meaningJa": "山や川など",
+        "example": "自然が豊かです。",
+        "exampleMeaning": "Thiên nhiên rất phong phú."
+    },
+    {
+        "word": "景色",
+        "reading": "けしき",
+        "meaning": "phong cảnh",
+        "meaningJa": "見える風景",
+        "example": "景色がすばらしいです。",
+        "exampleMeaning": "Phong cảnh rất tuyệt."
+    },
+    {
+        "word": "風",
+        "reading": "かぜ",
+        "meaning": "gió",
+        "meaningJa": "空気の流れ",
+        "example": "風が強いです。",
+        "exampleMeaning": "Gió mạnh."
+    },
+    {
+        "word": "波",
+        "reading": "なみ",
+        "meaning": "sóng",
+        "meaningJa": "海や川の動き",
+        "example": "波が高いです。",
+        "exampleMeaning": "Sóng cao."
+    },
+    {
+        "word": "港",
+        "reading": "みなと",
+        "meaning": "cảng",
+        "meaningJa": "船が集まる場所",
+        "example": "港に船があります。",
+        "exampleMeaning": "Có tàu ở cảng."
+    },
+    {
+        "word": "船",
+        "reading": "ふね",
+        "meaning": "tàu thuyền",
+        "meaningJa": "水の上を進む乗り物",
+        "example": "船で島へ行きます。",
+        "exampleMeaning": "Tôi đi đảo bằng tàu."
+    },
+    {
+        "word": "鳥",
+        "reading": "とり",
+        "meaning": "chim",
+        "meaningJa": "空を飛ぶ動物",
+        "example": "鳥が飛んでいます。",
+        "exampleMeaning": "Chim đang bay."
+    },
+    {
+        "word": "虫",
+        "reading": "むし",
+        "meaning": "côn trùng",
+        "meaningJa": "小さい生き物",
+        "example": "虫がたくさんいます。",
+        "exampleMeaning": "Có rất nhiều côn trùng."
+    },
+    {
+        "word": "光",
+        "reading": "ひかり",
+        "meaning": "ánh sáng",
+        "meaningJa": "明るさ",
+        "example": "光が見えます。",
+        "exampleMeaning": "Tôi nhìn thấy ánh sáng."
+    },
+    {
+        "word": "影",
+        "reading": "かげ",
+        "meaning": "bóng",
+        "meaningJa": "光が当たらない部分",
+        "example": "木の影で休みます。",
+        "exampleMeaning": "Tôi nghỉ dưới bóng cây."
+    },
+    {
+        "word": "文化",
+        "reading": "ぶんか",
+        "meaning": "văn hóa",
+        "meaningJa": "生活の習慣や伝統",
+        "example": "日本文化に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với văn hóa Nhật."
+    },
+    {
+        "word": "歴史",
+        "reading": "れきし",
+        "meaning": "lịch sử",
+        "meaningJa": "過去の出来事",
+        "example": "歴史を勉強しています。",
+        "exampleMeaning": "Tôi đang học lịch sử."
+    },
+    {
+        "word": "伝統",
+        "reading": "でんとう",
+        "meaning": "truyền thống",
+        "meaningJa": "昔から続く習慣",
+        "example": "伝統を大切にします。",
+        "exampleMeaning": "Tôi coi trọng truyền thống."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "thói quen",
+        "meaningJa": "毎日続けること",
+        "example": "運動する習慣があります。",
+        "exampleMeaning": "Tôi có thói quen tập thể dục."
+    },
+    {
+        "word": "生活",
+        "reading": "せいかつ",
+        "meaning": "cuộc sống",
+        "meaningJa": "毎日の暮らし",
+        "example": "日本で生活しています。",
+        "exampleMeaning": "Tôi đang sống ở Nhật."
+    }
+]

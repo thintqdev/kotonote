@@ -111,6 +111,29 @@ export const NOTIFICATIONS = {
 };
 
 /** Đọc deck/từ vựng (user đã đăng nhập) — `/api/vocabulary/*`, Bearer JWT */
+export const USER_VOCABULARY = {
+	DECKS: '/vocabulary/my/decks',
+	deck: (id) => `/vocabulary/my/decks/${encodeURIComponent(id)}`,
+	deckVocabulary: (id) =>
+		`/vocabulary/my/decks/${encodeURIComponent(id)}/vocabulary`,
+	deckWords: (deckId) =>
+		`/vocabulary/my/decks/${encodeURIComponent(deckId)}/words`,
+	deckImport: (deckId) =>
+		`/vocabulary/my/decks/${encodeURIComponent(deckId)}/import`,
+	word: (vocabId) => `/vocabulary/my/words/${encodeURIComponent(vocabId)}`,
+};
+
+/** Bộ Kanji riêng (Pro+) — `/api/kanji/my/*` */
+export const USER_KANJI = {
+	DECKS: '/kanji/my/decks',
+	deck: (id) => `/kanji/my/decks/${encodeURIComponent(id)}`,
+	deckKanji: (id) => `/kanji/my/decks/${encodeURIComponent(id)}/kanji`,
+	deckKanjiCreate: (deckId) =>
+		`/kanji/my/decks/${encodeURIComponent(deckId)}/kanji`,
+	deckImport: (deckId) => `/kanji/my/decks/${encodeURIComponent(deckId)}/import`,
+	kanji: (kanjiId) => `/kanji/my/kanji/${encodeURIComponent(kanjiId)}`,
+};
+
 export const VOCABULARY = {
 	DECKS: '/vocabulary/decks',
 	PROGRESS: '/vocabulary/progress',
