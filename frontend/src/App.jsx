@@ -91,9 +91,12 @@ import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
 import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
 import AdminArenaPage from "./pages/admin/AdminArenaPage.jsx";
+import AdminSentencePage from "./pages/admin/AdminSentencePage.jsx";
 import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
 import PageViewTracker from "./components/analytics/PageViewTracker.jsx";
 import ArenaPage from "./pages/ArenaPage.jsx";
+import SentenceStudyListPage from "./pages/SentenceStudyListPage.jsx";
+import SentenceStudyPage from "./pages/SentenceStudyPage.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -203,6 +206,8 @@ function App() {
                 />
                 <Route path="/kaiwa/:id/practice" element={<KaiwaPracticePage />} />
                 <Route path="/kaiwa/:id" element={<KaiwaDetailPage />} />
+                <Route path="/sentences" element={<SentenceStudyListPage />} />
+                <Route path="/sentences/:code" element={<SentenceStudyPage />} />
                 <Route path="/practice/history" element={<ExamPaperHistoryPage />} />
                 <Route
                   path="/practice/history/:attemptId/result"
@@ -252,6 +257,7 @@ function App() {
               <Route path="kaiwa/new" element={<AdminKaiwaEditorPage />} />
               <Route path="kaiwa/:id/edit" element={<AdminKaiwaEditorPage />} />
               <Route path="kaiwa" element={<AdminKaiwaHome />} />
+              <Route path="sentences" element={<AdminSentencePage />} />
               <Route path="exam-papers/:id/edit" element={<AdminExamPaperEditorPage />} />
               <Route path="exam-papers" element={<AdminExamPaperHome />} />
               <Route path="exam-structures/:id/edit" element={<AdminExamStructureEditPage />} />

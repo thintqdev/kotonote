@@ -1,0 +1,21 @@
+.admin-sentence-page .admin-sentence-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.admin-sentence-section {
+  margin-bottom: 2rem;
+}
+
+.admin-sentence-section h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-sentence-empty {
+  color: #666;
+  font-style: italic;
+}

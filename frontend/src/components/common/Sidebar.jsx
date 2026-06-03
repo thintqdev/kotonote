@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DASHBOARD_NAV_ITEMS } from '../../constants/dashboardNav.js';
+import { getVisibleDashboardNavItems } from '../../constants/dashboardNav.js';
 import { useSidebarCollapse } from '../../context/SidebarCollapseContext.jsx';
 import './Sidebar.css';
 
@@ -164,7 +164,7 @@ const Sidebar = () => {
           aria-label={t('sidebar.ariaMenu')}
         >
           <ul className="dash-sidebar-list">
-            {DASHBOARD_NAV_ITEMS.map((item) => {
+            {getVisibleDashboardNavItems().map((item) => {
               const label = t(`nav.${item.id}`);
               return (
               <li key={item.id}>

@@ -61,6 +61,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.kaiwa",
       },
       {
+        id: "sentences",
+        to: "/admin/sentences",
+        icon: "doc",
+        labelKey: "adminLayout.sidebar.sentences",
+      },
+      {
         id: "examPapers",
         to: "/admin/exam-papers",
         icon: "doc",

@@ -1,3 +1,13 @@
+/**
+ * @typedef {Object} DashboardNavItem
+ * @property {string} id
+ * @property {string} [to] — thiếu `to` → hiển thị dạng "sắp có"
+ * @property {boolean} [end]
+ * @property {string} iconSrc
+ * @property {boolean} [hidden=false] — `true` thì ẩn khỏi sidebar; mặc định hiện
+ */
+
+/** @type {ReadonlyArray<DashboardNavItem>} */
 export const DASHBOARD_NAV_ITEMS = [
   { id: 'home', to: '/', end: true, iconSrc: '/assets/menu-icons/home.png' },
   { id: 'alphabet', to: '/alphabet', iconSrc: '/assets/menu-icons/alphabet.png' },
@@ -7,13 +17,19 @@ export const DASHBOARD_NAV_ITEMS = [
   { id: 'reading', to: '/reading', iconSrc: '/assets/menu-icons/reading.png' },
   { id: 'listening', to: '/listening', iconSrc: '/assets/menu-icons/listening.png' },
   { id: 'kaiwa', to: '/kaiwa', iconSrc: '/assets/menu-icons/practice.png' },
+  { id: 'sentences', to: '/sentences', iconSrc: '/assets/menu-icons/practice.png', hidden: true },
   { id: 'practice', to: '/practice', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'notebook', to: '/notebook', iconSrc: '/assets/menu-icons/notebook.png' },
   { id: 'journal', to: '/journal', iconSrc: '/assets/menu-icons/notebook.png' },
-  { id: 'arena', to: '/arena', iconSrc: '/assets/menu-icons/practice.png' },
+  { id: 'arena', to: '/arena', iconSrc: '/assets/menu-icons/practice.png', hidden: true },
   { id: 'stats', to: '/leaderboard', iconSrc: '/assets/menu-icons/statistics.png' },
   { id: 'settings', to: '/settings', iconSrc: '/assets/menu-icons/settings.png' },
 ];
+
+/** Sidebar — chỉ item không bị `hidden: true` */
+export function getVisibleDashboardNavItems() {
+  return DASHBOARD_NAV_ITEMS.filter((item) => !item.hidden);
+}
 
 export const NAV_MENU_ICON_BY_ID = Object.fromEntries(
   DASHBOARD_NAV_ITEMS.map((item) => [item.id, item.iconSrc]),
@@ -29,6 +45,7 @@ export const SUBJECT_ROUTE_BY_ID = {
 	reading: '/reading',
 	listening: '/listening',
 	kaiwa: '/kaiwa',
+	sentences: '/sentences',
 	practice: '/practice',
 	alphabet: '/alphabet',
 };
