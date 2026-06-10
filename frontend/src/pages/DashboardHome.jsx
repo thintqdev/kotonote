@@ -125,6 +125,27 @@ const DashboardHome = () => {
 
   const myUserId = user?._id ? String(user._id) : "";
 
+  const leaderboardStreakEntries = useMemo(
+    () => leaderboardPreview?.streak ?? [],
+    [leaderboardPreview?.streak],
+  );
+  const leaderboardLessonEntries = useMemo(
+    () => leaderboardPreview?.lessons?.entries ?? [],
+    [leaderboardPreview?.lessons?.entries],
+  );
+  const leaderboardMeStreak = useMemo(
+    () => leaderboardPreview?.me?.streak ?? null,
+    [leaderboardPreview?.me?.streak],
+  );
+  const leaderboardMeLessons = useMemo(
+    () => leaderboardPreview?.me?.lessons ?? null,
+    [leaderboardPreview?.me?.lessons],
+  );
+  const leaderboardJlpt = useMemo(
+    () => leaderboardPreview?.lessons?.jlpt ?? profileJlpt,
+    [leaderboardPreview?.lessons?.jlpt, profileJlpt],
+  );
+
   const subjects = useMemo(() => {
     const rows = homePayload?.subjects;
     if (!rows?.length) return [];
@@ -220,11 +241,11 @@ const DashboardHome = () => {
         {user ? (
           <div className="dash-float dash-float--section dash-float--lb">
             <LeaderboardPreviewCard
-              jlpt={leaderboardPreview?.lessons?.jlpt ?? profileJlpt}
-              streakEntries={leaderboardPreview?.streak ?? []}
-              lessonEntries={leaderboardPreview?.lessons?.entries ?? []}
-              meStreak={leaderboardPreview?.me?.streak ?? null}
-              meLessons={leaderboardPreview?.me?.lessons ?? null}
+              jlpt={leaderboardJlpt}
+              streakEntries={leaderboardStreakEntries}
+              lessonEntries={leaderboardLessonEntries}
+              meStreak={leaderboardMeStreak}
+              meLessons={leaderboardMeLessons}
               loading={leaderboardLoading}
               error={leaderboardError}
               myId={myUserId}

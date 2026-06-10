@@ -1,0 +1,202 @@
+[
+    {
+        "word": "下ろします",
+        "reading": "おろします",
+        "meaning": "rút xuống/gỡ xuống",
+        "meaningJa": "高い所から下へ移す",
+        "example": "棚から荷物を下ろしました。",
+        "exampleMeaning": "Tôi đã lấy hành lý xuống khỏi kệ."
+    },
+    {
+        "word": "届けます",
+        "reading": "とどけます",
+        "meaning": "giao, chuyển đến",
+        "meaningJa": "相手の所まで持って行く",
+        "example": "友達に荷物を届けました。",
+        "exampleMeaning": "Tôi đã giao hành lý cho bạn."
+    },
+    {
+        "word": "世話します",
+        "reading": "せわします",
+        "meaning": "chăm sóc",
+        "meaningJa": "面倒を見る",
+        "example": "祖母の世話をしています。",
+        "exampleMeaning": "Tôi đang chăm sóc bà."
+    },
+    {
+        "word": "留守",
+        "reading": "るす",
+        "meaning": "vắng nhà",
+        "meaningJa": "家に誰もいないこと",
+        "example": "留守の間に電話がありました。",
+        "exampleMeaning": "Có cuộc gọi đến khi tôi vắng nhà."
+    },
+    {
+        "word": "受験します",
+        "reading": "じゅけんします",
+        "meaning": "dự thi",
+        "meaningJa": "試験を受ける",
+        "example": "来月JLPTを受験します。",
+        "exampleMeaning": "Tháng sau tôi sẽ dự thi JLPT."
+    },
+    {
+        "word": "案内します",
+        "reading": "あんないします",
+        "meaning": "hướng dẫn",
+        "meaningJa": "場所や方法を教える",
+        "example": "駅まで案内します。",
+        "exampleMeaning": "Tôi sẽ hướng dẫn bạn đến ga."
+    },
+    {
+        "word": "連絡します",
+        "reading": "れんらくします",
+        "meaning": "liên lạc",
+        "meaningJa": "知らせる",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "確認します",
+        "reading": "かくにんします",
+        "meaning": "xác nhận",
+        "meaningJa": "正しいか調べる",
+        "example": "予約を確認します。",
+        "exampleMeaning": "Tôi xác nhận đặt chỗ."
+    },
+    {
+        "word": "用意します",
+        "reading": "よういします",
+        "meaning": "chuẩn bị",
+        "meaningJa": "必要な物をそろえる",
+        "example": "会議の資料を用意します。",
+        "exampleMeaning": "Tôi chuẩn bị tài liệu cho cuộc họp."
+    },
+    {
+        "word": "提出します",
+        "reading": "ていしゅつします",
+        "meaning": "nộp",
+        "meaningJa": "書類などを出す",
+        "example": "レポートを提出しました。",
+        "exampleMeaning": "Tôi đã nộp báo cáo."
+    },
+    {
+        "word": "申請します",
+        "reading": "しんせいします",
+        "meaning": "đăng ký xin phép",
+        "meaningJa": "許可を求める",
+        "example": "休暇を申請しました。",
+        "exampleMeaning": "Tôi đã xin nghỉ phép."
+    },
+    {
+        "word": "手続きします",
+        "reading": "てつづきします",
+        "meaning": "làm thủ tục",
+        "meaningJa": "決められた方法で進める",
+        "example": "入学の手続きをしました。",
+        "exampleMeaning": "Tôi đã làm thủ tục nhập học."
+    },
+    {
+        "word": "受け取ります",
+        "reading": "うけとります",
+        "meaning": "nhận lấy",
+        "meaningJa": "相手から受ける",
+        "example": "荷物を受け取りました。",
+        "exampleMeaning": "Tôi đã nhận hàng."
+    },
+    {
+        "word": "預けます",
+        "reading": "あずけます",
+        "meaning": "gửi giữ",
+        "meaningJa": "人や場所に任せる",
+        "example": "荷物を預けました。",
+        "exampleMeaning": "Tôi đã gửi hành lý."
+    },
+    {
+        "word": "引き出します",
+        "reading": "ひきだします",
+        "meaning": "rút (tiền)",
+        "meaningJa": "銀行からお金を出す",
+        "example": "ATMでお金を引き出しました。",
+        "exampleMeaning": "Tôi đã rút tiền ở ATM."
+    },
+    {
+        "word": "振り込みます",
+        "reading": "ふりこみます",
+        "meaning": "chuyển khoản",
+        "meaningJa": "銀行口座へ送金する",
+        "example": "家賃を振り込みました。",
+        "exampleMeaning": "Tôi đã chuyển khoản tiền thuê nhà."
+    },
+    {
+        "word": "現金",
+        "reading": "げんきん",
+        "meaning": "tiền mặt",
+        "meaningJa": "紙幣や硬貨",
+        "example": "現金で払います。",
+        "exampleMeaning": "Tôi thanh toán bằng tiền mặt."
+    },
+    {
+        "word": "通帳",
+        "reading": "つうちょう",
+        "meaning": "sổ ngân hàng",
+        "meaningJa": "銀行口座の記録帳",
+        "example": "通帳を持っています。",
+        "exampleMeaning": "Tôi có sổ ngân hàng."
+    },
+    {
+        "word": "印鑑",
+        "reading": "いんかん",
+        "meaning": "con dấu",
+        "meaningJa": "名前を表すはんこ",
+        "example": "印鑑が必要です。",
+        "exampleMeaning": "Cần có con dấu."
+    },
+    {
+        "word": "身分証明書",
+        "reading": "みぶんしょうめいしょ",
+        "meaning": "giấy tờ tùy thân",
+        "meaningJa": "本人であることを証明する書類",
+        "example": "身分証明書を見せてください。",
+        "exampleMeaning": "Xin hãy cho xem giấy tờ tùy thân."
+    },
+    {
+        "word": "窓口",
+        "reading": "まどぐち",
+        "meaning": "quầy giao dịch",
+        "meaningJa": "手続きをする場所",
+        "example": "窓口で申し込みました。",
+        "exampleMeaning": "Tôi đã đăng ký tại quầy giao dịch."
+    },
+    {
+        "word": "郵便局",
+        "reading": "ゆうびんきょく",
+        "meaning": "bưu điện",
+        "meaningJa": "郵便を扱う場所",
+        "example": "郵便局へ行きます。",
+        "exampleMeaning": "Tôi đi đến bưu điện."
+    },
+    {
+        "word": "銀行",
+        "reading": "ぎんこう",
+        "meaning": "ngân hàng",
+        "meaningJa": "お金を預ける機関",
+        "example": "銀行で口座を作りました。",
+        "exampleMeaning": "Tôi đã mở tài khoản ở ngân hàng."
+    },
+    {
+        "word": "宅配",
+        "reading": "たくはい",
+        "meaning": "giao tận nơi",
+        "meaningJa": "家まで届けるサービス",
+        "example": "宅配を利用します。",
+        "exampleMeaning": "Tôi sử dụng dịch vụ giao tận nơi."
+    },
+    {
+        "word": "手数料",
+        "reading": "てすうりょう",
+        "meaning": "phí dịch vụ",
+        "meaningJa": "サービスにかかる料金",
+        "example": "手数料がかかります。",
+        "exampleMeaning": "Có tính phí dịch vụ."
+    }
+]

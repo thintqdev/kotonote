@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,7 +7,7 @@ import LeaderboardMyRankCallout from "../leaderboard/LeaderboardMyRankCallout.js
 import "./LeaderboardPreviewCard.css";
 import "../leaderboard/leaderboardShared.css";
 
-export default function LeaderboardPreviewCard({
+function LeaderboardPreviewCard({
   jlpt,
   streakEntries,
   lessonEntries,
@@ -135,3 +136,5 @@ LeaderboardPreviewCard.propTypes = {
   myId: PropTypes.string,
   streakEntries: PropTypes.array,
 };
+
+export default memo(LeaderboardPreviewCard);

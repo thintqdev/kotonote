@@ -8,6 +8,7 @@ import {
 	sortDeckItemsByDisplayOrder,
 	sortVocabApiList,
 } from '../utils/deckStudy.js';
+import { dedupePromise } from '../utils/dedupePromise.js';
 import api from './api.js';
 
 /** Cần JWT user — không gọi khi chưa đăng nhập. */
@@ -46,13 +47,16 @@ export async function getDeckWithVocabulary(deckId, opts = {}) {
  * @param {string} jlpt — N3, N4, …
  */
 export async function listVocabularyDecksByJlpt(jlpt) {
-	const level = jlptToApiLevel(jlpt);
-	const { decks } = await listVocabularyDecks({
-		level,
-		isActive: true,
-		limit: 100,
+	const key = String(jlpt || '').trim().toUpperCase();
+	return dedupePromise(`vocab-decks-jlpt-${key}`, async () => {
+		const level = jlptToApiLevel(jlpt);
+		const { decks } = await listVocabularyDecks({
+			level,
+			isActive: true,
+			limit: 100,
+		});
+		return sortDecksByOrder(filterActiveDecks(decks));
 	});
-	return sortDecksByOrder(filterActiveDecks(decks));
 }
 
 /**

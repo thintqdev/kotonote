@@ -23,6 +23,19 @@
   padding-bottom: 20px;
 }
 
+.vocab-study-lesson-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: calc(var(--vs-column-max) + 48px);
+  margin: 0 auto 28px;
+}
+
+.vocab-study-lesson-shell .vocab-study-lesson-ribbon,
+.vocab-study-lesson-shell .vocab-study-lesson-tabs {
+  margin-bottom: 0;
+}
+
 .vocab-study-breadcrumb-row {
   display: flex;
   flex-wrap: wrap;
@@ -1007,9 +1020,9 @@ button.vocab-cta-reset {
 
 /* Chế độ ôn theo bài (query lesson + jlpt) */
 .vocab-study-lesson-ribbon {
-  max-width: calc(var(--vs-column-max) + 48px);
-  margin: -4px auto 16px;
-  padding: 12px 16px 14px;
+  max-width: none;
+  margin: 0;
+  padding: 16px 18px 18px;
   border-radius: 14px;
   border: 1px solid rgba(92, 122, 82, 0.28);
   background: linear-gradient(
@@ -1021,7 +1034,7 @@ button.vocab-cta-reset {
 }
 
 .vocab-study-lesson-ribbon-main {
-  margin: 0 0 6px;
+  margin: 0 0 10px;
   font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -1048,9 +1061,9 @@ button.vocab-cta-reset {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-  padding-top: 10px;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px dashed rgba(92, 122, 82, 0.28);
 }
 
@@ -1071,7 +1084,7 @@ button.vocab-cta-reset {
 }
 
 .vocab-study-growth-caption {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   text-align: center;
   font-size: 0.84rem;
   font-weight: 800;
@@ -1081,10 +1094,11 @@ button.vocab-cta-reset {
 .vocab-study-lesson-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
-  margin: 0 auto 16px;
-  max-width: calc(var(--vs-column-max) + 48px);
+  margin: 0;
+  max-width: none;
+  padding: 4px 0 2px;
 }
 
 .vocab-study-tab {
@@ -1114,21 +1128,29 @@ button.vocab-cta-reset {
   color: var(--vocab-green-deep, #3d5c33);
 }
 
+.vocab-lesson-detail-head {
+  text-align: center;
+  padding: 4px 8px 24px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.22);
+}
+
 .vocab-lesson-panel-title {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .vocab-lesson-detail-board {
   max-width: var(--vs-column-max);
   margin: 0 auto;
-  padding-bottom: 24px;
+  padding: 8px 4px 32px;
 }
 
 .vocab-lesson-detail-lead {
-  margin: 0 0 18px;
+  margin: 0 auto;
+  max-width: 36em;
   font-size: 0.88rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--vs-muted);
   font-weight: 600;
   text-align: center;
@@ -1140,15 +1162,36 @@ button.vocab-cta-reset {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
+}
+
+.vocab-lesson-detail-virtual-scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 16px;
+  padding: 6px 4px 10px;
+  border: 1px solid rgba(92, 122, 82, 0.12);
+  background: rgba(255, 252, 248, 0.45);
+}
+
+.vocab-lesson-detail-list--virtual {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vocab-lesson-detail-card--virtual {
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .vocab-lesson-detail-card {
   border-radius: 14px;
   border: 1px solid rgba(92, 122, 82, 0.22);
   background: rgba(255, 252, 248, 0.96);
-  padding: 14px 16px 16px;
-  box-shadow: 0 2px 8px rgba(42, 35, 28, 0.05);
+  padding: 18px 18px 20px;
+  box-shadow: 0 2px 10px rgba(42, 35, 28, 0.06);
+  overflow: hidden;
 }
 
 .vocab-lesson-detail-top {
@@ -1156,7 +1199,7 @@ button.vocab-cta-reset {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 8px 14px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .vocab-lesson-detail-word {
@@ -1172,19 +1215,21 @@ button.vocab-cta-reset {
 }
 
 .vocab-lesson-detail-mean {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   font-size: 0.95rem;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .vocab-lesson-detail-ex {
   font-size: 0.88rem;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .vocab-lesson-detail-exvi {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.16);
   font-size: 0.86rem;
   color: var(--vs-muted);
   line-height: 1.5;

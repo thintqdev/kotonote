@@ -1,0 +1,202 @@
+[
+    {
+        "word": "売れます",
+        "reading": "うれます",
+        "meaning": "bán chạy, được bán",
+        "meaningJa": "商品が売れる",
+        "example": "この本はよく売れます。",
+        "exampleMeaning": "Cuốn sách này bán rất chạy."
+    },
+    {
+        "word": "踊ります",
+        "reading": "おどります",
+        "meaning": "nhảy múa",
+        "meaningJa": "音楽に合わせて体を動かす",
+        "example": "みんなで踊ります。",
+        "exampleMeaning": "Mọi người cùng nhảy múa."
+    },
+    {
+        "word": "かみます",
+        "reading": "かみます",
+        "meaning": "cắn",
+        "meaningJa": "歯で強くかむ",
+        "example": "犬にかまれました。",
+        "exampleMeaning": "Tôi bị chó cắn."
+    },
+    {
+        "word": "選びます",
+        "reading": "えらびます",
+        "meaning": "lựa chọn",
+        "meaningJa": "多くの中から決める",
+        "example": "好きな色を選びます。",
+        "exampleMeaning": "Tôi chọn màu mình thích."
+    },
+    {
+        "word": "通います",
+        "reading": "かよいます",
+        "meaning": "đi lại thường xuyên",
+        "meaningJa": "定期的に行く",
+        "example": "日本語学校に通っています。",
+        "exampleMeaning": "Tôi đang theo học trường tiếng Nhật."
+    },
+    {
+        "word": "メモします",
+        "reading": "メモします",
+        "meaning": "ghi chú",
+        "meaningJa": "忘れないように書く",
+        "example": "大事なことをメモします。",
+        "exampleMeaning": "Tôi ghi chú những điều quan trọng."
+    },
+    {
+        "word": "真面目",
+        "reading": "まじめ",
+        "meaning": "nghiêm túc",
+        "meaningJa": "一生懸命で誠実",
+        "example": "彼は真面目です。",
+        "exampleMeaning": "Anh ấy rất nghiêm túc."
+    },
+    {
+        "word": "熱心",
+        "reading": "ねっしん",
+        "meaning": "nhiệt tình",
+        "meaningJa": "一生懸命取り組む",
+        "example": "熱心に勉強しています。",
+        "exampleMeaning": "Tôi đang học rất chăm chỉ."
+    },
+    {
+        "word": "優しい",
+        "reading": "やさしい",
+        "meaning": "hiền, tốt bụng",
+        "meaningJa": "親切で思いやりがある",
+        "example": "先生は優しいです。",
+        "exampleMeaning": "Giáo viên rất tốt bụng."
+    },
+    {
+        "word": "偉い",
+        "reading": "えらい",
+        "meaning": "vĩ đại, đáng nể",
+        "meaningJa": "立派で尊敬できる",
+        "example": "偉い人になりたいです。",
+        "exampleMeaning": "Tôi muốn trở thành người đáng kính."
+    },
+    {
+        "word": "ちょうどいい",
+        "reading": "ちょうどいい",
+        "meaning": "vừa vặn, vừa đúng",
+        "meaningJa": "多すぎず少なすぎない",
+        "example": "このサイズはちょうどいいです。",
+        "exampleMeaning": "Kích cỡ này vừa đẹp."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "thói quen",
+        "meaningJa": "毎日続けること",
+        "example": "早起きはいい習慣です。",
+        "exampleMeaning": "Dậy sớm là thói quen tốt."
+    },
+    {
+        "word": "経験",
+        "reading": "けいけん",
+        "meaning": "kinh nghiệm",
+        "meaningJa": "実際にしたこと",
+        "example": "海外で働いた経験があります。",
+        "exampleMeaning": "Tôi có kinh nghiệm làm việc ở nước ngoài."
+    },
+    {
+        "word": "力",
+        "reading": "ちから",
+        "meaning": "sức mạnh, năng lực",
+        "meaningJa": "何かをする能力",
+        "example": "もっと日本語の力をつけたいです。",
+        "exampleMeaning": "Tôi muốn nâng cao năng lực tiếng Nhật."
+    },
+    {
+        "word": "人気",
+        "reading": "にんき",
+        "meaning": "được yêu thích",
+        "meaningJa": "多くの人に好かれること",
+        "example": "この店は人気があります。",
+        "exampleMeaning": "Cửa hàng này rất nổi tiếng."
+    },
+    {
+        "word": "形",
+        "reading": "かたち",
+        "meaning": "hình dạng",
+        "meaningJa": "物の外見",
+        "example": "面白い形の建物です。",
+        "exampleMeaning": "Đó là tòa nhà có hình dạng thú vị."
+    },
+    {
+        "word": "色",
+        "reading": "いろ",
+        "meaning": "màu sắc",
+        "meaningJa": "赤や青など",
+        "example": "青い色が好きです。",
+        "exampleMeaning": "Tôi thích màu xanh."
+    },
+    {
+        "word": "味",
+        "reading": "あじ",
+        "meaning": "hương vị",
+        "meaningJa": "食べ物の感じ",
+        "example": "この料理は味がいいです。",
+        "exampleMeaning": "Món ăn này có hương vị ngon."
+    },
+    {
+        "word": "ガム",
+        "reading": "ガム",
+        "meaning": "kẹo cao su",
+        "meaningJa": "かんで食べるお菓子",
+        "example": "ガムをかんでいます。",
+        "exampleMeaning": "Tôi đang nhai kẹo cao su."
+    },
+    {
+        "word": "品物",
+        "reading": "しなもの",
+        "meaning": "hàng hóa",
+        "meaningJa": "売るための物",
+        "example": "品物を届けます。",
+        "exampleMeaning": "Tôi giao hàng hóa."
+    },
+    {
+        "word": "値段",
+        "reading": "ねだん",
+        "meaning": "giá tiền",
+        "meaningJa": "商品の価格",
+        "example": "この商品の値段は高いです。",
+        "exampleMeaning": "Giá sản phẩm này cao."
+    },
+    {
+        "word": "給料",
+        "reading": "きゅうりょう",
+        "meaning": "lương",
+        "meaningJa": "仕事でもらうお金",
+        "example": "今月の給料をもらいました。",
+        "exampleMeaning": "Tôi đã nhận lương tháng này."
+    },
+    {
+        "word": "ボーナス",
+        "reading": "ボーナス",
+        "meaning": "thưởng",
+        "meaningJa": "特別にもらうお金",
+        "example": "夏にボーナスが出ます。",
+        "exampleMeaning": "Mùa hè có thưởng."
+    },
+    {
+        "word": "番組",
+        "reading": "ばんぐみ",
+        "meaning": "chương trình TV",
+        "meaningJa": "テレビやラジオの内容",
+        "example": "面白い番組を見ました。",
+        "exampleMeaning": "Tôi đã xem một chương trình thú vị."
+    },
+    {
+        "word": "小説",
+        "reading": "しょうせつ",
+        "meaning": "tiểu thuyết",
+        "meaningJa": "長い物語の本",
+        "example": "日本語の小説を読んでいます。",
+        "exampleMeaning": "Tôi đang đọc tiểu thuyết tiếng Nhật."
+    }
+]

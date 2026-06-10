@@ -1,0 +1,202 @@
+[
+    {
+        "word": "飼います",
+        "reading": "かいます",
+        "meaning": "nuôi (thú cưng)",
+        "meaningJa": "動物を育てる",
+        "example": "犬を飼っています。",
+        "exampleMeaning": "Tôi đang nuôi chó."
+    },
+    {
+        "word": "建てます",
+        "reading": "たてます",
+        "meaning": "xây dựng",
+        "meaningJa": "建物を作る",
+        "example": "新しい家を建てます。",
+        "exampleMeaning": "Tôi xây nhà mới."
+    },
+    {
+        "word": "走ります",
+        "reading": "はしります",
+        "meaning": "chạy",
+        "meaningJa": "速く移動する",
+        "example": "毎朝公園を走ります。",
+        "exampleMeaning": "Mỗi sáng tôi chạy trong công viên."
+    },
+    {
+        "word": "取ります",
+        "reading": "とります",
+        "meaning": "lấy, nghỉ (phép)",
+        "meaningJa": "手に入れる",
+        "example": "来週休みを取ります。",
+        "exampleMeaning": "Tuần sau tôi nghỉ phép."
+    },
+    {
+        "word": "見えます",
+        "reading": "みえます",
+        "meaning": "nhìn thấy",
+        "meaningJa": "自然に目に入る",
+        "example": "窓から海が見えます。",
+        "exampleMeaning": "Có thể nhìn thấy biển từ cửa sổ."
+    },
+    {
+        "word": "聞こえます",
+        "reading": "きこえます",
+        "meaning": "nghe thấy",
+        "meaningJa": "自然に音が聞こえる",
+        "example": "隣の部屋の音が聞こえます。",
+        "exampleMeaning": "Nghe thấy âm thanh từ phòng bên."
+    },
+    {
+        "word": "できます",
+        "reading": "できます",
+        "meaning": "được xây xong, được hoàn thành",
+        "meaningJa": "完成する",
+        "example": "駅の前にスーパーができました。",
+        "exampleMeaning": "Một siêu thị đã được xây trước ga."
+    },
+    {
+        "word": "開きます",
+        "reading": "ひらきます",
+        "meaning": "mở (sự kiện)",
+        "meaningJa": "会などを行う",
+        "example": "来週会議が開かれます。",
+        "exampleMeaning": "Tuần sau sẽ tổ chức cuộc họp."
+    },
+    {
+        "word": "鳥",
+        "reading": "とり",
+        "meaning": "chim",
+        "meaningJa": "空を飛ぶ動物",
+        "example": "鳥が飛んでいます。",
+        "exampleMeaning": "Chim đang bay."
+    },
+    {
+        "word": "犬",
+        "reading": "いぬ",
+        "meaning": "chó",
+        "meaningJa": "人と暮らす動物",
+        "example": "犬を飼っています。",
+        "exampleMeaning": "Tôi đang nuôi chó."
+    },
+    {
+        "word": "声",
+        "reading": "こえ",
+        "meaning": "giọng nói",
+        "meaningJa": "人が出す音",
+        "example": "大きい声で話します。",
+        "exampleMeaning": "Tôi nói bằng giọng lớn."
+    },
+    {
+        "word": "波",
+        "reading": "なみ",
+        "meaning": "sóng",
+        "meaningJa": "海や川の水の動き",
+        "example": "波の音が聞こえます。",
+        "exampleMeaning": "Nghe thấy tiếng sóng."
+    },
+    {
+        "word": "花火",
+        "reading": "はなび",
+        "meaning": "pháo hoa",
+        "meaningJa": "夜空に上がる花火",
+        "example": "花火がきれいに見えます。",
+        "exampleMeaning": "Có thể nhìn thấy pháo hoa rất đẹp."
+    },
+    {
+        "word": "景色",
+        "reading": "けしき",
+        "meaning": "phong cảnh",
+        "meaningJa": "目に見える風景",
+        "example": "山の景色がきれいです。",
+        "exampleMeaning": "Phong cảnh núi rất đẹp."
+    },
+    {
+        "word": "昼間",
+        "reading": "ひるま",
+        "meaning": "ban ngày",
+        "meaningJa": "昼の時間",
+        "example": "昼間は暑いです。",
+        "exampleMeaning": "Ban ngày trời nóng."
+    },
+    {
+        "word": "昔",
+        "reading": "むかし",
+        "meaning": "ngày xưa",
+        "meaningJa": "遠い過去",
+        "example": "昔ここは静かでした。",
+        "exampleMeaning": "Ngày xưa nơi đây yên tĩnh."
+    },
+    {
+        "word": "道具",
+        "reading": "どうぐ",
+        "meaning": "dụng cụ",
+        "meaningJa": "仕事や作業に使う物",
+        "example": "新しい道具を買いました。",
+        "exampleMeaning": "Tôi đã mua dụng cụ mới."
+    },
+    {
+        "word": "自動販売機",
+        "reading": "じどうはんばいき",
+        "meaning": "máy bán hàng tự động",
+        "meaningJa": "自動で商品を売る機械",
+        "example": "自動販売機でお茶を買います。",
+        "exampleMeaning": "Tôi mua trà ở máy bán hàng tự động."
+    },
+    {
+        "word": "通信販売",
+        "reading": "つうしんはんばい",
+        "meaning": "bán hàng qua mạng/thư tín",
+        "meaningJa": "電話やインターネットで売ること",
+        "example": "通信販売で本を買いました。",
+        "exampleMeaning": "Tôi mua sách qua mạng."
+    },
+    {
+        "word": "クリーニング",
+        "reading": "クリーニング",
+        "meaning": "giặt ủi",
+        "meaningJa": "服をきれいにするサービス",
+        "example": "スーツをクリーニングに出します。",
+        "exampleMeaning": "Tôi mang vest đi giặt ủi."
+    },
+    {
+        "word": "マンション",
+        "reading": "マンション",
+        "meaning": "chung cư",
+        "meaningJa": "大きい集合住宅",
+        "example": "新しいマンションに住んでいます。",
+        "exampleMeaning": "Tôi sống ở chung cư mới."
+    },
+    {
+        "word": "キッチン",
+        "reading": "キッチン",
+        "meaning": "nhà bếp",
+        "meaningJa": "料理をする場所",
+        "example": "キッチンで料理します。",
+        "exampleMeaning": "Tôi nấu ăn trong bếp."
+    },
+    {
+        "word": "教室",
+        "reading": "きょうしつ",
+        "meaning": "lớp học",
+        "meaningJa": "勉強する部屋",
+        "example": "教室に学生がいます。",
+        "exampleMeaning": "Có học sinh trong lớp."
+    },
+    {
+        "word": "パーティールーム",
+        "reading": "パーティールーム",
+        "meaning": "phòng tiệc",
+        "meaningJa": "パーティーをする部屋",
+        "example": "パーティールームを予約しました。",
+        "exampleMeaning": "Tôi đã đặt phòng tiệc."
+    },
+    {
+        "word": "後",
+        "reading": "あと",
+        "meaning": "sau",
+        "meaningJa": "その次の時間",
+        "example": "仕事の後で映画を見ます。",
+        "exampleMeaning": "Sau công việc tôi xem phim."
+    }
+]

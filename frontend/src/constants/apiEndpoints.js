@@ -200,34 +200,10 @@ export const KAIWA = {
 		`/kaiwa/${encodeURIComponent(contextId)}/sessions`,
 };
 
-/** Mẫu câu chuyên ngành — `/api/sentences` */
-export const SENTENCE = {
-	SPECIALTIES: '/sentences/specialties',
-	specialtyPack: (code) =>
-		`/sentences/specialties/${encodeURIComponent(code)}/pack`,
-	specialtyQuiz: (code) =>
-		`/sentences/specialties/${encodeURIComponent(code)}/quiz`,
-	template: (id) => `/sentences/templates/${encodeURIComponent(id)}`,
-	templateProgress: (id) =>
-		`/sentences/templates/${encodeURIComponent(id)}/progress`,
-};
-
 /** Kaiwa — bối cảnh hội thoại — `/api/admin/kaiwa` */
 export const ADMIN_KAIWA = {
 	BASE: '/admin/kaiwa',
 	context: (id) => `/admin/kaiwa/${encodeURIComponent(id)}`,
-};
-
-/** Mẫu câu chuyên ngành — `/api/admin/sentence-templates` */
-export const ADMIN_SENTENCE = {
-	BASE: '/admin/sentence-templates',
-	SEED: '/admin/sentence-templates/seed',
-	SPECIALTIES: '/admin/sentence-templates/specialties',
-	specialty: (id) =>
-		`/admin/sentence-templates/specialties/${encodeURIComponent(id)}`,
-	TEMPLATES: '/admin/sentence-templates/templates',
-	template: (id) =>
-		`/admin/sentence-templates/templates/${encodeURIComponent(id)}`,
 };
 
 /** JLPT đề thi — `/api/admin/exam-papers` */

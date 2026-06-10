@@ -23,7 +23,6 @@ import adminFeedbackRoutes from './adminFeedbackRoutes.js';
 import adminSystemRoutes from './adminSystemRoutes.js';
 import adminSettingsRoutes from './adminSettingsRoutes.js';
 import adminArenaRoutes from './adminArenaRoutes.js';
-import adminSentenceTemplateRoutes from './adminSentenceTemplateRoutes.js';
 
 const router = express.Router();
 
@@ -53,6 +52,5 @@ router.use('/feedback', adminFeedbackRoutes);
 router.use('/system', adminSystemRoutes);
 router.use('/settings', adminSettingsRoutes);
 router.use('/arena', adminArenaRoutes);
-router.use('/sentence-templates', adminSentenceTemplateRoutes);
 
 export default router;

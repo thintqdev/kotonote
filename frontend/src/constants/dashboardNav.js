@@ -17,7 +17,6 @@ export const DASHBOARD_NAV_ITEMS = [
   { id: 'reading', to: '/reading', iconSrc: '/assets/menu-icons/reading.png' },
   { id: 'listening', to: '/listening', iconSrc: '/assets/menu-icons/listening.png' },
   { id: 'kaiwa', to: '/kaiwa', iconSrc: '/assets/menu-icons/practice.png' },
-  { id: 'sentences', to: '/sentences', iconSrc: '/assets/menu-icons/practice.png', hidden: true },
   { id: 'practice', to: '/practice', iconSrc: '/assets/menu-icons/practice.png' },
   { id: 'notebook', to: '/notebook', iconSrc: '/assets/menu-icons/notebook.png' },
   { id: 'journal', to: '/journal', iconSrc: '/assets/menu-icons/notebook.png' },
@@ -45,7 +44,6 @@ export const SUBJECT_ROUTE_BY_ID = {
 	reading: '/reading',
 	listening: '/listening',
 	kaiwa: '/kaiwa',
-	sentences: '/sentences',
 	practice: '/practice',
 	alphabet: '/alphabet',
 };

@@ -35,5 +35,6 @@ const vocabularyDeckProgressSchema = new mongoose.Schema(
 
 vocabularyDeckProgressSchema.index({ userId: 1, deckId: 1 }, { unique: true });
 vocabularyDeckProgressSchema.index({ userId: 1, jlpt: 1 });
+vocabularyDeckProgressSchema.index({ userId: 1, updatedAt: -1 });
 
 export default mongoose.model('VocabularyDeckProgress', vocabularyDeckProgressSchema);

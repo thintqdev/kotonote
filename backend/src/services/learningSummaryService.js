@@ -1,9 +1,7 @@
 import User from '../models/User.js';
 import Badge from '../models/Badge.js';
-import Grammar from '../models/Grammar.js';
-import VocabularyDeck from '../models/VocabularyDeck.js';
-import KanjiDeck from '../models/KanjiDeck.js';
 import * as streakRepository from '../repositories/streakRepository.js';
+import { getDashboardCatalogCounts } from './dashboardCatalogCountsService.js';
 import {
 	calendarDaysFromIsoDate,
 	isoDateLocal,
@@ -32,14 +30,17 @@ function buildStreakWeekSummary(checkInDates) {
  * @param {import('mongoose').Types.ObjectId} userId
  */
 export const getLearningSummary = async (userId) => {
-	const [user, streak, vocabDecks, kanjiDecks, grammarLessons] =
-		await Promise.all([
-			User.findById(userId).select('profile earnedBadges').lean(),
-			streakRepository.getOrCreateStreak(userId),
-			VocabularyDeck.countDocuments({ isActive: true }),
-			KanjiDeck.countDocuments({ isActive: true }),
-			Grammar.countDocuments({ isPublished: true }),
-		]);
+	const [user, streak, catalogCounts] = await Promise.all([
+		User.findById(userId).select('profile earnedBadges').lean(),
+		streakRepository.getOrCreateStreak(userId),
+		getDashboardCatalogCounts(),
+	]);
+
+	const {
+		vocabDecksActive: vocabDecks,
+		kanjiDecksActive: kanjiDecks,
+		grammarTotal: grammarLessons,
+	} = catalogCounts;
 
 	if (!user) {
 		return null;

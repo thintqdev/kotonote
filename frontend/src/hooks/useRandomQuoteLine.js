@@ -27,7 +27,9 @@ export function useRandomQuoteLine({ fallbackI18nKey, staticText }) {
 		const ac = new AbortController();
 		(async () => {
 			try {
-				const data = await quoteService.getRandomQuote({ signal: ac.signal });
+				const data = await quoteService.getSharedRandomQuote({
+					signal: ac.signal,
+				});
 				const picked = quoteService.pickQuoteLineForLanguage(
 					data?.quote,
 					i18n.language,

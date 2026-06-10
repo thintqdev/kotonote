@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { memo, useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -150,4 +150,4 @@ DailyNoteCard.propTypes = {
   toolbarMountId: PropTypes.string,
 };
 
-export default DailyNoteCard;
+export default memo(DailyNoteCard);

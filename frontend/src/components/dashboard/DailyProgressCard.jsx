@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import './DailyProgressCard.css';
@@ -64,4 +65,4 @@ DailyProgressCard.propTypes = {
   ).isRequired,
 };
 
-export default DailyProgressCard;
+export default memo(DailyProgressCard);

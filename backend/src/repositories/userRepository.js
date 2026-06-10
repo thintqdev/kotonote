@@ -15,8 +15,31 @@ export const createUser = async (userData) => {
 	return await user.save();
 };
 
+/** Field tối thiểu cho middleware `authenticate` và `req.jlptUnlocked`. */
+export const AUTH_USER_SELECT =
+	'_id role isActive authProvider isEmailVerified membership';
+
 export const findUserById = async (userId) => {
 	return await User.findById(userId).select('-password');
+};
+
+/**
+ * User nhẹ cho auth middleware — plain object, không load password/profile/settings/…
+ * @param {import('mongoose').Types.ObjectId | string} userId
+ */
+export const findUserForAuth = async (userId) => {
+	return User.findById(userId).select(AUTH_USER_SELECT).lean();
+};
+
+/** Field tối thiểu cho Socket.IO handshake auth. */
+export const SOCKET_USER_SELECT = '_id role isActive name';
+
+/**
+ * User nhẹ cho socket auth — plain object.
+ * @param {import('mongoose').Types.ObjectId | string} userId
+ */
+export const findUserForSocketAuth = async (userId) => {
+	return User.findById(userId).select(SOCKET_USER_SELECT).lean();
 };
 
 /** Có hash mật khẩu — dùng cho đổi mật khẩu (không dùng `.select('-password')`). */

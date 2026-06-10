@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import { findUserForSocketAuth } from '../repositories/userRepository.js';
+import { verifyToken } from '../utils/jwt.js';
 
 /**
  * Initialize Socket.IO with authentication and middleware
@@ -35,12 +35,15 @@ export const initializeSocket = (httpServer) => {
 			}
 
 			// Verify JWT token (payload giống REST: { userId } — xem utils/jwt.js)
-			const decoded = jwt.verify(token, process.env.JWT_SECRET);
+			const decoded = verifyToken(token);
+			if (!decoded) {
+				return next(new Error('Authentication error: Invalid token'));
+			}
 			const userIdFromToken = decoded.userId ?? decoded.id;
 			if (!userIdFromToken) {
 				return next(new Error('Authentication error: Invalid token payload'));
 			}
-			const user = await User.findById(userIdFromToken);
+			const user = await findUserForSocketAuth(userIdFromToken);
 
 			if (!user) {
 				return next(new Error('Authentication error: User not found'));

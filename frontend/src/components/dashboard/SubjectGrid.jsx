@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import SubjectCard from "./SubjectCard.jsx";
@@ -48,4 +49,4 @@ SubjectGrid.propTypes = {
   ).isRequired,
 };
 
-export default SubjectGrid;
+export default memo(SubjectGrid);

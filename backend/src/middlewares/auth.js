@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { verifyToken } from '../utils/jwt.js';
-import { findUserById } from '../repositories/userRepository.js';
+import { findUserForAuth } from '../repositories/userRepository.js';
 import { apiError } from '../utils/response.js';
 import { AUTH, COMMON } from '../constants/messages.js';
 import { AUTH_PROVIDER } from '../constants/userStatus.js';
@@ -26,7 +26,7 @@ export const authenticate = asyncHandler(async (req, res, next) => {
 	}
 	
 	// Get user from token
-	const user = await findUserById(decoded.userId);
+	const user = await findUserForAuth(decoded.userId);
 	
 	if (!user) {
 		return apiError(res, COMMON.UNAUTHORIZED, 401);

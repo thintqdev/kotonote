@@ -1,0 +1,202 @@
+[
+    {
+        "word": "咲きます",
+        "reading": "さきます",
+        "meaning": "nở (hoa)",
+        "meaningJa": "花が開く",
+        "example": "桜が咲きました。",
+        "exampleMeaning": "Hoa anh đào đã nở."
+    },
+    {
+        "word": "変わります",
+        "reading": "かわります",
+        "meaning": "thay đổi",
+        "meaningJa": "前と違う状態になる",
+        "example": "生活が変わりました。",
+        "exampleMeaning": "Cuộc sống đã thay đổi."
+    },
+    {
+        "word": "困ります",
+        "reading": "こまります",
+        "meaning": "gặp khó khăn",
+        "meaningJa": "どうしたらいいかわからない",
+        "example": "お金がなくて困っています。",
+        "exampleMeaning": "Tôi gặp khó khăn vì không có tiền."
+    },
+    {
+        "word": "付けます",
+        "reading": "つけます",
+        "meaning": "đánh dấu, ghi",
+        "meaningJa": "印を付ける",
+        "example": "大事な所に印を付けます。",
+        "exampleMeaning": "Tôi đánh dấu chỗ quan trọng."
+    },
+    {
+        "word": "拾います",
+        "reading": "ひろいます",
+        "meaning": "nhặt",
+        "meaningJa": "落ちている物を取る",
+        "example": "道で財布を拾いました。",
+        "exampleMeaning": "Tôi nhặt được ví trên đường."
+    },
+    {
+        "word": "掛かります",
+        "reading": "かかります",
+        "meaning": "mắc, bị",
+        "meaningJa": "病気になる",
+        "example": "インフルエンザに掛かりました。",
+        "exampleMeaning": "Tôi bị cúm."
+    },
+    {
+        "word": "連絡",
+        "reading": "れんらく",
+        "meaning": "liên lạc",
+        "meaningJa": "情報を伝えること",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "都合",
+        "reading": "つごう",
+        "meaning": "sự thuận tiện",
+        "meaningJa": "予定や事情",
+        "example": "今日は都合がいいです。",
+        "exampleMeaning": "Hôm nay tôi tiện."
+    },
+    {
+        "word": "予定",
+        "reading": "よてい",
+        "meaning": "kế hoạch",
+        "meaningJa": "前もって決めたこと",
+        "example": "予定を確認します。",
+        "exampleMeaning": "Tôi xác nhận kế hoạch."
+    },
+    {
+        "word": "場所",
+        "reading": "ばしょ",
+        "meaning": "địa điểm",
+        "meaningJa": "物や人がある所",
+        "example": "場所を教えてください。",
+        "exampleMeaning": "Hãy chỉ cho tôi địa điểm."
+    },
+    {
+        "word": "ゴミ",
+        "reading": "ゴミ",
+        "meaning": "rác",
+        "meaningJa": "いらない物",
+        "example": "ゴミを捨てます。",
+        "exampleMeaning": "Tôi vứt rác."
+    },
+    {
+        "word": "箱",
+        "reading": "はこ",
+        "meaning": "cái hộp",
+        "meaningJa": "物を入れる物",
+        "example": "箱に入れてください。",
+        "exampleMeaning": "Hãy cho vào hộp."
+    },
+    {
+        "word": "燃えるゴミ",
+        "reading": "もえるゴミ",
+        "meaning": "rác cháy được",
+        "meaningJa": "燃やせるゴミ",
+        "example": "燃えるゴミの日です。",
+        "exampleMeaning": "Hôm nay là ngày đổ rác cháy được."
+    },
+    {
+        "word": "燃えないゴミ",
+        "reading": "もえないゴミ",
+        "meaning": "rác không cháy được",
+        "meaningJa": "燃やせないゴミ",
+        "example": "缶は燃えないゴミです。",
+        "exampleMeaning": "Lon là rác không cháy được."
+    },
+    {
+        "word": "置き場",
+        "reading": "おきば",
+        "meaning": "nơi để",
+        "meaningJa": "物を置く場所",
+        "example": "自転車置き場があります。",
+        "exampleMeaning": "Có nơi để xe đạp."
+    },
+    {
+        "word": "横",
+        "reading": "よこ",
+        "meaning": "bên cạnh",
+        "meaningJa": "となり",
+        "example": "銀行の横です。",
+        "exampleMeaning": "Ở bên cạnh ngân hàng."
+    },
+    {
+        "word": "瓶",
+        "reading": "びん",
+        "meaning": "chai thủy tinh",
+        "meaningJa": "ガラスの容器",
+        "example": "瓶を捨てます。",
+        "exampleMeaning": "Tôi vứt chai thủy tinh."
+    },
+    {
+        "word": "缶",
+        "reading": "かん",
+        "meaning": "lon",
+        "meaningJa": "金属の容器",
+        "example": "缶ジュースを飲みます。",
+        "exampleMeaning": "Tôi uống nước lon."
+    },
+    {
+        "word": "ガス",
+        "reading": "ガス",
+        "meaning": "gas",
+        "meaningJa": "燃料の一つ",
+        "example": "ガスを使います。",
+        "exampleMeaning": "Tôi dùng gas."
+    },
+    {
+        "word": "宇宙",
+        "reading": "うちゅう",
+        "meaning": "vũ trụ",
+        "meaningJa": "地球の外の世界",
+        "example": "宇宙に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với vũ trụ."
+    },
+    {
+        "word": "地球",
+        "reading": "ちきゅう",
+        "meaning": "Trái Đất",
+        "meaningJa": "私たちが住む星",
+        "example": "地球を守りましょう。",
+        "exampleMeaning": "Hãy bảo vệ Trái Đất."
+    },
+    {
+        "word": "環境",
+        "reading": "かんきょう",
+        "meaning": "môi trường",
+        "meaningJa": "自然や生活の周りの状態",
+        "example": "環境を守ることが大切です。",
+        "exampleMeaning": "Bảo vệ môi trường là điều quan trọng."
+    },
+    {
+        "word": "リサイクル",
+        "reading": "リサイクル",
+        "meaning": "tái chế",
+        "meaningJa": "再利用すること",
+        "example": "ペットボトルをリサイクルします。",
+        "exampleMeaning": "Tôi tái chế chai nhựa."
+    },
+    {
+        "word": "分別",
+        "reading": "ぶんべつ",
+        "meaning": "phân loại",
+        "meaningJa": "種類ごとに分けること",
+        "example": "ゴミを分別してください。",
+        "exampleMeaning": "Hãy phân loại rác."
+    },
+    {
+        "word": "規則",
+        "reading": "きそく",
+        "meaning": "quy tắc",
+        "meaningJa": "守るべき決まり",
+        "example": "規則を守ります。",
+        "exampleMeaning": "Tôi tuân thủ quy tắc."
+    }
+]

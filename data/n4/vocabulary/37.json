@@ -1,0 +1,202 @@
+[
+    {
+        "word": "褒めます",
+        "reading": "ほめます",
+        "meaning": "khen",
+        "meaningJa": "人のよいところを言う",
+        "example": "先生は学生を褒めました。",
+        "exampleMeaning": "Giáo viên đã khen học sinh."
+    },
+    {
+        "word": "叱ります",
+        "reading": "しかります",
+        "meaning": "mắng",
+        "meaningJa": "悪いことを注意する",
+        "example": "母は子どもを叱りました。",
+        "exampleMeaning": "Mẹ đã mắng con."
+    },
+    {
+        "word": "誘います",
+        "reading": "さそいます",
+        "meaning": "rủ",
+        "meaningJa": "いっしょに行こうと言う",
+        "example": "友達を映画に誘いました。",
+        "exampleMeaning": "Tôi đã rủ bạn đi xem phim."
+    },
+    {
+        "word": "起こします",
+        "reading": "おこします",
+        "meaning": "đánh thức",
+        "meaningJa": "寝ている人を起こす",
+        "example": "朝7時に弟を起こしました。",
+        "exampleMeaning": "Tôi đã đánh thức em trai lúc 7 giờ sáng."
+    },
+    {
+        "word": "招待します",
+        "reading": "しょうたいします",
+        "meaning": "mời",
+        "meaningJa": "人を会や家に呼ぶ",
+        "example": "友達を結婚式に招待しました。",
+        "exampleMeaning": "Tôi đã mời bạn đến đám cưới."
+    },
+    {
+        "word": "頼みます",
+        "reading": "たのみます",
+        "meaning": "nhờ vả",
+        "meaningJa": "人にお願いする",
+        "example": "田中さんに仕事を頼みました。",
+        "exampleMeaning": "Tôi đã nhờ anh Tanaka làm việc."
+    },
+    {
+        "word": "注意します",
+        "reading": "ちゅういします",
+        "meaning": "nhắc nhở/chú ý",
+        "meaningJa": "気をつけるように言う",
+        "example": "先生は学生に注意しました。",
+        "exampleMeaning": "Giáo viên đã nhắc nhở học sinh."
+    },
+    {
+        "word": "盗みます",
+        "reading": "ぬすみます",
+        "meaning": "ăn trộm",
+        "meaningJa": "人の物を取る",
+        "example": "だれかが私の財布を盗みました。",
+        "exampleMeaning": "Ai đó đã lấy trộm ví của tôi."
+    },
+    {
+        "word": "踏みます",
+        "reading": "ふみます",
+        "meaning": "giẫm",
+        "meaningJa": "足で上から押す",
+        "example": "電車で足を踏まれました。",
+        "exampleMeaning": "Tôi đã bị giẫm lên chân trên tàu điện."
+    },
+    {
+        "word": "壊します",
+        "reading": "こわします",
+        "meaning": "làm hỏng",
+        "meaningJa": "使えない状態にする",
+        "example": "弟が私の時計を壊しました。",
+        "exampleMeaning": "Em trai đã làm hỏng đồng hồ của tôi."
+    },
+    {
+        "word": "汚します",
+        "reading": "よごします",
+        "meaning": "làm bẩn",
+        "meaningJa": "きたなくする",
+        "example": "子どもが服を汚しました。",
+        "exampleMeaning": "Đứa trẻ đã làm bẩn quần áo."
+    },
+    {
+        "word": "破ります",
+        "reading": "やぶります",
+        "meaning": "xé rách",
+        "meaningJa": "紙などを切る",
+        "example": "妹が手紙を破りました。",
+        "exampleMeaning": "Em gái đã xé lá thư."
+    },
+    {
+        "word": "返します",
+        "reading": "かえします",
+        "meaning": "trả lại",
+        "meaningJa": "借りた物を戻す",
+        "example": "図書館に本を返しました。",
+        "exampleMeaning": "Tôi đã trả sách cho thư viện."
+    },
+    {
+        "word": "貸します",
+        "reading": "かします",
+        "meaning": "cho mượn",
+        "meaningJa": "人に物を使わせる",
+        "example": "友達にペンを貸しました。",
+        "exampleMeaning": "Tôi đã cho bạn mượn bút."
+    },
+    {
+        "word": "借ります",
+        "reading": "かります",
+        "meaning": "mượn",
+        "meaningJa": "人の物を使う",
+        "example": "友達にお金を借りました。",
+        "exampleMeaning": "Tôi đã mượn tiền của bạn."
+    },
+    {
+        "word": "手伝います",
+        "reading": "てつだいます",
+        "meaning": "giúp đỡ",
+        "meaningJa": "人の仕事を助ける",
+        "example": "母の料理を手伝いました。",
+        "exampleMeaning": "Tôi đã giúp mẹ nấu ăn."
+    },
+    {
+        "word": "送ります",
+        "reading": "おくります",
+        "meaning": "tiễn/gửi",
+        "meaningJa": "人を目的地まで連れて行く",
+        "example": "駅まで友達を送りました。",
+        "exampleMeaning": "Tôi đã tiễn bạn đến ga."
+    },
+    {
+        "word": "迎えます",
+        "reading": "むかえます",
+        "meaning": "đón",
+        "meaningJa": "来る人を待って会う",
+        "example": "空港へ家族を迎えに行きました。",
+        "exampleMeaning": "Tôi đã đi đón gia đình ở sân bay."
+    },
+    {
+        "word": "約束します",
+        "reading": "やくそくします",
+        "meaning": "hứa",
+        "meaningJa": "することを決める",
+        "example": "友達と会う約束をしました。",
+        "exampleMeaning": "Tôi đã hẹn gặp bạn."
+    },
+    {
+        "word": "相談します",
+        "reading": "そうだんします",
+        "meaning": "bàn bạc",
+        "meaningJa": "人に意見を聞く",
+        "example": "先生に進学について相談しました。",
+        "exampleMeaning": "Tôi đã trao đổi với giáo viên về việc học tiếp."
+    },
+    {
+        "word": "親切",
+        "reading": "しんせつ",
+        "meaning": "tử tế",
+        "meaningJa": "人にやさしいこと",
+        "example": "山田さんはとても親切です。",
+        "exampleMeaning": "Anh Yamada rất tử tế."
+    },
+    {
+        "word": "失礼",
+        "reading": "しつれい",
+        "meaning": "thất lễ/bất lịch sự",
+        "meaningJa": "礼儀がないこと",
+        "example": "失礼なことを言って、すみません。",
+        "exampleMeaning": "Xin lỗi vì đã nói điều thất lễ."
+    },
+    {
+        "word": "冗談",
+        "reading": "じょうだん",
+        "meaning": "đùa",
+        "meaningJa": "人を笑わせるための話",
+        "example": "それは冗談ですから、心配しないでください。",
+        "exampleMeaning": "Đó là lời nói đùa nên đừng lo."
+    },
+    {
+        "word": "謝ります",
+        "reading": "あやまります",
+        "meaning": "xin lỗi",
+        "meaningJa": "悪いことを認めて謝る",
+        "example": "友達に謝りました。",
+        "exampleMeaning": "Tôi đã xin lỗi bạn."
+    },
+    {
+        "word": "仲直りします",
+        "reading": "なかなおりします",
+        "meaning": "làm lành",
+        "meaningJa": "けんかした後、また仲よくなる",
+        "example": "兄とけんかしましたが、すぐ仲直りしました。",
+        "exampleMeaning": "Tôi đã cãi nhau với anh trai nhưng nhanh chóng làm lành."
+    }
+]

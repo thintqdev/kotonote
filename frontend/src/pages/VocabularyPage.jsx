@@ -3,7 +3,6 @@ import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-r
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildLessonQuizQuestions,
@@ -41,6 +40,7 @@ import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import VocabLessonUnlockGate from "../components/study/VocabLessonUnlockGate.jsx";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
+import VocabLessonDetailVirtualList from "../components/study/VocabLessonDetailVirtualList.jsx";
 import "./DashboardHome.css";
 import "./VocabularyPages.css";
 import "./VocabularyPage.css";
@@ -112,6 +112,11 @@ export default function VocabularyPage() {
   useEffect(() => {
     if (!user || !lessonJlpt || !isLessonMode) {
       setLoading(false);
+      if (!isUserDeck) {
+        setUnlockDecks([]);
+        setUnlockProgress({});
+      }
+      setUnlockReady(isUserDeck);
       return;
     }
     let cancelled = false;
@@ -119,7 +124,15 @@ export default function VocabularyPage() {
       setLoading(true);
       setError("");
       setApiLessonLocked(false);
+      if (!isUserDeck) setUnlockReady(false);
       try {
+        const unlockPromise = !isUserDeck
+          ? Promise.all([
+              listVocabularyDecksByJlpt(lessonJlpt),
+              getMyVocabularyProgress({ jlpt: lessonJlpt }),
+            ])
+          : null;
+
         if (deckId) {
           const { deck, vocabulary } = await getDeckWithVocabulary(deckId);
           const jlpt = lessonJlpt || levelToJlpt(deck.level);
@@ -130,8 +143,25 @@ export default function VocabularyPage() {
             setSortedDecks([deck]);
             setPackItems(items);
           }
+          if (unlockPromise) {
+            const [decks, progressList] = await unlockPromise;
+            if (!cancelled) {
+              setUnlockDecks(sortDecksByOrder(filterActiveDecks(decks)));
+              setUnlockProgress(vocabularyProgressToMap(progressList));
+            }
+          }
         } else {
-          const sorted = await listVocabularyDecksByJlpt(lessonJlpt);
+          let sorted;
+          if (unlockPromise) {
+            const [decks, progressList] = await unlockPromise;
+            sorted = decks;
+            if (!cancelled) {
+              setUnlockDecks(sortDecksByOrder(filterActiveDecks(decks)));
+              setUnlockProgress(vocabularyProgressToMap(progressList));
+            }
+          } else {
+            sorted = await listVocabularyDecksByJlpt(lessonJlpt);
+          }
           const lessonDeck =
             lessonNoFromQuery != null
               ? sorted[lessonNoFromQuery - 1]
@@ -173,48 +203,30 @@ export default function VocabularyPage() {
           }
           setSortedDecks([]);
           setPackItems([]);
+          if (!isUserDeck) {
+            setUnlockDecks([]);
+            setUnlockProgress({});
+          }
         }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+          setUnlockReady(true);
+        }
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [user, lessonJlpt, deckId, lessonNoFromQuery, isLessonMode, t]);
-
-  useEffect(() => {
-    if (!user || !lessonJlpt || !isLessonMode || isUserDeck) {
-      setUnlockDecks([]);
-      setUnlockProgress({});
-      setUnlockReady(isUserDeck);
-      return;
-    }
-    let cancelled = false;
-    (async () => {
-      setUnlockReady(false);
-      try {
-        const { decks } = await listVocabularyDecksByJlpt(lessonJlpt);
-        const progressList = await getMyVocabularyProgress({
-          jlpt: lessonJlpt,
-        });
-        if (!cancelled) {
-          setUnlockDecks(sortDecksByOrder(filterActiveDecks(decks)));
-          setUnlockProgress(vocabularyProgressToMap(progressList));
-        }
-      } catch {
-        if (!cancelled) {
-          setUnlockDecks([]);
-          setUnlockProgress({});
-        }
-      } finally {
-        if (!cancelled) setUnlockReady(true);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [user, lessonJlpt, isLessonMode, isUserDeck]);
+  }, [
+    user,
+    lessonJlpt,
+    deckId,
+    lessonNoFromQuery,
+    isLessonMode,
+    isUserDeck,
+    t,
+  ]);
 
   /** Luôn ưu tiên vị trí thật của deckId (khớp server), không tin lessonNo trên URL nếu lệch */
   const effectiveLessonNo = useMemo(() => {
@@ -509,30 +521,7 @@ export default function VocabularyPage() {
       pageClassName="vocab-dash"
     >
       <JlptLockGate jlpt={lessonJlpt}>
-      <div className="vocab-study-breadcrumb-row vocab-study-breadcrumb-row--solo">
-              <Breadcrumb
-                items={[
-                  { label: t("breadcrumb.home"), to: "/", end: true },
-                  {
-                    label: t("breadcrumb.vocabulary"),
-                    to: isUserDeck ? "/vocabulary/mine" : "/vocabulary/browse",
-                  },
-                  isUserDeck
-                    ? {
-                        label:
-                          sortedDecks[0]?.title ??
-                          t("vocabPage.userDeckStudyBreadcrumb"),
-                      }
-                    : {
-                        label: t("vocabStudyPage.lessonBreadcrumb", {
-                          n: lessonNoFromQuery,
-                          jlpt: lessonJlpt,
-                        }),
-                      },
-                ]}
-              />
-            </div>
-
+      <div className="vocab-study-lesson-shell">
             <div className="vocab-study-lesson-ribbon" role="status">
               <p className="vocab-study-lesson-ribbon-main">
                 {t("vocabStudyPage.lessonRibbon", {
@@ -597,6 +586,7 @@ export default function VocabularyPage() {
                 {t("vocabStudyPage.tabQuiz")}
               </button>
             </div>
+            </div>
 
             <article
               className="vocab-sheet vocab-scope vocab-notebook vocab-study-scope vocab-study-scrap-scope"
@@ -604,52 +594,34 @@ export default function VocabularyPage() {
             >
               {lessonTab === "detail" ? (
                 <div className="vocab-lesson-detail-board">
-                  <h1
-                    id="vocab-study-title"
-                    className="scrap-flash-title vocab-lesson-panel-title"
-                  >
-                    {t("vocabStudyPage.lessonDetailTitle", {
-                      n: lessonNoFromQuery,
-                      jlpt: lessonJlpt,
-                    })}
-                  </h1>
+                  <header className="vocab-lesson-detail-head">
+                    <h1
+                      id="vocab-study-title"
+                      className="scrap-flash-title vocab-lesson-panel-title"
+                    >
+                      {t("vocabStudyPage.lessonDetailTitle", {
+                        n: lessonNoFromQuery,
+                        jlpt: lessonJlpt,
+                      })}
+                    </h1>
+                    {lessonItemsStable.length > 0 ? (
+                      <p className="vocab-lesson-detail-lead">
+                        {t("vocabStudyPage.lessonDetailLead", {
+                          n: lessonItemsStable.length,
+                        })}
+                      </p>
+                    ) : null}
+                  </header>
                   {lessonItemsStable.length === 0 ? (
                     <p className="vocab-empty" role="status">
                       {t("vocabStudyPage.emptyLesson")}
                     </p>
                   ) : (
-                    <ul className="vocab-lesson-detail-list">
-                      {lessonItemsStable.map((row) => {
-                        const rowMean = vocabMeaningLine(row, lang);
-                        return (
-                          <li key={row.id} className="vocab-lesson-detail-card">
-                            <div className="vocab-lesson-detail-top" lang="ja">
-                              <span className="vocab-lesson-detail-word">
-                                {row.surface}
-                              </span>
-                              <span className="vocab-lesson-detail-read">
-                                {row.reading}
-                              </span>
-                            </div>
-                            <p className="vocab-lesson-detail-mean">
-                              {rowMean}
-                            </p>
-                            <div
-                              className="vocab-lesson-detail-ex"
-                              lang="ja"
-                              dangerouslySetInnerHTML={{
-                                __html: row.exampleJaHtml,
-                              }}
-                            />
-                            {showViGloss ? (
-                              <p className="vocab-lesson-detail-exvi" lang="vi">
-                                {row.exampleVi}
-                              </p>
-                            ) : null}
-                          </li>
-                        );
-                      })}
-                    </ul>
+                    <VocabLessonDetailVirtualList
+                      items={lessonItemsStable}
+                      lang={lang}
+                      showViGloss={showViGloss}
+                    />
                   )}
                 </div>
               ) : lessonTab === "flash" ? (

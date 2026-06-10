@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -44,7 +45,7 @@ function detailLine(t, item) {
   return null;
 }
 
-export default function ContinueLearningCard({
+function ContinueLearningCard({
   continueData,
   loading = false,
   compact = false,
@@ -157,3 +158,5 @@ ContinueLearningCard.propTypes = {
   }),
   loading: PropTypes.bool,
 };
+
+export default memo(ContinueLearningCard);

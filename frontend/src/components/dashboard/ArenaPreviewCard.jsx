@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -13,7 +14,7 @@ function formatWeekdays(weekdays, t) {
   return list.join(", ");
 }
 
-export default function ArenaPreviewCard({ arena, loading, error }) {
+function ArenaPreviewCard({ arena, loading, error }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language || "ja";
 
@@ -119,3 +120,5 @@ ArenaPreviewCard.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
 };
+
+export default memo(ArenaPreviewCard);

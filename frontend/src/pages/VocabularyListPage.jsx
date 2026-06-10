@@ -105,8 +105,9 @@ export default function VocabularyListPage() {
       const [{ decks: pageDecks, pagination: pag }, progressList] =
         await Promise.all([
           listVocabularyDecks(params),
-
-          getMyVocabularyProgress(),
+          getMyVocabularyProgress(
+            selectedJlpt ? { jlpt: selectedJlpt } : {},
+          ),
         ]);
 
       setDecks(pageDecks);

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "届けます",
+        "reading": "とどけます",
+        "meaning": "giao, nộp",
+        "meaningJa": "相手の所まで持って行く",
+        "example": "荷物を届けます。",
+        "exampleMeaning": "Tôi giao hành lý."
+    },
+    {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "tham gia",
+        "meaningJa": "会や試合に参加する",
+        "example": "会議に出ます。",
+        "exampleMeaning": "Tôi tham gia cuộc họp."
+    },
+    {
+        "word": "打ちます",
+        "reading": "うちます",
+        "meaning": "đánh, gõ",
+        "meaningJa": "手でたたく",
+        "example": "パソコンで文字を打ちます。",
+        "exampleMeaning": "Tôi gõ chữ trên máy tính."
+    },
+    {
+        "word": "貯金します",
+        "reading": "ちょきんします",
+        "meaning": "tiết kiệm tiền",
+        "meaningJa": "お金をためる",
+        "example": "毎月貯金しています。",
+        "exampleMeaning": "Tôi tiết kiệm tiền mỗi tháng."
+    },
+    {
+        "word": "太ります",
+        "reading": "ふとります",
+        "meaning": "béo lên",
+        "meaningJa": "体重が増える",
+        "example": "最近少し太りました。",
+        "exampleMeaning": "Gần đây tôi hơi tăng cân."
+    },
+    {
+        "word": "やせます",
+        "reading": "やせます",
+        "meaning": "gầy đi",
+        "meaningJa": "体重が減る",
+        "example": "運動してやせました。",
+        "exampleMeaning": "Tôi đã giảm cân nhờ tập thể dục."
+    },
+    {
+        "word": "過ぎます",
+        "reading": "すぎます",
+        "meaning": "quá mức",
+        "meaningJa": "多すぎる",
+        "example": "食べ過ぎました。",
+        "exampleMeaning": "Tôi ăn quá nhiều."
+    },
+    {
+        "word": "慣れます",
+        "reading": "なれます",
+        "meaning": "quen với",
+        "meaningJa": "普通に感じるようになる",
+        "example": "日本の生活に慣れました。",
+        "exampleMeaning": "Tôi đã quen với cuộc sống ở Nhật."
+    },
+    {
+        "word": "腐ります",
+        "reading": "くさります",
+        "meaning": "thối, hỏng",
+        "meaningJa": "食べ物が悪くなる",
+        "example": "この魚は腐っています。",
+        "exampleMeaning": "Con cá này đã bị hỏng."
+    },
+    {
+        "word": "確認します",
+        "reading": "かくにんします",
+        "meaning": "xác nhận",
+        "meaningJa": "正しいか調べる",
+        "example": "予定を確認します。",
+        "exampleMeaning": "Tôi xác nhận lịch trình."
+    },
+    {
+        "word": "健康",
+        "reading": "けんこう",
+        "meaning": "sức khỏe",
+        "meaningJa": "元気な状態",
+        "example": "健康に気をつけています。",
+        "exampleMeaning": "Tôi chú ý đến sức khỏe."
+    },
+    {
+        "word": "ダイエット",
+        "reading": "ダイエット",
+        "meaning": "ăn kiêng, giảm cân",
+        "meaningJa": "体重を減らすこと",
+        "example": "ダイエットをしています。",
+        "exampleMeaning": "Tôi đang giảm cân."
+    },
+    {
+        "word": "禁煙",
+        "reading": "きんえん",
+        "meaning": "cấm hút thuốc",
+        "meaningJa": "たばこを吸ってはいけない",
+        "example": "ここは禁煙です。",
+        "exampleMeaning": "Ở đây cấm hút thuốc."
+    },
+    {
+        "word": "禁酒",
+        "reading": "きんしゅ",
+        "meaning": "cấm rượu",
+        "meaningJa": "お酒を飲まないこと",
+        "example": "医者に禁酒と言われました。",
+        "exampleMeaning": "Bác sĩ bảo tôi kiêng rượu."
+    },
+    {
+        "word": "睡眠",
+        "reading": "すいみん",
+        "meaning": "giấc ngủ",
+        "meaningJa": "眠ること",
+        "example": "十分な睡眠が必要です。",
+        "exampleMeaning": "Cần ngủ đủ giấc."
+    },
+    {
+        "word": "ストレス",
+        "reading": "ストレス",
+        "meaning": "căng thẳng",
+        "meaningJa": "心や体の負担",
+        "example": "ストレスがたまっています。",
+        "exampleMeaning": "Tôi đang bị căng thẳng."
+    },
+    {
+        "word": "無理",
+        "reading": "むり",
+        "meaning": "quá sức",
+        "meaningJa": "できないこと",
+        "example": "無理をしないでください。",
+        "exampleMeaning": "Xin đừng cố quá sức."
+    },
+    {
+        "word": "運動",
+        "reading": "うんどう",
+        "meaning": "vận động",
+        "meaningJa": "体を動かすこと",
+        "example": "毎日運動します。",
+        "exampleMeaning": "Tôi vận động mỗi ngày."
+    },
+    {
+        "word": "食生活",
+        "reading": "しょくせいかつ",
+        "meaning": "chế độ ăn uống",
+        "meaningJa": "毎日の食事習慣",
+        "example": "食生活を改善します。",
+        "exampleMeaning": "Tôi cải thiện chế độ ăn uống."
+    },
+    {
+        "word": "生活",
+        "reading": "せいかつ",
+        "meaning": "cuộc sống",
+        "meaningJa": "毎日の暮らし",
+        "example": "日本で生活しています。",
+        "exampleMeaning": "Tôi đang sống ở Nhật."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "thói quen",
+        "meaningJa": "毎日続けること",
+        "example": "早起きは良い習慣です。",
+        "exampleMeaning": "Dậy sớm là thói quen tốt."
+    },
+    {
+        "word": "食べ過ぎ",
+        "reading": "たべすぎ",
+        "meaning": "ăn quá nhiều",
+        "meaningJa": "食べる量が多すぎること",
+        "example": "食べ過ぎに気をつけます。",
+        "exampleMeaning": "Tôi chú ý không ăn quá nhiều."
+    },
+    {
+        "word": "飲み過ぎ",
+        "reading": "のみすぎ",
+        "meaning": "uống quá nhiều",
+        "meaningJa": "飲む量が多すぎること",
+        "example": "飲み過ぎは体に悪いです。",
+        "exampleMeaning": "Uống quá nhiều không tốt cho cơ thể."
+    },
+    {
+        "word": "仕事中",
+        "reading": "しごとちゅう",
+        "meaning": "đang làm việc",
+        "meaningJa": "仕事をしている間",
+        "example": "仕事中は電話できません。",
+        "exampleMeaning": "Khi làm việc tôi không thể gọi điện."
+    },
+    {
+        "word": "最近",
+        "reading": "さいきん",
+        "meaning": "gần đây",
+        "meaningJa": "近い過去",
+        "example": "最近忙しいです。",
+        "exampleMeaning": "Gần đây tôi bận."
+    }
+]

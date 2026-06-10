@@ -1,9 +1,3 @@
-import Grammar from '../models/Grammar.js';
-import VocabularyDeck from '../models/VocabularyDeck.js';
-import Vocabulary from '../models/Vocabulary.js';
-import KanjiDeck from '../models/KanjiDeck.js';
-import Kanji from '../models/Kanji.js';
-import ReadingArticle from '../models/ReadingArticle.js';
 import VocabularyDeckProgress from '../models/VocabularyDeckProgress.js';
 import KanjiDeckProgress from '../models/KanjiDeckProgress.js';
 import * as streakRepository from '../repositories/streakRepository.js';
@@ -19,6 +13,7 @@ import {
 } from '../constants/dashboardHome.js';
 import { getTodayStudyProgress } from '../utils/todayStudyProgress.js';
 import { getContinueStudy } from './continueStudyService.js';
+import { getDashboardCatalogCounts } from './dashboardCatalogCountsService.js';
 
 function clampPct(value) {
 	const n = Number(value);
@@ -48,28 +43,27 @@ export async function getDashboardHome(userId) {
 	const [
 		userDoc,
 		streak,
-		grammarTotal,
-		vocabDecksActive,
-		vocabWordsTotal,
-		kanjiDecksActive,
-		kanjiTotal,
-		readingTotal,
+		catalogCounts,
 		vocabProgressRows,
 		kanjiProgressRows,
 		readingDone,
 	] = await Promise.all([
 		User.findById(userId).select('settings').lean(),
 		streakRepository.getOrCreateStreak(userId),
-		Grammar.countDocuments({ isPublished: true }),
-		VocabularyDeck.countDocuments({ isActive: true }),
-		Vocabulary.countDocuments({ isActive: true }),
-		KanjiDeck.countDocuments({ isActive: true }),
-		Kanji.countDocuments(),
-		ReadingArticle.countDocuments({ isPublished: true }),
+		getDashboardCatalogCounts(),
 		VocabularyDeckProgress.find({ userId }).select('growthStage').lean(),
 		KanjiDeckProgress.find({ userId }).select('growthStage').lean(),
 		readingProgressRepository.countByUserStatus(userId, 'done'),
 	]);
+
+	const {
+		grammarTotal,
+		vocabDecksActive,
+		vocabWordsTotal,
+		kanjiDecksActive,
+		kanjiTotal,
+		readingTotal,
+	} = catalogCounts;
 
 	const totalCounts = {
 		grammar: grammarTotal,

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "始めます",
+        "reading": "はじめます",
+        "meaning": "bắt đầu",
+        "meaningJa": "物事を始める",
+        "example": "会議を始めます。",
+        "exampleMeaning": "Tôi bắt đầu cuộc họp."
+    },
+    {
+        "word": "続けます",
+        "reading": "つづけます",
+        "meaning": "tiếp tục",
+        "meaningJa": "途中でやめないで続ける",
+        "example": "日本語の勉強を続けます。",
+        "exampleMeaning": "Tôi tiếp tục học tiếng Nhật."
+    },
+    {
+        "word": "見つけます",
+        "reading": "みつけます",
+        "meaning": "tìm thấy",
+        "meaningJa": "探して見つける",
+        "example": "なくした鍵を見つけました。",
+        "exampleMeaning": "Tôi đã tìm thấy chìa khóa bị mất."
+    },
+    {
+        "word": "受けます",
+        "reading": "うけます",
+        "meaning": "tham gia, dự thi, tiếp nhận",
+        "meaningJa": "試験や授業を受ける",
+        "example": "来月JLPTを受けます。",
+        "exampleMeaning": "Tháng sau tôi sẽ thi JLPT."
+    },
+    {
+        "word": "申し込みます",
+        "reading": "もうしこみます",
+        "meaning": "đăng ký",
+        "meaningJa": "参加したいと伝える",
+        "example": "試験に申し込みました。",
+        "exampleMeaning": "Tôi đã đăng ký kỳ thi."
+    },
+    {
+        "word": "休憩します",
+        "reading": "きゅうけいします",
+        "meaning": "nghỉ giải lao",
+        "meaningJa": "少し休む",
+        "example": "十分休憩しましょう。",
+        "exampleMeaning": "Hãy nghỉ giải lao 10 phút."
+    },
+    {
+        "word": "連休",
+        "reading": "れんきゅう",
+        "meaning": "kỳ nghỉ dài",
+        "meaningJa": "続けて休む日",
+        "example": "連休に旅行します。",
+        "exampleMeaning": "Tôi đi du lịch vào kỳ nghỉ dài."
+    },
+    {
+        "word": "試験",
+        "reading": "しけん",
+        "meaning": "kỳ thi",
+        "meaningJa": "能力を確認するテスト",
+        "example": "来週試験があります。",
+        "exampleMeaning": "Tuần sau có kỳ thi."
+    },
+    {
+        "word": "試合",
+        "reading": "しあい",
+        "meaning": "trận đấu",
+        "meaningJa": "スポーツの競争",
+        "example": "サッカーの試合を見ました。",
+        "exampleMeaning": "Tôi đã xem trận bóng đá."
+    },
+    {
+        "word": "大会",
+        "reading": "たいかい",
+        "meaning": "giải đấu, đại hội",
+        "meaningJa": "大きなイベント",
+        "example": "大会に参加します。",
+        "exampleMeaning": "Tôi tham gia giải đấu."
+    },
+    {
+        "word": "説明会",
+        "reading": "せつめいかい",
+        "meaning": "buổi giới thiệu",
+        "meaningJa": "説明を聞く会",
+        "example": "説明会に行きます。",
+        "exampleMeaning": "Tôi đi buổi giới thiệu."
+    },
+    {
+        "word": "展覧会",
+        "reading": "てんらんかい",
+        "meaning": "triển lãm",
+        "meaningJa": "作品を見せる会",
+        "example": "展覧会を見に行きました。",
+        "exampleMeaning": "Tôi đã đi xem triển lãm."
+    },
+    {
+        "word": "結婚式",
+        "reading": "けっこんしき",
+        "meaning": "lễ cưới",
+        "meaningJa": "結婚のお祝い",
+        "example": "友達の結婚式に出ます。",
+        "exampleMeaning": "Tôi tham dự đám cưới của bạn."
+    },
+    {
+        "word": "式",
+        "reading": "しき",
+        "meaning": "nghi lễ",
+        "meaningJa": "特別な行事",
+        "example": "卒業式があります。",
+        "exampleMeaning": "Có lễ tốt nghiệp."
+    },
+    {
+        "word": "卒業",
+        "reading": "そつぎょう",
+        "meaning": "tốt nghiệp",
+        "meaningJa": "学校を終えること",
+        "example": "来年大学を卒業します。",
+        "exampleMeaning": "Năm sau tôi tốt nghiệp đại học."
+    },
+    {
+        "word": "入学",
+        "reading": "にゅうがく",
+        "meaning": "nhập học",
+        "meaningJa": "学校に入ること",
+        "example": "四月に入学しました。",
+        "exampleMeaning": "Tôi nhập học vào tháng 4."
+    },
+    {
+        "word": "資料",
+        "reading": "しりょう",
+        "meaning": "tài liệu",
+        "meaningJa": "参考になる情報",
+        "example": "資料を読んでください。",
+        "exampleMeaning": "Hãy đọc tài liệu."
+    },
+    {
+        "word": "自由",
+        "reading": "じゆう",
+        "meaning": "tự do",
+        "meaningJa": "好きなようにできる",
+        "example": "自由に使ってください。",
+        "exampleMeaning": "Hãy sử dụng tự do."
+    },
+    {
+        "word": "都合",
+        "reading": "つごう",
+        "meaning": "sự thuận tiện",
+        "meaningJa": "予定や事情",
+        "example": "都合が悪いです。",
+        "exampleMeaning": "Tôi không tiện."
+    },
+    {
+        "word": "途中",
+        "reading": "とちゅう",
+        "meaning": "giữa chừng",
+        "meaningJa": "始めと終わりの間",
+        "example": "途中で雨が降りました。",
+        "exampleMeaning": "Giữa chừng trời mưa."
+    },
+    {
+        "word": "以上",
+        "reading": "いじょう",
+        "meaning": "trở lên",
+        "meaningJa": "その数より多い",
+        "example": "十八歳以上です。",
+        "exampleMeaning": "Từ 18 tuổi trở lên."
+    },
+    {
+        "word": "以下",
+        "reading": "いか",
+        "meaning": "trở xuống",
+        "meaningJa": "その数より少ない",
+        "example": "十歳以下は無料です。",
+        "exampleMeaning": "Dưới 10 tuổi miễn phí."
+    },
+    {
+        "word": "以内",
+        "reading": "いない",
+        "meaning": "trong vòng",
+        "meaningJa": "その期間の中",
+        "example": "一週間以内に返事します。",
+        "exampleMeaning": "Tôi sẽ trả lời trong vòng một tuần."
+    },
+    {
+        "word": "必ず",
+        "reading": "かならず",
+        "meaning": "nhất định",
+        "meaningJa": "絶対に",
+        "example": "必ず来てください。",
+        "exampleMeaning": "Nhất định hãy đến."
+    },
+    {
+        "word": "ぜひ",
+        "reading": "ぜひ",
+        "meaning": "nhất định",
+        "meaningJa": "強くすすめる気持ち",
+        "example": "ぜひ参加してください。",
+        "exampleMeaning": "Nhất định hãy tham gia."
+    }
+]

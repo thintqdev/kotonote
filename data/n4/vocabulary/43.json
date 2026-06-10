@@ -1,0 +1,202 @@
+[
+    {
+        "word": "増えます",
+        "reading": "ふえます",
+        "meaning": "tăng lên",
+        "meaningJa": "数や量が多くなる",
+        "example": "外国人観光客が増えています。",
+        "exampleMeaning": "Khách du lịch nước ngoài đang tăng lên."
+    },
+    {
+        "word": "減ります",
+        "reading": "へります",
+        "meaning": "giảm xuống",
+        "meaningJa": "数や量が少なくなる",
+        "example": "人口が減っています。",
+        "exampleMeaning": "Dân số đang giảm."
+    },
+    {
+        "word": "上がります",
+        "reading": "あがります",
+        "meaning": "tăng lên",
+        "meaningJa": "値段などが高くなる",
+        "example": "物価が上がりました。",
+        "exampleMeaning": "Giá cả đã tăng lên."
+    },
+    {
+        "word": "下がります",
+        "reading": "さがります",
+        "meaning": "giảm xuống",
+        "meaningJa": "値段などが低くなる",
+        "example": "ガソリンの値段が下がりました。",
+        "exampleMeaning": "Giá xăng đã giảm."
+    },
+    {
+        "word": "切れます",
+        "reading": "きれます",
+        "meaning": "đứt, hết",
+        "meaningJa": "続かなくなる",
+        "example": "電気が切れました。",
+        "exampleMeaning": "Điện đã bị ngắt."
+    },
+    {
+        "word": "なくなります",
+        "reading": "なくなります",
+        "meaning": "mất đi, hết",
+        "meaningJa": "存在しなくなる",
+        "example": "お金がなくなりました。",
+        "exampleMeaning": "Tiền đã hết."
+    },
+    {
+        "word": "変",
+        "reading": "へん",
+        "meaning": "kỳ lạ",
+        "meaningJa": "普通ではない",
+        "example": "変な音がします。",
+        "exampleMeaning": "Có tiếng động kỳ lạ."
+    },
+    {
+        "word": "厳しい",
+        "reading": "きびしい",
+        "meaning": "nghiêm khắc",
+        "meaningJa": "とても厳格である",
+        "example": "父は厳しい人です。",
+        "exampleMeaning": "Bố tôi là người nghiêm khắc."
+    },
+    {
+        "word": "真面目",
+        "reading": "まじめ",
+        "meaning": "nghiêm túc",
+        "meaningJa": "熱心で誠実である",
+        "example": "彼は真面目な学生です。",
+        "exampleMeaning": "Anh ấy là học sinh nghiêm túc."
+    },
+    {
+        "word": "熱心",
+        "reading": "ねっしん",
+        "meaning": "nhiệt tình",
+        "meaningJa": "一生懸命である",
+        "example": "熱心に勉強しています。",
+        "exampleMeaning": "Tôi đang học rất chăm chỉ."
+    },
+    {
+        "word": "十分",
+        "reading": "じゅうぶん",
+        "meaning": "đầy đủ",
+        "meaningJa": "足りている",
+        "example": "時間は十分あります。",
+        "exampleMeaning": "Có đủ thời gian."
+    },
+    {
+        "word": "おかしい",
+        "reading": "おかしい",
+        "meaning": "lạ, buồn cười",
+        "meaningJa": "普通ではない",
+        "example": "彼の話はおかしいです。",
+        "exampleMeaning": "Câu chuyện của anh ấy thật kỳ lạ."
+    },
+    {
+        "word": "ニュース",
+        "reading": "ニュース",
+        "meaning": "tin tức",
+        "meaningJa": "新しい出来事の知らせ",
+        "example": "ニュースを見ました。",
+        "exampleMeaning": "Tôi đã xem tin tức."
+    },
+    {
+        "word": "番組",
+        "reading": "ばんぐみ",
+        "meaning": "chương trình",
+        "meaningJa": "テレビやラジオの内容",
+        "example": "好きな番組があります。",
+        "exampleMeaning": "Tôi có chương trình yêu thích."
+    },
+    {
+        "word": "アナウンサー",
+        "reading": "アナウンサー",
+        "meaning": "phát thanh viên",
+        "meaningJa": "ニュースを伝える人",
+        "example": "アナウンサーがニュースを読みます。",
+        "exampleMeaning": "Phát thanh viên đọc bản tin."
+    },
+    {
+        "word": "記事",
+        "reading": "きじ",
+        "meaning": "bài báo",
+        "meaningJa": "新聞や雑誌の文章",
+        "example": "新聞の記事を読みました。",
+        "exampleMeaning": "Tôi đã đọc bài báo."
+    },
+    {
+        "word": "情報",
+        "reading": "じょうほう",
+        "meaning": "thông tin",
+        "meaningJa": "役に立つ知らせ",
+        "example": "新しい情報を集めています。",
+        "exampleMeaning": "Tôi đang thu thập thông tin mới."
+    },
+    {
+        "word": "噂",
+        "reading": "うわさ",
+        "meaning": "tin đồn",
+        "meaningJa": "人から人へ伝わる話",
+        "example": "その噂を聞きました。",
+        "exampleMeaning": "Tôi đã nghe tin đồn đó."
+    },
+    {
+        "word": "話題",
+        "reading": "わだい",
+        "meaning": "chủ đề bàn tán",
+        "meaningJa": "みんなが話していること",
+        "example": "そのニュースが話題です。",
+        "exampleMeaning": "Tin tức đó đang là chủ đề được bàn tán."
+    },
+    {
+        "word": "選挙",
+        "reading": "せんきょ",
+        "meaning": "bầu cử",
+        "meaningJa": "代表者を選ぶこと",
+        "example": "来月選挙があります。",
+        "exampleMeaning": "Tháng sau sẽ có bầu cử."
+    },
+    {
+        "word": "経済",
+        "reading": "けいざい",
+        "meaning": "kinh tế",
+        "meaningJa": "お金や社会の活動",
+        "example": "経済のニュースを見ます。",
+        "exampleMeaning": "Tôi xem tin tức kinh tế."
+    },
+    {
+        "word": "景気",
+        "reading": "けいき",
+        "meaning": "tình hình kinh tế",
+        "meaningJa": "経済の状態",
+        "example": "景気がよくなりました。",
+        "exampleMeaning": "Tình hình kinh tế đã tốt hơn."
+    },
+    {
+        "word": "事故",
+        "reading": "じこ",
+        "meaning": "tai nạn",
+        "meaningJa": "予想しない悪い出来事",
+        "example": "大きな事故がありました。",
+        "exampleMeaning": "Đã xảy ra một vụ tai nạn lớn."
+    },
+    {
+        "word": "火事",
+        "reading": "かじ",
+        "meaning": "hỏa hoạn",
+        "meaningJa": "建物などが燃えること",
+        "example": "近所で火事がありました。",
+        "exampleMeaning": "Đã xảy ra hỏa hoạn gần nhà."
+    },
+    {
+        "word": "地震",
+        "reading": "じしん",
+        "meaning": "động đất",
+        "meaningJa": "地面が揺れる自然現象",
+        "example": "昨夜地震がありました。",
+        "exampleMeaning": "Tối qua đã xảy ra động đất."
+    }
+]

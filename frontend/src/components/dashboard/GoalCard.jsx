@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import "./GoalCard.css";
@@ -62,4 +63,4 @@ GoalCard.propTypes = {
   dayDelta: PropTypes.number,
 };
 
-export default GoalCard;
+export default memo(GoalCard);

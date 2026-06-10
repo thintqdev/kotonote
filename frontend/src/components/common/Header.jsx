@@ -143,7 +143,11 @@ const Header = ({ userName, notificationCount, streakDays = 0 }) => {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuth();
   const [avatarBroken, setAvatarBroken] = useState(false);
-  const { recentNotifications, markOneRead } = useUserNotifications();
+  const {
+    recentNotifications,
+    markOneRead,
+    setNotificationSocketActive,
+  } = useUserNotifications();
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -209,6 +213,11 @@ const Header = ({ userName, notificationCount, streakDays = 0 }) => {
   useEffect(() => {
     setAvatarBroken(false);
   }, [user?._id, user?.avatar]);
+
+  useEffect(() => {
+    setNotificationSocketActive(isNotificationOpen);
+    return () => setNotificationSocketActive(false);
+  }, [isNotificationOpen, setNotificationSocketActive]);
 
   const avatarUrl = useMemo(() => {
     if (!user?.avatar || avatarBroken || !isResolvableAvatar(user.avatar)) {

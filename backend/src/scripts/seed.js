@@ -10,8 +10,6 @@ import seedBadges from '../seeds/badgeSeeder.js';
 import seedGrammars from '../seeds/grammarSeeder.js';
 import seedPrompts from '../seeds/promptSeeder.js';
 import seedExamStructures from '../seeds/examStructureSeeder.js';
-import seedSentenceTemplates from '../seeds/sentenceTemplateSeed.js';
-
 // Load environment variables
 dotenv.config();
 
@@ -33,7 +31,6 @@ const runSeeder = async () => {
 		await seedBadges();
 		await seedKanji();
 		await seedVocabularyDemo();
-		await seedSentenceTemplates();
 
 		console.log('\n✅ Database seeding completed successfully!');
 		process.exit(0);

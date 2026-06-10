@@ -14,7 +14,6 @@
 		"seed:kaiwa": "node src/scripts/seedKaiwaDemo.js",
 		"seed:prompts": "node src/scripts/seedPrompts.js",
 		"seed:arena": "node src/scripts/seedArena.js",
-		"seed:sentences": "node src/scripts/seedSentenceTemplate.js",
 		"arena:clear-attempts": "node src/scripts/clearArenaAttempts.js",
 		"payos:confirm-webhook": "node src/scripts/payosConfirmWebhook.js",
 		"membership:expire-due": "node src/scripts/membershipExpireDue.js",

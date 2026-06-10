@@ -1,0 +1,202 @@
+[
+    {
+        "word": "勤めます",
+        "reading": "つとめます",
+        "meaning": "làm việc tại",
+        "meaningJa": "会社などで働く",
+        "example": "私はIT会社に勤めています。",
+        "exampleMeaning": "Tôi làm việc tại một công ty IT."
+    },
+    {
+        "word": "休みます",
+        "reading": "やすみます",
+        "meaning": "nghỉ",
+        "meaningJa": "仕事や学校を休む",
+        "example": "今日は会社を休みます。",
+        "exampleMeaning": "Hôm nay tôi nghỉ làm."
+    },
+    {
+        "word": "かけます",
+        "reading": "かけます",
+        "meaning": "gọi điện/đeo/treo",
+        "meaningJa": "電話をする、身につける",
+        "example": "友達に電話をかけます。",
+        "exampleMeaning": "Tôi gọi điện cho bạn."
+    },
+    {
+        "word": "過ぎます",
+        "reading": "すぎます",
+        "meaning": "quá",
+        "meaningJa": "程度を超える",
+        "example": "食べ過ぎました。",
+        "exampleMeaning": "Tôi đã ăn quá nhiều."
+    },
+    {
+        "word": "慣れます",
+        "reading": "なれます",
+        "meaning": "quen",
+        "meaningJa": "経験して自然になる",
+        "example": "日本の生活に慣れました。",
+        "exampleMeaning": "Tôi đã quen với cuộc sống ở Nhật."
+    },
+    {
+        "word": "辞めます",
+        "reading": "やめます",
+        "meaning": "nghỉ việc",
+        "meaningJa": "仕事をやめる",
+        "example": "来月会社を辞めます。",
+        "exampleMeaning": "Tháng sau tôi sẽ nghỉ việc."
+    },
+    {
+        "word": "働きます",
+        "reading": "はたらきます",
+        "meaning": "làm việc",
+        "meaningJa": "仕事をする",
+        "example": "毎日8時間働きます。",
+        "exampleMeaning": "Tôi làm việc 8 tiếng mỗi ngày."
+    },
+    {
+        "word": "残業します",
+        "reading": "ざんぎょうします",
+        "meaning": "làm thêm giờ",
+        "meaningJa": "勤務時間後も働く",
+        "example": "昨日は残業しました。",
+        "exampleMeaning": "Hôm qua tôi đã làm thêm giờ."
+    },
+    {
+        "word": "出張します",
+        "reading": "しゅっちょうします",
+        "meaning": "đi công tác",
+        "meaningJa": "仕事で他の場所へ行く",
+        "example": "来週東京へ出張します。",
+        "exampleMeaning": "Tuần sau tôi đi công tác Tokyo."
+    },
+    {
+        "word": "研修します",
+        "reading": "けんしゅうします",
+        "meaning": "đào tạo",
+        "meaningJa": "勉強しながら訓練する",
+        "example": "新入社員を研修します。",
+        "exampleMeaning": "Tôi đào tạo nhân viên mới."
+    },
+    {
+        "word": "募集します",
+        "reading": "ぼしゅうします",
+        "meaning": "tuyển, chiêu mộ",
+        "meaningJa": "人を集める",
+        "example": "アルバイトを募集しています。",
+        "exampleMeaning": "Đang tuyển nhân viên bán thời gian."
+    },
+    {
+        "word": "採用します",
+        "reading": "さいようします",
+        "meaning": "tuyển dụng",
+        "meaningJa": "仕事に採る",
+        "example": "新しい社員を採用しました。",
+        "exampleMeaning": "Công ty đã tuyển dụng nhân viên mới."
+    },
+    {
+        "word": "面接します",
+        "reading": "めんせつします",
+        "meaning": "phỏng vấn",
+        "meaningJa": "応募者と話す",
+        "example": "来週面接します。",
+        "exampleMeaning": "Tuần sau tôi sẽ phỏng vấn."
+    },
+    {
+        "word": "評価します",
+        "reading": "ひょうかします",
+        "meaning": "đánh giá",
+        "meaningJa": "価値や能力を判断する",
+        "example": "上司が仕事を評価します。",
+        "exampleMeaning": "Cấp trên đánh giá công việc."
+    },
+    {
+        "word": "昇給します",
+        "reading": "しょうきゅうします",
+        "meaning": "tăng lương",
+        "meaningJa": "給料が上がる",
+        "example": "今年昇給しました。",
+        "exampleMeaning": "Năm nay tôi được tăng lương."
+    },
+    {
+        "word": "昇進します",
+        "reading": "しょうしんします",
+        "meaning": "thăng chức",
+        "meaningJa": "役職が上がる",
+        "example": "課長に昇進しました。",
+        "exampleMeaning": "Tôi đã được thăng chức lên trưởng ban."
+    },
+    {
+        "word": "退職します",
+        "reading": "たいしょくします",
+        "meaning": "nghỉ việc/nghỉ hưu",
+        "meaningJa": "会社を辞める",
+        "example": "父は去年退職しました。",
+        "exampleMeaning": "Bố tôi đã nghỉ việc năm ngoái."
+    },
+    {
+        "word": "勤務時間",
+        "reading": "きんむじかん",
+        "meaning": "giờ làm việc",
+        "meaningJa": "働く時間",
+        "example": "勤務時間は8時から17時です。",
+        "exampleMeaning": "Giờ làm việc là từ 8 giờ đến 17 giờ."
+    },
+    {
+        "word": "休日",
+        "reading": "きゅうじつ",
+        "meaning": "ngày nghỉ",
+        "meaningJa": "仕事や学校が休みの日",
+        "example": "休日は家族と過ごします。",
+        "exampleMeaning": "Ngày nghỉ tôi dành thời gian cho gia đình."
+    },
+    {
+        "word": "有給休暇",
+        "reading": "ゆうきゅうきゅうか",
+        "meaning": "nghỉ phép có lương",
+        "meaningJa": "給料が出る休暇",
+        "example": "有給休暇を取りました。",
+        "exampleMeaning": "Tôi đã nghỉ phép có lương."
+    },
+    {
+        "word": "職場",
+        "reading": "しょくば",
+        "meaning": "nơi làm việc",
+        "meaningJa": "働く場所",
+        "example": "職場は駅の近くです。",
+        "exampleMeaning": "Nơi làm việc ở gần nhà ga."
+    },
+    {
+        "word": "同僚",
+        "reading": "どうりょう",
+        "meaning": "đồng nghiệp",
+        "meaningJa": "同じ職場で働く人",
+        "example": "同僚と昼ご飯を食べました。",
+        "exampleMeaning": "Tôi đã ăn trưa cùng đồng nghiệp."
+    },
+    {
+        "word": "上司",
+        "reading": "じょうし",
+        "meaning": "cấp trên",
+        "meaningJa": "自分より役職が上の人",
+        "example": "上司に報告しました。",
+        "exampleMeaning": "Tôi đã báo cáo với cấp trên."
+    },
+    {
+        "word": "部下",
+        "reading": "ぶか",
+        "meaning": "cấp dưới",
+        "meaningJa": "自分より役職が下の人",
+        "example": "部下を指導しています。",
+        "exampleMeaning": "Tôi đang hướng dẫn cấp dưới."
+    },
+    {
+        "word": "仕事内容",
+        "reading": "しごとないよう",
+        "meaning": "nội dung công việc",
+        "meaningJa": "仕事の詳細",
+        "example": "仕事内容を説明してください。",
+        "exampleMeaning": "Xin hãy giải thích nội dung công việc."
+    }
+]

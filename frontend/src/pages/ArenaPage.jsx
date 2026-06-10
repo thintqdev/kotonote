@@ -1,15 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
 import StudyPageHeader from '../components/study/StudyPageHeader.jsx';
 import { mockStreak } from '../data/dashboardHomeMock.js';
-import KanjiRainGame from '../components/arena/KanjiRainGame.jsx';
-import VocabBoxGame from '../components/arena/VocabBoxGame.jsx';
-import ParticleQuizGame from '../components/arena/ParticleQuizGame.jsx';
-import ReadingRushGame from '../components/arena/ReadingRushGame.jsx';
-import MeaningRushGame from '../components/arena/MeaningRushGame.jsx';
 import {
 	beginArenaChallenge,
 	getArenaStatus,
@@ -20,6 +15,12 @@ import './DashboardHome.css';
 import './GrammarPages.css';
 import './VocabularyPages.css';
 import './ArenaPages.css';
+
+const KanjiRainGame = lazy(() => import('../components/arena/KanjiRainGame.jsx'));
+const VocabBoxGame = lazy(() => import('../components/arena/VocabBoxGame.jsx'));
+const ParticleQuizGame = lazy(() => import('../components/arena/ParticleQuizGame.jsx'));
+const ReadingRushGame = lazy(() => import('../components/arena/ReadingRushGame.jsx'));
+const MeaningRushGame = lazy(() => import('../components/arena/MeaningRushGame.jsx'));
 
 function formatDuration(ms) {
 	const totalSec = Math.max(0, Math.floor(Number(ms || 0) / 1000));
@@ -265,11 +266,13 @@ export default function ArenaPage() {
 							<p className="arena-loading">{t('arenaPage.submitting')}</p>
 						) : (
 							<div className="arena-game-shell">
-								<GameComponent
-									game={currentGame}
-									lang={lang}
-									onComplete={handleGameComplete}
-								/>
+								<Suspense fallback={<p className="arena-loading">{t('common.loading')}</p>}>
+									<GameComponent
+										game={currentGame}
+										lang={lang}
+										onComplete={handleGameComplete}
+									/>
+								</Suspense>
 							</div>
 						)}
 					</div>
