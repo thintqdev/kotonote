@@ -1379,21 +1379,35 @@ button.vocab-cta-reset {
   letter-spacing: 0.04em;
 }
 
-/* Kanji — chi tiết bài: cùng nhịp với flash (音 | 訓), thẻ gọn */
+/* Kanji — chi tiết bài: cùng nhịp header/list với từ vựng, thẻ gọn hơn một chút */
 .kanji-detail-board {
-  padding-inline: clamp(4px, 2vw, 8px);
+  padding-inline: 0;
+}
+
+.kanji-detail-board .vocab-lesson-detail-head {
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+}
+
+.kanji-detail-board .vocab-lesson-panel-title {
+  margin-bottom: 10px;
+}
+
+.kanji-detail-board .vocab-lesson-detail-lead {
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
 
 .kanji-detail-list {
-  gap: 20px;
+  gap: 16px;
 }
 
 .kanji-detail-item {
-  border-radius: 16px;
-  border: 1px solid rgba(58, 54, 48, 0.1);
-  background: rgba(255, 252, 248, 0.9);
-  padding: 18px 16px 20px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+  border-radius: 14px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  background: rgba(255, 252, 248, 0.96);
+  padding: 16px 16px 18px;
+  box-shadow: 0 2px 10px rgba(42, 35, 28, 0.06);
 }
 
 .kanji-detail-char-wrap {
@@ -1401,30 +1415,31 @@ button.vocab-cta-reset {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.16);
 }
 
 .kanji-detail-char {
   display: inline-block;
   font-family: var(--font-serif-jp, serif);
-  font-size: clamp(2.35rem, 6.5vw, 3.1rem);
+  font-size: clamp(2.1rem, 5.5vw, 2.75rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: 0.06em;
   color: var(--vs-ink);
 }
 
-/* Hán Việt sát dưới chữ Kanji */
 .kanji-underglyph-hv {
-  margin: 6px 0 0;
-  font-size: clamp(0.98rem, 2.6vw, 1.14rem);
+  margin: 4px 0 0;
+  font-size: clamp(0.9rem, 2.4vw, 1.05rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   color: rgba(88, 62, 44, 0.94);
 }
 
 .kanji-detail-item .kanji-flash-onkun {
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .kanji-flash-headglyph {
@@ -1446,21 +1461,33 @@ button.vocab-cta-reset {
 }
 
 .kanji-detail-item .kanji-detail-mean {
-  margin-top: 12px;
+  margin: 10px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .kanji-detail-item .kanji-detail-vocab {
-  margin-top: 10px;
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--vs-muted);
 }
 
 .kanji-detail-item .kanji-detail-examples {
-  margin-top: 12px;
-  padding-top: 14px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.16);
 }
 
 .kanji-detail-item .kanji-detail-examples p {
-  font-size: 0.9rem;
-  line-height: 1.58;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.kanji-detail-item .kanji-detail-examples p + p {
+  margin-top: 6px;
+  color: var(--vs-muted);
 }
 
 /* Kanji flash: bố cục gọn — 音 | 訓 */
@@ -1596,46 +1623,98 @@ button.vocab-cta-reset {
 }
 
 /* Kanji write tab */
+.kanji-write-board .vocab-lesson-detail-head {
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+}
+
+.kanji-write-board .vocab-lesson-panel-title {
+  margin-bottom: 10px;
+}
+
+.kanji-write-board .vocab-lesson-detail-lead {
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
 .kanji-write-wrap {
   max-width: var(--vs-column-max);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
+}
+
+.kanji-write-section-label {
+  margin: 0 0 10px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vs-muted);
+  text-align: center;
+}
+
+.kanji-write-stage-card {
+  border-radius: 14px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  background: rgba(255, 252, 248, 0.96);
+  box-shadow: 0 2px 10px rgba(42, 35, 28, 0.06);
+  overflow: hidden;
 }
 
 .kanji-write-status {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(92, 122, 82, 0.22);
-  background: rgba(255, 252, 248, 0.95);
+  justify-content: center;
+  padding: 14px 16px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.18);
+  background: rgba(235, 245, 228, 0.35);
+}
+
+.kanji-write-status-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
 }
 
 .kanji-write-char {
   font-family: var(--font-serif-jp, serif);
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-size: clamp(2rem, 5.5vw, 2.65rem);
   line-height: 1;
+  font-weight: 600;
+  color: var(--vs-ink);
 }
 
-.kanji-write-progress {
-  font-size: 0.84rem;
+.kanji-write-hv {
+  font-size: 0.92rem;
   font-weight: 700;
-  color: var(--vs-muted);
+  letter-spacing: 0.06em;
+  color: rgba(88, 62, 44, 0.92);
 }
 
 .kanji-write-stroke-stage {
-  border-radius: 14px;
-  border: 1px dashed rgba(58, 53, 48, 0.2);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(245, 240, 230, 0.55));
-  min-height: 210px;
+  border: none;
+  border-radius: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(245, 240, 230, 0.5)
+  );
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 16px 12px;
+}
+
+.kanji-write-stage-card .kanji-write-actions {
+  padding: 12px 14px 14px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.16);
+  background: rgba(255, 252, 248, 0.65);
 }
 
 .kanji-stroke-svg {
@@ -1773,32 +1852,120 @@ button.vocab-cta-reset {
   justify-content: center;
 }
 
+.kanji-write-practice {
+  padding-top: 4px;
+}
+
 .kanji-write-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
   align-items: stretch;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(92, 122, 82, 0.18);
+  background: rgba(255, 252, 248, 0.55);
 }
 
 .kanji-write-sample-wrap {
   border-radius: 12px;
-  border: 2px dashed rgba(92, 122, 82, 0.35);
+  border: 2px dashed rgba(92, 122, 82, 0.32);
   background: rgba(255, 252, 248, 0.98);
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 132px;
+  aspect-ratio: 1;
 }
 
 .kanji-write-sample {
   font-family: var(--font-serif-jp, serif);
-  font-size: clamp(2.4rem, 8vw, 4rem);
+  font-size: clamp(2.2rem, 7vw, 3.25rem);
   line-height: 1;
   font-weight: 700;
   color: var(--vocab-green-deep);
 }
 
+.kanji-write-grid .alpha-practice-pad {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 132px;
+  border-radius: 12px;
+  border: 2px solid rgba(92, 122, 82, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.kanji-write-grid .alpha-practice-pad--trace {
+  border-style: dashed;
+}
+
+.kanji-write-grid .alpha-practice-pad-guide {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  margin: 0;
+  font-family: var(--font-serif-jp, serif);
+  font-size: clamp(2rem, 16vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kanji-write-grid .alpha-practice-pad--bold .alpha-practice-pad-guide {
+  color: var(--vs-ink);
+  opacity: 0.2;
+}
+
+.kanji-write-grid .alpha-practice-pad--trace .alpha-practice-pad-guide {
+  color: rgba(58, 53, 48, 0.14);
+}
+
+.kanji-write-grid .alpha-practice-pad-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.kanji-write-foot {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(92, 122, 82, 0.2);
+}
+
+.kanji-write-foot .vocab-study-foot-count {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 122, 82, 0.22);
+  background: rgba(255, 252, 248, 0.9);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--vs-ink);
+}
+
 @media (max-width: 640px) {
+  .kanji-write-wrap {
+    gap: 20px;
+  }
+
   .kanji-write-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .kanji-write-sample-wrap {
+    min-height: 118px;
   }
 }
