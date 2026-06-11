@@ -26,6 +26,7 @@ export const MembershipReceiptPage = lazy(() => import('../pages/MembershipRecei
 export const NotificationsPage = lazy(() => import('../pages/NotificationsPage.jsx'));
 export const GrammarListPage = lazy(() => import('../pages/GrammarListPage.jsx'));
 export const GrammarDetailPage = lazy(() => import('../pages/GrammarDetailPage.jsx'));
+export const GrammarPracticePage = lazy(() => import('../pages/GrammarPracticePage.jsx'));
 export const VocabularyListPage = lazy(() => import('../pages/VocabularyListPage.jsx'));
 export const VocabularyDetailPage = lazy(() => import('../pages/VocabularyDetailPage.jsx'));
 export const VocabularyPage = lazy(() => import('../pages/VocabularyPage.jsx'));
@@ -95,6 +96,9 @@ export const AdminNotificationsDemoPage = lazy(
 	() => import('../pages/admin/AdminNotificationsDemoPage.jsx'),
 );
 export const AdminGrammarHome = lazy(() => import('../pages/admin/AdminGrammarHome.jsx'));
+export const AdminGrammarPracticePage = lazy(
+	() => import('../pages/admin/AdminGrammarPracticePage.jsx'),
+);
 export const AdminGrammarEditorPage = lazy(
 	() => import('../pages/admin/AdminGrammarEditorPage.jsx'),
 );

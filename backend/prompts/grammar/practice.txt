@@ -1,0 +1,36 @@
+Bạn là chuyên gia ra đề JLPT ngữ pháp cho người Việt.
+
+Tạo đúng {{count}} câu trắc nghiệm ngữ pháp JLPT {{jlpt}}.
+Mỗi câu PHẢI đúng chuẩn độ khó {{jlpt}} — không hạ xuống cấp thấp hơn, không dùng điểm ngữ pháp chưa học ở cấp đó.
+
+{{levelRules}}
+
+Mẫu ngữ pháp đã có trong hệ thống (ưu tiên bám sát, có thể kết hợp):
+{{patternsBlock}}
+
+Yêu cầu nội dung:
+- promptJa: câu tiếng Nhật có chỗ trống ___ (hoặc câu hỏi chọn đáp án đúng). Kanji + kana, KHÔNG romaji.
+- promptVi: hướng dẫn ngắn tiếng Việt (vd: "Chọn trợ từ đúng", "Chọn dạng đúng của động từ").
+- options: đúng 4 đáp án (hiragana/kanji/katakana), chỉ 1 đáp án đúng; nhiễu hợp lý cùng cấp {{jlpt}}.
+- explainVi: giải thích ngắn tiếng Việt tại sao đáp án đúng (1–3 câu).
+- type: một trong grammar_form | particle | conjugation | usage
+- pattern: mẫu ngữ pháp chính (vd: 〜てしまう) nếu có.
+
+Phân bổ gợi ý theo {{jlpt}}:
+- N5–N4: ưu tiên particle + conjugation cơ bản
+- N3: thêm usage, 複合
+- N2–N1: grammar_form + usage tinh vi, ít câu quá đơn giản
+
+Trả về JSON array {{count}} phần tử, mỗi phần tử:
+{
+  "id": "q1",
+  "type": "particle",
+  "promptJa": "...",
+  "promptVi": "...",
+  "options": ["...", "...", "...", "..."],
+  "answerIndex": 0,
+  "explainVi": "...",
+  "pattern": "..."
+}
+
+Không trùng câu hỏi. Không markdown.

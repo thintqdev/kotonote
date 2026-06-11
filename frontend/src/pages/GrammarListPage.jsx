@@ -264,6 +264,14 @@ export default function GrammarListPage() {
           titleId="grammar-list-title"
           title={t("grammarPage.listTitle")}
           subtitle={t("grammarPage.listSubtitle")}
+          aside={
+            <Link
+              to="/grammar/practice"
+              className="grammar-list-practice-link"
+            >
+              {t("grammarPage.practiceCta")}
+            </Link>
+          }
         />
 
         <div

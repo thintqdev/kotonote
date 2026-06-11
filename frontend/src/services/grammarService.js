@@ -25,3 +25,15 @@ export async function getGrammarBySlug(slug) {
 	const body = await api.get(GRAMMAR.bySlug(slug));
 	return body.data?.grammar ?? null;
 }
+
+/**
+ * Lấy đề quiz ngữ pháp (từ bộ đề admin đã xuất bản).
+ * @param {{ jlpt: string, count?: number }} params
+ */
+export async function getGrammarPracticeQuiz(params) {
+	const body = await api.get(GRAMMAR.PRACTICE_QUIZ, { params });
+	return {
+		questions: body.data?.questions ?? [],
+		meta: body.data?.meta ?? null,
+	};
+}

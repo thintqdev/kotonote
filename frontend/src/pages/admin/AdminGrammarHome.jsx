@@ -171,6 +171,12 @@ export default function AdminGrammarHome() {
 						Import CSV
 					</button>
 					<Link
+						to="/admin/grammar/practice"
+						className="admin-grammar-btn admin-grammar-btn--ghost"
+					>
+						Câu hỏi luyện tập
+					</Link>
+					<Link
 						to="/admin/grammar/new"
 						className="admin-grammar-btn admin-grammar-btn--primary"
 					>

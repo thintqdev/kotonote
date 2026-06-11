@@ -15,6 +15,7 @@ export const AUTH = {
 /** Ngữ pháp (user đã đăng nhập) — `/api/grammar/*`, Bearer JWT */
 export const GRAMMAR = {
 	BASE: '/grammar',
+	PRACTICE_QUIZ: '/grammar/practice/quiz',
 	bySlug: (slug) => `/grammar/${encodeURIComponent(slug)}`,
 };
 
@@ -185,6 +186,10 @@ export const ADMIN_BADGES = {
 export const ADMIN_GRAMMAR = {
 	BASE: '/admin/grammar',
 	grammar: (id) => `/admin/grammar/${encodeURIComponent(id)}`,
+	PRACTICE_BASE: '/admin/grammar/practice',
+	practice: (id) => `/admin/grammar/practice/${encodeURIComponent(id)}`,
+	PRACTICE_GENERATE: '/admin/grammar/practice/generate',
+	PRACTICE_IMPORT: '/admin/grammar/practice/import',
 };
 
 /** Kaiwa — bối cảnh hội thoại (user) — `/api/kaiwa` */

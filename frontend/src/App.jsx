@@ -89,6 +89,10 @@ function App() {
                 />
                 <Route path="/notifications" element={<Pages.NotificationsPage />} />
                 <Route path="/grammar" element={<Pages.GrammarListPage />} />
+                <Route
+                  path="/grammar/practice"
+                  element={<Pages.GrammarPracticePage />}
+                />
                 <Route path="/grammar/:slug" element={<Pages.GrammarDetailPage />} />
                 <Route path="/alphabet" element={<Pages.AlphabetPage />} />
                 <Route
@@ -176,6 +180,7 @@ function App() {
               />
               <Route path="kanji" element={<Pages.AdminKanjiHome />} />
               <Route path="grammar/new" element={<Pages.AdminGrammarEditorPage />} />
+              <Route path="grammar/practice" element={<Pages.AdminGrammarPracticePage />} />
               <Route path="grammar/:id/edit" element={<Pages.AdminGrammarEditorPage />} />
               <Route path="grammar" element={<Pages.AdminGrammarHome />} />
               <Route path="reading/new" element={<Pages.AdminReadingEditorPage />} />
