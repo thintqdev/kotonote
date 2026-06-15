@@ -1,0 +1,230 @@
+.continue-card {
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.15rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(74, 124, 63, 0.35);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 253, 248, 0.98) 0%,
+    rgba(248, 252, 242, 0.95) 100%
+  );
+  box-shadow: 2px 6px 16px rgba(45, 35, 25, 0.06);
+}
+
+.continue-card--loading {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.continue-card-loading {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b6254;
+}
+
+.continue-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.continue-card-title {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3d3528;
+}
+
+.continue-card-kind {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a7c3f;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(74, 124, 63, 0.1);
+}
+
+.continue-card-primary {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(200, 188, 160, 0.5);
+  background: #fffef9;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.continue-card-primary:hover {
+  background: rgba(76, 140, 74, 0.06);
+  border-color: rgba(74, 124, 63, 0.45);
+  text-decoration: none;
+}
+
+.continue-card-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.continue-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.continue-card-subject {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b6254;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.continue-card-lesson {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c2416;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.continue-card-meta,
+.continue-card-detail {
+  font-size: 0.8rem;
+  color: #6b5d4a;
+}
+
+.continue-ring {
+  --continue-pct: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #4a7c3f calc(var(--continue-pct) * 1%),
+    #e8dfd0 0
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.continue-ring-pct {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fffef9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #3d5a30;
+}
+
+.continue-card-cta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--vocab-accent, #4a7c3f);
+  white-space: nowrap;
+}
+
+.continue-card-more {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  border-top: 1px dashed rgba(200, 188, 160, 0.6);
+  padding-top: 0.65rem;
+}
+
+.continue-card-more-link {
+  display: grid;
+  grid-template-columns: 5rem 1fr auto;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  padding: 0.45rem 0.25rem;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 6px;
+}
+
+.continue-card-more-link:hover {
+  background: rgba(76, 140, 74, 0.06);
+  text-decoration: none;
+}
+
+.continue-card-more-subject {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b6254;
+}
+
+.continue-card-more-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #3d3528;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.continue-card-more-detail {
+  grid-column: 2;
+  font-size: 0.75rem;
+  color: #6b5d4a;
+}
+
+.continue-card-more-pct {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #4a7c3f;
+}
+
+.continue-card--compact .continue-card-primary {
+  grid-template-columns: auto 1fr auto;
+}
+
+.continue-card--compact .continue-card-cta {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .continue-card-primary {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .continue-ring {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .continue-card-cta {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .continue-card-more-link {
+    grid-template-columns: 1fr auto;
+  }
+
+  .continue-card-more-subject {
+    grid-column: 1 / -1;
+  }
+
+  .continue-card-more-detail {
+    grid-column: 1;
+  }
+}

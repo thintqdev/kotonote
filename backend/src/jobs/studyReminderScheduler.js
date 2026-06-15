@@ -1,4 +1,5 @@
 import { processStudyReminders } from '../services/studyReminderService.js';
+import { processArenaReminders } from '../services/arenaReminderService.js';
 import { STUDY_REMINDER_TICK_MS } from '../constants/userSettings.js';
 
 /** Chờ tới :00 hoặc :30 UTC tiếp theo (offset +7/+9 là cả giờ → local cũng :00/:30). */
@@ -18,6 +19,10 @@ export function startStudyReminderScheduler() {
 		processStudyReminders().catch((err) => {
 			// eslint-disable-next-line no-console
 			console.error('[StudyReminder]', err);
+		});
+		processArenaReminders().catch((err) => {
+			// eslint-disable-next-line no-console
+			console.error('[ArenaReminder]', err);
 		});
 	};
 

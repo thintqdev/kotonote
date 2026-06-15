@@ -1,3 +1,6 @@
+/** Cache TTL cho countDocuments toàn cục dùng trên dashboard (ms). */
+export const DASHBOARD_CATALOG_COUNTS_TTL_MS = 3 * 60 * 1000;
+
 /** Metadata thẻ môn học trên dashboard (route + style) */
 export const DASHBOARD_SUBJECT_ORDER = [
 	'grammar',

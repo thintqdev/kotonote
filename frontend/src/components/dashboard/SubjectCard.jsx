@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -104,4 +105,4 @@ SubjectCard.propTypes = {
   to: PropTypes.string,
 };
 
-export default SubjectCard;
+export default memo(SubjectCard);

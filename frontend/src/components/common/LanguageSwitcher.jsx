@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { ensureLanguageLoaded } from "../../i18n.js";
 import "./LanguageSwitcher.css";
 
 /** Đổi ngôn ngữ UI (vi / ja) — một ngôn tại một thời điểm */
 const LanguageSwitcher = ({ className = "" }) => {
   const { i18n, t } = useTranslation();
 
-  const setLang = (code) => {
+  const setLang = async (code) => {
     if (code !== i18n.language) {
-      void i18n.changeLanguage(code);
+      await ensureLanguageLoaded(code);
+      await i18n.changeLanguage(code);
     }
   };
 

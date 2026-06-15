@@ -1,0 +1,3 @@
+slug,jlpt,pattern,tagIds,isPublished,displayOrder,teaser_ja,teaser_vi,connection_ja,connection_vi,meaning_ja,meaning_vi
+ni-yoru-to,N3,～によると,hearsay|formal,false,0,ニュースや本など、客観的な情報の出所に使う伝聞表現。,"Nguồn khách quan (tin, sách…).",普通形 ＋ によると,Thể thường + によると,「〜という情報によると」を短く伝える。,Nói gọn “theo [nguồn]…”.
+rashii,N4,～らしい,conjecture,true,1,推測・伝聞・属性の伝え方。,Nghe kể / suy đoán / đặc trưng.,普通形 ＋ らしい,Thể thường + らしい,(1)聞いた話 (2)推測 (3)典型,(1) Nghe kể (2) Suy đoán (3) Đặc trưng

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "逃げます",
+        "reading": "にげます",
+        "meaning": "chạy trốn",
+        "meaningJa": "危険な場所から離れる",
+        "example": "地震のとき外へ逃げました。",
+        "exampleMeaning": "Khi động đất tôi đã chạy ra ngoài."
+    },
+    {
+        "word": "騒ぎます",
+        "reading": "さわぎます",
+        "meaning": "làm ồn",
+        "meaningJa": "大きな声や音を出す",
+        "example": "図書館で騒いではいけません。",
+        "exampleMeaning": "Không được làm ồn trong thư viện."
+    },
+    {
+        "word": "諦めます",
+        "reading": "あきらめます",
+        "meaning": "từ bỏ",
+        "meaningJa": "続けるのをやめる",
+        "example": "夢を諦めません。",
+        "exampleMeaning": "Tôi không từ bỏ ước mơ."
+    },
+    {
+        "word": "投げます",
+        "reading": "なげます",
+        "meaning": "ném",
+        "meaningJa": "物を遠くへ飛ばす",
+        "example": "ボールを投げます。",
+        "exampleMeaning": "Tôi ném bóng."
+    },
+    {
+        "word": "守ります",
+        "reading": "まもります",
+        "meaning": "tuân thủ, bảo vệ",
+        "meaningJa": "規則や約束を守る",
+        "example": "交通ルールを守ります。",
+        "exampleMeaning": "Tôi tuân thủ luật giao thông."
+    },
+    {
+        "word": "上げます",
+        "reading": "あげます",
+        "meaning": "nâng lên",
+        "meaningJa": "高い位置へ動かす",
+        "example": "手を上げてください。",
+        "exampleMeaning": "Xin hãy giơ tay lên."
+    },
+    {
+        "word": "下げます",
+        "reading": "さげます",
+        "meaning": "hạ xuống",
+        "meaningJa": "低い位置へ動かす",
+        "example": "値段を下げました。",
+        "exampleMeaning": "Đã giảm giá."
+    },
+    {
+        "word": "伝えます",
+        "reading": "つたえます",
+        "meaning": "truyền đạt",
+        "meaningJa": "人に知らせる",
+        "example": "先生に伝えます。",
+        "exampleMeaning": "Tôi sẽ báo cho giáo viên."
+    },
+    {
+        "word": "注意します",
+        "reading": "ちゅういします",
+        "meaning": "nhắc nhở, chú ý",
+        "meaningJa": "気をつけるように言う",
+        "example": "子どもに注意しました。",
+        "exampleMeaning": "Tôi đã nhắc nhở đứa trẻ."
+    },
+    {
+        "word": "外します",
+        "reading": "はずします",
+        "meaning": "rời khỏi chỗ, tháo ra",
+        "meaningJa": "その場から離れる",
+        "example": "少し席を外します。",
+        "exampleMeaning": "Tôi rời chỗ một lát."
+    },
+    {
+        "word": "席",
+        "reading": "せき",
+        "meaning": "chỗ ngồi",
+        "meaningJa": "座る場所",
+        "example": "席に座ってください。",
+        "exampleMeaning": "Xin hãy ngồi vào chỗ."
+    },
+    {
+        "word": "場所",
+        "reading": "ばしょ",
+        "meaning": "địa điểm",
+        "meaningJa": "物や人がある所",
+        "example": "集合場所は駅前です。",
+        "exampleMeaning": "Địa điểm tập trung là trước ga."
+    },
+    {
+        "word": "危険",
+        "reading": "きけん",
+        "meaning": "nguy hiểm",
+        "meaningJa": "安全ではない",
+        "example": "ここは危険です。",
+        "exampleMeaning": "Ở đây nguy hiểm."
+    },
+    {
+        "word": "禁止",
+        "reading": "きんし",
+        "meaning": "cấm",
+        "meaningJa": "してはいけないこと",
+        "example": "駐車禁止です。",
+        "exampleMeaning": "Cấm đỗ xe."
+    },
+    {
+        "word": "立入禁止",
+        "reading": "たちいりきんし",
+        "meaning": "cấm vào",
+        "meaningJa": "入ってはいけない",
+        "example": "ここは立入禁止です。",
+        "exampleMeaning": "Khu vực này cấm vào."
+    },
+    {
+        "word": "入口",
+        "reading": "いりぐち",
+        "meaning": "lối vào",
+        "meaningJa": "入る所",
+        "example": "入口はあちらです。",
+        "exampleMeaning": "Lối vào ở phía kia."
+    },
+    {
+        "word": "出口",
+        "reading": "でぐち",
+        "meaning": "lối ra",
+        "meaningJa": "出る所",
+        "example": "出口は右です。",
+        "exampleMeaning": "Lối ra ở bên phải."
+    },
+    {
+        "word": "非常口",
+        "reading": "ひじょうぐち",
+        "meaning": "lối thoát hiểm",
+        "meaningJa": "緊急時に使う出口",
+        "example": "非常口を確認してください。",
+        "exampleMeaning": "Hãy kiểm tra lối thoát hiểm."
+    },
+    {
+        "word": "無料",
+        "reading": "むりょう",
+        "meaning": "miễn phí",
+        "meaningJa": "お金がいらない",
+        "example": "入場は無料です。",
+        "exampleMeaning": "Vào cửa miễn phí."
+    },
+    {
+        "word": "利用",
+        "reading": "りよう",
+        "meaning": "sử dụng",
+        "meaningJa": "使うこと",
+        "example": "図書館を利用します。",
+        "exampleMeaning": "Tôi sử dụng thư viện."
+    },
+    {
+        "word": "中止",
+        "reading": "ちゅうし",
+        "meaning": "hủy bỏ",
+        "meaningJa": "途中でやめること",
+        "example": "雨で試合が中止になりました。",
+        "exampleMeaning": "Trận đấu bị hủy vì mưa."
+    },
+    {
+        "word": "地震",
+        "reading": "じしん",
+        "meaning": "động đất",
+        "meaningJa": "地面が揺れること",
+        "example": "昨夜地震がありました。",
+        "exampleMeaning": "Tối qua có động đất."
+    },
+    {
+        "word": "台風",
+        "reading": "たいふう",
+        "meaning": "bão",
+        "meaningJa": "強い風と雨",
+        "example": "台風が近づいています。",
+        "exampleMeaning": "Cơn bão đang đến gần."
+    },
+    {
+        "word": "星",
+        "reading": "ほし",
+        "meaning": "ngôi sao",
+        "meaningJa": "夜空に見える光",
+        "example": "星がよく見えます。",
+        "exampleMeaning": "Có thể nhìn thấy sao rất rõ."
+    },
+    {
+        "word": "宇宙",
+        "reading": "うちゅう",
+        "meaning": "vũ trụ",
+        "meaningJa": "地球の外の世界",
+        "example": "宇宙に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với vũ trụ."
+    }
+]

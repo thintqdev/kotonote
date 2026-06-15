@@ -2,6 +2,7 @@ import VocabularyDeckProgress from '../models/VocabularyDeckProgress.js';
 import * as vocabularyRepository from '../repositories/vocabularyRepository.js';
 import AppError from './AppError.js';
 import { VOCABULARY } from '../constants/messages.js';
+import { isUserOwnedDeck, officialDeckFilter } from './userVocabularyDeck.js';
 
 export const VOCAB_UNLOCK_SPROUT_STAGE = 1;
 
@@ -57,7 +58,12 @@ export async function assertVocabDeckLessonUnlocked(userId, deckId, opts = {}) {
 		throw new AppError(VOCABULARY.DECK_NOT_FOUND, 404);
 	}
 
+	if (isUserOwnedDeck(deck)) {
+		return;
+	}
+
 	const siblings = await vocabularyRepository.findAllDecks({
+		...officialDeckFilter(),
 		level: deck.level,
 		isActive: true,
 	});
@@ -112,6 +118,7 @@ export async function annotateVocabDeckLessonUnlock(userId, decks) {
 		const key = String(level);
 		if (!siblingsByLevel.has(key)) {
 			const rows = await vocabularyRepository.findAllDecks({
+				...officialDeckFilter(),
 				level: key,
 				isActive: true,
 			});
@@ -147,6 +154,14 @@ export async function annotateVocabDeckLessonUnlock(userId, decks) {
 	}
 
 	return decks.map((deck) => {
+		if (isUserOwnedDeck(deck)) {
+			return {
+				...deck,
+				lessonNo: 1,
+				lessonUnlocked: true,
+				isUserDeck: true,
+			};
+		}
 		const siblings = siblingsByLevel.get(String(deck.level)) ?? [];
 		const lessonNo = resolveLessonNoFromDeckId(siblings, deck._id);
 		const lessonUnlocked =
@@ -155,6 +170,7 @@ export async function annotateVocabDeckLessonUnlock(userId, decks) {
 			...deck,
 			lessonNo,
 			lessonUnlocked,
+			isUserDeck: false,
 		};
 	});
 }

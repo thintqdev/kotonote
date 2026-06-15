@@ -6,6 +6,7 @@ import { webhookRateLimit } from '../../middlewares/webhookRateLimit.js';
 import {
 	checkoutIdParamSchema,
 	createCheckoutSchema,
+	refundRequestSchema,
 } from '../../validators/membershipValidator.js';
 
 const router = express.Router();
@@ -52,6 +53,14 @@ router.post(
 	authenticate,
 	validate(checkoutIdParamSchema, 'params'),
 	membershipController.confirmCheckout,
+);
+
+router.post(
+	'/checkout/:checkoutId/refund-request',
+	authenticate,
+	validate(checkoutIdParamSchema, 'params'),
+	validate(refundRequestSchema),
+	membershipController.requestCheckoutRefund,
 );
 
 export default router;

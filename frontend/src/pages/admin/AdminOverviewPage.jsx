@@ -493,14 +493,14 @@ export default function AdminOverviewPage() {
             {t("adminSurvey.retry")}
           </button>
         </div>
-      ) : !stats || (stats.totalSurveys ?? 0) === 0 ? (
+      ) : !overview ? (
         <p className="admin-overview-status">{t("adminSurvey.empty")}</p>
       ) : (
         <>
           <div className="admin-overview-kpi-grid">
             <div className="admin-overview-kpi">
               <span className="admin-overview-kpi-value">
-                {stats.totalSurveys}
+                {stats?.totalSurveys ?? 0}
               </span>
               <span className="admin-overview-kpi-label">
                 {t("adminSurvey.kpiLabel")}
@@ -520,6 +520,14 @@ export default function AdminOverviewPage() {
               </span>
               <span className="admin-overview-kpi-label">
                 {t("adminSurvey.kpis.activeUsers")}
+              </span>
+            </div>
+            <div className="admin-overview-kpi admin-overview-kpi--compact">
+              <span className="admin-overview-kpi-value">
+                {overview?.kpis?.viewsToday ?? 0}
+              </span>
+              <span className="admin-overview-kpi-label">
+                {t("adminSurvey.kpis.viewsToday")}
               </span>
             </div>
             <div className="admin-overview-kpi admin-overview-kpi--compact">
@@ -559,6 +567,14 @@ export default function AdminOverviewPage() {
                   />
                   <Tooltip />
                   <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="views"
+                    name={t("adminSurvey.overviewTrend.series.views")}
+                    stroke="#6b8cae"
+                    strokeWidth={2}
+                    dot={{ r: 2 }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="surveys"
@@ -645,6 +661,7 @@ export default function AdminOverviewPage() {
             </div>
           </section>
 
+          {(stats?.totalSurveys ?? 0) > 0 ? (
           <div className="admin-overview-grid">
             <SurveyDonutCard
               title={t("adminSurvey.sections.level")}
@@ -674,6 +691,9 @@ export default function AdminOverviewPage() {
               />
             </div>
           </div>
+          ) : (
+            <p className="admin-overview-status">{t("adminSurvey.empty")}</p>
+          )}
         </>
       )}
     </div>

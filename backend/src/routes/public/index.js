@@ -2,6 +2,7 @@ import express from 'express';
 import quoteRoutes from './quoteRoutes.js';
 import vocabularyRoutes from './vocabularyRoutes.js';
 import streakRoutes from './streakRoutes.js';
+import leaderboardRoutes from './leaderboardRoutes.js';
 import surveyRoutes from './surveyRoutes.js';
 import profileRoutes from './profileRoutes.js';
 import kanjiRoutes from './kanjiRoutes.js';
@@ -14,6 +15,8 @@ import journalRoutes from './journalRoutes.js';
 import membershipRoutes from './membershipRoutes.js';
 import examPaperRoutes from './examPaperRoutes.js';
 import feedbackRoutes from './feedbackRoutes.js';
+import analyticsRoutes from './analyticsRoutes.js';
+import arenaRoutes from './arenaRoutes.js';
 
 const router = express.Router();
 
@@ -23,6 +26,7 @@ router.use('/vocabulary', vocabularyRoutes);
 router.use('/kanji', kanjiRoutes);
 router.use('/grammar', grammarRoutes);
 router.use('/streaks', streakRoutes);
+router.use('/leaderboard', leaderboardRoutes);
 router.use('/surveys', surveyRoutes);
 router.use('/profile', profileRoutes);
 router.use('/users', profileRoutes);
@@ -34,5 +38,7 @@ router.use('/journal', journalRoutes);
 router.use('/membership', membershipRoutes);
 router.use('/exam-papers', examPaperRoutes);
 router.use('/feedback', feedbackRoutes);
+router.use('/analytics', analyticsRoutes);
+router.use('/arena', arenaRoutes);
 
 export default router;

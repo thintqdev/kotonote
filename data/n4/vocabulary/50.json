@@ -1,0 +1,202 @@
+[
+    {
+        "word": "生まれます",
+        "reading": "うまれます",
+        "meaning": "được sinh ra",
+        "meaningJa": "この世に出る",
+        "example": "私は2000年に生まれました。",
+        "exampleMeaning": "Tôi sinh năm 2000."
+    },
+    {
+        "word": "亡くなります",
+        "reading": "なくなります",
+        "meaning": "qua đời",
+        "meaningJa": "人が死ぬ",
+        "example": "祖父は去年亡くなりました。",
+        "exampleMeaning": "Ông tôi đã qua đời năm ngoái."
+    },
+    {
+        "word": "入学式",
+        "reading": "にゅうがくしき",
+        "meaning": "lễ nhập học",
+        "meaningJa": "学校に入る式",
+        "example": "来週入学式があります。",
+        "exampleMeaning": "Tuần sau sẽ có lễ nhập học."
+    },
+    {
+        "word": "卒業式",
+        "reading": "そつぎょうしき",
+        "meaning": "lễ tốt nghiệp",
+        "meaningJa": "学校を卒業する式",
+        "example": "卒業式で友達と写真を撮りました。",
+        "exampleMeaning": "Tôi đã chụp ảnh với bạn bè trong lễ tốt nghiệp."
+    },
+    {
+        "word": "結婚式",
+        "reading": "けっこんしき",
+        "meaning": "lễ cưới",
+        "meaningJa": "結婚のお祝いの式",
+        "example": "来月結婚式に出席します。",
+        "exampleMeaning": "Tháng sau tôi sẽ tham dự lễ cưới."
+    },
+    {
+        "word": "葬式",
+        "reading": "そうしき",
+        "meaning": "đám tang",
+        "meaningJa": "亡くなった人を送る式",
+        "example": "葬式に参列しました。",
+        "exampleMeaning": "Tôi đã tham dự đám tang."
+    },
+    {
+        "word": "成人式",
+        "reading": "せいじんしき",
+        "meaning": "lễ thành nhân",
+        "meaningJa": "20歳を祝う式",
+        "example": "成人式で久しぶりに友達に会いました。",
+        "exampleMeaning": "Tôi đã gặp lại bạn cũ trong lễ thành nhân."
+    },
+    {
+        "word": "引っ越し",
+        "reading": "ひっこし",
+        "meaning": "chuyển nhà",
+        "meaningJa": "住む場所を変えること",
+        "example": "来月大阪へ引っ越します。",
+        "exampleMeaning": "Tháng sau tôi sẽ chuyển nhà đến Osaka."
+    },
+    {
+        "word": "就職",
+        "reading": "しゅうしょく",
+        "meaning": "xin được việc, có việc làm",
+        "meaningJa": "会社で働き始めること",
+        "example": "大学卒業後に就職しました。",
+        "exampleMeaning": "Sau khi tốt nghiệp đại học tôi đã đi làm."
+    },
+    {
+        "word": "退職",
+        "reading": "たいしょく",
+        "meaning": "nghỉ việc",
+        "meaningJa": "仕事を辞めること",
+        "example": "父は60歳で退職しました。",
+        "exampleMeaning": "Bố tôi nghỉ việc ở tuổi 60."
+    },
+    {
+        "word": "出産",
+        "reading": "しゅっさん",
+        "meaning": "sinh con",
+        "meaningJa": "子どもを産むこと",
+        "example": "姉が先月出産しました。",
+        "exampleMeaning": "Chị gái tôi đã sinh con tháng trước."
+    },
+    {
+        "word": "育児",
+        "reading": "いくじ",
+        "meaning": "nuôi con",
+        "meaningJa": "子どもを育てること",
+        "example": "育児は大変ですが楽しいです。",
+        "exampleMeaning": "Nuôi con vất vả nhưng rất vui."
+    },
+    {
+        "word": "介護",
+        "reading": "かいご",
+        "meaning": "chăm sóc người già/bệnh",
+        "meaningJa": "高齢者などの世話をすること",
+        "example": "祖母の介護をしています。",
+        "exampleMeaning": "Tôi đang chăm sóc bà."
+    },
+    {
+        "word": "看病",
+        "reading": "かんびょう",
+        "meaning": "chăm bệnh",
+        "meaningJa": "病人の世話をすること",
+        "example": "母を看病しました。",
+        "exampleMeaning": "Tôi đã chăm sóc mẹ khi bị bệnh."
+    },
+    {
+        "word": "お見舞い",
+        "reading": "おみまい",
+        "meaning": "thăm bệnh",
+        "meaningJa": "病人を訪ねること",
+        "example": "友達のお見舞いに行きました。",
+        "exampleMeaning": "Tôi đã đi thăm người bạn bị bệnh."
+    },
+    {
+        "word": "祝い",
+        "reading": "いわい",
+        "meaning": "lễ mừng",
+        "meaningJa": "おめでたいことを祝うこと",
+        "example": "結婚のお祝いを贈りました。",
+        "exampleMeaning": "Tôi đã gửi quà mừng đám cưới."
+    },
+    {
+        "word": "記念日",
+        "reading": "きねんび",
+        "meaning": "ngày kỷ niệm",
+        "meaningJa": "特別な日",
+        "example": "今日は結婚記念日です。",
+        "exampleMeaning": "Hôm nay là ngày kỷ niệm kết hôn."
+    },
+    {
+        "word": "伝統",
+        "reading": "でんとう",
+        "meaning": "truyền thống",
+        "meaningJa": "昔から受け継がれていること",
+        "example": "日本の伝統文化を学びます。",
+        "exampleMeaning": "Tôi học văn hóa truyền thống Nhật Bản."
+    },
+    {
+        "word": "文化",
+        "reading": "ぶんか",
+        "meaning": "văn hóa",
+        "meaningJa": "生活様式や芸術など",
+        "example": "日本文化に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với văn hóa Nhật Bản."
+    },
+    {
+        "word": "行事",
+        "reading": "ぎょうじ",
+        "meaning": "sự kiện nghi lễ",
+        "meaningJa": "決まった催し",
+        "example": "学校の行事に参加しました。",
+        "exampleMeaning": "Tôi đã tham gia sự kiện của trường."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "phong tục/thói quen",
+        "meaningJa": "長く続けていること",
+        "example": "毎朝運動する習慣があります。",
+        "exampleMeaning": "Tôi có thói quen tập thể dục mỗi sáng."
+    },
+    {
+        "word": "人生",
+        "reading": "じんせい",
+        "meaning": "cuộc đời",
+        "meaningJa": "人が生きる道",
+        "example": "人生は一度きりです。",
+        "exampleMeaning": "Cuộc đời chỉ có một lần."
+    },
+    {
+        "word": "思い出",
+        "reading": "おもいで",
+        "meaning": "kỷ niệm",
+        "meaningJa": "忘れられない記憶",
+        "example": "学生時代は良い思い出です。",
+        "exampleMeaning": "Thời học sinh là một kỷ niệm đẹp."
+    },
+    {
+        "word": "将来",
+        "reading": "しょうらい",
+        "meaning": "tương lai",
+        "meaningJa": "これから先",
+        "example": "将来日本で働きたいです。",
+        "exampleMeaning": "Tương lai tôi muốn làm việc ở Nhật."
+    },
+    {
+        "word": "幸せ",
+        "reading": "しあわせ",
+        "meaning": "hạnh phúc",
+        "meaningJa": "満足している状態",
+        "example": "家族といると幸せです。",
+        "exampleMeaning": "Ở bên gia đình tôi cảm thấy hạnh phúc."
+    }
+]

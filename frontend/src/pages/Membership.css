@@ -420,9 +420,10 @@
 
 .profile-membership-links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
   margin-top: 4px;
 }
 

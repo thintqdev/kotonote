@@ -5,6 +5,10 @@ import { getNavigationTargetFromNotification } from "../../utils/notificationNav
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { useUserNotifications } from "../../context/UserNotificationContext.jsx";
+import {
+  isResolvableAvatar,
+  resolveAvatarUrl,
+} from "../../utils/resolveAvatarUrl.js";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import NotificationDropdown from "./NotificationDropdown.jsx";
 import HeaderStreak from "../dashboard/HeaderStreak.jsx";
@@ -137,8 +141,13 @@ function DecoFlower(props) {
 
 const Header = ({ userName, notificationCount, streakDays = 0 }) => {
   const { t, i18n } = useTranslation();
-  const { logout } = useAuth();
-  const { recentNotifications, markOneRead } = useUserNotifications();
+  const { user, logout } = useAuth();
+  const [avatarBroken, setAvatarBroken] = useState(false);
+  const {
+    recentNotifications,
+    markOneRead,
+    setNotificationSocketActive,
+  } = useUserNotifications();
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -200,6 +209,22 @@ const Header = ({ userName, notificationCount, streakDays = 0 }) => {
     const ch = t ? [...t][0] : "?";
     return typeof ch === "string" ? ch.toUpperCase() : "?";
   }, [userName]);
+
+  useEffect(() => {
+    setAvatarBroken(false);
+  }, [user?._id, user?.avatar]);
+
+  useEffect(() => {
+    setNotificationSocketActive(isNotificationOpen);
+    return () => setNotificationSocketActive(false);
+  }, [isNotificationOpen, setNotificationSocketActive]);
+
+  const avatarUrl = useMemo(() => {
+    if (!user?.avatar || avatarBroken || !isResolvableAvatar(user.avatar)) {
+      return null;
+    }
+    return resolveAvatarUrl(user.avatar)?.trim() || null;
+  }, [user?.avatar, avatarBroken]);
 
   return (
     <header className="dash-topbar">
@@ -278,7 +303,19 @@ const Header = ({ userName, notificationCount, streakDays = 0 }) => {
                 }}
               >
                 <span className="dash-user-visual" aria-hidden="true">
-                  <span className="dash-user-avatar">{initial}</span>
+                  <span className="dash-user-avatar">
+                    {avatarUrl ? (
+                      <img
+                        src={avatarUrl}
+                        alt=""
+                        className="dash-user-avatar-img"
+                        decoding="async"
+                        onError={() => setAvatarBroken(true)}
+                      />
+                    ) : (
+                      initial
+                    )}
+                  </span>
                 </span>
                 <span className="dash-user-name">{userName}</span>
                 <IconChevron />

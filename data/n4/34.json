@@ -1,0 +1,202 @@
+[
+    {
+        "word": "磨きます",
+        "reading": "みがきます",
+        "meaning": "đánh, chà",
+        "meaningJa": "きれいになるようにこする",
+        "example": "毎朝歯を磨きます。",
+        "exampleMeaning": "Mỗi sáng tôi đánh răng."
+    },
+    {
+        "word": "組み立てます",
+        "reading": "くみたてます",
+        "meaning": "lắp ráp",
+        "meaningJa": "部品を合わせて作る",
+        "example": "机を組み立てます。",
+        "exampleMeaning": "Tôi lắp ráp cái bàn."
+    },
+    {
+        "word": "折ります",
+        "reading": "おります",
+        "meaning": "gấp",
+        "meaningJa": "紙などを曲げる",
+        "example": "紙を折ります。",
+        "exampleMeaning": "Tôi gấp giấy."
+    },
+    {
+        "word": "気がつきます",
+        "reading": "きがつきます",
+        "meaning": "nhận ra",
+        "meaningJa": "初めてわかる",
+        "example": "間違いに気がつきました。",
+        "exampleMeaning": "Tôi đã nhận ra lỗi sai."
+    },
+    {
+        "word": "付けます",
+        "reading": "つけます",
+        "meaning": "gắn, đính",
+        "meaningJa": "後ろに加える",
+        "example": "名前を付けます。",
+        "exampleMeaning": "Tôi đặt tên."
+    },
+    {
+        "word": "見つかります",
+        "reading": "みつかります",
+        "meaning": "được tìm thấy",
+        "meaningJa": "見つけられる",
+        "example": "財布が見つかりました。",
+        "exampleMeaning": "Ví đã được tìm thấy."
+    },
+    {
+        "word": "質問",
+        "reading": "しつもん",
+        "meaning": "câu hỏi",
+        "meaningJa": "聞きたいこと",
+        "example": "質問があります。",
+        "exampleMeaning": "Tôi có câu hỏi."
+    },
+    {
+        "word": "答え",
+        "reading": "こたえ",
+        "meaning": "câu trả lời",
+        "meaningJa": "質問への返事",
+        "example": "答えを書きます。",
+        "exampleMeaning": "Tôi viết câu trả lời."
+    },
+    {
+        "word": "夢",
+        "reading": "ゆめ",
+        "meaning": "ước mơ",
+        "meaningJa": "将来の希望",
+        "example": "私の夢は日本で働くことです。",
+        "exampleMeaning": "Ước mơ của tôi là làm việc ở Nhật."
+    },
+    {
+        "word": "天才",
+        "reading": "てんさい",
+        "meaning": "thiên tài",
+        "meaningJa": "特別に能力が高い人",
+        "example": "彼は天才です。",
+        "exampleMeaning": "Anh ấy là thiên tài."
+    },
+    {
+        "word": "試合",
+        "reading": "しあい",
+        "meaning": "trận đấu",
+        "meaningJa": "スポーツの競争",
+        "example": "試合を見ました。",
+        "exampleMeaning": "Tôi đã xem trận đấu."
+    },
+    {
+        "word": "意見",
+        "reading": "いけん",
+        "meaning": "ý kiến",
+        "meaningJa": "自分の考え",
+        "example": "意見を言ってください。",
+        "exampleMeaning": "Hãy cho biết ý kiến."
+    },
+    {
+        "word": "話",
+        "reading": "はなし",
+        "meaning": "câu chuyện",
+        "meaningJa": "人に伝える内容",
+        "example": "面白い話ですね。",
+        "exampleMeaning": "Đó là câu chuyện thú vị."
+    },
+    {
+        "word": "地球",
+        "reading": "ちきゅう",
+        "meaning": "Trái Đất",
+        "meaningJa": "私たちが住む星",
+        "example": "地球は丸いです。",
+        "exampleMeaning": "Trái Đất hình tròn."
+    },
+    {
+        "word": "月",
+        "reading": "つき",
+        "meaning": "mặt trăng",
+        "meaningJa": "夜空に見える天体",
+        "example": "月がきれいです。",
+        "exampleMeaning": "Trăng đẹp."
+    },
+    {
+        "word": "最近",
+        "reading": "さいきん",
+        "meaning": "gần đây",
+        "meaningJa": "近い過去",
+        "example": "最近忙しいです。",
+        "exampleMeaning": "Gần đây tôi bận."
+    },
+    {
+        "word": "有名",
+        "reading": "ゆうめい",
+        "meaning": "nổi tiếng",
+        "meaningJa": "多くの人が知っている",
+        "example": "彼は有名な歌手です。",
+        "exampleMeaning": "Anh ấy là ca sĩ nổi tiếng."
+    },
+    {
+        "word": "普通",
+        "reading": "ふつう",
+        "meaning": "bình thường",
+        "meaningJa": "特別ではない",
+        "example": "普通の会社員です。",
+        "exampleMeaning": "Tôi là nhân viên văn phòng bình thường."
+    },
+    {
+        "word": "まじめ",
+        "reading": "まじめ",
+        "meaning": "nghiêm túc",
+        "meaningJa": "一生懸命で誠実",
+        "example": "まじめな学生です。",
+        "exampleMeaning": "Là học sinh nghiêm túc."
+    },
+    {
+        "word": "熱心",
+        "reading": "ねっしん",
+        "meaning": "nhiệt tình",
+        "meaningJa": "一生懸命取り組む",
+        "example": "熱心に勉強しています。",
+        "exampleMeaning": "Tôi học rất chăm chỉ."
+    },
+    {
+        "word": "研究",
+        "reading": "けんきゅう",
+        "meaning": "nghiên cứu",
+        "meaningJa": "深く調べること",
+        "example": "AIを研究しています。",
+        "exampleMeaning": "Tôi đang nghiên cứu AI."
+    },
+    {
+        "word": "発表",
+        "reading": "はっぴょう",
+        "meaning": "thuyết trình",
+        "meaningJa": "人前で話すこと",
+        "example": "明日発表があります。",
+        "exampleMeaning": "Ngày mai tôi có bài thuyết trình."
+    },
+    {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích",
+        "meaningJa": "内容をわかりやすく話すこと",
+        "example": "先生が説明します。",
+        "exampleMeaning": "Giáo viên giải thích."
+    },
+    {
+        "word": "方法",
+        "reading": "ほうほう",
+        "meaning": "phương pháp",
+        "meaningJa": "やり方",
+        "example": "いい勉強方法を教えてください。",
+        "exampleMeaning": "Hãy chỉ cho tôi phương pháp học tốt."
+    },
+    {
+        "word": "発見",
+        "reading": "はっけん",
+        "meaning": "phát hiện",
+        "meaningJa": "新しく見つけること",
+        "example": "新しいことを発見しました。",
+        "exampleMeaning": "Tôi đã phát hiện điều mới."
+    }
+]

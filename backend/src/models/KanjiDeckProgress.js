@@ -35,5 +35,6 @@ const kanjiDeckProgressSchema = new mongoose.Schema(
 
 kanjiDeckProgressSchema.index({ userId: 1, deckId: 1 }, { unique: true });
 kanjiDeckProgressSchema.index({ userId: 1, jlpt: 1 });
+kanjiDeckProgressSchema.index({ userId: 1, updatedAt: -1 });
 
 export default mongoose.model('KanjiDeckProgress', kanjiDeckProgressSchema);

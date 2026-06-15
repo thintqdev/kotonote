@@ -27,8 +27,22 @@ export default defineConfig(({ mode }) => {
 			sourcemap: false,
 			rollupOptions: {
 				output: {
-					manualChunks: {
-						vendor: ['react', 'react-dom', 'axios'],
+					manualChunks(id) {
+						if (!id.includes('node_modules')) return undefined;
+						if (
+							id.includes('react-router') ||
+							id.includes('react-dom') ||
+							id.includes('/react/')
+						) {
+							return 'vendor-react';
+						}
+						if (id.includes('i18next') || id.includes('react-i18next')) {
+							return 'vendor-i18n';
+						}
+						if (id.includes('recharts')) return 'vendor-charts';
+						if (id.includes('socket.io-client')) return 'vendor-socket';
+						if (id.includes('axios')) return 'vendor-axios';
+						return undefined;
 					},
 				},
 			},

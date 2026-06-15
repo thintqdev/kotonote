@@ -151,6 +151,12 @@ export const ADMIN_SIDEBAR_SECTIONS = [
         labelKey: "adminLayout.sidebar.feedback",
       },
       {
+        id: "arena",
+        to: "/admin/arena",
+        iconSrc: "/assets/menu-icons/practice.png",
+        labelKey: "adminLayout.sidebar.arena",
+      },
+      {
         id: "settings",
         to: "/admin/settings",
         iconSrc: "/assets/menu-icons/settings.png",

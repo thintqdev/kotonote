@@ -15,6 +15,7 @@ import {
 } from '../utils/jlptAccess.js';
 import { isAdminRequest } from '../utils/queryBool.js';
 import { annotateKanjiDeckLessonUnlock } from '../utils/kanjiLessonUnlock.js';
+import { isUserOwnedDeck } from '../utils/userVocabularyDeck.js';
 
 // ============ DECK CONTROLLERS ============
 
@@ -51,7 +52,13 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 	let annotated = annotateWithJlptLock(decks, unlocked, jlptFromDeck);
 
 	if (!isAdminRequest(req) && req.user?._id) {
-		annotated = await annotateKanjiDeckLessonUnlock(req.user._id, annotated);
+		const officialOnly = annotated.filter((d) => !isUserOwnedDeck(d));
+		const annotatedOfficial = await annotateKanjiDeckLessonUnlock(
+			req.user._id,
+			officialOnly,
+		);
+		const byId = new Map(annotatedOfficial.map((d) => [String(d._id), d]));
+		annotated = annotated.map((d) => byId.get(String(d._id)) ?? d);
 	}
 
 	return apiSuccess(

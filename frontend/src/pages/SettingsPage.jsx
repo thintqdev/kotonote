@@ -57,6 +57,9 @@ function buildSettingsPayload(state) {
     notifications: {
       emailDigest: state.notifEmail,
       dailyStudyReminder: state.notifStudy,
+      streakCheckInReminder: state.notifStreak,
+      dailyGoalNudge: state.notifGoalNudge,
+      examCountdownReminder: state.notifExam,
       weeklyReport: state.notifWeekly,
     },
     study: {
@@ -78,6 +81,9 @@ const SettingsPage = () => {
 
   const [notifEmail, setNotifEmail] = useState(true);
   const [notifStudy, setNotifStudy] = useState(true);
+  const [notifStreak, setNotifStreak] = useState(true);
+  const [notifGoalNudge, setNotifGoalNudge] = useState(true);
+  const [notifExam, setNotifExam] = useState(true);
   const [notifWeekly, setNotifWeekly] = useState(false);
   const [dailyGoal, setDailyGoal] = useState("30");
   const [dailySubjectGoals, setDailySubjectGoals] = useState(() =>
@@ -97,6 +103,9 @@ const SettingsPage = () => {
     if (!settings) return;
     setNotifEmail(settings.notifications?.emailDigest ?? true);
     setNotifStudy(settings.notifications?.dailyStudyReminder ?? true);
+    setNotifStreak(settings.notifications?.streakCheckInReminder ?? true);
+    setNotifGoalNudge(settings.notifications?.dailyGoalNudge ?? true);
+    setNotifExam(settings.notifications?.examCountdownReminder ?? true);
     setNotifWeekly(settings.notifications?.weeklyReport ?? false);
     setDailyGoal(String(settings.study?.dailyGoalMinutes ?? 30));
     setDailySubjectGoals(
@@ -233,6 +242,54 @@ const SettingsPage = () => {
                   checked={notifStudy}
                   onChange={setNotifStudy}
                   disabled={formDisabled}
+                />
+              </li>
+              <li className="settings-row">
+                <div className="settings-row-text">
+                  <span className="settings-row-label">
+                    {t("settingsPage.notifStreak")}
+                  </span>
+                  <span className="settings-row-desc">
+                    {t("settingsPage.notifStreakDesc")}
+                  </span>
+                </div>
+                <SettingsToggle
+                  id="set-notif-streak"
+                  checked={notifStreak}
+                  onChange={setNotifStreak}
+                  disabled={formDisabled || !notifStudy}
+                />
+              </li>
+              <li className="settings-row">
+                <div className="settings-row-text">
+                  <span className="settings-row-label">
+                    {t("settingsPage.notifGoalNudge")}
+                  </span>
+                  <span className="settings-row-desc">
+                    {t("settingsPage.notifGoalNudgeDesc")}
+                  </span>
+                </div>
+                <SettingsToggle
+                  id="set-notif-goal"
+                  checked={notifGoalNudge}
+                  onChange={setNotifGoalNudge}
+                  disabled={formDisabled || !notifStudy}
+                />
+              </li>
+              <li className="settings-row">
+                <div className="settings-row-text">
+                  <span className="settings-row-label">
+                    {t("settingsPage.notifExam")}
+                  </span>
+                  <span className="settings-row-desc">
+                    {t("settingsPage.notifExamDesc")}
+                  </span>
+                </div>
+                <SettingsToggle
+                  id="set-notif-exam"
+                  checked={notifExam}
+                  onChange={setNotifExam}
+                  disabled={formDisabled || !notifStudy}
                 />
               </li>
               <li className="settings-row settings-row--last">

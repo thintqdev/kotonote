@@ -1,0 +1,304 @@
+.grammar-practice-page {
+  max-width: calc(var(--vs-column-max, 620px) + 48px);
+  margin-inline: auto;
+}
+
+.grammar-practice-back {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--vocab-green-deep, #3d5c33);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.grammar-practice-back:hover {
+  text-decoration: underline;
+}
+
+.grammar-practice-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: var(--vs-column-max, 620px);
+  margin: 0 auto;
+  padding: 4px 0 24px;
+}
+
+.grammar-practice-count-field {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.grammar-practice-count-field legend {
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vs-muted, rgba(58, 54, 48, 0.55));
+}
+
+.grammar-practice-count-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.grammar-practice-count-chip {
+  min-width: 3rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(92, 122, 82, 0.35);
+  background: rgba(255, 252, 248, 0.92);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--vs-ink, #3a3630);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.grammar-practice-count-chip.is-active {
+  background: rgba(235, 245, 228, 0.85);
+  border-color: rgba(92, 122, 82, 0.55);
+  color: var(--vocab-green-deep, #3d5c33);
+}
+
+.grammar-practice-level-hint {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--vs-muted, rgba(58, 54, 48, 0.55));
+  font-weight: 600;
+}
+
+.grammar-practice-start {
+  align-self: center;
+  min-width: min(100%, 240px);
+}
+
+.grammar-practice-session {
+  max-width: var(--vs-column-max, 620px);
+  margin: 0 auto;
+  padding-bottom: 28px;
+}
+
+.grammar-practice-session-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(92, 122, 82, 0.22);
+}
+
+.grammar-practice-session-meta {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--vs-ink, #3a3630);
+}
+
+/* —— Quiz: kiểu đề JLPT (minchō, hộp câu hỏi, đáp án đánh số) —— */
+
+.grammar-practice-quiz {
+  margin-top: 4px;
+}
+
+.grammar-practice-quiz-head {
+  margin-bottom: 14px;
+}
+
+.grammar-practice-quiz-meta {
+  margin: 0 0 4px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vs-muted, rgba(58, 54, 48, 0.55));
+}
+
+.grammar-practice-quiz-mode {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(61, 78, 58, 0.82);
+}
+
+.grammar-practice-q-prompt {
+  margin: 0 0 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 252, 246, 0.92);
+  border: 1px solid rgba(90, 107, 56, 0.14);
+}
+
+.grammar-practice-q-line {
+  margin: 0;
+  font-family: var(--font-serif-jp, var(--font-ja));
+  font-size: clamp(1.02rem, 2.6vw, 1.12rem);
+  font-weight: 600;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  color: rgba(45, 55, 42, 0.95);
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+.grammar-practice-q-vi {
+  margin: -0.35rem 0 0.9rem;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--vs-muted, rgba(58, 54, 48, 0.55));
+  text-align: left;
+}
+
+.grammar-practice-q-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grammar-practice-q-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(51, 51, 51, 0.2);
+  background: rgba(255, 255, 252, 0.88);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.grammar-practice-q-choice:hover:not(:disabled) {
+  border-color: rgba(90, 115, 64, 0.55);
+  background: #fff;
+}
+
+.grammar-practice-q-choice:disabled {
+  cursor: default;
+}
+
+.grammar-practice-q-choice-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.12rem;
+  border-radius: 999px;
+  background: rgba(90, 107, 56, 0.1);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: rgba(61, 78, 58, 0.95);
+  line-height: 1;
+}
+
+.grammar-practice-q-choice-text {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-serif-jp, var(--font-ja));
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: rgba(45, 55, 42, 0.95);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.grammar-practice-q-choice.is-correct {
+  border-color: rgba(79, 125, 89, 0.65);
+  background: rgba(235, 245, 228, 0.55);
+}
+
+.grammar-practice-q-choice.is-correct .grammar-practice-q-choice-num {
+  background: rgba(79, 125, 89, 0.25);
+}
+
+.grammar-practice-q-choice.is-wrong {
+  border-color: rgba(185, 74, 72, 0.55);
+  background: rgba(255, 235, 235, 0.45);
+}
+
+.grammar-practice-explain {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(90, 107, 56, 0.14);
+  background: rgba(235, 245, 228, 0.35);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  font-weight: 600;
+  color: var(--vs-ink, #3a3630);
+}
+
+.grammar-practice-quiz-next {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.grammar-practice-result {
+  margin-top: 12px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.grammar-practice-result-title {
+  margin: 0 0 8px;
+  font-family: var(--font-hand, var(--font-ui));
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--vs-ink, #3a3630);
+}
+
+.grammar-practice-result-score {
+  margin: 0 0 18px;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--vocab-green-deep, #3d5c33);
+}
+
+.grammar-practice-result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .grammar-practice-session-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .grammar-practice-q-line {
+    font-size: 1rem;
+  }
+
+  .grammar-practice-q-choice-text {
+    font-size: 0.94rem;
+  }
+}

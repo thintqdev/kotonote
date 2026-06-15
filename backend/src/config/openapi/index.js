@@ -4,6 +4,7 @@ import { userPaths } from './paths/users.js';
 import { surveyPaths } from './paths/surveys.js';
 import { quotePaths } from './paths/quotes.js';
 import { vocabularyPaths } from './paths/vocabulary.js';
+import { userVocabularyMyPaths } from './paths/userVocabularyMy.js';
 import { vocabularyProgressPaths } from './paths/vocabularyProgress.js';
 import { adminVocabularyImportPaths } from './paths/adminVocabularyImport.js';
 import { adminVocabularyGeneratePaths } from './paths/adminVocabularyGenerate.js';
@@ -83,6 +84,7 @@ export const openApiSpec = {
 		...surveyPaths,
 		...quotePaths,
 		...vocabularyPaths,
+		...userVocabularyMyPaths,
 		...vocabularyProgressPaths,
 		...adminVocabularyImportPaths,
 		...adminVocabularyGeneratePaths,

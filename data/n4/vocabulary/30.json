@@ -1,0 +1,202 @@
+[
+    {
+        "word": "貼ります",
+        "reading": "はります",
+        "meaning": "dán",
+        "meaningJa": "紙などを付ける",
+        "example": "壁にポスターを貼ります。",
+        "exampleMeaning": "Tôi dán poster lên tường."
+    },
+    {
+        "word": "掛けます",
+        "reading": "かけます",
+        "meaning": "treo",
+        "meaningJa": "高い所に付ける",
+        "example": "壁に時計を掛けます。",
+        "exampleMeaning": "Tôi treo đồng hồ lên tường."
+    },
+    {
+        "word": "飾ります",
+        "reading": "かざります",
+        "meaning": "trang trí",
+        "meaningJa": "きれいに見せるために置く",
+        "example": "部屋に花を飾ります。",
+        "exampleMeaning": "Tôi trang trí hoa trong phòng."
+    },
+    {
+        "word": "並べます",
+        "reading": "ならべます",
+        "meaning": "xếp hàng",
+        "meaningJa": "順番に置く",
+        "example": "本を棚に並べます。",
+        "exampleMeaning": "Tôi xếp sách lên kệ."
+    },
+    {
+        "word": "植えます",
+        "reading": "うえます",
+        "meaning": "trồng",
+        "meaningJa": "植物を土に入れる",
+        "example": "庭に木を植えます。",
+        "exampleMeaning": "Tôi trồng cây trong vườn."
+    },
+    {
+        "word": "戻します",
+        "reading": "もどします",
+        "meaning": "trả lại vị trí cũ",
+        "meaningJa": "元の場所へ返す",
+        "example": "本を棚に戻します。",
+        "exampleMeaning": "Tôi trả sách lại kệ."
+    },
+    {
+        "word": "まとめます",
+        "reading": "まとめます",
+        "meaning": "gom lại, tổng hợp",
+        "meaningJa": "一つにする",
+        "example": "資料をまとめます。",
+        "exampleMeaning": "Tôi tổng hợp tài liệu."
+    },
+    {
+        "word": "片づけます",
+        "reading": "かたづけます",
+        "meaning": "dọn dẹp",
+        "meaningJa": "きれいに整理する",
+        "example": "部屋を片づけます。",
+        "exampleMeaning": "Tôi dọn dẹp phòng."
+    },
+    {
+        "word": "しまいます",
+        "reading": "しまいます",
+        "meaning": "cất đi",
+        "meaningJa": "中に入れて保管する",
+        "example": "冬の服をしまいます。",
+        "exampleMeaning": "Tôi cất quần áo mùa đông."
+    },
+    {
+        "word": "決めます",
+        "reading": "きめます",
+        "meaning": "quyết định",
+        "meaningJa": "選んで決定する",
+        "example": "旅行の日を決めます。",
+        "exampleMeaning": "Tôi quyết định ngày du lịch."
+    },
+    {
+        "word": "予習します",
+        "reading": "よしゅうします",
+        "meaning": "chuẩn bị bài trước",
+        "meaningJa": "授業の前に勉強する",
+        "example": "毎日予習します。",
+        "exampleMeaning": "Mỗi ngày tôi chuẩn bị bài trước."
+    },
+    {
+        "word": "復習します",
+        "reading": "ふくしゅうします",
+        "meaning": "ôn tập",
+        "meaningJa": "勉強したことをもう一度する",
+        "example": "授業の後で復習します。",
+        "exampleMeaning": "Sau giờ học tôi ôn tập."
+    },
+    {
+        "word": "そのまま",
+        "reading": "そのまま",
+        "meaning": "giữ nguyên",
+        "meaningJa": "変えない状態",
+        "example": "そのまま待ってください。",
+        "exampleMeaning": "Hãy chờ nguyên như vậy."
+    },
+    {
+        "word": "授業",
+        "reading": "じゅぎょう",
+        "meaning": "giờ học",
+        "meaningJa": "学校の勉強時間",
+        "example": "授業が始まります。",
+        "exampleMeaning": "Giờ học bắt đầu."
+    },
+    {
+        "word": "講義",
+        "reading": "こうぎ",
+        "meaning": "bài giảng",
+        "meaningJa": "先生の説明",
+        "example": "大学で講義を受けます。",
+        "exampleMeaning": "Tôi tham gia bài giảng ở đại học."
+    },
+    {
+        "word": "予定表",
+        "reading": "よていひょう",
+        "meaning": "lịch trình",
+        "meaningJa": "予定を書いた表",
+        "example": "予定表を確認します。",
+        "exampleMeaning": "Tôi kiểm tra lịch trình."
+    },
+    {
+        "word": "ごみ箱",
+        "reading": "ごみばこ",
+        "meaning": "thùng rác",
+        "meaningJa": "ごみを入れる箱",
+        "example": "ごみをごみ箱に捨てます。",
+        "exampleMeaning": "Tôi vứt rác vào thùng rác."
+    },
+    {
+        "word": "花瓶",
+        "reading": "かびん",
+        "meaning": "lọ hoa",
+        "meaningJa": "花を飾る入れ物",
+        "example": "花瓶に花を入れます。",
+        "exampleMeaning": "Tôi cắm hoa vào lọ."
+    },
+    {
+        "word": "壁",
+        "reading": "かべ",
+        "meaning": "bức tường",
+        "meaningJa": "部屋を囲む部分",
+        "example": "壁に絵を掛けます。",
+        "exampleMeaning": "Tôi treo tranh lên tường."
+    },
+    {
+        "word": "周り",
+        "reading": "まわり",
+        "meaning": "xung quanh",
+        "meaningJa": "近くの場所",
+        "example": "周りを見てください。",
+        "exampleMeaning": "Hãy nhìn xung quanh."
+    },
+    {
+        "word": "真ん中",
+        "reading": "まんなか",
+        "meaning": "chính giữa",
+        "meaningJa": "中央",
+        "example": "真ん中に座ります。",
+        "exampleMeaning": "Tôi ngồi ở chính giữa."
+    },
+    {
+        "word": "隅",
+        "reading": "すみ",
+        "meaning": "góc",
+        "meaningJa": "端の部分",
+        "example": "部屋の隅に机があります。",
+        "exampleMeaning": "Có cái bàn ở góc phòng."
+    },
+    {
+        "word": "まだ",
+        "reading": "まだ",
+        "meaning": "vẫn chưa",
+        "meaningJa": "今も続いている",
+        "example": "まだ宿題が終わりません。",
+        "exampleMeaning": "Tôi vẫn chưa làm xong bài tập."
+    },
+    {
+        "word": "あとで",
+        "reading": "あとで",
+        "meaning": "sau đó",
+        "meaningJa": "後の時間に",
+        "example": "あとで電話します。",
+        "exampleMeaning": "Tôi sẽ gọi điện sau."
+    },
+    {
+        "word": "すぐに",
+        "reading": "すぐに",
+        "meaning": "ngay lập tức",
+        "meaningJa": "時間を置かずに",
+        "example": "すぐに行きます。",
+        "exampleMeaning": "Tôi đi ngay lập tức."
+    }
+]

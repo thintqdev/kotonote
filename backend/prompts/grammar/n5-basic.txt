@@ -6,6 +6,8 @@ Gợi ý mẫu ngữ pháp: {{patternHint}}
 Ghi chú admin: {{customPrompt}}
 
 Cấu trúc JSON bắt buộc:
+- slug: id URL kebab-case tiếng Anh (vd: masu-to-te-form, ni-yoru-to) — không dấu, không khoảng trắng
+- tagIds: mảng string, chọn 0–3 trong: hearsay, formal, conjecture, purpose, goal, change, conjugation, conditional, permission, obligation, passive, potential, comparison
 - pattern: mẫu ngữ pháp (vd: 〜ます)
 - teaser: { ja, vi }
 - topicRibbon: { ja, vi }
@@ -17,7 +19,10 @@ Cấu trúc JSON bắt buộc:
 - examples: mảng [{ ja, vi }, ...] (2–4 câu)
 - ng: { ja: [câu sai], vi: [dịch] }
 - ngNote: { ja, vi }
-- compare: { caption: {ja,vi}, colLabels: [], rows: [] } (có thể để trống N5)
+- compare: { caption, colLabels, rows: [], sections?: [{ id: "I"|"II"|"III", title, intro, rows: [{ label, cells }] }] }
+  · So 2 mẫu ngữ pháp: rows phẳng, sections: []
+  · Chia thể (て形…): tagIds có conjugation; sections I・II・III; section I ≥6 dòng: う・つ・る, む・ぶ・ぬ, く, ぐ, す, 行く（例外）
+  · cells mỗi dòng: ví dụ 辞書|ます|て|quy tắc (4 cột colLabels)
 - memo: { ja, vi }
 - practice: { items: [{ ja, vi }, ...] } (2–3 câu luyện tập)
 

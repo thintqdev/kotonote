@@ -1,0 +1,212 @@
+.leaderboard-scope {
+  max-width: 720px;
+}
+
+.leaderboard-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.leaderboard-panel {
+  margin-bottom: 2rem;
+}
+
+.leaderboard-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  color: var(--vocab-ink, #2c2416);
+}
+
+.leaderboard-panel-hint {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: var(--vocab-muted, #6b5d4a);
+}
+
+.leaderboard-table {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--vocab-border, #e8dfd0);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fffef9;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--vocab-border, #e8dfd0);
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-row--me {
+  background: rgba(76, 140, 74, 0.08);
+}
+
+.leaderboard-table--compact .leaderboard-row--compact {
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+}
+
+.leaderboard-rank {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--vocab-accent, #4a7c3f);
+  text-align: center;
+}
+
+.leaderboard-table--compact .leaderboard-rank {
+  font-size: 0.9rem;
+}
+
+.leaderboard-rank--1 {
+  color: #c9a227;
+}
+
+.leaderboard-rank--2 {
+  color: #8a8f98;
+}
+
+.leaderboard-rank--3 {
+  color: #b87333;
+}
+
+.leaderboard-user {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.leaderboard-user--compact {
+  gap: 0.45rem;
+}
+
+.leaderboard-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0ebe0;
+}
+
+.leaderboard-user--compact .leaderboard-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.75rem;
+}
+
+.leaderboard-avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--vocab-muted, #6b5d4a);
+}
+
+.leaderboard-name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-table--compact .leaderboard-name {
+  font-size: 0.875rem;
+}
+
+.leaderboard-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  color: var(--vocab-ink, #2c2416);
+  text-align: right;
+}
+
+.leaderboard-table--compact .leaderboard-value {
+  font-size: 0.85rem;
+}
+
+.leaderboard-value-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--vocab-muted, #6b5d4a);
+}
+
+.leaderboard-my-rank {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px dashed rgba(74, 124, 63, 0.45);
+  background: rgba(76, 140, 74, 0.1);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--vocab-ink, #2c2416);
+  line-height: 1.45;
+}
+
+.leaderboard-my-rank--compact {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+.leaderboard-my-rank-sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--vocab-muted, #6b5d4a);
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 480px) {
+  .leaderboard-scope {
+    max-width: none;
+  }
+
+  .leaderboard-row:not(.leaderboard-row--compact) {
+    grid-template-columns: 2rem 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.35rem 0.5rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .leaderboard-row:not(.leaderboard-row--compact) .leaderboard-rank {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .leaderboard-row:not(.leaderboard-row--compact) .leaderboard-user {
+    grid-column: 2;
+  }
+
+  .leaderboard-row:not(.leaderboard-row--compact) .leaderboard-value {
+    grid-column: 2;
+    white-space: normal;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+
+  .leaderboard-tabs.vocab-tabs--scroll-mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    padding-bottom: 0.25rem;
+  }
+}

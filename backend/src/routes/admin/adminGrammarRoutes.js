@@ -1,5 +1,6 @@
 import express from 'express';
 import * as grammarController from '../../controllers/grammarController.js';
+import adminGrammarPracticeRoutes from './adminGrammarPracticeRoutes.js';
 import { validate } from '../../middlewares/validate.js';
 import {
 	createGrammarSchema,
@@ -7,6 +8,8 @@ import {
 } from '../../validators/grammarValidator.js';
 
 const router = express.Router();
+
+router.use('/practice', adminGrammarPracticeRoutes);
 
 router.get('/', grammarController.listAdminGrammars);
 router.get('/:id', grammarController.getAdminGrammarById);

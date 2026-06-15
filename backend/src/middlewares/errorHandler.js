@@ -6,12 +6,17 @@ import { COMMON } from '../constants/messages.js';
  */
 const errorHandler = (err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
-	const messageCode = err.messageCode || COMMON.SERVER_ERROR;
+	const msg = String(err.message ?? '');
+	const messageCode =
+		err.messageCode ||
+		(/^MSG_\d+$/i.test(msg) ? msg : null) ||
+		COMMON.SERVER_ERROR;
 
 	res.status(statusCode).json({
 		success: false,
 		messageCode,
-		...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+		...(err.errors != null ? { errors: err.errors } : {}),
+		...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
 	});
 };
 

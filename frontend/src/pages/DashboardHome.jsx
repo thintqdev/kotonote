@@ -15,7 +15,13 @@ import GoalCard from "../components/dashboard/GoalCard.jsx";
 import SubjectGrid from "../components/dashboard/SubjectGrid.jsx";
 import DailyProgressCard from "../components/dashboard/DailyProgressCard.jsx";
 import DailyNoteCard from "../components/dashboard/DailyNoteCard.jsx";
+import LeaderboardPreviewCard from "../components/dashboard/LeaderboardPreviewCard.jsx";
+import ArenaPreviewCard from "../components/dashboard/ArenaPreviewCard.jsx";
+import { useArenaPreview } from "../hooks/useArenaPreview.js";
+import ContinueLearningCard from "../components/dashboard/ContinueLearningCard.jsx";
 import { buildDemoProfile } from "../data/dashboardHomeMock.js";
+import { useLeaderboardPreview } from "../hooks/useLeaderboardPreview.js";
+import { jlptLevelFromProfile } from "../utils/profileJlptLevel.js";
 import {
   formatExamDateLong,
   resolveGoalExamFields,
@@ -96,6 +102,49 @@ const DashboardHome = () => {
   }, [homeData, homeLoading, homeError, user]);
 
   const streakDays = homePayload?.streak?.days ?? 0;
+  const showHomeSkeleton = Boolean(user) && homeLoading && !homePayload;
+
+  const profileJlpt = useMemo(() => jlptLevelFromProfile(profile), [profile]);
+
+  const {
+    data: leaderboardPreview,
+    loading: leaderboardLoading,
+    error: leaderboardError,
+  } = useLeaderboardPreview({
+    enabled: Boolean(user) && !showHomeSkeleton,
+    jlpt: profileJlpt,
+  });
+
+  const {
+    data: arenaPreview,
+    loading: arenaLoading,
+    error: arenaError,
+  } = useArenaPreview({
+    enabled: Boolean(user) && !showHomeSkeleton,
+  });
+
+  const myUserId = user?._id ? String(user._id) : "";
+
+  const leaderboardStreakEntries = useMemo(
+    () => leaderboardPreview?.streak ?? [],
+    [leaderboardPreview?.streak],
+  );
+  const leaderboardLessonEntries = useMemo(
+    () => leaderboardPreview?.lessons?.entries ?? [],
+    [leaderboardPreview?.lessons?.entries],
+  );
+  const leaderboardMeStreak = useMemo(
+    () => leaderboardPreview?.me?.streak ?? null,
+    [leaderboardPreview?.me?.streak],
+  );
+  const leaderboardMeLessons = useMemo(
+    () => leaderboardPreview?.me?.lessons ?? null,
+    [leaderboardPreview?.me?.lessons],
+  );
+  const leaderboardJlpt = useMemo(
+    () => leaderboardPreview?.lessons?.jlpt ?? profileJlpt,
+    [leaderboardPreview?.lessons?.jlpt, profileJlpt],
+  );
 
   const subjects = useMemo(() => {
     const rows = homePayload?.subjects;
@@ -133,8 +182,6 @@ const DashboardHome = () => {
     fallbackI18nKey: "dashboard.quotes.note",
   });
 
-  const showHomeSkeleton = Boolean(user) && homeLoading && !homePayload;
-
   return (
     <Layout
       userName={displayName}
@@ -169,6 +216,40 @@ const DashboardHome = () => {
         {subjects.length > 0 ? (
           <div className="dash-float dash-float--section">
             <SubjectGrid subjects={subjects} pinnedCards />
+          </div>
+        ) : null}
+
+        {user && homePayload?.continue?.primary ? (
+          <div className="dash-float dash-float--section dash-float--continue">
+            <ContinueLearningCard
+              continueData={homePayload.continue}
+              loading={showHomeSkeleton}
+            />
+          </div>
+        ) : null}
+
+        {user ? (
+          <div className="dash-float dash-float--section dash-float--arena">
+            <ArenaPreviewCard
+              arena={arenaPreview}
+              loading={arenaLoading}
+              error={arenaError}
+            />
+          </div>
+        ) : null}
+
+        {user ? (
+          <div className="dash-float dash-float--section dash-float--lb">
+            <LeaderboardPreviewCard
+              jlpt={leaderboardJlpt}
+              streakEntries={leaderboardStreakEntries}
+              lessonEntries={leaderboardLessonEntries}
+              meStreak={leaderboardMeStreak}
+              meLessons={leaderboardMeLessons}
+              loading={leaderboardLoading}
+              error={leaderboardError}
+              myId={myUserId}
+            />
           </div>
         ) : null}
 

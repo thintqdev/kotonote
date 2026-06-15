@@ -10,6 +10,7 @@ import {
 	listAdminGrammars,
 } from '../../services/adminGrammarService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import GrammarBulkImportCsvModal from '../../components/admin/GrammarBulkImportCsvModal.jsx';
 import './AdminGrammarPage.css';
 
 export default function AdminGrammarHome() {
@@ -24,6 +25,7 @@ export default function AdminGrammarHome() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [bulkImportOpen, setBulkImportOpen] = useState(false);
 
 	const queryParams = useMemo(() => {
 		const p = { page, limit: 20 };
@@ -161,6 +163,19 @@ export default function AdminGrammarHome() {
 					>
 						Làm mới
 					</button>
+					<button
+						type="button"
+						className="admin-grammar-btn admin-grammar-btn--ghost"
+						onClick={() => setBulkImportOpen(true)}
+					>
+						Import CSV
+					</button>
+					<Link
+						to="/admin/grammar/practice"
+						className="admin-grammar-btn admin-grammar-btn--ghost"
+					>
+						Câu hỏi luyện tập
+					</Link>
 					<Link
 						to="/admin/grammar/new"
 						className="admin-grammar-btn admin-grammar-btn--primary"
@@ -255,6 +270,12 @@ export default function AdminGrammarHome() {
 					</button>
 				</nav>
 			) : null}
+
+			<GrammarBulkImportCsvModal
+				open={bulkImportOpen}
+				onClose={() => setBulkImportOpen(false)}
+				onDone={() => void fetchList()}
+			/>
 		</div>
 	);
 }

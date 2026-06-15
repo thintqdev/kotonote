@@ -6,6 +6,7 @@ import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
 import { mockStreak } from '../data/dashboardHomeMock.js';
 import {
+  createMembershipCheckout,
   getMembershipPlans,
   getMyMembership,
 } from '../services/membershipService.js';
@@ -36,6 +37,7 @@ const MembershipPage = () => {
   const [membership, setMembership] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [checkoutLoadingKey, setCheckoutLoadingKey] = useState('');
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -91,10 +93,27 @@ const MembershipPage = () => {
       })
     : t('membershipPage.subtitleFree');
 
-  const goCheckout = (tierId, billing) => {
-    navigate(
-      `/membership/checkout?plan=${encodeURIComponent(tierId)}&billing=${encodeURIComponent(billing)}`,
-    );
+  const goCheckout = async (tierId, billing) => {
+    const key = `${tierId}:${billing}`;
+    if (checkoutLoadingKey) return;
+
+    setCheckoutLoadingKey(key);
+    setError('');
+    try {
+      const created = await createMembershipCheckout({ tierId, billing });
+      const checkoutId = created?.checkoutId ?? created?.id;
+      if (!checkoutId) {
+        throw new Error('Missing checkout id');
+      }
+      navigate(
+        `/membership/checkout?checkoutId=${encodeURIComponent(checkoutId)}&plan=${encodeURIComponent(tierId)}&billing=${encodeURIComponent(billing)}`,
+        { state: { checkout: created } },
+      );
+    } catch (err) {
+      setError(getApiErrorMessage(err, t));
+    } finally {
+      setCheckoutLoadingKey('');
+    }
   };
 
   return (
@@ -210,8 +229,11 @@ const MembershipPage = () => {
                     <button
                       type="button"
                       className="membership-price-btn"
-                      disabled={isCurrent && membership?.billing === 'yearly'}
-                      onClick={() => goCheckout(tierId, 'yearly')}
+                      disabled={
+                        Boolean(checkoutLoadingKey) ||
+                        (isCurrent && membership?.billing === 'yearly')
+                      }
+                      onClick={() => void goCheckout(tierId, 'yearly')}
                     >
                       <span className="membership-price-btn-label">
                         {t('membershipPage.billing.yearly')}
@@ -224,9 +246,10 @@ const MembershipPage = () => {
                       type="button"
                       className="membership-price-btn membership-price-btn--lifetime"
                       disabled={
-                        isCurrent && membership?.billing === 'lifetime'
+                        Boolean(checkoutLoadingKey) ||
+                        (isCurrent && membership?.billing === 'lifetime')
                       }
-                      onClick={() => goCheckout(tierId, 'lifetime')}
+                      onClick={() => void goCheckout(tierId, 'lifetime')}
                     >
                       <span className="membership-price-btn-label">
                         {t('membershipPage.billing.lifetime')}

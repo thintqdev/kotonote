@@ -105,8 +105,9 @@ export default function VocabularyListPage() {
       const [{ decks: pageDecks, pagination: pag }, progressList] =
         await Promise.all([
           listVocabularyDecks(params),
-
-          getMyVocabularyProgress(),
+          getMyVocabularyProgress(
+            selectedJlpt ? { jlpt: selectedJlpt } : {},
+          ),
         ]);
 
       setDecks(pageDecks);
@@ -304,6 +305,9 @@ export default function VocabularyListPage() {
               </p>
             </div>
           </div>
+          <Link to="/vocabulary/mine" className="user-vocab-mine-tab-link">
+            {t("vocabPage.userDeckTab")}
+          </Link>
         </header>
 
         <div

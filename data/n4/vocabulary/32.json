@@ -1,0 +1,202 @@
+[
+    {
+        "word": "運動します",
+        "reading": "うんどうします",
+        "meaning": "tập thể dục, vận động",
+        "meaningJa": "体を動かす",
+        "example": "毎日三十分運動します。",
+        "exampleMeaning": "Mỗi ngày tôi tập thể dục 30 phút."
+    },
+    {
+        "word": "成功します",
+        "reading": "せいこうします",
+        "meaning": "thành công",
+        "meaningJa": "うまくいく",
+        "example": "プロジェクトが成功しました。",
+        "exampleMeaning": "Dự án đã thành công."
+    },
+    {
+        "word": "失敗します",
+        "reading": "しっぱいします",
+        "meaning": "thất bại",
+        "meaningJa": "うまくいかない",
+        "example": "試験に失敗しました。",
+        "exampleMeaning": "Tôi đã thi trượt."
+    },
+    {
+        "word": "合格します",
+        "reading": "ごうかくします",
+        "meaning": "đỗ",
+        "meaningJa": "試験に受かる",
+        "example": "JLPTに合格しました。",
+        "exampleMeaning": "Tôi đã đỗ JLPT."
+    },
+    {
+        "word": "戻ります",
+        "reading": "もどります",
+        "meaning": "quay lại",
+        "meaningJa": "元の場所へ帰る",
+        "example": "五時に会社へ戻ります。",
+        "exampleMeaning": "Tôi quay lại công ty lúc 5 giờ."
+    },
+    {
+        "word": "やみます",
+        "reading": "やみます",
+        "meaning": "tạnh (mưa)",
+        "meaningJa": "雨や雪が止まる",
+        "example": "雨がやみました。",
+        "exampleMeaning": "Mưa đã tạnh."
+    },
+    {
+        "word": "晴れます",
+        "reading": "はれます",
+        "meaning": "trời quang",
+        "meaningJa": "天気が良くなる",
+        "example": "明日は晴れそうです。",
+        "exampleMeaning": "Ngày mai có vẻ trời sẽ đẹp."
+    },
+    {
+        "word": "曇ります",
+        "reading": "くもります",
+        "meaning": "trời nhiều mây",
+        "meaningJa": "空に雲が多い",
+        "example": "今日は曇っています。",
+        "exampleMeaning": "Hôm nay trời nhiều mây."
+    },
+    {
+        "word": "吹きます",
+        "reading": "ふきます",
+        "meaning": "thổi",
+        "meaningJa": "風が動く",
+        "example": "強い風が吹いています。",
+        "exampleMeaning": "Gió đang thổi mạnh."
+    },
+    {
+        "word": "治ります",
+        "reading": "なおります",
+        "meaning": "khỏi bệnh",
+        "meaningJa": "病気が良くなる",
+        "example": "風邪が治りました。",
+        "exampleMeaning": "Tôi đã khỏi cảm."
+    },
+    {
+        "word": "続きます",
+        "reading": "つづきます",
+        "meaning": "tiếp tục",
+        "meaningJa": "終わらずに続く",
+        "example": "雨の日が続いています。",
+        "exampleMeaning": "Những ngày mưa đang tiếp diễn."
+    },
+    {
+        "word": "ひきます",
+        "reading": "ひきます",
+        "meaning": "mắc (bệnh)",
+        "meaningJa": "病気になる",
+        "example": "風邪をひきました。",
+        "exampleMeaning": "Tôi bị cảm."
+    },
+    {
+        "word": "冷やします",
+        "reading": "ひやします",
+        "meaning": "làm lạnh",
+        "meaningJa": "冷たくする",
+        "example": "ジュースを冷やします。",
+        "exampleMeaning": "Tôi làm lạnh nước trái cây."
+    },
+    {
+        "word": "暖房",
+        "reading": "だんぼう",
+        "meaning": "máy sưởi",
+        "meaningJa": "部屋を暖かくする設備",
+        "example": "暖房をつけます。",
+        "exampleMeaning": "Tôi bật máy sưởi."
+    },
+    {
+        "word": "冷房",
+        "reading": "れいぼう",
+        "meaning": "điều hòa",
+        "meaningJa": "部屋を涼しくする設備",
+        "example": "冷房を使います。",
+        "exampleMeaning": "Tôi dùng điều hòa."
+    },
+    {
+        "word": "温度",
+        "reading": "おんど",
+        "meaning": "nhiệt độ",
+        "meaningJa": "暑さや寒さの度合い",
+        "example": "温度を測ります。",
+        "exampleMeaning": "Tôi đo nhiệt độ."
+    },
+    {
+        "word": "気温",
+        "reading": "きおん",
+        "meaning": "nhiệt độ không khí",
+        "meaningJa": "外の温度",
+        "example": "今日の気温は三十度です。",
+        "exampleMeaning": "Nhiệt độ hôm nay là 30 độ."
+    },
+    {
+        "word": "風",
+        "reading": "かぜ",
+        "meaning": "gió",
+        "meaningJa": "空気の流れ",
+        "example": "風が強いです。",
+        "exampleMeaning": "Gió mạnh."
+    },
+    {
+        "word": "太陽",
+        "reading": "たいよう",
+        "meaning": "mặt trời",
+        "meaningJa": "地球を照らす星",
+        "example": "太陽が出ています。",
+        "exampleMeaning": "Mặt trời đang chiếu sáng."
+    },
+    {
+        "word": "星",
+        "reading": "ほし",
+        "meaning": "ngôi sao",
+        "meaningJa": "夜空に見える光",
+        "example": "星がきれいです。",
+        "exampleMeaning": "Những ngôi sao rất đẹp."
+    },
+    {
+        "word": "月",
+        "reading": "つき",
+        "meaning": "mặt trăng",
+        "meaningJa": "夜空に見える天体",
+        "example": "月が明るいです。",
+        "exampleMeaning": "Mặt trăng sáng."
+    },
+    {
+        "word": "空",
+        "reading": "そら",
+        "meaning": "bầu trời",
+        "meaningJa": "頭の上の広い空間",
+        "example": "空が青いです。",
+        "exampleMeaning": "Bầu trời xanh."
+    },
+    {
+        "word": "雲",
+        "reading": "くも",
+        "meaning": "đám mây",
+        "meaningJa": "空に浮かぶ水蒸気",
+        "example": "雲が多いです。",
+        "exampleMeaning": "Có nhiều mây."
+    },
+    {
+        "word": "天気予報",
+        "reading": "てんきよほう",
+        "meaning": "dự báo thời tiết",
+        "meaningJa": "天気の予想",
+        "example": "天気予報を見ます。",
+        "exampleMeaning": "Tôi xem dự báo thời tiết."
+    },
+    {
+        "word": "季節",
+        "reading": "きせつ",
+        "meaning": "mùa",
+        "meaningJa": "春夏秋冬",
+        "example": "秋は好きな季節です。",
+        "exampleMeaning": "Mùa thu là mùa tôi thích."
+    }
+]

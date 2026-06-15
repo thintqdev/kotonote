@@ -9,6 +9,7 @@ import {
 import { JLPT_BY_TIER } from '../../constants/membershipPlans.js';
 import { patchAdminUserMembership } from '../../services/adminMembershipService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import '../../styles/adminModalLayout.css';
 
 function toDatetimeLocalValue(iso) {
 	if (!iso) return '';
@@ -111,7 +112,7 @@ export default function AdminMembershipEditModal({
 				</div>
 
 				<form onSubmit={handleSubmit}>
-					<div className="admin-grammar-modal-body">
+					<div className="admin-grammar-modal-body admin-grammar-modal-body--tight-foot">
 						<p className="admin-subs-modal-user">
 							<strong>{user.name}</strong>
 							<br />
@@ -196,7 +197,7 @@ export default function AdminMembershipEditModal({
 						</p>
 					</div>
 
-					<div className="admin-grammar-modal-actions">
+					<div className="admin-grammar-modal-actions admin-grammar-modal-actions--foot">
 						<button
 							type="button"
 							className="admin-grammar-btn admin-grammar-btn--muted"

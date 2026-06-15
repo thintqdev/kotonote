@@ -23,12 +23,33 @@
   /* Càng nhỏ tỉ lệ (vd. 2.8/1) = khung càng “thấp”, cắt trên/dưới mạnh hơn — thử 2.5–3.5 */
   --logo-crop-aspect: 3.25 / 1;
 
-  /* Một family web chính (JP + Latin/VN); fallback hệ thống cho macOS/JP */
-  --font-ui: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Noto Sans JP',
-    system-ui, sans-serif;
-  /* Giữ token cũ — trùng UI để không nhồi nhiều font trên một trang */
-  --font-hand: var(--font-ui);
-  --font-serif-jp: var(--font-ui);
+  /*
+   * Font theo ngôn ngữ (i18n.js → html[lang]):
+   * VI — body: Plus Jakarta Sans · tiêu đề: Fraunces
+   * JA — Noto Serif JP (kiểu minchō gần đề JLPT in) + fallback Yu/Hiragino/MS Mincho hệ thống
+   */
+  --font-vi: 'Plus Jakarta Sans', 'Noto Serif JP', 'Segoe UI', system-ui, sans-serif;
+  --font-vi-display: 'Fraunces', 'Plus Jakarta Sans', Georgia, serif;
+  --font-ja: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', 'MS Mincho',
+    serif;
+
+  /* Mặc định trước khi i18n gán lang (fallbackLng: vi) */
+  --font-ui: var(--font-vi);
+  --font-hand: var(--font-vi-display);
+  --font-serif-jp: var(--font-ja);
+  --font-jp: var(--font-ja);
+}
+
+html[lang='vi'] {
+  --font-ui: var(--font-vi);
+  --font-hand: var(--font-vi-display);
+  --font-serif-jp: var(--font-ja);
+}
+
+html[lang='ja'] {
+  --font-ui: var(--font-ja);
+  --font-hand: var(--font-ja);
+  --font-serif-jp: var(--font-ja);
 }
 
 body {

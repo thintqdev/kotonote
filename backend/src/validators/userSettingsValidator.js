@@ -23,6 +23,9 @@ const dailySubjectGoalsSchema = Joi.object({
 const notificationsSchema = Joi.object({
 	emailDigest: Joi.boolean(),
 	dailyStudyReminder: Joi.boolean(),
+	streakCheckInReminder: Joi.boolean(),
+	dailyGoalNudge: Joi.boolean(),
+	examCountdownReminder: Joi.boolean(),
 	weeklyReport: Joi.boolean(),
 });
 

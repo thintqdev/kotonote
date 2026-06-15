@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { useUserNotificationSocket } from "../hooks/useUserNotificationSocket.js";
 import {
@@ -22,7 +23,15 @@ const RECENT_LIMIT = 5;
 
 export function UserNotificationProvider({ children }) {
   const { user } = useAuth();
-  const { socket } = useUserNotificationSocket(Boolean(user));
+  const location = useLocation();
+  const [notificationSocketActive, setNotificationSocketActive] =
+    useState(false);
+
+  const onNotificationsRoute = location.pathname.startsWith("/notifications");
+  const socketEnabled =
+    Boolean(user) && (onNotificationsRoute || notificationSocketActive);
+
+  const { socket } = useUserNotificationSocket(socketEnabled);
   const [unreadCount, setUnreadCount] = useState(0);
   const [recentNotifications, setRecentNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -106,8 +115,16 @@ export function UserNotificationProvider({ children }) {
       refresh,
       markOneRead,
       inboxVersion,
+      setNotificationSocketActive,
     }),
-    [unreadCount, recentNotifications, loading, refresh, markOneRead, inboxVersion],
+    [
+      unreadCount,
+      recentNotifications,
+      loading,
+      refresh,
+      markOneRead,
+      inboxVersion,
+    ],
   );
 
   return (

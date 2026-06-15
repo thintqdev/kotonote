@@ -54,6 +54,11 @@ export default function ListeningExercisePage() {
         if (cancelled) return;
         if (item) {
           setDetail(item);
+          const pick = {};
+          for (const row of item.progress?.questionAnswers ?? []) {
+            pick[row.questionIndex] = row.choiceIndex;
+          }
+          setQuizPick(pick);
         } else {
           setDetail(null);
           setError("Không tìm thấy bài nghe.");
@@ -125,10 +130,18 @@ export default function ListeningExercisePage() {
   };
 
   const handlePick = useCallback(
-    (qi, ci) => {
+    async (qi, ci) => {
+      if (!id) return;
       setQuizPick((prev) => ({ ...prev, [qi]: ci }));
+      try {
+        await listeningService.saveProgress(id, {
+          recordAnswer: { questionIndex: qi, choiceIndex: ci },
+        });
+      } catch {
+        /* giữ lựa chọn local */
+      }
     },
-    [],
+    [id],
   );
 
   const headerName =

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useRandomQuoteLine } from "../../hooks/useRandomQuoteLine.js";
@@ -34,4 +35,4 @@ WelcomeBanner.propTypes = {
   userName: PropTypes.string.isRequired,
 };
 
-export default WelcomeBanner;
+export default memo(WelcomeBanner);

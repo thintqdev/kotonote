@@ -3,9 +3,10 @@ import * as vocabularyService from '../services/vocabularyService.js';
 import { apiSuccess } from '../utils/response.js';
 import { VOCABULARY } from '../constants/messages.js';
 import {
-	assertDeckVisibleToUser,
+	assertDeckReadable,
 	buildDeckListFilters,
 } from '../utils/userDeckAccess.js';
+import { isUserOwnedDeck } from '../utils/userVocabularyDeck.js';
 import {
 	annotateWithJlptLock,
 	assertJlptUnlockedForRequest,
@@ -50,6 +51,7 @@ export const getAllDecks = asyncHandler(async (req, res) => {
 	if (!isAdminRequest(req) && req.user?._id) {
 		annotated = await annotateVocabDeckLessonUnlock(req.user._id, annotated);
 	}
+	// annotate only applies to official decks (see util)
 
 	return apiSuccess(
 		res,
@@ -63,9 +65,9 @@ export const getDeckById = asyncHandler(async (req, res) => {
 	const { id } = req.params;
 
 	const deck = await vocabularyService.getDeckById(id);
-	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertDeckReadable(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 	assertJlptUnlockedForRequest(req, jlptFromDeck(deck));
-	if (!isAdminRequest(req)) {
+	if (!isAdminRequest(req) && !isUserOwnedDeck(deck)) {
 		await assertVocabDeckLessonUnlocked(req.user._id, id, {
 			lessonNo: req.query.lessonNo,
 		});
@@ -83,9 +85,9 @@ export const getDeckWithVocabulary = asyncHandler(async (req, res) => {
 	const { id } = req.params;
 
 	const result = await vocabularyService.getDeckWithVocabulary(id);
-	assertDeckVisibleToUser(req, result.deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertDeckReadable(req, result.deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 	assertJlptUnlockedForRequest(req, jlptFromDeck(result.deck));
-	if (!isAdminRequest(req)) {
+	if (!isAdminRequest(req) && !isUserOwnedDeck(result.deck)) {
 		await assertVocabDeckLessonUnlocked(req.user._id, id, {
 			lessonNo: req.query.lessonNo,
 		});
@@ -129,9 +131,9 @@ export const getVocabularyByDeck = asyncHandler(async (req, res) => {
 	const { deckId } = req.params;
 
 	const deck = await vocabularyService.getDeckById(deckId);
-	assertDeckVisibleToUser(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
+	assertDeckReadable(req, deck, { messageCode: VOCABULARY.DECK_NOT_FOUND });
 	assertJlptUnlockedForRequest(req, jlptFromDeck(deck));
-	if (!isAdminRequest(req)) {
+	if (!isAdminRequest(req) && !isUserOwnedDeck(deck)) {
 		await assertVocabDeckLessonUnlocked(req.user._id, deckId, {
 			lessonNo: req.query.lessonNo,
 		});

@@ -1,0 +1,202 @@
+[
+    {
+        "word": "数えます",
+        "reading": "かぞえます",
+        "meaning": "đếm",
+        "meaningJa": "数を調べる",
+        "example": "人数を数えます。",
+        "exampleMeaning": "Tôi đếm số người."
+    },
+    {
+        "word": "測ります",
+        "reading": "はかります",
+        "meaning": "đo",
+        "meaningJa": "長さや重さなどを調べる",
+        "example": "体温を測ります。",
+        "exampleMeaning": "Tôi đo nhiệt độ cơ thể."
+    },
+    {
+        "word": "確かめます",
+        "reading": "たしかめます",
+        "meaning": "xác nhận",
+        "meaningJa": "正しいかどうか調べる",
+        "example": "予定を確かめます。",
+        "exampleMeaning": "Tôi xác nhận lịch trình."
+    },
+    {
+        "word": "合います",
+        "reading": "あいます",
+        "meaning": "phù hợp",
+        "meaningJa": "ぴったりである",
+        "example": "この靴は足に合います。",
+        "exampleMeaning": "Đôi giày này vừa chân."
+    },
+    {
+        "word": "出発します",
+        "reading": "しゅっぱつします",
+        "meaning": "khởi hành",
+        "meaningJa": "出かける",
+        "example": "朝8時に出発します。",
+        "exampleMeaning": "Tôi khởi hành lúc 8 giờ sáng."
+    },
+    {
+        "word": "到着します",
+        "reading": "とうちゃくします",
+        "meaning": "đến nơi",
+        "meaningJa": "目的地に着く",
+        "example": "空港に到着しました。",
+        "exampleMeaning": "Tôi đã đến sân bay."
+    },
+    {
+        "word": "酔います",
+        "reading": "よいます",
+        "meaning": "say",
+        "meaningJa": "酒や乗り物で気分が悪くなる",
+        "example": "車に酔いました。",
+        "exampleMeaning": "Tôi bị say xe."
+    },
+    {
+        "word": "危険",
+        "reading": "きけん",
+        "meaning": "nguy hiểm",
+        "meaningJa": "危ないこと",
+        "example": "ここは危険です。",
+        "exampleMeaning": "Chỗ này nguy hiểm."
+    },
+    {
+        "word": "必要",
+        "reading": "ひつよう",
+        "meaning": "cần thiết",
+        "meaningJa": "なくてはならない",
+        "example": "パスポートが必要です。",
+        "exampleMeaning": "Cần có hộ chiếu."
+    },
+    {
+        "word": "宇宙",
+        "reading": "うちゅう",
+        "meaning": "vũ trụ",
+        "meaningJa": "地球の外の世界",
+        "example": "宇宙に興味があります。",
+        "exampleMeaning": "Tôi hứng thú với vũ trụ."
+    },
+    {
+        "word": "地球",
+        "reading": "ちきゅう",
+        "meaning": "Trái Đất",
+        "meaningJa": "私たちが住んでいる星",
+        "example": "地球は青い星です。",
+        "exampleMeaning": "Trái Đất là hành tinh xanh."
+    },
+    {
+        "word": "宇宙船",
+        "reading": "うちゅうせん",
+        "meaning": "tàu vũ trụ",
+        "meaningJa": "宇宙へ行く乗り物",
+        "example": "宇宙船が飛び立ちました。",
+        "exampleMeaning": "Tàu vũ trụ đã cất cánh."
+    },
+    {
+        "word": "運転",
+        "reading": "うんてん",
+        "meaning": "lái xe",
+        "meaningJa": "車などを動かすこと",
+        "example": "運転に気をつけます。",
+        "exampleMeaning": "Tôi chú ý khi lái xe."
+    },
+    {
+        "word": "方法",
+        "reading": "ほうほう",
+        "meaning": "phương pháp",
+        "meaningJa": "やり方",
+        "example": "勉強の方法を教えてください。",
+        "exampleMeaning": "Hãy chỉ cho tôi phương pháp học."
+    },
+    {
+        "word": "機械",
+        "reading": "きかい",
+        "meaning": "máy móc",
+        "meaningJa": "仕事をする道具",
+        "example": "新しい機械を使います。",
+        "exampleMeaning": "Tôi sử dụng máy mới."
+    },
+    {
+        "word": "発明",
+        "reading": "はつめい",
+        "meaning": "phát minh",
+        "meaningJa": "新しい物を作ること",
+        "example": "便利な発明です。",
+        "exampleMeaning": "Đó là một phát minh tiện lợi."
+    },
+    {
+        "word": "発見",
+        "reading": "はっけん",
+        "meaning": "phát hiện",
+        "meaningJa": "新しく見つけること",
+        "example": "新しい星を発見しました。",
+        "exampleMeaning": "Đã phát hiện một ngôi sao mới."
+    },
+    {
+        "word": "研究",
+        "reading": "けんきゅう",
+        "meaning": "nghiên cứu",
+        "meaningJa": "詳しく調べること",
+        "example": "日本語を研究しています。",
+        "exampleMeaning": "Tôi đang nghiên cứu tiếng Nhật."
+    },
+    {
+        "word": "成功",
+        "reading": "せいこう",
+        "meaning": "thành công",
+        "meaningJa": "うまくいくこと",
+        "example": "実験が成功しました。",
+        "exampleMeaning": "Thí nghiệm đã thành công."
+    },
+    {
+        "word": "失敗",
+        "reading": "しっぱい",
+        "meaning": "thất bại",
+        "meaningJa": "うまくいかないこと",
+        "example": "試験に失敗しました。",
+        "exampleMeaning": "Tôi đã thất bại trong kỳ thi."
+    },
+    {
+        "word": "調査",
+        "reading": "ちょうさ",
+        "meaning": "điều tra",
+        "meaningJa": "詳しく調べること",
+        "example": "原因を調査します。",
+        "exampleMeaning": "Tôi điều tra nguyên nhân."
+    },
+    {
+        "word": "技術",
+        "reading": "ぎじゅつ",
+        "meaning": "kỹ thuật",
+        "meaningJa": "専門的な能力",
+        "example": "日本の技術は高いです。",
+        "exampleMeaning": "Kỹ thuật của Nhật Bản rất cao."
+    },
+    {
+        "word": "教育",
+        "reading": "きょういく",
+        "meaning": "giáo dục",
+        "meaningJa": "教えること",
+        "example": "教育は大切です。",
+        "exampleMeaning": "Giáo dục rất quan trọng."
+    },
+    {
+        "word": "環境",
+        "reading": "かんきょう",
+        "meaning": "môi trường",
+        "meaningJa": "周りの状態",
+        "example": "環境を守りましょう。",
+        "exampleMeaning": "Hãy bảo vệ môi trường."
+    },
+    {
+        "word": "未来",
+        "reading": "みらい",
+        "meaning": "tương lai",
+        "meaningJa": "これからの時代",
+        "example": "未来について考えます。",
+        "exampleMeaning": "Tôi suy nghĩ về tương lai."
+    }
+]

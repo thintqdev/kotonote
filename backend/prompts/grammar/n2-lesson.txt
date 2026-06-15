@@ -3,7 +3,9 @@ JLPT: {{jlpt}}
 Pattern hint: {{patternHint}}
 Admin: {{customPrompt}}
 
-Cấu trúc đầy đủ như bài N3: pattern, teaser, meaning, usage, examples, ng, compare, memo, practice.
+Cấu trúc đầy đủ như N3: slug, tagIds, pattern, teaser, topicRibbon, connection, meaning, usage, usageNote, pointBubble, examples, ng, ngNote, compare, memo, practice.
+compare: rows phẳng khi so 2 mẫu; chia thể → compare.sections (I/II/III, I có nhiều dòng đuôi). tagIds + conjugation khi là bài活用.
+tagIds hợp lệ: hearsay, formal, conjecture, purpose, goal, change, conjugation, conditional, permission, obligation, passive, potential, comparison
 Giải thích sâu hơn, ví dụ văn viết hoặc hội thoại lịch sự.
 
 Chỉ JSON object.

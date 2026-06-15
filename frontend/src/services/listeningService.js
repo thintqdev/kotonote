@@ -19,6 +19,15 @@ const listeningService = {
     const body = await api.get(`/listening/${id}`);
     return body.data?.item ?? body.data ?? null;
   },
+
+  /**
+   * @param {string} id
+   * @param {{ status?: string, recordAnswer?: { questionIndex: number, choiceIndex: number } }} payload
+   */
+  saveProgress: async (id, payload) => {
+    const body = await api.put(`/listening/${encodeURIComponent(id)}/progress`, payload);
+    return body.data?.progress ?? null;
+  },
 };
 
 export default listeningService;

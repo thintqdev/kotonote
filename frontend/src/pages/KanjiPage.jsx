@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
-import { Breadcrumb } from "../components/common";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildKanjiLessonQuizQuestions,
@@ -88,6 +87,7 @@ export default function KanjiPage() {
     () => (searchParams.get("deckId") || "").trim(),
     [searchParams],
   );
+  const isUserDeck = searchParams.get("userDeck") === "1";
   const isLessonMode = Boolean(
     lessonNoFromQuery != null && lessonJlpt.length > 0,
   );
@@ -147,11 +147,13 @@ export default function KanjiPage() {
   );
 
   const lessonUnlocked = useMemo(
-    () =>
-      isLessonMode && lessonNoFromQuery
+    () => {
+      if (isUserDeck) return true;
+      return isLessonMode && lessonNoFromQuery
         ? isDeckLessonUnlocked(sortedDecks, merged, lessonNoFromQuery)
-        : false,
-    [merged, sortedDecks, isLessonMode, lessonNoFromQuery],
+        : false;
+    },
+    [isUserDeck, merged, sortedDecks, isLessonMode, lessonNoFromQuery],
   );
 
   const lessonItemsStable = useMemo(() => {
@@ -384,12 +386,28 @@ export default function KanjiPage() {
     );
   }
 
-  if (!lessonUnlocked) {
+  if (!lessonUnlocked && !isUserDeck) {
     return <Navigate to="/kanji/browse" replace />;
   }
 
-  if (lessonItemsStable.length === 0) {
+  if (lessonItemsStable.length === 0 && !isUserDeck) {
     return <Navigate to="/kanji/browse" replace />;
+  }
+
+  if (isUserDeck && lessonItemsStable.length === 0 && !loading) {
+    return (
+      <Layout userName={headerName} streakDays={mockStreak.days}>
+        <p className="vocab-empty">{t("kanjiPage.userDeckStudyEmpty")}</p>
+        <p>
+          <Link
+            to={`/kanji/mine/${encodeURIComponent(deckId || effectiveDeckId)}/edit`}
+            className="admin-grammar-btn admin-grammar-btn--primary"
+          >
+            {t("kanjiPage.userDeckEdit")}
+          </Link>
+        </p>
+      </Layout>
+    );
   }
 
   return (
@@ -398,21 +416,7 @@ export default function KanjiPage() {
       streakDays={mockStreak.days}
       pageClassName="vocab-dash"
     >
-      <div className="vocab-study-breadcrumb-row vocab-study-breadcrumb-row--solo">
-        <Breadcrumb
-          items={[
-            { label: t("breadcrumb.home"), to: "/", end: true },
-            { label: t("breadcrumb.kanji"), to: "/kanji/browse" },
-            {
-              label: t("kanjiStudyPage.lessonBreadcrumb", {
-                n: lessonNoFromQuery,
-                jlpt: lessonJlpt,
-              }),
-            },
-          ]}
-        />
-      </div>
-
+      <div className="vocab-study-lesson-shell">
       <div className="vocab-study-lesson-ribbon" role="status">
         <p className="vocab-study-lesson-ribbon-main">
           {t("kanjiStudyPage.lessonRibbon", {
@@ -486,6 +490,7 @@ export default function KanjiPage() {
           {t("kanjiStudyPage.tabWrite")}
         </button>
       </div>
+      </div>
 
       <article
         className="vocab-sheet vocab-scope vocab-notebook vocab-study-scope vocab-study-scrap-scope"
@@ -493,15 +498,24 @@ export default function KanjiPage() {
       >
         {lessonTab === "detail" ? (
           <div className="vocab-lesson-detail-board kanji-detail-board">
-            <h1
-              id="kanji-study-title"
-              className="scrap-flash-title vocab-lesson-panel-title"
-            >
-              {t("kanjiStudyPage.lessonDetailTitle", {
-                n: lessonNoFromQuery,
-                jlpt: lessonJlpt,
-              })}
-            </h1>
+            <header className="vocab-lesson-detail-head">
+              <h1
+                id="kanji-study-title"
+                className="scrap-flash-title vocab-lesson-panel-title"
+              >
+                {t("kanjiStudyPage.lessonDetailTitle", {
+                  n: lessonNoFromQuery,
+                  jlpt: lessonJlpt,
+                })}
+              </h1>
+              {lessonItemsStable.length > 0 ? (
+                <p className="vocab-lesson-detail-lead">
+                  {t("kanjiStudyPage.lessonDetailLead", {
+                    n: lessonItemsStable.length,
+                  })}
+                </p>
+              ) : null}
+            </header>
             {lessonItemsStable.length === 0 ? (
               <p className="vocab-empty" role="status">
                 {t("kanjiStudyPage.emptyLesson")}
@@ -725,9 +739,6 @@ export default function KanjiPage() {
                 {flashRevealed ? (
                   <div className="vocab-study-rate-strip vocab-study-rate-strip--lesson">
                     <p className="vocab-study-rate-hint">
-                      <span className="vocab-study-rate-hint-icon" aria-hidden>
-                        💡
-                      </span>
                       {t("kanjiStudyPage.rateHint")}
                     </p>
                     <div
@@ -740,9 +751,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--rose vocab-cta-reset"
                         onClick={handleFlashReviewAgain}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          😢
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateForgotTitle")}
                         </span>
@@ -755,9 +763,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--honey vocab-cta-reset"
                         onClick={handleFlashReviewSoon}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          🤔
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateSoonTitle")}
                         </span>
@@ -770,9 +775,6 @@ export default function KanjiPage() {
                         className="vocab-study-rate-tile vocab-study-rate-tile--mint vocab-cta-reset"
                         onClick={handleFlashKnow}
                       >
-                        <span className="vocab-study-rate-emoji" aria-hidden>
-                          😎
-                        </span>
                         <span className="vocab-study-rate-tile-title">
                           {t("kanjiStudyPage.rateKnowTitle")}
                         </span>
@@ -877,84 +879,118 @@ export default function KanjiPage() {
             />
           </div>
         ) : (
-          <div className="vocab-lesson-quiz-board kanji-write-board">
-            <h1
-              id="kanji-study-title"
-              className="scrap-flash-title vocab-lesson-panel-title"
-            >
-              {t("kanjiStudyPage.writeBoardTitle")}
-            </h1>
-            <p className="vocab-lesson-quiz-intro">
-              {t("kanjiStudyPage.writeIntro")}
-            </p>
+          <div className="vocab-lesson-detail-board kanji-write-board">
+            <header className="vocab-lesson-detail-head kanji-write-head">
+              <h1
+                id="kanji-study-title"
+                className="scrap-flash-title vocab-lesson-panel-title"
+              >
+                {t("kanjiStudyPage.writeBoardTitle")}
+              </h1>
+              <p className="vocab-lesson-detail-lead">
+                {t("kanjiStudyPage.writeIntro")}
+              </p>
+            </header>
             {writeCurrent ? (
               <div className="kanji-write-wrap">
-                <div className="kanji-write-status">
-                  <span className="kanji-write-char" lang="ja">
-                    {writeCurrent.char}
-                  </span>
-                  <span className="kanji-write-progress">
-                    {t("kanjiStudyPage.writeProgress", {
-                      current: writeIndex + 1,
-                      total: writeTotal,
-                    })}
-                  </span>
-                </div>
-
-                <div className="kanji-write-stroke-stage">
-                  <KanjiStrokeAnimation
-                    char={writeCurrent.char}
-                    replayTick={writeReplayTick}
-                    fallbackHint={t("kanjiStudyPage.strokeFallback")}
-                  />
-                </div>
-
-                <div className="kanji-write-actions">
-                  <button
-                    type="button"
-                    className="vocab-study-nav-pill vocab-cta-reset"
-                    onClick={() => setWriteReplayTick((v) => v + 1)}
+                <section
+                  className="kanji-write-stage"
+                  aria-labelledby="kanji-write-stage-title"
+                >
+                  <h2
+                    id="kanji-write-stage-title"
+                    className="kanji-write-section-label"
                   >
-                    {t("kanjiStudyPage.replayStroke")}
-                  </button>
-                  <button
-                    type="button"
-                    className="vocab-study-nav-pill vocab-cta-reset"
-                    onClick={() => setWriteClearTick((v) => v + 1)}
-                  >
-                    {t("kanjiStudyPage.clearPractice")}
-                  </button>
-                </div>
+                    {t("kanjiStudyPage.writeStrokeTitle")}
+                  </h2>
+                  <div className="kanji-write-stage-card">
+                    <div className="kanji-write-status">
+                      <div className="kanji-write-status-main">
+                        <span className="kanji-write-char" lang="ja">
+                          {writeCurrent.char}
+                        </span>
+                        {writeCurrent.hanViet ? (
+                          <span className="kanji-write-hv" lang="vi">
+                            {writeCurrent.hanViet}
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
 
-                <div className="kanji-write-grid" role="group" aria-label={t("kanjiStudyPage.writePadsAria")}>
-                  <div className="kanji-write-sample-wrap">
-                    <span
-                      className="kanji-write-sample"
-                      lang="ja"
-                      aria-label={t("kanjiStudyPage.writeSampleAria", {
-                        char: writeCurrent.char,
-                      })}
-                    >
-                      {writeCurrent.char}
-                    </span>
+                    <div className="kanji-write-stroke-stage">
+                      <KanjiStrokeAnimation
+                        char={writeCurrent.char}
+                        replayTick={writeReplayTick}
+                        fallbackHint={t("kanjiStudyPage.strokeFallback")}
+                      />
+                    </div>
+
+                    <div className="kanji-write-actions">
+                      <button
+                        type="button"
+                        className="vocab-study-nav-pill vocab-cta-reset"
+                        onClick={() => setWriteReplayTick((v) => v + 1)}
+                      >
+                        {t("kanjiStudyPage.replayStroke")}
+                      </button>
+                      <button
+                        type="button"
+                        className="vocab-study-nav-pill vocab-cta-reset"
+                        onClick={() => setWriteClearTick((v) => v + 1)}
+                      >
+                        {t("kanjiStudyPage.clearPractice")}
+                      </button>
+                    </div>
                   </div>
-                  {[0, 1, 2].map((i) => (
-                    <AlphaPracticePad
-                      key={`${writeCurrent.char}-${i}`}
-                      guideText={writeCurrent.char}
-                      variant={i === 0 ? "bold" : "trace"}
-                      clearTick={writeClearTick}
-                      padIndex={i}
-                      ariaLabel={t("kanjiStudyPage.writePadAria", {
-                        n: i + 1,
-                        char: writeCurrent.char,
-                      })}
-                      showGuide
-                    />
-                  ))}
-                </div>
+                </section>
 
-                <div className="vocab-study-foot-nav">
+                <section
+                  className="kanji-write-practice"
+                  aria-labelledby="kanji-write-practice-title"
+                >
+                  <h2
+                    id="kanji-write-practice-title"
+                    className="kanji-write-section-label"
+                  >
+                    {t("kanjiStudyPage.writePracticeTitle")}
+                  </h2>
+                  <div
+                    className="kanji-write-grid"
+                    role="group"
+                    aria-label={t("kanjiStudyPage.writePadsAria")}
+                  >
+                    <div className="kanji-write-sample-wrap">
+                      <span
+                        className="kanji-write-sample"
+                        lang="ja"
+                        aria-label={t("kanjiStudyPage.writeSampleAria", {
+                          char: writeCurrent.char,
+                        })}
+                      >
+                        {writeCurrent.char}
+                      </span>
+                    </div>
+                    {[0, 1, 2].map((i) => (
+                      <AlphaPracticePad
+                        key={`${writeCurrent.char}-${i}`}
+                        guideText={writeCurrent.char}
+                        variant={i === 0 ? "bold" : "trace"}
+                        clearTick={writeClearTick}
+                        padIndex={i}
+                        ariaLabel={t("kanjiStudyPage.writePadAria", {
+                          n: i + 1,
+                          char: writeCurrent.char,
+                        })}
+                        showGuide
+                      />
+                    ))}
+                  </div>
+                </section>
+
+                <nav
+                  className="kanji-write-foot vocab-study-foot-nav"
+                  aria-label={t("kanjiStudyPage.writeNavAria")}
+                >
                   <button
                     type="button"
                     className="vocab-study-nav-pill vocab-cta-reset"
@@ -977,7 +1013,7 @@ export default function KanjiPage() {
                   >
                     {t("kanjiStudyPage.navNext")} →
                   </button>
-                </div>
+                </nav>
               </div>
             ) : (
               <p className="vocab-empty" role="status">

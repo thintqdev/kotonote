@@ -1,0 +1,202 @@
+[
+    {
+        "word": "泣きます",
+        "reading": "なきます",
+        "meaning": "khóc",
+        "meaningJa": "涙を流す",
+        "example": "子どもが泣いています。",
+        "exampleMeaning": "Đứa trẻ đang khóc."
+    },
+    {
+        "word": "笑います",
+        "reading": "わらいます",
+        "meaning": "cười",
+        "meaningJa": "楽しくて笑顔になる",
+        "example": "みんなで笑いました。",
+        "exampleMeaning": "Mọi người đã cùng cười."
+    },
+    {
+        "word": "乾きます",
+        "reading": "かわきます",
+        "meaning": "khô",
+        "meaningJa": "水分がなくなる",
+        "example": "洗濯物が乾きました。",
+        "exampleMeaning": "Quần áo giặt đã khô."
+    },
+    {
+        "word": "滑ります",
+        "reading": "すべります",
+        "meaning": "trượt",
+        "meaningJa": "足元が安定しない",
+        "example": "雨の日は滑りやすいです。",
+        "exampleMeaning": "Ngày mưa rất dễ trượt."
+    },
+    {
+        "word": "起きます",
+        "reading": "おきます",
+        "meaning": "xảy ra",
+        "meaningJa": "事件などが発生する",
+        "example": "事故が起きました。",
+        "exampleMeaning": "Đã xảy ra tai nạn."
+    },
+    {
+        "word": "調節します",
+        "reading": "ちょうせつします",
+        "meaning": "điều chỉnh",
+        "meaningJa": "ちょうどよくする",
+        "example": "エアコンを調節します。",
+        "exampleMeaning": "Tôi điều chỉnh điều hòa."
+    },
+    {
+        "word": "安全",
+        "reading": "あんぜん",
+        "meaning": "an toàn",
+        "meaningJa": "危険がない",
+        "example": "ここは安全です。",
+        "exampleMeaning": "Ở đây an toàn."
+    },
+    {
+        "word": "危険",
+        "reading": "きけん",
+        "meaning": "nguy hiểm",
+        "meaningJa": "危ないこと",
+        "example": "その道は危険です。",
+        "exampleMeaning": "Con đường đó nguy hiểm."
+    },
+    {
+        "word": "丁寧",
+        "reading": "ていねい",
+        "meaning": "lịch sự, cẩn thận",
+        "meaningJa": "礼儀正しい",
+        "example": "丁寧に説明してくださいました。",
+        "exampleMeaning": "Ngài đã giải thích rất lịch sự."
+    },
+    {
+        "word": "乱暴",
+        "reading": "らんぼう",
+        "meaning": "thô bạo",
+        "meaningJa": "荒っぽい",
+        "example": "乱暴な運転は危険です。",
+        "exampleMeaning": "Lái xe thô bạo rất nguy hiểm."
+    },
+    {
+        "word": "正しい",
+        "reading": "ただしい",
+        "meaning": "đúng",
+        "meaningJa": "間違っていない",
+        "example": "正しい答えを選びました。",
+        "exampleMeaning": "Tôi đã chọn đáp án đúng."
+    },
+    {
+        "word": "珍しい",
+        "reading": "めずらしい",
+        "meaning": "hiếm",
+        "meaningJa": "あまり見ない",
+        "example": "珍しい鳥を見ました。",
+        "exampleMeaning": "Tôi đã nhìn thấy một loài chim hiếm."
+    },
+    {
+        "word": "真面目",
+        "reading": "まじめ",
+        "meaning": "nghiêm túc",
+        "meaningJa": "誠実である",
+        "example": "彼は真面目な人です。",
+        "exampleMeaning": "Anh ấy là người nghiêm túc."
+    },
+    {
+        "word": "熱心",
+        "reading": "ねっしん",
+        "meaning": "nhiệt tình",
+        "meaningJa": "一生懸命である",
+        "example": "熱心に勉強しています。",
+        "exampleMeaning": "Tôi đang học rất chăm chỉ."
+    },
+    {
+        "word": "十分",
+        "reading": "じゅうぶん",
+        "meaning": "đầy đủ",
+        "meaningJa": "足りている",
+        "example": "時間は十分あります。",
+        "exampleMeaning": "Có đủ thời gian."
+    },
+    {
+        "word": "自由",
+        "reading": "じゆう",
+        "meaning": "tự do",
+        "meaningJa": "好きなようにできる",
+        "example": "自由に使ってください。",
+        "exampleMeaning": "Xin cứ tự do sử dụng."
+    },
+    {
+        "word": "真剣",
+        "reading": "しんけん",
+        "meaning": "nghiêm túc",
+        "meaningJa": "本気である",
+        "example": "真剣に考えています。",
+        "exampleMeaning": "Tôi đang suy nghĩ nghiêm túc."
+    },
+    {
+        "word": "気分",
+        "reading": "きぶん",
+        "meaning": "tâm trạng",
+        "meaningJa": "心の状態",
+        "example": "今日は気分がいいです。",
+        "exampleMeaning": "Hôm nay tâm trạng tôi rất tốt."
+    },
+    {
+        "word": "気持ち",
+        "reading": "きもち",
+        "meaning": "cảm xúc",
+        "meaningJa": "心の感じ",
+        "example": "気持ちが分かります。",
+        "exampleMeaning": "Tôi hiểu cảm xúc đó."
+    },
+    {
+        "word": "習慣",
+        "reading": "しゅうかん",
+        "meaning": "thói quen",
+        "meaningJa": "毎日続けること",
+        "example": "早起きの習慣があります。",
+        "exampleMeaning": "Tôi có thói quen dậy sớm."
+    },
+    {
+        "word": "生活",
+        "reading": "せいかつ",
+        "meaning": "cuộc sống",
+        "meaningJa": "毎日の暮らし",
+        "example": "日本で生活しています。",
+        "exampleMeaning": "Tôi đang sống ở Nhật."
+    },
+    {
+        "word": "健康",
+        "reading": "けんこう",
+        "meaning": "sức khỏe",
+        "meaningJa": "体が元気であること",
+        "example": "健康に気をつけています。",
+        "exampleMeaning": "Tôi chú ý đến sức khỏe."
+    },
+    {
+        "word": "病気",
+        "reading": "びょうき",
+        "meaning": "bệnh",
+        "meaningJa": "体の具合が悪い",
+        "example": "病気で休みました。",
+        "exampleMeaning": "Tôi nghỉ vì bị bệnh."
+    },
+    {
+        "word": "経験",
+        "reading": "けいけん",
+        "meaning": "kinh nghiệm",
+        "meaningJa": "実際にしたこと",
+        "example": "いい経験になりました。",
+        "exampleMeaning": "Đó là một kinh nghiệm tốt."
+    },
+    {
+        "word": "性格",
+        "reading": "せいかく",
+        "meaning": "tính cách",
+        "meaningJa": "人の特徴",
+        "example": "彼は明るい性格です。",
+        "exampleMeaning": "Anh ấy có tính cách vui vẻ."
+    }
+]

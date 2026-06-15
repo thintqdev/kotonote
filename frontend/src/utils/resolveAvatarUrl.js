@@ -24,3 +24,15 @@ export function resolvePublicMediaUrl(value) {
 
 /** Alias — avatar user lưu trên server dạng path hoặc URL tuyệt đối */
 export const resolveAvatarUrl = resolvePublicMediaUrl;
+
+/** Có thể hiển thị làm src ảnh đại diện (path, URL, data URL). */
+export function isResolvableAvatar(value) {
+	const t = String(value ?? '').trim();
+	if (!t) return false;
+	return (
+		t.startsWith('http://') ||
+		t.startsWith('https://') ||
+		t.startsWith('data:image/') ||
+		t.startsWith('/')
+	);
+}

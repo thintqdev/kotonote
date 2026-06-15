@@ -1,0 +1,202 @@
+[
+    {
+        "word": "答えます",
+        "reading": "こたえます",
+        "meaning": "trả lời",
+        "meaningJa": "質問に返事をする",
+        "example": "先生の質問に答えました。",
+        "exampleMeaning": "Tôi đã trả lời câu hỏi của giáo viên."
+    },
+    {
+        "word": "倒れます",
+        "reading": "たおれます",
+        "meaning": "ngã, đổ, ngất",
+        "meaningJa": "立っていたものが横になる",
+        "example": "台風で木が倒れました。",
+        "exampleMeaning": "Cây đã đổ do bão."
+    },
+    {
+        "word": "焼けます",
+        "reading": "やけます",
+        "meaning": "được nướng, bị cháy",
+        "meaningJa": "火で焼けた状態になる",
+        "example": "パンが焼けました。",
+        "exampleMeaning": "Bánh mì đã được nướng xong."
+    },
+    {
+        "word": "通ります",
+        "reading": "とおります",
+        "meaning": "đi qua",
+        "meaningJa": "ある場所を通過する",
+        "example": "毎日この道を通ります。",
+        "exampleMeaning": "Hằng ngày tôi đi qua con đường này."
+    },
+    {
+        "word": "死にます",
+        "reading": "しにます",
+        "meaning": "chết",
+        "meaningJa": "命がなくなる",
+        "example": "魚が死んでしまいました。",
+        "exampleMeaning": "Con cá đã chết mất rồi."
+    },
+    {
+        "word": "びっくりします",
+        "reading": "びっくりします",
+        "meaning": "ngạc nhiên",
+        "meaningJa": "驚く",
+        "example": "大きな音にびっくりしました。",
+        "exampleMeaning": "Tôi đã giật mình vì tiếng động lớn."
+    },
+    {
+        "word": "がっかりします",
+        "reading": "がっかりします",
+        "meaning": "thất vọng",
+        "meaningJa": "期待が外れて残念に思う",
+        "example": "試験に落ちてがっかりしました。",
+        "exampleMeaning": "Tôi thất vọng vì trượt kỳ thi."
+    },
+    {
+        "word": "安心します",
+        "reading": "あんしんします",
+        "meaning": "yên tâm",
+        "meaningJa": "心配がなくなる",
+        "example": "無事だと聞いて安心しました。",
+        "exampleMeaning": "Nghe nói bình an nên tôi yên tâm."
+    },
+    {
+        "word": "遅刻します",
+        "reading": "ちこくします",
+        "meaning": "đi muộn",
+        "meaningJa": "約束の時間に遅れる",
+        "example": "会議に遅刻しました。",
+        "exampleMeaning": "Tôi đã đến muộn cuộc họp."
+    },
+    {
+        "word": "早退します",
+        "reading": "そうたいします",
+        "meaning": "về sớm",
+        "meaningJa": "予定より早く帰る",
+        "example": "気分が悪くて早退しました。",
+        "exampleMeaning": "Tôi thấy không khỏe nên đã về sớm."
+    },
+    {
+        "word": "喧嘩します",
+        "reading": "けんかします",
+        "meaning": "cãi nhau",
+        "meaningJa": "争う",
+        "example": "友達と喧嘩しました。",
+        "exampleMeaning": "Tôi đã cãi nhau với bạn."
+    },
+    {
+        "word": "離婚します",
+        "reading": "りこんします",
+        "meaning": "ly hôn",
+        "meaningJa": "結婚をやめる",
+        "example": "二人は離婚しました。",
+        "exampleMeaning": "Hai người đã ly hôn."
+    },
+    {
+        "word": "複雑",
+        "reading": "ふくざつ",
+        "meaning": "phức tạp",
+        "meaningJa": "簡単ではない",
+        "example": "この問題は複雑です。",
+        "exampleMeaning": "Vấn đề này rất phức tạp."
+    },
+    {
+        "word": "邪魔",
+        "reading": "じゃま",
+        "meaning": "cản trở, làm phiền",
+        "meaningJa": "妨げになる",
+        "example": "ここに置くと邪魔です。",
+        "exampleMeaning": "Để ở đây sẽ vướng."
+    },
+    {
+        "word": "汚い",
+        "reading": "きたない",
+        "meaning": "bẩn",
+        "meaningJa": "きれいではない",
+        "example": "部屋が汚いです。",
+        "exampleMeaning": "Căn phòng bẩn."
+    },
+    {
+        "word": "嬉しい",
+        "reading": "うれしい",
+        "meaning": "vui mừng",
+        "meaningJa": "喜んでいる",
+        "example": "合格して嬉しいです。",
+        "exampleMeaning": "Tôi vui vì đã đỗ."
+    },
+    {
+        "word": "悲しい",
+        "reading": "かなしい",
+        "meaning": "buồn",
+        "meaningJa": "つらい気持ち",
+        "example": "悲しいニュースを聞きました。",
+        "exampleMeaning": "Tôi đã nghe một tin buồn."
+    },
+    {
+        "word": "恥ずかしい",
+        "reading": "はずかしい",
+        "meaning": "xấu hổ",
+        "meaningJa": "恥を感じる",
+        "example": "みんなの前で間違えて恥ずかしかったです。",
+        "exampleMeaning": "Tôi thấy xấu hổ vì mắc lỗi trước mọi người."
+    },
+    {
+        "word": "地震",
+        "reading": "じしん",
+        "meaning": "động đất",
+        "meaningJa": "地面が揺れる自然現象",
+        "example": "昨夜地震がありました。",
+        "exampleMeaning": "Tối qua đã có động đất."
+    },
+    {
+        "word": "台風",
+        "reading": "たいふう",
+        "meaning": "bão",
+        "meaningJa": "強い風を伴う嵐",
+        "example": "台風が近づいています。",
+        "exampleMeaning": "Cơn bão đang đến gần."
+    },
+    {
+        "word": "火事",
+        "reading": "かじ",
+        "meaning": "hỏa hoạn",
+        "meaningJa": "建物などが燃える事故",
+        "example": "近くで火事がありました。",
+        "exampleMeaning": "Gần đây đã xảy ra hỏa hoạn."
+    },
+    {
+        "word": "事故",
+        "reading": "じこ",
+        "meaning": "tai nạn",
+        "meaningJa": "思いがけない出来事",
+        "example": "交通事故が起きました。",
+        "exampleMeaning": "Đã xảy ra tai nạn giao thông."
+    },
+    {
+        "word": "お見合い",
+        "reading": "おみあい",
+        "meaning": "xem mắt",
+        "meaningJa": "結婚相手を紹介されること",
+        "example": "来週お見合いをします。",
+        "exampleMeaning": "Tuần sau tôi sẽ đi xem mắt."
+    },
+    {
+        "word": "紹介",
+        "reading": "しょうかい",
+        "meaning": "giới thiệu",
+        "meaningJa": "人や物を他人に知らせること",
+        "example": "友達を紹介しました。",
+        "exampleMeaning": "Tôi đã giới thiệu người bạn của mình."
+    },
+    {
+        "word": "原因",
+        "reading": "げんいん",
+        "meaning": "nguyên nhân",
+        "meaningJa": "物事が起こる理由",
+        "example": "事故の原因を調べます。",
+        "exampleMeaning": "Tôi sẽ điều tra nguyên nhân tai nạn."
+    }
+]

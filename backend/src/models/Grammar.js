@@ -25,6 +25,16 @@ const compareRowSchema = new mongoose.Schema(
 	{ _id: false },
 );
 
+const compareSectionSchema = new mongoose.Schema(
+	{
+		id: { type: String, trim: true, default: '' },
+		title: { type: locSchema, default: () => ({}) },
+		intro: { type: locSchema, default: () => ({}) },
+		rows: { type: [compareRowSchema], default: [] },
+	},
+	{ _id: false },
+);
+
 const grammarSchema = new mongoose.Schema(
 	{
 		slug: {
@@ -73,6 +83,8 @@ const grammarSchema = new mongoose.Schema(
 			caption: { type: locSchema, default: () => ({}) },
 			colLabels: { type: [locSchema], default: [] },
 			rows: { type: [compareRowSchema], default: [] },
+			/** Bài chia thể: mỗi section (I/II/III) có nhiều dòng quy tắc con. */
+			sections: { type: [compareSectionSchema], default: [] },
 		},
 		memo: { type: locSchema, default: () => ({}) },
 		practice: {

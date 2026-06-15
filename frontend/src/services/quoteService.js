@@ -1,6 +1,11 @@
 import { QUOTES } from '../constants/apiEndpoints.js';
 import { getApiData } from '../utils/apiEnvelope.js';
+import { dedupePromise } from '../utils/dedupePromise.js';
 import api from './api.js';
+
+const QUOTE_CACHE_TTL_MS = 90_000;
+/** @type {{ data: object | null, at: number }} */
+let quoteCache = { data: null, at: 0 };
 
 /**
  * Chọn nội dung hiển thị theo ngôn ngữ UI (ưu tiên bản tương ứng, fallback bản còn lại).
@@ -25,4 +30,23 @@ export function pickQuoteLineForLanguage(quote, language) {
 export async function getRandomQuote(axiosConfig = {}) {
 	const body = await api.get(QUOTES.RANDOM, axiosConfig);
 	return getApiData(body);
+}
+
+/**
+ * Quote ngẫu nhiên dùng chung (dashboard footer, banner, daily note) — dedupe + cache ngắn.
+ * @param {import('axios').AxiosRequestConfig} [axiosConfig]
+ */
+export async function getSharedRandomQuote(axiosConfig = {}) {
+	if (axiosConfig.signal?.aborted) {
+		throw new DOMException('Aborted', 'AbortError');
+	}
+	const now = Date.now();
+	if (quoteCache.data && now - quoteCache.at < QUOTE_CACHE_TTL_MS) {
+		return quoteCache.data;
+	}
+	return dedupePromise('quotes-random', async () => {
+		const data = await getRandomQuote(axiosConfig);
+		quoteCache = { data, at: Date.now() };
+		return data;
+	});
 }

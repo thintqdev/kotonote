@@ -26,8 +26,11 @@ export const GRAMMAR_AI_GENERATE = {
 	},
 	previewLines: (item) => {
 		if (!item) return [];
+		const tags = Array.isArray(item.tagIds) ? item.tagIds.join(', ') : '';
 		return [
+			`Slug: ${item.slug ?? '—'}`,
 			`Pattern: ${item.pattern ?? ''}`,
+			`Tags: ${tags || '—'}`,
 			`Teaser: ${item.teaser?.vi ?? item.teaser?.ja ?? ''}`,
 			`Ví dụ: ${item.examples?.length ?? 0} · Luyện tập: ${item.practice?.items?.length ?? 0}`,
 		];

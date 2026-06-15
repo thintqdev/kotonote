@@ -15,6 +15,7 @@ export const AUTH = {
 /** Ngữ pháp (user đã đăng nhập) — `/api/grammar/*`, Bearer JWT */
 export const GRAMMAR = {
 	BASE: '/grammar',
+	PRACTICE_QUIZ: '/grammar/practice/quiz',
 	bySlug: (slug) => `/grammar/${encodeURIComponent(slug)}`,
 };
 
@@ -57,6 +58,8 @@ export const MEMBERSHIP = {
 		`/membership/checkout/${encodeURIComponent(checkoutId)}/receipt`,
 	confirmCheckout: (checkoutId) =>
 		`/membership/checkout/${encodeURIComponent(checkoutId)}/confirm`,
+	refundRequest: (checkoutId) =>
+		`/membership/checkout/${encodeURIComponent(checkoutId)}/refund-request`,
 };
 
 /** GET/PUT hồ sơ người đăng nhập — `/api/users/me` (alias tương thích: `/api/profile/me`) */
@@ -96,6 +99,11 @@ export const STREAK = {
 	LEADERBOARD: '/streaks/leaderboard',
 };
 
+/** Bảng xếp hạng — `/api/leaderboard` */
+export const LEADERBOARD = {
+	BASE: '/leaderboard',
+};
+
 /** Thông báo người dùng — `/api/notifications` */
 export const NOTIFICATIONS = {
 	LIST: '/notifications',
@@ -104,6 +112,29 @@ export const NOTIFICATIONS = {
 };
 
 /** Đọc deck/từ vựng (user đã đăng nhập) — `/api/vocabulary/*`, Bearer JWT */
+export const USER_VOCABULARY = {
+	DECKS: '/vocabulary/my/decks',
+	deck: (id) => `/vocabulary/my/decks/${encodeURIComponent(id)}`,
+	deckVocabulary: (id) =>
+		`/vocabulary/my/decks/${encodeURIComponent(id)}/vocabulary`,
+	deckWords: (deckId) =>
+		`/vocabulary/my/decks/${encodeURIComponent(deckId)}/words`,
+	deckImport: (deckId) =>
+		`/vocabulary/my/decks/${encodeURIComponent(deckId)}/import`,
+	word: (vocabId) => `/vocabulary/my/words/${encodeURIComponent(vocabId)}`,
+};
+
+/** Bộ Kanji riêng (Pro+) — `/api/kanji/my/*` */
+export const USER_KANJI = {
+	DECKS: '/kanji/my/decks',
+	deck: (id) => `/kanji/my/decks/${encodeURIComponent(id)}`,
+	deckKanji: (id) => `/kanji/my/decks/${encodeURIComponent(id)}/kanji`,
+	deckKanjiCreate: (deckId) =>
+		`/kanji/my/decks/${encodeURIComponent(deckId)}/kanji`,
+	deckImport: (deckId) => `/kanji/my/decks/${encodeURIComponent(deckId)}/import`,
+	kanji: (kanjiId) => `/kanji/my/kanji/${encodeURIComponent(kanjiId)}`,
+};
+
 export const VOCABULARY = {
 	DECKS: '/vocabulary/decks',
 	PROGRESS: '/vocabulary/progress',
@@ -155,6 +186,10 @@ export const ADMIN_BADGES = {
 export const ADMIN_GRAMMAR = {
 	BASE: '/admin/grammar',
 	grammar: (id) => `/admin/grammar/${encodeURIComponent(id)}`,
+	PRACTICE_BASE: '/admin/grammar/practice',
+	practice: (id) => `/admin/grammar/practice/${encodeURIComponent(id)}`,
+	PRACTICE_GENERATE: '/admin/grammar/practice/generate',
+	PRACTICE_IMPORT: '/admin/grammar/practice/import',
 };
 
 /** Kaiwa — bối cảnh hội thoại (user) — `/api/kaiwa` */

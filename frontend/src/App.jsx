@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,6 +13,7 @@ import RequireAuth from "./components/routing/RequireAuth.jsx";
 import RequireAuthAndSurvey from "./components/routing/RequireAuthAndSurvey.jsx";
 import RequireGuest from "./components/routing/RequireGuest.jsx";
 import SurveyGate from "./components/routing/SurveyGate.jsx";
+import RouteFallback from "./components/routing/RouteFallback.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
@@ -19,81 +21,20 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 import RegisterThankYouPage from "./pages/RegisterThankYouPage.jsx";
 import VerifyEmailPage from "./pages/VerifyEmailPage.jsx";
 import DashboardHome from "./pages/DashboardHome.jsx";
-import Profile from "./pages/Profile.jsx";
-import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx";
-import FeedbackPage from "./pages/FeedbackPage.jsx";
-import MembershipPage from "./pages/MembershipPage.jsx";
-import MembershipCheckoutPage from "./pages/MembershipCheckoutPage.jsx";
-import MembershipPaymentHistoryPage from "./pages/MembershipPaymentHistoryPage.jsx";
-import MembershipCheckoutReturnPage from "./pages/MembershipCheckoutReturnPage.jsx";
-import NotificationsPage from "./pages/NotificationsPage.jsx";
-import GrammarListPage from "./pages/GrammarListPage.jsx";
-import GrammarDetailPage from "./pages/GrammarDetailPage.jsx";
-import VocabularyListPage from "./pages/VocabularyListPage.jsx";
-import VocabularyDetailPage from "./pages/VocabularyDetailPage.jsx";
-import VocabularyPage, {
-  VocabularyIndexRedirect,
-} from "./pages/VocabularyPage.jsx";
-import AlphabetPage from "./pages/AlphabetPage.jsx";
-import KanjiListPage from "./pages/KanjiListPage.jsx";
-import KanjiPage, { KanjiIndexRedirect } from "./pages/KanjiPage.jsx";
-import ReadingListPage from "./pages/ReadingListPage.jsx";
-import ReadingArticlePage from "./pages/ReadingArticlePage.jsx";
-import NotebookPage from "./pages/NotebookPage.jsx";
-import JournalPage from "./pages/JournalPage.jsx";
-import ListeningPage from "./pages/ListeningPage.jsx";
-import ListeningExercisePage from "./pages/ListeningExercisePage.jsx";
-import KaiwaListPage from "./pages/KaiwaListPage.jsx";
-import KaiwaDetailPage from "./pages/KaiwaDetailPage.jsx";
-import KaiwaPracticePage from "./pages/KaiwaPracticePage.jsx";
-import KaiwaSessionHistoryPage from "./pages/KaiwaSessionHistoryPage.jsx";
-import KaiwaSessionViewPage from "./pages/KaiwaSessionViewPage.jsx";
-import ExamPaperListPage from "./pages/ExamPaperListPage.jsx";
-import ExamPaperTakePage from "./pages/ExamPaperTakePage.jsx";
-import ExamPaperResultPage from "./pages/ExamPaperResultPage.jsx";
-import ExamPaperReviewPage from "./pages/ExamPaperReviewPage.jsx";
-import ExamPaperHistoryPage from "./pages/ExamPaperHistoryPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-import AdminShell, {
-  AdminStubContent,
-} from "./pages/admin/AdminShell.jsx";
-import AdminOverviewPage from "./pages/admin/AdminOverviewPage.jsx";
-import AdminSystemPage from "./pages/admin/AdminSystemPage.jsx";
-import AdminVocabularyHome from "./pages/admin/AdminVocabularyHome.jsx";
-import AdminKanjiHome from "./pages/admin/AdminKanjiHome.jsx";
-import VocabularyDeckEditorPage from "./pages/admin/VocabularyDeckEditorPage.jsx";
-import KanjiDeckEditorPage from "./pages/admin/KanjiDeckEditorPage.jsx";
-import AdminQuotesPage from "./pages/admin/AdminQuotesPage.jsx";
-import AdminPromptsPage from "./pages/admin/AdminPromptsPage.jsx";
-import BadgePage from "./pages/admin/BadgePage.jsx";
-import AdminUsersPage from "./pages/admin/AdminUsersPage.jsx";
-import AdminNotificationsDemoPage from "./pages/admin/AdminNotificationsDemoPage.jsx";
 import AdminLoginPage from "./pages/admin/AdminLoginPage.jsx";
 import { TermsPage, PrivacyPage } from "./pages/LegalDocumentPage.jsx";
-import AdminGrammarHome from "./pages/admin/AdminGrammarHome.jsx";
-import AdminGrammarEditorPage from "./pages/admin/AdminGrammarEditorPage.jsx";
-import AdminReadingHome from "./pages/admin/AdminReadingHome.jsx";
-import AdminReadingEditorPage from "./pages/admin/AdminReadingEditorPage.jsx";
-import AdminListeningHome from "./pages/admin/AdminListeningHome.jsx";
-import AdminSubscriptionsPage from "./pages/admin/AdminSubscriptionsPage.jsx";
-import AdminFeedbackPage from "./pages/admin/AdminFeedbackPage.jsx";
-import AdminKaiwaHome from "./pages/admin/AdminKaiwaHome.jsx";
-import AdminKaiwaEditorPage from "./pages/admin/AdminKaiwaEditorPage.jsx";
-import AdminExamPaperHome from "./pages/admin/AdminExamPaperHome.jsx";
-import AdminExamPaperEditorPage from "./pages/admin/AdminExamPaperEditorPage.jsx";
-import AdminExamStructureHome from "./pages/admin/AdminExamStructureHome.jsx";
-import AdminExamStructureEditPage from "./pages/admin/AdminExamStructureEditPage.jsx";
-import AdminSettingsPage from "./pages/admin/AdminSettingsPage.jsx";
-import MembershipReceiptPage from "./pages/MembershipReceiptPage.jsx";
+import PageViewTracker from "./components/analytics/PageViewTracker.jsx";
+import * as Pages from "./routes/lazyPages.js";
 import "./styles/App.css";
 
 function App() {
   return (
     <AuthProvider>
       <SurveyCompletionProvider>
-        <UserNotificationProvider>
           <Router>
+          <UserNotificationProvider>
+          <PageViewTracker />
           <Toaster
             position="top-center"
             richColors
@@ -109,6 +50,7 @@ function App() {
               },
             }}
           />
+          <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route element={<RequireGuest />}>
               <Route path="/login" element={<LoginPage />} />
@@ -124,85 +66,104 @@ function App() {
               <Route path="/survey" element={<SurveyGate />} />
               <Route element={<RequireAuthAndSurvey />}>
                 <Route path="/" element={<DashboardHome />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/change-password" element={<ChangePasswordPage />} />
-                <Route path="/settings" element={<SettingsPage />} />
-                <Route path="/feedback" element={<FeedbackPage />} />
-                <Route path="/membership" element={<MembershipPage />} />
+                <Route path="/profile" element={<Pages.Profile />} />
+                <Route path="/change-password" element={<Pages.ChangePasswordPage />} />
+                <Route path="/settings" element={<Pages.SettingsPage />} />
+                <Route path="/feedback" element={<Pages.FeedbackPage />} />
+                <Route path="/membership" element={<Pages.MembershipPage />} />
                 <Route
                   path="/membership/checkout"
-                  element={<MembershipCheckoutPage />}
+                  element={<Pages.MembershipCheckoutPage />}
                 />
                 <Route
                   path="/membership/checkout/return"
-                  element={<MembershipCheckoutReturnPage />}
+                  element={<Pages.MembershipCheckoutReturnPage />}
                 />
                 <Route
                   path="/membership/history"
-                  element={<MembershipPaymentHistoryPage />}
+                  element={<Pages.MembershipPaymentHistoryPage />}
                 />
                 <Route
                   path="/membership/receipt/:checkoutId"
-                  element={<MembershipReceiptPage />}
+                  element={<Pages.MembershipReceiptPage />}
                 />
-                <Route path="/notifications" element={<NotificationsPage />} />
-                <Route path="/grammar" element={<GrammarListPage />} />
-                <Route path="/grammar/:slug" element={<GrammarDetailPage />} />
-                <Route path="/alphabet" element={<AlphabetPage />} />
+                <Route path="/notifications" element={<Pages.NotificationsPage />} />
+                <Route path="/grammar" element={<Pages.GrammarListPage />} />
+                <Route
+                  path="/grammar/practice"
+                  element={<Pages.GrammarPracticePage />}
+                />
+                <Route path="/grammar/:slug" element={<Pages.GrammarDetailPage />} />
+                <Route path="/alphabet" element={<Pages.AlphabetPage />} />
                 <Route
                   path="/vocabulary/browse"
-                  element={<VocabularyListPage />}
+                  element={<Pages.VocabularyListPage />}
+                />
+                <Route
+                  path="/vocabulary/mine"
+                  element={<Pages.UserVocabularyMyDecksPage />}
+                />
+                <Route
+                  path="/vocabulary/mine/:deckId/edit"
+                  element={<Pages.UserVocabularyDeckEditorPage />}
                 />
                 <Route
                   path="/vocabulary/lesson/:lessonNo"
-                  element={<VocabularyPage />}
+                  element={<Pages.VocabularyPage />}
                 />
-                <Route path="/vocabulary/:id" element={<VocabularyDetailPage />} />
-                <Route path="/vocabulary" element={<VocabularyIndexRedirect />} />
-                <Route path="/kanji/browse" element={<KanjiListPage />} />
-                <Route path="/kanji/lesson/:lessonNo" element={<KanjiPage />} />
-                <Route path="/kanji" element={<KanjiIndexRedirect />} />
-                <Route path="/reading" element={<ReadingListPage />} />
-                <Route path="/reading/:id" element={<ReadingArticlePage />} />
-                <Route path="/notebook" element={<NotebookPage />} />
-                <Route path="/journal" element={<JournalPage />} />
-                <Route path="/listening" element={<ListeningPage />} />
-                <Route path="/listening/:id" element={<ListeningExercisePage />} />
-                <Route path="/kaiwa" element={<KaiwaListPage />} />
+                <Route path="/vocabulary/:id" element={<Pages.VocabularyDetailPage />} />
+                <Route path="/vocabulary" element={<Pages.VocabularyIndexRedirect />} />
+                <Route path="/kanji/browse" element={<Pages.KanjiListPage />} />
+                <Route path="/kanji/mine" element={<Pages.UserKanjiMyDecksPage />} />
+                <Route
+                  path="/kanji/mine/:deckId/edit"
+                  element={<Pages.UserKanjiDeckEditorPage />}
+                />
+                <Route path="/kanji/lesson/:lessonNo" element={<Pages.KanjiPage />} />
+                <Route path="/kanji" element={<Pages.KanjiIndexRedirect />} />
+                <Route path="/reading" element={<Pages.ReadingListPage />} />
+                <Route path="/reading/:id" element={<Pages.ReadingArticlePage />} />
+                <Route path="/notebook" element={<Pages.NotebookPage />} />
+                <Route path="/journal" element={<Pages.JournalPage />} />
+                <Route path="/leaderboard" element={<Pages.LeaderboardPage />} />
+                <Route path="/arena" element={<Pages.ArenaPage />} />
+                <Route path="/listening" element={<Pages.ListeningPage />} />
+                <Route path="/listening/:id" element={<Pages.ListeningExercisePage />} />
+                <Route path="/kaiwa" element={<Pages.KaiwaListPage />} />
                 <Route
                   path="/kaiwa/sessions/:sessionId"
-                  element={<KaiwaSessionViewPage />}
+                  element={<Pages.KaiwaSessionViewPage />}
                 />
                 <Route
                   path="/kaiwa/:id/history"
-                  element={<KaiwaSessionHistoryPage />}
+                  element={<Pages.KaiwaSessionHistoryPage />}
                 />
-                <Route path="/kaiwa/:id/practice" element={<KaiwaPracticePage />} />
-                <Route path="/kaiwa/:id" element={<KaiwaDetailPage />} />
-                <Route path="/practice/history" element={<ExamPaperHistoryPage />} />
+                <Route path="/kaiwa/:id/practice" element={<Pages.KaiwaPracticePage />} />
+                <Route path="/kaiwa/:id" element={<Pages.KaiwaDetailPage />} />
+                <Route path="/practice/history" element={<Pages.ExamPaperHistoryPage />} />
                 <Route
                   path="/practice/history/:attemptId/result"
-                  element={<ExamPaperResultPage />}
+                  element={<Pages.ExamPaperResultPage />}
                 />
                 <Route
                   path="/practice/history/:attemptId/review"
-                  element={<ExamPaperReviewPage />}
+                  element={<Pages.ExamPaperReviewPage />}
                 />
-                <Route path="/practice" element={<ExamPaperListPage />} />
-                <Route path="/practice/:slug/result" element={<ExamPaperResultPage />} />
-                <Route path="/practice/:slug/review" element={<ExamPaperReviewPage />} />
-                <Route path="/practice/:slug" element={<ExamPaperTakePage />} />
+                <Route path="/practice" element={<Pages.ExamPaperListPage />} />
+                <Route path="/practice/:slug/result" element={<Pages.ExamPaperResultPage />} />
+                <Route path="/practice/:slug/review" element={<Pages.ExamPaperReviewPage />} />
+                <Route path="/practice/:slug" element={<Pages.ExamPaperTakePage />} />
               </Route>
             </Route>
             <Route path="/welcome" element={<Navigate to="/" replace />} />
             <Route path="/auth" element={<Navigate to="/login" replace />} />
             <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/admin" element={<AdminShell />}>
-              <Route index element={<AdminOverviewPage />} />
-              <Route path="analytics" element={<AdminSystemPage />} />
+            <Route path="/admin" element={<Pages.AdminShell />}>
+              <Route index element={<Pages.AdminOverviewPage />} />
+              <Route path="analytics" element={<Pages.AdminSystemPage />} />
               <Route
                 path="vocabulary/decks/:deckId"
-                element={<VocabularyDeckEditorPage />}
+                element={<Pages.VocabularyDeckEditorPage />}
               />
               <Route
                 path="vocabulary/new"
@@ -212,43 +173,46 @@ function App() {
                 path="vocabulary/create"
                 element={<Navigate to="/admin/vocabulary/decks/new" replace />}
               />
-              <Route path="vocabulary" element={<AdminVocabularyHome />} />
+              <Route path="vocabulary" element={<Pages.AdminVocabularyHome />} />
               <Route
                 path="kanji/decks/:deckId"
-                element={<KanjiDeckEditorPage />}
+                element={<Pages.KanjiDeckEditorPage />}
               />
-              <Route path="kanji" element={<AdminKanjiHome />} />
-              <Route path="grammar/new" element={<AdminGrammarEditorPage />} />
-              <Route path="grammar/:id/edit" element={<AdminGrammarEditorPage />} />
-              <Route path="grammar" element={<AdminGrammarHome />} />
-              <Route path="reading/new" element={<AdminReadingEditorPage />} />
-              <Route path="reading/:id/edit" element={<AdminReadingEditorPage />} />
-              <Route path="reading" element={<AdminReadingHome />} />
-              <Route path="listening" element={<AdminListeningHome />} />
-              <Route path="kaiwa/new" element={<AdminKaiwaEditorPage />} />
-              <Route path="kaiwa/:id/edit" element={<AdminKaiwaEditorPage />} />
-              <Route path="kaiwa" element={<AdminKaiwaHome />} />
-              <Route path="exam-papers/:id/edit" element={<AdminExamPaperEditorPage />} />
-              <Route path="exam-papers" element={<AdminExamPaperHome />} />
-              <Route path="exam-structures/:id/edit" element={<AdminExamStructureEditPage />} />
-              <Route path="exam-structures" element={<AdminExamStructureHome />} />
-              <Route path="quotes" element={<AdminQuotesPage />} />
-              <Route path="feedback" element={<AdminFeedbackPage />} />
-              <Route path="prompts" element={<AdminPromptsPage />} />
-              <Route path="badges" element={<BadgePage />} />
-              <Route path="users" element={<AdminUsersPage />} />
-              <Route path="subscriptions" element={<AdminSubscriptionsPage />} />
+              <Route path="kanji" element={<Pages.AdminKanjiHome />} />
+              <Route path="grammar/new" element={<Pages.AdminGrammarEditorPage />} />
+              <Route path="grammar/practice" element={<Pages.AdminGrammarPracticePage />} />
+              <Route path="grammar/:id/edit" element={<Pages.AdminGrammarEditorPage />} />
+              <Route path="grammar" element={<Pages.AdminGrammarHome />} />
+              <Route path="reading/new" element={<Pages.AdminReadingEditorPage />} />
+              <Route path="reading/:id/edit" element={<Pages.AdminReadingEditorPage />} />
+              <Route path="reading" element={<Pages.AdminReadingHome />} />
+              <Route path="listening" element={<Pages.AdminListeningHome />} />
+              <Route path="kaiwa/new" element={<Pages.AdminKaiwaEditorPage />} />
+              <Route path="kaiwa/:id/edit" element={<Pages.AdminKaiwaEditorPage />} />
+              <Route path="kaiwa" element={<Pages.AdminKaiwaHome />} />
+              <Route path="exam-papers/:id/edit" element={<Pages.AdminExamPaperEditorPage />} />
+              <Route path="exam-papers" element={<Pages.AdminExamPaperHome />} />
+              <Route path="exam-structures/:id/edit" element={<Pages.AdminExamStructureEditPage />} />
+              <Route path="exam-structures" element={<Pages.AdminExamStructureHome />} />
+              <Route path="quotes" element={<Pages.AdminQuotesPage />} />
+              <Route path="feedback" element={<Pages.AdminFeedbackPage />} />
+              <Route path="prompts" element={<Pages.AdminPromptsPage />} />
+              <Route path="badges" element={<Pages.BadgePage />} />
+              <Route path="users" element={<Pages.AdminUsersPage />} />
+              <Route path="subscriptions" element={<Pages.AdminSubscriptionsPage />} />
               <Route
                 path="notifications"
-                element={<AdminNotificationsDemoPage />}
+                element={<Pages.AdminNotificationsDemoPage />}
               />
-              <Route path="settings" element={<AdminSettingsPage />} />
-              <Route path="*" element={<AdminStubContent />} />
+              <Route path="settings" element={<Pages.AdminSettingsPage />} />
+              <Route path="arena" element={<Pages.AdminArenaPage />} />
+              <Route path="*" element={<Pages.AdminStubContent />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </Suspense>
+          </UserNotificationProvider>
         </Router>
-        </UserNotificationProvider>
       </SurveyCompletionProvider>
     </AuthProvider>
   );

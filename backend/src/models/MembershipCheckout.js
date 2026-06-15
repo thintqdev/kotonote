@@ -50,6 +50,8 @@ const membershipCheckoutSchema = new mongoose.Schema(
 		providerTransactionId: { type: String, trim: true },
 		paymentUrl: { type: String, trim: true },
 		paidAt: { type: Date },
+		refundRequestedAt: { type: Date },
+		refundRequestNote: { type: String, trim: true, maxlength: 500 },
 		refundedAt: { type: Date },
 		refundReason: { type: String, trim: true, maxlength: 500 },
 		refundedByAdminId: {
@@ -67,5 +69,14 @@ const membershipCheckoutSchema = new mongoose.Schema(
 
 membershipCheckoutSchema.index({ userId: 1, status: 1, createdAt: -1 });
 membershipCheckoutSchema.index({ provider: 1, providerOrderCode: 1 });
+/** Một phiên pending duy nhất cho mỗi user + gói (chặn race khi create song song). */
+membershipCheckoutSchema.index(
+	{ userId: 1, tierId: 1, billing: 1 },
+	{
+		unique: true,
+		partialFilterExpression: { status: 'pending' },
+		name: 'membership_checkout_one_pending_per_plan',
+	},
+);
 
 export default mongoose.model('MembershipCheckout', membershipCheckoutSchema);

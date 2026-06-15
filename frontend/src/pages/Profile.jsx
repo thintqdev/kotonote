@@ -153,6 +153,18 @@ function libraryContentTotal(library) {
   );
 }
 
+function normalizeBioText(bio) {
+  return String(bio ?? '').trim();
+}
+
+function isBioLong(bio) {
+  const text = normalizeBioText(bio);
+  if (!text) return false;
+  if (text.length > 110) return true;
+  return text.split(/\n/).filter((line) => line.trim()).length > 3;
+}
+
+
 function buildDraftFromProfile(p) {
   const g = resolveGoalExamFields(p);
   return {
@@ -196,6 +208,7 @@ const Profile = () => {
   const [draft, setDraft] = useState(() =>
     buildDraftFromProfile(buildDemoProfile((key) => i18n.t(key))),
   );
+  const [bioExpanded, setBioExpanded] = useState(false);
   const avatarInputRef = useRef(null);
   const pendingAvatarFileRef = useRef(null);
   const pendingBlobUrlRef = useRef(null);
@@ -669,6 +682,13 @@ const Profile = () => {
     return profile.examDateLabel || '';
   }, [goalResolved.examDateIso, profile.examDateLabel, i18n.language]);
 
+  const hasBio = normalizeBioText(profile.bio).length > 0;
+  const bioLong = isBioLong(profile.bio);
+
+  useEffect(() => {
+    setBioExpanded(false);
+  }, [profile.bio, isEditing]);
+
   const onExamTypeChange = useCallback((typeKey) => {
     setDraft((d) => ({
       ...d,
@@ -728,7 +748,9 @@ const Profile = () => {
               )}
             </div>
 
-            <div className="profile-layout">
+            <div
+              className={`profile-layout${!isEditing ? ' profile-layout--view' : ''}`}
+            >
               <article className="profile-card profile-card--hero">
                 <span className="profile-card-tape" aria-hidden />
                 <div className="profile-hero-grid">
@@ -862,7 +884,7 @@ const Profile = () => {
                 </div>
 
                 {!isEditing ? (
-                  <dl className="profile-meta-row">
+                  <dl className="profile-meta-row profile-meta-row--view">
                     <div className="profile-meta-pair">
                       <dt>{t('profile.region')}</dt>
                       <dd>{localeDisplay.region}</dd>
@@ -916,126 +938,142 @@ const Profile = () => {
                     </label>
                   </div>
                 )}
-              </article>
 
-              <article className="profile-card profile-card--note">
-                <span className="profile-card-tape" aria-hidden />
-                <h3 className="profile-section-title">{t('profile.aboutTitle')}</h3>
-                {!isEditing ? (
-                  <p className="profile-bio">{profile.bio}</p>
-                ) : (
-                  <div className="profile-form-stack">
-                    <label className="profile-field">
-                      <span className="profile-field-label">{t('profile.aboutField')}</span>
-                      <textarea
-                        className="profile-textarea"
-                        rows={5}
-                        value={draft.bio}
-                        onChange={(e) => setField('bio', e.target.value)}
-                      />
-                    </label>
-                  </div>
-                )}
-              </article>
-
-              <section
-                className="profile-card profile-card--stats profile-stats"
-                aria-label={t('profile.statsAria')}
-              >
-                <span className="profile-card-tape" aria-hidden />
-                <h3 className="profile-section-title profile-section-title--flush">
-                  {t('profile.statsTitle')}
-                </h3>
-                <ul
-                  className={`profile-stat-grid${summaryLoading ? ' profile-stat-grid--loading' : ''}`}
-                  aria-busy={summaryLoading}
-                >
-                  <li className="profile-stat-chip">
-                    <span className="profile-stat-value">
-                      {statsDisplay.streak}
-                    </span>
-                    <span className="profile-stat-label">{t('profile.streak')}</span>
-                    {statsDisplay.streakHint ? (
-                      <span className="profile-stat-hint">
-                        {statsDisplay.streakHint}
-                      </span>
-                    ) : null}
-                  </li>
-                  <li className="profile-stat-chip">
-                    <span className="profile-stat-value">
-                      {statsDisplay.weekly}
-                    </span>
-                    <span className="profile-stat-label">
-                      {t('profile.weeklyCheckIn')}
-                    </span>
-                  </li>
-                  <li className="profile-stat-chip">
-                    <span className="profile-stat-value">
-                      {statsDisplay.badges}
-                    </span>
-                    <span className="profile-stat-label">
-                      {t('profile.badgesUnlocked')}
-                    </span>
-                    {statsDisplay.badgeHint ? (
-                      <span className="profile-stat-hint profile-stat-hint--truncate">
-                        {statsDisplay.badgeHint}
-                      </span>
-                    ) : null}
-                  </li>
-                  <li className="profile-stat-chip">
-                    <span
-                      className={`profile-stat-value${statsDisplay.fourthValue.length > 6 ? ' profile-stat-value--sm' : ''}`}
+                {!isEditing && hasBio ? (
+                  <div className="profile-hero-bio-block">
+                    <p
+                      className={`profile-bio${bioLong && !bioExpanded ? ' profile-bio--clamped' : ''}`}
                     >
-                      {statsDisplay.fourthValue}
-                    </span>
-                    <span className="profile-stat-label">
-                      {statsDisplay.fourthLabel}
-                    </span>
-                  </li>
-                </ul>
-              </section>
-
-              <article className="profile-card profile-card--membership">
-                <span className="profile-card-tape" aria-hidden />
-                <h3 className="profile-section-title profile-section-title--flush">
-                  {t('profile.membershipTitle')}
-                </h3>
-                {membershipLoading ? (
-                  <p className="profile-membership-meta">{t('common.loading')}</p>
-                ) : (
-                  <>
-                    <p className="profile-membership-tier">
-                      {membershipDisplay.planName}
+                      {profile.bio}
                     </p>
-                    <p className="profile-membership-meta">
-                      {t('profile.membershipBilling', {
-                        billing: membershipDisplay.billingLabel,
-                      })}
-                      {membershipDisplay.expiryText
-                        ? ` · ${t('profile.membershipExpires', {
-                            date: membershipDisplay.expiryText,
-                          })}`
-                        : ''}
-                    </p>
-                    <p className="profile-membership-jlpt">
-                      {t('profile.membershipJlpt', {
-                        levels: membershipDisplay.jlpt,
-                      })}
-                    </p>
-                    <div className="profile-membership-links">
-                      <Link className="profile-membership-link" to="/membership">
-                        {t('profile.membershipManage')}
-                      </Link>
-                      <Link
-                        className="profile-membership-link profile-membership-link--secondary"
-                        to="/membership/history"
+                    {bioLong ? (
+                      <button
+                        type="button"
+                        className="profile-bio-toggle"
+                        onClick={() => setBioExpanded((v) => !v)}
+                        aria-expanded={bioExpanded}
                       >
-                        {t('profile.membershipPaymentHistory')}
-                      </Link>
-                    </div>
-                  </>
-                )}
+                        {bioExpanded
+                          ? t('profile.bioShowLess')
+                          : t('profile.bioShowMore')}
+                      </button>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {isEditing ? (
+                  <label className="profile-field profile-hero-bio-field">
+                    <span className="profile-field-label">{t('profile.aboutField')}</span>
+                    <textarea
+                      className="profile-textarea"
+                      rows={4}
+                      value={draft.bio}
+                      onChange={(e) => setField('bio', e.target.value)}
+                    />
+                  </label>
+                ) : null}
               </article>
+
+              <div className="profile-aside-column">
+                <section
+                  className="profile-card profile-card--stats profile-stats"
+                  aria-label={t('profile.statsAria')}
+                >
+                  <span className="profile-card-tape" aria-hidden />
+                  <h3 className="profile-section-title profile-section-title--flush">
+                    {t('profile.statsTitle')}
+                  </h3>
+                  <ul
+                    className={`profile-stat-grid${summaryLoading ? ' profile-stat-grid--loading' : ''}`}
+                    aria-busy={summaryLoading}
+                  >
+                    <li className="profile-stat-chip">
+                      <span className="profile-stat-value">
+                        {statsDisplay.streak}
+                      </span>
+                      <span className="profile-stat-label">{t('profile.streak')}</span>
+                      {statsDisplay.streakHint ? (
+                        <span className="profile-stat-hint">
+                          {statsDisplay.streakHint}
+                        </span>
+                      ) : null}
+                    </li>
+                    <li className="profile-stat-chip">
+                      <span className="profile-stat-value">
+                        {statsDisplay.weekly}
+                      </span>
+                      <span className="profile-stat-label">
+                        {t('profile.weeklyCheckIn')}
+                      </span>
+                    </li>
+                    <li className="profile-stat-chip">
+                      <span className="profile-stat-value">
+                        {statsDisplay.badges}
+                      </span>
+                      <span className="profile-stat-label">
+                        {t('profile.badgesUnlocked')}
+                      </span>
+                      {statsDisplay.badgeHint ? (
+                        <span className="profile-stat-hint profile-stat-hint--truncate">
+                          {statsDisplay.badgeHint}
+                        </span>
+                      ) : null}
+                    </li>
+                    <li className="profile-stat-chip">
+                      <span
+                        className={`profile-stat-value${statsDisplay.fourthValue.length > 6 ? ' profile-stat-value--sm' : ''}`}
+                      >
+                        {statsDisplay.fourthValue}
+                      </span>
+                      <span className="profile-stat-label">
+                        {statsDisplay.fourthLabel}
+                      </span>
+                    </li>
+                  </ul>
+                </section>
+
+                <article className="profile-card profile-card--membership">
+                  <span className="profile-card-tape" aria-hidden />
+                  <h3 className="profile-section-title profile-section-title--flush">
+                    {t('profile.membershipTitle')}
+                  </h3>
+                  {membershipLoading ? (
+                    <p className="profile-membership-meta">{t('common.loading')}</p>
+                  ) : (
+                    <>
+                      <p className="profile-membership-tier">
+                        {membershipDisplay.planName}
+                      </p>
+                      <p className="profile-membership-meta">
+                        {t('profile.membershipBilling', {
+                          billing: membershipDisplay.billingLabel,
+                        })}
+                        {membershipDisplay.expiryText
+                          ? ` · ${t('profile.membershipExpires', {
+                              date: membershipDisplay.expiryText,
+                            })}`
+                          : ''}
+                      </p>
+                      <p className="profile-membership-jlpt">
+                        {t('profile.membershipJlpt', {
+                          levels: membershipDisplay.jlpt,
+                        })}
+                      </p>
+                      <div className="profile-membership-links">
+                        <Link className="profile-membership-link" to="/membership">
+                          {t('profile.membershipManage')}
+                        </Link>
+                        <Link
+                          className="profile-membership-link profile-membership-link--secondary"
+                          to="/membership/history"
+                        >
+                          {t('profile.membershipPaymentHistory')}
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </article>
+              </div>
 
               <div className="profile-split">
                 <article className="profile-card profile-card--goal">

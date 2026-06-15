@@ -2,6 +2,13 @@ import mongoose from 'mongoose';
 
 const vocabularyDeckSchema = new mongoose.Schema(
 	{
+		/** null = bộ hệ thống (admin); có giá trị = bộ riêng của user */
+		ownerId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			default: null,
+			index: true,
+		},
 		title: {
 			type: String,
 			required: true,
@@ -56,5 +63,6 @@ const vocabularyDeckSchema = new mongoose.Schema(
 vocabularyDeckSchema.index({ level: 1, displayOrder: 1 });
 vocabularyDeckSchema.index({ category: 1 });
 vocabularyDeckSchema.index({ isActive: 1 });
+vocabularyDeckSchema.index({ ownerId: 1, level: 1, displayOrder: 1 });
 
 export default mongoose.model('VocabularyDeck', vocabularyDeckSchema);

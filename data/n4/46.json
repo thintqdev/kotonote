@@ -1,0 +1,202 @@
+[
+    {
+        "word": "焼きます",
+        "reading": "やきます",
+        "meaning": "nướng",
+        "meaningJa": "火で食べ物を焼く",
+        "example": "魚を焼きます。",
+        "exampleMeaning": "Tôi nướng cá."
+    },
+    {
+        "word": "渡します",
+        "reading": "わたします",
+        "meaning": "trao, đưa",
+        "meaningJa": "人に手渡す",
+        "example": "先生に書類を渡しました。",
+        "exampleMeaning": "Tôi đã đưa tài liệu cho giáo viên."
+    },
+    {
+        "word": "帰ってきます",
+        "reading": "かえってきます",
+        "meaning": "trở về",
+        "meaningJa": "戻って来る",
+        "example": "父はもう帰ってきました。",
+        "exampleMeaning": "Bố tôi đã trở về rồi."
+    },
+    {
+        "word": "出ます",
+        "reading": "でます",
+        "meaning": "tham gia, xuất hiện",
+        "meaningJa": "会や試合などに参加する",
+        "example": "会議に出ます。",
+        "exampleMeaning": "Tôi tham gia cuộc họp."
+    },
+    {
+        "word": "留守",
+        "reading": "るす",
+        "meaning": "vắng nhà",
+        "meaningJa": "家に人がいないこと",
+        "example": "留守の間に電話がありました。",
+        "exampleMeaning": "Có điện thoại gọi đến khi tôi vắng nhà."
+    },
+    {
+        "word": "宅配便",
+        "reading": "たくはいびん",
+        "meaning": "dịch vụ chuyển phát",
+        "meaningJa": "荷物を届けるサービス",
+        "example": "宅配便で荷物を送りました。",
+        "exampleMeaning": "Tôi gửi hành lý bằng dịch vụ chuyển phát."
+    },
+    {
+        "word": "原因",
+        "reading": "げんいん",
+        "meaning": "nguyên nhân",
+        "meaningJa": "物事が起こる理由",
+        "example": "事故の原因を調べます。",
+        "exampleMeaning": "Tôi điều tra nguyên nhân vụ tai nạn."
+    },
+    {
+        "word": "注射",
+        "reading": "ちゅうしゃ",
+        "meaning": "tiêm",
+        "meaningJa": "薬を体に入れること",
+        "example": "病院で注射をしました。",
+        "exampleMeaning": "Tôi đã tiêm ở bệnh viện."
+    },
+    {
+        "word": "食欲",
+        "reading": "しょくよく",
+        "meaning": "sự thèm ăn",
+        "meaningJa": "食べたい気持ち",
+        "example": "夏は食欲がありません。",
+        "exampleMeaning": "Mùa hè tôi không có cảm giác thèm ăn."
+    },
+    {
+        "word": "おかげさまで",
+        "reading": "おかげさまで",
+        "meaning": "nhờ ơn, nhờ vậy",
+        "meaningJa": "感謝を表す言葉",
+        "example": "おかげさまで元気になりました。",
+        "exampleMeaning": "Nhờ vậy tôi đã khỏe lại."
+    },
+    {
+        "word": "具合",
+        "reading": "ぐあい",
+        "meaning": "tình trạng",
+        "meaningJa": "体や物の状態",
+        "example": "具合はいかがですか。",
+        "exampleMeaning": "Tình trạng của bạn thế nào rồi?"
+    },
+    {
+        "word": "葉",
+        "reading": "は",
+        "meaning": "lá cây",
+        "meaningJa": "植物の葉",
+        "example": "木の葉が落ちました。",
+        "exampleMeaning": "Lá cây đã rụng."
+    },
+    {
+        "word": "クリスマス",
+        "reading": "クリスマス",
+        "meaning": "Giáng sinh",
+        "meaningJa": "キリスト教のお祝い",
+        "example": "クリスマスを家族と過ごします。",
+        "exampleMeaning": "Tôi đón Giáng sinh cùng gia đình."
+    },
+    {
+        "word": "相手",
+        "reading": "あいて",
+        "meaning": "đối phương, đối tác",
+        "meaningJa": "一緒に行動する人",
+        "example": "相手の話を聞きます。",
+        "exampleMeaning": "Tôi lắng nghe đối phương."
+    },
+    {
+        "word": "紹介します",
+        "reading": "しょうかいします",
+        "meaning": "giới thiệu",
+        "meaningJa": "人や物を知らせる",
+        "example": "友達を紹介します。",
+        "exampleMeaning": "Tôi giới thiệu bạn mình."
+    },
+    {
+        "word": "利用します",
+        "reading": "りようします",
+        "meaning": "sử dụng",
+        "meaningJa": "役立てて使う",
+        "example": "図書館を利用します。",
+        "exampleMeaning": "Tôi sử dụng thư viện."
+    },
+    {
+        "word": "運びます",
+        "reading": "はこびます",
+        "meaning": "mang, vận chuyển",
+        "meaningJa": "物を移動させる",
+        "example": "荷物を運びます。",
+        "exampleMeaning": "Tôi mang hành lý."
+    },
+    {
+        "word": "拾います",
+        "reading": "ひろいます",
+        "meaning": "nhặt",
+        "meaningJa": "落ちている物を取る",
+        "example": "道で財布を拾いました。",
+        "exampleMeaning": "Tôi nhặt được ví trên đường."
+    },
+    {
+        "word": "連絡します",
+        "reading": "れんらくします",
+        "meaning": "liên lạc",
+        "meaningJa": "知らせる",
+        "example": "後で連絡します。",
+        "exampleMeaning": "Tôi sẽ liên lạc sau."
+    },
+    {
+        "word": "事故",
+        "reading": "じこ",
+        "meaning": "tai nạn",
+        "meaningJa": "予想しない悪い出来事",
+        "example": "事故が起こりました。",
+        "exampleMeaning": "Tai nạn đã xảy ra."
+    },
+    {
+        "word": "無理",
+        "reading": "むり",
+        "meaning": "quá sức, không thể",
+        "meaningJa": "できないこと",
+        "example": "無理をしないでください。",
+        "exampleMeaning": "Xin đừng cố quá sức."
+    },
+    {
+        "word": "親切",
+        "reading": "しんせつ",
+        "meaning": "tử tế",
+        "meaningJa": "やさしいこと",
+        "example": "親切な人に助けられました。",
+        "exampleMeaning": "Tôi đã được một người tử tế giúp đỡ."
+    },
+    {
+        "word": "説明",
+        "reading": "せつめい",
+        "meaning": "giải thích",
+        "meaningJa": "わかるように話すこと",
+        "example": "説明を聞きました。",
+        "exampleMeaning": "Tôi đã nghe phần giải thích."
+    },
+    {
+        "word": "準備",
+        "reading": "じゅんび",
+        "meaning": "chuẩn bị",
+        "meaningJa": "前もって用意すること",
+        "example": "旅行の準備をしています。",
+        "exampleMeaning": "Tôi đang chuẩn bị cho chuyến đi."
+    },
+    {
+        "word": "用意します",
+        "reading": "よういします",
+        "meaning": "chuẩn bị",
+        "meaningJa": "必要な物をそろえる",
+        "example": "資料を用意します。",
+        "exampleMeaning": "Tôi chuẩn bị tài liệu."
+    }
+]
