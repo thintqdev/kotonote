@@ -4,8 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ADMIN_SIDEBAR_SECTIONS } from "../constants/adminNav.js";
 import { USER_ROLE } from "../constants/userRole.js";
-import { fetchAdminSession } from "../services/adminAuthService.js";
-import { clearAdminToken, getAdminToken } from "../services/tokenStorage.js";
+import { adminLogout, fetchAdminSession } from "../services/adminAuthService.js";
 import { resolveAvatarUrl } from "../utils/resolveAvatarUrl.js";
 import "./AdminLayout.css";
 
@@ -397,8 +396,12 @@ function AdminLayout({ children = null }) {
   const [adminUser, setAdminUser] = useState(null);
   const [verifying, setVerifying] = useState(true);
 
-  const logout = useCallback(() => {
-    clearAdminToken();
+  const logout = useCallback(async () => {
+    try {
+      await adminLogout();
+    } catch {
+      /* ignore */
+    }
     navigate("/admin/login", { replace: true });
   }, [navigate]);
 
@@ -406,25 +409,17 @@ function AdminLayout({ children = null }) {
     const ac = new AbortController();
 
     const run = async () => {
-      if (!getAdminToken()) {
-        navigate("/admin/login", { replace: true });
-        setVerifying(false);
-        return;
-      }
-
       setVerifying(true);
       try {
         const { user } = await fetchAdminSession({ signal: ac.signal });
         if (ac.signal.aborted) return;
         if (!user || user.role !== USER_ROLE.ADMIN) {
-          clearAdminToken();
           navigate("/admin/login", { replace: true });
           return;
         }
         setAdminUser(user);
       } catch (e) {
         if (ac.signal.aborted || isCanceledRequest(e)) return;
-        clearAdminToken();
         navigate("/admin/login", { replace: true });
       } finally {
         if (!ac.signal.aborted) {

@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import './src/config/serverMetrics.js';
+import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import express from 'express';
 import path from 'path';
@@ -87,6 +88,7 @@ app.use(cors({
 	allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(compression());
+app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 

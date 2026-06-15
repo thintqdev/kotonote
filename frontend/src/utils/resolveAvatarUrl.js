@@ -1,38 +1,75 @@
 import { getSocketBaseUrl } from './socketBaseUrl.js';
 
+const BLOCKED_SCHEME_RE = /^(javascript|vbscript)(?::|&)/i;
+
+/** @returns {Set<string>} */
+function getAllowedMediaOrigins() {
+	const origins = new Set();
+	try {
+		origins.add(new URL(getSocketBaseUrl()).origin);
+	} catch {
+		/* ignore */
+	}
+	const apiOrigin = import.meta.env.VITE_API_ORIGIN?.trim();
+	if (apiOrigin) {
+		try {
+			origins.add(new URL(apiOrigin).origin);
+		} catch {
+			/* ignore */
+		}
+	}
+	const minioOrigin = import.meta.env.VITE_MINIO_PUBLIC_ORIGIN?.trim();
+	if (minioOrigin) {
+		try {
+			origins.add(new URL(minioOrigin).origin);
+		} catch {
+			/* ignore */
+		}
+	}
+	if (typeof window !== 'undefined' && window.location?.origin) {
+		origins.add(window.location.origin);
+	}
+	return origins;
+}
+
 /**
  * URL đầy đủ để hiển thị media từ API (avatar, v.v.).
- * — `http(s)://…`, `data:…` giữ nguyên
- * — đường dẫn tuyệt đối `/uploads/…` nối **origin backend** (cùng host với API / static).
- *   Dùng `getSocketBaseUrl()` để đúng khi `VITE_API_URL` tuyệt đối hoặc tương đối (`/api` + `VITE_API_ORIGIN`).
+ * Chỉ cho path nội bộ, data:image/*, hoặc http(s) từ origin tin cậy.
  * @param {string | null | undefined} value
  * @returns {string | null}
  */
 export function resolvePublicMediaUrl(value) {
 	if (value == null || value === '') return null;
 	const s = String(value).trim();
-	if (!s) return null;
-	if (s.startsWith('http://') || s.startsWith('https://') || s.startsWith('data:')) {
-		return s;
+	if (!s || BLOCKED_SCHEME_RE.test(s)) return null;
+
+	if (s.startsWith('data:')) {
+		return s.startsWith('data:image/') ? s : null;
 	}
+
+	if (s.startsWith('http://') || s.startsWith('https://')) {
+		try {
+			const u = new URL(s);
+			if (!getAllowedMediaOrigins().has(u.origin)) return null;
+			return u.href;
+		} catch {
+			return null;
+		}
+	}
+
 	if (s.startsWith('/')) {
+		if (s.startsWith('//') || s.startsWith('/\\')) return null;
 		const origin = getSocketBaseUrl();
 		return `${origin}${s}`;
 	}
-	return s;
+
+	return null;
 }
 
 /** Alias — avatar user lưu trên server dạng path hoặc URL tuyệt đối */
 export const resolveAvatarUrl = resolvePublicMediaUrl;
 
-/** Có thể hiển thị làm src ảnh đại diện (path, URL, data URL). */
+/** Có thể hiển thị làm src ảnh đại diện (path, URL tin cậy, data:image). */
 export function isResolvableAvatar(value) {
-	const t = String(value ?? '').trim();
-	if (!t) return false;
-	return (
-		t.startsWith('http://') ||
-		t.startsWith('https://') ||
-		t.startsWith('data:image/') ||
-		t.startsWith('/')
-	);
+	return resolvePublicMediaUrl(value) != null;
 }

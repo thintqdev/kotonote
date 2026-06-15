@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticate, authorize } from '../../middlewares/auth.js';
+import { authenticateAdmin, authorize } from '../../middlewares/auth.js';
 import { USER_ROLE } from '../../constants/userStatus.js';
 import adminVocabularyRoutes from './adminVocabularyRoutes.js';
 import adminQuoteRoutes from './adminQuoteRoutes.js';
@@ -27,7 +27,7 @@ import adminArenaRoutes from './adminArenaRoutes.js';
 const router = express.Router();
 
 // Apply authentication and admin authorization to all admin routes
-router.use(authenticate);
+router.use(authenticateAdmin);
 router.use(authorize(USER_ROLE.ADMIN));
 
 // Mount admin routes

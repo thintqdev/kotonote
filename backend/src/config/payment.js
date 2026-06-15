@@ -25,6 +25,9 @@ export function isPayosPaymentProvider() {
  * Chỉ cho phép POST /checkout/:id/confirm khi mock (tránh bypass production).
  */
 export function isMockConfirmEndpointAllowed() {
+	if (process.env.NODE_ENV === 'production') {
+		return false;
+	}
 	return isMockPaymentProvider();
 }
 

@@ -12,6 +12,7 @@ import {
 } from "../data/grammarMock.js";
 import { getGrammarBySlug } from "../services/grammarService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { sanitizeHtml } from "../utils/sanitizeHtml.js";
 import { isJlptLockedError } from "../utils/jlptAccess.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import GrammarCompareTables from "../components/grammar/GrammarCompareTables.jsx";
@@ -40,7 +41,7 @@ GrammarJpVi.propTypes = {
 };
 
 function GrammarExampleItem({ pair, lang }) {
-  const jaHtml = pair?.ja ?? "";
+  const jaHtml = sanitizeHtml(pair?.ja ?? "");
   const { secondary } = grammarLine(pair, lang);
   return (
     <li className="grammar-example-item-split">

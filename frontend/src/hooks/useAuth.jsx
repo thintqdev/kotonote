@@ -1,42 +1,34 @@
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import * as authService from '../services/authService.js';
-import {
-	clearUserToken,
-	getUserToken,
-	setUserToken,
-} from '../services/tokenStorage.js';
+import { clearLegacyStoredTokens } from '../services/tokenStorage.js';
 import { needsEmailVerification } from '../utils/authVerification.js';
 import { translateMessageCode } from '../utils/apiErrorMessage.js';
 
 const AuthContext = createContext();
 
-/**
- * Auth Context Provider
- */
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		clearLegacyStoredTokens();
+	}, []);
+
+	useEffect(() => {
 		let cancelled = false;
 		(async () => {
-			const token = getUserToken();
-			if (token) {
-				try {
-					const { user: profile } = await authService.fetchCurrentUser();
-					if (!cancelled) {
-						if (needsEmailVerification(profile)) {
-							clearUserToken();
-							setUser(null);
-						} else {
-							setUser(profile);
-						}
-					}
-				} catch {
-					if (!cancelled) {
-						clearUserToken();
+			try {
+				const { user: profile } = await authService.fetchCurrentUser();
+				if (!cancelled) {
+					if (needsEmailVerification(profile)) {
 						setUser(null);
+					} else {
+						setUser(profile);
 					}
+				}
+			} catch {
+				if (!cancelled) {
+					setUser(null);
 				}
 			}
 			if (!cancelled) {
@@ -48,60 +40,65 @@ export const AuthProvider = ({ children }) => {
 		};
 	}, []);
 
-	const login = async (email, password, remember = true) => {
-		const { user: nextUser, token } = await authService.login({
+	const login = async (email, password, remember = false) => {
+		const { user: nextUser } = await authService.login({
 			email,
 			password,
+			remember,
 		});
 		if (needsEmailVerification(nextUser)) {
-			clearUserToken();
 			setUser(null);
 			const err = new Error(translateMessageCode('MSG_113'));
 			/** @type {Error & { messageCode?: string }} */ (err).messageCode = 'MSG_113';
 			throw err;
 		}
-		setUserToken(token, remember);
 		setUser(nextUser);
-		return { user: nextUser, token };
+		return { user: nextUser };
 	};
 
-	const loginWithGoogle = async (googleIdToken, remember = true) => {
-		const { user: nextUser, token } = await authService.googleLogin({
+	const loginWithGoogle = async (googleIdToken, remember = false, password) => {
+		const { user: nextUser } = await authService.googleLogin({
 			token: googleIdToken,
+			remember,
+			...(password ? { password } : {}),
 		});
-		setUserToken(token, remember);
+		if (needsEmailVerification(nextUser)) {
+			setUser(null);
+			const err = new Error(translateMessageCode('MSG_113'));
+			/** @type {Error & { messageCode?: string }} */ (err).messageCode = 'MSG_113';
+			throw err;
+		}
 		setUser(nextUser);
-		return { user: nextUser, token };
+		return { user: nextUser };
 	};
 
-	/** Đăng ký — không đăng nhập; chờ xác minh email. */
 	const signUp = useCallback(async (name, email, password) => {
-		clearUserToken();
 		setUser(null);
 		return authService.register({ name, email, password });
 	}, []);
 
-	/** Sau khi bấm link trong email — đăng nhập và vào khảo sát. */
-	const completeEmailVerification = useCallback(async (token, remember = true) => {
-		const { user: nextUser, token: jwt } = await authService.verifyEmail(token);
-		setUserToken(jwt, remember);
+	const completeEmailVerification = useCallback(async (token) => {
+		const { user: nextUser } = await authService.verifyEmail(token);
 		setUser(nextUser);
-		return { user: nextUser, token: jwt };
+		return { user: nextUser };
 	}, []);
 
-	const logout = () => {
-		clearUserToken();
+	const logout = useCallback(async () => {
+		try {
+			await authService.logout();
+		} catch {
+			/* ignore */
+		}
 		setUser(null);
-	};
+	}, []);
 
 	const refreshUser = useCallback(async (axiosConfig = {}) => {
-		const token = getUserToken();
-		if (!token) return null;
 		try {
 			const { user: next } = await authService.fetchCurrentUser(axiosConfig);
 			setUser(next);
 			return next;
 		} catch {
+			setUser(null);
 			return null;
 		}
 	}, []);
@@ -125,9 +122,6 @@ export const AuthProvider = ({ children }) => {
 	);
 };
 
-/**
- * Custom hook to use auth context
- */
 export const useAuth = () => {
 	const context = useContext(AuthContext);
 	if (!context) {

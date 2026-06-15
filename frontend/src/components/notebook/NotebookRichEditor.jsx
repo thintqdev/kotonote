@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { resolvePublicMediaUrl } from '../../utils/resolveAvatarUrl.js';
+import { sanitizeNotebookHtml } from '../../utils/sanitizeHtml.js';
+import { normalizeSafeLinkUrl } from '../../utils/safeUrl.js';
 import './NotebookRichEditor.css';
 
 function exec(cmd, value = null) {
@@ -28,16 +30,17 @@ export default function NotebookRichEditor({
 	useEffect(() => {
 		const el = editorRef.current;
 		if (!el) return;
-		if (value !== lastHtml.current) {
-			el.innerHTML = value || '';
-			lastHtml.current = value || '';
+		const safe = sanitizeNotebookHtml(value || '');
+		if (safe !== lastHtml.current) {
+			el.innerHTML = safe;
+			lastHtml.current = safe;
 		}
 	}, [value]);
 
 	const emitChange = useCallback(() => {
 		const el = editorRef.current;
 		if (!el) return;
-		const html = el.innerHTML;
+		const html = sanitizeNotebookHtml(el.innerHTML);
 		lastHtml.current = html;
 		onChange(html);
 	}, [onChange]);
@@ -79,7 +82,8 @@ export default function NotebookRichEditor({
 				break;
 			case 'link': {
 				const url = window.prompt(t('notebook.editorLinkPrompt'));
-				if (url) exec('createLink', url);
+				const safe = normalizeSafeLinkUrl(url);
+				if (safe) exec('createLink', safe);
 				break;
 			}
 			case 'table':

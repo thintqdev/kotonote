@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { getUserToken } from "../services/tokenStorage.js";
 import { getSocketBaseUrl } from "../utils/socketBaseUrl.js";
 
 /**
- * Socket.IO cho user app — chỉ kết nối khi `enabled` (trang thông báo / dropdown mở).
- * Dynamic import `socket.io-client` để không tải ~42KB khi chưa cần.
+ * Socket.IO user app — cookie httpOnly qua `withCredentials`.
  * @param {boolean} enabled
  */
 export function useUserNotificationSocket(enabled) {
@@ -18,9 +16,6 @@ export function useUserNotificationSocket(enabled) {
       return undefined;
     }
 
-    const token = getUserToken();
-    if (!token) return undefined;
-
     let activeSocket = null;
     let cancelled = false;
     let onConnect = null;
@@ -31,7 +26,7 @@ export function useUserNotificationSocket(enabled) {
       if (cancelled) return;
 
       const s = io(getSocketBaseUrl(), {
-        auth: { token },
+        withCredentials: true,
         transports: ["websocket", "polling"],
       });
 

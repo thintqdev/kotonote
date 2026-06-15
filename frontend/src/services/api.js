@@ -3,12 +3,6 @@ import {
 	getApiErrorMessage,
 	translateMessageCode,
 } from '../utils/apiErrorMessage.js';
-import {
-	clearAdminToken,
-	clearUserToken,
-	getAdminToken,
-	getUserToken,
-} from './tokenStorage.js';
 
 /** Dev: `/api` qua Vite proxy → backend (xem VITE_API_PROXY_TARGET). */
 const baseURL =
@@ -21,18 +15,13 @@ const defaultHeaders = {
 
 /**
  * @param {import('axios').AxiosInstance} instance
- * @param {{ getToken: () => string | null, clearToken: () => void, unauthorizedHref: string | null }} opts
- *   unauthorizedHref: null → không redirect; string → window.location khi 401 (và điều kiện path)
+ * @param {{ unauthorizedHref: string | null }} opts
  */
 function attachAuthInterceptors(instance, opts) {
-	const { getToken, clearToken, unauthorizedHref } = opts;
+	const { unauthorizedHref } = opts;
 
 	instance.interceptors.request.use(
 		(config) => {
-			const token = getToken();
-			if (token) {
-				config.headers.Authorization = `Bearer ${token}`;
-			}
 			if (
 				typeof FormData !== 'undefined' &&
 				config.data instanceof FormData
@@ -44,14 +33,13 @@ function attachAuthInterceptors(instance, opts) {
 			}
 			return config;
 		},
-		(error) => Promise.reject(error)
+		(error) => Promise.reject(error),
 	);
 
 	instance.interceptors.response.use(
 		(response) => response.data,
 		(error) => {
 			if (error.response?.status === 401) {
-				clearToken();
 				if (
 					unauthorizedHref &&
 					typeof window !== 'undefined'
@@ -94,29 +82,27 @@ function attachAuthInterceptors(instance, opts) {
 				).apiErrors = apiErrors;
 			}
 			return Promise.reject(err);
-		}
+		},
 	);
 }
 
-/** Client cho người dùng app (JWT trong localStorage `token`) */
+/** Client user — JWT trong httpOnly cookie (`kn_user_session`). */
 export const api = axios.create({
 	baseURL,
+	withCredentials: true,
 	headers: { ...defaultHeaders },
 });
 attachAuthInterceptors(api, {
-	getToken: getUserToken,
-	clearToken: clearUserToken,
 	unauthorizedHref: '/login',
 });
 
-
+/** Client admin — JWT trong httpOnly cookie (`kn_admin_session`). */
 export const adminApi = axios.create({
 	baseURL,
+	withCredentials: true,
 	headers: { ...defaultHeaders },
 });
 attachAuthInterceptors(adminApi, {
-	getToken: getAdminToken,
-	clearToken: clearAdminToken,
 	unauthorizedHref: '/admin/login',
 });
 

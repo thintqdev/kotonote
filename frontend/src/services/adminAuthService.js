@@ -3,18 +3,20 @@ import { getApiData } from '../utils/apiEnvelope.js';
 import api, { adminApi } from './api.js';
 
 /**
- * Đăng nhập admin — không cần Bearer; JWT trả về lưu qua tokenStorage.setAdminToken.
- * @param {{ email: string, password: string }} credentials
- * @returns {Promise<{ user: object, token: string }>}
+ * @param {{ email: string, password: string, remember?: boolean }} credentials
+ * @returns {Promise<{ user: object }>}
  */
 export async function adminLogin(credentials) {
 	const body = await api.post(AUTH.ADMIN_LOGIN, credentials);
 	return getApiData(body);
 }
 
+export async function adminLogout() {
+	const body = await api.post(AUTH.ADMIN_LOGOUT);
+	return getApiData(body);
+}
+
 /**
- * Phiên admin hiện tại — Bearer admin JWT, backend `authenticate` + user từ DB.
- * Dùng để chống token giả / token user thường lẫn vào kho admin.
  * @param {import('axios').AxiosRequestConfig} [axiosConfig]
  * @returns {Promise<{ user: object }>}
  */

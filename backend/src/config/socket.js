@@ -1,6 +1,8 @@
 import { Server } from 'socket.io';
+import { parse as parseCookieHeader } from 'cookie';
 import { findUserForSocketAuth } from '../repositories/userRepository.js';
 import { verifyToken } from '../utils/jwt.js';
+import { AUTH_COOKIE } from '../constants/authCookies.js';
 
 /**
  * Initialize Socket.IO with authentication and middleware
@@ -28,7 +30,11 @@ export const initializeSocket = (httpServer) => {
 	 */
 	io.use(async (socket, next) => {
 		try {
-			const token = socket.handshake.auth.token;
+			const cookies = parseCookieHeader(socket.handshake.headers.cookie || '');
+			const token =
+				cookies[AUTH_COOKIE.USER] ||
+				cookies[AUTH_COOKIE.ADMIN] ||
+				socket.handshake.auth?.token;
 
 			if (!token) {
 				return next(new Error('Authentication error: No token provided'));

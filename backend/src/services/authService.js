@@ -119,7 +119,7 @@ export const changePassword = async (userId, currentPassword, newPassword) => {
 	return { messageCode: AUTH.PASSWORD_CHANGED };
 };
 
-export const googleLogin = async (googleToken) => {
+export const googleLogin = async (googleToken, password) => {
 	const googleUser = await verifyGoogleToken(googleToken);
 	
 	if (!googleUser || !googleUser.emailVerified) {
@@ -132,17 +132,42 @@ export const googleLogin = async (googleToken) => {
 		user = await userRepository.findUserByEmail(googleUser.email);
 		
 		if (user) {
-			// Check account status before linking
 			if (user.status === USER_STATUS.SUSPENDED) {
 				throw { messageCode: AUTH.ACCOUNT_SUSPENDED, statusCode: 403 };
 			}
-			
-			user.googleId = googleUser.googleId;
-			user.authProvider = AUTH_PROVIDER.GOOGLE;
-			user.avatar = googleUser.avatar;
-			user.isEmailVerified = true;
-			user.lastLogin = Date.now();
-			await user.save();
+
+			if (user.isLocked) {
+				throw { messageCode: AUTH.ACCOUNT_LOCKED, statusCode: 423 };
+			}
+
+			if (user.googleId && user.googleId !== googleUser.googleId) {
+				throw { messageCode: AUTH.GOOGLE_AUTH_FAILED, statusCode: 409 };
+			}
+
+			if (!user.googleId) {
+				if (!user.password) {
+					throw { messageCode: AUTH.GOOGLE_LINK_PASSWORD_REQUIRED, statusCode: 409 };
+				}
+
+				const linkPassword = String(password || '').trim();
+				if (!linkPassword) {
+					throw { messageCode: AUTH.GOOGLE_LINK_PASSWORD_REQUIRED, statusCode: 409 };
+				}
+
+				const isPasswordValid = await user.comparePassword(linkPassword);
+				if (!isPasswordValid) {
+					await user.incLoginAttempts();
+					throw { messageCode: AUTH.PASSWORD_INCORRECT, statusCode: 401 };
+				}
+
+				await user.resetLoginAttempts();
+				user.googleId = googleUser.googleId;
+				user.authProvider = AUTH_PROVIDER.GOOGLE;
+				user.avatar = googleUser.avatar;
+				user.isEmailVerified = true;
+				user.lastLogin = Date.now();
+				await user.save();
+			}
 		} else {
 			user = await userRepository.createUser({
 				email: googleUser.email,
@@ -158,6 +183,10 @@ export const googleLogin = async (googleToken) => {
 		// Check account status
 		if (user.status === USER_STATUS.SUSPENDED) {
 			throw { messageCode: AUTH.ACCOUNT_SUSPENDED, statusCode: 403 };
+		}
+
+		if (user.isLocked) {
+			throw { messageCode: AUTH.ACCOUNT_LOCKED, statusCode: 423 };
 		}
 		
 		// Update last login
@@ -311,16 +340,19 @@ export const adminLogin = async (email, password) => {
 	if (!user.isActive) {
 		throw { messageCode: AUTH.LOGIN_FAILED, statusCode: 403 };
 	}
+
+	if (user.isLocked) {
+		throw { messageCode: AUTH.ACCOUNT_LOCKED, statusCode: 423 };
+	}
 	
 	const isPasswordValid = await user.comparePassword(password);
 	
 	if (!isPasswordValid) {
+		await user.incLoginAttempts();
 		throw { messageCode: AUTH.PASSWORD_INCORRECT, statusCode: 401 };
 	}
 	
-	// Update last login only
-	user.lastLogin = Date.now();
-	await user.save();
+	await user.resetLoginAttempts();
 	
 	const token = generateToken(user._id);
 	

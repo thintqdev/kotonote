@@ -23,6 +23,7 @@ export const loginSchema = Joi.object({
 	password: Joi.string().required().messages({
 		'any.required': 'MSG_003',
 	}),
+	remember: Joi.boolean().optional(),
 });
 
 export const changePasswordSchema = Joi.object({

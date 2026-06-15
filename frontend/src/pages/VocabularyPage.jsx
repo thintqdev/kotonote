@@ -37,6 +37,7 @@ import {
   sortDecksByOrder,
 } from "../utils/deckStudy.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
+import { sanitizeHtml } from "../utils/sanitizeHtml.js";
 import JlptLockGate from "../components/study/JlptLockGate.jsx";
 import VocabLessonUnlockGate from "../components/study/VocabLessonUnlockGate.jsx";
 import VocabularyLessonQuiz from "./VocabularyLessonQuiz.jsx";
@@ -781,7 +782,9 @@ export default function VocabularyPage() {
                                       className="vocab-study-example-ja-block"
                                       lang="ja"
                                       dangerouslySetInnerHTML={{
-                                        __html: flashCurrent.exampleJaHtml,
+                                        __html: sanitizeHtml(
+                                          flashCurrent.exampleJaHtml,
+                                        ),
                                       }}
                                     />
                                     {showViGloss ? (

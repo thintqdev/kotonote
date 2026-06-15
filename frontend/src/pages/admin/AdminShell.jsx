@@ -1,7 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AdminLayout from "../../layouts/AdminLayout.jsx";
-import { getAdminToken } from "../../services/tokenStorage.js";
 
 function AdminStubContent() {
   const { pathname } = useLocation();
@@ -17,14 +16,8 @@ function AdminStubContent() {
   );
 }
 
-/**
- * Vỏ route /admin — sidebar cố định, nội dung qua Outlet (các trang con sẽ thay thế stub).
- */
+/** Vỏ route /admin — xác thực phiên trong AdminLayout. */
 export default function AdminShell() {
-  if (!getAdminToken()) {
-    return <Navigate to="/admin/login" replace />;
-  }
-
   return (
     <AdminLayout>
       <Outlet />

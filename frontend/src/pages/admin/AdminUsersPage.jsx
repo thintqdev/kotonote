@@ -16,7 +16,7 @@ import {
   listAdminUsers,
   patchBulkAdminUsersStatus,
 } from "../../services/adminUserService.js";
-import { getAdminJwtUserId } from "../../utils/adminJwt.js";
+import { fetchAdminSession } from "../../services/adminAuthService.js";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
 import "./AdminUsersPage.css";
 
@@ -45,7 +45,24 @@ function statusChipClass(status) {
 }
 
 export default function AdminUsersPage() {
-  const currentAdminId = useMemo(() => getAdminJwtUserId(), []);
+  const [currentAdminId, setCurrentAdminId] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { user } = await fetchAdminSession();
+        if (!cancelled && user?._id) {
+          setCurrentAdminId(String(user._id));
+        }
+      } catch {
+        /* ignore */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const [status, setStatus] = useState("");
   const [role, setRole] = useState("");

@@ -1,53 +1,36 @@
 import { STORAGE_KEYS } from '../constants/storageKeys.js';
 
+/** Xóa JWT cũ trong localStorage/sessionStorage (migration sang httpOnly cookie). */
+export function clearLegacyStoredTokens() {
+	if (typeof window === 'undefined') return;
+	for (const key of Object.values(STORAGE_KEYS)) {
+		localStorage.removeItem(key);
+		sessionStorage.removeItem(key);
+	}
+}
+
+/** @deprecated JWT nằm trong httpOnly cookie — luôn null. */
 export function getUserToken() {
-	return (
-		sessionStorage.getItem(STORAGE_KEYS.USER_TOKEN) ||
-		localStorage.getItem(STORAGE_KEYS.USER_TOKEN)
-	);
+	return null;
 }
 
-/**
- * @param {string} token
- * @param {boolean} [remember=true] — true: localStorage; false: chỉ phiên (sessionStorage)
- */
-export function setUserToken(token, remember = true) {
-	if (remember) {
-		sessionStorage.removeItem(STORAGE_KEYS.USER_TOKEN);
-		localStorage.setItem(STORAGE_KEYS.USER_TOKEN, token);
-	} else {
-		localStorage.removeItem(STORAGE_KEYS.USER_TOKEN);
-		sessionStorage.setItem(STORAGE_KEYS.USER_TOKEN, token);
-	}
-}
+/** @deprecated */
+export function setUserToken() {}
 
+/** @deprecated */
 export function clearUserToken() {
-	sessionStorage.removeItem(STORAGE_KEYS.USER_TOKEN);
-	localStorage.removeItem(STORAGE_KEYS.USER_TOKEN);
+	clearLegacyStoredTokens();
 }
 
-/**
- * @param {string} token
- * @param {boolean} remember — true: localStorage, false: sessionStorage
- */
-export function setAdminToken(token, remember) {
-	if (remember) {
-		sessionStorage.removeItem(STORAGE_KEYS.ADMIN_TOKEN);
-		localStorage.setItem(STORAGE_KEYS.ADMIN_TOKEN, token);
-	} else {
-		localStorage.removeItem(STORAGE_KEYS.ADMIN_TOKEN);
-		sessionStorage.setItem(STORAGE_KEYS.ADMIN_TOKEN, token);
-	}
-}
+/** @deprecated */
+export function setAdminToken() {}
 
+/** @deprecated JWT admin trong httpOnly cookie — luôn null. */
 export function getAdminToken() {
-	return (
-		sessionStorage.getItem(STORAGE_KEYS.ADMIN_TOKEN) ||
-		localStorage.getItem(STORAGE_KEYS.ADMIN_TOKEN)
-	);
+	return null;
 }
 
+/** @deprecated */
 export function clearAdminToken() {
-	sessionStorage.removeItem(STORAGE_KEYS.ADMIN_TOKEN);
-	localStorage.removeItem(STORAGE_KEYS.ADMIN_TOKEN);
+	clearLegacyStoredTokens();
 }

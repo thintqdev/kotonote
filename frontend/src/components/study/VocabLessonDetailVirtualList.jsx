@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { vocabMeaningLine } from "../../data/vocabularyMock.js";
+import { sanitizeHtml } from "../../utils/sanitizeHtml.js";
 
 const ROW_GAP = 16;
 const ROW_BODY = 184;
@@ -24,7 +25,7 @@ function VocabLessonDetailRow({ row, lang, showViGloss, style }) {
       <div
         className="vocab-lesson-detail-ex"
         lang="ja"
-        dangerouslySetInnerHTML={{ __html: row.exampleJaHtml }}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(row.exampleJaHtml) }}
       />
       {showViGloss ? (
         <p className="vocab-lesson-detail-exvi" lang="vi">

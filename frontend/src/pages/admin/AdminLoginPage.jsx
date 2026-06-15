@@ -1,11 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { adminLogin } from "../../services/adminAuthService.js";
-import {
-  getAdminToken,
-  setAdminToken,
-} from "../../services/tokenStorage.js";
+import { adminLogin, fetchAdminSession } from "../../services/adminAuthService.js";
 import { getAxiosErrorMessage } from "../../utils/apiErrorMessage.js";
 import "./AdminLoginPage.css";
 
@@ -96,9 +92,33 @@ export default function AdminLoginPage() {
   const [remember, setRemember] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [sessionChecked, setSessionChecked] = useState(false);
+  const [hasSession, setHasSession] = useState(false);
 
-  if (getAdminToken()) {
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { user } = await fetchAdminSession();
+        if (!cancelled && user?.role === "admin") {
+          setHasSession(true);
+        }
+      } catch {
+        /* not logged in */
+      }
+      if (!cancelled) setSessionChecked(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (sessionChecked && hasSession) {
     return <Navigate to="/admin" replace />;
+  }
+
+  if (!sessionChecked) {
+    return null;
   }
 
   const validate = () => {
@@ -115,8 +135,7 @@ export default function AdminLoginPage() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const { token } = await adminLogin({ email, password });
-      setAdminToken(token, remember);
+      await adminLogin({ email, password, remember });
       toast.success("Đăng nhập thành công", {
         description: "Chào mừng bạn đến Kotonote Studio.",
       });

@@ -186,7 +186,7 @@ const Header = ({ userName, notificationCount, streakDays = 0 }) => {
 
   const handleUserLogout = () => {
     setIsUserMenuOpen(false);
-    logout();
+    void logout();
     navigate("/login");
   };
 

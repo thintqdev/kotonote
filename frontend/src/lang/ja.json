@@ -1634,12 +1634,16 @@
     "verifyRequired": "ログインする前にメール確認を完了してください",
     "googleUnavailable": "Googleログイン未設定 — frontend/.env に VITE_GOOGLE_CLIENT_ID を追加し dev を再起動",
     "googleLoading": "Googleボタンを読み込み中…",
+    "googleLinkLead": "このGoogleメールは既存アカウントと一致します。リンクするには現在のパスワードを入力してください。",
+    "googleLinkConfirm": "リンクしてログイン",
+    "googleLinkCancel": "キャンセル",
     "errors": {
       "emailRequired": "メールを入力してください",
       "emailInvalid": "メールの形式が正しくありません",
       "passwordRequired": "パスワードを入力してください",
       "submitFailed": "ログインに失敗しました",
-      "googleFailed": "Googleログインに失敗しました"
+      "googleFailed": "Googleログインに失敗しました",
+      "googleTokenExpired": "Googleのセッションが期限切れです。もう一度Googleでログインしてください。"
     }
   },
   "forgotPassword": {
@@ -2300,6 +2304,8 @@
     "MSG_119": "登録済みのメールであれば、数分以内に再設定の案内が届きます",
     "MSG_120": "パスワードを再設定しました。新しいパスワードでログインできます",
     "MSG_121": "このメールアドレスは既に登録されています。ログインするか、別のメールをお使いください。",
+    "MSG_123": "Googleメールが既存アカウントと一致します。リンクするにはパスワードを入力してください。",
+    "MSG_124": "試行回数が多すぎます。しばらく待ってから再度お試しください。",
     "MSG_201": "ユーザー作成成功",
     "MSG_202": "ユーザー更新成功",
     "MSG_203": "ユーザー削除成功",

@@ -7,6 +7,8 @@ export const AUTH = {
 	VERIFY_EMAIL: '/auth/verify-email',
 	RESEND_VERIFICATION: '/auth/resend-verification',
 	GOOGLE: '/auth/google',
+	LOGOUT: '/auth/logout',
+	ADMIN_LOGOUT: '/auth/admin/logout',
 	CHANGE_PASSWORD: '/auth/change-password',
 	FORGOT_PASSWORD: '/auth/forgot-password',
 	RESET_PASSWORD: '/auth/reset-password',

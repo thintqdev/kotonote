@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
@@ -10,22 +10,33 @@ import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 const VerifyEmailPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { completeEmailVerification } = useAuth();
-  const token = (searchParams.get('token') || '').trim();
+  const [verifyToken] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    return (new URLSearchParams(window.location.search).get('token') || '').trim();
+  });
 
-  const [status, setStatus] = useState(token ? 'ready' : 'missing');
+  const [status, setStatus] = useState(verifyToken ? 'ready' : 'missing');
   const [errorMessage, setErrorMessage] = useState('');
   const [resendEmail, setResendEmail] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
 
+  useEffect(() => {
+    if (!verifyToken || typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has('token')) return;
+    url.searchParams.delete('token');
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    window.history.replaceState({}, '', next);
+  }, [verifyToken]);
+
   const handleVerify = async () => {
-    if (!token || isVerifying) return;
+    if (!verifyToken || isVerifying) return;
     setIsVerifying(true);
     setErrorMessage('');
     try {
-      await completeEmailVerification(token);
+      await completeEmailVerification(verifyToken);
       setStatus('success');
       toast.success(t('verifyEmail.successToast'));
       navigate('/survey', { replace: true });

@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
-import { getAdminToken } from "../services/tokenStorage.js";
 import { getSocketBaseUrl } from "../utils/socketBaseUrl.js";
 
 /**
- * Socket.IO cho tài khoản admin (cùng JWT với REST).
+ * Socket.IO admin — cookie httpOnly qua `withCredentials`.
  * @param {boolean} enabled
  */
 export function useAdminNotificationSocket(enabled) {
@@ -12,26 +10,42 @@ export function useAdminNotificationSocket(enabled) {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return undefined;
-    const token = getAdminToken();
-    if (!token) return undefined;
+    if (!enabled) {
+      setConnected(false);
+      setSocket(null);
+      return undefined;
+    }
 
-    const s = io(getSocketBaseUrl(), {
-      auth: { token },
-      transports: ["websocket", "polling"],
-    });
+    let activeSocket = null;
+    let cancelled = false;
+    let onConnect = null;
+    let onDisconnect = null;
 
-    const onConnect = () => setConnected(true);
-    const onDisconnect = () => setConnected(false);
+    (async () => {
+      const { io } = await import("socket.io-client");
+      if (cancelled) return;
 
-    s.on("connect", onConnect);
-    s.on("disconnect", onDisconnect);
-    setSocket(s);
+      const s = io(getSocketBaseUrl(), {
+        withCredentials: true,
+        transports: ["websocket", "polling"],
+      });
+
+      onConnect = () => setConnected(true);
+      onDisconnect = () => setConnected(false);
+
+      s.on("connect", onConnect);
+      s.on("disconnect", onDisconnect);
+      activeSocket = s;
+      setSocket(s);
+    })();
 
     return () => {
-      s.off("connect", onConnect);
-      s.off("disconnect", onDisconnect);
-      s.disconnect();
+      cancelled = true;
+      if (activeSocket) {
+        if (onConnect) activeSocket.off("connect", onConnect);
+        if (onDisconnect) activeSocket.off("disconnect", onDisconnect);
+        activeSocket.disconnect();
+      }
       setConnected(false);
       setSocket(null);
     };
