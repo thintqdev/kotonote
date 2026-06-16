@@ -13,9 +13,9 @@ import {
   updateAdminGrammar,
 } from "../../services/adminGrammarService.js";
 import { getApiErrorMessage } from "../../utils/apiErrorMessage.js";
-import EditorAIGenerateModal from "../../components/admin/EditorAIGenerateModal.jsx";
 import GrammarImportModal from "../../components/admin/GrammarImportModal.jsx";
 import { GRAMMAR_AI_GENERATE } from "../../constants/editorAiGenerateConfig.js";
+import { listAdminPrompts } from "../../services/adminPromptService.js";
 import {
   emptyGrammarForm,
   formToGrammarPayload,
@@ -31,8 +31,13 @@ export default function AdminGrammarEditorPage() {
   const [form, setForm] = useState(emptyGrammarForm);
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
-  const [generateOpen, setGenerateOpen] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
+  const [promptOptions, setPromptOptions] = useState([]);
+  const [promptsLoading, setPromptsLoading] = useState(true);
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    GRAMMAR_AI_GENERATE.defaultTemplate("N5"),
+  );
 
   useEffect(() => {
     if (!isEdit) return;
@@ -55,6 +60,50 @@ export default function AdminGrammarEditorPage() {
       cancelled = true;
     };
   }, [id, isEdit, navigate]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setPromptsLoading(true);
+      try {
+        const data = await listAdminPrompts({
+          type: GRAMMAR_AI_GENERATE.promptType,
+          isActive: true,
+        });
+        if (cancelled) return;
+        const list = (data.prompts ?? []).sort(
+          (a, b) =>
+            (Number(a.displayOrder) || 0) - (Number(b.displayOrder) || 0),
+        );
+        setPromptOptions(list);
+        const preferred = GRAMMAR_AI_GENERATE.defaultTemplate(form.jlpt);
+        if (list.some((p) => p.templateKey === preferred)) {
+          setSelectedTemplate(preferred);
+        } else if (list[0]?.templateKey) {
+          setSelectedTemplate(list[0].templateKey);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          toast.error("Không tải được danh sách prompt", {
+            description: getApiErrorMessage(e),
+          });
+        }
+      } finally {
+        if (!cancelled) setPromptsLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!promptOptions.length) return;
+    const preferred = GRAMMAR_AI_GENERATE.defaultTemplate(form.jlpt);
+    if (promptOptions.some((p) => p.templateKey === preferred)) {
+      setSelectedTemplate(preferred);
+    }
+  }, [form.jlpt, promptOptions]);
 
   const setField = (key, value) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -86,6 +135,53 @@ export default function AdminGrammarEditorPage() {
       next[index] = value;
       return { ...prev, practiceItems: next };
     });
+  };
+
+  const handleGenerateAI = async () => {
+    const pattern = form.pattern.trim();
+    if (!pattern) {
+      toast.error("Nhập mẫu ngữ pháp (Pattern) trước khi Generate AI");
+      return;
+    }
+    if (!selectedTemplate) {
+      toast.error("Chọn mẫu prompt");
+      return;
+    }
+    setGenerating(true);
+    try {
+      const { item, source } = await GRAMMAR_AI_GENERATE.generate({
+        templateName: selectedTemplate,
+        prompt: "",
+        jlpt: form.jlpt,
+        patternHint: pattern,
+      });
+      if (!item) {
+        toast.error("AI không trả về nội dung");
+        return;
+      }
+      setForm((prev) => {
+        const merged = mergeGrammarAIIntoForm(prev, item);
+        return {
+          ...merged,
+          pattern: prev.pattern.trim() || item.pattern?.trim() || prev.pattern,
+          jlpt: prev.jlpt,
+          slug: isEdit ? prev.slug : merged.slug,
+        };
+      });
+      const srcLabel =
+        source === "gemini"
+          ? "Gemini AI"
+          : "Placeholder (chưa cấu hình GEMINI_API_KEYS)";
+      toast.success("Đã điền vào form", {
+        description: `${srcLabel} · ${selectedTemplate} · Kiểm tra trước khi lưu.`,
+      });
+    } catch (err) {
+      toast.error("Generate thất bại", {
+        description: getApiErrorMessage(err),
+      });
+    } finally {
+      setGenerating(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -142,9 +238,10 @@ export default function AdminGrammarEditorPage() {
           <button
             type="button"
             className="admin-grammar-ai-btn"
-            onClick={() => setGenerateOpen(true)}
+            disabled={generating || saving || promptsLoading}
+            onClick={() => void handleGenerateAI()}
           >
-            Generate AI
+            {generating ? "Đang generate…" : "Generate AI"}
           </button>
         </div>
       </div>
@@ -165,14 +262,35 @@ export default function AdminGrammarEditorPage() {
                 spellCheck={false}
               />
             </label>
-            <label>
+            <label className="admin-grammar-grid-span">
               Pattern
               <input
                 value={form.pattern}
                 onChange={(e) => setField("pattern", e.target.value)}
                 required
                 lang="ja"
+                placeholder="vd: 〜ている / 〜によると"
               />
+            </label>
+            <label className="admin-grammar-grid-span">
+              Mẫu prompt
+              <select
+                value={selectedTemplate}
+                onChange={(e) => setSelectedTemplate(e.target.value)}
+                disabled={generating || promptsLoading}
+              >
+                {promptOptions.length === 0 ? (
+                  <option value={selectedTemplate}>
+                    {promptsLoading ? "Đang tải…" : selectedTemplate}
+                  </option>
+                ) : (
+                  promptOptions.map((p) => (
+                    <option key={p._id} value={p.templateKey}>
+                      {p.name} ({p.templateKey})
+                    </option>
+                  ))
+                )}
+              </select>
             </label>
             <label>
               JLPT
@@ -199,6 +317,12 @@ export default function AdminGrammarEditorPage() {
               />
             </label>
           </div>
+          <p className="admin-grammar-tags-hint">
+            Generate AI: nhập Pattern, chọn mẫu prompt ở trên rồi bấm{" "}
+            <strong>Generate AI</strong> — nội dung tự điền vào form (quản lý
+            prompt tại{" "}
+            <Link to="/admin/prompts">Prompt AI</Link>).
+          </p>
           <div className="admin-grammar-field admin-grammar-publish-row">
             <span className="admin-grammar-label">Xuất bản</span>
             <div className="admin-grammar-switch-wrap">
@@ -422,26 +546,6 @@ export default function AdminGrammarEditorPage() {
           </button>
         </div>
       </form>
-
-      <EditorAIGenerateModal
-        open={generateOpen}
-        onClose={() => setGenerateOpen(false)}
-        config={GRAMMAR_AI_GENERATE}
-        levelKey={form.jlpt}
-        contextHint={form.pattern}
-        onApply={(ai) =>
-          setForm((prev) => {
-            const merged = mergeGrammarAIIntoForm(prev, ai);
-            return {
-              ...merged,
-              pattern:
-                prev.pattern.trim() || ai.pattern?.trim() || prev.pattern,
-              jlpt: prev.jlpt,
-              slug: isEdit ? prev.slug : merged.slug,
-            };
-          })
-        }
-      />
 
       <GrammarImportModal
         open={importOpen}

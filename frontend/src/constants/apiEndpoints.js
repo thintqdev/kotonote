@@ -9,6 +9,8 @@ export const AUTH = {
 	GOOGLE: '/auth/google',
 	LOGOUT: '/auth/logout',
 	ADMIN_LOGOUT: '/auth/admin/logout',
+	/** GET — phiên admin (cookie `kn_admin_session`) */
+	ADMIN_ME: '/auth/admin/me',
 	CHANGE_PASSWORD: '/auth/change-password',
 	FORGOT_PASSWORD: '/auth/forgot-password',
 	RESET_PASSWORD: '/auth/reset-password',

@@ -1,7 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import * as authService from '../services/authService.js';
+import * as userService from '../services/userService.js';
 import { apiSuccess } from '../utils/response.js';
-import { AUTH } from '../constants/messages.js';
+import { AUTH, USER } from '../constants/messages.js';
 import {
 	setUserAuthCookie,
 	setAdminAuthCookie,
@@ -101,6 +102,12 @@ export const logout = asyncHandler(async (req, res) => {
 export const adminLogout = asyncHandler(async (req, res) => {
 	clearAdminAuthCookie(res);
 	return apiSuccess(res, null, AUTH.LOGOUT_SUCCESS, 200);
+});
+
+/** Phiên admin — JWT từ cookie `kn_admin_session`. */
+export const getAdminMe = asyncHandler(async (req, res) => {
+	const user = await userService.getCurrentUser(req.user._id);
+	return apiSuccess(res, { user }, USER.FETCHED, 200);
 });
 
 export const changePassword = asyncHandler(async (req, res) => {

@@ -802,6 +802,10 @@
   gap: 12px;
 }
 
+.admin-grammar-grid-span {
+  grid-column: 1 / -1;
+}
+
 .admin-grammar-grid label,
 .admin-grammar-form-section > label {
   display: flex;

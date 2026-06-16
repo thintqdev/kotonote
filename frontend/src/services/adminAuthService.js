@@ -1,4 +1,4 @@
-import { AUTH, PROFILE } from '../constants/apiEndpoints.js';
+import { AUTH } from '../constants/apiEndpoints.js';
 import { getApiData } from '../utils/apiEnvelope.js';
 import api, { adminApi } from './api.js';
 
@@ -21,6 +21,6 @@ export async function adminLogout() {
  * @returns {Promise<{ user: object }>}
  */
 export async function fetchAdminSession(axiosConfig = {}) {
-	const body = await adminApi.get(PROFILE.ME, axiosConfig);
+	const body = await adminApi.get(AUTH.ADMIN_ME, axiosConfig);
 	return getApiData(body);
 }

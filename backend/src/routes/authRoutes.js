@@ -1,7 +1,7 @@
 import express from 'express';
 import * as authController from '../controllers/authController.js';
 import { validate } from '../middlewares/validate.js';
-import { authenticate } from '../middlewares/auth.js';
+import { authenticate, authenticateAdmin } from '../middlewares/auth.js';
 import {
 	authCredentialRateLimit,
 	adminLoginRateLimit,
@@ -43,6 +43,7 @@ router.post(
 	authController.adminLogin,
 );
 router.post('/admin/logout', authController.adminLogout);
+router.get('/admin/me', authenticateAdmin, authController.getAdminMe);
 router.post(
 	'/google',
 	authCredentialRateLimit,
