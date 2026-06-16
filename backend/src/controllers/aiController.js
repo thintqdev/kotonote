@@ -4,6 +4,7 @@ import * as vocabularyService from '../services/vocabularyService.js';
 import * as kanjiService from '../services/kanjiService.js';
 import { apiSuccess } from '../utils/response.js';
 import { getGeminiApiKeys } from '../config/gemini.js';
+import { MESSAGES, VOCABULARY, KANJI } from '../constants/messages.js';
 
 /**
  * @desc    Generate vocabulary with AI
@@ -20,7 +21,7 @@ export const generateVocabulary = asyncHandler(async (req, res) => {
 	} = req.body;
 
 	if (!templateName || String(templateName).trim().length === 0) {
-		return apiSuccess(res, { vocabulary: [], count: 0 }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { vocabulary: [], count: 0 }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 	
 	// Get existing vocabulary if deckId provided
@@ -53,7 +54,7 @@ export const generateVocabulary = asyncHandler(async (req, res) => {
 			source: result.source,
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
-		}, MESSAGES.MSG_707, 201);
+		}, VOCABULARY.WORD_CREATED, 201);
 	}
 	
 	return apiSuccess(res, {
@@ -63,7 +64,7 @@ export const generateVocabulary = asyncHandler(async (req, res) => {
 		source: result.source,
 		promptUsed: result.promptUsed,
 		templateName: result.templateName,
-	}, MESSAGES.MSG_001, 200);
+	}, MESSAGES.SUCCESS, 200);
 });
 
 /**
@@ -81,7 +82,7 @@ export const generateKanji = asyncHandler(async (req, res) => {
 	} = req.body;
 	
 	if (!templateName || String(templateName).trim().length === 0) {
-		return apiSuccess(res, { kanji: [], count: 0 }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { kanji: [], count: 0 }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 
 	let existingChars = [];
@@ -112,7 +113,7 @@ export const generateKanji = asyncHandler(async (req, res) => {
 			source: result.source,
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
-		}, MESSAGES.MSG_901, 201);
+		}, KANJI.CREATED, 201);
 	}
 	
 	return apiSuccess(res, {
@@ -122,7 +123,7 @@ export const generateKanji = asyncHandler(async (req, res) => {
 		source: result.source,
 		promptUsed: result.promptUsed,
 		templateName: result.templateName,
-	}, MESSAGES.MSG_001, 200);
+	}, MESSAGES.SUCCESS, 200);
 });
 
 /**
@@ -138,7 +139,7 @@ export const generateGrammar = asyncHandler(async (req, res) => {
 	} = req.body;
 
 	if (!templateName || String(templateName).trim().length === 0) {
-		return apiSuccess(res, { grammar: null }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { grammar: null }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 
 	const result = await aiService.generateGrammarWithAI({
@@ -156,7 +157,7 @@ export const generateGrammar = asyncHandler(async (req, res) => {
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
 		},
-		MESSAGES.MSG_001,
+		MESSAGES.SUCCESS,
 		200,
 	);
 });
@@ -178,7 +179,7 @@ export const generateKaiwa = asyncHandler(async (req, res) => {
 	} = req.body;
 
 	if (!templateName || String(templateName).trim().length === 0) {
-		return apiSuccess(res, { context: null }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { context: null }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 
 	const result = await aiService.generateKaiwaContextWithAI({
@@ -196,7 +197,7 @@ export const generateKaiwa = asyncHandler(async (req, res) => {
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
 		},
-		MESSAGES.MSG_001,
+		MESSAGES.SUCCESS,
 		200,
 	);
 });
@@ -209,7 +210,7 @@ export const generateReading = asyncHandler(async (req, res) => {
 	} = req.body;
 
 	if (!templateName || String(templateName).trim().length === 0) {
-		return apiSuccess(res, { article: null }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { article: null }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 
 	const result = await aiService.generateReadingWithAI({
@@ -226,7 +227,7 @@ export const generateReading = asyncHandler(async (req, res) => {
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
 		},
-		MESSAGES.MSG_001,
+		MESSAGES.SUCCESS,
 		200,
 	);
 });
@@ -244,7 +245,7 @@ export const translate = asyncHandler(async (req, res) => {
 	} = req.body;
 	
 	if (!text || text.trim().length === 0) {
-		return apiSuccess(res, { translation: '' }, MESSAGES.MSG_003, 400);
+		return apiSuccess(res, { translation: '' }, MESSAGES.VALIDATION_ERROR, 400);
 	}
 	
 	const translation = await aiService.translateWithAI({
@@ -258,7 +259,7 @@ export const translate = asyncHandler(async (req, res) => {
 		translation,
 		sourceLang,
 		targetLang,
-	}, MESSAGES.MSG_001, 200);
+	}, MESSAGES.SUCCESS, 200);
 });
 
 /**
@@ -278,5 +279,5 @@ export const testAIConnection = asyncHandler(async (req, res) => {
 			: 'AI service not configured. Add GEMINI_API_KEYS (comma-separated) or GEMINI_API_KEY to .env',
 	};
 
-	return apiSuccess(res, status, MESSAGES.MSG_001, 200);
+	return apiSuccess(res, status, MESSAGES.SUCCESS, 200);
 });
