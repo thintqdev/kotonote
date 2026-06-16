@@ -3,6 +3,7 @@ import {
 	getApiErrorMessage,
 	translateMessageCode,
 } from '../utils/apiErrorMessage.js';
+import { isPublicAuthRoute } from '../constants/publicAuthRoutes.js';
 
 /** Dev: `/api` qua Vite proxy → backend (xem VITE_API_PROXY_TARGET). */
 const baseURL =
@@ -48,8 +49,7 @@ function attachAuthInterceptors(instance, opts) {
 					if (unauthorizedHref === '/login') {
 						if (
 							!path.startsWith('/admin') &&
-							path !== '/login' &&
-							path !== '/register'
+							!isPublicAuthRoute(path)
 						) {
 							window.location.href = unauthorizedHref;
 						}
