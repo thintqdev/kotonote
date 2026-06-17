@@ -154,6 +154,7 @@ export const generateGrammar = asyncHandler(async (req, res) => {
 		{
 			grammar: result.grammar,
 			source: result.source,
+			fallbackReason: result.fallbackReason ?? null,
 			promptUsed: result.promptUsed,
 			templateName: result.templateName,
 		},

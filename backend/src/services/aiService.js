@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import {
 	GEMINI_MODEL,
 	getGeminiApiKeys,
+	isGeminiConfigured,
 	shouldTryNextGeminiKey,
 } from '../config/gemini.js';
 import { getAIPromptAsync } from '../utils/promptLoader.js';
@@ -67,9 +68,15 @@ async function invokeGeminiWithKey(apiKey, prompt, options = {}) {
 		return responseText?.trim() ?? '';
 	}
 
-	return arrayMode
-		? parseJsonArrayFromAIText(responseText)
-		: parseJsonFromAIText(responseText);
+	if (arrayMode) {
+		return parseJsonArrayFromAIText(responseText);
+	}
+
+	try {
+		return parseJsonFromAIText(responseText);
+	} catch {
+		return parseJsonObjectLenient(responseText);
+	}
 }
 
 /**
@@ -276,11 +283,29 @@ export const generateGrammarWithAI = async (options) => {
 				templateName,
 			};
 		}
+		return {
+			grammar: generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }),
+			source: 'placeholder',
+			fallbackReason: 'normalize_failed',
+			promptUsed: prompt,
+			templateName,
+		};
+	}
+
+	if (!isGeminiConfigured()) {
+		return {
+			grammar: generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }),
+			source: 'placeholder',
+			fallbackReason: 'gemini_not_configured',
+			promptUsed: prompt,
+			templateName,
+		};
 	}
 
 	return {
 		grammar: generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }),
 		source: 'placeholder',
+		fallbackReason: 'gemini_api_failed',
 		promptUsed: prompt,
 		templateName,
 	};
@@ -514,7 +539,7 @@ function generatePlaceholderGrammar({ jlpt, patternHint, customPrompt }) {
 		},
 		memo: {
 			ja: 'メモ',
-			vi: `Placeholder — ${customPrompt || 'GEMINI_API_KEYS chưa cấu hình'}`,
+			vi: 'Dữ liệu mẫu (placeholder) — Gemini chưa trả kết quả hợp lệ.',
 		},
 		practice: {
 			items: [

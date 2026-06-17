@@ -22,6 +22,7 @@ export const GRAMMAR_AI_GENERATE = {
 		return {
 			item: result.grammar ?? null,
 			source: result.source ?? '',
+			fallbackReason: result.fallbackReason ?? null,
 		};
 	},
 	previewLines: (item) => {

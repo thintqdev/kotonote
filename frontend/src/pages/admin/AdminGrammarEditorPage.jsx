@@ -149,7 +149,7 @@ export default function AdminGrammarEditorPage() {
     }
     setGenerating(true);
     try {
-      const { item, source } = await GRAMMAR_AI_GENERATE.generate({
+      const { item, source, fallbackReason } = await GRAMMAR_AI_GENERATE.generate({
         templateName: selectedTemplate,
         prompt: "",
         jlpt: form.jlpt,
@@ -168,12 +168,20 @@ export default function AdminGrammarEditorPage() {
           slug: isEdit ? prev.slug : merged.slug,
         };
       });
-      const srcLabel =
-        source === "gemini"
-          ? "Gemini AI"
-          : "Placeholder (chưa cấu hình GEMINI_API_KEYS)";
-      toast.success("Đã điền vào form", {
-        description: `${srcLabel} · ${selectedTemplate} · Kiểm tra trước khi lưu.`,
+      if (source === "gemini") {
+        toast.success("Đã điền vào form từ Gemini AI", {
+          description: `${selectedTemplate} · Kiểm tra trước khi lưu.`,
+        });
+        return;
+      }
+      const reasonHint =
+        fallbackReason === "gemini_not_configured"
+          ? "Server chưa có GEMINI_API_KEYS / GEMINI_API_KEY trong .env"
+          : fallbackReason === "normalize_failed"
+            ? "Gemini trả JSON nhưng không parse/normalize được — xem log backend"
+            : "Gemini API lỗi hoặc hết quota — xem log backend";
+      toast.warning("AI không khả dụng — đã điền dữ liệu mẫu", {
+        description: `${reasonHint} · Pattern "${pattern}" đã được gửi qua patternHint (prompt trống là bình thường).`,
       });
     } catch (err) {
       toast.error("Generate thất bại", {
