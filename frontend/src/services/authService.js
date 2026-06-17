@@ -86,15 +86,37 @@ export async function resetPassword(payload, axiosConfig = {}) {
  * @param {import('axios').AxiosRequestConfig} [axiosConfig]
  * @returns {Promise<{ user: object }>}
  */
+async function loadCurrentUser(axiosConfig = {}) {
+	try {
+		const body = await api.get(PROFILE.ME, axiosConfig);
+		return getApiData(body);
+	} catch (err) {
+		const code =
+			typeof /** @type {Error & { messageCode?: string }} */ (err).messageCode ===
+			'string'
+				? /** @type {Error & { messageCode?: string }} */ (err).messageCode
+				: '';
+		/** Cookie user cũ/hỏng — xóa httpOnly cookie để không lặp MSG_004. */
+		if (code === 'MSG_004' || code === 'MSG_106') {
+			try {
+				await logout();
+			} catch {
+				/* ignore */
+			}
+		}
+		throw err;
+	}
+}
+
+/**
+ * @param {import('axios').AxiosRequestConfig} [axiosConfig]
+ * @returns {Promise<{ user: object }>}
+ */
 export async function fetchCurrentUser(axiosConfig = {}) {
 	if (axiosConfig.signal) {
-		const body = await api.get(PROFILE.ME, axiosConfig);
-		return getApiData(body);
+		return loadCurrentUser(axiosConfig);
 	}
-	return dedupePromise('users/me:cookie', async () => {
-		const body = await api.get(PROFILE.ME, axiosConfig);
-		return getApiData(body);
-	});
+	return dedupePromise('users/me:cookie', () => loadCurrentUser(axiosConfig));
 }
 
 export async function updateCurrentUser(payload, axiosConfig = {}) {

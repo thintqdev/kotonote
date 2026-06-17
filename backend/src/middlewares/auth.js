@@ -11,6 +11,29 @@ import { extractAuthToken } from '../utils/authCookies.js';
 /**
  * @param {import('express').Request} req
  * @param {string} cookieName
+ * @returns {Promise<Record<string, unknown> | null>}
+ */
+async function tryAuthenticateToken(req, cookieName) {
+	const token = extractAuthToken(req, cookieName);
+	if (!token) return null;
+
+	const decoded = verifyToken(token);
+	if (!decoded?.userId) return null;
+
+	const user = await findUserForAuth(decoded.userId);
+	if (!user || !user.isActive) return null;
+
+	const provider = user.authProvider || AUTH_PROVIDER.LOCAL;
+	if (provider === AUTH_PROVIDER.LOCAL && !user.isEmailVerified) {
+		return null;
+	}
+
+	return user;
+}
+
+/**
+ * @param {import('express').Request} req
+ * @param {string} cookieName
  */
 async function authenticateFromCookie(req, res, cookieName) {
 	const token = extractAuthToken(req, cookieName);
@@ -63,12 +86,19 @@ export const authenticateAdmin = createAuthenticate(AUTH_COOKIE.ADMIN);
 
 /**
  * User hoặc admin cookie — Studio đọc catalog qua `/kanji/*`, `/vocabulary/*`.
+ * Cookie user cũ/hỏng không chặn phiên admin.
  */
 export const authenticateUserOrAdmin = asyncHandler(async (req, res, next) => {
-	const userToken = extractAuthToken(req, AUTH_COOKIE.USER);
-	const cookieName = userToken ? AUTH_COOKIE.USER : AUTH_COOKIE.ADMIN;
-	await authenticateFromCookie(req, res, cookieName);
-	if (res.headersSent) return;
+	const user =
+		(await tryAuthenticateToken(req, AUTH_COOKIE.USER)) ??
+		(await tryAuthenticateToken(req, AUTH_COOKIE.ADMIN));
+
+	if (!user) {
+		return apiError(res, AUTH.TOKEN_INVALID, 401);
+	}
+
+	req.user = user;
+	req.jlptUnlocked = getJlptUnlockedForUser(user);
 	next();
 });
 

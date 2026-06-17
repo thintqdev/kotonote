@@ -16,6 +16,13 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		let cancelled = false;
+		const path =
+			typeof window !== 'undefined' ? window.location.pathname : '';
+		/** Admin Studio có phiên riêng — không gọi /users/me (tránh 401 MSG_004). */
+		if (path.startsWith('/admin')) {
+			setLoading(false);
+			return undefined;
+		}
 		(async () => {
 			try {
 				const { user: profile } = await authService.fetchCurrentUser();
