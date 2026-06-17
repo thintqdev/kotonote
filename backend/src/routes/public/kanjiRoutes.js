@@ -2,11 +2,11 @@ import express from 'express';
 import * as kanjiController from '../../controllers/kanjiController.js';
 import * as kanjiProgressController from '../../controllers/kanjiProgressController.js';
 import userKanjiDeckRoutes from './userKanjiDeckRoutes.js';
-import { authenticate } from '../../middlewares/auth.js';
+import { authenticateUserOrAdmin } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
-router.use(authenticate);
+router.use(authenticateUserOrAdmin);
 
 router.use('/my', userKanjiDeckRoutes);
 

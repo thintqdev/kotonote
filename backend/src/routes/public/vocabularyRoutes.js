@@ -2,11 +2,11 @@ import express from 'express';
 import * as vocabularyController from '../../controllers/vocabularyController.js';
 import * as vocabularyProgressController from '../../controllers/vocabularyProgressController.js';
 import userVocabularyDeckRoutes from './userVocabularyDeckRoutes.js';
-import { authenticate } from '../../middlewares/auth.js';
+import { authenticateUserOrAdmin } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
-router.use(authenticate);
+router.use(authenticateUserOrAdmin);
 
 router.use('/my', userVocabularyDeckRoutes);
 
