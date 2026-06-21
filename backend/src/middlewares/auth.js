@@ -86,12 +86,12 @@ export const authenticateAdmin = createAuthenticate(AUTH_COOKIE.ADMIN);
 
 /**
  * User hoặc admin cookie — Studio đọc catalog qua `/kanji/*`, `/vocabulary/*`.
- * Cookie user cũ/hỏng không chặn phiên admin.
+ * Ưu tiên cookie admin khi cả hai hợp lệ (tránh phiên user thường che role admin).
  */
 export const authenticateUserOrAdmin = asyncHandler(async (req, res, next) => {
 	const user =
-		(await tryAuthenticateToken(req, AUTH_COOKIE.USER)) ??
-		(await tryAuthenticateToken(req, AUTH_COOKIE.ADMIN));
+		(await tryAuthenticateToken(req, AUTH_COOKIE.ADMIN)) ??
+		(await tryAuthenticateToken(req, AUTH_COOKIE.USER));
 
 	if (!user) {
 		return apiError(res, AUTH.TOKEN_INVALID, 401);

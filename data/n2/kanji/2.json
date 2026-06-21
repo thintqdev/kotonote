@@ -1,0 +1,252 @@
+[
+    {
+        "char": "改",
+        "onYomi": "カイ",
+        "kunYomi": "あらた・める、あらた・まる",
+        "hanViet": "cải",
+        "meaningVi": "cải cách, sửa đổi",
+        "vocabJa": "改善",
+        "exampleJa": "仕事の流れを改善しました。",
+        "exampleVi": "Đã cải thiện quy trình công việc."
+    },
+    {
+        "char": "害",
+        "onYomi": "ガイ",
+        "kunYomi": "",
+        "hanViet": "hại",
+        "meaningVi": "thiệt hại",
+        "vocabJa": "被害",
+        "exampleJa": "台風で大きな被害が出ました。",
+        "exampleVi": "Cơn bão đã gây ra thiệt hại lớn."
+    },
+    {
+        "char": "街",
+        "onYomi": "ガイ",
+        "kunYomi": "まち",
+        "hanViet": "nhai",
+        "meaningVi": "đường phố, khu phố",
+        "vocabJa": "街頭",
+        "exampleJa": "街頭でインタビューを受けました。",
+        "exampleVi": "Tôi đã được phỏng vấn ngoài đường phố."
+    },
+    {
+        "char": "額",
+        "onYomi": "ガク",
+        "kunYomi": "ひたい",
+        "hanViet": "ngạch",
+        "meaningVi": "số tiền, trán",
+        "vocabJa": "金額",
+        "exampleJa": "金額を確認してください。",
+        "exampleVi": "Hãy xác nhận số tiền."
+    },
+    {
+        "char": "較",
+        "onYomi": "カク",
+        "kunYomi": "",
+        "hanViet": "giảo",
+        "meaningVi": "so sánh",
+        "vocabJa": "比較",
+        "exampleJa": "二つの商品を比較します。",
+        "exampleVi": "So sánh hai sản phẩm."
+    },
+    {
+        "char": "確",
+        "onYomi": "カク",
+        "kunYomi": "たし・か",
+        "hanViet": "xác",
+        "meaningVi": "chính xác",
+        "vocabJa": "確認",
+        "exampleJa": "内容を確認してください。",
+        "exampleVi": "Vui lòng xác nhận nội dung."
+    },
+    {
+        "char": "格",
+        "onYomi": "カク",
+        "kunYomi": "",
+        "hanViet": "cách",
+        "meaningVi": "tư cách, tiêu chuẩn",
+        "vocabJa": "資格",
+        "exampleJa": "資格を取得しました。",
+        "exampleVi": "Tôi đã lấy được chứng chỉ."
+    },
+    {
+        "char": "割",
+        "onYomi": "カツ",
+        "kunYomi": "わ・る、わり",
+        "hanViet": "cát",
+        "meaningVi": "chia cắt",
+        "vocabJa": "分割",
+        "exampleJa": "費用を分割で支払います。",
+        "exampleVi": "Tôi thanh toán chi phí theo từng đợt."
+    },
+    {
+        "char": "活",
+        "onYomi": "カツ",
+        "kunYomi": "",
+        "hanViet": "hoạt",
+        "meaningVi": "hoạt động",
+        "vocabJa": "活動",
+        "exampleJa": "地域活動に参加しています。",
+        "exampleVi": "Tôi tham gia các hoạt động địa phương."
+    },
+    {
+        "char": "株",
+        "onYomi": "シュ",
+        "kunYomi": "かぶ",
+        "hanViet": "chu",
+        "meaningVi": "cổ phiếu",
+        "vocabJa": "株式",
+        "exampleJa": "株式市場が変動しています。",
+        "exampleVi": "Thị trường chứng khoán đang biến động."
+    },
+    {
+        "char": "刊",
+        "onYomi": "カン",
+        "kunYomi": "",
+        "hanViet": "san",
+        "meaningVi": "xuất bản",
+        "vocabJa": "週刊",
+        "exampleJa": "週刊誌を読みます。",
+        "exampleVi": "Tôi đọc tạp chí tuần."
+    },
+    {
+        "char": "幹",
+        "onYomi": "カン",
+        "kunYomi": "みき",
+        "hanViet": "cán",
+        "meaningVi": "trục chính, nòng cốt",
+        "vocabJa": "幹部",
+        "exampleJa": "幹部会議が開かれました。",
+        "exampleVi": "Cuộc họp lãnh đạo đã được tổ chức."
+    },
+    {
+        "char": "慣",
+        "onYomi": "カン",
+        "kunYomi": "な・れる",
+        "hanViet": "quán",
+        "meaningVi": "quen thuộc",
+        "vocabJa": "習慣",
+        "exampleJa": "毎朝運動する習慣があります。",
+        "exampleVi": "Tôi có thói quen tập thể dục mỗi sáng."
+    },
+    {
+        "char": "歓",
+        "onYomi": "カン",
+        "kunYomi": "",
+        "hanViet": "hoan",
+        "meaningVi": "vui mừng",
+        "vocabJa": "歓迎",
+        "exampleJa": "皆さんを歓迎します。",
+        "exampleVi": "Chào mừng tất cả mọi người."
+    },
+    {
+        "char": "監",
+        "onYomi": "カン",
+        "kunYomi": "",
+        "hanViet": "giám",
+        "meaningVi": "giám sát",
+        "vocabJa": "監督",
+        "exampleJa": "監督の指示に従います。",
+        "exampleVi": "Tôi làm theo chỉ đạo của người giám sát."
+    },
+    {
+        "char": "管",
+        "onYomi": "カン",
+        "kunYomi": "くだ",
+        "hanViet": "quản",
+        "meaningVi": "quản lý",
+        "vocabJa": "管理",
+        "exampleJa": "データを管理しています。",
+        "exampleVi": "Tôi đang quản lý dữ liệu."
+    },
+    {
+        "char": "関",
+        "onYomi": "カン",
+        "kunYomi": "せき、かか・わる",
+        "hanViet": "quan",
+        "meaningVi": "liên quan",
+        "vocabJa": "関係",
+        "exampleJa": "この問題は私に関係ありません。",
+        "exampleVi": "Vấn đề này không liên quan đến tôi."
+    },
+    {
+        "char": "観",
+        "onYomi": "カン",
+        "kunYomi": "",
+        "hanViet": "quan",
+        "meaningVi": "quan sát, quan điểm",
+        "vocabJa": "観光",
+        "exampleJa": "京都へ観光に行きました。",
+        "exampleVi": "Tôi đã đi tham quan Kyoto."
+    },
+    {
+        "char": "願",
+        "onYomi": "ガン",
+        "kunYomi": "ねが・う",
+        "hanViet": "nguyện",
+        "meaningVi": "mong muốn",
+        "vocabJa": "願望",
+        "exampleJa": "願望を実現したいです。",
+        "exampleVi": "Tôi muốn thực hiện mong muốn của mình."
+    },
+    {
+        "char": "器",
+        "onYomi": "キ",
+        "kunYomi": "うつわ",
+        "hanViet": "khí",
+        "meaningVi": "dụng cụ",
+        "vocabJa": "機器",
+        "exampleJa": "新しい機器を導入しました。",
+        "exampleVi": "Đã đưa vào sử dụng thiết bị mới."
+    },
+    {
+        "char": "希",
+        "onYomi": "キ",
+        "kunYomi": "",
+        "hanViet": "hy",
+        "meaningVi": "hy vọng, hiếm",
+        "vocabJa": "希望",
+        "exampleJa": "希望を捨てないでください。",
+        "exampleVi": "Xin đừng từ bỏ hy vọng."
+    },
+    {
+        "char": "紀",
+        "onYomi": "キ",
+        "kunYomi": "",
+        "hanViet": "kỷ",
+        "meaningVi": "thế kỷ, ghi chép",
+        "vocabJa": "世紀",
+        "exampleJa": "21世紀に生きています。",
+        "exampleVi": "Chúng ta đang sống trong thế kỷ 21."
+    },
+    {
+        "char": "寄",
+        "onYomi": "キ",
+        "kunYomi": "よ・る",
+        "hanViet": "ký",
+        "meaningVi": "gửi, ghé",
+        "vocabJa": "寄付",
+        "exampleJa": "被災地へ寄付しました。",
+        "exampleVi": "Tôi đã quyên góp cho vùng thiên tai."
+    },
+    {
+        "char": "規",
+        "onYomi": "キ",
+        "kunYomi": "",
+        "hanViet": "quy",
+        "meaningVi": "quy tắc",
+        "vocabJa": "規則",
+        "exampleJa": "規則を守りましょう。",
+        "exampleVi": "Hãy tuân thủ quy định."
+    },
+    {
+        "char": "技",
+        "onYomi": "ギ",
+        "kunYomi": "わざ",
+        "hanViet": "kỹ",
+        "meaningVi": "kỹ thuật",
+        "vocabJa": "技術",
+        "exampleJa": "日本の技術は高いです。",
+        "exampleVi": "Công nghệ của Nhật Bản rất tiên tiến."
+    }
+]

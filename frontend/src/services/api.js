@@ -67,15 +67,22 @@ function attachAuthInterceptors(instance, opts) {
 				typeof error.response?.data?.messageCode === 'string'
 					? error.response.data.messageCode.trim()
 					: '';
+			const apiErrors = error.response?.data?.errors;
+			const jlptLevel =
+				Array.isArray(apiErrors) &&
+				apiErrors.find((item) => item?.field === 'jlpt')?.message;
 			const message = code
-				? translateMessageCode(code)
+				? translateMessageCode(
+						code,
+						undefined,
+						jlptLevel ? { level: String(jlptLevel) } : {},
+					)
 				: getApiErrorMessage(error);
 			const err = new Error(message);
 			if (code) {
 				/** @type {Error & { messageCode?: string }} */ (err).messageCode =
 					code;
 			}
-			const apiErrors = error.response?.data?.errors;
 			if (Array.isArray(apiErrors) && apiErrors.length) {
 				/** @type {Error & { apiErrors?: Array<{ field?: string, message?: string }> }} */ (
 					err

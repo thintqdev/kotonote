@@ -5,9 +5,10 @@ const MSG_CODE_RE = /^MSG_\d+$/;
 /**
  * @param {string} code
  * @param {(key: string, opts?: object) => string} [tFn]
+ * @param {Record<string, string>} [interpolation]
  * @returns {string}
  */
-export function translateMessageCode(code, tFn) {
+export function translateMessageCode(code, tFn, interpolation = {}) {
 	if (!code || typeof code !== 'string') {
 		return '';
 	}
@@ -20,7 +21,7 @@ export function translateMessageCode(code, tFn) {
 	const tr = tFn ?? ((k, opts) => i18n.t(k, opts));
 
 	if (i18n.exists(key)) {
-		return tr(key);
+		return tr(key, interpolation);
 	}
 
 	const fallbackKey = 'message.MSG_002';

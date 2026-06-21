@@ -1,0 +1,252 @@
+[
+    {
+        "char": "候",
+        "onYomi": "コウ",
+        "kunYomi": "そうろう",
+        "hanViet": "hầu",
+        "meaningVi": "thời tiết, tình hình",
+        "vocabJa": "気候",
+        "exampleJa": "この地域は温暖な気候です。",
+        "exampleVi": "Khu vực này có khí hậu ôn hòa."
+    },
+    {
+        "char": "耕",
+        "onYomi": "コウ",
+        "kunYomi": "たがや・す",
+        "hanViet": "canh",
+        "meaningVi": "cày cấy",
+        "vocabJa": "農耕",
+        "exampleJa": "昔から農耕が行われてきました。",
+        "exampleVi": "Từ xưa nơi đây đã có hoạt động canh tác."
+    },
+    {
+        "char": "鉱",
+        "onYomi": "コウ",
+        "kunYomi": "",
+        "hanViet": "khoáng",
+        "meaningVi": "quặng, khoáng sản",
+        "vocabJa": "鉱物",
+        "exampleJa": "この山では鉱物が採れます。",
+        "exampleVi": "Ngọn núi này có thể khai thác khoáng sản."
+    },
+    {
+        "char": "構",
+        "onYomi": "コウ",
+        "kunYomi": "かま・える",
+        "hanViet": "cấu",
+        "meaningVi": "cấu tạo, xây dựng",
+        "vocabJa": "構造",
+        "exampleJa": "建物の構造を調べます。",
+        "exampleVi": "Tôi nghiên cứu cấu trúc của tòa nhà."
+    },
+    {
+        "char": "講",
+        "onYomi": "コウ",
+        "kunYomi": "",
+        "hanViet": "giảng",
+        "meaningVi": "giảng dạy",
+        "vocabJa": "講演",
+        "exampleJa": "有名な教授の講演を聞きました。",
+        "exampleVi": "Tôi đã nghe bài diễn thuyết của một giáo sư nổi tiếng."
+    },
+    {
+        "char": "貢",
+        "onYomi": "コウ",
+        "kunYomi": "みつ・ぐ",
+        "hanViet": "cống",
+        "meaningVi": "đóng góp",
+        "vocabJa": "貢献",
+        "exampleJa": "社会に貢献したいです。",
+        "exampleVi": "Tôi muốn đóng góp cho xã hội."
+    },
+    {
+        "char": "項",
+        "onYomi": "コウ",
+        "kunYomi": "",
+        "hanViet": "hạng",
+        "meaningVi": "mục, khoản",
+        "vocabJa": "項目",
+        "exampleJa": "必要な項目を入力してください。",
+        "exampleVi": "Vui lòng nhập các mục cần thiết."
+    },
+    {
+        "char": "香",
+        "onYomi": "コウ",
+        "kunYomi": "か、かお・り",
+        "hanViet": "hương",
+        "meaningVi": "mùi hương",
+        "vocabJa": "香水",
+        "exampleJa": "彼女は香水をつけています。",
+        "exampleVi": "Cô ấy đang dùng nước hoa."
+    },
+    {
+        "char": "降",
+        "onYomi": "コウ",
+        "kunYomi": "お・りる、ふ・る",
+        "hanViet": "giáng",
+        "meaningVi": "rơi xuống, đi xuống",
+        "vocabJa": "以降",
+        "exampleJa": "来月以降に連絡します。",
+        "exampleVi": "Tôi sẽ liên lạc từ tháng sau trở đi."
+    },
+    {
+        "char": "鋼",
+        "onYomi": "コウ",
+        "kunYomi": "はがね",
+        "hanViet": "cương",
+        "meaningVi": "thép",
+        "vocabJa": "鋼鉄",
+        "exampleJa": "鋼鉄で橋を造りました。",
+        "exampleVi": "Người ta xây cây cầu bằng thép."
+    },
+    {
+        "char": "克",
+        "onYomi": "コク",
+        "kunYomi": "",
+        "hanViet": "khắc",
+        "meaningVi": "vượt qua",
+        "vocabJa": "克服",
+        "exampleJa": "困難を克服しました。",
+        "exampleVi": "Tôi đã vượt qua khó khăn."
+    },
+    {
+        "char": "穀",
+        "onYomi": "コク",
+        "kunYomi": "",
+        "hanViet": "cốc",
+        "meaningVi": "ngũ cốc",
+        "vocabJa": "穀物",
+        "exampleJa": "穀物の価格が上がっています。",
+        "exampleVi": "Giá ngũ cốc đang tăng."
+    },
+    {
+        "char": "骨",
+        "onYomi": "コツ",
+        "kunYomi": "ほね",
+        "hanViet": "cốt",
+        "meaningVi": "xương",
+        "vocabJa": "骨折",
+        "exampleJa": "転んで骨折しました。",
+        "exampleVi": "Tôi bị gãy xương do ngã."
+    },
+    {
+        "char": "混",
+        "onYomi": "コン",
+        "kunYomi": "ま・じる、こ・む",
+        "hanViet": "hỗn",
+        "meaningVi": "trộn lẫn, đông đúc",
+        "vocabJa": "混雑",
+        "exampleJa": "駅が混雑しています。",
+        "exampleVi": "Nhà ga đang rất đông đúc."
+    },
+    {
+        "char": "査",
+        "onYomi": "サ",
+        "kunYomi": "",
+        "hanViet": "tra",
+        "meaningVi": "điều tra, kiểm tra",
+        "vocabJa": "調査",
+        "exampleJa": "市場調査を行いました。",
+        "exampleVi": "Đã tiến hành khảo sát thị trường."
+    },
+    {
+        "char": "再",
+        "onYomi": "サイ",
+        "kunYomi": "ふたた・び",
+        "hanViet": "tái",
+        "meaningVi": "lại, tái",
+        "vocabJa": "再開",
+        "exampleJa": "工事が再開されました。",
+        "exampleVi": "Công trình đã được khởi động lại."
+    },
+    {
+        "char": "災",
+        "onYomi": "サイ",
+        "kunYomi": "わざわ・い",
+        "hanViet": "tai",
+        "meaningVi": "thiên tai, tai họa",
+        "vocabJa": "災害",
+        "exampleJa": "災害に備えましょう。",
+        "exampleVi": "Hãy chuẩn bị cho thiên tai."
+    },
+    {
+        "char": "採",
+        "onYomi": "サイ",
+        "kunYomi": "と・る",
+        "hanViet": "thái",
+        "meaningVi": "thu thập, tuyển dụng",
+        "vocabJa": "採用",
+        "exampleJa": "新入社員を採用しました。",
+        "exampleVi": "Công ty đã tuyển nhân viên mới."
+    },
+    {
+        "char": "際",
+        "onYomi": "サイ",
+        "kunYomi": "きわ",
+        "hanViet": "tế",
+        "meaningVi": "dịp, khi",
+        "vocabJa": "国際",
+        "exampleJa": "国際会議に参加しました。",
+        "exampleVi": "Tôi đã tham gia hội nghị quốc tế."
+    },
+    {
+        "char": "材",
+        "onYomi": "ザイ",
+        "kunYomi": "",
+        "hanViet": "tài",
+        "meaningVi": "vật liệu, nhân tài",
+        "vocabJa": "材料",
+        "exampleJa": "料理の材料を買いました。",
+        "exampleVi": "Tôi đã mua nguyên liệu nấu ăn."
+    },
+    {
+        "char": "財",
+        "onYomi": "ザイ",
+        "kunYomi": "",
+        "hanViet": "tài",
+        "meaningVi": "tài sản",
+        "vocabJa": "財産",
+        "exampleJa": "財産を管理しています。",
+        "exampleVi": "Anh ấy đang quản lý tài sản."
+    },
+    {
+        "char": "罪",
+        "onYomi": "ザイ",
+        "kunYomi": "つみ",
+        "hanViet": "tội",
+        "meaningVi": "tội lỗi",
+        "vocabJa": "犯罪",
+        "exampleJa": "犯罪を防ぐことが大切です。",
+        "exampleVi": "Việc ngăn chặn tội phạm là rất quan trọng."
+    },
+    {
+        "char": "策",
+        "onYomi": "サク",
+        "kunYomi": "",
+        "hanViet": "sách",
+        "meaningVi": "biện pháp, kế sách",
+        "vocabJa": "政策",
+        "exampleJa": "新しい政策が発表されました。",
+        "exampleVi": "Chính sách mới đã được công bố."
+    },
+    {
+        "char": "殺",
+        "onYomi": "サツ",
+        "kunYomi": "ころ・す",
+        "hanViet": "sát",
+        "meaningVi": "giết",
+        "vocabJa": "殺人",
+        "exampleJa": "殺人は重大な犯罪です。",
+        "exampleVi": "Giết người là một tội ác nghiêm trọng."
+    },
+    {
+        "char": "察",
+        "onYomi": "サツ",
+        "kunYomi": "",
+        "hanViet": "sát",
+        "meaningVi": "suy đoán, quan sát",
+        "vocabJa": "警察",
+        "exampleJa": "警察に相談しました。",
+        "exampleVi": "Tôi đã trao đổi với cảnh sát."
+    }
+]

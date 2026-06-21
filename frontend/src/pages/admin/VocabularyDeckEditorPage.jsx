@@ -277,8 +277,7 @@ export default function VocabularyDeckEditorPage() {
         return {
           pageTitle: "Tạo deck từ vựng",
           breadcrumbLast: "Tạo mới",
-          subtitle:
-            "Điền thông tin deck; có thể nhập JSON để tạo deck và từ cùng lúc.",
+          subtitle: "Điền thông tin deck và danh sách từ vựng.",
           primaryActionLabel: "Tạo deck",
         };
       }
@@ -437,41 +436,41 @@ export default function VocabularyDeckEditorPage() {
   };
 
   const submitImportJson = async () => {
-    if (isCreate && !title.trim()) {
-      toast.error("Thiếu thông tin", {
-        description: "Nhập tiêu đề deck ở form phía trên trước khi nhập JSON.",
-      });
-      return;
-    }
-    if (!isCreate && !deckId) {
-      toast.error("Chưa thể nhập", {
-        description: "Deck chưa có ID hợp lệ.",
-      });
-      return;
-    }
-
     setImportBusy(true);
     try {
       const list = parseVocabularyImportJson(importJsonText);
+
+      if (isCreate) {
+        const room = Math.max(0, MAX_WORDS_PER_DECK - filledWordCount);
+        if (list.length > room) {
+          toast.message("Đã giới hạn số từ", {
+            description: `Chỉ thêm ${room} từ (tối đa ${MAX_WORDS_PER_DECK}/deck).`,
+          });
+        }
+        setRows((prev) =>
+          mergeVocabularyAIIntoRows(prev, list, MAX_WORDS_PER_DECK),
+        );
+        toast.success("Đã nạp vào bảng", {
+          description:
+            "Từ vựng tạm trên form — điền thông tin deck rồi bấm «Tạo deck» để lưu.",
+        });
+        setImportModalOpen(false);
+        setImportJsonText("");
+        return;
+      }
+
+      if (!deckId) {
+        toast.error("Chưa thể nhập", {
+          description: "Deck chưa có ID hợp lệ.",
+        });
+        return;
+      }
+
       const capped = list.slice(0, MAX_WORDS_PER_DECK);
       if (list.length > MAX_WORDS_PER_DECK) {
         toast.message("Đã giới hạn số từ", {
           description: `Chỉ nhập ${MAX_WORDS_PER_DECK} từ đầu (tối đa/deck).`,
         });
-      }
-
-      if (isCreate) {
-        const { deck } = await createVocabularyDeck(buildDeckPayload());
-        const id = deck?._id;
-        if (!id) throw new Error("Không nhận được ID deck từ server.");
-        const { created } = await importVocabularyFromJson(String(id), capped);
-        toast.success("Đã tạo deck và nhập từ", {
-          description: `${created} từ đã được thêm.`,
-        });
-        setImportModalOpen(false);
-        setImportJsonText("");
-        navigate(`/admin/vocabulary/decks/${id}`, { replace: true });
-        return;
       }
 
       const { created } = await importVocabularyFromJson(deckId, capped);
@@ -940,7 +939,13 @@ export default function VocabularyDeckEditorPage() {
                     type="button"
                     className="vdeck-btn vdeck-btn--ghost"
                     onClick={openImportModal}
-                    title="Dán hoặc chọn file JSON; khi tạo mới sẽ tạo deck và nhập từ cùng lúc"
+                    title={
+                      isView
+                        ? "Chế độ xem — chuyển sang chỉnh sửa để nhập JSON."
+                        : isCreate
+                          ? "Nhập JSON vào bảng — lưu deck sau"
+                          : "Nhập nhiều từ từ file JSON"
+                    }
                   >
                     Nhập JSON
                   </button>
@@ -1123,8 +1128,8 @@ export default function VocabularyDeckEditorPage() {
               {isCreate ? (
                 <>
                   {" "}
-                  Khi tạo deck mới: điền <strong>tiêu đề</strong> ở form trước,
-                  bấm «Tạo deck và nhập» — không cần lưu deck trước.
+                  Deck mới: dữ liệu chỉ nạp vào bảng bên dưới; bấm «Tạo deck» khi
+                  đã điền tiêu đề deck.
                 </>
               ) : null}
             </p>
@@ -1178,11 +1183,7 @@ export default function VocabularyDeckEditorPage() {
                 disabled={importBusy}
                 onClick={() => void submitImportJson()}
               >
-                {importBusy
-                  ? "Đang nhập…"
-                  : isCreate
-                    ? "Tạo deck và nhập"
-                    : "Nhập"}
+                {importBusy ? "Đang nhập…" : "Nhập"}
               </button>
             </div>
           </div>

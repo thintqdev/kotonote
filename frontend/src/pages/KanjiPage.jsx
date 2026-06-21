@@ -19,6 +19,7 @@ import { getDeckWithKanji, loadKanjiPack } from "../services/kanjiService.js";
 import {
   getDeckLessonItems,
   isDeckLessonUnlocked,
+  JLPT_ORDER,
   mapKanjiRecord,
   sortDeckItemsByDisplayOrder,
 } from "../utils/deckStudy.js";
@@ -1041,5 +1042,10 @@ export function KanjiIndexRedirect() {
       />
     );
   }
-  return <Navigate to="/kanji/browse" replace />;
+  return (
+    <Navigate
+      to={`/kanji/browse?jlpt=${encodeURIComponent(JLPT_ORDER[0])}`}
+      replace
+    />
+  );
 }

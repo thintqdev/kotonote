@@ -42,6 +42,15 @@ export default function KanjiListPage() {
   const selectedJlpt = (searchParams.get("jlpt") || "").trim();
   const requestedPage = parseKanjiListPage(searchParams);
 
+  useEffect(() => {
+    if (!selectedJlpt) {
+      setSearchParams(
+        kanjiListSearchParams({ page: requestedPage, jlpt: JLPT_ORDER[0] }),
+        { replace: true },
+      );
+    }
+  }, [selectedJlpt, requestedPage, setSearchParams]);
+
   const [decks, setDecks] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +58,7 @@ export default function KanjiListPage() {
   const [progressByDeckId, setProgressByDeckId] = useState({});
 
   const fetchList = useCallback(async () => {
-    if (!user) return;
+    if (!user || !selectedJlpt) return;
     setLoading(true);
     setError("");
     try {
@@ -110,7 +119,7 @@ export default function KanjiListPage() {
       : Math.min(page * DECK_LESSON_PAGE_SIZE, totalLessons);
 
   const totalKanji = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
-  const displayJlpt = selectedJlpt || t("kanjiPage.jlptAll");
+  const displayJlpt = selectedJlpt;
 
   const setJlpt = (next) => {
     setSearchParams(
@@ -243,15 +252,6 @@ export default function KanjiListPage() {
           role="tablist"
           aria-label={t("readingPage.filterAria")}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={!selectedJlpt}
-            className={`vocab-tab${!selectedJlpt ? " vocab-tab--active" : ""}`}
-            onClick={() => setJlpt("")}
-          >
-            {t("readingPage.filterAll")}
-          </button>
           {JLPT_ORDER.map((lv) => (
             <button
               key={`jlpt-tab-${lv}`}
@@ -301,11 +301,6 @@ export default function KanjiListPage() {
 
                   <div className="vocab-lesson-main">
                     <h2 className="vocab-lesson-card-title">
-                      {!selectedJlpt ? (
-                        <span className="vocab-lesson-jlpt-tag">
-                          {lesson.jlpt}
-                        </span>
-                      ) : null}
                       {t("kanjiPage.lessonCardTitle", { n: lesson.lessonNo })}
                       {!canStudy ? (
                         <span className="vocab-lesson-lock-badge" aria-hidden>

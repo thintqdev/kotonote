@@ -1,0 +1,252 @@
+[
+    {
+        "char": "計",
+        "onYomi": "ケイ",
+        "kunYomi": "はか・る",
+        "hanViet": "kế",
+        "meaningVi": "tính toán, kế hoạch",
+        "vocabJa": "計画",
+        "exampleJa": "来年の計画を立てています。",
+        "exampleVi": "Tôi đang lập kế hoạch cho năm sau."
+    },
+    {
+        "char": "経",
+        "onYomi": "ケイ",
+        "kunYomi": "へ・る",
+        "hanViet": "kinh",
+        "meaningVi": "kinh qua, kinh tế",
+        "vocabJa": "経験",
+        "exampleJa": "貴重な経験ができました。",
+        "exampleVi": "Tôi đã có một trải nghiệm quý giá."
+    },
+    {
+        "char": "警",
+        "onYomi": "ケイ",
+        "kunYomi": "",
+        "hanViet": "cảnh",
+        "meaningVi": "cảnh giác",
+        "vocabJa": "警告",
+        "exampleJa": "警告を無視してはいけません。",
+        "exampleVi": "Không được phớt lờ cảnh báo."
+    },
+    {
+        "char": "芸",
+        "onYomi": "ゲイ",
+        "kunYomi": "",
+        "hanViet": "nghệ",
+        "meaningVi": "nghệ thuật",
+        "vocabJa": "芸術",
+        "exampleJa": "彼は芸術に興味があります。",
+        "exampleVi": "Anh ấy hứng thú với nghệ thuật."
+    },
+    {
+        "char": "劇",
+        "onYomi": "ゲキ",
+        "kunYomi": "",
+        "hanViet": "kịch",
+        "meaningVi": "kịch, vở diễn",
+        "vocabJa": "演劇",
+        "exampleJa": "学校で演劇を見ました。",
+        "exampleVi": "Tôi đã xem kịch ở trường."
+    },
+    {
+        "char": "欠",
+        "onYomi": "ケツ",
+        "kunYomi": "か・ける",
+        "hanViet": "khuyết",
+        "meaningVi": "thiếu hụt",
+        "vocabJa": "欠点",
+        "exampleJa": "誰にでも欠点があります。",
+        "exampleVi": "Ai cũng có khuyết điểm."
+    },
+    {
+        "char": "結",
+        "onYomi": "ケツ",
+        "kunYomi": "むす・ぶ",
+        "hanViet": "kết",
+        "meaningVi": "kết nối, kết quả",
+        "vocabJa": "結果",
+        "exampleJa": "良い結果が出ました。",
+        "exampleVi": "Đã có kết quả tốt."
+    },
+    {
+        "char": "潔",
+        "onYomi": "ケツ",
+        "kunYomi": "いさぎよ・い",
+        "hanViet": "khiết",
+        "meaningVi": "trong sạch",
+        "vocabJa": "清潔",
+        "exampleJa": "部屋を清潔に保ちます。",
+        "exampleVi": "Tôi giữ phòng luôn sạch sẽ."
+    },
+    {
+        "char": "件",
+        "onYomi": "ケン",
+        "kunYomi": "",
+        "hanViet": "kiện",
+        "meaningVi": "vụ việc",
+        "vocabJa": "事件",
+        "exampleJa": "その事件は有名です。",
+        "exampleVi": "Vụ việc đó rất nổi tiếng."
+    },
+    {
+        "char": "券",
+        "onYomi": "ケン",
+        "kunYomi": "",
+        "hanViet": "phiếu",
+        "meaningVi": "vé, phiếu",
+        "vocabJa": "乗車券",
+        "exampleJa": "乗車券を購入しました。",
+        "exampleVi": "Tôi đã mua vé tàu."
+    },
+    {
+        "char": "建",
+        "onYomi": "ケン",
+        "kunYomi": "た・てる",
+        "hanViet": "kiến",
+        "meaningVi": "xây dựng",
+        "vocabJa": "建設",
+        "exampleJa": "新しい橋を建設しています。",
+        "exampleVi": "Đang xây một cây cầu mới."
+    },
+    {
+        "char": "健",
+        "onYomi": "ケン",
+        "kunYomi": "すこ・やか",
+        "hanViet": "kiện",
+        "meaningVi": "khỏe mạnh",
+        "vocabJa": "健康",
+        "exampleJa": "健康が一番大切です。",
+        "exampleVi": "Sức khỏe là quan trọng nhất."
+    },
+    {
+        "char": "検",
+        "onYomi": "ケン",
+        "kunYomi": "",
+        "hanViet": "kiểm",
+        "meaningVi": "kiểm tra",
+        "vocabJa": "検査",
+        "exampleJa": "荷物の検査を受けました。",
+        "exampleVi": "Tôi đã trải qua kiểm tra hành lý."
+    },
+    {
+        "char": "険",
+        "onYomi": "ケン",
+        "kunYomi": "けわ・しい",
+        "hanViet": "hiểm",
+        "meaningVi": "nguy hiểm",
+        "vocabJa": "危険",
+        "exampleJa": "危険な場所へ行かないでください。",
+        "exampleVi": "Xin đừng đến nơi nguy hiểm."
+    },
+    {
+        "char": "権",
+        "onYomi": "ケン",
+        "kunYomi": "",
+        "hanViet": "quyền",
+        "meaningVi": "quyền hạn",
+        "vocabJa": "権利",
+        "exampleJa": "自分の権利を守りましょう。",
+        "exampleVi": "Hãy bảo vệ quyền lợi của mình."
+    },
+    {
+        "char": "現",
+        "onYomi": "ゲン",
+        "kunYomi": "あらわ・れる",
+        "hanViet": "hiện",
+        "meaningVi": "hiện tại, xuất hiện",
+        "vocabJa": "現在",
+        "exampleJa": "現在の状況を説明します。",
+        "exampleVi": "Tôi sẽ giải thích tình hình hiện tại."
+    },
+    {
+        "char": "限",
+        "onYomi": "ゲン",
+        "kunYomi": "かぎ・る",
+        "hanViet": "hạn",
+        "meaningVi": "giới hạn",
+        "vocabJa": "制限",
+        "exampleJa": "時間に制限があります。",
+        "exampleVi": "Có giới hạn về thời gian."
+    },
+    {
+        "char": "減",
+        "onYomi": "ゲン",
+        "kunYomi": "へ・る",
+        "hanViet": "giảm",
+        "meaningVi": "giảm xuống",
+        "vocabJa": "減少",
+        "exampleJa": "人口が減少しています。",
+        "exampleVi": "Dân số đang giảm."
+    },
+    {
+        "char": "源",
+        "onYomi": "ゲン",
+        "kunYomi": "みなもと",
+        "hanViet": "nguyên",
+        "meaningVi": "nguồn gốc",
+        "vocabJa": "資源",
+        "exampleJa": "資源を大切に使いましょう。",
+        "exampleVi": "Hãy sử dụng tài nguyên một cách quý trọng."
+    },
+    {
+        "char": "厳",
+        "onYomi": "ゲン",
+        "kunYomi": "きび・しい",
+        "hanViet": "nghiêm",
+        "meaningVi": "nghiêm khắc",
+        "vocabJa": "厳重",
+        "exampleJa": "厳重に管理されています。",
+        "exampleVi": "Được quản lý rất nghiêm ngặt."
+    },
+    {
+        "char": "己",
+        "onYomi": "コ",
+        "kunYomi": "おのれ",
+        "hanViet": "kỷ",
+        "meaningVi": "bản thân",
+        "vocabJa": "自己",
+        "exampleJa": "自己紹介をお願いします。",
+        "exampleVi": "Xin hãy tự giới thiệu."
+    },
+    {
+        "char": "個",
+        "onYomi": "コ",
+        "kunYomi": "",
+        "hanViet": "cá",
+        "meaningVi": "cá thể",
+        "vocabJa": "個人",
+        "exampleJa": "個人情報を守ります。",
+        "exampleVi": "Bảo vệ thông tin cá nhân."
+    },
+    {
+        "char": "故",
+        "onYomi": "コ",
+        "kunYomi": "ゆえ",
+        "hanViet": "cố",
+        "meaningVi": "nguyên nhân, cố ý",
+        "vocabJa": "事故",
+        "exampleJa": "交通事故が発生しました。",
+        "exampleVi": "Đã xảy ra tai nạn giao thông."
+    },
+    {
+        "char": "護",
+        "onYomi": "ゴ",
+        "kunYomi": "まも・る",
+        "hanViet": "hộ",
+        "meaningVi": "bảo vệ",
+        "vocabJa": "保護",
+        "exampleJa": "自然を保護する必要があります。",
+        "exampleVi": "Cần phải bảo vệ thiên nhiên."
+    },
+    {
+        "char": "効",
+        "onYomi": "コウ",
+        "kunYomi": "",
+        "hanViet": "hiệu",
+        "meaningVi": "hiệu quả",
+        "vocabJa": "効果",
+        "exampleJa": "この薬は効果があります。",
+        "exampleVi": "Loại thuốc này có hiệu quả."
+    }
+]

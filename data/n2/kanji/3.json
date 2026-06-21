@@ -1,0 +1,252 @@
+[
+    {
+        "char": "議",
+        "onYomi": "ギ",
+        "kunYomi": "",
+        "hanViet": "nghị",
+        "meaningVi": "thảo luận, nghị luận",
+        "vocabJa": "会議",
+        "exampleJa": "午後から会議があります。",
+        "exampleVi": "Chiều nay có cuộc họp."
+    },
+    {
+        "char": "義",
+        "onYomi": "ギ",
+        "kunYomi": "",
+        "hanViet": "nghĩa",
+        "meaningVi": "ý nghĩa, chính nghĩa",
+        "vocabJa": "意義",
+        "exampleJa": "その活動には大きな意義があります。",
+        "exampleVi": "Hoạt động đó có ý nghĩa rất lớn."
+    },
+    {
+        "char": "逆",
+        "onYomi": "ギャク",
+        "kunYomi": "さか",
+        "hanViet": "nghịch",
+        "meaningVi": "ngược lại",
+        "vocabJa": "逆転",
+        "exampleJa": "試合で逆転勝利しました。",
+        "exampleVi": "Đã lội ngược dòng và giành chiến thắng."
+    },
+    {
+        "char": "久",
+        "onYomi": "キュウ",
+        "kunYomi": "ひさ・しい",
+        "hanViet": "cửu",
+        "meaningVi": "lâu dài",
+        "vocabJa": "永久",
+        "exampleJa": "永久に保存されます。",
+        "exampleVi": "Được lưu trữ vĩnh viễn."
+    },
+    {
+        "char": "救",
+        "onYomi": "キュウ",
+        "kunYomi": "すく・う",
+        "hanViet": "cứu",
+        "meaningVi": "cứu giúp",
+        "vocabJa": "救助",
+        "exampleJa": "消防隊が救助に向かいました。",
+        "exampleVi": "Đội cứu hỏa đã đi cứu hộ."
+    },
+    {
+        "char": "求",
+        "onYomi": "キュウ",
+        "kunYomi": "もと・める",
+        "hanViet": "cầu",
+        "meaningVi": "tìm kiếm, yêu cầu",
+        "vocabJa": "要求",
+        "exampleJa": "会社は改善を要求しました。",
+        "exampleVi": "Công ty yêu cầu cải thiện."
+    },
+    {
+        "char": "給",
+        "onYomi": "キュウ",
+        "kunYomi": "",
+        "hanViet": "cấp",
+        "meaningVi": "cung cấp",
+        "vocabJa": "給与",
+        "exampleJa": "給与が振り込まれました。",
+        "exampleVi": "Lương đã được chuyển khoản."
+    },
+    {
+        "char": "許",
+        "onYomi": "キョ",
+        "kunYomi": "ゆる・す",
+        "hanViet": "hứa",
+        "meaningVi": "cho phép",
+        "vocabJa": "許可",
+        "exampleJa": "上司の許可を得ました。",
+        "exampleVi": "Tôi đã được cấp trên cho phép."
+    },
+    {
+        "char": "居",
+        "onYomi": "キョ",
+        "kunYomi": "い・る",
+        "hanViet": "cư",
+        "meaningVi": "cư trú",
+        "vocabJa": "住居",
+        "exampleJa": "新しい住居を探しています。",
+        "exampleVi": "Tôi đang tìm nơi ở mới."
+    },
+    {
+        "char": "共",
+        "onYomi": "キョウ",
+        "kunYomi": "とも",
+        "hanViet": "cộng",
+        "meaningVi": "cùng nhau",
+        "vocabJa": "共同",
+        "exampleJa": "共同で研究を行っています。",
+        "exampleVi": "Chúng tôi đang nghiên cứu chung."
+    },
+    {
+        "char": "協",
+        "onYomi": "キョウ",
+        "kunYomi": "",
+        "hanViet": "hiệp",
+        "meaningVi": "hợp tác",
+        "vocabJa": "協力",
+        "exampleJa": "ご協力ありがとうございます。",
+        "exampleVi": "Cảm ơn sự hợp tác của bạn."
+    },
+    {
+        "char": "競",
+        "onYomi": "キョウ",
+        "kunYomi": "きそ・う",
+        "hanViet": "cạnh",
+        "meaningVi": "cạnh tranh",
+        "vocabJa": "競争",
+        "exampleJa": "企業間の競争が激しいです。",
+        "exampleVi": "Sự cạnh tranh giữa các doanh nghiệp rất khốc liệt."
+    },
+    {
+        "char": "興",
+        "onYomi": "キョウ",
+        "kunYomi": "きょうみ",
+        "hanViet": "hưng",
+        "meaningVi": "hứng thú",
+        "vocabJa": "興味",
+        "exampleJa": "日本文化に興味があります。",
+        "exampleVi": "Tôi hứng thú với văn hóa Nhật Bản."
+    },
+    {
+        "char": "極",
+        "onYomi": "キョク",
+        "kunYomi": "きわ・める",
+        "hanViet": "cực",
+        "meaningVi": "cực điểm",
+        "vocabJa": "積極的",
+        "exampleJa": "積極的に発言してください。",
+        "exampleVi": "Hãy phát biểu một cách tích cực."
+    },
+    {
+        "char": "勤",
+        "onYomi": "キン",
+        "kunYomi": "つと・める",
+        "hanViet": "cần",
+        "meaningVi": "làm việc, siêng năng",
+        "vocabJa": "勤務",
+        "exampleJa": "東京で勤務しています。",
+        "exampleVi": "Tôi làm việc tại Tokyo."
+    },
+    {
+        "char": "禁",
+        "onYomi": "キン",
+        "kunYomi": "",
+        "hanViet": "cấm",
+        "meaningVi": "cấm đoán",
+        "vocabJa": "禁止",
+        "exampleJa": "ここでは喫煙禁止です。",
+        "exampleVi": "Cấm hút thuốc ở đây."
+    },
+    {
+        "char": "緊",
+        "onYomi": "キン",
+        "kunYomi": "",
+        "hanViet": "khẩn",
+        "meaningVi": "khẩn cấp",
+        "vocabJa": "緊急",
+        "exampleJa": "緊急会議が開かれました。",
+        "exampleVi": "Một cuộc họp khẩn đã được tổ chức."
+    },
+    {
+        "char": "句",
+        "onYomi": "ク",
+        "kunYomi": "",
+        "hanViet": "cú",
+        "meaningVi": "câu văn",
+        "vocabJa": "語句",
+        "exampleJa": "意味の分からない語句があります。",
+        "exampleVi": "Có những từ ngữ tôi không hiểu."
+    },
+    {
+        "char": "区",
+        "onYomi": "ク",
+        "kunYomi": "",
+        "hanViet": "khu",
+        "meaningVi": "khu vực",
+        "vocabJa": "地区",
+        "exampleJa": "この地区は人口が多いです。",
+        "exampleVi": "Khu vực này có dân số đông."
+    },
+    {
+        "char": "苦",
+        "onYomi": "ク",
+        "kunYomi": "くる・しい、にが・い",
+        "hanViet": "khổ",
+        "meaningVi": "đau khổ",
+        "vocabJa": "苦労",
+        "exampleJa": "彼は多くの苦労を経験しました。",
+        "exampleVi": "Anh ấy đã trải qua nhiều gian khổ."
+    },
+    {
+        "char": "具",
+        "onYomi": "グ",
+        "kunYomi": "そな・える",
+        "hanViet": "cụ",
+        "meaningVi": "dụng cụ",
+        "vocabJa": "家具",
+        "exampleJa": "新しい家具を買いました。",
+        "exampleVi": "Tôi đã mua đồ nội thất mới."
+    },
+    {
+        "char": "空",
+        "onYomi": "クウ",
+        "kunYomi": "そら、あ・く",
+        "hanViet": "không",
+        "meaningVi": "bầu trời, trống",
+        "vocabJa": "航空",
+        "exampleJa": "航空会社で働いています。",
+        "exampleVi": "Tôi làm việc cho hãng hàng không."
+    },
+    {
+        "char": "訓",
+        "onYomi": "クン",
+        "kunYomi": "",
+        "hanViet": "huấn",
+        "meaningVi": "huấn luyện",
+        "vocabJa": "訓練",
+        "exampleJa": "避難訓練を行いました。",
+        "exampleVi": "Đã tiến hành diễn tập sơ tán."
+    },
+    {
+        "char": "軍",
+        "onYomi": "グン",
+        "kunYomi": "",
+        "hanViet": "quân",
+        "meaningVi": "quân đội",
+        "vocabJa": "軍事",
+        "exampleJa": "軍事問題が議論されています。",
+        "exampleVi": "Các vấn đề quân sự đang được thảo luận."
+    },
+    {
+        "char": "群",
+        "onYomi": "グン",
+        "kunYomi": "む・れる",
+        "hanViet": "quần",
+        "meaningVi": "bầy, nhóm",
+        "vocabJa": "群集",
+        "exampleJa": "群集が広場に集まりました。",
+        "exampleVi": "Đám đông đã tập trung tại quảng trường."
+    }
+]

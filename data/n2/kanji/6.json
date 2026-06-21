@@ -1,0 +1,252 @@
+[
+    {
+        "char": "座",
+        "onYomi": "ザ",
+        "kunYomi": "すわ・る",
+        "hanViet": "tọa",
+        "meaningVi": "chỗ ngồi, ngồi",
+        "vocabJa": "座席",
+        "exampleJa": "窓側の座席を予約しました。",
+        "exampleVi": "Tôi đã đặt chỗ ngồi cạnh cửa sổ."
+    },
+    {
+        "char": "妻",
+        "onYomi": "サイ",
+        "kunYomi": "つま",
+        "hanViet": "thê",
+        "meaningVi": "vợ",
+        "vocabJa": "夫妻",
+        "exampleJa": "彼は妻と一緒に旅行しました。",
+        "exampleVi": "Anh ấy đi du lịch cùng vợ."
+    },
+    {
+        "char": "斉",
+        "onYomi": "サイ",
+        "kunYomi": "そろ・う",
+        "hanViet": "tề",
+        "meaningVi": "đồng đều, thống nhất",
+        "vocabJa": "一斉",
+        "exampleJa": "全員が一斉に立ち上がりました。",
+        "exampleVi": "Mọi người đồng loạt đứng dậy."
+    },
+    {
+        "char": "済",
+        "onYomi": "サイ",
+        "kunYomi": "す・む、す・ます",
+        "hanViet": "tế",
+        "meaningVi": "xong, giải quyết",
+        "vocabJa": "経済",
+        "exampleJa": "手続きが済みました。",
+        "exampleVi": "Thủ tục đã hoàn tất."
+    },
+    {
+        "char": "細",
+        "onYomi": "サイ",
+        "kunYomi": "ほそ・い、こま・かい",
+        "hanViet": "tế",
+        "meaningVi": "nhỏ, chi tiết, tỉ mỉ",
+        "vocabJa": "細かい",
+        "exampleJa": "細かい点まで確認してください。",
+        "exampleVi": "Hãy kiểm tra cả những chi tiết nhỏ."
+    },
+    {
+        "char": "裁",
+        "onYomi": "サイ",
+        "kunYomi": "た・つ、さば・く",
+        "hanViet": "tài",
+        "meaningVi": "cắt may, phán xét",
+        "vocabJa": "裁判",
+        "exampleJa": "裁判の結果を待っています。",
+        "exampleVi": "Tôi đang chờ kết quả phiên tòa."
+    },
+    {
+        "char": "歳",
+        "onYomi": "サイ",
+        "kunYomi": "とし",
+        "hanViet": "tuế",
+        "meaningVi": "tuổi, năm",
+        "vocabJa": "歳末",
+        "exampleJa": "歳末は忙しくなります。",
+        "exampleVi": "Cuối năm thường rất bận rộn."
+    },
+    {
+        "char": "刷",
+        "onYomi": "サツ",
+        "kunYomi": "す・る",
+        "hanViet": "sanat",
+        "meaningVi": "in ấn",
+        "vocabJa": "印刷",
+        "exampleJa": "資料を印刷しました。",
+        "exampleVi": "Tôi đã in tài liệu."
+    },
+    {
+        "char": "擦",
+        "onYomi": "サツ",
+        "kunYomi": "す・る、こす・る",
+        "hanViet": "sát",
+        "meaningVi": "chà, ma sát",
+        "vocabJa": "摩擦",
+        "exampleJa": "靴を布で擦りました。",
+        "exampleVi": "Tôi đã lau giày bằng vải."
+    },
+    {
+        "char": "撮",
+        "onYomi": "サツ",
+        "kunYomi": "と・る",
+        "hanViet": "toát",
+        "meaningVi": "chụp, quay",
+        "vocabJa": "撮影",
+        "exampleJa": "記念写真を撮りました。",
+        "exampleVi": "Chúng tôi đã chụp ảnh kỷ niệm."
+    },
+    {
+        "char": "削",
+        "onYomi": "サク",
+        "kunYomi": "けず・る",
+        "hanViet": "tác",
+        "meaningVi": "gọt, cắt giảm",
+        "vocabJa": "削減",
+        "exampleJa": "予算を削減する必要があります。",
+        "exampleVi": "Cần phải cắt giảm ngân sách."
+    },
+    {
+        "char": "参",
+        "onYomi": "サン",
+        "kunYomi": "まい・る、まじわ・る",
+        "hanViet": "tham",
+        "meaningVi": "tham gia, đi đến",
+        "vocabJa": "参加",
+        "exampleJa": "会議に参加しました。",
+        "exampleVi": "Tôi đã tham dự cuộc họp."
+    },
+    {
+        "char": "惨",
+        "onYomi": "サン",
+        "kunYomi": "みじ・め",
+        "hanViet": "sẩm",
+        "meaningVi": "thảm khốc, khốn khổ",
+        "vocabJa": "悲惨",
+        "exampleJa": "事故の現場は悲惨でした。",
+        "exampleVi": "Hiện trường vụ tai nạn thật thảm khốc."
+    },
+    {
+        "char": "傘",
+        "onYomi": "サン",
+        "kunYomi": "かさ",
+        "hanViet": "tản",
+        "meaningVi": "cái ô, che chở",
+        "vocabJa": "雨傘",
+        "exampleJa": "雨なので傘を持って行きます。",
+        "exampleVi": "Trời mưa nên tôi mang theo ô."
+    },
+    {
+        "char": "散",
+        "onYomi": "サン",
+        "kunYomi": "ち・る、ち・らす",
+        "hanViet": "tán",
+        "meaningVi": "phân tán, tan",
+        "vocabJa": "散歩",
+        "exampleJa": "夕方に公園を散歩します。",
+        "exampleVi": "Buổi chiều tôi đi dạo công viên."
+    },
+    {
+        "char": "桟",
+        "onYomi": "サン",
+        "kunYomi": "かけはし",
+        "hanViet": "sán",
+        "meaningVi": "cầu tạm, bến tạm",
+        "vocabJa": "桟橋",
+        "exampleJa": "船は桟橋に着きました。",
+        "exampleVi": "Tàu đã cập bến tạm."
+    },
+    {
+        "char": "賛",
+        "onYomi": "サン",
+        "kunYomi": "",
+        "hanViet": "tán",
+        "meaningVi": "tán thành, ủng hộ",
+        "vocabJa": "賛成",
+        "exampleJa": "その意見に賛成です。",
+        "exampleVi": "Tôi tán thành ý kiến đó."
+    },
+    {
+        "char": "残",
+        "onYomi": "ザン",
+        "kunYomi": "のこ・る、のこ・す",
+        "hanViet": "tàn",
+        "meaningVi": "còn lại",
+        "vocabJa": "残業",
+        "exampleJa": "今日は残業があります。",
+        "exampleVi": "Hôm nay tôi phải làm thêm giờ."
+    },
+    {
+        "char": "暫",
+        "onYomi": "ザン",
+        "kunYomi": "しばら・く",
+        "hanViet": "tạm",
+        "meaningVi": "tạm thời",
+        "vocabJa": "暫く",
+        "exampleJa": "暫くお待ちください。",
+        "exampleVi": "Xin vui lòng chờ một lát."
+    },
+    {
+        "char": "仕",
+        "onYomi": "シ",
+        "kunYomi": "つか・える",
+        "hanViet": "sĩ",
+        "meaningVi": "làm việc, phục vụ",
+        "vocabJa": "仕事",
+        "exampleJa": "新しい仕事を見つけました。",
+        "exampleVi": "Tôi đã tìm được việc làm mới."
+    },
+    {
+        "char": "司",
+        "onYomi": "シ",
+        "kunYomi": "つかさど・る",
+        "hanViet": "ti",
+        "meaningVi": "quản lý, điều hành",
+        "vocabJa": "司会",
+        "exampleJa": "彼が式の司会を務めました。",
+        "exampleVi": "Anh ấy đảm nhiệm dẫn chương trình lễ."
+    },
+    {
+        "char": "史",
+        "onYomi": "シ",
+        "kunYomi": "",
+        "hanViet": "sử",
+        "meaningVi": "lịch sử",
+        "vocabJa": "歴史",
+        "exampleJa": "日本の歴史を勉強しています。",
+        "exampleVi": "Tôi đang học lịch sử Nhật Bản."
+    },
+    {
+        "char": "刺",
+        "onYomi": "シ",
+        "kunYomi": "さ・す、とげ",
+        "hanViet": "thí",
+        "meaningVi": "đâm, gai",
+        "vocabJa": "刺激",
+        "exampleJa": "強い刺激を受けました。",
+        "exampleVi": "Tôi đã nhận một kích thích mạnh."
+    },
+    {
+        "char": "死",
+        "onYomi": "シ",
+        "kunYomi": "し・ぬ",
+        "hanViet": "tử",
+        "meaningVi": "chết",
+        "vocabJa": "死亡",
+        "exampleJa": "事故で死亡者は出ませんでした。",
+        "exampleVi": "Vụ tai nạn không có người tử vong."
+    },
+    {
+        "char": "私",
+        "onYomi": "シ",
+        "kunYomi": "わたし",
+        "hanViet": "tư",
+        "meaningVi": "tôi, riêng tư",
+        "vocabJa": "私立",
+        "exampleJa": "私立の大学に通っています。",
+        "exampleVi": "Tôi đang học ở một trường đại học tư thục."
+    }
+]

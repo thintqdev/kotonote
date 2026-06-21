@@ -30,6 +30,7 @@ import {
   getDeckLessonItems,
   getVocabLessonUnlockReasonKey,
   isVocabLessonUnlockedByGrowth,
+  JLPT_ORDER,
   lessonNoForDeck,
   levelToJlpt,
   mapVocabRecord,
@@ -969,5 +970,10 @@ export function VocabularyIndexRedirect() {
       />
     );
   }
-  return <Navigate to="/vocabulary/browse" replace />;
+  return (
+    <Navigate
+      to={`/vocabulary/browse?jlpt=${encodeURIComponent(JLPT_ORDER[0])}`}
+      replace
+    />
+  );
 }

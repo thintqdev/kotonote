@@ -1,0 +1,252 @@
+[
+    {
+        "char": "愛",
+        "onYomi": "アイ",
+        "kunYomi": "",
+        "hanViet": "ái",
+        "meaningVi": "yêu thương",
+        "vocabJa": "愛情",
+        "exampleJa": "彼は家族に深い愛情を持っています。",
+        "exampleVi": "Anh ấy dành tình yêu sâu sắc cho gia đình."
+    },
+    {
+        "char": "案",
+        "onYomi": "アン",
+        "kunYomi": "",
+        "hanViet": "án",
+        "meaningVi": "phương án, dự thảo",
+        "vocabJa": "提案",
+        "exampleJa": "新しい提案をしました。",
+        "exampleVi": "Tôi đã đưa ra một đề xuất mới."
+    },
+    {
+        "char": "以",
+        "onYomi": "イ",
+        "kunYomi": "",
+        "hanViet": "dĩ",
+        "meaningVi": "từ, trở lên",
+        "vocabJa": "以上",
+        "exampleJa": "参加者は100人以上です。",
+        "exampleVi": "Có hơn 100 người tham gia."
+    },
+    {
+        "char": "移",
+        "onYomi": "イ",
+        "kunYomi": "うつ・る、うつ・す",
+        "hanViet": "di",
+        "meaningVi": "di chuyển",
+        "vocabJa": "移動",
+        "exampleJa": "電車で移動します。",
+        "exampleVi": "Tôi di chuyển bằng tàu điện."
+    },
+    {
+        "char": "衣",
+        "onYomi": "イ",
+        "kunYomi": "ころも",
+        "hanViet": "y",
+        "meaningVi": "quần áo",
+        "vocabJa": "衣類",
+        "exampleJa": "衣類を整理しました。",
+        "exampleVi": "Tôi đã sắp xếp quần áo."
+    },
+    {
+        "char": "域",
+        "onYomi": "イキ",
+        "kunYomi": "",
+        "hanViet": "vực",
+        "meaningVi": "khu vực",
+        "vocabJa": "地域",
+        "exampleJa": "この地域は静かです。",
+        "exampleVi": "Khu vực này rất yên tĩnh."
+    },
+    {
+        "char": "印",
+        "onYomi": "イン",
+        "kunYomi": "しるし",
+        "hanViet": "ấn",
+        "meaningVi": "dấu, con dấu",
+        "vocabJa": "印象",
+        "exampleJa": "彼は良い印象を与えました。",
+        "exampleVi": "Anh ấy đã để lại ấn tượng tốt."
+    },
+    {
+        "char": "因",
+        "onYomi": "イン",
+        "kunYomi": "",
+        "hanViet": "nhân",
+        "meaningVi": "nguyên nhân",
+        "vocabJa": "原因",
+        "exampleJa": "事故の原因を調査しています。",
+        "exampleVi": "Đang điều tra nguyên nhân vụ tai nạn."
+    },
+    {
+        "char": "宇",
+        "onYomi": "ウ",
+        "kunYomi": "",
+        "hanViet": "vũ",
+        "meaningVi": "vũ trụ",
+        "vocabJa": "宇宙",
+        "exampleJa": "宇宙に興味があります。",
+        "exampleVi": "Tôi có hứng thú với vũ trụ."
+    },
+    {
+        "char": "永",
+        "onYomi": "エイ",
+        "kunYomi": "なが・い",
+        "hanViet": "vĩnh",
+        "meaningVi": "vĩnh viễn",
+        "vocabJa": "永遠",
+        "exampleJa": "永遠の愛を誓いました。",
+        "exampleVi": "Họ thề nguyện tình yêu vĩnh cửu."
+    },
+    {
+        "char": "営",
+        "onYomi": "エイ",
+        "kunYomi": "いとな・む",
+        "hanViet": "doanh",
+        "meaningVi": "kinh doanh",
+        "vocabJa": "営業",
+        "exampleJa": "営業部で働いています。",
+        "exampleVi": "Tôi làm việc tại phòng kinh doanh."
+    },
+    {
+        "char": "衛",
+        "onYomi": "エイ",
+        "kunYomi": "",
+        "hanViet": "vệ",
+        "meaningVi": "bảo vệ, vệ sinh",
+        "vocabJa": "衛生",
+        "exampleJa": "衛生管理が重要です。",
+        "exampleVi": "Quản lý vệ sinh rất quan trọng."
+    },
+    {
+        "char": "液",
+        "onYomi": "エキ",
+        "kunYomi": "",
+        "hanViet": "dịch",
+        "meaningVi": "chất lỏng",
+        "vocabJa": "液体",
+        "exampleJa": "この液体は危険です。",
+        "exampleVi": "Chất lỏng này nguy hiểm."
+    },
+    {
+        "char": "益",
+        "onYomi": "エキ",
+        "kunYomi": "",
+        "hanViet": "ích",
+        "meaningVi": "lợi ích",
+        "vocabJa": "利益",
+        "exampleJa": "利益が増加しました。",
+        "exampleVi": "Lợi nhuận đã tăng lên."
+    },
+    {
+        "char": "演",
+        "onYomi": "エン",
+        "kunYomi": "",
+        "hanViet": "diễn",
+        "meaningVi": "biểu diễn",
+        "vocabJa": "演技",
+        "exampleJa": "彼の演技は素晴らしいです。",
+        "exampleVi": "Diễn xuất của anh ấy rất tuyệt vời."
+    },
+    {
+        "char": "応",
+        "onYomi": "オウ",
+        "kunYomi": "こた・える",
+        "hanViet": "ứng",
+        "meaningVi": "đáp ứng",
+        "vocabJa": "対応",
+        "exampleJa": "迅速に対応しました。",
+        "exampleVi": "Đã phản hồi nhanh chóng."
+    },
+    {
+        "char": "往",
+        "onYomi": "オウ",
+        "kunYomi": "",
+        "hanViet": "vãng",
+        "meaningVi": "đi lại",
+        "vocabJa": "往復",
+        "exampleJa": "大阪まで往復しました。",
+        "exampleVi": "Tôi đã đi khứ hồi đến Osaka."
+    },
+    {
+        "char": "欧",
+        "onYomi": "オウ",
+        "kunYomi": "",
+        "hanViet": "âu",
+        "meaningVi": "châu Âu",
+        "vocabJa": "欧州",
+        "exampleJa": "欧州へ出張します。",
+        "exampleVi": "Tôi đi công tác châu Âu."
+    },
+    {
+        "char": "価",
+        "onYomi": "カ",
+        "kunYomi": "あたい",
+        "hanViet": "giá",
+        "meaningVi": "giá trị",
+        "vocabJa": "価値",
+        "exampleJa": "この経験には価値があります。",
+        "exampleVi": "Kinh nghiệm này rất có giá trị."
+    },
+    {
+        "char": "可",
+        "onYomi": "カ",
+        "kunYomi": "",
+        "hanViet": "khả",
+        "meaningVi": "có thể",
+        "vocabJa": "可能",
+        "exampleJa": "実現は可能です。",
+        "exampleVi": "Việc thực hiện là khả thi."
+    },
+    {
+        "char": "河",
+        "onYomi": "カ",
+        "kunYomi": "かわ",
+        "hanViet": "hà",
+        "meaningVi": "sông",
+        "vocabJa": "河川",
+        "exampleJa": "河川の水位が上がっています。",
+        "exampleVi": "Mực nước sông đang dâng lên."
+    },
+    {
+        "char": "過",
+        "onYomi": "カ",
+        "kunYomi": "す・ぎる",
+        "hanViet": "quá",
+        "meaningVi": "quá mức, vượt qua",
+        "vocabJa": "過去",
+        "exampleJa": "過去を振り返りました。",
+        "exampleVi": "Tôi nhìn lại quá khứ."
+    },
+    {
+        "char": "解",
+        "onYomi": "カイ",
+        "kunYomi": "と・く",
+        "hanViet": "giải",
+        "meaningVi": "giải thích, giải quyết",
+        "vocabJa": "解決",
+        "exampleJa": "問題を解決しました。",
+        "exampleVi": "Đã giải quyết vấn đề."
+    },
+    {
+        "char": "快",
+        "onYomi": "カイ",
+        "kunYomi": "こころよ・い",
+        "hanViet": "khoái",
+        "meaningVi": "dễ chịu",
+        "vocabJa": "快適",
+        "exampleJa": "快適な環境で働いています。",
+        "exampleVi": "Tôi làm việc trong môi trường thoải mái."
+    },
+    {
+        "char": "械",
+        "onYomi": "カイ",
+        "kunYomi": "",
+        "hanViet": "giới",
+        "meaningVi": "máy móc",
+        "vocabJa": "機械",
+        "exampleJa": "機械の操作を学びました。",
+        "exampleVi": "Tôi đã học cách vận hành máy móc."
+    }
+]

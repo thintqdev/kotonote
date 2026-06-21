@@ -72,6 +72,15 @@ export default function VocabularyListPage() {
 
   const requestedPage = parseVocabListPage(searchParams);
 
+  useEffect(() => {
+    if (!selectedJlpt) {
+      setSearchParams(
+        vocabListSearchParams({ page: requestedPage, jlpt: JLPT_ORDER[0] }),
+        { replace: true },
+      );
+    }
+  }, [selectedJlpt, requestedPage, setSearchParams]);
+
   const [decks, setDecks] = useState([]);
 
   const [pagination, setPagination] = useState(null);
@@ -83,7 +92,7 @@ export default function VocabularyListPage() {
   const [progressByDeckId, setProgressByDeckId] = useState({});
 
   const fetchList = useCallback(async () => {
-    if (!user) return;
+    if (!user || !selectedJlpt) return;
 
     setLoading(true);
 
@@ -166,7 +175,7 @@ export default function VocabularyListPage() {
 
   const totalWords = lessons.reduce((acc, lesson) => acc + lesson.total, 0);
 
-  const displayJlpt = selectedJlpt || t("vocabPage.jlptAll");
+  const displayJlpt = selectedJlpt;
 
   const setJlpt = (next) => {
     setSearchParams(
@@ -315,16 +324,6 @@ export default function VocabularyListPage() {
           role="tablist"
           aria-label={t("readingPage.filterAria")}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={!selectedJlpt}
-            className={`vocab-tab${!selectedJlpt ? " vocab-tab--active" : ""}`}
-            onClick={() => setJlpt("")}
-          >
-            {t("readingPage.filterAll")}
-          </button>
-
           {JLPT_ORDER.map((lv) => (
             <button
               key={`jlpt-tab-${lv}`}
@@ -407,15 +406,7 @@ export default function VocabularyListPage() {
                   </div>
 
                   <div className="vocab-lesson-main">
-                    <h2 className="vocab-lesson-card-title">
-                      {!selectedJlpt ? (
-                        <span className="vocab-lesson-jlpt-tag">
-                          {lesson.jlpt}
-                        </span>
-                      ) : null}
-
-                      {cardTitle}
-                    </h2>
+                    <h2 className="vocab-lesson-card-title">{cardTitle}</h2>
 
                     <p className="vocab-lesson-card-sub">
                       {!canStudy && !jlptLocked && lesson.unlockReasonKey

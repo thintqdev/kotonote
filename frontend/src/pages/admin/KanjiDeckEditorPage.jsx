@@ -290,16 +290,38 @@ export default function KanjiDeckEditorPage() {
   }, [importModalOpen]);
 
   const submitImportJson = async () => {
-    if (isCreate || !deckId) {
-      toast.error("Chưa thể nhập", {
-        description:
-          "Hãy bấm «Tạo deck» hoặc «Lưu thay đổi» trước, rồi quay lại trang này.",
-      });
-      return;
-    }
     setImportBusy(true);
     try {
       const list = parseKanjiImportJson(importJsonText);
+
+      if (isCreate) {
+        const items = list.map((item) => ({
+          ...item,
+          kunYomi: item.kunYomi === "—" ? "" : item.kunYomi,
+        }));
+        const room = Math.max(0, MAX_KANJI_PER_DECK - filledKanjiCount);
+        if (items.length > room) {
+          toast.message("Đã giới hạn số chữ", {
+            description: `Chỉ thêm ${room} chữ (tối đa ${MAX_KANJI_PER_DECK}/deck).`,
+          });
+        }
+        setRows((prev) => mergeKanjiAIIntoRows(prev, items, MAX_KANJI_PER_DECK));
+        toast.success("Đã nạp vào bảng", {
+          description:
+            "Kanji tạm trên form — điền thông tin deck rồi bấm «Tạo deck» để lưu.",
+        });
+        setImportModalOpen(false);
+        setImportJsonText("");
+        return;
+      }
+
+      if (!deckId) {
+        toast.error("Chưa thể nhập", {
+          description: "Deck chưa có ID hợp lệ.",
+        });
+        return;
+      }
+
       const result = await importKanjiFromJson(deckId, list);
       const created = result?.created ?? list.length;
       toast.success("Đã nhập xong", {
@@ -713,7 +735,7 @@ export default function KanjiDeckEditorPage() {
                       isView
                         ? "Chế độ xem — chuyển sang chỉnh sửa để nhập JSON."
                         : isCreate
-                          ? "Lưu deck trước, rồi quay lại để nhập JSON."
+                          ? "Nhập JSON vào bảng — lưu deck sau"
                           : "Nhập nhiều chữ từ file JSON"
                     }
                   >
@@ -920,6 +942,13 @@ export default function KanjiDeckEditorPage() {
               <strong>vocabJa</strong>, <strong>exampleJa</strong>,{" "}
               <strong>exampleVi</strong>. Có thể thêm <strong>kunYomi</strong>{" "}
               (mặc định —).
+              {isCreate ? (
+                <>
+                  {" "}
+                  Deck mới: dữ liệu chỉ nạp vào bảng bên dưới; bấm «Tạo deck» khi
+                  đã điền tiêu đề deck.
+                </>
+              ) : null}
             </p>
             <details className="vdeck-modal-sample">
               <summary>Ví dụ</summary>
