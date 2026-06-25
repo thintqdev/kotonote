@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import AuthLayout from '../components/auth/AuthLayout.jsx';
+import { useAuth } from '../hooks/useAuth.jsx';
+import LegalLayout from '../components/legal/LegalLayout.jsx';
 import './LegalPage.css';
 
 /**
@@ -9,16 +10,19 @@ import './LegalPage.css';
  */
 const LegalDocumentPage = ({ doc }) => {
 	const { t } = useTranslation();
+	const { user } = useAuth();
 	const baseKey = `legal.${doc}`;
 	const sections = t(`${baseKey}.sections`, { returnObjects: true });
 	const sectionList = Array.isArray(sections) ? sections : [];
+	const backTo = user ? '/' : '/login';
+	const backLabel = user ? t('legal.backHome') : t('legal.backLogin');
 
 	return (
-		<AuthLayout formLayout="survey">
-			<article className="legal-doc auth-form-section">
+		<LegalLayout>
+			<article className="legal-doc">
 				<header className="legal-doc-header">
-					<Link to="/register" className="legal-back">
-						← {t('legal.backToRegister')}
+					<Link to={backTo} className="legal-back">
+						← {backLabel}
 					</Link>
 					<h1 className="legal-doc-title">{t(`${baseKey}.title`)}</h1>
 					<p className="legal-doc-meta">{t(`${baseKey}.updated`)}</p>
@@ -56,7 +60,7 @@ const LegalDocumentPage = ({ doc }) => {
 					)}
 				</footer>
 			</article>
-		</AuthLayout>
+		</LegalLayout>
 	);
 };
 

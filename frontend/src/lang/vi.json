@@ -1531,6 +1531,8 @@
   },
   "legal": {
     "backToRegister": "Quay lại đăng ký",
+    "backHome": "Về trang chủ",
+    "backLogin": "Về đăng nhập",
     "viewTerms": "Xem Điều khoản sử dụng",
     "viewPrivacy": "Xem Chính sách bảo mật",
     "terms": {

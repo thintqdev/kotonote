@@ -18,8 +18,12 @@ export const AuthProvider = ({ children }) => {
 		let cancelled = false;
 		const path =
 			typeof window !== 'undefined' ? window.location.pathname : '';
-		/** Admin Studio có phiên riêng — không gọi /users/me (tránh 401 MSG_004). */
-		if (path.startsWith('/admin')) {
+		/** Admin Studio / trang pháp lý công khai — không gọi /users/me. */
+		if (
+			path.startsWith('/admin') ||
+			path === '/terms' ||
+			path === '/privacy'
+		) {
 			setLoading(false);
 			return undefined;
 		}

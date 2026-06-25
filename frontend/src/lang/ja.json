@@ -1535,6 +1535,8 @@
   },
   "legal": {
     "backToRegister": "登録に戻る",
+    "backHome": "ホームへ",
+    "backLogin": "ログインへ",
     "viewTerms": "利用規約を見る",
     "viewPrivacy": "プライバシーポリシーを見る",
     "terms": {

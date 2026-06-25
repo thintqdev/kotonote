@@ -5,6 +5,8 @@ export const PUBLIC_AUTH_ROUTE_PREFIXES = [
 	'/verify-email',
 	'/forgot-password',
 	'/reset-password',
+	'/terms',
+	'/privacy',
 ];
 
 /**
