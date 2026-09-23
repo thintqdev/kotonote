@@ -10,6 +10,7 @@ import seedBadges from '../seeds/badgeSeeder.js';
 import seedGrammars from '../seeds/grammarSeeder.js';
 import seedPrompts from '../seeds/promptSeeder.js';
 import seedExamStructures from '../seeds/examStructureSeeder.js';
+import seedReadingDemo from '../seeds/readingDemoSeeder.js';
 // Load environment variables
 dotenv.config();
 
@@ -28,6 +29,7 @@ const runSeeder = async () => {
 		await seedPrompts();
 		await seedExamStructures();
 		await seedGrammars();
+		await seedReadingDemo();
 		await seedBadges();
 		await seedKanji();
 		await seedVocabularyDemo();

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import UiIcon from "../components/common/UiIcon.jsx";
 import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import { READING_JLPT_LEVELS } from "../data/readingMock.js";
@@ -441,7 +442,7 @@ export default function ReadingListPage() {
             onClick={() => setMode("suggested")}
           >
             <span className="reading-foot-ico" aria-hidden>
-              ✿
+              <UiIcon name="flower" size={24} />
             </span>
             {t("readingPage.footSuggested")}
           </button>

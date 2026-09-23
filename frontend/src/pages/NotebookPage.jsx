@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Layout from '../layouts/Layout.jsx';
 import { Breadcrumb } from '../components/common';
+import UiIcon from '../components/common/UiIcon.jsx';
 import StudyPageHeader from '../components/study/StudyPageHeader.jsx';
 import NotebookRichEditor from '../components/notebook/NotebookRichEditor.jsx';
 import { mockStreak } from '../data/dashboardHomeMock.js';
@@ -284,7 +285,7 @@ export default function NotebookPage() {
 											>
 												{note.isPinned ? (
 													<span className="nb-note-pin" aria-hidden>
-														📌
+												<UiIcon name="pin" size={18} />
 													</span>
 												) : null}
 												<span className="nb-note-card-title">
@@ -336,7 +337,7 @@ export default function NotebookPage() {
 												markDirty();
 											}}
 										>
-											📌 {t('notebook.pin')}
+											<UiIcon name="pin" size={18} /> {t('notebook.pin')}
 										</button>
 										<button
 											type="button"

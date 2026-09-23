@@ -2,22 +2,22 @@ import ReadingArticle from '../models/ReadingArticle.js';
 import { READING_DEMO_ARTICLES } from './readingDemoArticles.js';
 
 /**
- * Nạp bài đọc demo (bỏ qua slug đã tồn tại).
+ * Nạp hoặc cập nhật bài đọc demo theo slug.
  */
 export default async function seedReadingDemo() {
 	let created = 0;
-	let skipped = 0;
+	let updated = 0;
 
 	for (const row of READING_DEMO_ARTICLES) {
-		const exists = await ReadingArticle.findOne({ slug: row.slug }).lean();
-		if (exists) {
-			skipped += 1;
-			continue;
-		}
-		await ReadingArticle.create(row);
-		created += 1;
+		const result = await ReadingArticle.updateOne(
+			{ slug: row.slug },
+			{ $set: row },
+			{ upsert: true },
+		);
+		if (result.upsertedCount > 0) created += 1;
+		else updated += 1;
 	}
 
-	console.log(`   Reading: ${created} created, ${skipped} skipped`);
-	return { created, skipped };
+	console.log(`   Reading: ${created} created, ${updated} updated`);
+	return { created, updated };
 }

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
 import GoogleSignInButton from '../components/auth/GoogleSignInButton.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import { useAuth } from '../hooks/useAuth.jsx';
 import { getAxiosErrorMessage, translateMessageCode } from '../utils/apiErrorMessage.js';
 import { getSafeRedirectPath } from '../utils/safeRedirectPath.js';
@@ -146,7 +147,7 @@ const LoginPage = () => {
           <div className="form-title-row">
             <h2 className="form-title-main">{t('login.title')}</h2>
             <span className="form-title-pencil" aria-hidden="true">
-              ✏
+              <UiIcon name="pencil" size={34} />
             </span>
           </div>
         </div>
@@ -162,7 +163,7 @@ const LoginPage = () => {
               <span className="auth-label-text">{t('login.email')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">✉</span>
+              <span className="input-icon"><UiIcon name="mail" size={20} /></span>
               <input
                 id="login-email"
                 type="email"
@@ -183,7 +184,7 @@ const LoginPage = () => {
               <span className="auth-label-text">{t('login.password')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">🔒</span>
+              <span className="input-icon"><UiIcon name="lock" size={20} /></span>
               <input
                 id="login-password"
                 type={showPassword ? 'text' : 'password'}
@@ -201,7 +202,7 @@ const LoginPage = () => {
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={t('login.showPassword')}
               >
-                {showPassword ? '🙈' : '👁'}
+                <UiIcon name={showPassword ? 'eye-closed' : 'eye-open'} size={20} />
               </button>
             </div>
             {errors.password && <span className="error-msg">{errors.password}</span>}
@@ -251,7 +252,7 @@ const LoginPage = () => {
                     <span className="auth-label-text">{t('login.password')}</span>
                   </label>
                   <div className="input-wrap">
-                    <span className="input-icon">🔒</span>
+                    <span className="input-icon"><UiIcon name="lock" size={20} /></span>
                     <input
                       id="google-link-password"
                       type="password"

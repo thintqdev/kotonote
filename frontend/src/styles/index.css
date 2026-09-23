@@ -28,10 +28,11 @@
    * VI — body: Plus Jakarta Sans · tiêu đề: Fraunces
    * JA — Noto Serif JP (kiểu minchō gần đề JLPT in) + fallback Yu/Hiragino/MS Mincho hệ thống
    */
-  --font-vi: 'Plus Jakarta Sans', 'Noto Serif JP', 'Segoe UI', system-ui, sans-serif;
+  --font-vi: 'Plus Jakarta Sans', 'Noto Sans JP', 'Segoe UI', system-ui, sans-serif;
   --font-vi-display: 'Fraunces', 'Plus Jakarta Sans', Georgia, serif;
   --font-ja: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', 'MS Mincho',
     serif;
+  --font-jp-ui: 'Noto Sans JP', 'Yu Gothic UI', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
 
   /* Mặc định trước khi i18n gán lang (fallbackLng: vi) */
   --font-ui: var(--font-vi);

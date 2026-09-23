@@ -349,8 +349,8 @@ export default function ListeningExercisePage() {
                           role="status"
                         >
                           {isCorrect
-                            ? "Chính xác! Làm tốt lắm 🎉"
-                            : "Chưa chính xác! Thử lại nhé 🧐"}
+                            ? "Chính xác! Làm tốt lắm"
+                            : "Chưa chính xác! Thử lại nhé"}
                         </p>
                         
                         <div

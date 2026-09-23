@@ -31,3 +31,8 @@ export async function saveReadingProgress(slug, payload) {
 	const body = await api.put(READING.progress(slug), payload);
 	return body.data?.progress ?? null;
 }
+
+export async function analyzeReadingTranslation(slug, translationVi) {
+	const body = await api.post(READING.translationFeedback(slug), { translationVi });
+	return body.data ?? null;
+}

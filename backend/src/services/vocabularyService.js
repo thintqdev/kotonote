@@ -126,7 +126,7 @@ export const createVocab = async (vocabData) => {
 	// Check if deck exists
 	const deck = await getDeckById(vocabData.deckId);
 
-	// Check if deck is full (max 25 words)
+	// Check if deck is full (shared limit for system and personal decks)
 	const count = await vocabularyRepository.countVocabInDeck(vocabData.deckId);
 	if (count >= MAX_WORDS_PER_DECK) {
 		throw { messageCode: VOCABULARY.DECK_FULL, statusCode: 400 };

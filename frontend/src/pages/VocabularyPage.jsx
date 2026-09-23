@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-r
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
+import UiIcon from "../components/common/UiIcon.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildLessonQuizQuestions,
@@ -896,7 +897,7 @@ export default function VocabularyPage() {
                   ) : flashDone ? (
                     <div className="vocab-study-done">
                       <div className="vocab-study-done-ico" aria-hidden>
-                        ✿
+                        <UiIcon name="flower" size={48} />
                       </div>
                       <h1
                         id="vocab-study-title"

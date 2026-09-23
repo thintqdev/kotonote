@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import UiIcon from "../components/common/UiIcon.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import { KANJI_LESSON_GROWTH_MAX } from "../data/kanjiMock.js";
 import { getLessonMilestoneLitCount } from "../data/vocabularyMock.js";
@@ -305,7 +306,7 @@ export default function KanjiListPage() {
                       {!canStudy ? (
                         <span className="vocab-lesson-lock-badge" aria-hidden>
                           {" "}
-                          🔒
+                          <UiIcon name="lock" size={16} />
                         </span>
                       ) : null}
                     </h2>

@@ -85,6 +85,16 @@
   margin-bottom: 16px;
 }
 
+.admin-overview-kpi-grid .admin-overview-kpi:first-child {
+  border-color: rgba(84, 119, 79, 0.34);
+  background: linear-gradient(135deg, #fffdf8 0%, rgba(193, 215, 184, 0.55) 100%);
+  box-shadow: 0 8px 24px rgba(68, 94, 65, 0.11);
+}
+
+.admin-overview-kpi-grid .admin-overview-kpi:nth-child(2) .admin-overview-kpi-value:not(:empty) {
+  color: #9a5838;
+}
+
 .admin-overview-kpi-grid .admin-overview-kpi {
   margin-bottom: 0;
 }
@@ -204,7 +214,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--admin-ink-soft);
+  color: rgba(58, 54, 48, 0.78);
 }
 
 .admin-overview-grid {

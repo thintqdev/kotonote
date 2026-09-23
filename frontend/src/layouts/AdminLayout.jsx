@@ -1,5 +1,12 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ADMIN_SIDEBAR_SECTIONS } from "../constants/adminNav.js";
@@ -171,9 +178,41 @@ function isAvatarSrc(s) {
 
 function AdminSidebar() {
   const { t } = useTranslation();
+  const [collapsed, setCollapsed] = useState(
+    () => window.localStorage.getItem("kotonote-admin-sidebar") === "collapsed",
+  );
+  const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLocaleLowerCase("vi");
+  const visibleSections = useMemo(
+    () =>
+      ADMIN_SIDEBAR_SECTIONS.map((section) => ({
+        ...section,
+        items: section.items.filter((item) =>
+          normalizedQuery
+            ? t(item.labelKey).toLocaleLowerCase("vi").includes(normalizedQuery)
+            : true,
+        ),
+      })).filter((section) => section.items.length > 0),
+    [normalizedQuery, t],
+  );
+
+  const toggleCollapsed = () => {
+    setCollapsed((current) => {
+      const next = !current;
+      window.localStorage.setItem(
+        "kotonote-admin-sidebar",
+        next ? "collapsed" : "expanded",
+      );
+      if (next) setQuery("");
+      return next;
+    });
+  };
 
   return (
-    <aside className="admin-sidebar" aria-label={t("adminLayout.sidebar.aria")}>
+    <aside
+      className={`admin-sidebar${collapsed ? " admin-sidebar--collapsed" : ""}`}
+      aria-label={t("adminLayout.sidebar.aria")}
+    >
       <div className="admin-sidebar-spine" aria-hidden="true" />
       <div className="admin-sidebar-bg" aria-hidden="true" />
       <div className="admin-sidebar-inner">
@@ -186,10 +225,38 @@ function AdminSidebar() {
             height={48}
             decoding="async"
           />
+          <span className="admin-sidebar-brand-mark" aria-hidden>
+            K
+          </span>
+          <button
+            type="button"
+            className="admin-sidebar-collapse"
+            onClick={toggleCollapsed}
+            aria-label={collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"}
+            title={collapsed ? "Mở rộng menu" : "Thu gọn menu"}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M14.5 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="admin-sidebar-search">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.8" />
+            <path d="M16 16l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Tìm chức năng…"
+            aria-label="Tìm chức năng quản trị"
+          />
         </div>
 
         <nav className="admin-sidebar-nav" id="admin-sidebar-nav">
-          {ADMIN_SIDEBAR_SECTIONS.map((section) => (
+          {visibleSections.map((section) => (
             <div key={section.id} className="admin-nav-section">
               {section.titleKey ? (
                 <p className="admin-nav-section-title">{t(section.titleKey)}</p>
@@ -200,6 +267,7 @@ function AdminSidebar() {
                     <NavLink
                       to={item.to}
                       end={Boolean(item.end)}
+                      title={collapsed ? t(item.labelKey) : undefined}
                       className={({ isActive }) =>
                         [
                           "admin-nav-link",

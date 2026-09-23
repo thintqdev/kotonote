@@ -889,6 +889,30 @@
       "resultWrong": "Chưa trúng đáp án đúng — xem giải thích từng lựa chọn bên dưới.",
       "retry": "Chọn lại",
       "optionsAria": "Câu {{n}} — các lựa chọn trắc nghiệm"
+    },
+    "translation": {
+      "title": "Luyện dịch và nhận xét bằng AI",
+      "stepsTitle": "Cách làm để thật sự tăng đọc hiểu",
+      "step1": "Đọc câu hỏi trước để biết thông tin cần tìm, nhưng chưa xem đáp án.",
+      "step2": "Khoanh từ nối, phủ định và động từ cuối mỗi mệnh đề; xác định ai làm gì.",
+      "step3": "Tóm tắt mạch ý của các đoạn, sau đó dịch nguyên bài trong một lượt để giữ ngữ cảnh.",
+      "step4": "Chỉ sau khi hoàn thành toàn bài mới gửi AI nhận xét, sửa lại rồi đối chiếu bản tham khảo.",
+      "paragraph": "Đoạn {{n}}",
+      "yourTranslation": "Bản dịch nguyên bài của bạn",
+      "placeholder": "Dịch toàn bộ bài ở đây. Giữ đúng mạch ý và sắc thái, đồng thời diễn đạt bằng tiếng Việt tự nhiên…",
+      "completeAll": "Hãy hoàn thành bản dịch nguyên bài trước khi gửi AI nhận xét.",
+      "analyze": "Nhờ AI chấm và nhận xét",
+      "analyzing": "AI đang phân tích kỹ từng đoạn…",
+      "overall": "Nhận xét tổng thể",
+      "strengths": "Điểm bạn làm tốt",
+      "focus": "Điểm cần tập trung",
+      "paragraphScore": "Đoạn {{n}} · {{score}}/100",
+      "attention": "Chỗ cần chú ý",
+      "structures": "Cấu trúc then chốt",
+      "reference": "Bản dịch tham khảo",
+      "noReference": "Chưa có bản dịch tham khảo.",
+      "method": "Các bước luyện lại bài này",
+      "aiUnavailable": "Gemini chưa sẵn sàng nên hiện chỉ có hướng dẫn cơ bản. Bản dịch của bạn vẫn được giữ trên trang."
     }
   },
   "alphabetPage": {
@@ -1075,7 +1099,7 @@
     "badgeJlptLocked": "Cần gói · {{level}}",
     "userDeckTab": "Bộ của tôi (Pro+)",
     "userDeckTitle": "Bộ từ vựng của tôi",
-    "userDeckSubtitle": "Tạo và quản lý bộ từ riêng — tối đa 25 từ mỗi bộ.",
+    "userDeckSubtitle": "Tạo và quản lý bộ từ riêng — tối đa 100 từ mỗi bộ.",
     "userDeckQuota": "Đã dùng {{used}} / {{max}} bộ",
     "userDeckBackOfficial": "Bộ hệ thống",
     "userDeckCreate": "Tạo bộ mới",
@@ -1974,7 +1998,7 @@
           "Mọi quyền lợi Free",
           "Ngữ pháp, từ vựng, kanji N3",
           "Đọc hiểu N3",
-          "Bộ từ vựng & Kanji riêng (10 bộ, 25 mục/bộ)"
+          "Bộ riêng: tối đa 100 từ vựng hoặc 25 Kanji mỗi bộ"
         ]
       },
       "ultra": {
@@ -2392,7 +2416,7 @@
     "MSG_709": "Xóa từ vựng thành công",
     "MSG_710": "Lấy thông tin từ vựng thành công",
     "MSG_711": "Không tìm thấy từ vựng",
-    "MSG_712": "Bộ từ vựng đã đầy (tối đa 25 từ)",
+    "MSG_712": "Bộ từ vựng đã đầy (tối đa 100 từ)",
     "MSG_713": "Đã tải tiến độ học từ vựng",
     "MSG_714": "Đã tải tiến độ bài học",
     "MSG_715": "Đã cập nhật tiến độ cây nở hoa",

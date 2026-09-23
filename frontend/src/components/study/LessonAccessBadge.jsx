@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import UiIcon from '../common/UiIcon.jsx';
 
 /**
  * Badge trạng thái mở/khóa bài — luôn nhìn thấy trên card danh sách.
@@ -25,7 +26,7 @@ export default function LessonAccessBadge({ variant, jlpt }) {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<span className="vocab-lesson-status-badge-ico" aria-hidden>
-					🔒
+					<UiIcon name="lock" size={16} />
 				</span>
 				{t('vocabPage.badgeJlptLocked', { level: jlpt || '' })}
 			</Link>
@@ -35,7 +36,7 @@ export default function LessonAccessBadge({ variant, jlpt }) {
 	return (
 		<span className="vocab-lesson-status-badge vocab-lesson-status-badge--growth">
 			<span className="vocab-lesson-status-badge-ico" aria-hidden>
-				🔒
+				<UiIcon name="lock" size={16} />
 			</span>
 			{t('vocabPage.badgeGrowthLocked')}
 		</span>

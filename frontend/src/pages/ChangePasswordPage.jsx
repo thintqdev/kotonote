@@ -6,6 +6,7 @@ import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import * as authService from "../services/authService.js";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import UiIcon from "../components/common/UiIcon.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import "./AuthPage.css";
 import "./Profile.css";
@@ -149,7 +150,7 @@ const ChangePasswordPage = () => {
                     </span>
                   </label>
                   <div className="input-wrap">
-                    <span className="input-icon">🔒</span>
+                    <span className="input-icon"><UiIcon name="lock" size={20} /></span>
                     <input
                       id="cp-current"
                       type={showCurrent ? "text" : "password"}
@@ -176,7 +177,7 @@ const ChangePasswordPage = () => {
                       onClick={() => setShowCurrent((v) => !v)}
                       aria-label={t("login.showPassword")}
                     >
-                      {showCurrent ? "🙈" : "👁"}
+                      <UiIcon name={showCurrent ? "eye-closed" : "eye-open"} size={20} />
                     </button>
                   </div>
                   {errors.current ? (
@@ -191,7 +192,7 @@ const ChangePasswordPage = () => {
                     </span>
                   </label>
                   <div className="input-wrap">
-                    <span className="input-icon">🔒</span>
+                    <span className="input-icon"><UiIcon name="lock" size={20} /></span>
                     <input
                       id="cp-new"
                       type={showNew ? "text" : "password"}
@@ -216,7 +217,7 @@ const ChangePasswordPage = () => {
                       onClick={() => setShowNew((v) => !v)}
                       aria-label={t("login.showPassword")}
                     >
-                      {showNew ? "🙈" : "👁"}
+                      <UiIcon name={showNew ? "eye-closed" : "eye-open"} size={20} />
                     </button>
                   </div>
                   {errors.new ? (
@@ -231,7 +232,7 @@ const ChangePasswordPage = () => {
                     </span>
                   </label>
                   <div className="input-wrap">
-                    <span className="input-icon">🔒</span>
+                    <span className="input-icon"><UiIcon name="lock" size={20} /></span>
                     <input
                       id="cp-confirm"
                       type={showConfirm ? "text" : "password"}
@@ -258,7 +259,7 @@ const ChangePasswordPage = () => {
                       onClick={() => setShowConfirm((v) => !v)}
                       aria-label={t("login.showPassword")}
                     >
-                      {showConfirm ? "🙈" : "👁"}
+                      <UiIcon name={showConfirm ? "eye-closed" : "eye-open"} size={20} />
                     </button>
                   </div>
                   {errors.confirm ? (

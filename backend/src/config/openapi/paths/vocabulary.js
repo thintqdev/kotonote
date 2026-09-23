@@ -422,7 +422,7 @@ export const vocabularyPaths = {
 					},
 				},
 				'400': {
-					description: 'Deck is full (max 25 words)',
+					description: 'Deck is full (max 100 words)',
 					content: {
 						'application/json': {
 							schema: { $ref: '#/components/schemas/Error' },

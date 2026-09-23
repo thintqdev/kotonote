@@ -9,6 +9,7 @@ import {
 	buildJlptAccessMeta,
 	isJlptUnlocked,
 } from '../utils/jlptAccess.js';
+import { analyzeReadingTranslation } from '../services/readingTranslationService.js';
 
 export const listPublishedArticles = asyncHandler(async (req, res) => {
 	const unlocked = req.jlptUnlocked ?? [];
@@ -79,6 +80,13 @@ export const saveArticleProgress = asyncHandler(async (req, res) => {
 		req.body,
 	);
 	return apiSuccess(res, { progress }, messageCode, 200);
+});
+
+export const analyzeArticleTranslation = asyncHandler(async (req, res) => {
+	const { article } = await readingService.getPublishedArticleBySlug(req.user._id, req.params.slug);
+	assertJlptUnlocked(req.jlptUnlocked, article.jlpt);
+	const result = await analyzeReadingTranslation({ article, translationVi: req.body.translationVi });
+	return apiSuccess(res, result, READING.TRANSLATION_ANALYZED, 200);
 });
 
 export const listAdminArticles = asyncHandler(async (req, res) => {

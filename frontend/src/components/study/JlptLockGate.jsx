@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useJlptAccess } from '../../hooks/useJlptAccess.js';
 import { normalizeJlptLevel } from '../../utils/jlptAccess.js';
+import UiIcon from '../common/UiIcon.jsx';
 import './JlptLockGate.css';
 
 /**
@@ -34,7 +35,7 @@ export default function JlptLockGate({
 		>
 			<div className="jlpt-lock-gate-inner profile-card">
 				<span className="jlpt-lock-gate-icon" aria-hidden>
-					🔒
+					<UiIcon name="lock" size={44} />
 				</span>
 				<h2 id="jlpt-lock-title" className="jlpt-lock-gate-title">
 					{level

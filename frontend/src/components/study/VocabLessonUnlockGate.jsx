@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import UiIcon from '../common/UiIcon.jsx';
 import './JlptLockGate.css';
 
 /**
@@ -22,7 +23,7 @@ export default function VocabLessonUnlockGate({
 		<div className="jlpt-lock-gate" role="region" aria-labelledby="vocab-unlock-title">
 			<div className="jlpt-lock-gate-inner profile-card">
 				<span className="jlpt-lock-gate-icon" aria-hidden>
-					🌱
+					<UiIcon name="sprout" size={44} />
 				</span>
 				<h2 id="vocab-unlock-title" className="jlpt-lock-gate-title">
 					{t('vocabPage.unlockGateTitle', { n: lessonNo })}

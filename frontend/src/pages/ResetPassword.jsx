@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import * as authService from '../services/authService.js';
 import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
@@ -110,7 +111,7 @@ const ResetPassword = () => {
           <div className="form-title-row">
             <h2 className="form-title-main">{t('resetPassword.title')}</h2>
             <span className="form-title-pencil" aria-hidden="true">
-              ✏
+              <UiIcon name="pencil" size={34} />
             </span>
           </div>
           <p className="auth-forgot-lead">{t('resetPassword.lead')}</p>
@@ -128,7 +129,7 @@ const ResetPassword = () => {
               <span className="auth-label-text">{t('resetPassword.newPassword')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">🔒</span>
+              <span className="input-icon"><UiIcon name="lock" size={20} /></span>
               <input
                 id="reset-new-password"
                 type={showPassword ? 'text' : 'password'}
@@ -151,7 +152,7 @@ const ResetPassword = () => {
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={t('login.showPassword')}
               >
-                {showPassword ? '🙈' : '👁'}
+                <UiIcon name={showPassword ? 'eye-closed' : 'eye-open'} size={20} />
               </button>
             </div>
             {errors.newPassword && (
@@ -164,7 +165,7 @@ const ResetPassword = () => {
               <span className="auth-label-text">{t('resetPassword.confirmPassword')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">🔒</span>
+              <span className="input-icon"><UiIcon name="lock" size={20} /></span>
               <input
                 id="reset-confirm-password"
                 type={showConfirm ? 'text' : 'password'}
@@ -187,7 +188,7 @@ const ResetPassword = () => {
                 onClick={() => setShowConfirm((v) => !v)}
                 aria-label={t('login.showPassword')}
               >
-                {showConfirm ? '🙈' : '👁'}
+                <UiIcon name={showConfirm ? 'eye-closed' : 'eye-open'} size={20} />
               </button>
             </div>
             {errors.confirmPassword && (

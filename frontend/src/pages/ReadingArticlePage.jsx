@@ -10,6 +10,7 @@ import { grammarIsViUI } from "../data/grammarMock.js";
 import {
   getReadingArticle,
   saveReadingProgress,
+  analyzeReadingTranslation,
 } from "../services/readingService.js";
 import { getApiErrorMessage } from "../utils/apiErrorMessage.js";
 import { isJlptLockedError } from "../utils/jlptAccess.js";
@@ -33,6 +34,11 @@ export default function ReadingArticlePage() {
   const [lockedJlpt, setLockedJlpt] = useState("");
   /** @type {Record<number, number>} */
   const [quizPick, setQuizPick] = useState({});
+  const [translation, setTranslation] = useState("");
+  const [translationFeedback, setTranslationFeedback] = useState(null);
+  const [translationSource, setTranslationSource] = useState("");
+  const [translationLoading, setTranslationLoading] = useState(false);
+  const [translationError, setTranslationError] = useState("");
 
   useEffect(() => {
     if (!user || !slug) {
@@ -51,6 +57,7 @@ export default function ReadingArticlePage() {
           return;
         }
         setDetail(article);
+        setTranslation("");
         const pick = {};
         for (const row of article.questionAnswers ?? []) {
           pick[row.questionIndex] = row.choiceIndex;
@@ -99,6 +106,24 @@ export default function ReadingArticlePage() {
     },
     [slug],
   );
+
+  const handleAnalyzeTranslation = useCallback(async () => {
+    if (!slug || translation.trim().length < 20) {
+      setTranslationError(t("readingArticlePage.translation.completeAll"));
+      return;
+    }
+    setTranslationLoading(true);
+    setTranslationError("");
+    try {
+      const result = await analyzeReadingTranslation(slug, translation);
+      setTranslationFeedback(result?.feedback ?? null);
+      setTranslationSource(result?.source ?? "");
+    } catch (err) {
+      setTranslationError(getApiErrorMessage(err, t));
+    } finally {
+      setTranslationLoading(false);
+    }
+  }, [slug, translation, t]);
 
   const headerName =
     (user?.name && String(user.name).trim().split(/\s+/)[0]) ||
@@ -208,6 +233,62 @@ export default function ReadingArticlePage() {
               </p>
             ))}
           </div>
+        </section>
+
+        <section className="grammar-block reading-translation" aria-labelledby="reading-translation-title">
+          <h2 id="reading-translation-title" className="grammar-h">
+            {t("readingArticlePage.translation.title")}
+          </h2>
+          <div className="grammar-box reading-translation-guide">
+            <h3>{t("readingArticlePage.translation.stepsTitle")}</h3>
+            <ol>
+              <li>{t("readingArticlePage.translation.step1")}</li>
+              <li>{t("readingArticlePage.translation.step2")}</li>
+              <li>{t("readingArticlePage.translation.step3")}</li>
+              <li>{t("readingArticlePage.translation.step4")}</li>
+            </ol>
+          </div>
+          <div className="grammar-box reading-translation-card reading-translation-workspace">
+            <label htmlFor="reading-full-translation">{t("readingArticlePage.translation.yourTranslation")}</label>
+            <textarea
+              id="reading-full-translation"
+              rows={12}
+              maxLength={12000}
+              value={translation}
+              disabled={translationLoading}
+              placeholder={t("readingArticlePage.translation.placeholder")}
+              onChange={(event) => {
+                setTranslation(event.target.value);
+                setTranslationFeedback(null);
+                setTranslationError("");
+              }}
+            />
+            <p className="reading-translation-count">{translation.length.toLocaleString()} / 12.000</p>
+          </div>
+          {translationError ? <p className="reading-translation-error" role="alert">{translationError}</p> : null}
+          <button type="button" className="reading-translation-submit" disabled={translationLoading} onClick={() => void handleAnalyzeTranslation()}>
+            {translationLoading ? t("readingArticlePage.translation.analyzing") : t("readingArticlePage.translation.analyze")}
+          </button>
+
+          {translationFeedback ? (
+            <div className="reading-ai-feedback" aria-live="polite">
+              <div className="grammar-box reading-ai-summary">
+                <div className="reading-ai-score"><strong>{translationFeedback.overallScore}</strong><span>/100</span></div>
+                <div><h3>{t("readingArticlePage.translation.overall")}</h3><p>{translationFeedback.summaryVi}</p></div>
+              </div>
+              {translationSource === "placeholder" ? <p className="reading-translation-error">{t("readingArticlePage.translation.aiUnavailable")}</p> : null}
+              <div className="reading-ai-columns">
+                <div className="grammar-box"><h3>{t("readingArticlePage.translation.strengths")}</h3><ul>{translationFeedback.strengthsVi.map((item) => <li key={item}>{item}</li>)}</ul></div>
+                <div className="grammar-box"><h3>{t("readingArticlePage.translation.focus")}</h3><ul>{translationFeedback.focusVi.map((item) => <li key={item}>{item}</li>)}</ul></div>
+              </div>
+              <div className="grammar-box reading-ai-paragraph">
+                {translationFeedback.issues.length ? <div className="reading-ai-issues"><h4>{t("readingArticlePage.translation.attention")}</h4>{translationFeedback.issues.map((issue, issueIndex) => <div className={`reading-ai-issue reading-ai-issue--${issue.severity}`} key={`${issue.quote}-${issueIndex}`}><p><strong>{issue.quote}</strong></p><p>{issue.correctionVi}</p><small>{issue.explanationVi}</small></div>)}</div> : null}
+                {translationFeedback.keyStructures.length ? <div><h4>{t("readingArticlePage.translation.structures")}</h4>{translationFeedback.keyStructures.map((item) => <p key={item.pattern}><strong lang="ja">{item.pattern}</strong> — {item.meaningVi}<br/><small>{item.noteVi}</small></p>)}</div> : null}
+                <div className="reading-ai-reference"><h4>{t("readingArticlePage.translation.reference")}</h4><p>{translationFeedback.referenceTranslationVi || t("readingArticlePage.translation.noReference")}</p></div>
+              </div>
+              <div className="grammar-box reading-ai-method"><h3>{t("readingArticlePage.translation.method")}</h3><ol>{translationFeedback.readingMethodVi.map((step) => <li key={step}>{step}</li>)}</ol></div>
+            </div>
+          ) : null}
         </section>
 
         {detail.vocabulary?.length ? (

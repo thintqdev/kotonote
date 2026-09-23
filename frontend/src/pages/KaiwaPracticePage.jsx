@@ -9,6 +9,7 @@ import {
 } from "../hooks/useSpeechRecognition.js";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import UiIcon from "../components/common/UiIcon.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   getKaiwaContextById,
@@ -335,7 +336,7 @@ export default function KaiwaPracticePage() {
                 {messages.length === 0 && !busy ? (
                   <div className="kaiwa-chat-empty">
                     <div className="kaiwa-chat-empty__icon" aria-hidden>
-                      💬
+                      <UiIcon name="chat" size={52} />
                     </div>
                     <p>{t("kaiwaPractice.emptyChat")}</p>
                   </div>

@@ -4,7 +4,19 @@
  */
 
 .admin-shell {
-  --admin-modal-x: 1.15rem;
+  --admin-modal-x: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.admin-shell :is(.admin-grammar-modal-backdrop, .admin-quote-modal-backdrop,
+  .admin-users-modal-backdrop, .vdeck-modal-backdrop, .exam-modal-backdrop,
+  .admin-receipt-modal-backdrop) {
+  padding: clamp(18px, 4vw, 40px);
+}
+
+.admin-shell :is(.admin-grammar-modal, .admin-quote-modal, .admin-users-modal,
+  .vdeck-modal, .exam-bulk-import-modal, .admin-receipt-modal) {
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(42, 38, 32, 0.24);
 }
 
 /* —— Shell —— */
@@ -30,7 +42,7 @@
 .admin-shell .admin-users-modal-header,
 .admin-shell .vdeck-modal-header,
 .admin-shell .exam-bulk-import-modal .exam-modal-header {
-  padding: 1.1rem var(--admin-modal-x) 0.45rem;
+  padding: 1.35rem var(--admin-modal-x) 0.75rem;
   border-bottom: none;
 }
 
@@ -61,7 +73,7 @@
 .admin-shell .admin-grammar-modal-body,
 .admin-shell .admin-quote-modal-body,
 .admin-shell .admin-users-modal-body {
-  padding: 0.35rem var(--admin-modal-x) 0.85rem;
+  padding: 0.65rem var(--admin-modal-x) 1.25rem;
   flex: 1 1 auto;
   overflow: auto;
   min-height: 0;

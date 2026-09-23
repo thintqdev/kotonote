@@ -57,19 +57,19 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       {
         id: "kaiwa",
         to: "/admin/kaiwa",
-        icon: "audio",
+        iconSrc: "/assets/menu-icons/kaiwa.png",
         labelKey: "adminLayout.sidebar.kaiwa",
       },
       {
         id: "examPapers",
         to: "/admin/exam-papers",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/exam-papers.png",
         labelKey: "adminLayout.sidebar.examPapers",
       },
       {
         id: "examStructures",
         to: "/admin/exam-structures",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/exam-structures.png",
         labelKey: "adminLayout.sidebar.examStructures",
       },
     ],
@@ -105,31 +105,31 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       {
         id: "users",
         to: "/admin/users",
-        icon: "user",
+        iconSrc: "/assets/admin-menu-icons/users.png",
         labelKey: "adminLayout.sidebar.users",
       },
       {
         id: "subscriptions",
         to: "/admin/subscriptions",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/subscriptions.png",
         labelKey: "adminLayout.sidebar.subscriptions",
       },
       {
         id: "quotes",
         to: "/admin/quotes",
-        icon: "user",
+        iconSrc: "/assets/admin-menu-icons/quotes.png",
         labelKey: "adminLayout.sidebar.quotes",
       },
       {
         id: "prompts",
         to: "/admin/prompts",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/prompts.png",
         labelKey: "adminLayout.sidebar.prompts",
       },
       {
         id: "badges",
         to: "/admin/badges",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/badges.png",
         labelKey: "adminLayout.sidebar.badges",
       },
       {
@@ -141,19 +141,19 @@ export const ADMIN_SIDEBAR_SECTIONS = [
       {
         id: "notifications",
         to: "/admin/notifications",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/notifications.png",
         labelKey: "adminLayout.sidebar.notifications",
       },
       {
         id: "feedback",
         to: "/admin/feedback",
-        icon: "doc",
+        iconSrc: "/assets/admin-menu-icons/feedback.png",
         labelKey: "adminLayout.sidebar.feedback",
       },
       {
         id: "arena",
         to: "/admin/arena",
-        iconSrc: "/assets/menu-icons/practice.png",
+        iconSrc: "/assets/admin-menu-icons/arena.png",
         labelKey: "adminLayout.sidebar.arena",
       },
       {

@@ -29,6 +29,7 @@ export const READING = {
 	SUMMARY: '/reading/summary',
 	bySlug: (slug) => `/reading/${encodeURIComponent(slug)}`,
 	progress: (slug) => `/reading/${encodeURIComponent(slug)}/progress`,
+	translationFeedback: (slug) => `/reading/${encodeURIComponent(slug)}/translation-feedback`,
 };
 
 /** Đề thi JLPT (user) — `/api/exam-papers/*` */

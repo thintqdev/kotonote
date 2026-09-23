@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import UiIcon from '../common/UiIcon.jsx';
 import './ExamMediaZoomImage.css';
 
 /**
@@ -50,7 +51,7 @@ export default function ExamMediaZoomImage({
 					loading="lazy"
 				/>
 				<span className="exam-media-zoom-hint" aria-hidden>
-					🔍 Phóng to
+					<UiIcon name="zoom" size={18} /> Phóng to
 				</span>
 			</button>
 

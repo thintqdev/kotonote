@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import { requestPasswordReset } from '../services/authService.js';
 import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
@@ -57,7 +58,7 @@ const ForgotPassword = () => {
             <div className="form-title-row">
               <h2 className="form-title-main">{t('forgotPassword.successTitle')}</h2>
               <span className="form-title-pencil" aria-hidden="true">
-                ✉
+                <UiIcon name="mail" size={34} />
               </span>
             </div>
           </div>
@@ -84,7 +85,7 @@ const ForgotPassword = () => {
           <div className="form-title-row">
             <h2 className="form-title-main">{t('forgotPassword.title')}</h2>
             <span className="form-title-pencil" aria-hidden="true">
-              ✏
+              <UiIcon name="pencil" size={34} />
             </span>
           </div>
           <p className="auth-forgot-lead">{t('forgotPassword.lead')}</p>
@@ -102,7 +103,7 @@ const ForgotPassword = () => {
               <span className="auth-label-text">{t('forgotPassword.email')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">✉</span>
+              <span className="input-icon"><UiIcon name="mail" size={20} /></span>
               <input
                 id="forgot-email"
                 type="email"

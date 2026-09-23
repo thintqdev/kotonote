@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import { useAuth } from '../hooks/useAuth.jsx';
 import { resendVerificationEmail } from '../services/authService.js';
 import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
@@ -87,7 +88,7 @@ const VerifyEmailPage = () => {
             <div className="form-title-row">
               <h2 className="form-title-main">{t('verifyEmail.confirmTitle')}</h2>
               <span className="form-title-pencil" aria-hidden="true">
-                ✉
+                <UiIcon name="mail" size={34} />
               </span>
             </div>
             <p className="auth-forgot-lead">{t('verifyEmail.confirmLead')}</p>
@@ -128,7 +129,7 @@ const VerifyEmailPage = () => {
               <span className="auth-label-text">{t('register.email')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">✉</span>
+              <span className="input-icon"><UiIcon name="mail" size={20} /></span>
               <input
                 id="verify-resend-email"
                 type="email"

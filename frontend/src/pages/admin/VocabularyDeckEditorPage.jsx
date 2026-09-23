@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import {
   JLPT_LEVEL_OPTIONS,
+  MAX_WORDS_PER_DECK,
   VOCAB_CATEGORY_OPTIONS,
 } from "../../constants/vocabularyFieldMeta.js";
 import {
@@ -64,7 +65,6 @@ const THUMBNAIL_PRESETS = [
 
 const MAX_UPLOAD_FILE_BYTES = 1.5 * 1024 * 1024;
 const MAX_THUMB_DATA_URL_LENGTH = 560_000;
-const MAX_WORDS_PER_DECK = 25;
 
 function vocabRowsFilledCount(rows) {
   return rows.filter((r) => r.word.trim() && r.reading.trim() && r.meaning.trim())
@@ -621,7 +621,7 @@ export default function VocabularyDeckEditorPage() {
   const openGenerateModal = () => {
     if (formLocked) return;
     if (slotsLeft <= 0) {
-      toast.error("Deck đã đủ 25 từ");
+      toast.error(`Deck đã đủ ${MAX_WORDS_PER_DECK} từ`);
       return;
     }
     setGenerateOpen(true);
@@ -1063,7 +1063,7 @@ export default function VocabularyDeckEditorPage() {
                   </table>
                 </div>
                 <p className="vdeck-table-foot">
-                  {rows.length} dòng · tối đa 25 từ/deck
+                  {rows.length} dòng · tối đa {MAX_WORDS_PER_DECK} từ/deck
                 </p>
               </section>
             </div>

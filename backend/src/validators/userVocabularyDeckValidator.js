@@ -5,6 +5,7 @@ import {
 	vocabularyDeckUpdateSchema,
 	vocabularyUpdateSchema,
 } from './vocabularyValidator.js';
+import { MAX_WORDS_PER_DECK } from '../constants/vocabulary.js';
 
 export const userVocabularyDeckCreateSchema = vocabularyDeckCreateSchema.keys({
 	isActive: Joi.forbidden(),
@@ -37,6 +38,6 @@ export const userVocabularyImportSchema = Joi.object({
 			}),
 		)
 		.min(1)
-		.max(25)
+		.max(MAX_WORDS_PER_DECK)
 		.required(),
 });

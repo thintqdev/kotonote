@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import { useAuth } from '../hooks/useAuth.jsx';
 import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
@@ -99,7 +100,7 @@ const RegisterPage = () => {
               <span className="auth-label-text">{t('register.username')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">👤</span>
+              <span className="input-icon"><UiIcon name="user" size={20} /></span>
               <input
                 id="reg-username"
                 type="text"
@@ -120,7 +121,7 @@ const RegisterPage = () => {
               <span className="auth-label-text">{t('register.email')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">✉</span>
+              <span className="input-icon"><UiIcon name="mail" size={20} /></span>
               <input
                 id="reg-email"
                 type="email"
@@ -141,7 +142,7 @@ const RegisterPage = () => {
               <span className="auth-label-text">{t('register.password')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">🔒</span>
+              <span className="input-icon"><UiIcon name="lock" size={20} /></span>
               <input
                 id="reg-password"
                 type={showPassword ? 'text' : 'password'}
@@ -159,7 +160,7 @@ const RegisterPage = () => {
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={t('register.showPassword')}
               >
-                {showPassword ? '🙈' : '👁'}
+                <UiIcon name={showPassword ? 'eye-closed' : 'eye-open'} size={20} />
               </button>
             </div>
             {errors.password && <span className="error-msg">{errors.password}</span>}
@@ -170,7 +171,7 @@ const RegisterPage = () => {
               <span className="auth-label-text">{t('register.confirmPassword')}</span>
             </label>
             <div className="input-wrap">
-              <span className="input-icon">🔒</span>
+              <span className="input-icon"><UiIcon name="lock" size={20} /></span>
               <input
                 id="reg-confirm"
                 type={showConfirmPassword ? 'text' : 'password'}
@@ -188,7 +189,7 @@ const RegisterPage = () => {
                 onClick={() => setShowConfirmPassword((v) => !v)}
                 aria-label={t('register.showPassword')}
               >
-                {showConfirmPassword ? '🙈' : '👁'}
+                <UiIcon name={showConfirmPassword ? 'eye-closed' : 'eye-open'} size={20} />
               </button>
             </div>
             {errors.confirmPassword && <span className="error-msg">{errors.confirmPassword}</span>}

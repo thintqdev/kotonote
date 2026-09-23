@@ -1,4 +1,5 @@
 import { MAX_KANJI_PER_DECK } from "./kanjiFieldMeta.js";
+import { MAX_WORDS_PER_DECK } from "./vocabularyFieldMeta.js";
 import {
 	generateAdminKanji,
 	generateAdminVocabulary,
@@ -10,7 +11,8 @@ export const VOCABULARY_AI_GENERATE = {
 	promptType: "vocabulary",
 	modalTitle: "Generate từ vựng (AI)",
 	unitLabel: "từ",
-	maxPerDeck: 25,
+	maxPerDeck: MAX_WORDS_PER_DECK,
+	maxGenerateBatch: 25,
 	defaultTemplate: (level) => {
 		const lv = String(level ?? "n5").toLowerCase();
 		if (lv === "n3") return "n3-daily";
@@ -39,6 +41,7 @@ export const KANJI_AI_GENERATE = {
 	modalTitle: "Generate Kanji (AI)",
 	unitLabel: "chữ",
 	maxPerDeck: MAX_KANJI_PER_DECK,
+	maxGenerateBatch: 25,
 	defaultTemplate: (jlpt) => {
 		const lv = String(jlpt ?? "N5").toUpperCase();
 		if (lv === "N3") return "n3-intermediate";

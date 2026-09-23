@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
 import { Breadcrumb } from "../components/common";
+import UiIcon from "../components/common/UiIcon.jsx";
 import StudyPageHeader from "../components/study/StudyPageHeader.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import KanaStrokeAnimation from "../components/alphabet/KanaStrokeAnimation.jsx";
@@ -476,7 +477,7 @@ export default function AlphabetPage() {
           <article className="alpha-card alpha-card--tip">
             <h3 className="alpha-card-title">
               <span className="alpha-tip-icon" aria-hidden="true">
-                💡
+                <UiIcon name="lightbulb" size={28} />
               </span>
               {t("alphabetPage.tipTitle")}
             </h3>

@@ -82,7 +82,14 @@ export default function DeckAIGenerateModal({
 			toast.error(`Deck đã đủ ${config.maxPerDeck} ${config.unitLabel}`);
 			return;
 		}
-		const count = Math.min(Math.max(1, Number(generateCount) || 1), slotsLeft);
+		const generationLimit = Math.min(
+			slotsLeft,
+			config.maxGenerateBatch ?? slotsLeft,
+		);
+		const count = Math.min(
+			Math.max(1, Number(generateCount) || 1),
+			generationLimit,
+		);
 		const hint = generateHint.trim() || String(deckHint ?? "").trim();
 		setBusy(true);
 		try {
@@ -197,11 +204,15 @@ export default function DeckAIGenerateModal({
 							className="vdeck-input"
 							type="number"
 							min={1}
-							max={slotsLeft}
+							max={Math.min(slotsLeft, config.maxGenerateBatch ?? slotsLeft)}
 							value={generateCount}
 							onChange={(e) =>
 								setGenerateCount(
-									Math.min(slotsLeft, Math.max(1, Number(e.target.value) || 1)),
+									Math.min(
+										slotsLeft,
+										config.maxGenerateBatch ?? slotsLeft,
+										Math.max(1, Number(e.target.value) || 1),
+									),
 								)
 							}
 							disabled={busy}
@@ -254,6 +265,7 @@ DeckAIGenerateModal.propTypes = {
 		modalTitle: PropTypes.string.isRequired,
 		unitLabel: PropTypes.string.isRequired,
 		maxPerDeck: PropTypes.number.isRequired,
+		maxGenerateBatch: PropTypes.number,
 		defaultTemplate: PropTypes.func.isRequired,
 		generate: PropTypes.func.isRequired,
 		previewColumns: PropTypes.array,

@@ -26,4 +26,4 @@ export const PART_OF_SPEECH = {
 	OTHER: 'other',
 };
 
-export const MAX_WORDS_PER_DECK = 25;
+export const MAX_WORDS_PER_DECK = 100;

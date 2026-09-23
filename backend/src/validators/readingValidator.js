@@ -66,3 +66,7 @@ export const saveReadingProgressSchema = Joi.object({
 		choiceIndex: Joi.number().integer().min(0).required(),
 	}).optional(),
 }).min(1);
+
+export const analyzeReadingTranslationSchema = Joi.object({
+	translationVi: Joi.string().trim().min(20).max(12000).required(),
+});

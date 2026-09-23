@@ -43,7 +43,7 @@ const vocabularyDeckSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 			min: 0,
-			max: 25,
+			max: 100,
 		},
 		isActive: {
 			type: Boolean,

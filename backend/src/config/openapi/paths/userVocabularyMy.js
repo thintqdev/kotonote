@@ -62,7 +62,7 @@ export const userVocabularyMyPaths = {
 		post: {
 			tags: ['Vocabulary - My Decks'],
 			summary: 'Create my vocabulary deck',
-			description: 'Requires Pro+ membership. Quota per tier; max 25 words per deck.',
+			description: 'Requires Pro+ membership. Quota per tier; max 100 words per deck.',
 			security: [{ bearerAuth: [] }],
 			requestBody: {
 				required: true,
@@ -179,7 +179,7 @@ export const userVocabularyMyPaths = {
 	'/api/vocabulary/my/decks/{deckId}/import': {
 		post: {
 			tags: ['Vocabulary - My Decks'],
-			summary: 'Import words into my deck (JSON array, max 25 total)',
+			summary: 'Import words into my deck (JSON array, max 100 total)',
 			security: [{ bearerAuth: [] }],
 			parameters: [
 				{

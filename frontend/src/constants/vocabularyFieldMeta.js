@@ -2,6 +2,8 @@
  * Nhãn UI cho enum backend (Mongoose) — FE bám theo giá trị API.
  */
 
+export const MAX_WORDS_PER_DECK = 100;
+
 export const JLPT_LEVEL_OPTIONS = [
 	{ value: 'n5', label: 'N5 — Sơ cấp' },
 	{ value: 'n4', label: 'N4' },

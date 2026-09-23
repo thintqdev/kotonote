@@ -3,6 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../hooks/useAuth.jsx";
 import Layout from "../layouts/Layout.jsx";
+import UiIcon from "../components/common/UiIcon.jsx";
 import { mockStreak } from "../data/dashboardHomeMock.js";
 import {
   buildKanjiLessonQuizQuestions,
@@ -815,7 +816,7 @@ export default function KanjiPage() {
             ) : flashDone ? (
               <div className="vocab-study-done">
                 <div className="vocab-study-done-ico" aria-hidden>
-                  ✿
+                  <UiIcon name="flower" size={48} />
                 </div>
                 <h1
                   id="kanji-study-title"

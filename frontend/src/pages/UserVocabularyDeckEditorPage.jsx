@@ -17,11 +17,12 @@ import {
 } from '../services/userVocabularyDeckService.js';
 import { getApiErrorMessage } from '../utils/apiErrorMessage.js';
 import { JLPT_ORDER, jlptToApiLevel, levelToJlpt } from '../utils/deckStudy.js';
+import { MAX_WORDS_PER_DECK } from '../constants/vocabularyFieldMeta.js';
 import './DashboardHome.css';
 import './VocabularyPages.css';
 import './GrammarPages.css';
 
-const MAX_WORDS = 25;
+const MAX_WORDS = MAX_WORDS_PER_DECK;
 
 const emptyWord = () => ({
 	word: '',

@@ -3,6 +3,7 @@ import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import AuthLayout from '../components/auth/AuthLayout.jsx';
+import UiIcon from '../components/common/UiIcon.jsx';
 import { resendVerificationEmail } from '../services/authService.js';
 import { getAxiosErrorMessage } from '../utils/apiErrorMessage.js';
 
@@ -37,7 +38,7 @@ const RegisterThankYouPage = () => {
           <div className="form-title-row">
             <h2 className="form-title-main">{t('registerThankYou.title')}</h2>
             <span className="form-title-pencil" aria-hidden="true">
-              ✉
+              <UiIcon name="mail" size={34} />
             </span>
           </div>
           <p className="auth-forgot-lead">{t('registerThankYou.lead', { email })}</p>

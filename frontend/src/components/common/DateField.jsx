@@ -7,6 +7,7 @@ import {
 } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import UiIcon from "./UiIcon.jsx";
 import {
   parseIsoToLocalDate,
   localDateToIso,
@@ -211,7 +212,7 @@ function DateField({
             {labelText || t("dateField.placeholder")}
           </span>
           <span className="date-field-trigger-icon" aria-hidden>
-            📅
+            <UiIcon name="calendar" size={18} />
           </span>
         </button>
         {value ? (

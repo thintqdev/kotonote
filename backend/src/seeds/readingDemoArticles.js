@@ -151,8 +151,114 @@ const fullBodies = {
 	},
 };
 
-export const READING_DEMO_ARTICLES = listMeta.map((meta, index) => {
-	const body = fullBodies[meta.slug] ?? stubBody(meta.snippetJa);
+const levelArticles = [
+	{
+		slug: 'r-n5-sunday', jlpt: 'N5', titleJa: '日曜日の買い物',
+		snippetJa: '日曜日、ゆきさんはお母さんとスーパーへ行きました。',
+		wordCount: 170, readingMinutes: 3, rating: 4.7, displayOrder: 8, featured: true,
+		paragraphsJa: [
+			'日曜日、ゆきさんはお母さんとスーパーへ行きました。スーパーは家の近くにあります。二人は歩いて行きました。',
+			'ゆきさんはりんごを三つと牛乳を一本買いました。お母さんは魚と野菜を買いました。',
+			'買い物のあと、二人はパン屋へ行きました。ゆきさんは小さいパンを食べて、家へ帰りました。',
+		],
+		vocabulary: [
+			{ termJa: '近く（ちかく）', gloss: { vi: 'gần, khu vực gần', ja: '遠くない場所' } },
+			{ termJa: '買い物（かいもの）', gloss: { vi: 'việc mua sắm', ja: '物を買うこと' } },
+		],
+		questions: [{
+			questionJa: 'ゆきさんは何を三つ買いましたか。',
+			choicesJa: ['パン', 'りんご', '魚'], answerIndex: 1,
+			explainPerChoice: { ja: ['パンの数は書いていない。', '正解。', '魚はお母さんが買った。'], vi: ['Không nói số bánh mì.', 'Đúng.', 'Mẹ mua cá.'] },
+		}],
+	},
+	{
+		slug: 'r-n4-library-card', jlpt: 'N4', titleJa: '図書館で本を借りる',
+		snippetJa: '町の図書館では、一人五冊まで本を借りることができます。',
+		wordCount: 310, readingMinutes: 4, rating: 4.7, displayOrder: 9,
+		paragraphsJa: [
+			'町の図書館では、一人五冊まで本を借りることができます。借りる期間は二週間です。初めて利用する人は、住所が分かる物を持って受付へ行きます。',
+			'読みたい本が貸し出し中のときは、予約することもできます。本が戻ったら、図書館からメールが来ます。',
+			'返す日は図書館が休みでも、入口の横にある箱へ入れれば大丈夫です。ただし、CDは壊れやすいので受付へ返してください。',
+		],
+		vocabulary: [
+			{ termJa: '貸し出し中（かしだしちゅう）', gloss: { vi: 'đang được cho mượn' } },
+			{ termJa: '受付（うけつけ）', gloss: { vi: 'quầy tiếp nhận' } },
+		],
+		questions: [{
+			questionJa: '図書館が休みの日に返せない物はどれですか。',
+			choicesJa: ['本', 'CD', '雑誌'], answerIndex: 1,
+			explainPerChoice: { ja: ['箱に返せる。', '正解。受付へ返す。', '箱に返せる。'], vi: ['Có thể bỏ vào hộp.', 'Đúng, phải trả tại quầy.', 'Có thể bỏ vào hộp.'] },
+		}],
+	},
+	{
+		slug: 'r-n3-remote-work', jlpt: 'N3', titleJa: '在宅勤務で変わったこと',
+		snippetJa: '在宅勤務を始めて、通勤時間がなくなった一方、仕事と生活の区別が難しくなった。',
+		wordCount: 520, readingMinutes: 6, rating: 4.8, displayOrder: 10, featured: true,
+		paragraphsJa: [
+			'去年から週に三日、家で働くようになった。以前は通勤に往復二時間かかっていたが、その時間を家事や運動に使えるようになった。朝も落ち着いて仕事を始められる。',
+			'しかし、良いことばかりではない。家にいると仕事を終えるきっかけがなく、夜までパソコンを見てしまうことがある。また、同僚との短い会話から得られる情報も少なくなった。',
+			'そこで私は、仕事を始める時刻と終える時刻を決め、昼休みには必ず外を歩くことにした。在宅勤務を快適にするには、自分で生活のリズムを作る必要があると思う。',
+		],
+		vocabulary: [
+			{ termJa: '往復（おうふく）', gloss: { vi: 'đi và về, khứ hồi' } },
+			{ termJa: 'きっかけ', gloss: { vi: 'dịp, nguyên nhân khởi đầu' } },
+		],
+		questions: [{
+			questionJa: '筆者が在宅勤務の問題を減らすためにしていることは何ですか。',
+			choicesJa: ['夜まで働く', '勤務時間を決めて昼に外を歩く', '毎日会社へ行く'], answerIndex: 1,
+			explainPerChoice: { ja: ['問題そのもの。', '正解。', '週三日は在宅勤務。'], vi: ['Đó chính là vấn đề.', 'Đúng.', 'Ba ngày mỗi tuần làm tại nhà.'] },
+		}],
+	},
+	{
+		slug: 'r-n2-food-loss', jlpt: 'N2', titleJa: '食品ロスを減らすには',
+		snippetJa: '食べられるにもかかわらず廃棄される食品を減らすには、消費者の判断も問われている。',
+		wordCount: 820, readingMinutes: 9, rating: 4.9, displayOrder: 11,
+		paragraphsJa: [
+			'まだ食べられるにもかかわらず捨てられる食品、いわゆる「食品ロス」が社会的な課題となっている。店側が売れ残りを減らす工夫をするだけでなく、私たち消費者の買い方も見直さなければならない。',
+			'例えば、商品棚の奥から期限の長い商品を選ぶ行動は、一見すると合理的に思える。しかし、すぐに食べる予定なら手前の商品でも問題はない。皆が期限の長い物だけを取れば、手前の商品は売れ残り、廃棄につながる。',
+			'もちろん、必要以上に買わないことが基本である。ただし、単に我慢を求めるだけでは長続きしない。期限表示の意味を理解し、自分の予定に合わせて選ぶことが、無理なく続けられる対策ではないだろうか。',
+		],
+		vocabulary: [
+			{ termJa: 'にもかかわらず', gloss: { vi: 'mặc dù, bất chấp' } },
+			{ termJa: '廃棄（はいき）', gloss: { vi: 'sự vứt bỏ, tiêu hủy' } },
+			{ termJa: '見直す（みなおす）', gloss: { vi: 'xem xét lại' } },
+		],
+		questions: [{
+			questionJa: '筆者が最も勧めている行動はどれですか。',
+			choicesJa: ['常に期限が最も長い商品を買う', '買い物を完全にやめる', '食べる予定に応じて必要な商品を選ぶ', '店だけに対策を任せる'], answerIndex: 2,
+			explainPerChoice: { ja: ['廃棄を増やす場合がある。', 'そのような主張ではない。', '正解。', '消費者の行動も必要。'], vi: ['Có thể làm tăng lãng phí.', 'Không phải lập luận của tác giả.', 'Đúng.', 'Người tiêu dùng cũng phải hành động.'] },
+		}],
+	},
+	{
+		slug: 'r-n1-efficiency-paradox', jlpt: 'N1', titleJa: '効率化がもたらす逆説',
+		snippetJa: '技術によって作業時間が短縮されても、必ずしも私たちの余暇が増えるとは限らない。',
+		wordCount: 1250, readingMinutes: 13, rating: 4.9, displayOrder: 12, featured: true,
+		paragraphsJa: [
+			'技術の進歩によって一つの作業に要する時間が短縮されれば、私たちの自由な時間は増えるはずだ。ところが現実には、効率化が進むほど忙しさを訴える人も少なくない。この食い違いは、空いた時間がそのまま余暇になるという前提に問題があることを示している。',
+			'連絡が瞬時に届くようになると、返答に許される時間まで短くなる。資料を容易に作成できれば、求められる資料の量や質が上がる。つまり、技術は既存の作業を軽減する一方で、これまで存在しなかった期待や仕事を生み出すのである。効率化によって生じた余裕は、しばしば新たな要求によって埋められてしまう。',
+			'だからといって、技術を遠ざければよいわけではない。重要なのは、何を速くできるかだけでなく、何のために速くするのかを問い直すことだ。生み出された時間の使い道を意識的に決めない限り、効率化は目的ではなく、際限のない加速そのものになりかねない。',
+		],
+		vocabulary: [
+			{ termJa: '食い違い（くいちがい）', gloss: { vi: 'sự bất nhất, chênh lệch' } },
+			{ termJa: '際限がない（さいげんがない）', gloss: { vi: 'không có giới hạn' } },
+			{ termJa: '〜になりかねない', gloss: { vi: 'có nguy cơ trở thành…' } },
+		],
+		questions: [{
+			questionJa: '筆者によれば、効率化しても余暇が増えない主な理由は何ですか。',
+			choicesJa: ['技術が作業を遅くするから', '空いた時間に新しい期待や仕事が生じるから', '人々が技術を全く使わないから', '資料の質が低下するから'], answerIndex: 1,
+			explainPerChoice: { ja: ['反対に作業は速くなる。', '正解。', '本文と異なる。', '要求される質は上がる。'], vi: ['Ngược lại, công việc nhanh hơn.', 'Đúng.', 'Trái với bài.', 'Chất lượng được kỳ vọng cao hơn.'] },
+		}],
+	},
+];
+
+export const READING_DEMO_ARTICLES = [...listMeta, ...levelArticles].map((meta, index) => {
+	const body = meta.paragraphsJa
+		? {
+			paragraphsJa: meta.paragraphsJa,
+			vocabulary: meta.vocabulary ?? [],
+			questions: meta.questions ?? [],
+		}
+		: (fullBodies[meta.slug] ?? stubBody(meta.snippetJa));
 	return {
 		...meta,
 		isPublished: true,

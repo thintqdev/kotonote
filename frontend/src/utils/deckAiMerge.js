@@ -24,7 +24,7 @@ function kanjiRowFilled(r) {
  * @param {object[]} items
  * @param {number} maxWords
  */
-export function mergeVocabularyAIIntoRows(rows, items, maxWords = 25) {
+export function mergeVocabularyAIIntoRows(rows, items, maxWords = 100) {
 	const kept = rows.filter(vocabRowFilled);
 	const room = Math.max(0, maxWords - kept.length);
 	const added = (items ?? []).slice(0, room).map((item) => ({

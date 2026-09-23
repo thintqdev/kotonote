@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { resolvePublicMediaUrl } from '../../utils/resolveAvatarUrl.js';
 import { sanitizeNotebookHtml } from '../../utils/sanitizeHtml.js';
 import { normalizeSafeLinkUrl } from '../../utils/safeUrl.js';
+import UiIcon from '../common/UiIcon.jsx';
 import './NotebookRichEditor.css';
 
 function exec(cmd, value = null) {
@@ -128,8 +129,8 @@ export default function NotebookRichEditor({
 		{ id: 'quote', label: '❝', title: t('notebook.toolQuote') },
 		{ id: 'table', label: '▦', title: t('notebook.toolTable') },
 		{ id: 'hr', label: '—', title: t('notebook.toolHr') },
-		{ id: 'link', label: '🔗', title: t('notebook.toolLink') },
-		{ id: 'image', label: '🖼', title: t('notebook.toolImage') },
+		{ id: 'link', icon: 'link', title: t('notebook.toolLink') },
+		{ id: 'image', icon: 'image', title: t('notebook.toolImage') },
 	];
 
 	return (
@@ -145,7 +146,7 @@ export default function NotebookRichEditor({
 						onMouseDown={(e) => e.preventDefault()}
 						onClick={() => handleToolbar(tool.id)}
 					>
-						{tool.label}
+						{tool.icon ? <UiIcon name={tool.icon} size={18} /> : tool.label}
 					</button>
 				))}
 			</div>

@@ -296,9 +296,7 @@ export default function AdminUsersPage() {
     <div className="admin-stub-main admin-users-page">
       <h1 className="admin-users-title">Quản lý người dùng</h1>
       <p className="admin-users-lead">
-        Lọc danh sách, chọn nhiều user để đổi trạng thái hàng loạt, hoặc sửa
-        từng người — API <code>/api/admin/users</code> và{" "}
-        <code>/api/admin/users/bulk/status</code>.
+        Tìm kiếm, lọc và cập nhật trạng thái tài khoản trong cùng một nơi.
       </p>
 
       <section className="admin-users-stats" aria-label="Thống kê người dùng">
@@ -409,7 +407,7 @@ export default function AdminUsersPage() {
             className="admin-users-btn admin-users-btn--ghost"
             onClick={applySearch}
           >
-            Áp dụng tìm
+            Tìm kiếm
           </button>
           <button
             type="button"
