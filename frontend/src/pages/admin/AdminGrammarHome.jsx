@@ -10,6 +10,7 @@ import {
 	listAdminGrammars,
 } from '../../services/adminGrammarService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import GrammarBulkImportCsvModal from '../../components/admin/GrammarBulkImportCsvModal.jsx';
 import './AdminGrammarPage.css';
 
@@ -25,6 +26,7 @@ export default function AdminGrammarHome() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [deleteTarget, setDeleteTarget] = useState(null);
 	const [bulkImportOpen, setBulkImportOpen] = useState(false);
 
 	const queryParams = useMemo(() => {
@@ -63,13 +65,18 @@ export default function AdminGrammarHome() {
 		setPage(1);
 	};
 
-	const handleDelete = async (row) => {
+	const closeDelete = () => {
+		if (!deletingId) setDeleteTarget(null);
+	};
+
+	const handleDelete = async () => {
+		const row = deleteTarget;
 		if (!row?._id) return;
-		if (!window.confirm(`Xóa mục「${row.pattern}」?`)) return;
 		setDeletingId(row._id);
 		try {
 			await deleteAdminGrammar(String(row._id));
 			toast.success('Đã xóa ngữ pháp');
+			setDeleteTarget(null);
 			await fetchList();
 		} catch (e) {
 			toast.error('Không xóa được', { description: getApiErrorMessage(e) });
@@ -236,7 +243,7 @@ export default function AdminGrammarHome() {
 												type="button"
 												className="admin-grammar-btn admin-grammar-btn--danger"
 												disabled={deletingId === row._id}
-												onClick={() => void handleDelete(row)}
+												onClick={() => setDeleteTarget(row)}
 											>
 												Xóa
 											</button>
@@ -275,6 +282,16 @@ export default function AdminGrammarHome() {
 				open={bulkImportOpen}
 				onClose={() => setBulkImportOpen(false)}
 				onDone={() => void fetchList()}
+			/>
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteTarget)}
+				title="Xóa ngữ pháp?"
+				lead="Hành động không thể hoàn tác. Mục ngữ pháp sẽ bị gỡ khỏi hệ thống."
+				preview={deleteTarget?.pattern}
+				previewLang="ja"
+				deleting={Boolean(deletingId)}
+				onClose={closeDelete}
+				onConfirm={() => void handleDelete()}
 			/>
 		</div>
 	);

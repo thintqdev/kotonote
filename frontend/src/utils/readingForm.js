@@ -20,6 +20,7 @@ export const emptyReadingForm = () => ({
 	featured: false,
 	isPublished: true,
 	displayOrder: 0,
+	contentFormat: 'markup',
 	paragraphsText: '',
 	vocabulary: [{ termJa: '', glossVi: '', glossJa: '' }],
 	questions: [emptyQuestion()],
@@ -39,6 +40,7 @@ export function articleToForm(article) {
 		featured: Boolean(article.featured),
 		isPublished: article.isPublished !== false,
 		displayOrder: article.displayOrder ?? 0,
+		contentFormat: article.contentFormat === 'markup' ? 'markup' : 'plain',
 		paragraphsText: (article.paragraphsJa ?? []).join('\n\n'),
 		vocabulary: (article.vocabulary ?? []).length
 			? article.vocabulary.map((v) => ({
@@ -113,6 +115,7 @@ export function formToArticlePayload(form) {
 		featured: Boolean(form.featured),
 		isPublished: Boolean(form.isPublished),
 		displayOrder: Number(form.displayOrder) || 0,
+		contentFormat: form.contentFormat === 'markup' ? 'markup' : 'plain',
 		paragraphsJa,
 		vocabulary,
 		questions,

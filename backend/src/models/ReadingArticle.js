@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
-import { READING_JLPT_LEVELS } from '../constants/reading.js';
+import {
+	READING_CONTENT_FORMATS,
+	READING_JLPT_LEVELS,
+} from '../constants/reading.js';
 
 const glossSchema = new mongoose.Schema(
 	{
@@ -59,6 +62,11 @@ const readingArticleSchema = new mongoose.Schema(
 		featured: { type: Boolean, default: false },
 		isPublished: { type: Boolean, default: true },
 		displayOrder: { type: Number, default: 0 },
+		contentFormat: {
+			type: String,
+			enum: READING_CONTENT_FORMATS,
+			default: 'plain',
+		},
 		paragraphsJa: { type: [String], default: [] },
 		vocabulary: { type: [vocabularySchema], default: [] },
 		questions: { type: [questionSchema], default: [] },

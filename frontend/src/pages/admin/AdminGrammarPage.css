@@ -965,6 +965,19 @@
   color: var(--admin-ink-soft);
 }
 
+.admin-reading-sentence-panel {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  margin-top: 1rem;
+}
+
+.admin-reading-sentence-stats {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--admin-ink);
+}
+
 .admin-reading-cover-preview {
   max-width: 280px;
   border-radius: 10px;

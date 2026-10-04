@@ -6,6 +6,7 @@ import {
 	deleteAdminReadingArticle,
 	listAdminReadingArticles,
 } from '../../services/adminReadingService.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import './AdminGrammarPage.css';
 
@@ -20,6 +21,7 @@ export default function AdminReadingHome() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [deleteTarget, setDeleteTarget] = useState(null);
 
 	const queryParams = useMemo(() => {
 		const p = { page, limit: 20 };
@@ -56,13 +58,18 @@ export default function AdminReadingHome() {
 		setPage(1);
 	};
 
-	const handleDelete = async (row) => {
+	const closeDelete = () => {
+		if (!deletingId) setDeleteTarget(null);
+	};
+
+	const handleDelete = async () => {
+		const row = deleteTarget;
 		if (!row?._id) return;
-		if (!window.confirm(`Xóa bài「${row.titleJa}」?`)) return;
 		setDeletingId(row._id);
 		try {
 			await deleteAdminReadingArticle(String(row._id));
 			toast.success('Đã xóa bài đọc');
+			setDeleteTarget(null);
 			await fetchList();
 		} catch (e) {
 			toast.error('Không xóa được', { description: getApiErrorMessage(e) });
@@ -200,7 +207,7 @@ export default function AdminReadingHome() {
 												type="button"
 												className="admin-grammar-btn admin-grammar-btn--danger"
 												disabled={deletingId === row._id}
-												onClick={() => void handleDelete(row)}
+												onClick={() => setDeleteTarget(row)}
 											>
 												Xóa
 											</button>
@@ -234,6 +241,17 @@ export default function AdminReadingHome() {
 					</button>
 				</nav>
 			) : null}
+
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteTarget)}
+				title="Xóa bài đọc?"
+				lead="Hành động không thể hoàn tác. Bài đọc sẽ bị gỡ khỏi hệ thống."
+				preview={deleteTarget?.titleJa}
+				previewLang="ja"
+				deleting={Boolean(deletingId)}
+				onClose={closeDelete}
+				onConfirm={() => void handleDelete()}
+			/>
 		</div>
 	);
 }

@@ -206,6 +206,75 @@ export const adminReadingPaths = {
 			},
 		},
 	},
+	'/api/admin/reading/{id}/sentence-analysis': {
+		get: {
+			tags: ['Reading - Admin'],
+			summary: 'Sentence analysis cache status',
+			security: [{ bearerAuth: [] }],
+			parameters: [
+				{ name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+			],
+			responses: {
+				'200': {
+					description: 'Status',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean' },
+									messageCode: { type: 'string', example: 'MSG_941' },
+									data: {
+										type: 'object',
+										properties: {
+											status: { $ref: '#/components/schemas/ReadingSentenceAnalysisStatus' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'404': { $ref: '#/components/responses/NotFound' },
+				...adminAuth,
+			},
+		},
+	},
+	'/api/admin/reading/{id}/sentence-analysis/regenerate': {
+		post: {
+			tags: ['Reading - Admin'],
+			summary: 'Discard and regenerate sentence analysis with AI',
+			security: [{ bearerAuth: [] }],
+			parameters: [
+				{ name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+			],
+			responses: {
+				'200': {
+					description: 'Regenerated (sentences that AI failed on stay missing and are generated lazily later)',
+					content: {
+						'application/json': {
+							schema: {
+								type: 'object',
+								properties: {
+									success: { type: 'boolean' },
+									messageCode: { type: 'string', example: 'MSG_942' },
+									data: {
+										type: 'object',
+										properties: {
+											status: { $ref: '#/components/schemas/ReadingSentenceAnalysisStatus' },
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				'404': { $ref: '#/components/responses/NotFound' },
+				'503': { description: 'Gemini not configured (MSG_943)' },
+				...adminAuth,
+			},
+		},
+	},
 	'/api/admin/reading/{id}/cover': {
 		post: {
 			tags: ['Reading - Admin'],

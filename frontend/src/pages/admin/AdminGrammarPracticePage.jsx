@@ -10,6 +10,7 @@ import {
 	updateAdminGrammarPracticeQuestion,
 } from '../../services/adminGrammarPracticeService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import GrammarPracticeImportJsonModal from '../../components/admin/GrammarPracticeImportJsonModal.jsx';
 import './AdminGrammarPage.css';
 
@@ -51,6 +52,7 @@ export default function AdminGrammarPracticePage() {
 	const [detailLoading, setDetailLoading] = useState(false);
 	const [togglingId, setTogglingId] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [deleteTarget, setDeleteTarget] = useState(null);
 
 	const queryParams = useMemo(() => {
 		const p = { page, limit: pageSize };
@@ -171,14 +173,19 @@ export default function AdminGrammarPracticePage() {
 		}
 	};
 
-	const handleDelete = async (row) => {
+	const closeDelete = () => {
+		if (!deletingId) setDeleteTarget(null);
+	};
+
+	const handleDelete = async () => {
+		const row = deleteTarget;
 		if (!row?._id) return;
-		if (!window.confirm('Xóa câu hỏi này?')) return;
 		setDeletingId(row._id);
 		try {
 			await deleteAdminGrammarPracticeQuestion(String(row._id));
 			toast.success('Đã xóa câu hỏi');
 			if (detailId === row._id) closeDetail();
+			setDeleteTarget(null);
 			await fetchList();
 		} catch (e) {
 			toast.error('Không xóa được', { description: getApiErrorMessage(e) });
@@ -343,7 +350,7 @@ export default function AdminGrammarPracticePage() {
 												type="button"
 												className="admin-grammar-btn admin-grammar-btn--danger"
 												disabled={deletingId === row._id}
-												onClick={() => void handleDelete(row)}
+												onClick={() => setDeleteTarget(row)}
 											>
 												Xóa
 											</button>
@@ -591,6 +598,16 @@ export default function AdminGrammarPracticePage() {
 				</div>
 			) : null}
 
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteTarget)}
+				title="Xóa câu hỏi?"
+				lead="Hành động không thể hoàn tác. Câu hỏi luyện ngữ pháp sẽ bị gỡ khỏi hệ thống."
+				preview={deleteTarget?.promptJa}
+				previewLang="ja"
+				deleting={Boolean(deletingId)}
+				onClose={closeDelete}
+				onConfirm={() => void handleDelete()}
+			/>
 			<GrammarPracticeImportJsonModal
 				open={importOpen}
 				onClose={() => setImportOpen(false)}

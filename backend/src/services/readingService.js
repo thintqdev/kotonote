@@ -8,6 +8,10 @@ import {
 } from '../constants/reading.js';
 import AppError from '../utils/AppError.js';
 import { safeTryUnlockMilestoneBadge } from './badgeUnlockService.js';
+import {
+	deleteSentenceAnalysis,
+	listArticleSentences,
+} from './readingSentenceService.js';
 
 /** @param {string | null | undefined} imageUrl */
 export async function deleteStoredReadingCover(imageUrl) {
@@ -149,6 +153,7 @@ export const getPublishedArticleBySlug = async (userId, slug) => {
 			...article,
 			id: article.slug,
 			questions: normalizeQuestions(article.questions),
+			sentences: listArticleSentences(article),
 			status: progress?.status ?? 'not_started',
 			questionAnswers: progress?.questionAnswers ?? [],
 		},
@@ -340,4 +345,5 @@ export const deleteArticle = async (id) => {
 		throw new AppError(READING.NOT_FOUND, 404);
 	}
 	await deleteStoredReadingCover(article.imageUrl);
+	await deleteSentenceAnalysis(article._id);
 };

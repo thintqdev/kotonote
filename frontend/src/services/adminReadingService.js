@@ -32,6 +32,16 @@ export async function deleteAdminReadingArticle(id) {
 	await adminApi.delete(ADMIN_READING.article(id));
 }
 
+export async function getAdminReadingSentenceAnalysis(id) {
+	const body = await adminApi.get(ADMIN_READING.sentenceAnalysis(id));
+	return getApiData(body).status;
+}
+
+export async function regenerateAdminReadingSentenceAnalysis(id) {
+	const body = await adminApi.post(ADMIN_READING.sentenceAnalysisRegenerate(id));
+	return getApiData(body).status;
+}
+
 /**
  * @param {File} file
  * @param {string} [articleId] — nếu có: gán luôn vào bài

@@ -29,7 +29,8 @@ export const READING = {
 	SUMMARY: '/reading/summary',
 	bySlug: (slug) => `/reading/${encodeURIComponent(slug)}`,
 	progress: (slug) => `/reading/${encodeURIComponent(slug)}/progress`,
-	translationFeedback: (slug) => `/reading/${encodeURIComponent(slug)}/translation-feedback`,
+	sentenceFeedback: (slug) => `/reading/${encodeURIComponent(slug)}/sentence-feedback`,
+	translationSummary: (slug) => `/reading/${encodeURIComponent(slug)}/translation-summary`,
 };
 
 /** Đề thi JLPT (user) — `/api/exam-papers/*` */
@@ -256,6 +257,9 @@ export const ADMIN_READING = {
 	UPLOAD_COVER: '/admin/reading/upload-cover',
 	article: (id) => `/admin/reading/${encodeURIComponent(id)}`,
 	cover: (id) => `/admin/reading/${encodeURIComponent(id)}/cover`,
+	sentenceAnalysis: (id) => `/admin/reading/${encodeURIComponent(id)}/sentence-analysis`,
+	sentenceAnalysisRegenerate: (id) =>
+		`/admin/reading/${encodeURIComponent(id)}/sentence-analysis/regenerate`,
 };
 
 /** Trích dẫn — `/api/admin/quotes` */

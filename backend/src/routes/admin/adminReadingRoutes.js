@@ -22,6 +22,11 @@ router.post(
 	readingCoverUploadMiddleware,
 	readingController.uploadArticleCover,
 );
+router.get('/:id/sentence-analysis', readingController.getSentenceAnalysisStatus);
+router.post(
+	'/:id/sentence-analysis/regenerate',
+	readingController.regenerateSentenceAnalysis,
+);
 router.put('/:id', validate(updateReadingSchema), readingController.updateArticle);
 router.delete('/:id', readingController.deleteArticle);
 

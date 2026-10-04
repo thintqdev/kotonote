@@ -18,6 +18,7 @@ import {
 	updateAdminParticle,
 	updateAdminVocab,
 } from '../../services/adminArenaService.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import { getAxiosErrorMessage } from '../../utils/apiErrorMessage.js';
 import { GRAMMAR_JLPT_LEVELS } from '../../constants/grammarFieldMeta.js';
 import { ARENA_MAX_ACTIVE_GAMES } from '../../constants/arena.js';
@@ -116,6 +117,8 @@ export default function AdminArenaPage() {
 	const [stats, setStats] = useState({ kanji: 0, vocab: 0, particle: 0 });
 	const [loading, setLoading] = useState(true);
 	const [saving, setSaving] = useState(false);
+	const [deleteRequest, setDeleteRequest] = useState(null);
+	const [deletingItem, setDeletingItem] = useState(false);
 	const [jlptFilter, setJlptFilter] = useState('N4');
 	const [kanjiList, setKanjiList] = useState([]);
 	const [vocabList, setVocabList] = useState([]);
@@ -349,16 +352,24 @@ export default function AdminArenaPage() {
 		}
 	};
 
-	const handleDelete = async (fn, id, clearEdit) => {
-		if (!window.confirm(t('adminArena.confirmDelete'))) return;
+	const closeDeleteRequest = () => {
+		if (!deletingItem) setDeleteRequest(null);
+	};
+
+	const confirmDelete = async () => {
+		if (!deleteRequest) return;
+		setDeletingItem(true);
 		try {
-			await fn(id);
+			await deleteRequest.fn(deleteRequest.id);
 			toast.success(t('adminArena.questionDeleted'));
-			clearEdit?.();
+			deleteRequest.clearEdit?.();
+			setDeleteRequest(null);
 			void loadDataTab();
 			void loadDashboard();
 		} catch (err) {
 			toast.error(getAxiosErrorMessage(err, t));
+		} finally {
+			setDeletingItem(false);
 		}
 	};
 
@@ -1019,9 +1030,14 @@ export default function AdminArenaPage() {
 													type="button"
 													className="admin-arena-btn admin-arena-btn--ghost admin-arena-btn--sm admin-arena-btn--danger"
 													onClick={() =>
-														void handleDelete(deleteAdminKanji, row._id, () => {
-															setEditKanjiId(null);
-															setKanjiEdit(null);
+														setDeleteRequest({
+															fn: deleteAdminKanji,
+															id: row._id,
+															preview: row.char,
+															clearEdit: () => {
+																setEditKanjiId(null);
+																setKanjiEdit(null);
+															},
 														})
 													}
 												>
@@ -1195,9 +1211,14 @@ export default function AdminArenaPage() {
 													type="button"
 													className="admin-arena-btn admin-arena-btn--ghost admin-arena-btn--sm admin-arena-btn--danger"
 													onClick={() =>
-														void handleDelete(deleteAdminVocab, row._id, () => {
-															setEditVocabId(null);
-															setVocabEdit(null);
+														setDeleteRequest({
+															fn: deleteAdminVocab,
+															id: row._id,
+															preview: row.wordJa,
+															clearEdit: () => {
+																setEditVocabId(null);
+																setVocabEdit(null);
+															},
 														})
 													}
 												>
@@ -1364,9 +1385,14 @@ export default function AdminArenaPage() {
 													type="button"
 													className="admin-arena-btn admin-arena-btn--ghost admin-arena-btn--sm admin-arena-btn--danger"
 													onClick={() =>
-														void handleDelete(deleteAdminParticle, row._id, () => {
-															setEditParticleId(null);
-															setParticleEdit(null);
+														setDeleteRequest({
+															fn: deleteAdminParticle,
+															id: row._id,
+															preview: row.sentenceJa,
+															clearEdit: () => {
+																setEditParticleId(null);
+																setParticleEdit(null);
+															},
 														})
 													}
 												>
@@ -1475,6 +1501,16 @@ export default function AdminArenaPage() {
 					) : null}
 				</section>
 			) : null}
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteRequest)}
+				title={t('adminArena.confirmDelete')}
+				lead="Hành động không thể hoàn tác."
+				preview={deleteRequest?.preview}
+				previewLang="ja"
+				deleting={deletingItem}
+				onClose={closeDeleteRequest}
+				onConfirm={() => void confirmDelete()}
+			/>
 		</div>
 	);
 }

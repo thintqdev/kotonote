@@ -10,6 +10,7 @@ import {
 	deleteAdminKaiwaContext,
 	listAdminKaiwaContexts,
 } from '../../services/adminKaiwaService.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import './AdminGrammarPage.css';
 
@@ -25,6 +26,7 @@ export default function AdminKaiwaHome() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [deleteTarget, setDeleteTarget] = useState(null);
 
 	const queryParams = useMemo(() => {
 		const p = { page, limit: 20 };
@@ -62,13 +64,18 @@ export default function AdminKaiwaHome() {
 		setPage(1);
 	};
 
-	const handleDelete = async (row) => {
+	const closeDelete = () => {
+		if (!deletingId) setDeleteTarget(null);
+	};
+
+	const handleDelete = async () => {
+		const row = deleteTarget;
 		if (!row?._id) return;
-		if (!window.confirm(`Xóa bối cảnh「${row.titleVi}」?`)) return;
 		setDeletingId(row._id);
 		try {
 			await deleteAdminKaiwaContext(String(row._id));
 			toast.success('Đã xóa bối cảnh');
+			setDeleteTarget(null);
 			await fetchList();
 		} catch (e) {
 			toast.error('Không xóa được', { description: getApiErrorMessage(e) });
@@ -233,7 +240,7 @@ export default function AdminKaiwaHome() {
 												type="button"
 												className="admin-grammar-btn admin-grammar-btn--danger"
 												disabled={deletingId === row._id}
-												onClick={() => void handleDelete(row)}
+												onClick={() => setDeleteTarget(row)}
 											>
 												{deletingId === row._id ? '…' : 'Xóa'}
 											</button>
@@ -269,6 +276,16 @@ export default function AdminKaiwaHome() {
 					</button>
 				</nav>
 			) : null}
+
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteTarget)}
+				title="Xóa bối cảnh?"
+				lead="Hành động không thể hoàn tác. Bối cảnh hội thoại sẽ bị gỡ khỏi hệ thống."
+				preview={deleteTarget?.titleVi}
+				deleting={Boolean(deletingId)}
+				onClose={closeDelete}
+				onConfirm={() => void handleDelete()}
+			/>
 		</div>
 	);
 }

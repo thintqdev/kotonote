@@ -14,6 +14,7 @@ import {
 	resetExamStructureTemplate,
 	updateExamStructureTemplate,
 } from '../../services/adminExamStructureService.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import { reorderExamPartsInSection } from '../../utils/reorderExamParts.js';
 import './AdminGrammarPage.css';
@@ -240,6 +241,7 @@ export default function AdminExamStructureEditPage() {
 	const [loading, setLoading] = useState(true);
 	const [saving, setSaving] = useState(false);
 	const [resetting, setResetting] = useState(false);
+	const [confirm, setConfirm] = useState(null);
 
 	const load = useCallback(async () => {
 		setLoading(true);
@@ -282,19 +284,29 @@ export default function AdminExamStructureEditPage() {
 		toast.success(`Đã thêm part ${partType}`);
 	};
 
+	const closeConfirm = () => {
+		if (!resetting) setConfirm(null);
+	};
+
 	const handleRemovePart = (sectionType, partType) => {
 		const meta = EXAM_PART_META[partType];
 		const label = meta?.titleVi ?? partType;
-		if (!window.confirm(`Xóa part「${label}」khỏi khung ${template?.jlpt}?`)) {
-			return;
-		}
-		setSections((prev) => {
-			const filtered = prev.filter(
-				(s) => !(s.sectionType === sectionType && s.partType === partType),
-			);
-			return filtered
-				.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-				.map((s, idx) => ({ ...s, order: idx + 1 }));
+		setConfirm({
+			title: 'Xóa part?',
+			lead: `Part sẽ bị gỡ khỏi khung ${template?.jlpt}. Hãy lưu khung sau khi xóa.`,
+			preview: label,
+			confirmLabel: 'Xóa',
+			run: () => {
+				setSections((prev) => {
+					const filtered = prev.filter(
+						(s) => !(s.sectionType === sectionType && s.partType === partType),
+					);
+					return filtered
+						.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+						.map((s, idx) => ({ ...s, order: idx + 1 }));
+				});
+				setConfirm(null);
+			},
 		});
 	};
 
@@ -336,29 +348,35 @@ export default function AdminExamStructureEditPage() {
 		}
 	};
 
-	const handleReset = async () => {
-		if (
-			!window.confirm(
-				`Reset khung ${template?.jlpt} về mặc định từ seed? Mọi tuỳ chỉnh sẽ mất.`,
-			)
-		) {
-			return;
-		}
-		setResetting(true);
-		try {
-			const updated = await resetExamStructureTemplate(id);
-			setTemplate(updated);
-			setSections(
-				[...(updated.sections ?? [])]
-					.map(normalizeBlueprintRow)
-					.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
-			);
-			toast.success('Đã reset khung');
-		} catch (e) {
-			toast.error('Reset thất bại', { description: getApiErrorMessage(e) });
-		} finally {
-			setResetting(false);
-		}
+	const requestReset = () => {
+		setConfirm({
+			title: 'Reset khung?',
+			lead: `Reset khung ${template?.jlpt} về mặc định từ seed. Mọi tuỳ chỉnh sẽ mất.`,
+			confirmLabel: 'Reset',
+			pendingLabel: 'Đang reset…',
+			run: async () => {
+				setResetting(true);
+				try {
+					const updated = await resetExamStructureTemplate(id);
+					setTemplate(updated);
+					setSections(
+						[...(updated.sections ?? [])]
+							.map(normalizeBlueprintRow)
+							.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
+					);
+					setConfirm(null);
+					toast.success('Đã reset khung');
+				} catch (e) {
+					toast.error('Reset thất bại', { description: getApiErrorMessage(e) });
+				} finally {
+					setResetting(false);
+				}
+			},
+		});
+	};
+
+	const runConfirm = async () => {
+		await confirm?.run?.();
 	};
 
 	if (loading) return <p className="admin-grammar-status">Đang tải khung…</p>;
@@ -383,7 +401,7 @@ export default function AdminExamStructureEditPage() {
 					<button
 						type="button"
 						className="admin-grammar-btn admin-grammar-btn--ghost"
-						onClick={() => void handleReset()}
+						onClick={requestReset}
 						disabled={resetting || saving}
 					>
 						{resetting ? 'Đang reset…' : 'Reset mặc định'}
@@ -428,6 +446,17 @@ export default function AdminExamStructureEditPage() {
 					</section>
 				);
 			})}
+			<AdminDeleteConfirmModal
+				open={Boolean(confirm)}
+				title={confirm?.title ?? 'Xác nhận'}
+				lead={confirm?.lead}
+				preview={confirm?.preview}
+				confirmLabel={confirm?.confirmLabel}
+				pendingLabel={confirm?.pendingLabel}
+				deleting={resetting}
+				onClose={closeConfirm}
+				onConfirm={() => void runConfirm()}
+			/>
 		</div>
 	);
 }

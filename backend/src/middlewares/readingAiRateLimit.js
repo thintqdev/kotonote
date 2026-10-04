@@ -1,8 +1,9 @@
 import rateLimit from 'express-rate-limit';
 
-export const readingAiRateLimit = rateLimit({
+/** Mỗi lượt nộp có thể gồm 1 câu, nên hạn mức cao hơn so với chấm cả bài. */
+export const readingSentenceAiRateLimit = rateLimit({
 	windowMs: 15 * 60 * 1000,
-	limit: 10,
+	limit: 60,
 	standardHeaders: true,
 	legacyHeaders: false,
 	keyGenerator: (req) => String(req.user._id),

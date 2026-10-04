@@ -9,7 +9,7 @@ import {
 	buildJlptAccessMeta,
 	isJlptUnlocked,
 } from '../utils/jlptAccess.js';
-import { analyzeReadingTranslation } from '../services/readingTranslationService.js';
+import * as readingSentenceService from '../services/readingSentenceService.js';
 
 export const listPublishedArticles = asyncHandler(async (req, res) => {
 	const unlocked = req.jlptUnlocked ?? [];
@@ -82,11 +82,44 @@ export const saveArticleProgress = asyncHandler(async (req, res) => {
 	return apiSuccess(res, { progress }, messageCode, 200);
 });
 
-export const analyzeArticleTranslation = asyncHandler(async (req, res) => {
+// @desc Chấm bản dịch từng câu + trả phân tích chủ/vị, ngữ pháp của các câu đã nộp
+// @route POST /api/reading/:slug/sentence-feedback
+// @access Private
+export const analyzeSentenceTranslations = asyncHandler(async (req, res) => {
 	const { article } = await readingService.getPublishedArticleBySlug(req.user._id, req.params.slug);
 	assertJlptUnlocked(req.jlptUnlocked, article.jlpt);
-	const result = await analyzeReadingTranslation({ article, translationVi: req.body.translationVi });
-	return apiSuccess(res, result, READING.TRANSLATION_ANALYZED, 200);
+	const result = await readingSentenceService.analyzeSentenceTranslations({
+		article,
+		items: req.body.items,
+	});
+	return apiSuccess(res, result, READING.SENTENCE_FEEDBACK_ANALYZED, 200);
+});
+
+// @desc Tổng kết chung sau khi đã chấm xong toàn bộ câu
+// @route POST /api/reading/:slug/translation-summary
+// @access Private
+export const summarizeArticleTranslation = asyncHandler(async (req, res) => {
+	const { article } = await readingService.getPublishedArticleBySlug(req.user._id, req.params.slug);
+	assertJlptUnlocked(req.jlptUnlocked, article.jlpt);
+	const result = await readingSentenceService.summarizeArticleTranslation({
+		article,
+		items: req.body.items,
+	});
+	return apiSuccess(res, result, READING.TRANSLATION_SUMMARY_CREATED, 200);
+});
+
+// @route GET /api/admin/reading/:id/sentence-analysis
+// @access Private/Admin
+export const getSentenceAnalysisStatus = asyncHandler(async (req, res) => {
+	const status = await readingSentenceService.getSentenceAnalysisStatus(req.params.id);
+	return apiSuccess(res, { status }, READING.SENTENCE_ANALYSIS_FETCHED, 200);
+});
+
+// @route POST /api/admin/reading/:id/sentence-analysis/regenerate
+// @access Private/Admin
+export const regenerateSentenceAnalysis = asyncHandler(async (req, res) => {
+	const status = await readingSentenceService.regenerateSentenceAnalysis(req.params.id);
+	return apiSuccess(res, { status }, READING.SENTENCE_ANALYSIS_REGENERATED, 200);
 });
 
 export const listAdminArticles = asyncHandler(async (req, res) => {

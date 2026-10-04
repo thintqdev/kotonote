@@ -571,6 +571,7 @@ export const schemas = {
 			featured: { type: 'boolean' },
 			isPublished: { type: 'boolean' },
 			displayOrder: { type: 'number' },
+			contentFormat: { type: 'string', enum: ['plain', 'markup'], default: 'plain' },
 			paragraphsJa: { type: 'array', items: { type: 'string' } },
 			vocabulary: {
 				type: 'array',
@@ -580,10 +581,105 @@ export const schemas = {
 				type: 'array',
 				items: { $ref: '#/components/schemas/ReadingQuestion' },
 			},
+			sentences: {
+				type: 'array',
+				description: 'User detail only — sentences to translate one by one',
+				items: {
+					type: 'object',
+					properties: {
+						index: { type: 'integer' },
+						paragraphIndex: { type: 'integer' },
+						textJa: { type: 'string' },
+					},
+				},
+			},
 			status: {
 				type: 'string',
 				enum: ['not_started', 'in_progress', 'done'],
 			},
+		},
+	},
+	ReadingSentenceAnalysis: {
+		type: 'object',
+		properties: {
+			index: { type: 'integer' },
+			textJa: { type: 'string' },
+			referenceVi: { type: 'string' },
+			subject: {
+				type: 'object',
+				properties: {
+					ja: { type: 'string' },
+					vi: { type: 'string' },
+					implied: { type: 'boolean' },
+					noteVi: { type: 'string' },
+				},
+			},
+			predicate: {
+				type: 'object',
+				properties: {
+					ja: { type: 'string' },
+					vi: { type: 'string' },
+					noteVi: { type: 'string' },
+				},
+			},
+			components: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						ja: { type: 'string' },
+						role: {
+							type: 'string',
+							enum: ['topic', 'subject', 'predicate', 'object', 'complement', 'modifier', 'adverbial', 'connector', 'clause'],
+						},
+						vi: { type: 'string' },
+					},
+				},
+			},
+			structureVi: { type: 'string' },
+			grammarPoints: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						pattern: { type: 'string' },
+						meaningVi: { type: 'string' },
+						usageVi: { type: 'string' },
+					},
+				},
+			},
+		},
+	},
+	ReadingSentenceFeedback: {
+		type: 'object',
+		properties: {
+			score: { type: 'integer', minimum: 0, maximum: 100 },
+			verdict: { type: 'string', enum: ['correct', 'partial', 'incorrect'] },
+			subjectOk: { type: 'boolean' },
+			predicateOk: { type: 'boolean' },
+			commentVi: { type: 'string' },
+			issues: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						quote: { type: 'string' },
+						correctionVi: { type: 'string' },
+						explanationVi: { type: 'string' },
+						severity: { type: 'string', enum: ['minor', 'important', 'critical'] },
+					},
+				},
+			},
+			suggestionVi: { type: 'string' },
+		},
+	},
+	ReadingSentenceAnalysisStatus: {
+		type: 'object',
+		properties: {
+			totalSentences: { type: 'integer' },
+			analyzedCount: { type: 'integer' },
+			stale: { type: 'boolean' },
+			updatedAt: { type: 'string', format: 'date-time', nullable: true },
 		},
 	},
 	ReadingArticleInput: {
@@ -601,6 +697,7 @@ export const schemas = {
 			featured: { type: 'boolean' },
 			isPublished: { type: 'boolean' },
 			displayOrder: { type: 'number' },
+			contentFormat: { type: 'string', enum: ['plain', 'markup'], default: 'plain' },
 			paragraphsJa: { type: 'array', items: { type: 'string' } },
 			vocabulary: {
 				type: 'array',

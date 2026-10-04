@@ -26,6 +26,7 @@ import {
   partNeedsPassageFromMeta,
 } from "../../hooks/useExamStructureMeta.js";
 import { uploadExamMedia } from "../../services/adminExamPaperService.js";
+import AdminDeleteConfirmModal from "../../components/admin/AdminDeleteConfirmModal.jsx";
 import { getApiErrorMessage } from "../../utils/apiErrorMessage.js";
 import { resolvePublicMediaUrl } from "../../utils/resolveAvatarUrl.js";
 import {
@@ -564,6 +565,7 @@ export default function ExamPartEditModal({
   const [replaceOnImport, setReplaceOnImport] = useState(true);
   const [importErrors, setImportErrors] = useState([]);
   const [saveErrors, setSaveErrors] = useState([]);
+  const [pendingDelete, setPendingDelete] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [uploadingMedia, setUploadingMedia] = useState(false);
   const [uploadingMediaBlockIndex, setUploadingMediaBlockIndex] = useState(null);
@@ -580,6 +582,7 @@ export default function ExamPartEditModal({
       setActiveTab("manual");
       setImportErrors([]);
       setSaveErrors([]);
+      setPendingDelete(null);
       openedPartKeyRef.current = null;
       return;
     }
@@ -744,11 +747,17 @@ export default function ExamPartEditModal({
   };
 
   const removeQuestion = (qi) => {
-    if (!window.confirm(`Xóa câu ${qi + 1}?`)) return;
-    setDraft((prev) => ({
-      ...prev,
-      questions: (prev.questions ?? []).filter((_, i) => i !== qi),
-    }));
+    setPendingDelete({
+      title: "Xóa câu?",
+      lead: "Câu sẽ bị gỡ khỏi bản nháp. Hãy lưu phần này để ghi thay đổi.",
+      preview: `Câu ${qi + 1}`,
+      apply: () => {
+        setDraft((prev) => ({
+          ...prev,
+          questions: (prev.questions ?? []).filter((_, i) => i !== qi),
+        }));
+      },
+    });
   };
 
   const patchReadingPassages = (updater) => {
@@ -815,8 +824,14 @@ export default function ExamPartEditModal({
   };
 
   const removeReadingPassage = (bi) => {
-    if (!window.confirm(`Xóa đoạn ${bi + 1}?`)) return;
-    patchReadingPassages((passages) => passages.filter((_, i) => i !== bi));
+    setPendingDelete({
+      title: "Xóa đoạn?",
+      lead: "Đoạn và câu hỏi trong đoạn sẽ bị gỡ khỏi bản nháp.",
+      preview: `Đoạn ${bi + 1}`,
+      apply: () => {
+        patchReadingPassages((passages) => passages.filter((_, i) => i !== bi));
+      },
+    });
   };
 
   const updateReadingBlockQuestion = (bi, qi, next) => {
@@ -840,17 +855,28 @@ export default function ExamPartEditModal({
   };
 
   const removeReadingBlockQuestion = (bi, qi) => {
-    if (!window.confirm(`Xóa câu ${qi + 1} (đoạn ${bi + 1})?`)) return;
-    patchReadingPassages((passages) => {
-      const nextPassages = [...passages];
-      nextPassages[bi] = {
-        ...nextPassages[bi],
-        questions: (nextPassages[bi].questions ?? []).filter(
-          (_, i) => i !== qi,
-        ),
-      };
-      return nextPassages;
+    setPendingDelete({
+      title: "Xóa câu?",
+      lead: "Câu sẽ bị gỡ khỏi đoạn trong bản nháp.",
+      preview: `Câu ${qi + 1} (đoạn ${bi + 1})`,
+      apply: () => {
+        patchReadingPassages((passages) => {
+          const nextPassages = [...passages];
+          nextPassages[bi] = {
+            ...nextPassages[bi],
+            questions: (nextPassages[bi].questions ?? []).filter(
+              (_, i) => i !== qi,
+            ),
+          };
+          return nextPassages;
+        });
+      },
     });
+  };
+
+  const confirmPendingDelete = () => {
+    pendingDelete?.apply();
+    setPendingDelete(null);
   };
 
   const applyPartImport = () => {
@@ -1308,6 +1334,14 @@ export default function ExamPartEditModal({
           </button>
         </footer>
       </div>
+      <AdminDeleteConfirmModal
+        open={Boolean(pendingDelete)}
+        title={pendingDelete?.title ?? "Xóa?"}
+        lead={pendingDelete?.lead}
+        preview={pendingDelete?.preview}
+        onClose={() => setPendingDelete(null)}
+        onConfirm={confirmPendingDelete}
+      />
     </div>
   );
 }

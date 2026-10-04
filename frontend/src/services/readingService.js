@@ -32,7 +32,22 @@ export async function saveReadingProgress(slug, payload) {
 	return body.data?.progress ?? null;
 }
 
-export async function analyzeReadingTranslation(slug, translationVi) {
-	const body = await api.post(READING.translationFeedback(slug), { translationVi });
+/**
+ * @param {string} slug
+ * @param {{ index: number, translationVi: string }[]} items
+ * @returns {Promise<{ results: object[], source: string } | null>}
+ */
+export async function analyzeSentenceTranslations(slug, items) {
+	const body = await api.post(READING.sentenceFeedback(slug), { items });
+	return body.data ?? null;
+}
+
+/**
+ * @param {string} slug
+ * @param {{ index: number, translationVi: string, score: number }[]} items — đủ mọi câu của bài
+ * @returns {Promise<{ summary: object | null, source: string } | null>}
+ */
+export async function summarizeReadingTranslation(slug, items) {
+	const body = await api.post(READING.translationSummary(slug), { items });
 	return body.data ?? null;
 }

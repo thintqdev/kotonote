@@ -7,9 +7,12 @@ import {
 	updateAdminReadingArticle,
 	uploadAdminReadingCover,
 } from '../../services/adminReadingService.js';
+import AdminReadingSentenceAnalysisPanel from '../../components/admin/AdminReadingSentenceAnalysisPanel.jsx';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import { resolvePublicMediaUrl } from '../../utils/resolveAvatarUrl.js';
 import EditorAIGenerateModal from '../../components/admin/EditorAIGenerateModal.jsx';
+import ExamMarkupPreview from '../../components/exam/ExamMarkupPreview.jsx';
+import ExamPassageMarkupHelp from '../../components/exam/ExamPassageMarkupHelp.jsx';
 import { READING_AI_GENERATE } from '../../constants/editorAiGenerateConfig.js';
 import {
 	READING_JLPT_LEVELS,
@@ -34,6 +37,7 @@ export default function AdminReadingEditorPage() {
 	const coverFileRef = useRef(null);
 
 	const coverPreviewSrc = resolvePublicMediaUrl(form.imageUrl);
+	const useMarkup = form.contentFormat === 'markup';
 
 	useEffect(() => {
 		if (!isEdit) return;
@@ -343,6 +347,17 @@ export default function AdminReadingEditorPage() {
 
 				<section className="admin-grammar-form-section">
 					<h2>Nội dung bài đọc</h2>
+					<label className="admin-grammar-check">
+						<input
+							type="checkbox"
+							checked={useMarkup}
+							onChange={(e) =>
+								setField('contentFormat', e.target.checked ? 'markup' : 'plain')
+							}
+						/>
+						Dùng cú pháp định dạng (gạch chân, in đậm, furigana…) — tắt để hiển thị
+						nguyên văn
+					</label>
 					<label className="admin-reading-field-label">
 						<span className="admin-grammar-label">Đoạn văn (JA) — cách nhau bằng dòng trống</span>
 						<textarea
@@ -353,6 +368,17 @@ export default function AdminReadingEditorPage() {
 							lang="ja"
 						/>
 					</label>
+					{useMarkup ? (
+						<>
+							<ExamMarkupPreview
+								text={form.paragraphsText}
+								label="Xem trước"
+								lang="ja"
+							/>
+							<ExamPassageMarkupHelp />
+						</>
+					) : null}
+					{isEdit ? <AdminReadingSentenceAnalysisPanel articleId={id} /> : null}
 				</section>
 
 				<section className="admin-grammar-form-section admin-reading-vocab-section">
@@ -440,6 +466,9 @@ export default function AdminReadingEditorPage() {
 									lang="ja"
 									placeholder="例：この文章の主旨として最も適当なものはどれですか。"
 								/>
+								{useMarkup ? (
+									<ExamMarkupPreview text={q.questionJa} compact lang="ja" />
+								) : null}
 							</label>
 							{q.choices.map((choice, ci) => (
 								<div
@@ -460,6 +489,9 @@ export default function AdminReadingEditorPage() {
 												}
 												lang="ja"
 											/>
+											{useMarkup ? (
+												<ExamMarkupPreview text={choice} compact lang="ja" />
+											) : null}
 										</label>
 										<label className="admin-reading-field-label">
 											<span className="admin-grammar-label">Giải thích JA</span>

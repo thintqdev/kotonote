@@ -15,6 +15,7 @@ import {
 	updateAdminExamPaper,
 } from '../../services/adminExamPaperService.js';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import ExamPaperFormModal from './ExamPaperFormModal.jsx';
 import './AdminGrammarPage.css';
 
@@ -31,6 +32,7 @@ export default function AdminExamPaperHome() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [deletingId, setDeletingId] = useState('');
+	const [deleteTarget, setDeleteTarget] = useState(null);
 	const [showModal, setShowModal] = useState(false);
 	const [editingItem, setEditingItem] = useState(null);
 
@@ -94,14 +96,18 @@ export default function AdminExamPaperHome() {
 		await fetchList();
 	};
 
-	const handleDelete = async (row) => {
+	const closeDelete = () => {
+		if (!deletingId) setDeleteTarget(null);
+	};
+
+	const handleDelete = async () => {
+		const row = deleteTarget;
 		if (!row?._id) return;
-		const label = row.titleVi || `${row.jlpt} ${row.year}`;
-		if (!window.confirm(`Xóa đề「${label}」?`)) return;
 		setDeletingId(row._id);
 		try {
 			await deleteAdminExamPaper(String(row._id));
 			toast.success('Đã xóa đề thi');
+			setDeleteTarget(null);
 			await fetchList();
 		} catch (e) {
 			toast.error('Không xóa được', { description: getApiErrorMessage(e) });
@@ -320,7 +326,7 @@ export default function AdminExamPaperHome() {
 												type="button"
 												className="admin-grammar-btn admin-grammar-btn--danger"
 												disabled={deletingId === row._id}
-												onClick={() => void handleDelete(row)}
+												onClick={() => setDeleteTarget(row)}
 											>
 												{deletingId === row._id ? '…' : 'Xóa'}
 											</button>
@@ -363,6 +369,19 @@ export default function AdminExamPaperHome() {
 				}}
 				initialData={editingItem}
 				onSubmit={handleSubmit}
+			/>
+			<AdminDeleteConfirmModal
+				open={Boolean(deleteTarget)}
+				title="Xóa đề thi?"
+				lead="Hành động không thể hoàn tác. Đề thi và câu hỏi đi kèm sẽ bị gỡ."
+				preview={
+					deleteTarget
+						? deleteTarget.titleVi || `${deleteTarget.jlpt} ${deleteTarget.year}`
+						: undefined
+				}
+				deleting={Boolean(deletingId)}
+				onClose={closeDelete}
+				onConfirm={() => void handleDelete()}
 			/>
 		</div>
 	);

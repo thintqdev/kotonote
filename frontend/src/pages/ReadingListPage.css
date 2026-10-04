@@ -7,35 +7,19 @@
 
 /* Translation practice: active recall first, AI feedback second. */
 .reading-translation-guide { border-left: 5px solid var(--sage, #71866f); }
-.reading-translation-guide h3, .reading-ai-feedback h3, .reading-ai-feedback h4 { margin-top: 0; color: #49382f; }
-.reading-translation-guide ol, .reading-ai-method ol { margin: .65rem 0 0; padding-left: 1.35rem; line-height: 1.75; }
-.reading-translation-workspace { display: grid; gap: 1rem; margin-top: 1rem; }
-.reading-translation-card { display: grid; gap: .7rem; }
-.reading-translation-number { margin: 0; color: #8b4e3d; font-weight: 800; letter-spacing: .04em; }
-.reading-translation-card label { font-weight: 750; color: #49382f; }
-.reading-translation-card textarea { width: 100%; resize: vertical; box-sizing: border-box; border: 1px solid #c9b9a4; border-radius: 12px; padding: .85rem 1rem; background: #fffdf7; color: #342821; font: inherit; line-height: 1.6; }
-.reading-translation-card textarea:focus { outline: 3px solid rgba(113, 134, 111, .22); border-color: #71866f; }
-.reading-translation-count { margin: -.35rem 0 0; text-align: right; color: #78695e; font-size: .85rem; }
+.reading-translation-guide h3 { margin-top: 0; color: #49382f; }
+.reading-translation-guide ol { margin: .65rem 0 0; padding-left: 1.35rem; line-height: 1.75; }
 .reading-translation-submit { margin-top: 1rem; border: 0; border-radius: 999px; padding: .8rem 1.25rem; background: #7f493a; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
-.reading-translation-submit:disabled { opacity: .58; cursor: wait; }
+.reading-translation-submit:disabled { opacity: .58; cursor: not-allowed; }
 .reading-translation-error { margin: .8rem 0 0; color: #9b3029; font-weight: 700; }
-.reading-ai-feedback { display: grid; gap: 1rem; margin-top: 1.25rem; }
-.reading-ai-summary { display: flex; align-items: center; gap: 1rem; border: 2px solid #71866f; }
-.reading-ai-score { flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: #e8eee3; color: #475a43; }
-.reading-ai-score strong { display: block; font-size: 1.7rem; line-height: 1; }
-.reading-ai-score span { font-size: .8rem; }
-.reading-ai-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.reading-ai-columns ul { margin-bottom: 0; padding-left: 1.2rem; line-height: 1.65; }
-.reading-ai-paragraph { display: grid; gap: .75rem; }
 .reading-ai-issues { display: grid; gap: .6rem; }
 .reading-ai-issue { padding: .75rem .9rem; border-radius: 10px; background: #fff8e8; border-left: 4px solid #d59b45; }
 .reading-ai-issue--critical { background: #fff0ed; border-left-color: #b9463b; }
 .reading-ai-issue--minor { background: #f3f7ef; border-left-color: #71866f; }
 .reading-ai-issue p { margin: .15rem 0; }
-.reading-ai-issue small, .reading-ai-paragraph small { color: #67584e; line-height: 1.5; }
+.reading-ai-issue small { color: #67584e; line-height: 1.5; }
 .reading-ai-reference { padding: .85rem 1rem; border-radius: 10px; background: #f2eee5; }
 .reading-ai-reference p { margin-bottom: 0; line-height: 1.7; white-space: pre-line; }
-@media (max-width: 680px) { .reading-ai-columns { grid-template-columns: 1fr; } .reading-ai-summary { align-items: flex-start; } }
 
 .reading-sub-sep {
   font-weight: 600;

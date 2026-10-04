@@ -64,7 +64,8 @@ services:
       start_period: 5s
 
   minio-init:
-    image: quay.io/minio/mc:latest
+    # quay.io/minio/mc anonymous pull is blocked; server image already ships /usr/bin/mc
+    image: quay.io/minio/minio:latest
     container_name: kotonote-minio-init
     depends_on:
       minio:

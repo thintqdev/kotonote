@@ -1,9 +1,10 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import {
-	GEMINI_MODEL,
 	getGeminiApiKeys,
+	getGeminiModels,
 	isGeminiConfigured,
 	shouldTryNextGeminiKey,
+	shouldTryNextGeminiModel,
 } from '../config/gemini.js';
 import { getAIPromptAsync } from '../utils/promptLoader.js';
 import {
@@ -35,11 +36,16 @@ import {
 /**
  * @param {string} apiKey
  * @param {string} prompt
- * @param {{ temperature?: number, maxTokens?: number, arrayMode?: boolean, jsonMode?: boolean }} options
+ * @param {{ model: string, temperature?: number, maxTokens?: number, arrayMode?: boolean, jsonMode?: boolean }} options
  */
-async function invokeGeminiWithKey(apiKey, prompt, options = {}) {
-	const { temperature = 0.7, maxTokens = 8192, arrayMode = true, jsonMode = true } =
-		options;
+async function invokeGeminiWithKey(apiKey, prompt, options) {
+	const {
+		model: modelName,
+		temperature = 0.7,
+		maxTokens = 8192,
+		arrayMode = true,
+		jsonMode = true,
+	} = options;
 
 	const genAI = new GoogleGenerativeAI(apiKey);
 	const generationConfig = {
@@ -51,7 +57,7 @@ async function invokeGeminiWithKey(apiKey, prompt, options = {}) {
 	}
 
 	const model = genAI.getGenerativeModel({
-		model: GEMINI_MODEL,
+		model: modelName,
 		generationConfig,
 	});
 
@@ -84,61 +90,77 @@ async function invokeGeminiWithKey(apiKey, prompt, options = {}) {
  * @param {{ temperature?: number, maxTokens?: number, arrayMode?: boolean }} [options]
  */
 export const callGeminiAPI = async (prompt, options = {}) => {
-	const keys = getGeminiApiKeys();
-	if (!keys.length) {
+	if (!isGeminiConfigured()) {
 		console.warn('GEMINI_API_KEYS not configured, using placeholder data');
 		return null;
 	}
 
 	const arrayMode = options.arrayMode !== false;
-	let lastError = null;
-
-	for (let i = 0; i < keys.length; i += 1) {
-		try {
-			return await invokeGeminiWithKey(keys[i], prompt, {
+	try {
+		return await runGeminiWithFallback('Gemini API', (apiKey, model) =>
+			invokeGeminiWithKey(apiKey, prompt, {
 				...options,
+				model,
 				arrayMode,
 				jsonMode: true,
-			});
-		} catch (error) {
-			lastError = error;
-			console.error(
-				`Gemini API error (key ${i + 1}/${keys.length}):`,
-				/** @type {Error} */ (error).message,
+			}),
+		);
+	} catch (error) {
+		if (!arrayMode) {
+			const responseText = String(
+				/** @type {{ responseText?: string }} */ (error)?.responseText ?? '',
 			);
-			if (shouldTryNextGeminiKey(error) && i < keys.length - 1) {
-				console.warn(
-					`Trying next Gemini API key (${i + 2}/${keys.length})…`,
-				);
-				continue;
-			}
-			if (!arrayMode) {
-				const responseText = String(
-					/** @type {{ responseText?: string }} */ (error)?.responseText ?? '',
-				);
-				if (responseText) {
-					try {
-						return parseJsonObjectLenient(responseText);
-					} catch (lenientErr) {
-						console.error(
-							'Gemini lenient JSON parse failed:',
-							/** @type {Error} */ (lenientErr).message,
-						);
-					}
+			if (responseText) {
+				try {
+					return parseJsonObjectLenient(responseText);
+				} catch (lenientErr) {
+					console.error(
+						'Gemini lenient JSON parse failed:',
+						/** @type {Error} */ (lenientErr).message,
+					);
 				}
 			}
-			break;
 		}
-	}
-
-	if (lastError) {
 		console.error(
-			'All Gemini API keys failed:',
-			/** @type {Error} */ (lastError).message,
+			'All Gemini models/keys failed:',
+			/** @type {Error} */ (error)?.message,
 		);
+		return null;
 	}
-	return null;
 };
+
+/**
+ * Thử lần lượt model chính → model dự phòng; trong mỗi model xoay vòng API key khi hết quota / key lỗi.
+ * @template T
+ * @param {string} label
+ * @param {(apiKey: string, model: string) => Promise<T>} invoke
+ * @returns {Promise<T>}
+ * @throws {Error} lỗi cuối cùng khi mọi model/key đều thất bại
+ */
+async function runGeminiWithFallback(label, invoke) {
+	const keys = getGeminiApiKeys();
+	const models = getGeminiModels();
+	let lastError = null;
+
+	for (let m = 0; m < models.length; m += 1) {
+		for (let k = 0; k < keys.length; k += 1) {
+			try {
+				return await invoke(keys[k], models[m]);
+			} catch (error) {
+				lastError = error;
+				console.error(
+					`${label} error (${models[m]}, key ${k + 1}/${keys.length}):`,
+					/** @type {Error} */ (error).message,
+				);
+				if (shouldTryNextGeminiKey(error) && k < keys.length - 1) continue;
+				break;
+			}
+		}
+		if (m === models.length - 1 || !shouldTryNextGeminiModel(lastError)) break;
+		console.warn(`Gemini model ${models[m]} unavailable, trying ${models[m + 1]}…`);
+	}
+	throw lastError;
+}
 
 /**
  * @param {Object} params
@@ -401,31 +423,23 @@ export const translateWithAI = async (options) => {
 
 	const prompt = `Translate the following ${sourceLang} text to ${targetLang}:\n\n${text}\n\nProvide only the translation, no explanations.`;
 
-	const keys = getGeminiApiKeys();
-	if (!keys.length) {
+	if (!isGeminiConfigured()) {
 		return `[Translation placeholder] ${text}`;
 	}
 
-	for (let i = 0; i < keys.length; i += 1) {
-		try {
-			const translated = await invokeGeminiWithKey(keys[i], prompt, {
+	try {
+		const translated = await runGeminiWithFallback('Gemini translate', (apiKey, model) =>
+			invokeGeminiWithKey(apiKey, prompt, {
+				model,
 				temperature: 0.3,
 				maxTokens: 2048,
 				jsonMode: false,
-			});
-			return translated || `[Translation placeholder] ${text}`;
-		} catch (error) {
-			console.error(
-				`Gemini translate error (key ${i + 1}/${keys.length}):`,
-				/** @type {Error} */ (error).message,
-			);
-			if (shouldTryNextGeminiKey(error) && i < keys.length - 1) {
-				continue;
-			}
-		}
+			}),
+		);
+		return translated || `[Translation placeholder] ${text}`;
+	} catch {
+		return `[Translation placeholder] ${text}`;
 	}
-
-	return `[Translation placeholder] ${text}`;
 };
 
 function generatePlaceholderVocabulary({ count, existingItems, templateName, customPrompt }) {

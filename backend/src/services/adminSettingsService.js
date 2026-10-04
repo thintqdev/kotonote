@@ -6,6 +6,7 @@ import {
 	isPayosConfigured,
 } from '../config/payment.js';
 import { getStorageDriver } from '../config/storage.js';
+import { GEMINI_MODEL, getGeminiModels } from '../config/gemini.js';
 
 /**
  * Cấu hình studio (không lộ secret) — admin only.
@@ -28,7 +29,8 @@ export async function getStudioSettings() {
 		},
 		ai: {
 			geminiConfigured: Boolean(process.env.GEMINI_API_KEY?.trim()),
-			model: process.env.GEMINI_MODEL || null,
+			model: GEMINI_MODEL,
+			fallbackModels: getGeminiModels().slice(1),
 		},
 		storage: {
 			driver: getStorageDriver(),

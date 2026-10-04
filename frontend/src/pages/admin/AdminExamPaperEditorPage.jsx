@@ -23,6 +23,7 @@ import {
 	initAdminExamPaperSections,
 	updateAdminExamPaperSections,
 } from '../../services/adminExamPaperService.js';
+import AdminDeleteConfirmModal from '../../components/admin/AdminDeleteConfirmModal.jsx';
 import { getApiErrorMessage } from '../../utils/apiErrorMessage.js';
 import { reorderExamPartsInSection } from '../../utils/reorderExamParts.js';
 import { resolveListeningAudioUrl } from '../../utils/examListeningHelpers.js';
@@ -40,6 +41,7 @@ export default function AdminExamPaperEditorPage() {
 	const [showBulkImport, setShowBulkImport] = useState(false);
 	const [editingPart, setEditingPart] = useState(null);
 	const [resetting, setResetting] = useState(false);
+	const [resetConfirmOpen, setResetConfirmOpen] = useState(false);
 	const [reordering, setReordering] = useState(false);
 
 	const loadPaper = useCallback(async () => {
@@ -149,18 +151,16 @@ export default function AdminExamPaperEditorPage() {
 		}
 	};
 
+	const closeResetConfirm = () => {
+		if (!resetting) setResetConfirmOpen(false);
+	};
+
 	const handleResetFrame = async () => {
-		if (
-			!window.confirm(
-				'Reset khung đề theo cấu trúc JLPT? Toàn bộ câu hỏi hiện tại sẽ bị xóa.',
-			)
-		) {
-			return;
-		}
 		setResetting(true);
 		try {
 			const updated = await initAdminExamPaperSections(id);
 			setPaper(updated);
+			setResetConfirmOpen(false);
 			toast.success('Đã tạo lại khung đề từ blueprint DB');
 			await loadPaper();
 		} catch (e) {
@@ -230,7 +230,7 @@ export default function AdminExamPaperEditorPage() {
 					<button
 						type="button"
 						className="admin-grammar-btn admin-grammar-btn--ghost"
-						onClick={() => void handleResetFrame()}
+						onClick={() => setResetConfirmOpen(true)}
 						disabled={resetting}
 					>
 						{resetting ? 'Đang reset…' : 'Reset khung'}
@@ -299,6 +299,17 @@ export default function AdminExamPaperEditorPage() {
 				partMetaMap={partMeta}
 				sectionMetaMap={sectionMeta}
 				onSave={handleSaveSections}
+			/>
+			<AdminDeleteConfirmModal
+				open={resetConfirmOpen}
+				title="Reset khung đề?"
+				lead="Toàn bộ câu hỏi hiện tại sẽ bị xóa. Khung được tạo lại theo cấu trúc JLPT."
+				preview={paper.titleVi}
+				confirmLabel="Reset"
+				pendingLabel="Đang reset…"
+				deleting={resetting}
+				onClose={closeResetConfirm}
+				onConfirm={() => void handleResetFrame()}
 			/>
 			<ExamBulkImportModal
 				isOpen={showBulkImport}

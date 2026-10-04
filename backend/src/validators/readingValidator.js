@@ -1,5 +1,11 @@
 import Joi from 'joi';
-import { READING_JLPT_LEVELS, READING_STATUS } from '../constants/reading.js';
+import {
+	READING_CONTENT_FORMATS,
+	READING_JLPT_LEVELS,
+	READING_SENTENCE_FEEDBACK_MAX_ITEMS,
+	READING_STATUS,
+} from '../constants/reading.js';
+import { MAX_ARTICLE_SENTENCES } from '../utils/sentenceSplitter.js';
 
 const glossSchema = Joi.object({
 	vi: Joi.string().allow('').default(''),
@@ -39,6 +45,7 @@ const articleBodySchema = {
 	featured: Joi.boolean().default(false),
 	isPublished: Joi.boolean().default(true),
 	displayOrder: Joi.number().integer().min(0).default(0),
+	contentFormat: Joi.string().valid(...READING_CONTENT_FORMATS),
 	paragraphsJa: Joi.array().items(Joi.string().allow('')).default([]),
 	vocabulary: Joi.array().items(vocabularySchema).default([]),
 	questions: Joi.array().items(questionSchema).default([]),
@@ -67,6 +74,31 @@ export const saveReadingProgressSchema = Joi.object({
 	}).optional(),
 }).min(1);
 
-export const analyzeReadingTranslationSchema = Joi.object({
-	translationVi: Joi.string().trim().min(20).max(12000).required(),
+export const summarizeTranslationSchema = Joi.object({
+	items: Joi.array()
+		.items(
+			Joi.object({
+				index: Joi.number().integer().min(0).required(),
+				translationVi: Joi.string().trim().min(1).max(1000).required(),
+				score: Joi.number().min(0).max(100).required(),
+			}),
+		)
+		.min(1)
+		.max(MAX_ARTICLE_SENTENCES)
+		.unique('index')
+		.required(),
+});
+
+export const analyzeSentenceTranslationsSchema = Joi.object({
+	items: Joi.array()
+		.items(
+			Joi.object({
+				index: Joi.number().integer().min(0).required(),
+				translationVi: Joi.string().trim().min(1).max(1000).required(),
+			}),
+		)
+		.min(1)
+		.max(READING_SENTENCE_FEEDBACK_MAX_ITEMS)
+		.unique('index')
+		.required(),
 });
